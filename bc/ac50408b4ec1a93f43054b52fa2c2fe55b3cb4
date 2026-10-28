@@ -1,0 +1,17 @@
+AGENTS.md
+  h_06e01297fc405a 2,4,12,22-30
+  h_06e01297fc405a 13-14,16-21
+.gitignore
+  h_06e01297fc405a 3-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bcac50408b4ec1a93f43054b52fa2c2fe55b3cb4",
+  "prompts": {},
+  "humans": {
+    "h_06e01297fc405a": {
+      "author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
