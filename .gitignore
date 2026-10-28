@@ -1,2 +1,4 @@
 # Видео большого размера — в git не коммитим
 *.mp4
+/.idea/
+utils/node_modules/
