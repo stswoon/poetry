@@ -1,0 +1,16 @@
+AGENTS.md
+  h_06e01297fc405a 7
+possible-styles.md
+  h_06e01297fc405a 1-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "225f09cd4e4cac244c854b3cc675bbc2931d82ef",
+  "prompts": {},
+  "humans": {
+    "h_06e01297fc405a": {
+      "author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
