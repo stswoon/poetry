@@ -1,0 +1,18 @@
+AGENTS.md
+  h_06e01297fc405a 1-36
+input-stsPoetryMake.md
+  h_06e01297fc405a 1-29
+input-stsPoetryUpload.md
+  h_06e01297fc405a 1-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9606d1c4fbd2d3a1ecea553d7f61f814242bb489",
+  "prompts": {},
+  "humans": {
+    "h_06e01297fc405a": {
+      "author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
