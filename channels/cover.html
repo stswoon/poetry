@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>stsAI Стихи — обложка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #0d0b09; }
+  body { width: 2560px; height: 1280px; overflow: hidden; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg id="art" xmlns="http://www.w3.org/2000/svg" width="2560" height="1280" viewBox="0 0 2560 1280"></svg>
+<script>
+// ---------- palette ----------
+const IVORY = '#EFE6D4';
+const GOLD = '#E2B65C';
+const GOLD_DIM = '#B8975E';
+
+// ---------- seeded random ----------
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const rnd = mulberry32(20261026);
+const R = (a, b) => a + (b - a) * rnd();
+const f = n => n.toFixed(1);
+
+// ---------- layout ----------
+// ?h=<height>&off=<vertical shift of the title strip>&s=<strip scale> — one source for every platform's cover
+const P = new URLSearchParams(location.search);
+const W = 2560, H = +(P.get('h') || 1280);
+const OFF = +(P.get('off') || 0);
+const S = +(P.get('s') || 1);
+const NIB = { x: 1330, y: 1096 + OFF };   // nib tip, touches the end of the title
+const ANGLE = -6;                   // degrees; quill rises to the right
+const L = 1060;                     // quill length (local units)
+
+// ---------- quill geometry (local: nib at 0,0, axis +x, y down) ----------
+const XS = 300;                     // where vanes begin
+function hw(x) {                    // half-width of calamus / rachis
+  if (x < 110) return 0;
+  if (x < 300) return 13 - 3 * (x - 110) / 190;
+  return 9 - 8 * (x - 300) / (L - 300);
+}
+function prof(u) { return Math.pow(u, 0.55) * Math.pow(1 - Math.pow(u, 2.6), 0.62); }
+let PMAX = 0; for (let i = 0; i <= 1000; i++) PMAX = Math.max(PMAX, prof(i / 1000));
+function wU(x) { if (x <= XS || x >= L) return hw(Math.min(Math.max(x, XS), L)); const u = (x - XS) / (L - XS); return Math.max(hw(x), 118 * prof(u) / PMAX); }
+function wL(x) { if (x <= XS || x >= L) return hw(Math.min(Math.max(x, XS), L)); const u = (x - XS) / (L - XS); return Math.max(hw(x), 86 * prof(u) / PMAX); }
+
+function buildQuill() {
+  const out = [];
+  // soft body of the natural (upper) vane
+  let d = `M${XS},${-hw(XS)}`;
+  for (let x = XS; x <= L; x += 6) d += ` L${f(x)},${f(-wU(x))}`;
+  d += ` L${L},0 Z`;
+  out.push(`<path d="${d}" fill="url(#vaneFill)" opacity="0.55"/>`);
+
+  // natural barbs, upper side
+  const gaps = [[560, 572], [790, 800], [905, 912]];
+  for (let x0 = XS + 3; x0 < L - 8; x0 += 3.6) {
+    if (gaps.some(([a, b]) => x0 > a && x0 < b)) continue;
+    const t = (x0 - XS) / (L - XS);
+    const lean = 0.75 * wU(x0) + 14;
+    let x1 = Math.min(x0 + lean, L - 2);
+    const y1 = -wU(x1) * R(0.94, 1.0);
+    const y0 = -hw(x0);
+    const cx = x0 + (x1 - x0) * 0.18, cy = y0 + (y1 - y0) * 0.62;
+    // tip dissolves: barbs near the tip break into particles
+    if (t > 0.86 && rnd() < (t - 0.86) * 6) continue;
+    out.push(`<path d="M${f(x0)},${f(y0)} Q${f(cx)},${f(cy)} ${f(x1)},${f(y1)}" stroke="${IVORY}" stroke-width="${f(R(1.0, 1.7))}" fill="none" opacity="${R(0.35, 0.85).toFixed(2)}"/>`);
+  }
+  // downy wisps near the base
+  for (let i = 0; i < 46; i++) {
+    const x0 = R(270, XS + 70), side = rnd() < 0.5 ? -1 : 1;
+    const len = R(26, 70);
+    const y0 = side * hw(x0);
+    const x1 = x0 + R(6, 30), y1 = y0 + side * len;
+    out.push(`<path d="M${f(x0)},${f(y0)} Q${f(x0 + R(-20, 25))},${f(y0 + side * len * 0.6)} ${f(x1)},${f(y1)}" stroke="${IVORY}" stroke-width="1" fill="none" opacity="${R(0.18, 0.4).toFixed(2)}"/>`);
+  }
+
+  // AI side: circuit traces in place of barbs (lower side)
+  const ends = [];
+  for (let x0 = XS + 22; x0 < L - 40; x0 += R(17, 24)) {
+    const t = (x0 - XS) / (L - XS);
+    const y0 = hw(x0);
+    const wl = wL(x0);
+    const k = R(0.25, 0.55);
+    const s1 = Math.max(6, wl * k);
+    const p1x = x0 + s1 * 0.55, p1y = y0 + s1;
+    // second leg runs forward, nearly parallel to the shaft, until it meets the vane edge
+    let px = p1x, py = p1y;
+    const dx = 1, dy = 0.2;
+    while (py < wL(px) * 0.93 && px < L - 4) { px += dx * 2; py += dy * 2; }
+    if (t > 0.88 && rnd() < (t - 0.88) * 7) continue;
+    out.push(`<path d="M${f(x0)},${f(y0)} L${f(p1x)},${f(p1y)} L${f(px)},${f(py)}" stroke="${GOLD}" stroke-width="2.3" fill="none" stroke-linejoin="round" opacity="0.92"/>`);
+    if (rnd() < 0.45) out.push(`<circle cx="${f(p1x)}" cy="${f(p1y)}" r="3.2" fill="${GOLD}"/>`);
+    out.push(`<circle cx="${f(px)}" cy="${f(py)}" r="${f(R(4, 5.6))}" fill="#0d0b09" stroke="${GOLD}" stroke-width="2"/>`);
+    ends.push([px, py]);
+    // occasional short stub, like a branch on a board
+    if (rnd() < 0.3) {
+      const bx = p1x + (px - p1x) * 0.45, by = p1y + (py - p1y) * 0.45;
+      out.push(`<path d="M${f(bx)},${f(by)} l${f(10)},${f(14)}" stroke="${GOLD}" stroke-width="1.8" opacity="0.8"/><circle cx="${f(bx + 10)}" cy="${f(by + 14)}" r="2.6" fill="${GOLD}"/>`);
+    }
+  }
+  // faint links between neighbouring end nodes trace the vane's edge
+  for (let i = 0; i + 1 < ends.length; i++) {
+    const [ax, ay] = ends[i], [bx, by] = ends[i + 1];
+    out.push(`<line x1="${f(ax)}" y1="${f(ay)}" x2="${f(bx)}" y2="${f(by)}" stroke="${GOLD}" stroke-width="1" opacity="0.28"/>`);
+  }
+
+  // rachis + calamus
+  let top = '', bot = '';
+  for (let x = 110; x <= L; x += 10) { top += ` L${f(x)},${f(-hw(x))}`; bot = ` L${f(x)},${f(hw(x))}` + bot; }
+  out.push(`<path d="M110,0${top} L${L},0${bot} Z" fill="url(#shaft)"/>`);
+  out.push(`<path d="M300,0 L${L - 10},0" stroke="#ffffff" stroke-width="1.4" opacity="0.35"/>`);
+  // calamus rings
+  for (const x of [150, 196, 238]) out.push(`<path d="M${x},${f(-hw(x))} Q${x + 4},0 ${x},${f(hw(x))}" stroke="#bfae8f" stroke-width="1.2" fill="none" opacity="0.5"/>`);
+
+  // nib
+  out.push(`<path d="M0,0 L118,-17 Q128,0 118,17 Z" fill="url(#nib)"/>`);
+  out.push(`<path d="M6,0 L74,0" stroke="#1a140c" stroke-width="2"/>`);
+  out.push(`<circle cx="80" cy="0" r="4" fill="#1a140c"/>`);
+  out.push(`<path d="M2,-0.5 L118,-17" stroke="#fff3d0" stroke-width="1.2" opacity="0.55"/>`);
+
+  // particles shed by the tip (local coords; drift up = -y and forward = +x)
+  for (let i = 0; i < 70; i++) {
+    const t = Math.pow(rnd(), 1.4);
+    const x = L * 0.86 + t * 420 + R(-20, 20);
+    const y = -R(0, 1) * (40 + t * 260) + R(-30, 30) * (1 - t);
+    const s = R(2, 6) * (1 - t * 0.6);
+    const col = rnd() < 0.55 ? GOLD : IVORY;
+    out.push(rnd() < 0.5
+      ? `<rect x="${f(x)}" y="${f(y)}" width="${f(s)}" height="${f(s)}" fill="${col}" opacity="${f(0.9 - t * 0.6)}"/>`
+      : `<circle cx="${f(x)}" cy="${f(y)}" r="${f(s / 2)}" fill="${col}" opacity="${f(0.9 - t * 0.6)}"/>`);
+  }
+  return out.join('\n');
+}
+
+// ---------- constellation (global coords) ----------
+function toGlobal(x, y) {
+  const a = ANGLE * Math.PI / 180;
+  return [NIB.x + x * Math.cos(a) - y * Math.sin(a), NIB.y + x * Math.sin(a) + y * Math.cos(a)];
+}
+function buildNetwork() {
+  const [tx, ty] = toGlobal(L, 0);
+  const pts = [];
+  let guard = 0;
+  while (pts.length < 120 && guard++ < 20000) {
+    const x = R(160, 2480), y = R(70, 900 + OFF);
+    const dist = Math.hypot(x - (tx + 60), y - (ty - 160));
+    const p = 0.06 + 0.94 * Math.exp(-dist / 650);
+    if (rnd() > p) continue;
+    if (pts.some(([px, py]) => Math.hypot(px - x, py - y) < 58)) continue;
+    pts.push([x, y, dist]);
+  }
+  const out = [];
+  const seen = new Set();
+  for (let i = 0; i < pts.length; i++) {
+    const [x, y, dist] = pts[i];
+    const near = pts.map((p, j) => [Math.hypot(p[0] - x, p[1] - y), j]).filter(([d, j]) => j !== i).sort((a, b) => a[0] - b[0]).slice(0, 2);
+    for (const [d, j] of near) {
+      if (d > 260) continue;
+      const key = i < j ? i + '-' + j : j + '-' + i;
+      if (seen.has(key)) continue; seen.add(key);
+      const o = Math.max(0.06, 0.42 * Math.exp(-dist / 900));
+      out.push(`<line x1="${f(x)}" y1="${f(y)}" x2="${f(pts[j][0])}" y2="${f(pts[j][1])}" stroke="${GOLD}" stroke-width="1.1" opacity="${o.toFixed(2)}"/>`);
+    }
+  }
+  for (const [x, y, dist] of pts) {
+    const o = Math.max(0.14, 0.95 * Math.exp(-dist / 1000));
+    const r = R(2, 4.6) * (0.6 + 0.6 * Math.exp(-dist / 800));
+    if (rnd() < 0.22) out.push(`<circle cx="${f(x)}" cy="${f(y)}" r="${f(r + 3.5)}" fill="none" stroke="${GOLD}" stroke-width="1.3" opacity="${f(o * 0.8)}"/>`);
+    out.push(`<circle cx="${f(x)}" cy="${f(y)}" r="${f(r)}" fill="${rnd() < 0.7 ? GOLD : IVORY}" opacity="${f(o)}"/>`);
+  }
+  return out.join('\n');
+}
+
+// ---------- assemble ----------
+const svg = `
+<defs>
+  <radialGradient id="bg" cx="1420" cy="${1010 + OFF}" r="1500" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#2b2219"/>
+    <stop offset="0.45" stop-color="#17120e"/>
+    <stop offset="1" stop-color="#0a0807"/>
+  </radialGradient>
+  <linearGradient id="vaneFill" x1="0" y1="0" x2="0" y2="-120" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="${IVORY}" stop-opacity="0.35"/>
+    <stop offset="1" stop-color="${IVORY}" stop-opacity="0.04"/>
+  </linearGradient>
+  <linearGradient id="shaft" x1="0" y1="-14" x2="0" y2="14" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#fbf5e8"/>
+    <stop offset="0.55" stop-color="#d9ccb2"/>
+    <stop offset="1" stop-color="#9c8d72"/>
+  </linearGradient>
+  <linearGradient id="nib" x1="0" y1="-17" x2="0" y2="17" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#ffe6a8"/>
+    <stop offset="0.5" stop-color="#d7a548"/>
+    <stop offset="1" stop-color="#8a6324"/>
+  </linearGradient>
+  <linearGradient id="aiGrad" x1="0" y1="${900 + OFF}" x2="0" y2="${1110 + OFF}" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#f3d38e"/>
+    <stop offset="1" stop-color="#c88f37"/>
+  </linearGradient>
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+    <feColorMatrix in="n" type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="table" tableValues="0 0.07"/></feComponentTransfer>
+  </filter>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="3" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<rect width="${W}" height="${H}" fill="url(#bg)"/>
+
+<g>${buildNetwork()}</g>
+
+<g transform="translate(1280 ${1050 + OFF}) scale(${S}) translate(-1280 ${-(1050 + OFF)})">
+<g transform="translate(${NIB.x} ${NIB.y}) rotate(${ANGLE})" filter="url(#soft)">
+${buildQuill()}
+</g>
+
+<!-- ink thread from the last letter to the nib -->
+<path d="M1300,${1101 + OFF} Q1316,${1104 + OFF} ${NIB.x},${NIB.y}" stroke="${GOLD}" stroke-width="2.4" fill="none" opacity="0.9"/>
+<circle cx="${NIB.x}" cy="${NIB.y}" r="3.4" fill="${GOLD}"/>
+
+<g font-family="'Cormorant Garamond', Georgia, serif">
+  <text id="title" x="1296" y="${1100 + OFF}" text-anchor="end" font-size="214" font-weight="600" fill="${IVORY}" letter-spacing="1">sts<tspan fill="url(#aiGrad)">AI</tspan> Стихи</text>
+  <text id="sub" x="1296" y="${1178 + OFF}" text-anchor="end" font-size="40" font-weight="500" fill="${GOLD_DIM}" letter-spacing="4">КЛАССИЧЕСКАЯ ПОЭЗИЯ · ГОЛОС И МУЗЫКА НЕЙРОСЕТЕЙ</text>
+</g>
+</g>
+
+<rect width="${W}" height="${H}" filter="url(#grain)" opacity="1"/>
+`;
+const art = document.getElementById('art');
+art.setAttribute('height', H);
+art.setAttribute('viewBox', `0 0 ${W} ${H}`);
+document.body.style.height = H + 'px';
+art.innerHTML = svg;
+// stretch the subtitle to exactly the title's width once the font is in
+document.fonts.ready.then(() => {
+  const w = document.getElementById('title').getBBox().width;
+  const sub = document.getElementById('sub');
+  sub.setAttribute('textLength', f(w - 8));
+  sub.setAttribute('lengthAdjust', 'spacing');
+  sub.removeAttribute('letter-spacing');
+});
+</script>
+</body>
+</html>

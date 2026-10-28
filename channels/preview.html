@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Обложка — превью</title>
+<style>
+  body { margin: 0; padding: 40px; background: #19191a; color: #ccc; font: 22px/1.4 "Segoe UI", sans-serif; width: 1800px; }
+  h2 { font-weight: 500; font-size: 22px; margin: 28px 0 10px; color: #aaa; }
+  /* desktop: VK shows the cover at 6:1, background-size: cover, anchored to the bottom */
+  .desk { position: relative; width: 1585px; height: 264px; border-radius: 12px; background: url(cover.png) 50% 100% / cover no-repeat; }
+  .desk .ava { position: absolute; left: 20px; top: 244px; width: 110px; height: 110px; border-radius: 50%; background: #8a8f99; border: 4px solid #19191a; }
+  .row { display: flex; gap: 40px; align-items: flex-start; }
+  /* phone: 375x172, object-fit: cover, centred */
+  .phone { width: 375px; height: 172px; background: url(cover.png) 50% 50% / cover no-repeat; position: relative; }
+  .phone::before { content: "←"; position: absolute; left: 14px; top: 8px; color: #fff; font-size: 26px; }
+  .phone::after { content: "⌕  ⋯"; position: absolute; right: 14px; top: 8px; color: #fff; font-size: 24px; }
+  .full { width: 1000px; height: 500px; background: url(cover.png) center / contain no-repeat; }
+</style>
+</head>
+<body>
+  <h2>Компьютер (vkvideo.ru, 6:1, видна нижняя часть)</h2>
+  <div class="desk"><div class="ava"></div></div>
+  <div style="height:70px"></div>
+  <div class="row">
+    <div><h2>Телефон (m.vkvideo.ru)</h2><div class="phone"></div></div>
+    <div><h2>Целиком 2560×1280</h2><div class="full"></div></div>
+  </div>
+</body>
+</html>

@@ -1,4 +1,17 @@
 # Видео большого размера — в git не коммитим
 *.mp4
-/.idea/
+/.idea
+
 utils/node_modules/
+
+# Пересобираемое: рендеры, кэши и служебные файлы HyperFrames
+utils/renders/
+utils/.hyperframes/
+utils/.thumbnails/
+utils/.waveform-cache/
+utils/node_modules/
+utils/.progress*.json
+
+utils/__pycache__/
+utils/*.pyc
+utils/*.log
