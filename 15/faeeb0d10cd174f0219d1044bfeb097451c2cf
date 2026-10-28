@@ -1,0 +1,58 @@
+.claude/skills/stsPoetryMake/references/elevenlabs.md
+  h_06e01297fc405a 1-58
+.claude/skills/stsPoetryMake/references/prava.md
+  h_06e01297fc405a 1-87
+.claude/skills/stsPoetryMake/references/progress.md
+  h_06e01297fc405a 1-57
+.claude/skills/stsPoetryMake/references/sborka.md
+  h_06e01297fc405a 1-66
+.claude/skills/stsPoetryMake/references/scenariy.md
+  h_06e01297fc405a 1-50
+.claude/skills/stsPoetryMake/scripts/progress.py
+  h_06e01297fc405a 1-254
+"texts/Блок/Ночь улица фонарь аптека/README.md"
+  h_06e01297fc405a 1-16
+"texts/Есенин/Гой ты Русь моя родная/01_tekst.md"
+  h_06e01297fc405a 1-61
+"texts/Есенин/Гой ты Русь моя родная/02_prava.md"
+  h_06e01297fc405a 1-29
+"texts/Есенин/Гой ты Русь моя родная/04_golos.md"
+  h_06e01297fc405a 1-19
+"texts/Есенин/Гой ты Русь моя родная/05_stili.md"
+  h_06e01297fc405a 1-55
+"texts/Есенин/Гой ты Русь моя родная/06_scenariy.md"
+  h_06e01297fc405a 1-66
+"texts/Есенин/Гой ты Русь моя родная/07_publikaciya.md"
+  h_06e01297fc405a 1-30
+"texts/Есенин/Гой ты Русь моя родная/README.md"
+  h_06e01297fc405a 1-45
+texts/Киплинг/Заповедь/README.md
+  h_06e01297fc405a 1-31
+"texts/Крылов/Ворона и лисица/README.md"
+  h_06e01297fc405a 1-13
+texts/Лермонтов/Бородино/01_tekst_stiha.md
+  h_06e01297fc405a 1-145
+texts/Лермонтов/Бородино/02_elevenlabs_v4_ves_tekst.txt
+  h_06e01297fc405a 1-137
+texts/Лермонтов/Бородино/03_ozvuchka_i_golos.md
+  h_06e01297fc405a 1-52
+texts/Лермонтов/Бородино/04_scenariy.md
+  h_06e01297fc405a 1-27
+texts/Лермонтов/Бородино/05_stili.md
+  h_06e01297fc405a 1-28
+texts/Лермонтов/Бородино/README.md
+  h_06e01297fc405a 1-42
+"texts/Пушкин/У лукоморья/README.md"
+  h_06e01297fc405a 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "15faeeb0d10cd174f0219d1044bfeb097451c2cf",
+  "prompts": {},
+  "humans": {
+    "h_06e01297fc405a": {
+      "author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
