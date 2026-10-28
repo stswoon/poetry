@@ -1,0 +1,9 @@
+{
+  "name": "poetry-utils",
+  "private": true,
+  "description": "Утилиты для роликов: Framer Motion (пакет motion) для анимаций в HyperFrames",
+  "type": "module",
+  "dependencies": {
+    "motion": "14.7.1"
+  }
+}
