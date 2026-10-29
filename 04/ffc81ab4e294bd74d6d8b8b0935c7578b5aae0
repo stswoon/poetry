@@ -1,0 +1,14 @@
+input-stsPoetryUpload.md
+  h_06e01297fc405a 1-2,6-8,12-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "04ffc81ab4e294bd74d6d8b8b0935c7578b5aae0",
+  "prompts": {},
+  "humans": {
+    "h_06e01297fc405a": {
+      "author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
