@@ -1,0 +1,5 @@
+{
+  "name": "local-mods",
+  "owner": { "name": "stswoon" },
+  "plugins": [{ "name": "limits-band", "source": "./limits-band" }]
+}
