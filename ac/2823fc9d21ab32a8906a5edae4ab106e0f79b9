@@ -1,0 +1,33 @@
+.claude/mods/.claude-plugin/marketplace.json
+  s_e8bd83ed7578e9::t_139976fb871530 1-5
+.claude/mods/README.md
+  s_e8bd83ed7578e9::t_4128b7b5bca819 1-23
+.claude/mods/limits-band/.claude-plugin/plugin.json
+  s_e8bd83ed7578e9::t_50b6ec590529e9 1-6
+.claude/mods/limits-band/hooks/hooks.json
+  s_e8bd83ed7578e9::t_4ed00ae534b1b6 1
+.claude/mods/limits-band/hooks/register.tsx
+  s_e8bd83ed7578e9::t_a9e297a587faac 1-181
+.claude/mods/limits-band/tests/limits.test.tsx
+  s_e8bd83ed7578e9::t_e8dcbd5dfd8e1d 1-115
+.claude/mods/limits-band/tsconfig.json
+  s_e8bd83ed7578e9::t_9eb20025667186 1-3
+.claude/mods/limits-band/types/index.d.ts
+  s_e8bd83ed7578e9::t_55cc357adf3abb 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ac2823fc9d21ab32a8906a5edae4ab106e0f79b9",
+  "prompts": {},
+  "sessions": {
+    "s_e8bd83ed7578e9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "31fb3fb8-e1a0-4269-b07f-6602dd52f210",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
