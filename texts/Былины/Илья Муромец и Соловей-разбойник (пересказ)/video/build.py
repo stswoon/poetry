@@ -68,6 +68,8 @@ def main():
     <script src="src/gfx.js"></script>
     <script src="src/sprites.js"></script>
     <script src="src/scenes.js"></script>
+    <script src="src/actors.js"></script>
+    <script src="src/actions.js"></script>
     <script src="src/main.js"></script>
     <script>
       const tl = gsap.timeline({{ paused: true }});

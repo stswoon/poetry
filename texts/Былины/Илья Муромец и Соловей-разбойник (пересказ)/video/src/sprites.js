@@ -15,84 +15,170 @@ function leg(c, hx, hy, a1, a2, l1, l2, col, hoof, w = 3) {
   rect(c, fx - 1, fy, 4, 2, hoof);
 }
 
-// Конь с Ильёй. frame 0..7 — фаза галопа; opt: spear, bow, walk, noRider, color
+
+// Конь с Ильёй. frame 0..7. opt: walk, idle (стоит, но дышит), kneel, spear, bow, noRider, talk, hand: [x, y] — кисть правой руки
 function riderSprite(frame, opt = {}) {
   const key = "rider" + frame + JSON.stringify(opt);
-  return sprite(key, 84, 72, (c) => {
+  return sprite(key, 84, 80, (c) => {
     const p = (frame / 8) * Math.PI * 2;
-    const amp = opt.walk ? 0.42 : 0.82;
-    const bob = opt.walk ? R(Math.sin(p * 2) * 0.6) : R(Math.sin(p * 2) * 1.2);
-    const ox = 6, oy = 12 + bob;
+    const still = opt.idle || opt.kneel;
+    const amp = still ? 0 : opt.walk ? 0.42 : 0.82;
+    const bob = still ? 0 : opt.walk ? R(Math.sin(p * 2) * 0.6) : R(Math.sin(p * 2) * 1.2);
+    const ox = 6, oy = 18 + bob;
     const X = (x) => x + ox, Y = (y) => y + oy;
     const dark = COL.bayD, mid = COL.bay, light = COL.bayL;
-    // дальние ноги
-    leg(c, X(46), Y(38), Math.sin(p + 1.6) * amp + 0.1, Math.sin(p + 1.6) * amp - Math.max(0, Math.sin(p + 2.6)) * 1.1, 10, 9, dark, COL.hoof);
-    leg(c, X(25), Y(38), Math.sin(p + 3.6) * amp, Math.sin(p + 3.6) * amp - Math.max(0, Math.sin(p + 4.6)) * 1.1, 10, 9, dark, COL.hoof);
-    // хвост
-    const tw = Math.sin(p) * 3;
+    const nod = still ? R(Math.sin(p) * 1.1) : 0; // конь кивает
+    if (opt.kneel) {
+      leg(c, X(46), Y(38), 1.1, -1.5, 8, 7, dark, COL.hoof);
+      leg(c, X(25), Y(38), 0.3, -0.4, 9, 8, dark, COL.hoof);
+    } else {
+      leg(c, X(46), Y(38), Math.sin(p + 1.6) * amp + 0.1, Math.sin(p + 1.6) * amp - Math.max(0, Math.sin(p + 2.6)) * 1.1 * (still ? 0 : 1), 10, 9, dark, COL.hoof);
+      leg(c, X(25), Y(38), Math.sin(p + 3.6) * amp, Math.sin(p + 3.6) * amp - Math.max(0, Math.sin(p + 4.6)) * 1.1 * (still ? 0 : 1), 10, 9, dark, COL.hoof);
+    }
+    // хвост шевелится всегда
+    const tw = Math.sin(p) * (still ? 2.4 : 3);
     poly(c, [[X(19), Y(28)], [X(12), Y(29 + tw * 0.4)], [X(4), Y(38 + tw)], [X(7), Y(45 + tw)], [X(13), Y(37 + tw * 0.5)], [X(21), Y(33)]], COL.mane);
-    // туловище
     ell(c, X(34), Y(33), 16, 8.5, mid);
     ell(c, X(34), Y(30), 13, 4.5, light);
     rect(c, X(22), Y(39), 24, 2, dark);
-    // шея и голова
-    poly(c, [[X(43), Y(31)], [X(51), Y(23)], [X(55), Y(13)], [X(48), Y(10)], [X(43), Y(21)], [X(40), Y(28)]], mid);
-    poly(c, [[X(48), Y(9)], [X(55), Y(6)], [X(62), Y(10)], [X(69), Y(16)], [X(68), Y(20)], [X(61), Y(20)], [X(55), Y(16)], [X(50), Y(14)]], light);
-    rect(c, X(61), Y(13), 3, 1, dark);
-    poly(c, [[X(50), Y(8)], [X(51), Y(2)], [X(54), Y(7)]], mid);
-    rect(c, X(56), Y(10), 2, 2, COL.hoof);
-    rect(c, X(66), Y(18), 2, 1, COL.hoof);
-    // грива
-    poly(c, [[X(47), Y(8)], [X(52), Y(7)], [X(47), Y(14)], [X(44), Y(22)], [X(40), Y(30)], [X(36 + tw * 0.3), Y(25)], [X(41), Y(14)]], COL.mane);
-    // упряжь
-    line(c, X(56), Y(14), X(62), Y(18), COL.gold);
-    line(c, X(50), Y(12), X(38), Y(23), COL.leather);
-    // ближние ноги
-    leg(c, X(44), Y(38), Math.sin(p) * amp + 0.1, Math.sin(p) * amp - Math.max(0, Math.sin(p + 1)) * 1.1, 11, 10, mid, COL.hoof, 4);
-    leg(c, X(25), Y(38), Math.sin(p + 2) * amp, Math.sin(p + 2) * amp - Math.max(0, Math.sin(p + 3)) * 1.1, 11, 10, mid, COL.hoof, 4);
-    // попона и седло
+    poly(c, [[X(43), Y(31)], [X(51), Y(23)], [X(55), Y(13 + nod)], [X(48), Y(10 + nod)], [X(43), Y(21)], [X(40), Y(28)]], mid);
+    poly(c, [[X(48), Y(9 + nod)], [X(55), Y(6 + nod)], [X(62), Y(10 + nod)], [X(69), Y(16 + nod)], [X(68), Y(20 + nod)], [X(61), Y(20 + nod)], [X(55), Y(16 + nod)], [X(50), Y(14 + nod)]], light);
+    rect(c, X(61), Y(13 + nod), 3, 1, dark);
+    poly(c, [[X(50), Y(8 + nod)], [X(51), Y(2 + nod)], [X(54), Y(7 + nod)]], mid);
+    rect(c, X(56), Y(10 + nod), 2, 2, COL.hoof);
+    rect(c, X(66), Y(18 + nod), 2, 1, COL.hoof);
+    poly(c, [[X(47), Y(8 + nod)], [X(52), Y(7 + nod)], [X(47), Y(14)], [X(44), Y(22)], [X(40), Y(30)], [X(36 + tw * 0.3), Y(25)], [X(41), Y(14)]], COL.mane);
+    line(c, X(56), Y(14 + nod), X(62), Y(18 + nod), COL.gold);
+    if (opt.kneel) {
+      leg(c, X(44), Y(38), 1.2, -1.6, 9, 8, mid, COL.hoof, 4);
+      leg(c, X(25), Y(38), 0.25, -0.35, 10, 9, mid, COL.hoof, 4);
+    } else {
+      leg(c, X(44), Y(38), Math.sin(p) * amp + 0.1, Math.sin(p) * amp - Math.max(0, Math.sin(p + 1)) * 1.1 * (still ? 0 : 1), 11, 10, mid, COL.hoof, 4);
+      leg(c, X(25), Y(38), Math.sin(p + 2) * amp, Math.sin(p + 2) * amp - Math.max(0, Math.sin(p + 3)) * 1.1 * (still ? 0 : 1), 11, 10, mid, COL.hoof, 4);
+    }
     poly(c, [[X(25), Y(25)], [X(41), Y(25)], [X(42), Y(32)], [X(24), Y(33)]], COL.red);
     rect(c, X(24), Y(32), 19, 1, COL.gold);
     if (opt.noRider) return;
     const ry = oy - 2;
     const RY = (y) => y + ry;
-    // плащ
+    // плащ развевается
     const fl = Math.sin(p) * 2;
     poly(c, [[X(27), RY(6)], [X(16 - fl), RY(10)], [X(9 - fl), RY(21 + fl)], [X(19), RY(25)], [X(29), RY(18)]], COL.red);
     poly(c, [[X(26), RY(8)], [X(18), RY(12)], [X(14), RY(19)], [X(21), RY(19)], [X(28), RY(14)]], COL.redL);
-    // нога
     poly(c, [[X(29), RY(24)], [X(36), RY(24)], [X(39), RY(35)], [X(35), RY(36)]], COL.mailD);
     poly(c, [[X(35), RY(34)], [X(39), RY(34)], [X(39), RY(40)], [X(43), RY(42)], [X(34), RY(42)]], COL.leather);
-    // кольчуга
     poly(c, [[X(26), RY(6)], [X(38), RY(6)], [X(39), RY(25)], [X(26), RY(26)]], COL.mail);
     c.fillStyle = COL.mailD;
     for (let y = 7; y < 25; y += 2) for (let x = 27 + (y % 4 ? 1 : 0); x < 38; x += 2) c.fillRect(X(x), RY(y), 1, 1);
     rect(c, X(26), RY(22), 13, 2, COL.leather);
     rect(c, X(31), RY(22), 3, 2, COL.gold);
-    // голова
-    disc(c, X(33), RY(1), 5, COL.skin);
-    rect(c, X(35), RY(0), 2, 1, COL.hoof);
-    poly(c, [[X(30), RY(3)], [X(38), RY(1)], [X(38), RY(8)], [X(34), RY(10)], [X(30), RY(7)]], "#b8a890");
-    rect(c, X(36), RY(5), 2, 1, COL.skinD);
-    // шлем
-    poly(c, [[X(27), RY(0)], [X(39), RY(0)], [X(37), RY(-5)], [X(33), RY(-11)], [X(29), RY(-5)]], COL.steel);
-    poly(c, [[X(29), RY(-1)], [X(32), RY(-1)], [X(32), RY(-8)], [X(30), RY(-5)]], COL.steelL);
-    rect(c, X(27), RY(0), 12, 1, COL.gold);
-    rect(c, X(36), RY(0), 1, 3, COL.steelD);
+    // лицо: глаз, бровь, нос, рот, борода только снизу
+    disc(c, X(33), RY(1), 6, COL.skin);
+    poly(c, [[X(29), RY(4)], [X(39), RY(3)], [X(39), RY(8)], [X(35), RY(11)], [X(30), RY(8)]], "#b8a890");
+    rect(c, X(35), RY(-1), 3, 3, COL.white); rect(c, X(36), RY(-1), 2, 3, COL.hoof);
+    rect(c, X(34), RY(-2), 5, 1, "#4a3a2a");
+    rect(c, X(38), RY(1), 2, 2, COL.skinD);
+    if (opt.talk) rect(c, X(35), RY(4), 4, 2, "#5a1a1a"); else rect(c, X(35), RY(4), 4, 1, "#7a3a2a");
+    // шлем выше глаз
+    poly(c, [[X(26), RY(-3)], [X(40), RY(-3)], [X(38), RY(-8)], [X(33), RY(-14)], [X(28), RY(-8)]], COL.steel);
+    poly(c, [[X(28), RY(-4)], [X(31), RY(-4)], [X(31), RY(-10)], [X(29), RY(-8)]], COL.steelL);
+    rect(c, X(26), RY(-3), 14, 1, COL.gold);
     // рука
-    if (opt.bow) {
-      line(c, X(33), RY(11), X(45), RY(9), COL.mailD, 3);
-      rect(c, X(45), RY(8), 3, 3, COL.skin);
-    } else if (opt.spear) {
-      line(c, X(34), RY(10), X(42), RY(16), COL.mailD, 3);
-      rect(c, X(42), RY(15), 3, 3, COL.skin);
+    const hand = opt.hand || (opt.bow ? [45, 9] : opt.spear ? [42, 16] : [46, 14]);
+    line(c, X(34), RY(10), X(hand[0]), RY(hand[1]), COL.mailD, 3);
+    rect(c, X(hand[0]), RY(hand[1]) - 1, 3, 3, COL.skin);
+    if (opt.spear) {
       line(c, X(18), RY(19), X(77), RY(9), COL.leather, 1);
       poly(c, [[X(76), RY(6)], [X(83), RY(8)], [X(77), RY(12)]], COL.steelL);
-    } else {
-      line(c, X(34), RY(10), X(46), RY(14), COL.mailD, 3);
-      rect(c, X(46), RY(13), 3, 3, COL.skin);
-      line(c, X(47), RY(15), X(53), RY(14 - oy + ry + 0), COL.leather);
+    } else if (!opt.hand && !opt.bow) {
+      line(c, X(47), RY(15), X(53), Y(14 + nod), COL.leather);
     }
+  });
+}
+
+function soloveySprite(pose = "sit", patched = false, wing = 0, talk = false) {
+  return sprite("sol" + pose + patched + wing + talk, 46, 50, (c) => {
+    const ww = wing * 3;
+    poly(c, [[12, 20], [2 - ww, 28], [0 - ww, 36], [7, 34], [12, 32]], COL.featherD);
+    poly(c, [[34, 20], [44 + ww, 28], [46 + ww, 36], [39, 34], [34, 32]], COL.featherD);
+    for (let i = 0; i < 4; i++) { rect(c, 2 + i * 2 - ww, 30 + i, 2, 4, COL.feather); rect(c, 42 - i * 2 + ww, 30 + i, 2, 4, COL.feather); }
+    poly(c, [[13, 18], [33, 18], [36, 40], [10, 40]], COL.feather);
+    poly(c, [[17, 19], [29, 19], [31, 38], [15, 38]], COL.featherL);
+    c.fillStyle = COL.feather;
+    for (let y = 21; y < 38; y += 3) for (let x = 16 + (y % 2) * 2; x < 31; x += 4) c.fillRect(x, y, 2, 1);
+    rect(c, 13, 40, 7, 4, COL.featherD); rect(c, 26, 40, 7, 4, COL.featherD);
+    rect(c, 12, 44, 8, 2, COL.hoof); rect(c, 26, 44, 8, 2, COL.hoof);
+    ell(c, 23, 12, 9, 9, COL.skinD);
+    ell(c, 23, 12, 8, 8, "#c8956a");
+    poly(c, [[12, 11], [34, 11], [31, 4], [23, -2], [15, 4]], COL.featherD);
+    poly(c, [[20, 3], [23, -4], [26, 3]], COL.red);
+    if (patched) { line(c, 15, 7, 21, 13, COL.hoof); line(c, 21, 7, 15, 13, COL.hoof); }
+    else { rect(c, 16, 10, 4, 3, COL.white); rect(c, 18, 11, 2, 2, "#c82020"); }
+    rect(c, 26, 10, 4, 3, COL.white); rect(c, 27, 11, 2, 2, "#c82020");
+    rect(c, 15, 8, 6, 1, COL.hoof); rect(c, 25, 8, 6, 1, COL.hoof);
+    poly(c, [[21, 12], [25, 12], [25, 17], [23, 21], [21, 17]], COL.beak);
+    rect(c, 22, 16, 2, 2, "#a06a20");
+    poly(c, [[14, 16], [20, 19], [26, 19], [32, 16], [30, 25], [26, 23], [23, 28], [20, 23], [16, 25]], COL.black);
+    if (talk) { rect(c, 20, 21, 7, 3, "#5a1010"); rect(c, 21, 21, 5, 1, COL.white); }
+    if (pose === "whistle") {
+      ell(c, 23, 20, 3, 3, "#7a1c1c"); rect(c, 22, 19, 2, 2, "#2a0808");
+      line(c, 12, 26, 20, 21, COL.featherD, 3); line(c, 34, 26, 26, 21, COL.featherD, 3);
+      rect(c, 20, 20, 2, 2, COL.skin); rect(c, 25, 20, 2, 2, COL.skin);
+    }
+    if (pose === "bound") {
+      c.fillStyle = COL.leather;
+      for (const y of [22, 28, 34, 39]) c.fillRect(9, y, 28, 2);
+      c.fillStyle = "#8a6030"; c.fillRect(22, 21, 3, 20);
+    }
+  });
+}
+
+function princeSprite(coat = false, frame = 0, talk = false, gest = 0) {
+  return sprite("pr" + coat + frame + talk + gest, 34, 46, (c) => {
+    const k = frame % 2 ? 1 : 0, o = 4, dx = 4;
+    const X = (x) => x + dx, Y = (y) => y + o;
+    rect(c, X(8), Y(33), 4, 7 - k, COL.redD); rect(c, X(14), Y(33), 4, 7 - (1 - k), COL.redD);
+    rect(c, X(7), Y(39 - k), 5, 2, COL.goldD); rect(c, X(14), Y(39 - (1 - k)), 5, 2, COL.goldD);
+    poly(c, [[X(7), Y(14)], [X(19), Y(14)], [X(21), Y(34)], [X(5), Y(34)]], COL.blue);
+    rect(c, X(12), Y(14), 2, 20, COL.gold);
+    rect(c, X(6), Y(24), 14, 2, COL.gold);
+    if (coat) {
+      poly(c, [[X(6), Y(13)], [X(13), Y(13)], [X(6), Y(34)], [X(2), Y(34)]], COL.fur);
+      c.fillStyle = COL.furD; for (let y = 15; y < 33; y += 3) c.fillRect(X(5 + ((y * 3) % 3)), Y(y), 2, 1);
+    } else {
+      poly(c, [[X(7), Y(13)], [X(3), Y(16)], [X(2), Y(33)], [X(6), Y(33)]], COL.purple);
+      poly(c, [[X(19), Y(13)], [X(23), Y(16)], [X(24), Y(33)], [X(20), Y(33)]], COL.purple);
+      rect(c, X(6), Y(12), 14, 3, COL.fur);
+    }
+    // рука: 0 вниз, 1 вперёд, 2 вверх
+    const hand = [[23, 26], [28, 16], [26, 6]][gest];
+    line(c, X(19), Y(16), X(hand[0]), Y(hand[1]), COL.blueD, 3);
+    rect(c, X(hand[0]) - 1, Y(hand[1]) - 1, 3, 3, COL.skin);
+    disc(c, X(13), Y(8), 5, COL.skin);
+    rect(c, X(14), Y(6), 3, 2, COL.white); rect(c, X(15), Y(6), 2, 2, COL.hoof);
+    rect(c, X(9), Y(6), 3, 2, COL.white); rect(c, X(10), Y(6), 2, 2, COL.hoof);
+    poly(c, [[X(9), Y(10)], [X(17), Y(10)], [X(15), Y(15)], [X(13), Y(16)], [X(11), Y(15)]], "#c49a50");
+    if (talk) rect(c, X(11), Y(10), 5, 2, "#5a1a1a"); else rect(c, X(11), Y(10), 5, 1, "#7a3a2a");
+    rect(c, X(7), Y(2), 12, 3, COL.fur);
+    poly(c, [[X(8), Y(2)], [X(18), Y(2)], [X(16), Y(-2)], [X(13), Y(-4)], [X(10), Y(-2)]], COL.red);
+    rect(c, X(12), Y(-4), 2, 2, COL.gold);
+    rect(c, X(7), Y(3), 12, 1, COL.furD);
+  });
+}
+
+// Девушка по пояс для окна: у неё есть глаза и рот
+function girlSprite(col, frame = 0) {
+  return sprite("girl" + col + frame, 20, 22, (c) => {
+    poly(c, [[3, 13], [15, 13], [16, 22], [2, 22]], col);
+    rect(c, 8, 13, 2, 9, COL.gold);
+    disc(c, 9, 9, 5, COL.skin);
+    rect(c, 6, 8, 2, 2, COL.hoof); rect(c, 11, 8, 2, 2, COL.hoof);
+    rect(c, 5, 7, 3, 1, "#6a4020"); rect(c, 10, 7, 3, 1, "#6a4020");
+    if (frame === 1) rect(c, 8, 11, 3, 2, "#5a1010"); else rect(c, 8, 12, 3, 1, COL.redD);
+    if (frame === 2) { line(c, 3, 15, 0, 5, col, 2); line(c, 15, 15, 18, 5, col, 2); rect(c, 0, 3, 2, 2, COL.skin); rect(c, 17, 3, 2, 2, COL.skin); }
+    poly(c, [[3, 6], [15, 6], [13, 1], [9, 0], [5, 1]], COL.red);
+    rect(c, 3, 5, 12, 1, COL.gold);
+    rect(c, 3, 8, 2, 8, "#6a4020");
   });
 }
 
@@ -124,73 +210,7 @@ function crowSprite(frame) {
   }, null);
 }
 
-// Соловей: сидит на суку. pose: 'sit' | 'whistle' | 'bound'; patched — без правого глаза
-function soloveySprite(pose = "sit", patched = false, wing = 0) {
-  return sprite("sol" + pose + patched + wing, 46, 50, (c) => {
-    const ww = wing * 3;
-    // крылья-рукава
-    poly(c, [[12, 20], [2 - ww, 28], [0 - ww, 36], [7, 34], [12, 32]], COL.featherD);
-    poly(c, [[34, 20], [44 + ww, 28], [46 + ww, 36], [39, 34], [34, 32]], COL.featherD);
-    for (let i = 0; i < 4; i++) { rect(c, 2 + i * 2 - ww, 30 + i, 2, 4, COL.feather); rect(c, 42 - i * 2 + ww, 30 + i, 2, 4, COL.feather); }
-    // тело
-    poly(c, [[13, 18], [33, 18], [36, 40], [10, 40]], COL.feather);
-    poly(c, [[17, 19], [29, 19], [31, 38], [15, 38]], COL.featherL);
-    c.fillStyle = COL.feather;
-    for (let y = 21; y < 38; y += 3) for (let x = 16 + (y % 2) * 2; x < 31; x += 4) c.fillRect(x, y, 2, 1);
-    // сапоги на суку
-    rect(c, 13, 40, 7, 4, COL.featherD); rect(c, 26, 40, 7, 4, COL.featherD);
-    rect(c, 12, 44, 8, 2, COL.hoof); rect(c, 26, 44, 8, 2, COL.hoof);
-    // голова
-    ell(c, 23, 12, 9, 9, COL.skinD);
-    ell(c, 23, 12, 8, 8, "#c8956a");
-    // шапка-капюшон с гребнем
-    poly(c, [[12, 11], [34, 11], [31, 4], [23, -2], [15, 4]], COL.featherD);
-    poly(c, [[20, 3], [23, -4], [26, 3]], COL.red);
-    // глаза
-    if (patched) { line(c, 15, 7, 21, 13, COL.hoof); line(c, 21, 7, 15, 13, COL.hoof); }
-    else { rect(c, 16, 10, 4, 3, COL.white); rect(c, 18, 11, 2, 2, "#c82020"); }
-    rect(c, 26, 10, 4, 3, COL.white); rect(c, 27, 11, 2, 2, "#c82020");
-    rect(c, 15, 8, 6, 1, COL.hoof); rect(c, 25, 8, 6, 1, COL.hoof);
-    // нос-клюв
-    poly(c, [[21, 12], [25, 12], [25, 17], [23, 21], [21, 17]], COL.beak);
-    rect(c, 22, 16, 2, 2, "#a06a20");
-    // борода
-    poly(c, [[14, 16], [20, 19], [26, 19], [32, 16], [30, 25], [26, 23], [23, 28], [20, 23], [16, 25]], COL.black);
-    if (pose === "whistle") {
-      ell(c, 23, 20, 3, 3, "#7a1c1c"); rect(c, 22, 19, 2, 2, "#2a0808");
-      line(c, 12, 26, 20, 21, COL.featherD, 3); line(c, 34, 26, 26, 21, COL.featherD, 3);
-      rect(c, 20, 20, 2, 2, COL.skin); rect(c, 25, 20, 2, 2, COL.skin);
-    }
-  });
-}
 
-function princeSprite(coat = false, frame = 0, hatOff = false) {
-  return sprite("pr" + coat + frame + hatOff, 26, 42, (c) => {
-    const k = frame % 2 ? 1 : 0;
-    rect(c, 8, 33, 4, 7 - k, COL.redD); rect(c, 14, 33, 4, 7 - (1 - k), COL.redD);
-    rect(c, 7, 39 - k, 5, 2, COL.goldD); rect(c, 14, 39 - (1 - k), 5, 2, COL.goldD);
-    poly(c, [[7, 14], [19, 14], [21, 34], [5, 34]], COL.blue);
-    rect(c, 12, 14, 2, 20, COL.gold);
-    rect(c, 6, 24, 14, 2, COL.gold);
-    if (coat) {
-      poly(c, [[6, 13], [13, 13], [6, 34], [2, 34]], COL.fur);
-      c.fillStyle = COL.furD; for (let y = 15; y < 33; y += 3) c.fillRect(5 + ((y * 3) % 3), y, 2, 1);
-    } else {
-      poly(c, [[7, 13], [3, 16], [2, 33], [6, 33]], COL.purple);
-      poly(c, [[19, 13], [23, 16], [24, 33], [20, 33]], COL.purple);
-      rect(c, 6, 12, 14, 3, COL.fur);
-    }
-    disc(c, 13, 8, 5, COL.skin);
-    rect(c, 14, 7, 2, 1, COL.hoof); rect(c, 10, 7, 2, 1, COL.hoof);
-    poly(c, [[9, 9], [17, 9], [15, 15], [13, 16], [11, 15]], "#c49a50");
-    if (!hatOff) {
-      rect(c, 7, 3, 12, 3, COL.fur);
-      poly(c, [[8, 3], [18, 3], [16, -2], [13, -4], [10, -2]], COL.red);
-      rect(c, 12, -4, 2, 2, COL.gold);
-      rect(c, 7, 4, 12, 1, COL.furD);
-    }
-  });
-}
 
 function muzhikSprite(shirt = COL.white, frame = 0, opt = {}) {
   return sprite("mz" + shirt + frame + JSON.stringify(opt), 22, 30, (c) => {
@@ -214,20 +234,6 @@ function muzhikSprite(shirt = COL.white, frame = 0, opt = {}) {
   });
 }
 
-// Девушка по пояс для окна
-function girlSprite(col, frame = 0) {
-  return sprite("girl" + col + frame, 18, 18, (c) => {
-    poly(c, [[3, 10], [15, 10], [16, 18], [2, 18]], col);
-    rect(c, 8, 10, 2, 8, COL.gold);
-    disc(c, 9, 6, 4, COL.skin);
-    rect(c, 7, 5, 1, 2, COL.hoof); rect(c, 11, 5, 1, 2, COL.hoof);
-    rect(c, 8, 8, 2, 1, COL.redD);
-    poly(c, [[3, 5], [15, 5], [13, -2], [9, -4], [5, -2]], COL.red);
-    rect(c, 3, 4, 12, 1, COL.gold);
-    if (frame) rect(c, 8, 8, 2, 2, "#5a1010");
-    rect(c, 3, 6, 2, 8, "#6a4020");
-  });
-}
 
 // Портрет говорящего 40×40. kind: narrator, ilya, solovey, solovey2, vladimir, muzhik, daughter1..3
 function portrait(kind, mouth = 0, blink = false) {
