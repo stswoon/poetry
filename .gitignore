@@ -4,6 +4,9 @@
 # Видео большого размера — в git не коммитим
 *.mp4
 
+# Музыка длинной былины больше 100 МБ, пересобирается кодом из music/make_music.mjs
+texts/Былины/Илья Муромец и Соловей-разбойник/music/music.wav
+
 # upload-helper: браузерный профиль (cookies!), логи прогонов и зависимости
 utils/upload-helper/node_modules/
 utils/upload-helper/.profile/

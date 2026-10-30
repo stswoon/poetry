@@ -1,0 +1,13 @@
+{
+  "voice_id": "ogi2DyUAKJb7CEdqqvlU",
+  "name": "Stanislav",
+  "settings": { "stability": 0.5, "similarity_boost": 0.75 },
+  "cast": {
+    "сказитель": { "voice_id": "ogi2DyUAKJb7CEdqqvlU", "name": "Stanislav" },
+    "илья": { "voice_id": "vQxSi2EuaRWwBw3nn6dK", "name": "Marat" },
+    "соловей": { "voice_id": "pM78bgjPVk0JXtaEnFoj", "name": "Nester Surovy" },
+    "владимир": { "voice_id": "lxY8Pn0yWs1Ve9rBceah", "name": "Ivan Nazarov" },
+    "мужички": { "voice_id": "lxY8Pn0yWs1Ve9rBceah", "name": "Ivan Nazarov" },
+    "дочь": { "voice_id": "ymDCYd8puC7gYjxIamPt", "name": "Marina" }
+  }
+}
