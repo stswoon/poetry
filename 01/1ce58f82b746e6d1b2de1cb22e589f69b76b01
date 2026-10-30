@@ -1,0 +1,419 @@
+README.md
+  s_d9c50e26c2c3ce::t_5b5951c128dfae 9-30
+"texts/Есенин/Гой ты Русь моя родная/02_prava.md"
+  s_8d559d15110c72::t_e150de2adbd689 20
+utils/upload-helper-disk/README.md
+  s_df3b2bcf4b0eff::t_4ba6eb5d19de09 1-2,20-25,27-34,38-39,43-51,55-66,68,71-83,87,90,93-94,96,106-121,123-129,131-135,144-145,147-152,154,156,158,160-163,166-168,172,174-175,177-178,180-184,196,199-201,203-216,240-245,249-257,261-293,295-316,320-335
+  s_716f458d0ee5f7::t_4e4e1801423573 3,5-13,15-19,26,36,40-42,69,84-85,88,91-92,97,99-100,104,136-139,141-143,146,153,157,159,169-171,176,185-187,190-195,197-198,217-225,233-234,236-239,246-247,294,317,336-338
+  s_d9c50e26c2c3ce::t_fa7d4d9f38c884 67,70
+  s_716f458d0ee5f7::t_89b637510c5c9d 86,89,105,140,179,188,235
+  s_df3b2bcf4b0eff::t_0d1a3d915c8d6d 164-165
+  s_df3b2bcf4b0eff::t_fca255f62f3030 258-260
+  s_d9c50e26c2c3ce::t_7712d3072f32b1 339
+  s_716f458d0ee5f7::t_94431c78590cbe 4,14,35,98,102-103,122,130,155,173,189,202,226-230
+  s_716f458d0ee5f7::t_9f602261314aeb 231-232
+  s_716f458d0ee5f7::t_7b039a1d5c8e83 95,101
+  s_df3b2bcf4b0eff::t_a20e824fb67adc 248
+  s_1d116a18b72000::t_2e5f379814c565 37,52
+  s_d9c50e26c2c3ce::t_d27b9d4b3fcfe0 53-54,318-319
+  s_d9c50e26c2c3ce::t_e76ea5919fcd99 340-342
+  s_f0537f04fe697d::t_505e4801015b24 343-351
+utils/upload-helper/lib/media.js
+  s_8d559d15110c72::t_622a10598d38f1 1-88
+utils/upload-helper-disk/lib/api.js
+  s_df3b2bcf4b0eff::t_c337d5ff5ee8f3 1-21,23-48,56-58,63-65,82-89,91-93,99-101,105-125,127-187,189,197-211,213,216-218
+  s_df3b2bcf4b0eff::t_93bb3be3f0d5c5 126
+  s_1d116a18b72000::t_da2d9f7e7b0e0f 212,214-215
+  s_1d116a18b72000::t_dc5a2b6574f3b2 188,190-196
+  s_1d116a18b72000::t_b840a1c3a5dba3 74,77
+  s_1d116a18b72000::t_d4c4ee59f2d309 22
+  s_1d116a18b72000::t_2f3ef4f163b2fa 49-55,59-62,66-73,75-76,78-81,90,94-98,102-104
+utils/upload-helper/lib/vk.js
+  s_8d559d15110c72::t_3e4dd63a204d84 119
+  s_8d559d15110c72::t_97870e4464d3bb 21-27,35
+  s_8d559d15110c72::t_9c50d0135d718b 132
+  s_8d559d15110c72::t_35ec84d1236f45 59,65-66,83,92-95,97-98,101,107,113
+  s_8d559d15110c72::t_39462a9b69bffa 172-173
+  s_8d559d15110c72::t_63f28a51322293 1-2,5-12,14-15,30,49-58,60-64,67-81,84-86,88-89,112,114-118,120-122,126,128-130,133-151,155,157
+  s_8d559d15110c72::t_4633be48ab1dce 152,156,158-171
+  s_8d559d15110c72::t_81043af3d2bad2 174-215
+  s_8d559d15110c72::t_086a169edda31e 216-232,237,242
+  s_8d559d15110c72::t_7d9c579bc62f64 31-34,36
+  s_8d559d15110c72::t_f1643e37905aae 102
+  s_8d559d15110c72::t_58eac181d5da92 13,16-20,28-29
+  s_8d559d15110c72::t_c31319f28821d2 37-38,40,42-43,45-48
+  s_8d559d15110c72::t_73963452cc4472 90-91,103-105
+  s_8d559d15110c72::t_706d83c31d0e79 3,153-154
+  s_8d559d15110c72::t_bf593c97e3b8be 4
+  s_8d559d15110c72::t_bbaa36f2dbc66d 39
+  s_8d559d15110c72::t_80b3d67e4ead8c 41
+  s_8d559d15110c72::t_e3e6ed777f8fd0 44
+  s_8d559d15110c72::t_0129c959762de8 82
+  s_8d559d15110c72::t_db0f877c1ae48a 87
+  s_8d559d15110c72::t_4e6e6e3d868c3b 96
+  s_8d559d15110c72::t_6e307993d5cd4c 99-100
+  s_8d559d15110c72::t_78c954504db922 106
+  s_8d559d15110c72::t_dcf30e0db31562 108-111
+  s_8d559d15110c72::t_f85d4303a1d8b4 123-125
+  s_8d559d15110c72::t_10bd3d2b335666 127
+  s_8d559d15110c72::t_9a308f38fdd90b 131
+  s_8d559d15110c72::t_d0a6a01d2bd1f6 233-236
+  s_8d559d15110c72::t_5da2feaceecbc9 238-241
+  s_8d559d15110c72::t_8a4ce0529a07d4 243-245
+  s_f0537f04fe697d::t_bf3c67298ee139 246-268
+utils/upload-helper/lib/rutube.js
+  s_8d559d15110c72::t_365c1b78cabdde 119
+  s_8d559d15110c72::t_135b74723e0efd 101-108
+  s_8d559d15110c72::t_db0bfadaac4d44 22-25,27
+  s_8d559d15110c72::t_6ef5f8851ca8c9 81-95
+  s_8d559d15110c72::t_63f479d476c920 1-3,5-15,21,44-53,55-59,62-77,80,97-98,112,115-116,118,120,124-126,128,130-135,137-144,146-148,150-155,157-161,169
+  s_8d559d15110c72::t_e3d20085da4a11 16-20,26,30-42,54,60-61,78-79,96,113-114,117,121-123,127,129,136,145,149,156,162-168
+  s_8d559d15110c72::t_4a01ba2c83fb09 28-29,43
+  s_8d559d15110c72::t_a12f94719a334f 99-100,109-110
+  s_8d559d15110c72::t_f1dbed3eb788cb 111
+  s_8d559d15110c72::t_a4e9efd719c17d 4
+  s_8d559d15110c72::t_42f64fec054f56 170-172
+  s_f0537f04fe697d::t_4697b18930602e 173-198
+utils/upload-helper/lib/selectors.js
+  s_8d559d15110c72::t_8c44434e080396 10-18
+  s_8d559d15110c72::t_21463833f69f4c 100-102,107-108,114-115,117
+  s_8d559d15110c72::t_88695e06b2f23c 1-9,19,21-49,53-54,64-99,103-106,109-113,118-122,124-137,140-144,149,151
+  s_8d559d15110c72::t_98627711da3aec 20
+  s_8d559d15110c72::t_feab99aa736f96 123
+  s_8d559d15110c72::t_d44029432ff091 50-52
+  s_8d559d15110c72::t_c8423d91f54483 55-57,61-63
+  s_8d559d15110c72::t_f78e880f47065c 116
+  s_8d559d15110c72::t_c677592fbe48c8 138-139
+  s_8d559d15110c72::t_4bf42a2fc5be7b 145-148
+  s_8d559d15110c72::t_361af319818541 150
+  s_f0537f04fe697d::t_2d1d6d7f9beb12 58-60
+.claude/skills/stsPoetryMake/references/prava.md
+  s_8d559d15110c72::t_7d5e388f437386 68
+utils/generate-elevenlabs-voice/lib/text.js
+  s_88927507b20a98::t_053af557cadfc9 3-17,20-41,43-65,67-88,101-110,112-117,119-146,148-271
+  s_88927507b20a98::t_6bb06b7a2aee54 1-2
+  s_88927507b20a98::t_93ce02f9cbaff7 111,118
+  s_88927507b20a98::t_313e4c6707756b 66
+  s_88927507b20a98::t_ba1dd235defe1c 89-100
+  s_88927507b20a98::t_f48879e520bc5d 147
+  s_88927507b20a98::t_12b8858ad64019 18-19,42
+input-stsPoetryUpload.md
+  s_716f458d0ee5f7::t_863fca996ee045 17
+  s_716f458d0ee5f7::t_aed98262adfbd5 15-16,18
+  s_8d559d15110c72::t_fb21b456411c19 8,13-14
+utils/upload-helper-disk/lib/config.js
+  s_df3b2bcf4b0eff::t_4748506af8b9b4 1-3,5-11
+  s_d9c50e26c2c3ce::t_b23f15b125f318 4
+  s_df3b2bcf4b0eff::t_870353ef1ceb1c 12-14
+utils/upload-helper/lib/probe.js
+  s_8d559d15110c72::t_e9997a02f700f5 3,8-10,17-18,20-21,28-32,34-38
+  s_8d559d15110c72::t_585605d16169de 12,19,22-27,33
+  s_8d559d15110c72::t_3c0505cd23212a 1-2,4-7,11,13-16,39-57,59-127
+  s_8d559d15110c72::t_3a6cccd5849473 58
+utils/generate-elevenlabs-voice/voice.example.json
+  s_88927507b20a98::t_67f833f69a210f 9
+  s_88927507b20a98::t_469ed22dcf7fa2 1-8,10-11
+utils/upload-helper/README.md
+  s_8d559d15110c72::t_b1b7d44ea2d9e6 94,96-103,106,110-114,116-120
+  s_8d559d15110c72::t_0f6fc643a8e052 159
+  s_8d559d15110c72::t_9fd86da4fe25ba 93,95
+  s_8d559d15110c72::t_aa0386209ed409 104-105,107-109,115
+  s_8d559d15110c72::t_2c129f64d7a7b4 1-92,121-158,160-193
+  s_8d559d15110c72::t_aaa91666cd6c38 194-196
+  s_f0537f04fe697d::t_84ce2b590f13c9 197-251
+utils/upload-helper-disk/config.json
+  s_716f458d0ee5f7::t_84414355e5a5a8 3
+  s_716f458d0ee5f7::t_c24c1b7d28d4f1 4
+  s_df3b2bcf4b0eff::t_fa2773bf6c8880 1-2,5-16
+utils/README.md
+  s_8d559d15110c72::t_b14ca2948e5656 12-26,66-85
+  s_df3b2bcf4b0eff::t_e513d16e61fd8e 27-28,32,34,36,40-41,46-47
+  s_d9c50e26c2c3ce::t_98d0413e30ffca 45,63
+  s_716f458d0ee5f7::t_1166ffc0efb912 30-31,33,35,39,42
+  s_716f458d0ee5f7::t_c70839450d3321 37-38,43
+  s_88927507b20a98::t_33ed442cf54729 48-62,64-65
+  s_716f458d0ee5f7::t_e54debea3e5004 29,44
+utils/generate-elevenlabs-voice/README.md
+  s_88927507b20a98::t_5c4326e7ad1ea5 106
+  s_d9c50e26c2c3ce::t_7efd08dc25b0a1 262-263,278
+  s_88927507b20a98::t_38a1dea776b98d 34-35
+  s_88927507b20a98::t_79bf690d4655e8 205-206
+  s_88927507b20a98::t_48f25e95a73219 1-31,36-105,107-204,207-261,264-277,279-283
+  s_88927507b20a98::t_bdc0e3005f8909 32-33
+  s_88927507b20a98::t_4fb9a94d9f218e 284-286
+  s_f0537f04fe697d::t_b8f33352538bc0 287-294
+utils/upload-helper/lib/config.js
+  s_8d559d15110c72::t_ac20604a7d84d2 1-10
+  s_8d559d15110c72::t_b08eeab2dab1f3 11-13
+  s_f0537f04fe697d::t_cc1ef896897ede 14
+utils/generate-elevenlabs-voice/lib/format.js
+  s_88927507b20a98::t_2aee59f48b3cb6 1-36
+utils/upload-helper/package.json
+  s_8d559d15110c72::t_3b402fdfb39be7 1-19
+utils/generate-elevenlabs-voice/config.json
+  s_88927507b20a98::t_6bd34c4a0b73b9 1-36
+utils/upload-helper/run.js
+  s_8d559d15110c72::t_8c4781b1d14dd7 106
+  s_8d559d15110c72::t_612b92aae665cf 145
+  s_8d559d15110c72::t_af451c90d11e12 102-105,107-108
+  s_8d559d15110c72::t_a14f08aef575b3 137,142-144,146-151,153-156,158-160,162-164,170,172
+  s_8d559d15110c72::t_05069f60a97eca 122-123
+  s_8d559d15110c72::t_ce18d56fb91124 90-99,101
+  s_8d559d15110c72::t_1536bf3595bf52 208
+  s_8d559d15110c72::t_615d4a5d3e9c6a 1-17,19-20,22-54,56-59,61-62,68-74,76-89,100,109-121,124-136,138-141,152,161,165-169,171,173-207,214-227,229-238,240,242-256
+  s_8d559d15110c72::t_381fe0559a9246 228
+  s_8d559d15110c72::t_991135abf2b2a4 55
+  s_8d559d15110c72::t_7784ffd603b3cb 239,241
+  s_8d559d15110c72::t_83c5dc4aac21db 60,63-67,75
+  s_8d559d15110c72::t_30be486f50e5e8 18
+  s_8d559d15110c72::t_fb9ac575aacfc5 21
+  s_8d559d15110c72::t_b68906821b265c 157
+  s_8d559d15110c72::t_455d294b1a36dc 209-213
+  s_8d559d15110c72::t_e0f671f651b529 257-259
+  s_f0537f04fe697d::t_ea26e9cc9e52fd 260-345
+utils/upload-helper-disk/lib/token.js
+  s_d9c50e26c2c3ce::t_8a6f7e9defc299 1-6,8-9,11,19-20
+  s_df3b2bcf4b0eff::t_e10bb1a9996b86 7,10,12-18
+.env.example
+  s_d9c50e26c2c3ce::t_7c9c87c4d16a81 1-10
+.gitignore
+  s_df3b2bcf4b0eff::t_dc79ff00edf58a 15
+  s_88927507b20a98::t_ad452e7295e396 21
+  s_d9c50e26c2c3ce::t_3e1b097641320f 16-18
+  h_06e01297fc405a 1-3
+  s_8d559d15110c72::t_8201bc15d7143b 7-11
+  s_d9c50e26c2c3ce::t_80a661e0d44de9 12-14,19-20
+  s_716f458d0ee5f7::t_71055adfc11274 33
+utils/upload-helper/AGENTS.md
+  s_8d559d15110c72::t_99c71527b523ee 58
+  s_8d559d15110c72::t_6a8feeba394118 1-57,59
+channels/README.md
+  s_8d559d15110c72::t_18616a2f9c2a93 55
+utils/upload-helper/config.json
+  s_8d559d15110c72::t_863b66b5ac8d40 9
+  s_8d559d15110c72::t_95e086f67072c1 30
+  s_8d559d15110c72::t_87fb257082cf3e 1-8,10-29,31-35
+  s_8d559d15110c72::t_96266f6bdea0a3 36
+utils/generate-elevenlabs-voice/lib/elevenlabs.js
+  s_88927507b20a98::t_8b61d48a958a7f 215
+  s_88927507b20a98::t_0b929640e980e6 61
+  s_88927507b20a98::t_f9c5bc8492333c 1-40,44-60,62-157,168-214
+  s_88927507b20a98::t_8e0ae718452875 41-43
+  s_88927507b20a98::t_67a630c85ee561 158-167
+utils/upload-helper-disk/lib/state.js
+  s_df3b2bcf4b0eff::t_46d8a59f6ffc6d 28-29
+  s_df3b2bcf4b0eff::t_ba2be7a9ad8fe8 1-27,30-50
+utils/upload-helper-disk/lib/format.js
+  s_df3b2bcf4b0eff::t_ff1337987d4156 1-39,41-62
+  s_df3b2bcf4b0eff::t_48f53fc2568d33 40
+utils/upload-helper/lib/browser.js
+  s_8d559d15110c72::t_79acd62d22ef24 23-30
+  s_8d559d15110c72::t_37d338447cfeb1 1-22,31-49,54,58-62,86,88-142
+  s_8d559d15110c72::t_4941da665554f5 50-53,55-57,63-85,87
+utils/upload-helper-disk/lib/files.js
+  s_716f458d0ee5f7::t_564f7ccba511dc 68
+  s_716f458d0ee5f7::t_37088b1b7c00a0 85
+  s_716f458d0ee5f7::t_02ab92a5fa2634 25
+  s_716f458d0ee5f7::t_75968e40dc4d34 20-24,26-37
+  s_716f458d0ee5f7::t_a441076c05c9be 40
+  s_df3b2bcf4b0eff::t_82d48d437f9dbd 1-19,38-39,41-67,69-84,86-148
+utils/generate-elevenlabs-voice/package.json
+  s_88927507b20a98::t_c5abb01ccdc6cc 1-16
+utils/upload-helper/lib/flows.js
+  s_8d559d15110c72::t_6aede953696592 66,68,71,78-85,88-113,157-158,233,236,243
+  s_8d559d15110c72::t_c9eb7d7141cde6 115,119-127,129-132,134-135,138,141-143,152-153
+  s_8d559d15110c72::t_fa3d3843f5a147 86-87
+  s_8d559d15110c72::t_0dcf6aae347e05 4-6,9-17
+  s_8d559d15110c72::t_4e48737037fe4a 1-2,18-29,31-64,161-214,221-224,227,229,240,244
+  s_8d559d15110c72::t_f6ad1523bf99b4 65,67,69-70,72-77,159-160,238-239
+  s_8d559d15110c72::t_bd405bf6f99926 114,116-118,128,133,136-137,139-140,144-151,154-156,215
+  s_8d559d15110c72::t_2412d9cb76bd20 3
+  s_8d559d15110c72::t_a01930bbfebdc2 7-8
+  s_8d559d15110c72::t_b15f94ec802f1c 30
+  s_8d559d15110c72::t_7a2177317c99f1 216-220
+  s_8d559d15110c72::t_0c5dafd0aef3ad 225-226
+  s_8d559d15110c72::t_361185b7b7402a 228
+  s_8d559d15110c72::t_9f6f8e3fde3c5b 230-232
+  s_8d559d15110c72::t_6bd2f6f3296bd7 234-235
+  s_8d559d15110c72::t_4f88f3b19bc19e 237
+  s_8d559d15110c72::t_abd9ae7624d5c0 241-242
+  s_8d559d15110c72::t_12d9f9ffd6a10a 245-247
+  s_f0537f04fe697d::t_0ad8c45d3b468d 248-302
+utils/generate-elevenlabs-voice/run.js
+  s_88927507b20a98::t_a9531ad9d03e54 271-273,567
+  s_88927507b20a98::t_33ba600a60a5d2 693-694,696-697
+  s_88927507b20a98::t_74956f2d11f7aa 1-145,147-223,225-244,253-255,257-265,267-270,274-331,339-340,342,344-345,347-507,509-566,568-594,598-692,698-796,806-810,822-930,934-962,964,975,978,982-1029,1033-1034,1036,1039,1045,1052,1057
+  s_88927507b20a98::t_529e9491d40eca 245-252,256
+  s_88927507b20a98::t_7ddbc5bfdbcfe5 695
+  s_88927507b20a98::t_dc80a20b338bd9 266
+  s_d9c50e26c2c3ce::t_ed385ca8ff2c12 224
+  s_88927507b20a98::t_28645fdcf8eaa1 332-338,341,343,346
+  s_d9c50e26c2c3ce::t_6f6ab8790fd3ea 146
+  s_88927507b20a98::t_c919a84873a5cc 963,965-974,976-977,979-981
+  s_88927507b20a98::t_e1c685fadc203b 811-821
+  s_88927507b20a98::t_9b7ef6287294e0 797-805
+  s_88927507b20a98::t_e56875ba257771 931-933
+  s_88927507b20a98::t_3876d70def131c 595-597
+  s_88927507b20a98::t_a421da12bc760d 508
+  s_88927507b20a98::t_747402107db6b0 1030-1032
+  s_88927507b20a98::t_77f0c948f9d53d 1035
+  s_88927507b20a98::t_bb9bd5d52caa3e 1037-1038
+  s_88927507b20a98::t_fcaa3b2a95446c 1040-1044
+  s_88927507b20a98::t_3444e0cdf1341c 1046-1051
+  s_88927507b20a98::t_e11f1efd6ee443 1053-1056
+  s_88927507b20a98::t_4cc2fc5d108fc3 1058
+utils/upload-helper-disk/AGENTS.md
+  s_df3b2bcf4b0eff::t_067617f93d2012 1-2,4-11,21-22,47-62
+  s_716f458d0ee5f7::t_993ca50997957c 3,12,14,26,35,38
+  s_716f458d0ee5f7::t_73de3e2ba648bd 36-37
+  s_d9c50e26c2c3ce::t_6af164a101dcce 23-24
+  s_716f458d0ee5f7::t_4979c5a0e0d76f 13,15-20,25,27-34,39-43,45-46
+  s_1d116a18b72000::t_858d821c9c83e6 44
+  s_df3b2bcf4b0eff::t_98b8aa30458c39 63-65
+utils/generate-elevenlabs-voice/AGENTS.md
+  s_88927507b20a98::t_9845b39b962284 1-28,30-34
+  s_d9c50e26c2c3ce::t_5763c925536184 29
+  s_88927507b20a98::t_379821777a874e 35-37
+utils/upload-helper-disk/run.js
+  s_df3b2bcf4b0eff::t_d7e5b3aa85d0a0 401
+  s_716f458d0ee5f7::t_2ca2231d6bb21c 7-8,86,553
+  s_df3b2bcf4b0eff::t_7a39a1c5cb7634 214
+  s_df3b2bcf4b0eff::t_8bbdd1551f4899 466-468
+  s_716f458d0ee5f7::t_fb16939d280294 554,620-622
+  s_1d116a18b72000::t_1ad51e3d0d536a 95,99-124
+  s_df3b2bcf4b0eff::t_73af4c9e36ad1a 498
+  s_df3b2bcf4b0eff::t_246ec5829ed179 536
+  s_df3b2bcf4b0eff::t_fde5548dc2b838 67
+  s_716f458d0ee5f7::t_5107b6af2d0c71 590
+  s_716f458d0ee5f7::t_269998f3d6d6f2 591-601
+  s_df3b2bcf4b0eff::t_13aa6b6bf47d7b 70
+  s_716f458d0ee5f7::t_ca12dbf1c1733c 614,617,623-625,627,631,636,640,647-649
+  s_716f458d0ee5f7::t_f319600b35a3c4 626
+  s_df3b2bcf4b0eff::t_6d79b64c268bb1 1-6,10-16,18-66,68-69,71-72,74-84,90-94,96-98,125-131,133-136,138-140,144-152,157-170,172,174-211,213,215-218,220-286,292-351,353-400,402-443,445-449,455-465,469-497,499-516,518-528,530-535,537-543,550-552,555-557,559-561,566-570,573-589,602-613,615-616,618-619,628-630,632-635,637-639,641-646,650-653
+  s_716f458d0ee5f7::t_e67d78409b43c8 9
+  s_716f458d0ee5f7::t_03fdd0fae4caab 544-549
+  s_1d116a18b72000::t_b225d56e8ad2d7 153-156
+  s_df3b2bcf4b0eff::t_9e5b55019e70eb 85,87-89,171,173
+  s_1d116a18b72000::t_b6edafc50c38e3 287-291
+  s_df3b2bcf4b0eff::t_ddf461b82f02b1 444,450-454
+  s_df3b2bcf4b0eff::t_899181b8842bdf 558,562-565,571-572
+  s_df3b2bcf4b0eff::t_e8e4566261a460 212,219
+  s_df3b2bcf4b0eff::t_9bcbc93c3b93d0 137,141-143
+  s_df3b2bcf4b0eff::t_9abb979b2ea19b 17
+  s_df3b2bcf4b0eff::t_766f2bd09c28df 73
+  s_df3b2bcf4b0eff::t_adc648a652be59 132
+  s_df3b2bcf4b0eff::t_3ffcb0144f49b4 352
+  s_df3b2bcf4b0eff::t_8d052822aa78d4 517
+  s_df3b2bcf4b0eff::t_c84735845b2231 529
+  s_df3b2bcf4b0eff::t_3db12268b25dac 654-656
+  s_f0537f04fe697d::t_ca682885f1d09a 657-684
+utils/generate-elevenlabs-voice/lib/config.js
+  s_88927507b20a98::t_140669a3099c10 1-45
+.claude/skills/stsPoetryMake/SKILL.md
+  s_88927507b20a98::t_eae9be2d946b42 63,65-66,68,70-72,74-80
+  s_88927507b20a98::t_7cbd1d34621b05 73
+  s_88927507b20a98::t_73bababe98cdf9 32
+  s_88927507b20a98::t_818ae4f019cf38 31
+  s_f0537f04fe697d::t_9f4a0ae6218387 20
+utils/upload-helper-disk/package.json
+  s_df3b2bcf4b0eff::t_7090ff0970b0de 1-17
+utils/upload-helper-disk/lib/upload.js
+  s_df3b2bcf4b0eff::t_c12b24c24f6043 1-49,51-99,101-129
+  s_df3b2bcf4b0eff::t_1116d106372b73 50
+  s_df3b2bcf4b0eff::t_f864f22a0fbc50 100
+utils/generate-elevenlabs-voice/lib/audio.js
+  s_88927507b20a98::t_07e5f112795f2f 1-82
+utils/upload-helper/lib/ui.js
+  s_8d559d15110c72::t_4b82b531956d0d 71-72,77,88,94
+  s_8d559d15110c72::t_1db52e80490ab4 1-30,34-37,39-53,56-67,69-70,85,92-93,95-156
+  s_8d559d15110c72::t_ff2302343dfaee 68,73-76,78-84,86-87,89-91
+  s_8d559d15110c72::t_bc462c015a5ac7 31-33,38,54-55
+  s_8d559d15110c72::t_8dbaecada53a1a 157-159
+  s_f0537f04fe697d::t_adf379348fe3f3 160-166
+utils/generate-elevenlabs-voice/lib/key.js
+  s_88927507b20a98::t_a103668e4b14a2 7,10,12-19
+  s_d9c50e26c2c3ce::t_9e15e2b3a97002 1-6,8-9,11,20-21
+utils/lib/args.js
+  s_f0537f04fe697d::t_7dbf2c2f68637c 1-93
+utils/lib/env.js
+  s_f0537f04fe697d::t_6659edd555940f 1-62
+utils/lib/files.js
+  s_f0537f04fe697d::t_4bdf3fe50ae383 1-31
+utils/lib/format.js
+  s_f0537f04fe697d::t_81cad1b39184e5 1-17
+utils/lib/http.js
+  s_f0537f04fe697d::t_3b58e95958824d 1-102
+utils/lib/state.js
+  s_f0537f04fe697d::t_602e3c4e6c89b4 1-101
+utils/upload-helper/package-lock.json
+  h_06e01297fc405a 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "011ce58f82b746e6d1b2de1cb22e589f69b76b01",
+  "prompts": {},
+  "humans": {
+    "h_06e01297fc405a": {
+      "author": "stswoon <xx@xx.xx>"
+    }
+  },
+  "sessions": {
+    "s_1d116a18b72000": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e74a9945bffddnP11LkaR6lcwh",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_716f458d0ee5f7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e748d5cfbffdoAajWfxSEaW5pg",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_88927507b20a98": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e74c6e686ffelYMg2JnbmvRr7G",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_8d559d15110c72": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e77096b31ffd2xcueq143qkJjF",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_d9c50e26c2c3ce": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e748aca10ffdyGZ3OkRRTswplK",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_df3b2bcf4b0eff": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e76d47a21ffdVF28FYOWEwb2UX",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_f0537f04fe697d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d1260177-f5f6-4d22-a8e8-060a0573accf",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
