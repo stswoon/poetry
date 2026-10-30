@@ -1,0 +1,19 @@
+.claude/skills/stsPoetryMake/SKILL.md
+  s_3d7ccc81ca340f::t_0f09d7cea6f1cf 3,20,31,65-68,70-73,75-99,104-111
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "543d33016be59ec75655b1d16f3772814425bced",
+  "prompts": {},
+  "sessions": {
+    "s_3d7ccc81ca340f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "703b9de9-7344-4952-9ebd-c83198140ec2",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
