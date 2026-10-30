@@ -49,11 +49,11 @@ video/
 # проба и черновик
 npx hyperframes render --quality draft --fps 60 --output renders/draft_v1.mp4 > renders/draft_v1.log 2>&1
 # финал
-npx hyperframes render --quality delivery --fps 60 --output renders/<slug>_1080p60.mp4 > renders/final.log 2>&1
+npx hyperframes render --quality delivery --fps 60 --output renders/final.mp4 > renders/final.log 2>&1
 ```
 
 - Длинный рендер запускай через Bash с `run_in_background: true`. Прогресс читается из строк лога `@hf-progress {"code":"capture","done":N,"total":M,"pct":P}`. Конец рендера отмечает строка `Render complete`, ошибку — `Render failed`.
-- Готовый финал скопируй в `<папка>/<slug>_1080p60.mp4`. Старый не перезаписывай: `_v2`, `_v3`.
+- Готовый финал скопируй в `<папка>/<Стих> - <Поэт> - vN.mp4`, например `Парус - Лермонтов - v1.mp4`. Уже отправленную версию не перезаписывай: `v2`, `v3`.
 
 ## Проверки перед сдачей
 
