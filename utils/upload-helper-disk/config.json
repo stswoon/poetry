@@ -1,0 +1,16 @@
+{
+  "apiBase": "https://cloud-api.yandex.net",
+  "remoteDir": "/poetry",
+  "extensions": ["mp4"],
+  "overwrite": false,
+  "verify": true,
+  "retries": {
+    "api": 4,
+    "upload": 2
+  },
+  "timeouts": {
+    "apiMs": 60000,
+    "uploadIdleMs": 300000,
+    "verifyMs": 30000
+  }
+}

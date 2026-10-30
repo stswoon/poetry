@@ -1,0 +1,11 @@
+{
+  "voice_id": "vQxSi2EuaRWwBw3nn6dK",
+  "name": "Marat — Warm, Calm",
+  "model_id": "eleven_v4",
+  "language_code": "ru",
+  "output_format": "mp3_44100_128",
+  "settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  }
+}

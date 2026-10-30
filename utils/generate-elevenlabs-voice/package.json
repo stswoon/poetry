@@ -1,0 +1,16 @@
+{
+  "name": "poetry-generate-elevenlabs-voice",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Генерация голоса для стиха через ElevenLabs API (Eleven v4)",
+  "main": "run.js",
+  "scripts": {
+    "key": "node run.js key",
+    "voices": "node run.js voices",
+    "generate": "node run.js generate"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

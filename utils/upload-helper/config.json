@@ -1,0 +1,36 @@
+{
+  "profileDir": ".profile",
+  "browserChannel": "chrome",
+  "headless": false,
+  "slowMo": 0,
+
+  "vk": {
+    "cabinet": "https://cabinet.vkvideo.ru/dashboard/@club242590990",
+    "uploadUrl": "https://cabinet.vkvideo.ru/dashboard/@club242590990"
+  },
+
+  "rutube": {
+    "studio": "https://studio.rutube.ru/",
+    "uploadUrl": "https://studio.rutube.ru/uploader/"
+  },
+
+  "defaults": {
+    "category": "Культура",
+    "publish": true
+  },
+
+  "limits": {
+    "title": { "vk": 128, "rutube": 100 },
+    "description": { "vk": 5000, "rutube": 5000 },
+    "rutubeFileSizeBytes": 26843545600
+  },
+
+  "timeouts": {
+    "navigation": 90000,
+    "loginWait": 600000,
+    "formAppear": 180000,
+    "uploadFinish": 1800000,
+    "publish": 180000,
+    "manualPublish": 3600000
+  }
+}

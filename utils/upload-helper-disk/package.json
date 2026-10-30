@@ -1,0 +1,17 @@
+{
+  "name": "poetry-upload-helper-disk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Загрузка бекапов видео на Яндекс Диск через REST API и OAuth-токен",
+  "main": "run.js",
+  "scripts": {
+    "token": "node run.js token",
+    "info": "node run.js info",
+    "list": "node run.js list",
+    "upload": "node run.js upload"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,8 +1,24 @@
+/.idea
+/.serena/
+
 # Видео большого размера — в git не коммитим
 *.mp4
-/.idea
 
-utils/node_modules/
+# upload-helper: браузерный профиль (cookies!), логи прогонов и зависимости
+utils/upload-helper/node_modules/
+utils/upload-helper/.profile/
+utils/upload-helper/logs/
+
+# Секреты: токен Яндекс Диска и ключ ElevenLabs — в корневом .env
+/.env
+/.env.local
+
+# upload-helper-disk: логи прогонов
+utils/upload-helper-disk/logs/
+
+# Устаревшие файлы токенов — больше не используются, но не коммитим
+utils/upload-helper-disk/.token
+utils/generate-elevenlabs-voice/.token
 
 # Пересобираемое: рендеры, кэши и служебные файлы HyperFrames
 utils/renders/

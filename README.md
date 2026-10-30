@@ -6,3 +6,25 @@
 
 - VK Видео — https://vkvideo.ru/@club242590990
 - Rutube — https://rutube.ru/channel/75569483
+
+## Секреты
+
+Токены лежат в корневом `.env` (в git не попадает, образец — `.env.example`):
+
+```
+YANDEX_DISK_TOKEN=   # OAuth-токен Яндекс Диска, доступ ко всему Диску
+ELEVENLABS_API_KEY=  # API-ключ ElevenLabs
+```
+
+`.env` заполняется только руками: через аргументы командной строки секреты не передаются,
+чтобы не оседать в истории оболочки и в чате. Проверить, что утилиты их видят:
+
+```powershell
+cd utils/upload-helper-disk
+node run.js token
+
+cd ../generate-elevenlabs-voice
+node run.js key
+```
+
+Утилиты ищут секреты в порядке: переменная окружения, затем корневой `.env`.

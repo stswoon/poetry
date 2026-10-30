@@ -1,0 +1,19 @@
+{
+  "name": "poetry-upload-helper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Загрузка роликов на VK Видео и RUTUBE через настоящий браузер (Playwright + Chrome)",
+  "main": "run.js",
+  "scripts": {
+    "login": "node run.js login",
+    "probe": "node run.js probe",
+    "upload": "node run.js upload"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "playwright-core": "^1.64.1"
+  }
+}

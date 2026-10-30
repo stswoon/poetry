@@ -1,0 +1,36 @@
+{
+  "apiBase": "https://api.elevenlabs.io",
+  "modelId": "eleven_v4",
+  "languageCode": "ru",
+  "outputFormat": "mp3_44100_128",
+  "textFile": "elevenlabs.txt",
+  "voiceFile": "voice.json",
+  "outputFile": "voice.mp3",
+  "maxCharsPerRequest": 9500,
+  "charMargin": 500,
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "pricesPer1kUsd": {
+    "eleven_v4": 0.08,
+    "eleven_v4_turbo": 0.04,
+    "eleven_v3": 0.08,
+    "eleven_v3_conversational": 0.04,
+    "eleven_multilingual_v2": 0.08,
+    "eleven_flash_v2_5": 0.04
+  },
+  "modelLimits": {
+    "eleven_v4": 10000,
+    "eleven_v4_turbo": 10000,
+    "eleven_v3": 5000,
+    "eleven_v3_conversational": 5000,
+    "eleven_multilingual_v2": 10000,
+    "eleven_flash_v2_5": 40000
+  },
+  "retries": 3,
+  "timeouts": {
+    "apiMs": 30000,
+    "generateMs": 300000
+  }
+}
