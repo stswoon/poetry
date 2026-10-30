@@ -1,0 +1,19 @@
+.claude/skills/stsPoetryMake/references/elevenlabs.md
+  s_3d7ccc81ca340f::t_72e3059d67f03b 8,10,13-14,16,18-23,25,29-31,35-36,42,44,46,48-58,60-61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "33923f5170bb05821bbefaa77cadec26d44722a0",
+  "prompts": {},
+  "sessions": {
+    "s_3d7ccc81ca340f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "703b9de9-7344-4952-9ebd-c83198140ec2",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
