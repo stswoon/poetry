@@ -165,7 +165,8 @@ export async function selectPlaylistsVk(page, scope, names) {
   for (const name of names) {
     if (hasChip(await readChips(field), name)) continue;
 
-    const option = page.getByRole('option', { name: exactName(name) }).first();
+    // Ищем по тексту, а не по имени роли: у непустого плейлиста в имя пункта попадает его обложка.
+    const option = page.getByRole('option').filter({ hasText: exactName(name) }).first();
     let found = false;
 
     // Подсказки VK фильтруются по введённому тексту — пробуем каждое написание.
@@ -174,7 +175,7 @@ export async function selectPlaylistsVk(page, scope, names) {
       await input.fill('', { timeout: 5000 }).catch(() => {});
       await input.type(spelling, { delay: 60 }).catch(() => {});
 
-      // Подсказки могут идти долго, особенно когда канал занят другой заливкой.
+      // Список плейлистов приходит не сразу: ждём пункт, а не фиксированную паузу.
       found = await option
         .waitFor({ state: 'visible', timeout: 8000 })
         .then(() => true)
