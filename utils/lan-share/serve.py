@@ -3,7 +3,8 @@
 
   python3 utils/lan-share/serve.py "texts/<Поэт>/<Стих>" [--port 8770]
 
-Отдаёт только video.mp4, cover.png и voice.mp3 из папки стиха, остальное недоступно.
+Отдаёт только ролик, cover.png и voice.mp3 из папки стиха, остальное недоступно.
+Ролик — самая старшая версия «<Стих> - <Поэт> - vN.mp4», в старых папках video.mp4.
 Поддерживает Range: без него видео не перематывается, а Safari на iPhone его не играет.
 """
 import argparse
@@ -30,7 +31,21 @@ def lan_ip():
         s.close()
 
 
-def make_handler(folder, title):
+def find_video(folder):
+    def version(path):
+        m = re.search(r" - v(\d+)\.mp4$", path.name, re.I)
+        return int(m.group(1)) if m else -1
+
+    videos = sorted(folder.glob("*.mp4"), key=version)
+    if videos and version(videos[-1]) >= 0:
+        return videos[-1]
+    old = folder / "video.mp4"
+    return old if old.is_file() else None
+
+
+def make_handler(folder, title, video):
+    paths = {n: video if n == "video.mp4" else folder / n for n in FILES}
+
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
             pass
@@ -45,14 +60,14 @@ def make_handler(folder, title):
             name = self.path.split("?")[0].lstrip("/")
             if name == "":
                 return self.send_page(head)
-            if name not in FILES or not (folder / name).is_file():
+            if name not in FILES or not paths[name].is_file():
                 self.send_error(404)
                 return
-            self.send_file(folder / name, FILES[name], head)
+            self.send_file(paths[name], FILES[name], head)
 
         def send_page(self, head):
             t = html.escape(title)
-            links = "".join(f'<a href="/{n}" download>{n}</a> ' for n in FILES if (folder / n).is_file())
+            links = "".join(f'<a href="/{n}" download>{n}</a> ' for n in FILES if paths[n].is_file())
             body = f"""<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>{t}</title>
 <style>body{{margin:0 auto;max-width:960px;padding:16px;background:#111;color:#eee;font:16px sans-serif}}
@@ -113,9 +128,10 @@ def main():
     ap.add_argument("--port", type=int, default=8770, help="первый порт для попытки, занятые пропускаются")
     args = ap.parse_args()
     folder = Path(args.folder).resolve()
-    if not (folder / "video.mp4").is_file():
-        sys.exit(f"Нет video.mp4 в {folder}")
-    handler = make_handler(folder, folder.name)
+    video = find_video(folder)
+    if video is None:
+        sys.exit(f"Нет ролика в {folder}")
+    handler = make_handler(folder, folder.name, video)
     for port in range(args.port, args.port + 20):
         try:
             server = ThreadingHTTPServer(("0.0.0.0", port), handler)
