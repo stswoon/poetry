@@ -1,6 +1,6 @@
 import { config } from './config.js';
 import { selectors } from './selectors.js';
-import { attachFile, checkConsentBoxes, fillFirst, findFirst, waitEnabled } from './ui.js';
+import { attachFile, checkConsentBoxes, fillFirst, findFirst, waitEnabled, watchForText } from './ui.js';
 import { chooseOption, readAccess, selectAccessLink, selectPlaylistsRutube, waitForVideoUrl } from './flows.js';
 import { goto } from './browser.js';
 
@@ -178,6 +178,9 @@ export async function uploadRutube({ page, job, run }) {
     };
   }
 
+  // Уведомление быстро исчезает, а публикация бывает долгой: следим за ним с момента до клика и всё ожидание ссылки.
+  const playlistFailed = job.playlists.length > 0 ? watchForText(page, s.playlistError, t.publish) : false;
+
   await publishButton.click({ timeout: 30000 });
   await page.waitForTimeout(3000);
   await run.shot(page, 'rutube-after-publish');
@@ -185,6 +188,11 @@ export async function uploadRutube({ page, job, run }) {
   const url = (await waitForVideoUrl(page, s, t.publish)) || previewUrl || (await readVideoUrl(page));
   if (url) run.info(`Ссылка: ${url}`);
   else run.warn('RUTUBE: видео опубликовано, но ссылку найти не удалось');
+
+  // Ссылка могла найтись сразу: тогда уведомление ждём ещё немного, а не весь t.publish.
+  if (await Promise.race([playlistFailed, page.waitForTimeout(5000).then(() => false)])) {
+    run.warn(`RUTUBE: студия не добавила ролик в плейлисты (${job.playlists.join(', ')}) — добавь вручную: Студия → Плейлисты`);
+  }
 
   run.set({ ready: true, published: true, url });
   return { pendingPublish: false, accessConfirmed: true, url };
