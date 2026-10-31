@@ -1,0 +1,16 @@
+{
+  "video": "video.mp4",
+  "thumb": "cover.png",
+  "title": "Зимний вечер - Пушкин",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 3",
+    "класс 5"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
