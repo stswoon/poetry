@@ -134,8 +134,20 @@ export function hasChip(chips, name) {
   return chips.some((chip) => normalizeName(chip) === wanted);
 }
 
+/** «класс 3» и «класс-3» — один плейлист: регистр и лишние пробелы тоже не важны. */
 function normalizeName(text) {
-  return String(text).replace(/\s+/g, ' ').trim().toLowerCase();
+  return String(text)
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+    .replace(/^класс[ -](\d+)$/, 'класс $1');
+}
+
+/** Все написания плейлиста; то, что указано в job, идёт первым. */
+function playlistSpellings(name) {
+  const grade = normalizeName(name).match(/^класс (\d+)$/)?.[1];
+  if (!grade) return [name];
+  return [...new Set([name, `класс ${grade}`, `класс-${grade}`])];
 }
 
 /**
@@ -153,14 +165,24 @@ export async function selectPlaylistsVk(page, scope, names) {
   for (const name of names) {
     if (hasChip(await readChips(field), name)) continue;
 
-    await input.click({ timeout: 10000 }).catch(() => {});
-    await input.fill('', { timeout: 5000 }).catch(() => {});
-    await input.type(name, { delay: 60 }).catch(() => {});
-    await page.waitForTimeout(1200);
-
     const option = page.getByRole('option', { name: exactName(name) }).first();
+    let found = false;
 
-    if (await option.isVisible().catch(() => false)) {
+    // Подсказки VK фильтруются по введённому тексту — пробуем каждое написание.
+    for (const spelling of playlistSpellings(name)) {
+      await input.click({ timeout: 10000 }).catch(() => {});
+      await input.fill('', { timeout: 5000 }).catch(() => {});
+      await input.type(spelling, { delay: 60 }).catch(() => {});
+
+      // Подсказки могут идти долго, особенно когда канал занят другой заливкой.
+      found = await option
+        .waitFor({ state: 'visible', timeout: 8000 })
+        .then(() => true)
+        .catch(() => false);
+      if (found) break;
+    }
+
+    if (found) {
       await option.click({ timeout: 10000 }).catch(() => {});
       await page.waitForTimeout(500);
     } else {
@@ -186,7 +208,9 @@ export async function selectPlaylistsRutube(page, scope, names) {
     const count = await combos.count().catch(() => 0);
     for (let i = 0; i < count; i++) {
       const text = await combos.nth(i).innerText().catch(() => '');
-      if (/плейлист/i.test(text) || names.some((name) => text.includes(name))) return combos.nth(i);
+      if (/плейлист/i.test(text)) return combos.nth(i);
+      const chips = await readChips(combos.nth(i));
+      if (names.some((name) => hasChip(chips, name))) return combos.nth(i);
     }
     return null;
   };
@@ -239,7 +263,8 @@ async function isOptionSelected(row) {
 }
 
 function exactName(name) {
-  return new RegExp(`^${escapeRegex(name)}$`, 'i');
+  const body = playlistSpellings(name).map(escapeRegex).join('|');
+  return new RegExp(`^(?:${body})$`, 'i');
 }
 
 function escapeRegex(text) {

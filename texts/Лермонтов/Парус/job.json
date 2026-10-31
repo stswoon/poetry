@@ -1,0 +1,18 @@
+{
+  "video": "video.mp4",
+  "thumb": "cover.png",
+  "title": "Парус - Лермонтов",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 4",
+    "класс 6",
+    "класс 7",
+    "класс 9"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}

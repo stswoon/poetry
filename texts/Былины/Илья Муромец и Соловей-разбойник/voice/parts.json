@@ -1,0 +1,389 @@
+[
+ {
+  "name": "01-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 1219,
+  "start": 0.0,
+  "duration": 61.12,
+  "gain_db": 3.99
+ },
+ {
+  "name": "02-илья",
+  "role": "илья",
+  "stanza_end": true,
+  "chars": 216,
+  "start": 61.57,
+  "duration": 10.96,
+  "gain_db": 0.07
+ },
+ {
+  "name": "03-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 70,
+  "start": 73.63,
+  "duration": 3.36,
+  "gain_db": 3.32
+ },
+ {
+  "name": "04-мужички",
+  "role": "мужички",
+  "stanza_end": true,
+  "chars": 1256,
+  "start": 77.44,
+  "duration": 60.88,
+  "gain_db": 6.08
+ },
+ {
+  "name": "05-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 1116,
+  "start": 139.42,
+  "duration": 54.32,
+  "gain_db": 2.43
+ },
+ {
+  "name": "06-илья",
+  "role": "илья",
+  "stanza_end": true,
+  "chars": 330,
+  "start": 194.19,
+  "duration": 17.04,
+  "gain_db": -0.23
+ },
+ {
+  "name": "07-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 876,
+  "start": 212.33,
+  "duration": 44.96,
+  "gain_db": 4.48
+ },
+ {
+  "name": "08-дочь",
+  "role": "дочь",
+  "stanza_end": true,
+  "chars": 205,
+  "start": 257.74,
+  "duration": 10.16,
+  "gain_db": 4.54
+ },
+ {
+  "name": "09-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 115,
+  "start": 269.0,
+  "duration": 6.16,
+  "gain_db": 5.87
+ },
+ {
+  "name": "10-дочь",
+  "role": "дочь",
+  "stanza_end": true,
+  "chars": 175,
+  "start": 275.61,
+  "duration": 8.72,
+  "gain_db": 2.97
+ },
+ {
+  "name": "11-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 117,
+  "start": 285.43,
+  "duration": 6.16,
+  "gain_db": 5.29
+ },
+ {
+  "name": "12-дочь",
+  "role": "дочь",
+  "stanza_end": true,
+  "chars": 265,
+  "start": 292.04,
+  "duration": 13.84,
+  "gain_db": 4.56
+ },
+ {
+  "name": "13-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 69,
+  "start": 306.98,
+  "duration": 3.76,
+  "gain_db": 7.12
+ },
+ {
+  "name": "14-дочь",
+  "role": "дочь",
+  "stanza_end": true,
+  "chars": 220,
+  "start": 311.19,
+  "duration": 9.68,
+  "gain_db": 1.21
+ },
+ {
+  "name": "15-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 371,
+  "start": 321.97,
+  "duration": 19.36,
+  "gain_db": 3.87
+ },
+ {
+  "name": "16-соловей",
+  "role": "соловей",
+  "stanza_end": true,
+  "chars": 367,
+  "start": 341.78,
+  "duration": 19.68,
+  "gain_db": 5.34
+ },
+ {
+  "name": "17-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 1309,
+  "start": 362.56,
+  "duration": 67.84,
+  "gain_db": 4.72
+ },
+ {
+  "name": "18-владимир",
+  "role": "владимир",
+  "stanza_end": true,
+  "chars": 183,
+  "start": 430.85,
+  "duration": 9.36,
+  "gain_db": 3.68
+ },
+ {
+  "name": "19-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 78,
+  "start": 441.31,
+  "duration": 3.92,
+  "gain_db": 5.56
+ },
+ {
+  "name": "20-илья",
+  "role": "илья",
+  "stanza_end": true,
+  "chars": 215,
+  "start": 445.68,
+  "duration": 12.16,
+  "gain_db": -0.94
+ },
+ {
+  "name": "21-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 70,
+  "start": 458.94,
+  "duration": 3.36,
+  "gain_db": 4.24
+ },
+ {
+  "name": "22-владимир",
+  "role": "владимир",
+  "stanza_end": true,
+  "chars": 193,
+  "start": 462.75,
+  "duration": 9.76,
+  "gain_db": 3.72
+ },
+ {
+  "name": "23-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 64,
+  "start": 473.61,
+  "duration": 3.28,
+  "gain_db": 5.06
+ },
+ {
+  "name": "24-илья",
+  "role": "илья",
+  "stanza_end": true,
+  "chars": 557,
+  "start": 477.34,
+  "duration": 30.48,
+  "gain_db": 1.36
+ },
+ {
+  "name": "25-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 70,
+  "start": 508.92,
+  "duration": 3.52,
+  "gain_db": 4.21
+ },
+ {
+  "name": "26-владимир",
+  "role": "владимир",
+  "stanza_end": true,
+  "chars": 1069,
+  "start": 512.89,
+  "duration": 50.8,
+  "gain_db": 3.17
+ },
+ {
+  "name": "27-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 68,
+  "start": 564.79,
+  "duration": 3.6,
+  "gain_db": 5.08
+ },
+ {
+  "name": "28-илья",
+  "role": "илья",
+  "stanza_end": true,
+  "chars": 228,
+  "start": 568.84,
+  "duration": 11.52,
+  "gain_db": -0.34
+ },
+ {
+  "name": "29-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 392,
+  "start": 581.46,
+  "duration": 18.24,
+  "gain_db": 3.12
+ },
+ {
+  "name": "30-владимир",
+  "role": "владимир",
+  "stanza_end": true,
+  "chars": 125,
+  "start": 600.15,
+  "duration": 6.24,
+  "gain_db": 1.34
+ },
+ {
+  "name": "31-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 85,
+  "start": 607.49,
+  "duration": 4.4,
+  "gain_db": 4.28
+ },
+ {
+  "name": "32-соловей",
+  "role": "соловей",
+  "stanza_end": true,
+  "chars": 219,
+  "start": 612.34,
+  "duration": 12.8,
+  "gain_db": 4.74
+ },
+ {
+  "name": "33-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 85,
+  "start": 626.24,
+  "duration": 4.48,
+  "gain_db": 5.85
+ },
+ {
+  "name": "34-владимир",
+  "role": "владимир",
+  "stanza_end": true,
+  "chars": 198,
+  "start": 631.17,
+  "duration": 8.96,
+  "gain_db": 1.41
+ },
+ {
+  "name": "35-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 64,
+  "start": 641.23,
+  "duration": 3.2,
+  "gain_db": 4.67
+ },
+ {
+  "name": "36-илья",
+  "role": "илья",
+  "stanza_end": true,
+  "chars": 177,
+  "start": 644.88,
+  "duration": 9.36,
+  "gain_db": -0.64
+ },
+ {
+  "name": "37-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 85,
+  "start": 655.34,
+  "duration": 4.24,
+  "gain_db": 6.8
+ },
+ {
+  "name": "38-соловей",
+  "role": "соловей",
+  "stanza_end": true,
+  "chars": 633,
+  "start": 660.03,
+  "duration": 33.44,
+  "gain_db": 6.22
+ },
+ {
+  "name": "39-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 71,
+  "start": 694.57,
+  "duration": 3.76,
+  "gain_db": 4.88
+ },
+ {
+  "name": "40-илья",
+  "role": "илья",
+  "stanza_end": true,
+  "chars": 261,
+  "start": 698.78,
+  "duration": 12.8,
+  "gain_db": 0.68
+ },
+ {
+  "name": "41-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 1233,
+  "start": 712.68,
+  "duration": 59.68,
+  "gain_db": 2.64
+ },
+ {
+  "name": "42-илья",
+  "role": "илья",
+  "stanza_end": true,
+  "chars": 326,
+  "start": 772.81,
+  "duration": 18.8,
+  "gain_db": 0.8
+ },
+ {
+  "name": "43-сказитель",
+  "role": "сказитель",
+  "stanza_end": false,
+  "chars": 127,
+  "start": 792.71,
+  "duration": 8.0,
+  "gain_db": 4.5
+ }
+]
