@@ -94,7 +94,7 @@ export async function uploadVk({ page, job, run }) {
     } else {
       const { missing, selected } = await selectPlaylistsVk(page, scope, job.playlists);
       for (const name of job.playlists) {
-        if (missing.includes(name)) run.warn(`VK: плейлиста «${name}» нет — создай его в кабинете и повтори`);
+        if (missing.includes(name)) run.warn(`VK: плейлист «${name}» не найден в подсказках — его нет или VK не успел ответить. Проверь в кабинете и добавь ролик вручную`);
         else if (selected.includes(name)) run.info(`Плейлист «${name}» выбран`);
         else run.warn(`VK: плейлист «${name}» не появился в поле — проверь вручную`);
       }

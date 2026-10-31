@@ -173,9 +173,12 @@ export async function selectPlaylistsVk(page, scope, names) {
       await input.click({ timeout: 10000 }).catch(() => {});
       await input.fill('', { timeout: 5000 }).catch(() => {});
       await input.type(spelling, { delay: 60 }).catch(() => {});
-      await page.waitForTimeout(1200);
 
-      found = await option.isVisible().catch(() => false);
+      // Подсказки могут идти долго, особенно когда канал занят другой заливкой.
+      found = await option
+        .waitFor({ state: 'visible', timeout: 8000 })
+        .then(() => true)
+        .catch(() => false);
       if (found) break;
     }
 
