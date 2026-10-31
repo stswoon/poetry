@@ -1,0 +1,15 @@
+{
+  "video": "Ласточка примчалась - Майков - v2.mp4",
+  "thumb": "cover.png",
+  "title": "Ласточка примчалась - Майков",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 1"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
