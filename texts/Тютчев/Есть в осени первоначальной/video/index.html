@@ -1,0 +1,551 @@
+<!doctype html>
+<!-- Шаблон: index.html собирается из template.tpl командой `python3 build.py`. Правьте этот файл, не index.html. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      @font-face { font-family: "Cormorant"; font-style: normal; font-weight: 300 700;
+        src: url("assets/fonts/cormorant-cyr.woff2") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "Cormorant"; font-style: normal; font-weight: 300 700;
+        src: url("assets/fonts/cormorant-lat.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F; }
+      @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 300 700;
+        src: url("assets/fonts/cormorant-it-cyr.woff2") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 300 700;
+        src: url("assets/fonts/cormorant-it-lat.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F; }
+      :root { --ink: #241a12; --rubric: #a2471a; --azure: #1a6aa6; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #f4eee0; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: "Cormorant", serif; color: var(--ink); background: #f4eee0; }
+      #scene { position: absolute; inset: 0; width: 1920px; height: 1080px; z-index: 0; }
+      .w { display: inline-block; white-space: nowrap; }
+      .ch { display: inline-block; opacity: 0; }
+      .rub { color: var(--rubric); }
+      .azure { color: var(--azure); }
+      #preload { position: absolute; left: 0; top: 0; opacity: 0; font: italic 600 30px "Cormorant"; }
+      #preload b { font: 700 30px "Cormorant"; }
+
+      /* строфа на чистой бумаге под панорамой */
+      .stanza { position: absolute; left: 0; width: 1920px; top: 662px; z-index: 3; text-align: center; }
+      .line { font-size: 62px; font-style: italic; font-weight: 600; line-height: 74px; height: 74px; white-space: nowrap; letter-spacing: 0.002em; }
+
+      /* заставка и финал */
+      .card { position: absolute; left: 160px; top: 190px; width: 1600px; height: 700px; z-index: 5;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      .card-title { font-size: 164px; font-weight: 700; line-height: 1.04; letter-spacing: 0.01em; color: var(--ink); white-space: nowrap; }
+      .card-author { margin-top: 22px; font-size: 60px; font-style: italic; font-weight: 600; line-height: 1.1; color: var(--rubric); white-space: nowrap; }
+      .card-year { margin-top: 8px; font-size: 42px; font-style: italic; font-weight: 500; line-height: 1.1; color: #6a5238; white-space: nowrap; }
+      .card.big { top: 648px; height: 340px; }
+      .card.big .card-title { font-size: 124px; line-height: 1.05; }
+      .card.big .card-author { margin-top: 10px; font-size: 54px; }
+      .card.big .card-year { margin-top: 2px; font-size: 38px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="48.160" data-width="1920" data-height="1080">
+      <canvas id="scene" width="1920" height="1080"></canvas>
+      <div id="preload" aria-hidden="true">Шрифт 0123456789 <b>СВЮЗ ?</b></div>
+      <div id="title-card" class="clip" data-start="0.000" data-duration="5.600" data-track-index="4"><div class="card" id="title-card-in"><h1 class="card-title"><span class="w"><span class="ch">Е</span><span class="ch">с</span><span class="ch">т</span><span class="ch">ь</span></span> <span class="w"><span class="ch">в</span></span> <span class="w"><span class="ch">о</span><span class="ch">с</span><span class="ch">е</span><span class="ch">н</span><span class="ch">и</span></span></h1><h1 class="card-title"><span class="w"><span class="ch">п</span><span class="ch">е</span><span class="ch">р</span><span class="ch">в</span><span class="ch">о</span><span class="ch">н</span><span class="ch">а</span><span class="ch">ч</span><span class="ch">а</span><span class="ch">л</span><span class="ch">ь</span><span class="ch">н</span><span class="ch">о</span><span class="ch">й</span></span></h1><p class="card-author"><span class="w"><span class="ch">Ф</span><span class="ch">ё</span><span class="ch">д</span><span class="ch">о</span><span class="ch">р</span></span> <span class="w"><span class="ch">И</span><span class="ch">в</span><span class="ch">а</span><span class="ch">н</span><span class="ch">о</span><span class="ch">в</span><span class="ch">и</span><span class="ch">ч</span></span> <span class="w"><span class="ch">Т</span><span class="ch">ю</span><span class="ch">т</span><span class="ch">ч</span><span class="ch">е</span><span class="ch">в</span></span></p><p class="card-year"><span class="w"><span class="ch">1</span><span class="ch">8</span><span class="ch">5</span><span class="ch">7</span></span></p></div></div>
+      <div id="st1" class="clip" data-start="5.530" data-duration="11.532" data-track-index="3"><div class="stanza" id="st1-in"><div class="line" id="l1"><span class="w"><span class="ch">Е</span><span class="ch">с</span><span class="ch">т</span><span class="ch">ь</span></span> <span class="w"><span class="ch">в</span></span> <span class="w rub"><span class="ch">о</span><span class="ch">с</span><span class="ch">е</span><span class="ch">н</span><span class="ch">и</span></span> <span class="w"><span class="ch">п</span><span class="ch">е</span><span class="ch">р</span><span class="ch">в</span><span class="ch">о</span><span class="ch">н</span><span class="ch">а</span><span class="ch">ч</span><span class="ch">а</span><span class="ch">л</span><span class="ch">ь</span><span class="ch">н</span><span class="ch">о</span><span class="ch">й</span></span></div><div class="line" id="l2"><span class="w"><span class="ch">К</span><span class="ch">о</span><span class="ch">р</span><span class="ch">о</span><span class="ch">т</span><span class="ch">к</span><span class="ch">а</span><span class="ch">я</span><span class="ch">,</span></span> <span class="w"><span class="ch">н</span><span class="ch">о</span></span> <span class="w rub"><span class="ch">д</span><span class="ch">и</span><span class="ch">в</span><span class="ch">н</span><span class="ch">а</span><span class="ch">я</span></span> <span class="w"><span class="ch">п</span><span class="ch">о</span><span class="ch">р</span><span class="ch">а</span></span> <span class="w"><span class="ch">—</span></span></div><div class="line" id="l3"><span class="w"><span class="ch">В</span><span class="ch">е</span><span class="ch">с</span><span class="ch">ь</span></span> <span class="w"><span class="ch">д</span><span class="ch">е</span><span class="ch">н</span><span class="ch">ь</span></span> <span class="w"><span class="ch">с</span><span class="ch">т</span><span class="ch">о</span><span class="ch">и</span><span class="ch">т</span></span> <span class="w"><span class="ch">к</span><span class="ch">а</span><span class="ch">к</span></span> <span class="w"><span class="ch">б</span><span class="ch">ы</span></span> <span class="w rub"><span class="ch">х</span><span class="ch">р</span><span class="ch">у</span><span class="ch">с</span><span class="ch">т</span><span class="ch">а</span><span class="ch">л</span><span class="ch">ь</span><span class="ch">н</span><span class="ch">ы</span><span class="ch">й</span><span class="ch">,</span></span></div><div class="line" id="l4"><span class="w"><span class="ch">И</span></span> <span class="w rub"><span class="ch">л</span><span class="ch">у</span><span class="ch">ч</span><span class="ch">е</span><span class="ch">з</span><span class="ch">а</span><span class="ch">р</span><span class="ch">н</span><span class="ch">ы</span></span> <span class="w"><span class="ch">в</span><span class="ch">е</span><span class="ch">ч</span><span class="ch">е</span><span class="ch">р</span><span class="ch">а</span><span class="ch">…</span></span></div></div></div>
+      <div id="st2" class="clip" data-start="16.662" data-duration="12.555" data-track-index="3"><div class="stanza" id="st2-in"><div class="line" id="l5"><span class="w"><span class="ch">Г</span><span class="ch">д</span><span class="ch">е</span></span> <span class="w"><span class="ch">б</span><span class="ch">о</span><span class="ch">д</span><span class="ch">р</span><span class="ch">ы</span><span class="ch">й</span></span> <span class="w rub"><span class="ch">с</span><span class="ch">е</span><span class="ch">р</span><span class="ch">п</span></span> <span class="w"><span class="ch">г</span><span class="ch">у</span><span class="ch">л</span><span class="ch">я</span><span class="ch">л</span></span> <span class="w"><span class="ch">и</span></span> <span class="w"><span class="ch">п</span><span class="ch">а</span><span class="ch">д</span><span class="ch">а</span><span class="ch">л</span></span> <span class="w"><span class="ch">к</span><span class="ch">о</span><span class="ch">л</span><span class="ch">о</span><span class="ch">с</span><span class="ch">,</span></span></div><div class="line" id="l6"><span class="w"><span class="ch">Т</span><span class="ch">е</span><span class="ch">п</span><span class="ch">е</span><span class="ch">р</span><span class="ch">ь</span></span> <span class="w"><span class="ch">у</span><span class="ch">ж</span></span> <span class="w"><span class="ch">п</span><span class="ch">у</span><span class="ch">с</span><span class="ch">т</span><span class="ch">о</span></span> <span class="w"><span class="ch">в</span><span class="ch">с</span><span class="ch">ё</span></span> <span class="w"><span class="ch">—</span></span> <span class="w rub"><span class="ch">п</span><span class="ch">р</span><span class="ch">о</span><span class="ch">с</span><span class="ch">т</span><span class="ch">о</span><span class="ch">р</span></span> <span class="w"><span class="ch">в</span><span class="ch">е</span><span class="ch">з</span><span class="ch">д</span><span class="ch">е</span><span class="ch">,</span></span> <span class="w"><span class="ch">—</span></span></div><div class="line" id="l7"><span class="w"><span class="ch">Л</span><span class="ch">и</span><span class="ch">ш</span><span class="ch">ь</span></span> <span class="w rub"><span class="ch">п</span><span class="ch">а</span><span class="ch">у</span><span class="ch">т</span><span class="ch">и</span><span class="ch">н</span><span class="ch">ы</span></span> <span class="w"><span class="ch">т</span><span class="ch">о</span><span class="ch">н</span><span class="ch">к</span><span class="ch">и</span><span class="ch">й</span></span> <span class="w"><span class="ch">в</span><span class="ch">о</span><span class="ch">л</span><span class="ch">о</span><span class="ch">с</span></span></div><div class="line" id="l8"><span class="w rub"><span class="ch">Б</span><span class="ch">л</span><span class="ch">е</span><span class="ch">с</span><span class="ch">т</span><span class="ch">и</span><span class="ch">т</span></span> <span class="w"><span class="ch">н</span><span class="ch">а</span></span> <span class="w"><span class="ch">п</span><span class="ch">р</span><span class="ch">а</span><span class="ch">з</span><span class="ch">д</span><span class="ch">н</span><span class="ch">о</span><span class="ch">й</span></span> <span class="w"><span class="ch">б</span><span class="ch">о</span><span class="ch">р</span><span class="ch">о</span><span class="ch">з</span><span class="ch">д</span><span class="ch">е</span><span class="ch">.</span></span></div></div></div>
+      <div id="st3" class="clip" data-start="28.817" data-duration="12.589" data-track-index="3"><div class="stanza" id="st3-in"><div class="line" id="l9"><span class="w rub"><span class="ch">П</span><span class="ch">у</span><span class="ch">с</span><span class="ch">т</span><span class="ch">е</span><span class="ch">е</span><span class="ch">т</span></span> <span class="w"><span class="ch">в</span><span class="ch">о</span><span class="ch">з</span><span class="ch">д</span><span class="ch">у</span><span class="ch">х</span><span class="ch">,</span></span> <span class="w"><span class="ch">п</span><span class="ch">т</span><span class="ch">и</span><span class="ch">ц</span></span> <span class="w"><span class="ch">н</span><span class="ch">е</span></span> <span class="w"><span class="ch">с</span><span class="ch">л</span><span class="ch">ы</span><span class="ch">ш</span><span class="ch">н</span><span class="ch">о</span></span> <span class="w"><span class="ch">б</span><span class="ch">о</span><span class="ch">л</span><span class="ch">е</span><span class="ch">,</span></span></div><div class="line" id="l10"><span class="w"><span class="ch">Н</span><span class="ch">о</span></span> <span class="w"><span class="ch">д</span><span class="ch">а</span><span class="ch">л</span><span class="ch">е</span><span class="ch">к</span><span class="ch">о</span></span> <span class="w"><span class="ch">е</span><span class="ch">щ</span><span class="ch">ё</span></span> <span class="w"><span class="ch">д</span><span class="ch">о</span></span> <span class="w"><span class="ch">п</span><span class="ch">е</span><span class="ch">р</span><span class="ch">в</span><span class="ch">ы</span><span class="ch">х</span></span> <span class="w"><span class="ch">з</span><span class="ch">и</span><span class="ch">м</span><span class="ch">н</span><span class="ch">и</span><span class="ch">х</span></span> <span class="w rub"><span class="ch">б</span><span class="ch">у</span><span class="ch">р</span><span class="ch">ь</span></span> <span class="w"><span class="ch">—</span></span></div><div class="line" id="l11"><span class="w"><span class="ch">И</span></span> <span class="w"><span class="ch">л</span><span class="ch">ь</span><span class="ch">ё</span><span class="ch">т</span><span class="ch">с</span><span class="ch">я</span></span> <span class="w"><span class="ch">ч</span><span class="ch">и</span><span class="ch">с</span><span class="ch">т</span><span class="ch">а</span><span class="ch">я</span></span> <span class="w"><span class="ch">и</span></span> <span class="w"><span class="ch">т</span><span class="ch">ё</span><span class="ch">п</span><span class="ch">л</span><span class="ch">а</span><span class="ch">я</span></span> <span class="w azure"><span class="ch">л</span><span class="ch">а</span><span class="ch">з</span><span class="ch">у</span><span class="ch">р</span><span class="ch">ь</span></span></div><div class="line" id="l12"><span class="w"><span class="ch">Н</span><span class="ch">а</span></span> <span class="w rub"><span class="ch">о</span><span class="ch">т</span><span class="ch">д</span><span class="ch">ы</span><span class="ch">х</span><span class="ch">а</span><span class="ch">ю</span><span class="ch">щ</span><span class="ch">е</span><span class="ch">е</span></span> <span class="w"><span class="ch">п</span><span class="ch">о</span><span class="ch">л</span><span class="ch">е</span><span class="ch">…</span></span></div></div></div>
+      <div id="final-card" class="clip" data-start="40.806" data-duration="7.354" data-track-index="4"><div class="card big" id="final-card-in"><h1 class="card-title"><span class="w"><span class="ch">Е</span><span class="ch">с</span><span class="ch">т</span><span class="ch">ь</span></span> <span class="w"><span class="ch">в</span></span> <span class="w"><span class="ch">о</span><span class="ch">с</span><span class="ch">е</span><span class="ch">н</span><span class="ch">и</span></span> <span class="w"><span class="ch">п</span><span class="ch">е</span><span class="ch">р</span><span class="ch">в</span><span class="ch">о</span><span class="ch">н</span><span class="ch">а</span><span class="ch">ч</span><span class="ch">а</span><span class="ch">л</span><span class="ch">ь</span><span class="ch">н</span><span class="ch">о</span><span class="ch">й</span></span></h1><p class="card-author"><span class="w"><span class="ch">Ф</span><span class="ch">ё</span><span class="ch">д</span><span class="ch">о</span><span class="ch">р</span></span> <span class="w"><span class="ch">И</span><span class="ch">в</span><span class="ch">а</span><span class="ch">н</span><span class="ch">о</span><span class="ch">в</span><span class="ch">и</span><span class="ch">ч</span></span> <span class="w"><span class="ch">Т</span><span class="ch">ю</span><span class="ch">т</span><span class="ch">ч</span><span class="ch">е</span><span class="ch">в</span></span></p><p class="card-year"><span class="w"><span class="ch">1</span><span class="ch">8</span><span class="ch">5</span><span class="ch">7</span></span></p></div></div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="6.000" data-duration="34.160" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="48.160" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>
+      const CFG = {"total": 48.16, "voiceStart": 6.0, "final": 40.806, "lines": [{"n": 1, "s": 6.03, "e": 8.174}, {"n": 2, "s": 8.805, "e": 11.089}, {"n": 3, "s": 11.637, "e": 13.78}, {"n": 4, "s": 14.307, "e": 15.701}, {"n": 5, "s": 17.162, "e": 20.23}, {"n": 6, "s": 20.786, "e": 23.428}, {"n": 7, "s": 24.055, "e": 25.992}, {"n": 8, "s": 26.42, "e": 28.171}, {"n": 9, "s": 29.317, "e": 32.247}, {"n": 10, "s": 32.743, "e": 34.878}, {"n": 11, "s": 35.416, "e": 38.027}, {"n": 12, "s": 38.477, "e": 39.906}], "stanzas": [{"id": "st1", "first": 1, "last": 4, "exit": 16.462}, {"id": "st2", "first": 5, "last": 8, "exit": 28.617}, {"id": "st3", "first": 9, "last": 12, "exit": 40.806}], "ev": {"S1": 6.03, "L2": 8.805, "L3": 11.637, "hrust": 13.22, "L4": 14.307, "luch": 14.44, "E4": 15.701, "S2": 17.162, "bodr": 17.68, "serp": 18.36, "E5": 20.23, "L6": 20.786, "prostor": 22.55, "E6": 23.428, "L7": 24.055, "tonk": 25.16, "E7": 25.992, "L8": 26.42, "boroz": 27.34, "E8": 28.171, "S3": 29.317, "E9": 32.247, "L10": 32.743, "perv": 33.87, "E10": 34.878, "L11": 35.416, "laz": 37.62, "E11": 38.027, "L12": 38.477, "END": 39.906}};
+      const W = 1920, H = 1080, TOTAL = CFG.total, EV = CFG.ev, FINAL = CFG.final;
+      const PW = 1920, PH = 702;            // панорама в мировых координатах
+      const MW = 640, MH = 234, MS = 3;     // карта растекания: в 3 раза меньше панорамы
+      const HOR = 360;                      // линия горизонта
+      const SUN = [1340, 288];
+
+      // ---------- утилиты ----------
+      function mulberry32(a) { return function () { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+      const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+      const lerp = (a, b, u) => a + (b - a) * u;
+      const sstep = (u) => { u = clamp(u, 0, 1); return u * u * (3 - 2 * u); };
+      const prog = (t, a, b) => clamp((t - a) / Math.max(1e-6, b - a), 0, 1);
+      const mkCanvas = (w, h) => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
+      function curve(keys, t) {
+        if (t <= keys[0][0]) return keys[0][1];
+        for (let i = 1; i < keys.length; i++) if (t <= keys[i][0]) {
+          const [t0, v0] = keys[i - 1], [t1, v1] = keys[i];
+          return v0 + (v1 - v0) * sstep((t - t0) / Math.max(1e-6, t1 - t0)); }
+        return keys[keys.length - 1][1];
+      }
+      // пружина Framer Motion как функция времени: 0 → 1 с перелётом
+      const springEase = (() => {
+        const g = Motion.spring({ stiffness: 90, damping: 16, mass: 1, keyframes: [0, 1] });
+        const pts = []; for (let i = 0; i <= 300; i++) pts.push(g.next(i * 10).value);
+        return (s) => { if (s <= 0) return 0; const f = s * 100; if (f >= 300) return 1; const i = Math.floor(f); return lerp(pts[i], pts[i + 1], f - i); };
+      })();
+
+      // ---------- шум и карты растекания ----------
+      function valueNoise(w, h, cell, rng) {
+        const gw = Math.ceil(w / cell) + 2, gh = Math.ceil(h / cell) + 2, g = new Float32Array(gw * gh);
+        for (let i = 0; i < g.length; i++) g[i] = rng();
+        const out = new Float32Array(w * h);
+        for (let y = 0; y < h; y++) {
+          const fy = y / cell, iy = Math.floor(fy), v = fy - iy, sv = v * v * (3 - 2 * v);
+          for (let x = 0; x < w; x++) {
+            const fx = x / cell, ix = Math.floor(fx), u = fx - ix, su = u * u * (3 - 2 * u);
+            const a = g[iy * gw + ix], b = g[iy * gw + ix + 1], c = g[(iy + 1) * gw + ix], d = g[(iy + 1) * gw + ix + 1];
+            out[y * w + x] = a + (b - a) * su + (c - a) * sv + (a - b - c + d) * su * sv;
+          }
+        }
+        return out;
+      }
+      function fbm(w, h, cell, oct, rng) {
+        const out = new Float32Array(w * h); let amp = 1, sum = 0;
+        for (let o = 0; o < oct; o++) { const n = valueNoise(w, h, Math.max(2, cell / 2 ** o), rng);
+          for (let i = 0; i < out.length; i++) out[i] += n[i] * amp; sum += amp; amp *= 0.55; }
+        for (let i = 0; i < out.length; i++) out[i] /= sum;
+        return out;
+      }
+      const mapRng = mulberry32(1857);
+      const N1 = fbm(MW, MH, 90, 5, mapRng), N2 = fbm(MW, MH, 26, 3, mapRng);
+      function makeMap(fn) {
+        const m = new Float32Array(MW * MH); let lo = 1e9, hi = -1e9;
+        for (let y = 0; y < MH; y++) for (let x = 0; x < MW; x++) { const i = y * MW + x, v = fn(x * MS, y * MS, N1[i], N2[i]); m[i] = v; if (v < lo) lo = v; if (v > hi) hi = v; }
+        for (let i = 0; i < m.length; i++) m[i] = (m[i] - lo) / (hi - lo);
+        return m;
+      }
+      const radial = (cx, cy, r, amp = 0.35) => (x, y, a, b) => Math.hypot(x - cx, (y - cy) * 1.35) / r + amp * a + amp * 0.35 * b;
+      const MAPS = {
+        sky: makeMap(radial(960, 330, 1100)),
+        far: makeMap(radial(960, 340, 1000, 0.42)),
+        field: makeMap(radial(960, 420, 1050, 0.3)),
+        eve: makeMap(radial(SUN[0], SUN[1], 1400, 0.3)),
+        storm: makeMap(radial(1650, 200, 130, 0.25)),
+        warm: makeMap(radial(1200, 470, 1200, 0.35)),
+        stacks: makeMap(radial(1200, 450, 900, 0.3)),
+      };
+      // лазурь льётся сверху потёками: зубцы по x
+      { const fx = valueNoise(MW, 1, 7, mapRng), fx2 = valueNoise(MW, 1, 34, mapRng);
+        MAPS.azure = makeMap((x, y, a, b) => { const c = Math.floor(x / MS); return y / 470 - 0.16 * fx[c] - 0.2 * fx2[c] + 0.14 * a + 0.05 * b; }); }
+
+      const mFill = mkCanvas(MW, MH), mEdge = mkCanvas(MW, MH);
+      const mfc = mFill.getContext("2d"), mec = mEdge.getContext("2d");
+      const iFill = mfc.createImageData(MW, MH), iEdge = mec.createImageData(MW, MH);
+      for (let i = 0; i < iFill.data.length; i += 4) { iFill.data[i] = iFill.data[i + 1] = iFill.data[i + 2] = 255; iEdge.data[i] = iEdge.data[i + 1] = iEdge.data[i + 2] = 255; }
+      function buildMask(map, u) {
+        const soft = 0.05, band = 0.028, th = u * (1 + soft), df = iFill.data, de = iEdge.data;
+        for (let i = 0, j = 3; i < map.length; i++, j += 4) {
+          const d = th - map[i];
+          if (d <= 0) { df[j] = 0; de[j] = 0; continue; }
+          const a = d >= soft ? 1 : d / soft;
+          df[j] = 255 * a * a * (3 - 2 * a);
+          const e = (d - band) / band;
+          de[j] = 255 * Math.exp(-e * e);
+        }
+        mfc.putImageData(iFill, 0, 0); mec.putImageData(iEdge, 0, 0);
+      }
+
+      // ---------- холсты ----------
+      const ctx = document.getElementById("scene").getContext("2d");
+      const pan = mkCanvas(PW, PH), pc = pan.getContext("2d");
+      const tmp = mkCanvas(PW, PH), tc = tmp.getContext("2d");
+      for (const c of [pc, tc]) { c.imageSmoothingEnabled = true; c.imageSmoothingQuality = "high"; }
+
+      // заливка слоя с мокрым краем: краска идёт по карте, на кромке темнее
+      function wash(layer, map, u, alpha = 1, edge = 0.5) {
+        if (u <= 0 || alpha <= 0.002) return;
+        pc.globalCompositeOperation = "multiply";
+        if (u >= 1) { pc.globalAlpha = alpha; pc.drawImage(layer, 0, 0); pc.globalAlpha = 1; return; }
+        buildMask(map, u);
+        tc.setTransform(1, 0, 0, 1, 0, 0); tc.globalCompositeOperation = "source-over"; tc.clearRect(0, 0, PW, PH);
+        tc.drawImage(layer, 0, 0); tc.globalCompositeOperation = "destination-in"; tc.drawImage(mFill, 0, 0, PW, PH);
+        pc.globalAlpha = alpha; pc.drawImage(tmp, 0, 0);
+        if (edge > 0) {
+          tc.globalCompositeOperation = "source-over"; tc.clearRect(0, 0, PW, PH);
+          tc.drawImage(layer, 0, 0); tc.globalCompositeOperation = "destination-in"; tc.drawImage(mEdge, 0, 0, PW, PH);
+          pc.globalAlpha = alpha * edge * Math.min(1, (1 - u) * 6); pc.drawImage(tmp, 0, 0);
+        }
+        pc.globalAlpha = 1;
+      }
+
+      // ---------- акварель кодом: полупрозрачные деформированные многоугольники ----------
+      function gauss(r) { return (r() + r() + r() + r() - 2) * 0.9; }
+      function deform(pts, depth, vari, r) {
+        let cur = pts;
+        for (let d = 0; d < depth; d++) { const nx = [];
+          for (let i = 0; i < cur.length; i++) { const a = cur[i], b = cur[(i + 1) % cur.length], len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+            nx.push(a, [(a[0] + b[0]) / 2 + gauss(r) * len * vari, (a[1] + b[1]) / 2 + gauss(r) * len * vari]); }
+          cur = nx; }
+        return cur;
+      }
+      function fillPoly(c, pts) { c.beginPath(); c.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) c.lineTo(pts[i][0], pts[i][1]); c.closePath(); c.fill(); }
+      function wetBlob(c, pts, col, r, { layers = 16, alpha = 0.05, vari = 0.3, base = 2, each = 2 } = {}) {
+        const b = deform(pts, base, vari, r); c.fillStyle = col; c.globalAlpha = alpha;
+        for (let i = 0; i < layers; i++) fillPoly(c, deform(b, each, vari, r));
+        c.globalAlpha = 1;
+      }
+      const rect = (x0, y0, x1, y1, n = 8) => { const p = [];
+        for (let i = 0; i < n; i++) p.push([lerp(x0, x1, i / n), y0]); for (let i = 0; i < 3; i++) p.push([x1, lerp(y0, y1, i / 3)]);
+        for (let i = 0; i < n; i++) p.push([lerp(x1, x0, i / n), y1]); for (let i = 0; i < 3; i++) p.push([x0, lerp(y1, y0, i / 3)]); return p; };
+      const circle = (cx, cy, rx, ry = rx, n = 9) => { const p = []; for (let i = 0; i < n; i++) { const a = i / n * 6.283; p.push([cx + rx * Math.cos(a), cy + ry * Math.sin(a)]); } return p; };
+
+      // неровность пигмента: выедает пятна и зерно
+      const blotch = (() => { const c = mkCanvas(MW, MH), x = c.getContext("2d"), im = x.createImageData(MW, MH), r = mulberry32(77), n = fbm(MW, MH, 60, 4, r);
+        for (let i = 0; i < n.length; i++) im.data[i * 4 + 3] = clamp((n[i] - 0.38) * 260, 0, 110); x.putImageData(im, 0, 0); return c; })();
+      const grainPan = (() => { const c = mkCanvas(PW, PH), x = c.getContext("2d"), im = x.createImageData(PW, PH), r = mulberry32(99);
+        for (let i = 3; i < im.data.length; i += 4) im.data[i] = r() * r() * 70; x.putImageData(im, 0, 0); return c; })();
+      function uneven(c, k = 1) { c.globalCompositeOperation = "destination-out"; c.globalAlpha = k; c.drawImage(blotch, 0, 0, PW, PH); c.globalAlpha = 1; c.drawImage(grainPan, 0, 0); c.globalCompositeOperation = "source-over"; }
+      const layer = (fn, k) => { const c = mkCanvas(PW, PH), x = c.getContext("2d"); fn(x); uneven(x, k); return c; };
+
+      // небо
+      const LSky = layer((c) => { const r = mulberry32(11);
+        const g = c.createLinearGradient(0, 0, 0, HOR + 10); g.addColorStop(0, "rgba(118,172,212,0.62)"); g.addColorStop(0.55, "rgba(186,208,214,0.42)"); g.addColorStop(0.85, "rgba(240,212,150,0.55)"); g.addColorStop(1, "rgba(238,196,120,0.6)");
+        c.fillStyle = g; c.fillRect(0, 0, PW, HOR + 16);
+        for (let i = 0; i < 9; i++) wetBlob(c, circle(r() * PW, 40 + r() * 230, 120 + r() * 240, 30 + r() * 50), r() < 0.5 ? "#9cc2dc" : "#f0dcae", r, { layers: 8, alpha: 0.05 });
+      }, 0.8);
+      // дальний кряж и золотой лес
+      const LFar = layer((c) => { const r = mulberry32(22), cols = ["#dc9a26", "#c96f1d", "#e3b636", "#98a03c", "#b5522a", "#e8c24a", "#a8862a"];
+        const ridge = []; ridge.push([-30, HOR + 14]); for (let x = -30; x <= 1950; x += 90) ridge.push([x, 292 + 24 * Math.sin(x * 0.0052 + 1) + 12 * Math.sin(x * 0.017)]); ridge.push([1950, HOR + 14]);
+        wetBlob(c, ridge, "#8ea6b4", r, { layers: 12, alpha: 0.05, vari: 0.08 });
+        for (let x = -20; x < 1950; x += 16 + r() * 26) { const cr = 16 + r() * 34, y = HOR - 10 - r() * 34 - cr * 0.55;
+          wetBlob(c, circle(x, y, cr, cr * (0.8 + r() * 0.5)), cols[Math.floor(r() * cols.length)], r, { layers: 7, alpha: 0.09, vari: 0.3, base: 1, each: 2 }); }
+      }, 0.55);
+      // поле с бороздами и стернёй
+      const LField = layer((c) => { const r = mulberry32(33);
+        wetBlob(c, rect(-40, HOR, PW + 40, PH + 40, 10), "#d7ae55", r, { layers: 14, alpha: 0.055, vari: 0.04 });
+        const g = c.createLinearGradient(0, HOR, 0, PH); g.addColorStop(0, "rgba(226,190,110,0.5)"); g.addColorStop(1, "rgba(176,128,58,0.62)");
+        c.fillStyle = g; c.fillRect(0, HOR + 2, PW, PH - HOR);
+        c.lineCap = "round";
+        c.save(); c.beginPath(); c.rect(0, HOR + 3, PW, PH); c.clip();
+        for (let i = 0; i < 96; i++) { const phi = (-1 + 2 * i / 95) * 1.5, vy = HOR - 80, xe = 960 + Math.tan(phi) * (PH + 10 - vy) + (r() - 0.5) * 60; c.strokeStyle = `rgba(112,74,30,${0.035 + r() * 0.07})`; c.lineWidth = 2 + r() * 9;
+          c.beginPath(); c.moveTo(960, vy); c.lineTo(xe, PH + 10); c.stroke(); }
+        c.restore();
+        for (let i = 0; i < 4200; i++) { const d = r() ** 1.7, y = HOR + 5 + d * (PH - HOR), x = r() * PW, h = 2 + d * 13; c.strokeStyle = `rgba(92,58,22,${0.1 + r() * 0.26})`; c.lineWidth = 0.6 + d * 1.1;
+          c.beginPath(); c.moveTo(x, y); c.lineTo(x + (r() - 0.5) * h * 0.7, y - h); c.stroke(); }
+      }, 0.5);
+      // вечерний янтарь с нетронутым пятном солнца
+      const LEve = layer((c) => { const r = mulberry32(44);
+        const g = c.createLinearGradient(0, 0, 0, HOR + 8); g.addColorStop(0, "rgba(232,150,120,0.42)"); g.addColorStop(0.6, "rgba(240,140,70,0.72)"); g.addColorStop(1, "rgba(226,104,44,0.85)");
+        c.fillStyle = g; c.fillRect(0, 0, PW, HOR + 8);
+        const f = c.createLinearGradient(0, HOR, 0, PH); f.addColorStop(0, "rgba(232,120,60,0.5)"); f.addColorStop(1, "rgba(200,110,70,0.18)"); c.fillStyle = f; c.fillRect(0, HOR + 6, PW, PH - HOR);
+        for (let i = 0; i < 7; i++) wetBlob(c, circle(r() * PW, 80 + r() * 200, 180 + r() * 240, 16 + r() * 34), "#d8643c", r, { layers: 8, alpha: 0.05 });
+        c.globalCompositeOperation = "destination-out";
+        const s = c.createRadialGradient(SUN[0], SUN[1], 30, SUN[0], SUN[1], 230); s.addColorStop(0, "rgba(0,0,0,1)"); s.addColorStop(0.22, "rgba(0,0,0,0.98)"); s.addColorStop(1, "rgba(0,0,0,0)");
+        c.fillStyle = s; c.fillRect(0, 0, PW, PH); c.globalCompositeOperation = "source-over";
+      }, 0.45);
+      // лазурь: заливка неба, потёки, резерв под лес
+      const LAzure = layer((c) => { const r = mulberry32(55);
+        const g = c.createLinearGradient(0, 0, 0, HOR); g.addColorStop(0, "rgba(58,150,226,0.95)"); g.addColorStop(0.65, "rgba(96,178,234,0.78)"); g.addColorStop(1, "rgba(160,212,238,0.55)");
+        c.fillStyle = g; c.fillRect(0, 0, PW, HOR + 4);
+        for (let i = 0; i < 12; i++) wetBlob(c, circle(r() * PW, r() * 280, 120 + r() * 220, 26 + r() * 50), "#3a94d8", r, { layers: 6, alpha: 0.05 });
+        c.globalCompositeOperation = "destination-out"; c.globalAlpha = 0.86; c.drawImage(LFar, 0, 0); c.globalAlpha = 1; c.globalCompositeOperation = "source-over";
+      }, 0.32);
+      // далёкая туча
+      const LStorm = layer((c) => { const r = mulberry32(66);
+        for (const [x, y, a, b] of [[1650, 196, 84, 28], [1612, 204, 56, 20], [1700, 206, 52, 18], [1652, 214, 64, 12]]) wetBlob(c, circle(x, y, a, b), "#7a8294", r, { layers: 10, alpha: 0.07, vari: 0.28 });
+      }, 0.2);
+      // тепло на поле в конце
+      const LWarm = layer((c) => {
+        const g = c.createLinearGradient(0, HOR, 0, PH); g.addColorStop(0, "rgba(248,196,118,0.34)"); g.addColorStop(1, "rgba(236,168,104,0.22)"); c.fillStyle = g; c.fillRect(0, HOR + 3, PW, PH - HOR);
+      }, 0.4);
+      // стога
+      const LStacks = layer((c) => { const r = mulberry32(88);
+        for (const [x, y, s] of [[1456, 512, 1], [1640, 462, 0.68], [1236, 442, 0.5], [404, 492, 0.8], [596, 438, 0.46]]) {
+          const pts = []; for (let i = 0; i <= 10; i++) { const a = Math.PI * (1 - i / 10); pts.push([x + 86 * s * Math.cos(a), y - 122 * s * Math.sin(a) ** 0.8]); }
+          wetBlob(c, pts, "#b78a36", r, { layers: 10, alpha: 0.11, vari: 0.08, base: 1, each: 2 });
+          c.strokeStyle = "rgba(50,32,14,0.6)"; c.lineCap = "round"; c.lineWidth = 1.2 + s * 0.7;
+          for (let k = 0; k < 18; k++) { const u = r(), h = r(); const px = x + 74 * s * (u * 2 - 1) * Math.sqrt(1 - h * 0.8), py = y - 106 * s * h; c.beginPath(); c.moveTo(px, py); c.lineTo(px + (u - 0.5) * 22 * s, py + 18 * s + r() * 14 * s); c.stroke(); }
+          c.lineWidth = 2 + s; c.beginPath(); pts.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.stroke();
+          c.fillStyle = "rgba(70,44,18,0.2)"; c.beginPath(); c.ellipse(x + 16 * s, y + 3, 104 * s, 13 * s, 0, 0, 6.283); c.fill();
+        }
+      }, 0.15);
+
+      // ---------- маска панорамы: рваный мокрый край ----------
+      const panMask = (() => { const c = mkCanvas(PW, PH), x = c.getContext("2d"), r = mulberry32(5); x.filter = "blur(2.5px)";
+        wetBlob(x, rect(74, 62, 1846, 604, 12), "#fff", r, { layers: 34, alpha: 0.12, vari: 0.045, base: 3, each: 2 });
+        const edgeAt = (u) => { const L = 2 * (1772 + 542), d = u * L; if (d < 1772) return [74 + d, 62, 0, -1]; if (d < 1772 + 542) return [1846, 62 + d - 1772, 1, 0]; if (d < 2 * 1772 + 542) return [1846 - (d - 1772 - 542), 604, 0, 1]; return [74, 604 - (d - 2 * 1772 - 542), -1, 0]; };
+        for (let i = 0; i < 90; i++) { const [px, py, nx, ny] = edgeAt(r()), sz = 16 + r() * 48, off = nx || ny ? r() * 14 : 0, down = ny > 0 ? 0.42 : 1;
+          wetBlob(x, circle(px + nx * off, py + ny * off * down, sz * (ny ? 1.5 : 0.62), sz * (ny ? 0.62 : 1.5) * down, 8), "#fff", r, { layers: 10, alpha: 0.13, vari: 0.26, base: 1, each: 2 }); }
+        x.globalCompositeOperation = "destination-out";
+        for (let i = 0; i < 30; i++) { const [px, py, nx, ny] = edgeAt(r()), sz = 10 + r() * 26; wetBlob(x, circle(px + nx * sz * 0.6, py + ny * sz * 0.6, sz * (ny ? 1.3 : 0.7), sz * (ny ? 0.7 : 1.3), 8), "#000", r, { layers: 10, alpha: 0.12, vari: 0.26, base: 1, each: 2 }); }
+        x.filter = "none"; x.globalCompositeOperation = "source-over"; return c; })();
+
+      // ---------- бумага ----------
+      const paper = (() => { const c = mkCanvas(W, H), x = c.getContext("2d"), im = x.createImageData(W, H), r = mulberry32(3), lw = 480, lh = 270, n = fbm(lw, lh, 40, 4, r);
+        for (let py = 0, i = 0; py < H; py++) for (let px = 0; px < W; px++, i += 4) {
+          const lo = n[(py >> 2) * lw + (px >> 2)] - 0.5, g = (r() - 0.5) * 9 + (r() < 0.03 ? -6 : 0), v = lo * 12 + g;
+          im.data[i] = 245 + v; im.data[i + 1] = 239 + v; im.data[i + 2] = 225 + v; im.data[i + 3] = 255; }
+        x.putImageData(im, 0, 0); return c; })();
+
+      // ---------- спрайты ----------
+      const leafSprites = [["#dc9a26", 1], ["#c96f1d", 2], ["#e3b636", 3], ["#b5522a", 4]].map(([col, seed]) => { const c = mkCanvas(76, 76), x = c.getContext("2d"), r = mulberry32(seed * 41);
+        const pts = []; for (let i = 0; i <= 8; i++) { const u = i / 8, w = 19 * Math.sin(Math.PI * Math.pow(u, 0.72)); pts.push([7 + 62 * u, 38 - w]); } for (let i = 7; i > 0; i--) { const u = i / 8, w = 19 * Math.sin(Math.PI * Math.pow(u, 0.72)); pts.push([7 + 62 * u, 38 + w]); }
+        wetBlob(x, pts, col, r, { layers: 10, alpha: 0.2, vari: 0.03, base: 1, each: 1 });
+        x.strokeStyle = "rgba(70,40,14,0.55)"; x.lineCap = "round"; x.lineWidth = 1.1; x.beginPath(); x.moveTo(2, 39); x.quadraticCurveTo(38, 36, 66, 38); x.stroke();
+        x.lineWidth = 0.7; for (let i = 1; i < 5; i++) { const px = 12 + i * 10; x.beginPath(); x.moveTo(px, 37.5); x.lineTo(px + 7, 28); x.moveTo(px, 37.5); x.lineTo(px + 7, 47); x.stroke(); }
+        return c; });
+      const earSprites = [1, 2, 3].map((seed) => { const c = mkCanvas(90, 360), x = c.getContext("2d"), r = mulberry32(seed * 131), cx = 45;
+        x.strokeStyle = "rgba(58,38,16,0.9)"; x.lineCap = "round"; x.lineWidth = 2.4; x.beginPath(); x.moveTo(cx, 356); x.quadraticCurveTo(cx + 8, 200, cx + 2, 104); x.stroke();
+        x.lineWidth = 1.4; x.beginPath(); x.moveTo(cx + 3, 240); x.quadraticCurveTo(cx + 24, 216, cx + 22, 178); x.stroke();
+        for (let i = 0; i < 20; i++) { const side = i % 2 ? 1 : -1, y = 104 - i * 4.2, dx = side * (5.4 - i * 0.17);
+          x.save(); x.translate(cx + 2 + dx, y); x.rotate(side * 0.34); x.fillStyle = i % 3 ? "#d29b34" : "#c28322"; x.globalAlpha = 0.92; x.beginPath(); x.ellipse(0, 0, 4.2, 7.6, 0, 0, 6.283); x.fill();
+          x.globalAlpha = 1; x.strokeStyle = "rgba(58,38,16,0.8)"; x.lineWidth = 0.9; x.stroke(); x.beginPath(); x.moveTo(side * 1.5, -7); x.lineTo(side * (6 + r() * 7), -24 - r() * 12); x.stroke(); x.restore(); }
+        return c; });
+
+      // чернильные деревья на горизонте
+      const TREE_TIPS = [];
+      const TREES = (() => { const r = mulberry32(19), out = [];
+        function branch(paths, x, y, ang, len, w, depth, d) {
+          const pts = [], bend = (r() - 0.5) * 0.7; for (let i = 0; i <= 6; i++) { const u = i / 6, a = ang + bend * u; pts.push([x + Math.sin(a) * len * u, y - Math.cos(a) * len * u]); }
+          paths.push({ pts, w, d }); const e = pts[6];
+          if (depth === 0) { TREE_TIPS.push(e); return; }
+          const n = depth === 3 ? 6 : 3;
+          for (let k = 0; k < n; k++) { const u = depth === 3 ? 0.34 + 0.62 * (k + r() * 0.8) / n : 0.45 + 0.5 * r(), q = pts[Math.round(u * 6)], side = k % 2 ? 1 : -1;
+            branch(paths, q[0], q[1], ang + side * (0.45 + r() * 0.55), len * (depth === 3 ? 0.42 - u * 0.2 : 0.46) * (0.75 + r() * 0.5), Math.max(0.9, w * 0.52), depth - 1, d + 0.16 + u * 0.2); }
+          if (depth === 3) TREE_TIPS.push(e);
+        }
+        for (const [x, h] of [[176, 150], [298, 112], [442, 176], [730, 124], [792, 92], [1120, 148], [1248, 116], [1560, 162], [1704, 108]]) {
+          const paths = []; branch(paths, x, HOR + 8, (r() - 0.5) * 0.14, h, 3.4, 3, 0); out.push({ paths, delay: r() * 0.5 }); }
+        return out; })();
+      // золотая листва на ветках
+      const LLeafy = layer((c) => { const r = mulberry32(23), cols = ["#e3b636", "#dc9a26", "#eac34a", "#c97a22"];
+        for (const q of TREE_TIPS) for (let k = 0; k < 2; k++) wetBlob(c, circle(q[0] + (r() - 0.5) * 22, q[1] + (r() - 0.5) * 18, 7 + r() * 12, 6 + r() * 9, 6), cols[Math.floor(r() * 4)], r, { layers: 4, alpha: 0.2, vari: 0.3, base: 1, each: 1 });
+      }, 0.3);
+      { const az = LAzure.getContext("2d"); az.globalCompositeOperation = "destination-out"; az.globalAlpha = 0.97; az.drawImage(LLeafy, 0, 0); az.globalAlpha = 1; az.globalCompositeOperation = "source-over"; }
+      function inkPath(c, pts, u, w) { if (u <= 0) return; const n = (pts.length - 1) * clamp(u, 0, 1), k = Math.floor(n); c.lineWidth = w; c.beginPath(); c.moveTo(pts[0][0], pts[0][1]);
+        for (let i = 1; i <= k; i++) c.lineTo(pts[i][0], pts[i][1]);
+        if (k < pts.length - 1) { const f = n - k; c.lineTo(lerp(pts[k][0], pts[k + 1][0], f), lerp(pts[k][1], pts[k + 1][1], f)); } c.stroke(); }
+
+      // хрустальные грани: сетка над полем
+      const FACET = (() => { const r = mulberry32(31), cols = 12, rows = 4, p = [], tris = [], edges = [];
+        for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++) p.push([60 + i * 1800 / cols + (i && i < cols ? (r() - 0.5) * 90 : 0), 44 + j * 268 / rows + (j && j < rows ? (r() - 0.5) * 48 : 0)]);
+        const id = (i, j) => j * (cols + 1) + i;
+        for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) { const a = id(i, j), b = id(i + 1, j), c = id(i, j + 1), d = id(i + 1, j + 1);
+          if (r() < 0.5) { tris.push([a, b, c], [b, d, c]); edges.push([a, b], [a, c], [b, c]); } else { tris.push([a, b, d], [a, d, c]); edges.push([a, b], [a, c], [a, d]); }
+          if (i === cols - 1) edges.push([b, d]); if (j === rows - 1) edges.push([c, d]); }
+        const dist = (q) => Math.hypot(q[0] - 960, (q[1] - 190) * 1.5);
+        return { p, tris: tris.map((t, i) => ({ t, k: i % 3, seed: r() * 6.283, d: dist(t.map((v) => p[v]).reduce((a, b) => [a[0] + b[0] / 3, a[1] + b[1] / 3], [0, 0])) })),
+          edges: edges.map(([a, b]) => ({ a, b, d: Math.min(dist(p[a]), dist(p[b])) })), sparks: p.filter(() => r() < 0.5).map((q) => ({ q, s: r() * 6.283, d: dist(q) })) }; })();
+      function star(c, x, y, s) { c.beginPath(); for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4, l = i % 2 ? s * 0.16 : s; c.lineTo(x + l * Math.cos(a), y + l * Math.sin(a)); } c.closePath(); c.fill(); }
+
+      // колосья в поле
+      const EARS = (() => { const r = mulberry32(47), out = [];
+        for (let i = 0; i < 86; i++) { const x = -30 + i * 23 + (r() - 0.5) * 16; out.push({ x, y: 640 + r() * 20, s: 0.86 + r() * 0.42, spr: i % 3, sway: r() * 6.283, tilt: (r() - 0.5) * 0.14, dir: r() < 0.72 ? 1 : -1, delay: r() * 0.5, lag: r() * 0.14 }); }
+        return out.sort((a, b) => a.y - b.y); })();
+      const TWhet = 17.2;
+      function sickleX(t) { return lerp(-150, 2080, Math.pow(prog(t, EV.bodr, EV.E5 + 0.15), 1.1)); }
+      function fallT(x) { // момент, когда серп проходит колос
+        let lo = EV.bodr, hi = EV.E5 + 0.15; for (let i = 0; i < 14; i++) { const m = (lo + hi) / 2; if (sickleX(m) < x) lo = m; else hi = m; } return hi; }
+      for (const e of EARS) e.tf = fallT(e.x);
+
+      function drawSickle(c, x, y, a) {
+        c.save(); c.translate(x, y); c.rotate(a); c.scale(1.28, 1.28);
+        c.lineCap = "round"; c.strokeStyle = "#5a3a1a"; c.lineWidth = 15; c.beginPath(); c.moveTo(0, 8); c.lineTo(-10, 98); c.stroke();
+        c.strokeStyle = "rgba(30,18,8,0.9)"; c.lineWidth = 2; c.beginPath(); c.moveTo(7, 8); c.lineTo(-2, 100); c.moveTo(-7, 6); c.lineTo(-18, 96); c.stroke();
+        c.beginPath(); c.moveTo(-4, 8); c.bezierCurveTo(-80, -22, -92, -128, 8, -160); c.bezierCurveTo(-46, -112, -44, -38, 10, 0); c.closePath();
+        c.fillStyle = "#2c2a2c"; c.fill();
+        c.strokeStyle = "rgba(240,244,250,0.9)"; c.lineWidth = 2.2; c.beginPath(); c.moveTo(-14, -6); c.bezierCurveTo(-78, -30, -84, -118, 2, -152); c.stroke();
+        c.restore();
+      }
+
+      // нить паутины
+      const STEM_A = [262, 346], STEM_B = [1650, 398];
+      const THREAD = (() => { const p = []; for (let i = 0; i <= 60; i++) { const u = i / 60; p.push([lerp(STEM_A[0], STEM_B[0], u), lerp(STEM_A[1], STEM_B[1], u) + 58 * Math.sin(Math.PI * u) + 3 * Math.sin(u * 19)]); } return p; })();
+      const DROPS = (() => { const r = mulberry32(61), o = []; for (let i = 0; i < 18; i++) o.push({ i: 3 + Math.floor(r() * 55), s: r() * 6.283, m: 1.4 + r() * 1.5 }); return o; })();
+      // пучки сухой травы: главный стебель держит нить
+      const TUFTS = (() => { const r = mulberry32(67), out = [];
+        for (const [tx, ty, by] of [[STEM_A[0], STEM_A[1], 556], [STEM_B[0], STEM_B[1], 596]]) {
+          const mk = (x0, xt, yt, bend) => { const p = []; for (let i = 0; i <= 12; i++) { const u = i / 12; p.push([lerp(x0, xt, u) + bend * Math.sin(Math.PI * u), lerp(by, yt, u)]); } return p; };
+          out.push({ pts: mk(tx - 8, tx, ty, -14), w: 2.6, head: true });
+          for (let k = 0; k < 6; k++) { const s = k % 2 ? 1 : -1, xt = tx + s * (22 + r() * 60), yt = ty + 40 + r() * 90; out.push({ pts: mk(tx - 8 + s * r() * 10, xt, yt, s * (10 + r() * 22)), w: 1.5 + r() * 0.7, head: r() < 0.7 }); }
+        }
+        return out; })();
+
+      const FURROWS = (() => { const r = mulberry32(71), o = []; for (let i = 0; i < 18; i++) { const a = -1.5 + 3 * i / 17 + (r() - 0.5) * 0.05, p = []; for (let k = 0; k <= 20; k++) { const u = k / 20, y = lerp(HOR + 30, 680, u * u); p.push([960 + a * (y - HOR + 8) * 3.5 + Math.sin(u * 8 + i) * 2, y]); } o.push({ p, d: r() * 0.4 }); } return o; })();
+
+      const BIRDS = (() => { const o = [[0, 0]]; for (let i = 1; i <= 6; i++) { o.push([-i * 52, -i * 26 + 4 * Math.sin(i)]); o.push([-i * 52, i * 22 + 4 * Math.cos(i)]); } return o; })();
+      function bird(c, x, y, s, f) { const k = 12 * s, up = Math.sin(f) * 8 * s; c.beginPath(); c.moveTo(x - 2 * k, y - up); c.quadraticCurveTo(x - k, y - up - 0.8 * k, x, y); c.quadraticCurveTo(x + k, y - up - 0.8 * k, x + 2 * k, y - up); c.stroke(); }
+
+      const LEAVES = (() => { const r = mulberry32(83), o = []; for (let i = 0; i < 22; i++) o.push({ t0: EV.L2 - 0.4 + r() * 6.4, y0: 40 + r() * 360, spd: 240 + r() * 240, sw: 18 + r() * 34, ph: r() * 6.283, rot: r() * 6.283, vr: (r() - 0.5) * 4, spr: i % 4, s: 0.42 + r() * 0.5 }); return o; })();
+
+      // камера: [t, zoom, ox, oy]
+      const CAM = [[0, 1, 960, 400], [16.2, 1.012, 960, 400], [17.4, 1.36, 960, 640], [EV.prostor - 0.1, 1.36, 960, 640]];
+      function camera(t) {
+        if (t < EV.prostor) { let z = curve([[0, 1], [16.1, 1.015], [17.3, 1.36], [EV.prostor, 1.36]], t); const oy = curve([[16.1, 400], [17.3, 640]], t); return [z, 960, oy]; }
+        if (t < EV.L7) return [lerp(1.36, 1, springEase(t - EV.prostor)), 960, curve([[EV.prostor, 640], [EV.L7, 500]], t)];
+        return [curve([[EV.L7, 1], [EV.L7 + 1.4, 1.1], [EV.S3 - 0.2, 1.1], [EV.S3 + 0.9, 1], [TOTAL, 1.03]], t), 960, curve([[EV.L7, 500], [EV.S3, 500], [EV.S3 + 0.9, 400], [TOTAL, 300]], t)];
+      }
+
+      function renderAt(t) {
+        // панорама
+        pc.setTransform(1, 0, 0, 1, 0, 0); pc.globalCompositeOperation = "source-over"; pc.globalAlpha = 1; pc.clearRect(0, 0, PW, PH);
+        const [z, ox, oy] = camera(t);
+        pc.setTransform(z, 0, 0, z, ox * (1 - z), oy * (1 - z));
+        wash(LSky, MAPS.sky, prog(t, 5.45, EV.S1 + 2.6));
+        wash(LFar, MAPS.far, prog(t, EV.S1 - 0.2, EV.L2 + 2.0), 1, 0.35);
+        wash(LField, MAPS.field, prog(t, EV.S1 + 0.5, EV.L2 + 2.6), 1, 0.4);
+        // вечер
+        const eveA = curve([[EV.E4 + 0.5, 1], [TWhet, 0.0]], t);
+        wash(LEve, MAPS.eve, sstep(prog(t, EV.luch - 0.15, EV.luch + 1.3)), eveA, 0.6);
+        // тепло в конце
+        wash(LWarm, MAPS.warm, prog(t, EV.L12 - 0.2, EV.END + 0.9), 1, 0.2);
+        wash(LStorm, MAPS.storm, prog(t, EV.perv - 0.5, EV.E10 + 0.2), curve([[EV.L11 + 0.2, 1], [EV.laz, 0]], t), 0.5);
+        wash(LAzure, MAPS.azure, Math.pow(prog(t, EV.L11 - 0.05, EV.END - 0.4), 0.85), 1, 0.55);
+        wash(LStacks, MAPS.stacks, prog(t, EV.L12 + 0.15, EV.END + 1.4), 1, 0.25);
+
+        pc.globalCompositeOperation = "source-over"; pc.globalAlpha = 1;
+        // деревья тушью (строка 2)
+        { const a = curve([[EV.L2, 1], [TOTAL, 1]], t); pc.lineCap = "round"; pc.strokeStyle = "rgba(38,24,12,0.86)"; pc.globalAlpha = a;
+          for (const tr of TREES) for (const p of tr.paths) inkPath(pc, p.pts, prog(t, EV.L2 + 0.1 + tr.delay + p.d, EV.L2 + 0.9 + tr.delay + p.d), p.w);
+          pc.globalAlpha = 1; }
+        wash(LLeafy, MAPS.far, prog(t, EV.L2 + 0.7, EV.L3 + 0.5), 1, 0.2);
+        pc.globalCompositeOperation = "source-over";
+        // хрусталь (строка 3)
+        const hT = EV.hrust - 0.04;
+        if (t > hT && t < EV.luch + 1.4) {
+          const fade = 1 - sstep(prog(t, EV.luch - 0.1, EV.luch + 1.2));
+          for (const f of FACET.tris) { const u = sstep(prog(t, hT + f.d / 1300, hT + f.d / 1300 + 0.32)); if (u <= 0) continue;
+            const q = 0.5 + 0.5 * Math.sin(t * 2.2 + f.seed); pc.fillStyle = f.k === 0 ? `rgba(255,255,255,${(0.1 + 0.2 * q) * u * fade})` : f.k === 1 ? `rgba(120,178,220,${(0.08 + 0.12 * q) * u * fade})` : `rgba(255,250,232,${(0.03 + 0.12 * q) * u * fade})`;
+            pc.beginPath(); pc.moveTo(FACET.p[f.t[0]][0], FACET.p[f.t[0]][1]); pc.lineTo(FACET.p[f.t[1]][0], FACET.p[f.t[1]][1]); pc.lineTo(FACET.p[f.t[2]][0], FACET.p[f.t[2]][1]); pc.closePath(); pc.fill(); }
+          pc.lineWidth = 1.7;
+          for (const e of FACET.edges) { const u = prog(t, hT + e.d / 1300, hT + e.d / 1300 + 0.28); if (u <= 0) continue; const a = FACET.p[e.a], b = FACET.p[e.b];
+            pc.strokeStyle = `rgba(255,255,255,${0.72 * fade})`; pc.beginPath(); pc.moveTo(a[0], a[1]); pc.lineTo(lerp(a[0], b[0], u), lerp(a[1], b[1], u)); pc.stroke(); }
+          pc.fillStyle = "#ffffff";
+          for (const s of FACET.sparks) { const u = prog(t, hT + s.d / 1300, hT + s.d / 1300 + 0.2); if (u <= 0) continue; const tw = 0.5 + 0.5 * Math.sin(t * 7 + s.s), sz = (6 + 16 * tw) * u * fade; if (sz > 0.5) star(pc, s.q[0], s.q[1], sz); }
+        }
+        // лучи вечера (строка 4)
+        if (t > EV.luch - 0.1 && t < EV.S2) {
+          const k = springEase(t - EV.luch), fd = 1 - sstep(prog(t, EV.E4 + 0.3, EV.S2 - 0.3));
+          pc.lineCap = "round";
+          for (let i = 0; i < 28; i++) { const a = i / 28 * 6.283 + 0.1, L = (i % 2 ? 300 : 460) * k + 20 * Math.sin(t * 1.6 + i), r0 = 64;
+            pc.strokeStyle = `rgba(255,236,178,${0.58 * fd})`; pc.lineWidth = i % 2 ? 4 : 7; pc.beginPath(); pc.moveTo(SUN[0] + r0 * Math.cos(a), SUN[1] + r0 * Math.sin(a)); pc.lineTo(SUN[0] + (r0 + L) * Math.cos(a), SUN[1] + (r0 + L) * Math.sin(a)); pc.stroke(); }
+          const g = pc.createRadialGradient(SUN[0], SUN[1], 10, SUN[0], SUN[1], 70); g.addColorStop(0, `rgba(255,246,206,${fd})`); g.addColorStop(0.75, `rgba(255,216,120,${fd})`); g.addColorStop(1, "rgba(255,190,90,0)");
+          pc.fillStyle = g; pc.beginPath(); pc.arc(SUN[0], SUN[1], 70 * Math.min(1, k * 1.1), 0, 6.283); pc.fill();
+        }
+        // колосья и серп (строка 5–6)
+        const rise = prog(t, EV.E4 + 0.25, EV.S2 + 0.1);
+        const earAlpha = 1 - sstep(prog(t, EV.L6 + 0.05, EV.prostor - 0.15));
+        if (rise > 0 && earAlpha > 0.003) {
+          for (const e of EARS) {
+            const up = springEase(prog(t, EV.E4 + 0.25 + e.delay, EV.S2 + 0.7 + e.delay) * 1.6); if (up <= 0) continue;
+            const ft = t - e.tf - e.lag, fall = ft > 0 ? clamp(ft * ft * 7 + ft * 1.6, 0, 1) : 0;
+            const angle = e.tilt + 0.05 * Math.sin(t * 1.5 + e.sway + e.x * 0.006) + e.dir * fall * 1.28;
+            pc.save(); pc.translate(e.x, e.y + fall * 44); pc.rotate(angle); pc.scale(e.s, e.s * up);
+            pc.globalAlpha = earAlpha * clamp(up * 2, 0, 1); pc.drawImage(earSprites[e.spr], -45, -356); pc.restore();
+          }
+          pc.globalAlpha = 1;
+        }
+        if (t > EV.bodr - 0.05 && t < EV.E5 + 0.3) {
+          const x = sickleX(t), sw = (t - EV.bodr) * 5.4, a = 0.78 + 0.7 * Math.sin(sw), y = 468 + 42 * Math.sin(sw + 1.1);
+          // след дуги
+          pc.lineCap = "round";
+          for (let k = 1; k < 8; k++) { const tt = t - k * 0.028; if (tt < EV.bodr) break; const xx = sickleX(tt), ss = (tt - EV.bodr) * 5.4, aa = 0.78 + 0.7 * Math.sin(ss), yy = 468 + 42 * Math.sin(ss + 1.1);
+            pc.strokeStyle = `rgba(38,26,16,${0.2 * (1 - k / 8)})`; pc.lineWidth = 8 - k * 0.7; pc.beginPath(); pc.moveTo(xx + 130 * Math.sin(aa - 0.4), yy - 130 * Math.cos(aa - 0.4)); pc.lineTo(x + 130 * Math.sin(a - 0.4), y - 130 * Math.cos(a - 0.4)); pc.stroke(); }
+          drawSickle(pc, x, y, a);
+        }
+        // паутина (строки 7–8)
+        if (t > EV.L7 - 0.05 && t < EV.S3 + 1.6) {
+          const a = 1 - sstep(prog(t, EV.S3 + 0.3, EV.S3 + 1.4));
+          pc.globalAlpha = a; pc.lineCap = "round";
+          const su = sstep(prog(t, EV.L7 - 0.02, EV.L7 + 0.55));
+          pc.strokeStyle = "rgba(48,30,14,0.9)";
+          for (const f of TUFTS) { inkPath(pc, f.pts, su, f.w);
+            if (su >= 0.98 && f.head) { const top = f.pts[12]; pc.lineWidth = 1.2; for (let i = 0; i < 5; i++) { const y = top[1] + 2 + i * 6; pc.beginPath(); pc.moveTo(top[0], y); pc.lineTo(top[0] + (i % 2 ? 7 : -7), y - 7); pc.stroke(); } } }
+          const u = sstep(prog(t, EV.L7 + 0.25, EV.E7));
+          inkPath(pc, THREAD.map((p) => [p[0], p[1] + 1]), u, 1.5); pc.strokeStyle = "rgba(255,255,250,0.96)"; inkPath(pc, THREAD, u, 1.05);
+          pc.fillStyle = "#fffef6";
+          for (const d of DROPS) { if (d.i / 60 > u) continue; const p = THREAD[d.i], tw = 0.7 + 0.3 * Math.sin(t * 3.6 + d.s); pc.globalAlpha = a * tw; pc.beginPath(); pc.arc(p[0], p[1], d.m, 0, 6.283); pc.fill(); }
+          // на «блестит» по нити бежит блик, за ним вспыхивают капли
+          const gu = prog(t, EV.L8 - 0.05, EV.E8 + 0.1);
+          if (gu > 0 && gu < 1) { const p = THREAD[Math.round(gu * 60)], m = Math.sin(Math.PI * gu) ** 0.35, gl = pc.createRadialGradient(p[0], p[1], 0, p[0], p[1], 46 * m);
+            gl.addColorStop(0, `rgba(255,255,240,${0.9 * a})`); gl.addColorStop(1, "rgba(255,255,240,0)"); pc.globalAlpha = 1; pc.fillStyle = gl; pc.beginPath(); pc.arc(p[0], p[1], 46 * m, 0, 6.283); pc.fill();
+            pc.fillStyle = "#fffef6"; pc.globalAlpha = a; star(pc, p[0], p[1], 34 * m); }
+          pc.fillStyle = "#fffef6";
+          for (const d of DROPS) { const dd = gu * 60 - d.i; if (gu <= 0 || dd < 0) continue; const p = THREAD[d.i], tw = Math.max(0, 1 - dd / 22) + (gu >= 1 ? 0 : 0) + 0.22 * (0.5 + 0.5 * Math.sin(t * 5.3 + d.s * 3)); pc.globalAlpha = a * clamp(tw, 0, 1); star(pc, p[0], p[1], 6 + 15 * clamp(tw, 0, 1)); }
+          // борозды
+          pc.globalAlpha = a; pc.strokeStyle = "rgba(60,38,16,0.42)";
+          for (const f of FURROWS) inkPath(pc, f.p, sstep(prog(t, EV.boroz - 0.1 + f.d, EV.E8 + 0.35 + f.d)), 2);
+          pc.globalAlpha = 1;
+        }
+        // птицы (строка 9)
+        if (t > EV.S3 - 0.25 && t < EV.E9 + 0.2) {
+          const u = prog(t, EV.S3 - 0.2, EV.E9), cx = lerp(150, 2150, Math.pow(u, 1.05)), cy = lerp(285, 26, u), s = lerp(1.15, 0.72, u);
+          pc.strokeStyle = "rgba(28,20,14,0.95)"; pc.lineCap = "round"; pc.lineWidth = 3.4;
+          BIRDS.forEach((b, i) => bird(pc, cx + b[0] * s, cy + b[1] * s, s, t * 9 + i * 0.8));
+        }
+        // снежинки у тучи (строка 10)
+        if (t > EV.perv && t < EV.laz + 0.2) {
+          const a = prog(t, EV.perv + 0.2, EV.perv + 0.9) * (1 - sstep(prog(t, EV.L11 + 0.2, EV.laz)));
+          pc.fillStyle = `rgba(255,255,255,${a})`;
+          for (let i = 0; i < 16; i++) { const ph = (t * 0.26 + i * 0.137) % 1, x = 1590 + (i * 61 % 130) + 6 * Math.sin(t * 2 + i), y = 222 + ph * 52; pc.beginPath(); pc.arc(x, y, 1.8, 0, 6.283); pc.fill(); }
+        }
+
+        // сборка кадра: бумага, панорама в рваном крае, сверху лист
+        pc.setTransform(1, 0, 0, 1, 0, 0); pc.globalCompositeOperation = "destination-in"; pc.globalAlpha = 1; pc.drawImage(panMask, 0, 0); pc.globalCompositeOperation = "source-over";
+        ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1; ctx.drawImage(paper, 0, 0);
+        ctx.globalCompositeOperation = "multiply"; ctx.drawImage(pan, 0, 0); ctx.globalCompositeOperation = "source-over";
+
+        // колосья в углах заставки: первый кадр не пустой и сразу про поле
+        if (t < 5.6) { const a = 1 - sstep(prog(t, 4.9, 5.5));
+          for (const [x, y, r, k, sp] of [[116, 1096, 0.2, 0.92, 0], [176, 1104, 0.46, 0.8, 1], [66, 1104, -0.06, 0.74, 2], [1804, 1096, -0.2, 0.92, 1], [1744, 1104, -0.46, 0.8, 2], [1854, 1104, 0.06, 0.74, 0]]) {
+            ctx.save(); ctx.translate(x, y); ctx.rotate(r + 0.018 * Math.sin(t * 1.3 + x)); ctx.scale(k, k); ctx.globalAlpha = a; ctx.drawImage(earSprites[sp], -45, -356); ctx.restore(); }
+          ctx.globalAlpha = 1; }
+        // золотой лист на заставке: падает и касается бумаги, отсюда идёт первая капля
+        if (t > 0.6 && t < 6.6) {
+          const u = prog(t, 0.7, 5.35), e = sstep(u), y = lerp(-70, 330, e), x = 960 + 170 * Math.sin(u * 7.2) * (1 - u) + 60 * (1 - u), rot = 1.1 * Math.sin(u * 7.2 + 0.6) * (1 - u * 0.7) + 0.15;
+          const a = 1 - sstep(prog(t, 5.5, 6.5));
+          ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(1.45, 1.45); ctx.globalAlpha = a; ctx.drawImage(leafSprites[0], -38, -38); ctx.restore(); ctx.globalAlpha = 1;
+        }
+        // листья на ветру (первая строфа, поверх панорамы, в пределах её края)
+        for (const l of LEAVES) { const tt = t - l.t0; if (tt < 0 || tt > 6) continue; const x = -80 + tt * l.spd, y = l.y0 + tt * 24 + l.sw * Math.sin(tt * 1.7 + l.ph); if (x > 2000 || y > 600) continue;
+          const a = (1 - sstep(prog(t, EV.E4 + 0.2, EV.S2 + 0.2))) * Math.min(1, tt * 3);
+          ctx.save(); ctx.translate(x, y); ctx.rotate(l.rot + l.vr * tt); ctx.scale(l.s, l.s * (0.6 + 0.4 * Math.sin(tt * 3 + l.ph))); ctx.globalAlpha = a; ctx.drawImage(leafSprites[l.spr], -38, -38); ctx.restore(); }
+        ctx.globalAlpha = 1;
+      }
+
+      // ---------- Framer Motion: текст ----------
+      const $ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+      const seq = [];
+      const ink = (els, at, per = 0.025, dur = 0.28) => seq.push([els,
+        { opacity: [0, 1], transform: ["translateY(5px)", "translateY(0px)"] },
+        { at, duration: dur, ease: [0.22, 1, 0.36, 1], delay: Motion.stagger(per) }]);
+      const out = (el, at, dur = 0.5) => seq.push([el,
+        { opacity: [1, 0], transform: ["translateY(0px)", "translateY(-14px)"] }, { at, duration: dur, ease: "easeIn" }]);
+
+      // заставка
+      ink($("#title-card-in .card-title .ch"), 0.4, 0.06, 0.5);
+      ink($("#title-card-in .card-author .ch"), 1.9, 0.028, 0.4);
+      ink($("#title-card-in .card-year .ch"), 2.6, 0.06, 0.4);
+      out(document.getElementById("title-card-in"), 4.95, 0.55);
+      // строки
+      for (const st of CFG.stanzas) {
+        for (let n = st.first; n <= st.last; n++) {
+          const l = CFG.lines[n - 1], chars = $(`#l${n} .ch`);
+          ink(chars, l.s - 0.1, Math.min(0.03, 0.72 * (l.e - l.s) / chars.length), 0.26);
+          if (n < st.last) seq.push([document.getElementById(`l${n}`), { opacity: [1, 0.62] }, { at: CFG.lines[n].s - 0.1, duration: 0.35 }]);
+        }
+        out(document.getElementById(`${st.id}-in`), st.exit);
+      }
+      // финал
+      ink($("#final-card-in .card-title .ch"), FINAL + 0.45, 0.05, 0.55);
+      ink($("#final-card-in .card-author .ch"), FINAL + 1.7, 0.028, 0.4);
+      ink($("#final-card-in .card-year .ch"), FINAL + 2.4, 0.06, 0.4);
+
+      const main = Motion.animate(seq);
+      main.pause();
+      const seek = (t) => { renderAt(t); main.time = t; };
+      window.addEventListener("hf-seek", (e) => seek(e.detail.time));
+      seek(0);
+
+      const tl = gsap.timeline({ paused: true });
+      tl.set({}, {}, TOTAL);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

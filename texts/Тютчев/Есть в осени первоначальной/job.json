@@ -1,0 +1,19 @@
+{
+  "video": "video.mp4",
+  "thumb": "cover.png",
+  "title": "Есть в осени первоначальной - Тютчев",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 2",
+    "класс 3",
+    "класс 5",
+    "класс 6",
+    "класс 7"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
