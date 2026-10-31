@@ -1,0 +1,17 @@
+==================== ГОЛОС (не для озвучки) ====================
+Голос: Marina — Soft, Clear and Warm (ID: ymDCYd8puC7gYjxIamPt)
+Запасной: Marat — Warm, Calm and Friendly (ID: vQxSi2EuaRWwBw3nn6dK)
+Настройки: stability 0.5, similarity_boost 0.75, модель Eleven v4
+Проверить на слух: ударения «бе́ла», «зли́ся»; весёлый подъём на последней строке.
+
+=========== ТЕКСТ ДЛЯ ОЗВУЧКИ — копировать отсюда ===========
+[warm, gentle storyteller, for little children, slowly]
+Ласточка примчалась [short pause]
+Из-за бе́ла мо́ря, [short pause]
+Се́ла и запе́ла: [long pause]
+[cheerful, playful, slowly]
+Как февраль ни зли́ся, [short pause]
+Как ты, март, ни хму́рься, [short pause]
+Будь хоть снег, хоть до́ждик — [short pause]
+[joyful, bright]
+Всё весно́ю па́хнет!
