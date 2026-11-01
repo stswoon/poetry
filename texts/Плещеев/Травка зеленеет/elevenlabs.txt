@@ -1,0 +1,22 @@
+==================== ГОЛОС (не для озвучки) ====================
+Голос: Marat — Warm, Calm and Friendly (ID: vQxSi2EuaRWwBw3nn6dK)
+Запасной: Marina — Soft, Clear and Warm (ID: ymDCYd8puC7gYjxIamPt)
+Настройки: stability 0.5, similarity_boost 0.75, модель Eleven v4
+Проверить на слух: первое слово после «Травка» — «зелене́ет» (в первом дубле Whisper слышал «звенеет»); ударения «се́ни», «миле́й», «прощебе́чь», «принесла́»; ласковое обращение к ласточке в третьей строфе.
+
+=========== ТЕКСТ ДЛЯ ОЗВУЧКИ — копировать отсюда ===========
+[warm, gentle storyteller, for little children, slowly]
+Травка зелене́ет, [short pause]
+Солнышко блестит; [short pause]
+Ласточка с весною [short pause]
+В се́ни к нам летит. [long pause]
+[bright, joyful, slowly]
+С нею солнце краше [short pause]
+И весна миле́й… [short pause]
+Прощебе́чь с дороги [short pause]
+Нам привет скорей! [long pause]
+[tender, softly, talking to a little bird, slowly]
+Дам тебе я зёрен, [short pause]
+А ты песню спой, [short pause]
+Что из стран далёких [short pause]
+Принесла́ с собой…
