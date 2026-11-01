@@ -1,30 +1,26 @@
-# Сборка и рендер (HyperFrames + vizavi-motion + Motion)
+# Сборка и рендер (HyperFrames + Motion)
 
 ## Инструменты
 
-- **HyperFrames:** HTML с GSAP, рендер через headless Chrome и FFmpeg. CLI вызывай как `npx hyperframes <cmd>` из папки проекта. Если npx не находит его, используй `node "C:/Users/stswoon/.claude/plugins/cache/hyperframes/hyperframes/<версия>/skills/hyperframes/scripts/plugin-cli.mjs" <cmd>` (версию возьми из `ls`).
-- **vizavi-motion:** режиссура (раскадровка, камера, глубина, motion blur, обязательная итерация после первой сборки), проверка экспорта.
-- **Motion** (Framer Motion): пружины и инерция. Подключи с jsdelivr с точной версией, `Motion.spring(...)` преврати в функцию easing для GSAP. Так каждый кадр детерминирован и рендерится сам по себе. Свои `requestAnimationFrame` и анимации Motion, идущие по реальному времени, в рендере не работают.
-- **Перед началом:** `npx hyperframes doctor --json`, проверь `ok`, FFmpeg и Chrome.
+- **HyperFrames:** HTML с GSAP, рендер через headless Chrome и FFmpeg. CLI вызывай как `npx hyperframes@0.8.204 <cmd>` из папки проекта.
+- **Motion** (Framer Motion): пружины и инерция. Бандл — `utils/node_modules/motion/dist/motion.js`, с CDN не подключай. `Motion.spring(...)` преврати в функцию easing для GSAP. Так каждый кадр детерминирован и рендерится сам по себе. Свои `requestAnimationFrame` и анимации Motion, идущие по реальному времени, в рендере не работают.
+- **Перед началом:** `npx hyperframes@0.8.204 doctor --json`, проверь `ok`, FFmpeg и Chrome.
 
 ## Структура `<папка>/video/`
 
-Как в `texts/Есенин/Гой ты Русь моя родная/video/` и `texts/Киплинг/Заповедь/zapoved*/`: исходник сцен лежит отдельно, HTML генерируется.
+Как в `texts/Майков/Ласточка примчалась/video/`: исходник сцен лежит отдельно, HTML генерируется.
 
 ```
 video/
-  assets/voice/voice.mp3     голос (копия)
-  assets/music.mp3           музыка (если есть)
-  assets/sfx/*.wav           шумы, синтез кодом
-  timing.json                строки и слова с временами (шаг 6)
-  tools/gen.py | src/*.mjs   генератор: сцены → compositions/*.html + index.html
-  compositions/sNN.html      сгенерировано, руками не править
-  index.html                 сгенерировано
+  assets/voice.mp3           голос (копия)
+  assets/music.wav           музыка (копия из ../music/)
+  build.py, template.tpl     генератор: шаблон, ../poem.md и ../timings.json → index.html
+  index.html                 сгенерировано, руками не править
   renders/                   пробы, черновики, финал, логи рендера
 ```
 
-- Init: `npx hyperframes init video --non-interactive --resolution landscape --skill hyperframes --skip-transcribe`.
-- Тайминги сцен и строк берутся **только** из `timing.json`. Новый голос значит заменить файл, пересчитать timing и пересобрать.
+- Init: `npx hyperframes@0.8.204 init video --non-interactive --resolution landscape --skill hyperframes --skip-transcribe`.
+- Тайминги сцен и строк берутся **только** из `timings.json` в папке стиха. Новый голос значит заменить файл, пересчитать `timings.json` и пересобрать.
 - Одна сцена — один файл исходника и одна запись (Write) за раз. Так легче укладываться в отчёты раз в 2 минуты.
 
 ## Уроки прошлых роликов (не повторять)
@@ -47,9 +43,9 @@ video/
 
 ```bash
 # проба и черновик
-npx hyperframes render --quality draft --fps 60 --output renders/draft_v1.mp4 > renders/draft_v1.log 2>&1
+npx hyperframes@0.8.204 render --quality draft --fps 30 --output renders/draft_v1.mp4 > renders/draft_v1.log 2>&1
 # финал
-npx hyperframes render --quality delivery --fps 60 --output renders/final.mp4 > renders/final.log 2>&1
+npx hyperframes@0.8.204 render --quality delivery --fps 30 --output renders/final.mp4 > renders/final.log 2>&1
 ```
 
 - Длинный рендер запускай через Bash с `run_in_background: true`. Прогресс читается из строк лога `@hf-progress {"code":"capture","done":N,"total":M,"pct":P}`. Конец рендера отмечает строка `Render complete`, ошибку — `Render failed`.
@@ -57,10 +53,17 @@ npx hyperframes render --quality delivery --fps 60 --output renders/final.mp4 > 
 
 ## Проверки перед сдачей
 
-1. `npx hyperframes check`: без ошибок. Предупреждения прочитай и объясни.
+1. `npx hyperframes@0.8.204 check`: без ошибок. Предупреждения прочитай и объясни.
 2. **Полнота текста:** каждое слово стиха есть на экране, сверено пословно.
-3. **Синхрон:** каждая строка появляется в пределах ±0.15 с от начала её чтения по `timing.json`.
+3. **Синхрон:** каждая строка появляется в пределах ±0.15 с от начала её чтения по `timings.json`.
 4. **Кадры:** контактный лист по границам сцен и по середине каждой строфы (`ffmpeg` из готового MP4, не из кода). Посмотри сам: артефакты, наезды, обрезанный текст, пустые кадры.
-5. **Звук:** `ffmpeg -af ebur128` или `loudnorm` (печать), цель −14 LUFS ±1, TP ≤ −1 dBTP, голос не перекрыт музыкой (по измерению, на слух ты не слышишь).
-6. **Файл:** `ffprobe` — 1920×1080, 60 fps, H.264, yuv420p, AAC, длительность равна `data-duration`.
+5. **Звук:** цель −14 LUFS ±1, TP ≤ −1 dBTP, голос не перекрыт музыкой (по измерению, на слух ты не слышишь). LUFS (Loudness Units relative to Full Scale) — средняя воспринимаемая громкость всего ролика: чем ближе к нулю, тем громче. TP (true peak) — настоящий пик сигнала; с запасом до 0 звук не хрипит, когда площадка его пережимает.
+   ```bash
+   ffmpeg -nostdin -hide_banner -i "<ролик>.mp4" -af ebur128=peak=true:framelog=quiet -f null -
+   ```
+   В сводке смотри `I:` (LUFS) и `Peak:`. Вне цели — поправь звук поверх рендера, видео не перекодируй, и измерь снова. `<X>` — на сколько дБ не хватает до −14:
+   ```bash
+   ffmpeg -i "<рендер>.mp4" -c:v copy -af "volume=<X>dB,alimiter=limit=0.82:attack=4:release=60:level=false" -c:a aac -b:a 192k "<ролик>.mp4"
+   ```
+6. **Файл:** `ffprobe` — 1920×1080, 30 fps, H.264, yuv420p, AAC, длительность равна `data-duration`.
 7. В сдаче честно раздели: «проверено по файлу» и «не проверено (на слух)».
