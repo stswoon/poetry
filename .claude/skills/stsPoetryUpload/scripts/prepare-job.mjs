@@ -2,7 +2,8 @@
 /**
  * Готовит публикацию стиха: проверяет папку и пишет рядом с роликом job.json и desc.txt.
  * Запуск: node prepare-job.mjs "<Поэт>/<Стих>"
- * Последняя строка вывода — PREPARE_JSON: {...}; код выхода 1, если публиковать нельзя.
+ * Последняя строка вывода — PREPARE_JSON: {...}; код выхода 1, если в папке чего-то не хватает.
+ * Если в rights.md нет вывода ✅, job.json и desc.txt не пишутся, а в отчёте rightsOk: false: ролик идёт только на Диск.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -26,13 +27,22 @@ const title = `${poem} - ${poet}`;
 const description = buildDescription();
 
 if (!fs.existsSync(path.join(dir, 'cover.png'))) errors.push('Нет обложки cover.png');
-if (!/^##\s*Вывод[\s\S]*?✅/m.test(readIfExists('rights.md'))) {
-  errors.push('В rights.md нет вывода ✅: публиковать нельзя, пока права не подтверждены');
-}
-if (description.length > DESCRIPTION_LIMIT) {
+const rightsOk = /^##\s*Вывод[\s\S]*?✅/m.test(readIfExists('rights.md'));
+if (rightsOk && description.length > DESCRIPTION_LIMIT) {
   errors.push(`Описание ${description.length} символов, лимит ${DESCRIPTION_LIMIT}`);
 }
 if (errors.length > 0) fail(errors);
+
+if (!rightsOk) {
+  report({
+    ok: true,
+    rightsOk,
+    video: path.join(dir, video),
+    poemText: path.join(dir, 'poem.md'),
+    title,
+  });
+  process.exit(0);
+}
 
 const playlists = findPlaylists();
 
@@ -58,6 +68,7 @@ fs.writeFileSync(
 const helper = path.join(REPO_ROOT, 'utils', 'upload-helper');
 report({
   ok: true,
+  rightsOk,
   job: path.join(dir, 'job.json'),
   video: path.join(dir, video),
   poemText: path.join(dir, 'poem.md'),
