@@ -1,0 +1,18 @@
+==================== ГОЛОС (не для озвучки) ====================
+Голос: Marina — Soft, Clear and Warm (ID: ymDCYd8puC7gYjxIamPt)
+Запасной: Stanislav — Deep, Empathetic and Warm (ID: ogi2DyUAKJb7CEdqqvlU)
+Настройки: stability 0.5, similarity_boost 0.75, модель Eleven v4
+Проверить на слух: ударения «цвето́к», «по́дле», «сквози́стый», «го́ре», «было́м», «ино́м»; тихая грусть во второй строфе и светлый подъём на «первые грёзы».
+
+=========== ТЕКСТ ДЛЯ ОЗВУЧКИ — копировать отсюда ===========
+[tender, gentle storyteller, for little children, slowly]
+Голубенький, чистый [short pause]
+Подснежник-цвето́к! [short pause]
+А по́дле сквози́стый, [short pause]
+Последний снежо́к… [long pause]
+[quietly, wistful, slowly]
+Последние слёзы [short pause]
+О го́ре было́м [short pause]
+[hopeful, softly brightening, slowly]
+И первые грёзы [short pause]
+О счастье ино́м…
