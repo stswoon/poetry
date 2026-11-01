@@ -1,0 +1,19 @@
+.claude/skills/stsPoetryCI/SKILL.md
+  s_743f05276a46cf::t_6da0ca04b07235 1-57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a275cf0f34c5172959a6c60b5522dd9820f9f62b",
+  "prompts": {},
+  "sessions": {
+    "s_743f05276a46cf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b42ed7ae-3d68-4310-8f18-55f42fd094d4",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
