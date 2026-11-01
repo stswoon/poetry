@@ -1,0 +1,15 @@
+{
+  "video": "Травка зеленеет - Плещеев - v2.mp4",
+  "thumb": "cover.png",
+  "title": "Травка зеленеет - Плещеев",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 1"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
