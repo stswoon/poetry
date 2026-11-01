@@ -1,0 +1,23 @@
+.gitignore
+  s_1fc49f4a2a14b7::t_b38afa11774203 8-9
+.claude/skills/stsPoetryMake/references/elevenlabs.md
+  s_1fc49f4a2a14b7::t_5979d318227f9c 39
+programs/6-класс.md
+  s_1fc49f4a2a14b7::t_09b615bfd8af34 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c0a8db293e4e79a334c71079d03939d12e64c415",
+  "prompts": {},
+  "sessions": {
+    "s_1fc49f4a2a14b7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e061d346-767a-40dc-bf9f-237558236160",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
