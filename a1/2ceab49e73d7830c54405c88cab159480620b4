@@ -1,0 +1,396 @@
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/desc.txt"
+  s_9b3b8c52c46eee::t_c5a9ef1e23c901 1-28
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/poem.md"
+  s_9b3b8c52c46eee::t_7c1ed09545e3ff 3-7
+  s_9b3b8c52c46eee::t_ca9317d08e42c8 1-2
+  s_9b3b8c52c46eee::t_50fb62b9bf95eb 8-10
+  s_46bdcb2b7b12b8::t_9f1893087b818b 11-55
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/job.json"
+  s_9b3b8c52c46eee::t_c5a9ef1e23c901 1-16
+possible-styles.md
+  s_905e870ba53c8c::t_1373d897dabe6b 39-44
+possible-voices.md
+  s_905e870ba53c8c::t_bcc6771fa72128 8
+programs/1-класс.md
+  s_905e870ba53c8c::t_50494ff911921a 5-49
+programs/3-класс.md
+  s_905e870ba53c8c::t_b639cc46fae3d2 5-63
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/audio-check/align.py"
+  s_4670d8ce30fa6d::t_4ec007810f4b7e 1-40
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/audio-check/line05/transcribe-check.json"
+  s_4670d8ce30fa6d::t_135a0c18fcba62 1-32
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/audio-check/line09/transcribe-check.json"
+  s_4670d8ce30fa6d::t_2c70a697ee4292 1-44
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/audio-check/line11/transcribe-check.json"
+  s_4670d8ce30fa6d::t_3883c589edd4ab 1-44
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/audio-check/review.md"
+  s_4670d8ce30fa6d::t_0cf3917dbf8b8a 1-41
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/elevenlabs-v3.txt"
+  s_905e870ba53c8c::t_0d12776f5c8462 1-42
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/elevenlabs.txt"
+  s_905e870ba53c8c::t_3de14233665acd 1-42
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/music/anime-v2/README.md"
+  s_2ed64de4a9081a::t_29e96886e6e579 1-33
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/music/anime-v2/generate.py"
+  s_2ed64de4a9081a::t_ac0ddbf2ff074c 1-342
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/music/anime-v2/report.json"
+  s_2ed64de4a9081a::t_32be568fa58e30 1-127
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/music/generate.py"
+  s_c028b6ba891b28::t_32638da9860b0b 1-372
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/music/report.json"
+  s_c028b6ba891b28::t_b9af951f792a4f 1-48
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/rights.md"
+  s_905e870ba53c8c::t_f086b8d3b51490 1-45
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/script-v1.md"
+  s_905e870ba53c8c::t_d3e52a78382483 1-53
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/script-v2.md"
+  s_11b1a10a325e51::t_575207c41689c0 1-38
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/script.md"
+  s_905e870ba53c8c::t_dc07a919f943ed 1-20
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/silencedetect-45.log"
+  s_4670d8ce30fa6d::t_cf3958997abbde 1-76
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/silencedetect.log"
+  s_4670d8ce30fa6d::t_8b1b031349e648 1-84
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/timings-v3.json"
+  s_905e870ba53c8c::t_94740ee52e5a38 1-163
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/timings.json"
+  s_4670d8ce30fa6d::t_d6aee9dd6f3bfd 1-163
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/transcript.json"
+  s_4670d8ce30fa6d::t_64725272d20493 1-572
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/verification-v2.md"
+  s_905e870ba53c8c::t_c826fab90841d6 1-13
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/verification-v3.md"
+  s_905e870ba53c8c::t_7385d989c7ae5a 1-15
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/verification.md"
+  s_905e870ba53c8c::t_c24043a5c82129 1-53
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/.gitignore"
+  s_905e870ba53c8c::t_93a02569c555b8 1-7
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/AGENTS.md"
+  s_4670d8ce30fa6d::t_3785e0496e986b 1-109
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/CLAUDE.md"
+  s_4670d8ce30fa6d::t_de6dd4c791d05b 1-109
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/REVIEW.md"
+  s_905e870ba53c8c::t_06a5efd5a0ccfa 1-19
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/SPEC.md"
+  s_905e870ba53c8c::t_890e1aaef77e9f 1-22
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/.gitignore"
+  s_11b1a10a325e51::t_e201a060755630 1-7
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/QA.md"
+  s_4970423988e153::t_f2e520618b9411 1-91
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/README.md"
+  s_905e870ba53c8c::t_342bc5e70f914c 1-23
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/REVIEW.md"
+  s_905e870ba53c8c::t_9a0c8b3d0a47a7 1-26
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/SPEC.md"
+  s_905e870ba53c8c::t_5e700162960aee 1-38
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/assets/anime-motion.js"
+  s_11b1a10a325e51::t_23572d6571a8f6 1-72
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/assets/art/prompts.json"
+  s_905e870ba53c8c::t_dfef5ab9f6a27f 1-57
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/assets/gsap.min.js"
+  s_905e870ba53c8c::t_958ad4e6ac13d7 1-11
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/assets/motion.js"
+  s_905e870ba53c8c::t_3e9d99039c6a57 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/assets/style.css"
+  s_11b1a10a325e51::t_8668695f6fd3d6 1-5
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/build-manifest.json"
+  s_11b1a10a325e51::t_2c616e2c40f81b 1-87
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/build.py"
+  s_905e870ba53c8c::t_d236ac4f5d0c75 1-123
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/captions.html"
+  s_11b1a10a325e51::t_77a7019a55558a 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene0.html"
+  s_11b1a10a325e51::t_04034b83719b2b 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene1.html"
+  s_11b1a10a325e51::t_e0b79c31ac3137 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene10.html"
+  s_11b1a10a325e51::t_b9ca5202f9a055 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene11.html"
+  s_11b1a10a325e51::t_838dfca2232889 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene12.html"
+  s_11b1a10a325e51::t_ab11dfc46a4873 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene13.html"
+  s_11b1a10a325e51::t_c6f9fd386b940e 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene14.html"
+  s_11b1a10a325e51::t_eec1d2ef7c0b8e 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene2.html"
+  s_11b1a10a325e51::t_8b795687e18762 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene3.html"
+  s_11b1a10a325e51::t_ca1ef770f23f64 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene4.html"
+  s_11b1a10a325e51::t_3788faf501aded 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene5.html"
+  s_11b1a10a325e51::t_91e50a5cf82d05 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene6.html"
+  s_11b1a10a325e51::t_6e73809c391fae 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene7.html"
+  s_11b1a10a325e51::t_45802148402f2a 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene8.html"
+  s_11b1a10a325e51::t_9187f69eb7ee2b 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/compositions/scene9.html"
+  s_11b1a10a325e51::t_c32240ef6641ec 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/debug.log"
+  s_905e870ba53c8c::t_ce7c1265983070 1-6
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/index.html"
+  s_11b1a10a325e51::t_1dd6bd74a4f5f7 1-16
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/master.py"
+  s_905e870ba53c8c::t_9e6d86ec89a309 1-33
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/meta.json"
+  s_11b1a10a325e51::t_85d2c3178d898c 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v2/package.json"
+  s_905e870ba53c8c::t_357082beaadea4 1-11
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/.gitignore"
+  s_3dea84e35dfa36::t_969f1d5dd1d92f 1-8
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/CHANGES.md"
+  s_905e870ba53c8c::t_54b336fcf29762 1-20
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/QA.md"
+  s_4970423988e153::t_977be74c674084 1-99
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/assets/anime-motion.js"
+  s_4970423988e153::t_9c3200292a268e 1-46
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/assets/art/map-prompt.txt"
+  s_905e870ba53c8c::t_1e9d86749cd389 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/assets/art/prompts.json"
+  s_3dea84e35dfa36::t_dc94d51856c0f6 1-57
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/assets/gsap.min.js"
+  s_3dea84e35dfa36::t_8a214e3170c2b9 1-11
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/assets/motion.js"
+  s_3dea84e35dfa36::t_48005b9b690792 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/assets/style.css"
+  s_3dea84e35dfa36::t_12acf6a6decf65 1-7
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/build-manifest.json"
+  s_11b1a10a325e51::t_39c87435a4a953 1-67
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/build.py"
+  s_4970423988e153::t_5d555f6663e7ff 1-105
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/captions.html"
+  s_11b1a10a325e51::t_b3e0edfa1276ec 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene0.html"
+  s_11b1a10a325e51::t_457a1191824df8 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene1.html"
+  s_11b1a10a325e51::t_c219c3922efeaa 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene10.html"
+  s_11b1a10a325e51::t_e574b79fd98a8d 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene11.html"
+  s_11b1a10a325e51::t_fcdea0d93556c5 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene12.html"
+  s_11b1a10a325e51::t_d92ad6c5f2f5a2 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene2.html"
+  s_11b1a10a325e51::t_4e6126b3ba08eb 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene3.html"
+  s_11b1a10a325e51::t_3b56beb156d21c 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene4.html"
+  s_11b1a10a325e51::t_986f94b12312cd 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene7.html"
+  s_11b1a10a325e51::t_b3bc22cd2d2ae6 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene8.html"
+  s_11b1a10a325e51::t_f1879cebf28fd7 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/compositions/scene9.html"
+  s_11b1a10a325e51::t_ba7065fd790a27 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/index.html"
+  s_11b1a10a325e51::t_7717b02926e489 1-12
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/master.py"
+  s_3dea84e35dfa36::t_95a7a77707e0b9 1-33
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/meta.json"
+  s_11b1a10a325e51::t_3ca609bf475fe0 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/package.json"
+  s_3dea84e35dfa36::t_2dd46dc7251637 1-11
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v3/revise.py"
+  s_3dea84e35dfa36::t_2751354263ae3f 1-37
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/.gitignore"
+  s_905e870ba53c8c::t_7f4609e5110360 1-8
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/CHANGES.md"
+  s_905e870ba53c8c::t_ab02d4b189390f 1-5
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/QA.md"
+  s_905e870ba53c8c::t_d32ef9c8d40ebc 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/assets/anime-motion.js"
+  s_905e870ba53c8c::t_4b629c95c01cda 1-46
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/assets/art/map-prompt.txt"
+  s_905e870ba53c8c::t_31dd0e84e1dce8 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/assets/art/prompts.json"
+  s_905e870ba53c8c::t_10dae3c767b02a 1-57
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/assets/gsap.min.js"
+  s_905e870ba53c8c::t_4b1e640a885268 1-11
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/assets/motion.js"
+  s_905e870ba53c8c::t_b203b617de42da 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/assets/style.css"
+  s_905e870ba53c8c::t_47e9dd1cbc5fdc 1-7
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/build-manifest.json"
+  s_905e870ba53c8c::t_99fffb90e31d7d 1-67
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/build.py"
+  s_905e870ba53c8c::t_5f47a899fa9901 1-105
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/captions.html"
+  s_905e870ba53c8c::t_fab497556731e3 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene0.html"
+  s_905e870ba53c8c::t_00220873d3e0f2 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene1.html"
+  s_905e870ba53c8c::t_75c971ed7d6e5e 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene10.html"
+  s_905e870ba53c8c::t_fe8c53039f61b5 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene11.html"
+  s_905e870ba53c8c::t_976a0cf54c3677 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene12.html"
+  s_905e870ba53c8c::t_16b1b47e5f5fed 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene2.html"
+  s_905e870ba53c8c::t_04a7ef028dd8fe 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene3.html"
+  s_905e870ba53c8c::t_a312aafff3b96a 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene4.html"
+  s_905e870ba53c8c::t_db90bd329f0777 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene7.html"
+  s_905e870ba53c8c::t_ba48e3604638a6 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene8.html"
+  s_905e870ba53c8c::t_d0639dcccca897 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/compositions/scene9.html"
+  s_905e870ba53c8c::t_3ad31f3abf9679 1-4
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/index.html"
+  s_905e870ba53c8c::t_a4785375a7d587 1-12
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/master.py"
+  s_905e870ba53c8c::t_1bcd6c51f2d48e 1-33
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/meta.json"
+  s_905e870ba53c8c::t_608ddede13dc72 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/package.json"
+  s_905e870ba53c8c::t_a4ca50cfb85c2f 1-11
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/render-v4.log"
+  s_905e870ba53c8c::t_8829d99e59442e 1-505
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/anime-v4/revise.py"
+  s_905e870ba53c8c::t_a3e5784a97c356 1-37
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/artwork.py"
+  s_905e870ba53c8c::t_87f2c37d0001e9 1-535
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/assets/fonts/.gitignore"
+  s_905e870ba53c8c::t_46479db5f791fe 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/assets/fonts/README.md"
+  s_905e870ba53c8c::t_bfe470ee14f36e 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/assets/gsap.min.js"
+  s_4670d8ce30fa6d::t_e4c470a8d7af01 1-11
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/assets/motion.js"
+  s_4670d8ce30fa6d::t_597eceabe4b946 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/assets/scene-motion.js"
+  s_905e870ba53c8c::t_257748624b77b5 1-86
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/build-manifest.json"
+  s_905e870ba53c8c::t_acef6c71cde72f 1-55
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/build.py"
+  s_905e870ba53c8c::t_90f74621b35acd 1-179
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/captions.html"
+  s_905e870ba53c8c::t_afd3fb11d89f9c 1-29
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/scene0.html"
+  s_905e870ba53c8c::t_c0515daa61ee98 1-50
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/scene1.html"
+  s_905e870ba53c8c::t_37332f2cd9612f 1-45
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/scene2.html"
+  s_905e870ba53c8c::t_b04aa0d0ab23b8 1-45
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/scene3.html"
+  s_905e870ba53c8c::t_f48cd3da1bc4ea 1-45
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/scene4.html"
+  s_905e870ba53c8c::t_cc7b1f9d9f46a1 1-45
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/scene5.html"
+  s_905e870ba53c8c::t_79d957912b31af 1-45
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/scene6.html"
+  s_905e870ba53c8c::t_f535b406b0793c 1-45
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/scene7.html"
+  s_905e870ba53c8c::t_e7dffb77e6304c 1-45
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/compositions/scene8.html"
+  s_905e870ba53c8c::t_42f6dc134304a5 1-50
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/hyperframes.json"
+  s_4670d8ce30fa6d::t_a4a2091a3c22c2 1-13
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/index.html"
+  s_905e870ba53c8c::t_7ee2e23ff52475 1-41
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/master.py"
+  s_905e870ba53c8c::t_8fff4a9a66b20f 1-33
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/meta.json"
+  s_905e870ba53c8c::t_2a4bcd77c22b57 1-5
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/package.json"
+  s_4670d8ce30fa6d::t_fa1d90c8db1c04 1-11
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/video/template.tpl"
+  s_905e870ba53c8c::t_dc786a03aceaf8 1-32
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/voice-repair-v3/line22.txt"
+  s_905e870ba53c8c::t_bf93d58c8cb773 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/voice-repair-v3/repair.py"
+  s_905e870ba53c8c::t_30bdb3e4dca379 1-22
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/voice-repair-v3/report.json"
+  s_905e870ba53c8c::t_c0ae94a2ad0ad9 1-14
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/voice-repair-v3/transcript-check.txt"
+  s_905e870ba53c8c::t_23438594d2e04c 1
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/voice-repair-v3/whisper.log"
+  s_905e870ba53c8c::t_b41adc07e122e3 1-55
+"texts/Пушкин/Сказка о царе Салтане (отрывок)/voice.json"
+  s_905e870ba53c8c::t_2da6134bb4ca61 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a12ceab49e73d7830c54405c88cab159480620b4",
+  "prompts": {},
+  "sessions": {
+    "s_11b1a10a325e51": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a5ae-b02e-7b13-91ee-1b0869690650",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_2ed64de4a9081a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a5a7-b99c-7f60-ba16-d8b00b74d7cd",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_3dea84e35dfa36": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a626-626f-7bd3-9b36-b2f4eaa81a3e",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_4670d8ce30fa6d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19d63-4e11-7cd0-b925-3b0d10371ffa",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_46bdcb2b7b12b8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19d5b-797f-70d3-a573-9706b66aa6ce",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_4970423988e153": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a5b9-9bce-7b63-a7b0-273aa0e499f9",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_905e870ba53c8c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19d5a-c57c-7e80-9dc5-c5877ac18e41",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_9b3b8c52c46eee": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e58ba93eeffdghyFzRxXhUgzJh",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_c028b6ba891b28": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19d66-86f1-74a0-9089-b30f91ccbc80",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
