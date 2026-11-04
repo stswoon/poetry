@@ -4,7 +4,8 @@
   python3 utils/lan-share/serve.py "texts/<Поэт>/<Стих>" [--port 8770]
 
 Отдаёт только ролик, cover.png и voice.mp3 из папки стиха, остальное недоступно.
-Ролик — самая старшая версия «<Стих> - <Поэт> - vN.mp4», в старых папках video.mp4.
+Ролик — самая старшая версия «<Стих> - <Поэт> - vN.mp4», в старых папках video.mp4. Версия ищется
+на каждый запрос: новая vN подхватывается без перезапуска, а кэш браузера отключён.
 Поддерживает Range: без него видео не перематывается, а Safari на iPhone его не играет.
 """
 import argparse
@@ -43,8 +44,10 @@ def find_video(folder):
     return old if old.is_file() else None
 
 
-def make_handler(folder, title, video):
-    paths = {n: video if n == "video.mp4" else folder / n for n in FILES}
+def make_handler(folder, title):
+    def paths():
+        video = find_video(folder)
+        return {n: video if n == "video.mp4" else folder / n for n in FILES}
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
@@ -58,24 +61,28 @@ def make_handler(folder, title, video):
 
         def respond(self, head):
             name = self.path.split("?")[0].lstrip("/")
+            p = paths()
             if name == "":
-                return self.send_page(head)
-            if name not in FILES or not paths[name].is_file():
+                return self.send_page(head, p)
+            if name not in FILES or p[name] is None or not p[name].is_file():
                 self.send_error(404)
                 return
-            self.send_file(paths[name], FILES[name], head)
+            self.send_file(p[name], FILES[name], head)
 
-        def send_page(self, head):
+        def send_page(self, head, p):
             t = html.escape(title)
-            links = "".join(f'<a href="/{n}" download>{n}</a> ' for n in FILES if paths[n].is_file())
+            # имя и время файла в адресе: новая версия не берётся из кэша браузера
+            ver = lambda n: f"{n}?{int(p[n].stat().st_mtime)}"
+            links = "".join(f'<a href="/{ver(n)}" download="{html.escape(p[n].name)}">{html.escape(p[n].name)}</a> ' for n in FILES if p[n] and p[n].is_file())
             body = f"""<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>{t}</title>
 <style>body{{margin:0 auto;max-width:960px;padding:16px;background:#111;color:#eee;font:16px sans-serif}}
 video{{width:100%;background:#000}}a{{color:#ffd24a;margin-right:16px}}</style></head>
-<body><h1>{t}</h1><video controls playsinline preload="metadata" poster="/cover.png" src="/video.mp4"></video>
+<body><h1>{t}</h1><video controls playsinline preload="metadata" poster="/{ver('cover.png') if p['cover.png'].is_file() else ''}" src="/{ver('video.mp4')}"></video>
 <p>Скачать: {links}</p></body></html>""".encode("utf8")
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Cache-Control", "no-store")
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             if not head:
@@ -102,6 +109,7 @@ video{{width:100%;background:#000}}a{{color:#ffd24a;margin-right:16px}}</style><
                 self.send_response(200)
             self.send_header("Content-Type", ctype)
             self.send_header("Accept-Ranges", "bytes")
+            self.send_header("Cache-Control", "no-cache")
             self.send_header("Content-Length", str(end - start + 1))
             self.end_headers()
             if head:
@@ -128,10 +136,9 @@ def main():
     ap.add_argument("--port", type=int, default=8770, help="первый порт для попытки, занятые пропускаются")
     args = ap.parse_args()
     folder = Path(args.folder).resolve()
-    video = find_video(folder)
-    if video is None:
+    if find_video(folder) is None:
         sys.exit(f"Нет ролика в {folder}")
-    handler = make_handler(folder, folder.name, video)
+    handler = make_handler(folder, folder.name)
     for port in range(args.port, args.port + 20):
         try:
             server = ThreadingHTTPServer(("0.0.0.0", port), handler)
