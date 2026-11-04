@@ -1,0 +1,43 @@
+==================== ГОЛОС (не для озвучки) ====================
+Голос: Stanislav — Deep, Empathetic and Warm (ID: ogi2DyUAKJb7CEdqqvlU)
+Запасной: Marat — Warm, Calm and Friendly (ID: vQxSi2EuaRWwBw3nn6dK)
+Настройки: stability 0.5, similarity_boost 0.75, модель Eleven v4
+Проверить на слух: ударения «бо́рзая», «однозву́чный», «вёрсты полоса́ты», «одне́», «возвратя́сь», «загляжу́сь не наглядя́сь», «ками́на», «доку́чных», «разлучи́т», «Дре́мля смо́лкнул», «отума́нен»; ровная дорожная грусть в начале, светлеющая мечта на «Завтра, Нина» и усталое затихание в последней строфе; паузы между строфами ~1,5 с; теги не произносятся вслух.
+
+=========== ТЕКСТ ДЛЯ ОЗВУЧКИ — копировать отсюда ===========
+[melancholic night narrator, slowly, quietly]
+Сквозь волнистые туманы [short pause]
+Пробирается луна, [short pause]
+На печальные поляны [short pause]
+Льёт печально свет она. [long pause]
+[slowly, wistful, steady like a long road]
+По дороге зимней, скучной [short pause]
+Тройка бо́рзая бежит, [short pause]
+Колокольчик однозву́чный [short pause]
+Утомительно гремит. [long pause]
+[warmly, thoughtful]
+Что-то слышится родное [short pause]
+В долгих песнях ямщика: [short pause]
+То разгу́лье удалое, [short pause]
+[sadly, softly]
+То сердечная тоска… [long pause]
+[quietly, lonely, slowly]
+Ни огня, ни чёрной хаты, [short pause]
+Глушь и снег… Навстречу мне [short pause]
+Только вёрсты полоса́ты [short pause]
+Попадаются одне́… [long pause]
+[sighs, then dreamy, gently brightening]
+Скучно, грустно… Завтра, Нина, [short pause]
+Завтра к милой возвратя́сь, [short pause]
+Я забудусь у ками́на, [short pause]
+Загляжу́сь не наглядя́сь. [long pause]
+[warm, tender, unhurried]
+Звучно стрелка часовая [short pause]
+Мерный круг свой совершит, [short pause]
+И, доку́чных удаляя, [short pause]
+Полночь нас не разлучи́т. [long pause]
+[sadly, tired, slowly, fading]
+Грустно, Нина: путь мой скучен, [short pause]
+Дре́мля смо́лкнул мой ямщик, [short pause]
+Колокольчик однозву́чен, [short pause]
+Отума́нен лунный лик.

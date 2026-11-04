@@ -1,0 +1,16 @@
+{
+  "video": "Зимняя дорога - Пушкин - v2.mp4",
+  "thumb": "cover.png",
+  "title": "Зимняя дорога - Пушкин",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 4",
+    "класс 6"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
