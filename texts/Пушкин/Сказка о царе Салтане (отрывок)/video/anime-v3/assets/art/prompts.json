@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-04",
+  "style": "Приключенческое аниме",
+  "generator": "built-in image_gen",
+  "assets": [
+    {
+      "file": "city.png",
+      "prompt": "Use case: illustration-story. Create a gorgeous widescreen 16:9 original Japanese adventure-anime background painting for an animated short of Pushkin's Tale of Tsar Saltan, brilliant hand-painted cinematic cel animation, rich painterly clouds, turquoise and ultramarine sea, warm gold light. View from low over the sea toward a fantastical old Russian island port on the RIGHT TWO THIRDS, white stone ramparts and many gold onion domes amid lush hills, arched harbor entrance, small wooden docks. Left third open ocean and distant sky. Horizon and island low-middle; foreground is clear sea with flowing waves. No ships, no people, no letters, no text, no borders, no logos, no watermark. Wide panoramic environment with clean space for moving ship layer. Detailed, luminous and exciting, not a flat vector drawing, not chibi, not Western comic. A fully realized beautiful anime film background.",
+      "generator": "built-in image_gen"
+    },
+    {
+      "file": "ship.png",
+      "prompt": "One standalone animation cutout of a beautiful medieval Russian merchant sailing ship, pointing right, viewed in dramatic low three-quarter view from the port side, full ship completely in frame, ivory single square sail brilliantly filled with wind, tall wooden mast, small crimson pennant at masthead, polished honey walnut wood hull with gold carved prow and a narrow turquoise stripe, rigging lines. Original hand-drawn Japanese adventure anime film cel, crisp elegant dark ink outlines and rich painted shadows, warm sunlight from upper left, exquisite and adventurous. Isolated on genuinely transparent background. No sea, no ground, no shadow underneath, no people, no text, no border. Horizontal composition, generous empty margin around entire ship and mast. Single object, not sheet. Use case illustration-story, asset animated ship layer for Pushkin's Tale of Tsar Saltan.",
+      "generator": "built-in image_gen"
+    },
+    {
+      "file": "merchant.png",
+      "prompt": "Original hand-drawn adventure anime character animation cutout. A young adult Russian merchant sailor, early twenties, handsome expressive large hazel anime eyes, wavy chestnut hair, white linen open collar shirt with rolled sleeves, teal blue sleeveless embroidered vest, scarlet sash, dark trousers, simple brown boots. Full body including boots entirely in frame on genuinely transparent background. He faces three-quarter RIGHT, weight on left leg, RIGHT arm extended with index finger pointing excitedly to the right at a distant island, left hand at waist, surprised joyful open-mouth expression. Strong readable silhouette, natural anatomy, five fingers per hand, warm golden highlights, sharp dark linework and clean cel shading, beautifully drawn serious adventure anime not chibi not flat vector. No props no backdrop no shadow no ground no text no logo. Wide margin around hands feet head.",
+      "generator": "built-in image_gen"
+    },
+    {
+      "file": "prince.png",
+      "prompt": "Original hand-drawn adventure anime character animation cutout for Pushkin's Tale of Tsar Saltan. Young adult Russian Prince Gvidon, early twenties, athletic slender heroic proportion, sharp expressive blue anime eyes, short wavy dark brown hair, small gold circlet crown, richly embroidered burgundy red knee length kaftan with golden trim, white undershirt and dark fitted trousers, brown boots, teal cloak swept behind one shoulder. Full body including boots completely in frame on genuinely transparent background. Three-quarter view facing LEFT, welcoming open palm extended toward left, kind confident smile, grounded natural pose. Beautiful Japanese adventure anime cel illustration, crisp dark ink contours and sculpted cel shading, warm gold rim light. Not chibi, not generic vector. No throne, no ground, no shadow, no lettering, no border, no watermark. Generous transparent margins around hands head feet.",
+      "generator": "built-in image_gen"
+    },
+    {
+      "file": "ocean.png",
+      "prompt": "Use case illustration-story. A breathtaking cinematic original Japanese adventure-anime environment background painting, widescreen 16:9. Sunlit open ocean under towering pearl-white cumulus clouds and brilliant blue sky, turquoise foaming foreground waves, darker ultramarine horizon, warm golden light from upper left. Horizon at middle height, lower half rolling sea with directional wave crests. Energetic wind, luminous delicate painted textures and refined ink details, exceptionally beautiful cel animation movie backdrop. NO island, no city, no land, no vessel, no people, no letters or text, no framing, no watermark. Clear open space for a separately animated sailing ship. Keep sky blue and water turquoise, not sunset orange.",
+      "generator": "built-in image_gen"
+    },
+    {
+      "file": "palace.png",
+      "prompt": "Use case illustration-story. A beautiful widescreen 16:9 original hand-painted Japanese adventure anime film BACKGROUND of Prince Gvidon's Russian fairytale palace banqueting loggia, no people. Polished warm stone terrace, elaborate white arches with gold ornamental trim, crimson draped curtains, carved wood ceiling. Through broad open arches a brilliantly blue sea and white gold-domed old Russian island port are visible. A low richly set banqueting table occupies lower middle, with bread, apples, grapes, decorated gold cups and jug, white linen tablecloth. Upper middle and left/right foreground have clear open space for separately composited anime characters. Bright golden midday sunlight, teal shadows, gorgeous cel animation craftsmanship, warm welcoming mood. No letters, no text, no logos, no watermark. Natural perspective and spacious composition.",
+      "generator": "built-in image_gen"
+    },
+    {
+      "file": "elder.png",
+      "prompt": "Use case illustration-story. One original adventure-anime character cutout on genuinely TRANSPARENT background. Full body of a friendly middle-aged Russian merchant sailor, stocky build, dark brown beard with gray at temples, expressive brown anime eyes, burgundy soft sailor cap, ochre gold short caftan over white linen shirt, dark wide belt, navy trousers and brown boots. He stands three-quarter facing RIGHT with a surprised amused expression and one hand shading his eyes as he peers toward a distant island. His entire body, boots, fingers and head all in frame with generous margins. Original high quality Japanese adventure anime cel animation illustration, beautifully inked sculpted face, warm golden light, elegant linework and detailed cel shading, natural adult proportions, not chibi not vector. No props, no ground, no scenery, no lettering, no watermark. One character only.",
+      "generator": "built-in image_gen"
+    },
+    {
+      "file": "deck.png",
+      "prompt": "Use case illustration-story. Widescreen 16:9 original Japanese adventure anime film background, eye level on the deck of an ornate old Russian medieval merchant sailboat. Honey brown wooden planked deck in bottom quarter, carved gold-edged dark wood bulwark/railing running horizontally at lower middle height; ropes and rigging at far outer edges only. The middle and top are brilliant blue sky with sunlit white clouds and sparkling turquoise sea. No sail or mast obstructing the middle, leave wide empty clear stage for two standing characters. Detailed painted textures, crisp ink and rich cel shading, beautiful warm golden daylight. No people, no letters, no text, no logos. Sea horizon around middle, clear open center. Camera looks outward from deck over ship rail, suitable behind waist-up sailors.",
+      "generator": "built-in image_gen"
+    },
+    {
+      "file": "gun.png",
+      "prompt": "Use case illustration-story. Single ornate old bronze ceremonial cannon on a compact dark wooden wheeled carriage, isolated on genuinely transparent background, full object in frame with margin. Barrel points diagonally up and RIGHT, three-quarter side view. Dark teal patinated bronze, gold ring bands around barrel, warm brown walnut carriage, two large wooden wheels with bronze hubs. Original beautiful Japanese adventure anime cel animation drawing for a Russian fairytale island port, crisp elegant ink linework, detailed wood grain and warm sunlight, dark blue sculpted shadows. No smoke, no fire, no people, no backdrop, no ground, no lettering, no logo. One cannon only, wide landscape composition.",
+      "generator": "built-in image_gen"
+    },
+    {
+      "file": "chest.png",
+      "prompt": "Use case illustration-story. One open old Russian merchant wooden sea chest, full object entirely visible isolated on genuinely transparent background. Three-quarter view looking slightly down, lid fully open toward rear. Richly rendered honey walnut planks with bronze gold reinforcement bands and lock, inside are neatly folded luxurious brown sable and silvery dark fox FUR FABRIC bundles with detailed soft tufts, no animal heads no animal bodies no paws. For the trade scene in Pushkin's Tale of Tsar Saltan. Original beautiful Japanese adventure anime cel illustration, ink linework, warm sunlight from upper left, rich wood grain, cream highlights, blue shadows, detailed visual storytelling prop, not generic flat vector. No ground no backdrop no text no symbols no watermark. Generous transparent margins.",
+      "generator": "built-in image_gen"
+    }
+  ]
+}

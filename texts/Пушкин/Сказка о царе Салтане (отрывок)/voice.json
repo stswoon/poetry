@@ -1,0 +1,17 @@
+{
+  "voice_id": "lxY8Pn0yWs1Ve9rBceah",
+  "name": "Ivan Nazarov",
+  "settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "generation": {
+    "date": "2026-11-02",
+    "model_id": "eleven_v4",
+    "durationSec": 48.64,
+    "inputCharacters": 1057,
+    "actualCharacters": 423,
+    "estimatedCostUsd": 0.08456,
+    "actualCostUsd": 0.03384
+  }
+}

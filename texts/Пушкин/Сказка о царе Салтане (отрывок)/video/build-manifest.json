@@ -1,0 +1,55 @@
+{
+  "duration": 58.64,
+  "voiceDuration": 48.64,
+  "intro": 4.0,
+  "outro": 6.0,
+  "lineCount": 26,
+  "scenes": [
+    {
+      "scene": 0,
+      "start": 0,
+      "end": 4.0
+    },
+    {
+      "scene": 1,
+      "start": 4.0,
+      "end": 11.626000000000001
+    },
+    {
+      "scene": 2,
+      "start": 11.626000000000001,
+      "end": 18.421
+    },
+    {
+      "scene": 3,
+      "start": 18.421,
+      "end": 26.422
+    },
+    {
+      "scene": 4,
+      "start": 26.422,
+      "end": 34.352000000000004
+    },
+    {
+      "scene": 5,
+      "start": 34.352000000000004,
+      "end": 38.201
+    },
+    {
+      "scene": 6,
+      "start": 38.201,
+      "end": 45.008
+    },
+    {
+      "scene": 7,
+      "start": 45.008,
+      "end": 52.64
+    },
+    {
+      "scene": 8,
+      "start": 52.64,
+      "end": 58.64
+    }
+  ],
+  "screenTextMatchesPoem": true
+}

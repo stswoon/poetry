@@ -1,0 +1,87 @@
+{
+  "version": 2,
+  "style": "Приключенческое аниме",
+  "duration": 55.14,
+  "intro": 2.5,
+  "outro": 4.0,
+  "voiceDuration": 48.64,
+  "lineCount": 26,
+  "screenTextMatchesPoem": true,
+  "scenes": [
+    {
+      "scene": 0,
+      "start": 0,
+      "end": 2.5
+    },
+    {
+      "scene": 1,
+      "start": 2.5,
+      "end": 6.297000000000001
+    },
+    {
+      "scene": 2,
+      "start": 6.297000000000001,
+      "end": 10.126000000000001
+    },
+    {
+      "scene": 3,
+      "start": 10.126000000000001,
+      "end": 13.559
+    },
+    {
+      "scene": 4,
+      "start": 13.559,
+      "end": 16.921
+    },
+    {
+      "scene": 5,
+      "start": 16.921,
+      "end": 21.302
+    },
+    {
+      "scene": 6,
+      "start": 21.302,
+      "end": 24.922
+    },
+    {
+      "scene": 7,
+      "start": 24.922,
+      "end": 29.275
+    },
+    {
+      "scene": 8,
+      "start": 29.275,
+      "end": 32.852000000000004
+    },
+    {
+      "scene": 9,
+      "start": 32.852000000000004,
+      "end": 36.701
+    },
+    {
+      "scene": 10,
+      "start": 36.701,
+      "end": 40.44
+    },
+    {
+      "scene": 11,
+      "start": 40.44,
+      "end": 43.508
+    },
+    {
+      "scene": 12,
+      "start": 43.508,
+      "end": 47.149
+    },
+    {
+      "scene": 13,
+      "start": 47.149,
+      "end": 51.14
+    },
+    {
+      "scene": 14,
+      "start": 51.14,
+      "end": 55.14
+    }
+  ]
+}

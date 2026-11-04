@@ -1,0 +1,8 @@
+/.hyperframes/
+/renders/
+/__pycache__/
+/.thumbnails/
+/.waveform-cache/
+/assets/voice.mp3
+/assets/music.wav
+/assets/voice.wav

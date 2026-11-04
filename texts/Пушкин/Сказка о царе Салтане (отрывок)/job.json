@@ -1,0 +1,16 @@
+{
+  "video": "Сказка о царе Салтане (отрывок) - Пушкин - v4.mp4",
+  "thumb": "cover.png",
+  "title": "Сказка о царе Салтане (отрывок) - Пушкин",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 1",
+    "класс 3"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}

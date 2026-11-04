@@ -1,0 +1,48 @@
+{
+  "source": "All tones, percussion, wind, water and SFX synthesized by this code; no external audio.",
+  "seed": 1831223,
+  "bpm": 112.0,
+  "sample_rate": 48000,
+  "channels": 2,
+  "sample_width_bits": 16,
+  "samples_per_channel": 2814720,
+  "duration_seconds": 58.64,
+  "intro_seconds": 4.0,
+  "voice_seconds": 48.64,
+  "outro_seconds": 6.0,
+  "voice_rms": 0.06765238577429362,
+  "voice_rms_dbfs": -23.394337666370497,
+  "voice_active_lines_rms_dbfs": -22.68605658442217,
+  "music_under_voice_rms": 0.007590492501288568,
+  "music_under_voice_rms_dbfs": -42.394600888802465,
+  "voice_above_music_db": 19.00026322243197,
+  "intro_rms_dbfs": -36.394599831139146,
+  "outro_rms_dbfs": -36.39458960424039,
+  "music_peak_dbfs": -20.78686436239053,
+  "clipped_samples": 0,
+  "dialogue_simple_texture_seconds": [
+    34.352000000000004,
+    45.008
+  ],
+  "departure_lift_seconds": 45.008,
+  "sfx_events": [
+    {
+      "event": "soft_cannon_puff",
+      "line": 11,
+      "visual_time_seconds": 22.802,
+      "peak_time_seconds": 22.835333333333335,
+      "onset_seconds": 22.808666666666667,
+      "delay_frames_at_30fps": 1,
+      "unscaled_mono_peak_dbfs": -35.79011283213838
+    },
+    {
+      "event": "wooden_gangway_knock",
+      "line": 13,
+      "visual_time_seconds": 26.422,
+      "peak_time_seconds": 26.455333333333336,
+      "onset_seconds": 26.446562500000002,
+      "delay_frames_at_30fps": 1,
+      "unscaled_mono_peak_dbfs": -38.288887564304375
+    }
+  ]
+}

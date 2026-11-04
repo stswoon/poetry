@@ -1,0 +1,127 @@
+{
+  "source": "Original synthesized composition, instruments, ambience and cannon; no external audio.",
+  "interpreter": "C:\\Users\\stswoon\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "numpy_version": "2.3.5",
+  "seed": 1831224,
+  "bpm": 128.0,
+  "sample_rate": 48000,
+  "channels": 2,
+  "sample_width_bits": 16,
+  "samples_per_channel": 2646720,
+  "duration_seconds": 55.14,
+  "intro_seconds": 2.5,
+  "voice_seconds": 48.64,
+  "outro_seconds": 4.0,
+  "voice_rms_dbfs": -23.394337666370497,
+  "music_under_voice_rms_dbfs": -42.59459809110132,
+  "voice_above_music_db": 19.200260424730825,
+  "intro_rms_dbfs": -36.59459969991123,
+  "outro_rms_dbfs": -36.59458693252675,
+  "music_peak_dbfs": -19.187775519003708,
+  "clipped_samples": 0,
+  "dialogue_simple_texture_seconds": [
+    32.852000000000004,
+    43.508
+  ],
+  "sfx_events": [
+    {
+      "event": "cannon",
+      "line": 11,
+      "visual_time_seconds": 21.302,
+      "peak_time_seconds": 21.335333333333335,
+      "onset_seconds": 21.301041666666666,
+      "delay_frames": 1,
+      "fps": 30.0
+    }
+  ],
+  "sections": [
+    {
+      "scene": "ship",
+      "lines": [
+        1,
+        4
+      ],
+      "start": 2.52,
+      "end": 10.126000000000001,
+      "music_rms_dbfs": -41.42975635502066,
+      "voice_over_music_db": 18.03541868865016
+    },
+    {
+      "scene": "sailors",
+      "lines": [
+        5,
+        6
+      ],
+      "start": 10.126000000000001,
+      "end": 13.559,
+      "music_rms_dbfs": -41.574418219087676,
+      "voice_over_music_db": 18.18008055271718
+    },
+    {
+      "scene": "golden_city",
+      "lines": [
+        7,
+        10
+      ],
+      "start": 13.559,
+      "end": 21.302,
+      "music_rms_dbfs": -41.78997649661537,
+      "voice_over_music_db": 18.39563883024487
+    },
+    {
+      "scene": "salute",
+      "lines": [
+        11,
+        12
+      ],
+      "start": 21.302,
+      "end": 24.922,
+      "music_rms_dbfs": -41.490182036237606,
+      "voice_over_music_db": 18.095844369867113
+    },
+    {
+      "scene": "welcome",
+      "lines": [
+        13,
+        16
+      ],
+      "start": 24.922,
+      "end": 32.852000000000004,
+      "music_rms_dbfs": -42.700006319056044,
+      "voice_over_music_db": 19.305668652685554
+    },
+    {
+      "scene": "gvidon",
+      "lines": [
+        17,
+        18
+      ],
+      "start": 32.852000000000004,
+      "end": 36.701,
+      "music_rms_dbfs": -47.937329586958654,
+      "voice_over_music_db": 24.54299192058816
+    },
+    {
+      "scene": "answer",
+      "lines": [
+        19,
+        22
+      ],
+      "start": 36.701,
+      "end": 43.508,
+      "music_rms_dbfs": -47.88544032464685,
+      "voice_over_music_db": 24.491102658276354
+    },
+    {
+      "scene": "departure",
+      "lines": [
+        23,
+        26
+      ],
+      "start": 43.508,
+      "end": 51.14,
+      "music_rms_dbfs": -41.687506131218484,
+      "voice_over_music_db": 18.29316846484799
+    }
+  ]
+}
