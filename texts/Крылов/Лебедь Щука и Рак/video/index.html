@@ -1,0 +1,1010 @@
+<!doctype html>
+<!-- Шаблон: index.html собирается из template.tpl и src/*.js командой `python3 build.py`. Правьте эти файлы, не index.html. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      @font-face { font-family: "Narrow"; font-weight: 700; src: local("PT Sans Narrow Bold"), local("PTSans-NarrowBold"); }
+      @font-face { font-family: "SansB"; font-weight: 700; font-style: italic; src: local("PT Sans Bold Italic"), local("PTSans-BoldItalic"); }
+      @font-face { font-family: "Num"; src: local("Impact"); }
+      :root { --navy: #0b1a3a; --yellow: #ffd21f; --red: #e8322b; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #060f26; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: "Narrow", sans-serif; color: #fff; background: #060f26; }
+      #scene { position: absolute; inset: 0; width: 1920px; height: 1080px; z-index: 0; }
+      #preload { position: absolute; left: 0; top: 0; opacity: 0; font: 700 30px "Narrow"; }
+      #preload i { font: italic 700 30px "SansB"; } #preload b { font: 30px "Num"; }
+      .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 3; }
+      #caps { clip-path: inset(814px 0 106px 0); }
+      .cap { position: absolute; left: 290px; top: 0; height: 70px; line-height: 70px; font-size: 58px; font-weight: 700; white-space: nowrap; word-spacing: 0.06em; opacity: 0;
+             text-shadow: 0 3px 0 rgba(0, 0, 0, 0.35); }
+      .w { display: inline-block; opacity: 0; }
+      .k { color: var(--yellow); }
+      .tt { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; opacity: 0; }
+      .tt h1 { position: absolute; left: 380px; white-space: nowrap; font-weight: 700; color: #fff; text-shadow: 0 5px 0 rgba(0, 0, 0, 0.35); letter-spacing: 0.01em; }
+      .tt p { position: absolute; left: 384px; white-space: nowrap; font-family: "SansB", sans-serif; font-style: italic; font-weight: 700; color: var(--yellow); }
+      #tt1 h1 { top: 384px; font-size: 118px; line-height: 140px; }
+      #tt1 p { top: 538px; font-size: 48px; line-height: 60px; }
+      #tt2 h1 { top: 150px; font-size: 150px; line-height: 176px; }
+      #tt2 p { top: 334px; font-size: 56px; line-height: 70px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="49.400" data-width="1920" data-height="1080">
+      <canvas id="scene" width="1920" height="1080"></canvas>
+      <div id="preload" aria-hidden="true">Лебедь Щука <i>Иван Андреевич Крылов</i> <b>0,0 00:15</b></div>
+      <div id="caps" class="clip layer" data-start="3.970" data-duration="39.730" data-track-index="3" data-track-kind="captions"><div class="cap" id="c1" data-n="1"><span class="w" data-at="4.570">Когда</span> <span class="w" data-at="4.960">в</span> <span class="w" data-at="5.020">товарищах</span> <span class="w k" data-at="5.760">согласья</span> <span class="w" data-at="6.550">нет,</span></div><div class="cap" id="c2" data-n="2"><span class="w" data-at="7.802">На</span> <span class="w" data-at="8.010">лад</span> <span class="w" data-at="8.280">их</span> <span class="w" data-at="8.500">дело</span> <span class="w" data-at="8.820">не</span> <span class="w" data-at="9.010">пойдёт,</span></div><div class="cap" id="c3" data-n="3"><span class="w" data-at="10.250">И</span> <span class="w" data-at="10.340">выйдет</span> <span class="w" data-at="10.830">из</span> <span class="w" data-at="10.990">него</span> <span class="w" data-at="11.280">не</span> <span class="w" data-at="11.480">дело,</span> <span class="w" data-at="12.425">только</span> <span class="w k" data-at="12.790">мука.</span></div><div class="cap" id="c4" data-n="4"><span class="w" data-at="14.927">Однажды</span> <span class="w k" data-at="15.837">Лебедь,</span> <span class="w k" data-at="16.440">Рак</span> <span class="w" data-at="16.880">да</span> <span class="w k" data-at="16.990">Щука</span></div><div class="cap" id="c5" data-n="5"><span class="w" data-at="17.843">Везти</span> <span class="w" data-at="18.300">с</span> <span class="w" data-at="18.390">поклажей</span> <span class="w k" data-at="19.030">воз</span> <span class="w" data-at="19.320">взялись,</span></div><div class="cap" id="c6" data-n="6"><span class="w" data-at="20.265">И</span> <span class="w" data-at="20.450">вместе</span> <span class="w" data-at="21.050">трое</span> <span class="w" data-at="21.600">все</span> <span class="w" data-at="21.970">в</span> <span class="w" data-at="22.050">него</span> <span class="w" data-at="22.340">впряглись;</span></div><div class="cap" id="c7" data-n="7"><span class="w" data-at="23.432">Из</span> <span class="w" data-at="23.720">кожи</span> <span class="w" data-at="24.150">лезут</span> <span class="w" data-at="24.570">вон,</span> <span class="w" data-at="25.146">а</span> <span class="w" data-at="25.290">возу</span> <span class="w" data-at="25.820">всё</span> <span class="w" data-at="26.170">нет</span> <span class="w k" data-at="26.310">ходу!</span></div><div class="cap" id="c8" data-n="8"><span class="w" data-at="27.320">Поклажа</span> <span class="w" data-at="27.820">бы</span> <span class="w" data-at="27.940">для</span> <span class="w" data-at="28.110">них</span> <span class="w" data-at="28.320">казалась</span> <span class="w" data-at="28.910">и</span> <span class="w k" data-at="28.980">легка:</span></div><div class="cap" id="c9" data-n="9"><span class="w" data-at="29.892">Да</span> <span class="w k" data-at="30.130">Лебедь</span> <span class="w" data-at="30.630">рвётся</span> <span class="w" data-at="31.350">в</span> <span class="w k" data-at="31.420">облака,</span></div><div class="cap" id="c10" data-n="10"><span class="w k" data-at="32.155">Рак</span> <span class="w" data-at="32.570">пятится</span> <span class="w k" data-at="33.100">назад,</span> <span class="w" data-at="33.809">а</span> <span class="w k" data-at="33.950">Щука</span> <span class="w" data-at="34.530">тянет</span> <span class="w" data-at="35.010">в</span> <span class="w k" data-at="35.110">воду.</span></div><div class="cap" id="c11" data-n="11"><span class="w" data-at="36.106">Кто</span> <span class="w" data-at="36.360">виноват</span> <span class="w" data-at="36.960">из</span> <span class="w" data-at="37.150">них,</span> <span class="w" data-at="37.708">кто</span> <span class="w" data-at="37.950">прав,</span> <span class="w" data-at="38.791">—</span> <span class="w k" data-at="38.791">судить</span> <span class="w" data-at="39.260">не</span> <span class="w" data-at="39.390">нам;</span></div><div class="cap" id="c12" data-n="12"><span class="w" data-at="40.262">Да</span> <span class="w" data-at="40.510">только</span> <span class="w k" data-at="41.000">воз</span> <span class="w" data-at="41.709">и</span> <span class="w k" data-at="41.800">ныне</span> <span class="w k" data-at="42.300">там.</span></div></div>
+      <div id="title1" class="clip layer" data-start="0" data-duration="4.500" data-track-index="4" data-track-kind="graphics"><div class="tt" id="tt1"><h1>Лебедь, Щука и Рак</h1><p>Иван Андреевич Крылов · 1814</p></div></div>
+      <div id="title2" class="clip layer" data-start="43.700" data-duration="5.700" data-track-index="4" data-track-kind="graphics"><div class="tt" id="tt2"><h1>Лебедь, Щука и Рак</h1><p>Иван Андреевич Крылов</p></div></div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="4.500" data-duration="38.400" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="49.400" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>
+      const CFG = {"total": 49.4, "ev": {"V0": 4.5, "L1": 4.57, "L2": 7.802, "L3": 10.25, "L4": 14.927, "L5": 17.843, "L6": 20.265, "L7": 23.432, "L8": 27.32, "L9": 29.892, "L10": 32.155, "L11": 36.106, "L12": 40.262, "E1": 7.103, "E2": 9.67, "E3": 13.383, "E4": 17.576, "E5": 19.888, "E6": 23.026, "E7": 26.894, "E8": 29.551, "E9": 31.931, "E10": 35.645, "E11": 39.774, "E12": 42.7, "w_soglas": 5.76, "w_net": 6.55, "w_lad": 8.01, "w_poidet": 9.01, "w_muka": 12.79, "w_leb": 15.837, "w_rak": 16.44, "w_shch": 16.99, "w_pokl": 18.39, "w_voz": 19.03, "w_vzial": 19.32, "w_troe": 21.05, "w_vpr": 22.34, "w_lezut": 24.15, "w_vozu": 25.29, "w_hodu": 26.31, "w_legka": 28.98, "w_obl": 31.42, "w_nazad": 33.1, "w_shch2": 33.95, "w_vodu": 35.11, "w_vin": 36.36, "w_prav": 37.95, "w_sud": 38.791, "w_voz3": 41.0, "w_nyne": 41.8, "w_tam": 42.3, "wipe1": 3.85, "wipe2": 14.327, "wipe3": 29.342, "green": 23.312, "fin": 43.7, "total": 49.4, "red1": 22.612, "red2": 22.962}, "blocks": [[1, 3], [4, 12]]};
+// Спортивная трансляция: арена у пруда, воз и три участника. Всё рисуется кодом на одном canvas.
+const W = 1920, H = 1080, TOTAL = CFG.total, EV = CFG.ev, TAU = Math.PI * 2;
+
+function mulberry32(a) { return function () { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, u) => a + (b - a) * u;
+const sstep = (u) => { u = clamp(u, 0, 1); return u * u * (3 - 2 * u); };
+const prog = (t, a, b) => clamp((t - a) / Math.max(1e-6, b - a), 0, 1);
+const win = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(sstep(prog(t, a, a + fi)), 1 - sstep(prog(t, b - fo, b)));
+const mkCanvas = (w, h) => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
+const easeOut = (u) => 1 - Math.pow(1 - clamp(u, 0, 1), 3);
+// пружины Framer Motion как функции времени: 0 → 1 с перелётом
+function makeSpring(opts) {
+  const g = Motion.spring({ ...opts, keyframes: [0, 1] });
+  const pts = []; for (let i = 0; i <= 400; i++) pts.push(g.next(i * 10).value);
+  return (s) => { if (s <= 0) return 0; const f = s * 100; if (f >= 400) return 1; const i = Math.floor(f); return lerp(pts[i], pts[i + 1], f - i); };
+}
+const springPop = makeSpring({ stiffness: 260, damping: 13, mass: 1 });
+const springSoft = makeSpring({ stiffness: 140, damping: 17, mass: 1 });
+const springSnap = makeSpring({ stiffness: 420, damping: 20, mass: 1 });
+// детерминированный «шум» для дрожи
+const wob = (t, f, s = 0) => Math.sin(t * f + s) * 0.6 + Math.sin(t * f * 2.31 + s * 1.7) * 0.4;
+
+const C = {
+  navy: "#0b1a3a", navy2: "#15306a", navy3: "#21468f", yellow: "#ffd21f", yellowD: "#e0a800", red: "#e8322b", redD: "#a3161a",
+  white: "#ffffff", ink: "#16223d", sky1: "#3d9be9", sky2: "#bfe6ff", grass1: "#74c74e", grass2: "#3f9a35",
+  track: "#d3a46a", trackD: "#b9854b", water1: "#2f8fd6", water2: "#1c66b0", swan: "#2a6fdb", rak: "#e0452c", pike: "#3c9a3a",
+};
+const F_NARROW = '"Narrow"', F_SANS = '"SansB"', F_NUM = '"Num"';
+function font(c, px, fam = F_NARROW, style = "") { c.font = `${style} ${px}px ${fam}`.trim(); }
+
+// параллелограмм со скосом s
+function slant(c, x, y, w, h, s) { c.beginPath(); c.moveTo(x + s, y); c.lineTo(x + w, y); c.lineTo(x + w - s, y + h); c.lineTo(x, y + h); c.closePath(); }
+function rrect(c, x, y, w, h, r) { c.beginPath(); c.roundRect(x, y, w, h, r); }
+// обводка + заливка текущего пути мультяшным контуром
+function ink(c, fill, lw = 5, stroke = C.ink) { c.fillStyle = fill; c.fill(); if (lw > 0) { c.lineWidth = lw; c.strokeStyle = stroke; c.lineJoin = "round"; c.stroke(); } }
+// стрелка от (x0,y0) к (x1,y1), видна доля u
+function arrow(c, x0, y0, x1, y1, u, col, lw, head = 34) {
+  if (u <= 0) return;
+  const x = lerp(x0, x1, u), y = lerp(y0, y1, u), a = Math.atan2(y1 - y0, x1 - x0);
+  c.save(); c.strokeStyle = col; c.fillStyle = col; c.lineWidth = lw; c.lineCap = "round";
+  c.beginPath(); c.moveTo(x0, y0); c.lineTo(x - Math.cos(a) * head * 0.6, y - Math.sin(a) * head * 0.6); c.stroke();
+  c.beginPath(); c.moveTo(x, y); c.lineTo(x - Math.cos(a - 0.45) * head, y - Math.sin(a - 0.45) * head);
+  c.lineTo(x - Math.cos(a + 0.45) * head, y - Math.sin(a + 0.45) * head); c.closePath(); c.fill();
+  c.restore();
+}
+
+// ---------- Герои и воз (мультяшные, с контуром) ----------
+// Все смотрят вправо; (x, y) — центр туловища; s — масштаб.
+
+// Лебедь. o: flap 0..1 (крыло поднято), fly (лапы поджаты), neck (наклон шеи), tired (поникший)
+function swan(c, x, y, s, o = {}) {
+  const flap = o.flap ?? 0.2, tired = o.tired ?? 0, neck = (o.neck ?? 0) - tired * 0.5;
+  c.save(); c.translate(x, y); c.scale(s, s); c.rotate(o.rot ?? 0);
+  // дальнее крыло
+  wing(c, -5, -28, lerp(0.05, 1.3, flap) + 0.12 - tired * 0.45, 0.92, "#d7e2ee");
+  // лапы
+  if (!o.fly) {
+    c.fillStyle = "#ff8a1e"; c.strokeStyle = C.ink; c.lineWidth = 4;
+    for (const dx of [-10, 22]) { c.beginPath(); c.moveTo(dx, 48); c.lineTo(dx - 18, 72); c.lineTo(dx + 20, 72); c.closePath(); c.fill(); c.stroke(); }
+  } else {
+    c.fillStyle = "#ff8a1e"; c.strokeStyle = C.ink; c.lineWidth = 4;
+    c.beginPath(); c.ellipse(-92, 30, 22, 9, 0.3, 0, TAU); c.fill(); c.stroke();
+  }
+  // туловище
+  c.beginPath(); c.moveTo(-118, -30);
+  c.bezierCurveTo(-70, -48, 30, -52, 72, -14); c.bezierCurveTo(98, 12, 76, 56, 22, 58);
+  c.bezierCurveTo(-42, 62, -98, 40, -120, -4); c.quadraticCurveTo(-134, -24, -118, -30); c.closePath();
+  ink(c, "#ffffff", 5);
+  c.save(); c.clip(); c.fillStyle = "rgba(120,150,190,0.22)"; c.beginPath(); c.ellipse(-10, 62, 130, 38, 0, 0, TAU); c.fill(); c.restore();
+  // шея и голова
+  c.save(); c.translate(58, -18); c.rotate(neck);
+  c.lineCap = "round";
+  const neckPath = () => { c.beginPath(); c.moveTo(0, 0); c.bezierCurveTo(34, -40, -26, -92, 14, -136); };
+  neckPath(); c.strokeStyle = C.ink; c.lineWidth = 34; c.stroke();
+  neckPath(); c.strokeStyle = "#ffffff"; c.lineWidth = 24; c.stroke();
+  c.translate(18, -138);
+  c.beginPath(); c.ellipse(4, 0, 27, 21, -0.1, 0, TAU); ink(c, "#ffffff", 5);
+  // клюв
+  c.beginPath(); c.moveTo(20, -10); c.quadraticCurveTo(52, -6, 64, 6); c.quadraticCurveTo(44, 12, 20, 10); c.closePath(); ink(c, "#ff8a1e", 4);
+  c.beginPath(); c.moveTo(20, -10); c.quadraticCurveTo(14, 0, 20, 10); c.lineTo(26, 9); c.quadraticCurveTo(22, 0, 27, -9); c.closePath(); ink(c, C.ink, 0);
+  // повязка команды
+  c.beginPath(); c.moveTo(-22, -6); c.quadraticCurveTo(0, -24, 22, -16); c.lineTo(22, -8); c.quadraticCurveTo(0, -16, -22, 3); c.closePath(); ink(c, C.swan, 3);
+  c.beginPath(); c.moveTo(-22, -2); c.lineTo(-40, -14); c.lineTo(-36, 6); c.closePath(); ink(c, C.swan, 3);
+  // глаз
+  const blink = o.squint ?? tired;
+  c.fillStyle = C.ink;
+  if (blink > 0.5) { c.lineWidth = 4; c.strokeStyle = C.ink; c.beginPath(); c.moveTo(0, -2); c.lineTo(12, -1); c.stroke(); }
+  else { c.beginPath(); c.arc(7, -2, 5.5, 0, TAU); c.fill(); c.fillStyle = "#fff"; c.beginPath(); c.arc(9, -4, 2, 0, TAU); c.fill(); }
+  c.restore();
+  // ближнее крыло
+  wing(c, -12, -20, lerp(-0.04, 1.2, flap) - tired * 0.4, 1, "#ffffff");
+  c.restore();
+}
+function wing(c, x, y, a, k, fill) {
+  c.save(); c.translate(x, y); c.rotate(a); c.scale(k, k);
+  c.beginPath(); c.moveTo(18, 6);
+  c.bezierCurveTo(-10, -48, -100, -66, -158, -34);
+  c.quadraticCurveTo(-146, -22, -150, -12); c.quadraticCurveTo(-130, -8, -132, 4); c.quadraticCurveTo(-108, 4, -108, 16);
+  c.bezierCurveTo(-70, 22, -20, 26, 18, 6); c.closePath();
+  ink(c, fill, 5);
+  c.strokeStyle = "rgba(22,34,61,0.35)"; c.lineWidth = 3; c.lineCap = "round";
+  for (const [x0, y0, x1, y1] of [[-30, -10, -96, -22], [-40, 6, -104, 0], [-20, 16, -70, 14]]) { c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo((x0 + x1) / 2, (y0 + y1) / 2 - 8, x1, y1); c.stroke(); }
+  c.restore();
+}
+
+// Рак. o: claw 0..1 (раскрыты клешни), walk (фаза ножек), tired
+function rak(c, x, y, s, o = {}) {
+  const walk = o.walk ?? 0, claw = o.claw ?? 0.3, tired = o.tired ?? 0;
+  c.save(); c.translate(x, y); c.scale(s, s); c.rotate(o.rot ?? 0);
+  const red = C.rak, redL = "#ff7a52", redD = "#a8281a";
+  // дальняя клешня
+  arm(c, 52, 4, -0.18 - tired * 0.3, claw, 0.86, redD);
+  // ножки
+  c.strokeStyle = C.ink; c.lineCap = "round";
+  for (let i = 0; i < 4; i++) {
+    const ph = walk + i * 1.6, lx = 34 - i * 22, sw = Math.sin(ph) * 10;
+    c.lineWidth = 9; c.beginPath(); c.moveTo(lx, 18); c.lineTo(lx + 6 + sw, 42); c.lineTo(lx - 2 + sw * 1.4, 60 - Math.max(0, Math.cos(ph)) * 8); c.stroke();
+    c.strokeStyle = redD; c.lineWidth = 5; c.stroke(); c.strokeStyle = C.ink;
+  }
+  // хвост: сегменты и веер
+  const segs = [[-36, 32, 27], [-66, 28, 25], [-92, 24, 22], [-114, 20, 19], [-132, 16, 16]];
+  const curl = tired * 0.25;
+  c.save();
+  c.save(); c.translate(-148, 8 + curl * 30); c.rotate(curl);
+  c.beginPath(); c.moveTo(0, 0); c.lineTo(-34, -24); c.quadraticCurveTo(-44, 0, -34, 24); c.closePath(); ink(c, redL, 4);
+  c.beginPath(); c.moveTo(0, 0); c.lineTo(-30, 0); c.stroke();
+  c.restore();
+  for (let i = segs.length - 1; i >= 0; i--) {
+    const [sx, rx, ry] = segs[i];
+    c.beginPath(); c.ellipse(sx, 4 + i * curl * 7, rx * 0.62, ry, 0, 0, TAU); ink(c, i % 2 ? red : redL, 4);
+  }
+  c.restore();
+  // панцирь
+  c.beginPath(); c.moveTo(-14, -8); c.bezierCurveTo(0, -46, 70, -44, 96, -6); c.lineTo(108, 0); c.lineTo(94, 8);
+  c.bezierCurveTo(70, 34, 0, 36, -14, 18); c.closePath(); ink(c, red, 5);
+  c.fillStyle = "rgba(255,255,255,0.28)"; c.beginPath(); c.ellipse(36, -22, 34, 9, -0.05, 0, TAU); c.fill();
+  // повязка команды — красно-жёлтая лента
+  c.beginPath(); c.moveTo(18, -36); c.lineTo(32, -36); c.lineTo(28, 30); c.lineTo(14, 30); c.closePath(); ink(c, C.yellow, 3);
+  // глаза на стебельках
+  for (const [ex, ey, k] of [[78, -46, 0.9], [90, -40, 1]]) {
+    c.lineWidth = 5; c.strokeStyle = C.ink; c.beginPath(); c.moveTo(ex - 6, -14); c.lineTo(ex, ey); c.stroke();
+    c.beginPath(); c.arc(ex, ey, 9 * k, 0, TAU); ink(c, "#fff", 3.5);
+    if (tired > 0.5) { c.strokeStyle = C.ink; c.lineWidth = 3; c.beginPath(); c.moveTo(ex - 6, ey); c.lineTo(ex + 6, ey); c.stroke(); }
+    else { c.fillStyle = C.ink; c.beginPath(); c.arc(ex + 2, ey + 1, 4.5 * k, 0, TAU); c.fill(); }
+  }
+  // усы
+  c.strokeStyle = C.ink; c.lineWidth = 3.5;
+  for (const [k, ph] of [[1, 0], [0.8, 1.3]]) {
+    c.beginPath(); c.moveTo(100, -6);
+    c.bezierCurveTo(150, -40 * k + Math.sin(walk * 0.5 + ph) * 6, 190, -110 * k, 160 + 30 * k, -150 * k + Math.sin(walk * 0.7 + ph) * 8); c.stroke();
+  }
+  // ближняя клешня
+  arm(c, 60, 14, 0.05 + tired * 0.35, claw, 1, red);
+  c.restore();
+}
+function arm(c, x, y, a, open, k, fill) {
+  c.save(); c.translate(x, y); c.rotate(a); c.scale(k, k);
+  c.lineCap = "round";
+  c.strokeStyle = C.ink; c.lineWidth = 18; c.beginPath(); c.moveTo(0, 0); c.lineTo(40, 14); c.lineTo(78, 6); c.stroke();
+  c.strokeStyle = fill; c.lineWidth = 10; c.stroke();
+  c.translate(84, 4);
+  // нижний «палец» и ладонь
+  c.beginPath(); c.moveTo(-10, -8); c.bezierCurveTo(10, -26, 46, -22, 66, -6); c.quadraticCurveTo(72, 4, 62, 6);
+  c.bezierCurveTo(44, 16, 8, 22, -10, 10); c.closePath(); ink(c, fill, 4.5);
+  // верхний подвижный палец
+  c.save(); c.translate(14, -14); c.rotate(-0.15 - open * 0.55);
+  c.beginPath(); c.moveTo(0, 0); c.bezierCurveTo(14, -22, 44, -26, 62, -14); c.quadraticCurveTo(48, -6, 30, -4); c.closePath(); ink(c, fill, 4.5);
+  c.restore();
+  c.restore();
+}
+
+// Щука. o: tail (фаза хвоста), mouth 0..1, dive (наклон носом вниз), tired
+function pike(c, x, y, s, o = {}) {
+  const ph = o.tail ?? 0, mouth = o.mouth ?? 0.2, tired = o.tired ?? 0;
+  c.save(); c.translate(x, y); c.scale(s, s); c.rotate(o.rot ?? 0);
+  const g1 = "#4f9d3a", gD = "#2c6a26", belly = "#e2ee9c";
+  // хвостовой плавник
+  c.save(); c.translate(-150, 0); c.rotate(Math.sin(ph) * 0.35 * (1 - tired * 0.8));
+  c.beginPath(); c.moveTo(6, 0); c.quadraticCurveTo(-26, -20, -58, -48); c.quadraticCurveTo(-44, -8, -42, 0); c.quadraticCurveTo(-44, 8, -58, 48); c.quadraticCurveTo(-26, 20, 6, 0); c.closePath();
+  ink(c, "#c9562f", 4.5);
+  c.restore();
+  // спинной и анальный плавники у хвоста
+  c.beginPath(); c.moveTo(-70, -26); c.quadraticCurveTo(-104, -66, -128, -48); c.quadraticCurveTo(-118, -24, -110, -14); c.closePath(); ink(c, "#c9562f", 4);
+  c.beginPath(); c.moveTo(-70, 26); c.quadraticCurveTo(-100, 58, -124, 44); c.quadraticCurveTo(-116, 22, -110, 14); c.closePath(); ink(c, "#c9562f", 4);
+  // туловище
+  const body = () => { c.beginPath(); c.moveTo(-150, 0); c.bezierCurveTo(-120, -30, -40, -44, 60, -36); c.bezierCurveTo(110, -32, 150, -22, 190, -8);
+    c.lineTo(196, 4); c.bezierCurveTo(150, 22, 110, 34, 60, 36); c.bezierCurveTo(-40, 42, -120, 30, -150, 0); c.closePath(); };
+  body(); ink(c, g1, 5);
+  c.save(); body(); c.clip();
+  c.fillStyle = belly; c.beginPath(); c.ellipse(20, 40, 190, 26, 0, 0, TAU); c.fill();
+  c.fillStyle = gD;
+  for (let i = 0; i < 7; i++) { const bx = -110 + i * 30; c.beginPath(); c.ellipse(bx, -10, 7, 22, 0.25, 0, TAU); c.fill(); }
+  c.fillStyle = "rgba(255,255,255,0.22)"; c.beginPath(); c.ellipse(40, -24, 90, 7, -0.03, 0, TAU); c.fill();
+  c.restore();
+  body(); c.lineWidth = 5; c.strokeStyle = C.ink; c.stroke();
+  // рот: пасть открывается вниз
+  const m = 4 + mouth * 18;
+  c.save(); c.beginPath(); c.moveTo(196, 4); c.lineTo(120, 8); c.lineTo(186, 4 + m); c.closePath(); ink(c, "#7a1e22", 3.5);
+  c.fillStyle = "#fff"; for (let i = 0; i < 5; i++) { const tx = 132 + i * 12; c.beginPath(); c.moveTo(tx, 6); c.lineTo(tx + 5, 6 + 4 + mouth * 5); c.lineTo(tx + 9, 6); c.fill(); }
+  c.restore();
+  // жаберная крышка и грудной плавник
+  c.strokeStyle = "rgba(22,34,61,0.6)"; c.lineWidth = 4; c.beginPath(); c.moveTo(78, -26); c.quadraticCurveTo(64, 0, 80, 26); c.stroke();
+  c.save(); c.translate(62, 18); c.rotate(0.5 + Math.sin(ph * 1.3) * 0.3);
+  c.beginPath(); c.moveTo(0, 0); c.quadraticCurveTo(-30, 14, -46, 34); c.quadraticCurveTo(-16, 30, 6, 10); c.closePath(); ink(c, "#c9562f", 3.5); c.restore();
+  // повязка команды на лбу
+  c.beginPath(); c.moveTo(96, -33); c.lineTo(112, -30); c.lineTo(104, 24); c.lineTo(90, 26); c.closePath(); ink(c, C.yellow, 3);
+  // глаз
+  c.beginPath(); c.arc(132, -14, 12, 0, TAU); ink(c, "#ffe36b", 4);
+  if (tired > 0.5) { c.strokeStyle = C.ink; c.lineWidth = 4; c.beginPath(); c.moveTo(122, -14); c.lineTo(142, -14); c.stroke(); }
+  else { c.fillStyle = C.ink; c.beginPath(); c.arc(136, -14, 6, 0, TAU); c.fill(); c.fillStyle = "#fff"; c.beginPath(); c.arc(138, -17, 2.2, 0, TAU); c.fill(); }
+  // бровь: решительная
+  c.strokeStyle = C.ink; c.lineWidth = 5; c.lineCap = "round"; c.beginPath(); c.moveTo(118, -32 + tired * 6); c.lineTo(148, -26 - (1 - tired) * 4); c.stroke();
+  c.restore();
+}
+
+// Воз с поклажей. (x, y) — земля под центром; o: load 0..1 (поклажа упала), shake, rock (покачивание колёс)
+const CART = { front: [300, -96], rear: [-206, -112] };
+function cart(c, x, y, s, o = {}) {
+  const rock = o.rock ?? 0;
+  c.save(); c.translate(x + (o.shake ?? 0), y); c.scale(s, s);
+  // оглобли
+  c.strokeStyle = C.ink; c.lineCap = "round"; c.lineWidth = 16;
+  c.beginPath(); c.moveTo(170, -118); c.lineTo(304, -94); c.stroke(); c.strokeStyle = "#9b5c26"; c.lineWidth = 9; c.stroke();
+  // кузов
+  c.save(); c.rotate(rock * 0.01);
+  c.beginPath(); c.moveTo(-210, -182); c.lineTo(214, -182); c.lineTo(196, -96); c.lineTo(-196, -96); c.closePath(); ink(c, "#b5743a", 5);
+  c.strokeStyle = "rgba(60,30,8,0.55)"; c.lineWidth = 4;
+  for (const yy of [-154, -126]) { c.beginPath(); c.moveTo(-204, yy); c.lineTo(208, yy); c.stroke(); }
+  for (const xx of [-150, -40, 70, 170]) { c.beginPath(); c.moveTo(xx, -180); c.lineTo(xx - 4, -98); c.stroke(); }
+  c.beginPath(); c.rect(-214, -190, 432, 14); ink(c, "#8a521f", 4);
+  // поклажа: падает сверху по очереди
+  const L = o.load ?? 1;
+  const pieces = [
+    (cc) => { cc.beginPath(); cc.roundRect(-30, -96, 160, 96, 8); ink(cc, "#7a4518", 5); cc.fillStyle = "#c79a3a";
+      for (const bx of [-6, 98]) { cc.beginPath(); cc.rect(bx, -96, 14, 96); ink(cc, "#c79a3a", 3); }
+      cc.beginPath(); cc.arc(50, -48, 10, 0, TAU); ink(cc, "#e7c35a", 3); },
+    (cc) => { sack(cc, -150, 0, 1); },
+    (cc) => { cc.beginPath(); cc.ellipse(160, -50, 38, 52, 0, 0, TAU); ink(cc, "#9a6230", 5);
+      cc.strokeStyle = "#5b3410"; cc.lineWidth = 6; for (const yy of [-82, -18]) { cc.beginPath(); cc.moveTo(124, yy + 50 - 50); cc.ellipse(160, yy, 36, 6, 0, 0, Math.PI); cc.stroke(); } },
+    (cc) => { sack(cc, -70, -6, 0.85); },
+  ];
+  const T = [[0, 0.45], [0.18, 0.62], [0.32, 0.76], [0.48, 0.95]];
+  pieces.forEach((p, i) => {
+    const u = prog(L, T[i][0], T[i][1]); if (u <= 0) return;
+    const k = springPop(u * 1.6), dy = (1 - easeOut(u * 1.4)) * -420;
+    c.save(); c.translate(0, -186 + dy); c.scale(1 + (1 - k) * 0.12, k > 0 ? 0.88 + k * 0.12 : 1); p(c); c.restore();
+  });
+  c.restore();
+  // колёса
+  for (const wx of [-118, 126]) wheel(c, wx, -64, 64, rock * 0.08 + wx * 0.001);
+  c.restore();
+}
+function sack(c, x, y, k) {
+  c.save(); c.translate(x, y); c.scale(k, k);
+  c.beginPath(); c.moveTo(-58, 0); c.bezierCurveTo(-74, -50, -54, -98, -20, -108); c.quadraticCurveTo(0, -122, 20, -108);
+  c.bezierCurveTo(54, -98, 74, -50, 58, 0); c.closePath(); ink(c, "#e8d29c", 5);
+  c.strokeStyle = C.ink; c.lineWidth = 5; c.beginPath(); c.moveTo(-16, -108); c.lineTo(16, -108); c.stroke();
+  c.fillStyle = "rgba(120,90,40,0.25)"; c.beginPath(); c.ellipse(16, -40, 26, 30, 0.3, 0, TAU); c.fill();
+  c.restore();
+}
+function wheel(c, x, y, r, a) {
+  c.save(); c.translate(x, y); c.rotate(a);
+  c.beginPath(); c.arc(0, 0, r, 0, TAU); c.lineWidth = 16; c.strokeStyle = C.ink; c.stroke(); c.lineWidth = 9; c.strokeStyle = "#7a4518"; c.stroke();
+  c.strokeStyle = C.ink; c.lineWidth = 7; c.lineCap = "round";
+  for (let i = 0; i < 8; i++) { const q = i * TAU / 8; c.beginPath(); c.moveTo(0, 0); c.lineTo(Math.cos(q) * (r - 6), Math.sin(q) * (r - 6)); c.stroke(); }
+  c.strokeStyle = "#a8682c"; c.lineWidth = 3.5;
+  for (let i = 0; i < 8; i++) { const q = i * TAU / 8; c.beginPath(); c.moveTo(0, 0); c.lineTo(Math.cos(q) * (r - 8), Math.sin(q) * (r - 8)); c.stroke(); }
+  c.beginPath(); c.arc(0, 0, 13, 0, TAU); ink(c, "#5b3410", 4);
+  c.restore();
+}
+
+// капли пота у героя
+function sweat(c, x, y, t, k, seed = 0) {
+  if (k <= 0) return;
+  c.save(); c.globalAlpha *= k;
+  for (let i = 0; i < 3; i++) {
+    const ph = ((t * 1.6 + i / 3 + seed) % 1), dx = (i - 1) * 26 + Math.sin(seed + i) * 6, dy = ph * 46;
+    c.globalAlpha = k * (1 - ph);
+    c.beginPath(); c.moveTo(x + dx, y + dy - 16); c.quadraticCurveTo(x + dx + 9, y + dy, x + dx, y + dy + 4); c.quadraticCurveTo(x + dx - 9, y + dy, x + dx, y + dy - 16);
+    c.fillStyle = "#8fd3ff"; c.fill(); c.strokeStyle = C.ink; c.lineWidth = 2.5; c.stroke();
+  }
+  c.restore();
+}
+
+// значки стихий
+function iconCloud(c, x, y, s, col = "#fff") {
+  c.save(); c.translate(x, y); c.scale(s, s);
+  c.beginPath(); c.arc(-18, 6, 16, 0, TAU); c.arc(4, -6, 22, 0, TAU); c.arc(24, 6, 15, 0, TAU); c.rect(-18, 6, 42, 16); c.fillStyle = col; c.fill();
+  c.restore();
+}
+function iconBack(c, x, y, s, col = "#fff") { c.save(); c.translate(x, y); c.scale(s, s); arrow(c, 28, 0, -30, 0, 1, col, 12, 30); c.restore(); }
+function iconWave(c, x, y, s, col = "#fff") {
+  c.save(); c.translate(x, y); c.scale(s, s); c.strokeStyle = col; c.lineWidth = 8; c.lineCap = "round";
+  for (const dy of [-10, 10]) { c.beginPath(); c.moveTo(-30, dy); for (let i = 0; i <= 6; i++) c.quadraticCurveTo(-30 + i * 10 - 5, dy + (i % 2 ? -10 : 10), -30 + i * 10, dy); c.stroke(); }
+  c.restore();
+}
+
+// ---------- Арена: небо, трибуны, луг, дорожка, пруд (статичный фон в мировых координатах) ----------
+// Мир шире кадра, чтобы камера могла двигаться: x −200..2120, y −300..1080
+const WX0 = -450, WY0 = -300, WW = 2950, WH = 1380;
+const POND = { x: 1640, y: 742, rx: 360, ry: 92 };
+const GROUND = 730; // линия колёс воза
+const CARTX = 860;
+
+const arenaC = mkCanvas(WW, WH);
+function buildArena() {
+  const c = arenaC.getContext("2d"), r = mulberry32(5);
+  c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, WW, WH);
+  c.translate(-WX0, -WY0);
+  // небо
+  let g = c.createLinearGradient(0, WY0, 0, 520); g.addColorStop(0, "#2f86dc"); g.addColorStop(0.6, "#7cc4f4"); g.addColorStop(1, "#cdeeff");
+  c.fillStyle = g; c.fillRect(WX0, WY0, WW, 900);
+  // дальние холмы
+  c.fillStyle = "#9fd77a"; c.beginPath(); c.moveTo(WX0, 470);
+  for (let x = WX0; x <= WX0 + WW; x += 40) c.lineTo(x, 450 - 30 * Math.sin(x * 0.004) - 16 * Math.sin(x * 0.011 + 1)); c.lineTo(WX0 + WW, 600); c.lineTo(WX0, 600); c.fill();
+  // трибуны
+  const TY = 418;
+  c.fillStyle = "#24407e"; c.fillRect(WX0, TY, WW, 112);
+  c.fillStyle = "#1a2f5f"; for (let i = 0; i < 4; i++) c.fillRect(WX0, TY + 18 + i * 24, WW, 4);
+  const crowd = ["#ffd21f", "#e8322b", "#ffffff", "#2a6fdb", "#ff8a1e", "#7fd35a", "#f2b9c9"];
+  for (let row = 0; row < 4; row++) for (let x = WX0 + (row % 2) * 9; x < WX0 + WW; x += 18) {
+    const y = TY + 10 + row * 24 + r() * 3;
+    c.fillStyle = crowd[Math.floor(r() * crowd.length)]; c.beginPath(); c.arc(x + r() * 4, y, 6.5, 0, TAU); c.fill();
+    c.fillStyle = "rgba(255,226,190,0.95)"; c.beginPath(); c.arc(x + r() * 4, y - 9, 4.5, 0, TAU); c.fill();
+  }
+  // рекламный борт
+  c.fillStyle = C.navy; c.fillRect(WX0, 520, WW, 38);
+  const boards = ["КУБОК ЛЕСА", "ВОЗ-2026", "КУБОК ЛЕСА", "ВОЗ-2026", "КУБОК ЛЕСА", "ВОЗ-2026", "КУБОК ЛЕСА", "ВОЗ-2026"];
+  boards.forEach((b, i) => {
+    const x = WX0 + 40 + i * 400; c.fillStyle = i % 2 ? C.yellow : C.red; c.fillRect(x, 524, 360, 30);
+    c.fillStyle = i % 2 ? C.navy : "#fff"; c.font = `700 24px "Narrow", "PT Sans Narrow", sans-serif`; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(b, x + 180, 540);
+  });
+  // луг
+  g = c.createLinearGradient(0, 558, 0, 1080); g.addColorStop(0, "#86d25c"); g.addColorStop(1, "#3f9a35");
+  c.fillStyle = g; c.fillRect(WX0, 558, WW, 1080 - 558 + 10);
+  for (let i = 0; i < 520; i++) { const x = WX0 + r() * WW, y = 570 + r() * 520; c.strokeStyle = r() > 0.5 ? "rgba(40,110,30,0.35)" : "rgba(200,240,150,0.35)"; c.lineWidth = 3; c.beginPath(); c.moveTo(x, y); c.lineTo(x + (r() - 0.5) * 8, y - 10 - r() * 10); c.stroke(); }
+  // дорожка
+  c.fillStyle = C.track; c.beginPath(); c.moveTo(WX0, 655); c.lineTo(WX0 + WW, 655); c.lineTo(WX0 + WW, 790); c.lineTo(WX0, 790); c.fill();
+  c.fillStyle = C.trackD; c.fillRect(WX0, 650, WW, 8); c.fillRect(WX0, 788, WW, 6);
+  for (let i = 0; i < 160; i++) { c.fillStyle = "rgba(120,80,40,0.25)"; c.beginPath(); c.ellipse(WX0 + r() * WW, 665 + r() * 120, 3 + r() * 6, 2 + r() * 2, 0, 0, TAU); c.fill(); }
+  // стартовая линия (шашечки) под возом
+  for (let i = 0; i < 9; i++) for (let j = 0; j < 2; j++) { c.fillStyle = (i + j) % 2 ? C.ink : "#fff"; c.fillRect(CARTX - 18 + j * 18, 658 + i * 14.6, 18, 14.6); }
+  c.fillStyle = "#fff"; c.font = `700 30px "Narrow", "PT Sans Narrow", sans-serif`; c.textAlign = "center"; c.fillText("СТАРТ", CARTX, 818);
+  // пруд
+  c.save(); c.beginPath(); c.ellipse(POND.x, POND.y, POND.rx + 14, POND.ry + 12, 0, 0, TAU); c.fillStyle = "#c9a15e"; c.fill();
+  g = c.createLinearGradient(0, POND.y - POND.ry, 0, POND.y + POND.ry); g.addColorStop(0, "#58b4f0"); g.addColorStop(1, C.water2);
+  c.beginPath(); c.ellipse(POND.x, POND.y, POND.rx, POND.ry, 0, 0, TAU); c.fillStyle = g; c.fill(); c.lineWidth = 5; c.strokeStyle = C.ink; c.stroke();
+  c.restore();
+  // камыши
+  for (const [x, y, k] of [[1300, 715, 1], [1325, 722, 0.8], [1960, 720, 1], [1985, 728, 0.9], [1940, 732, 0.7]]) reed(c, x, y, k);
+  // флажки на трибунах
+  for (let i = 0; i < 11; i++) { const x = WX0 + 120 + i * 270; c.strokeStyle = "#ccc"; c.lineWidth = 4; c.beginPath(); c.moveTo(x, TY); c.lineTo(x, TY - 70); c.stroke(); }
+}
+buildArena();
+function reed(c, x, y, k) {
+  c.save(); c.translate(x, y); c.scale(k, k); c.strokeStyle = "#3d7a2a"; c.lineWidth = 6; c.lineCap = "round";
+  for (const a of [-0.2, 0, 0.18]) { c.beginPath(); c.moveTo(0, 0); c.quadraticCurveTo(a * 60, -60, a * 90, -120); c.stroke(); }
+  c.fillStyle = "#6b3f1c"; c.beginPath(); c.ellipse(0, -112, 7, 22, 0, 0, TAU); c.fill(); c.restore();
+}
+// флажки колышутся
+function flags(c, t) {
+  const cols = [C.red, C.yellow, C.swan, C.yellow, C.red, C.pike, C.red, C.yellow, C.swan];
+  for (let i = 0; i < 11; i++) {
+    const x = WX0 + 120 + i * 270, y = 418 - 70;
+    c.fillStyle = cols[i % cols.length]; c.beginPath(); c.moveTo(x, y);
+    for (let k = 0; k <= 6; k++) c.lineTo(x + k * 9, y + Math.sin(t * 6 + i + k * 0.7) * 4 * (k / 6));
+    for (let k = 6; k >= 0; k--) c.lineTo(x + k * 9, y + 30 + Math.sin(t * 6 + i + k * 0.7) * 4 * (k / 6) - k * 1.5);
+    c.closePath(); c.fill();
+  }
+}
+// облака плывут
+const CLOUDS = [[200, 90, 1.2], [760, 40, 0.9], [1250, 120, 1.4], [1700, 60, 1], [2100, 150, 0.8], [-150, 170, 1]];
+function clouds(c, t) {
+  c.save();
+  for (const [x0, y, k] of CLOUDS) {
+    const x = WX0 + ((x0 - WX0 + t * 14 * k) % (WW + 300)) - 150;
+    c.save(); c.translate(x, y); c.scale(k * 2.2, k * 2.2);
+    c.fillStyle = "rgba(255,255,255,0.95)"; c.beginPath(); c.arc(-30, 8, 22, 0, TAU); c.arc(0, -6, 30, 0, TAU); c.arc(32, 6, 22, 0, TAU); c.arc(8, 14, 22, 0, TAU); c.fill();
+    c.restore();
+  }
+  c.restore();
+}
+// рябь на пруду
+function pondRipples(c, t) {
+  c.save(); c.beginPath(); c.ellipse(POND.x, POND.y, POND.rx - 4, POND.ry - 4, 0, 0, TAU); c.clip();
+  c.strokeStyle = "rgba(255,255,255,0.55)"; c.lineWidth = 4; c.lineCap = "round";
+  for (let i = 0; i < 7; i++) {
+    const x = POND.x - 260 + i * 85 + Math.sin(t * 0.8 + i) * 18, y = POND.y - 50 + (i % 3) * 38;
+    c.beginPath(); c.moveTo(x - 26, y); c.quadraticCurveTo(x, y - 7, x + 26, y); c.stroke();
+  }
+  c.restore();
+}
+// вода поверх нижней части щуки
+function pondFront(c, t, alpha = 0.78) {
+  c.save(); c.beginPath(); c.ellipse(POND.x, POND.y, POND.rx, POND.ry, 0, 0, TAU); c.clip();
+  c.fillStyle = `rgba(28,102,176,${alpha})`;
+  c.beginPath(); c.moveTo(POND.x - POND.rx, POND.y - 6);
+  for (let x = POND.x - POND.rx; x <= POND.x + POND.rx; x += 20) c.lineTo(x, POND.y - 6 + Math.sin(x * 0.03 + t * 4) * 5);
+  c.lineTo(POND.x + POND.rx, POND.y + POND.ry); c.lineTo(POND.x - POND.rx, POND.y + POND.ry); c.closePath(); c.fill();
+  c.restore();
+}
+
+// ---------- Студия: фон для предматчевой аналитики и заставки ----------
+function studioBg(c, t) {
+  const g = c.createRadialGradient(960, 480, 100, 960, 540, 1150); g.addColorStop(0, "#21468f"); g.addColorStop(1, "#060f26");
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
+  c.save(); c.globalAlpha = 0.12; c.fillStyle = "#fff";
+  for (let i = 0; i < 7; i++) { const x = -400 + i * 380 + ((t * 40) % 380); slant(c, x, 0, 120, H, 300); c.fill(); }
+  c.restore();
+}
+// тактическая доска
+const BOARD = { x: 420, y: 110, w: 1080, h: 640, cx: 960, cy: 430 };
+const boardC = mkCanvas(BOARD.w + 40, BOARD.h + 40);
+{
+  const c = boardC.getContext("2d"), r = mulberry32(21);
+  c.translate(20, 20);
+  c.beginPath(); c.roundRect(0, 0, BOARD.w, BOARD.h, 18); c.fillStyle = "#7a4a22"; c.fill(); c.lineWidth = 6; c.strokeStyle = C.ink; c.stroke();
+  c.beginPath(); c.roundRect(22, 22, BOARD.w - 44, BOARD.h - 44, 8); c.fillStyle = "#1f5a3a"; c.fill();
+  for (let i = 0; i < 1400; i++) { c.fillStyle = `rgba(255,255,255,${0.02 + r() * 0.04})`; c.fillRect(22 + r() * (BOARD.w - 44), 22 + r() * (BOARD.h - 44), 2 + r() * 10, 1.5); }
+  c.strokeStyle = "rgba(255,255,255,0.22)"; c.lineWidth = 4;
+  c.strokeRect(60, 60, BOARD.w - 120, BOARD.h - 120);
+  c.beginPath(); c.moveTo(BOARD.w / 2, 60); c.lineTo(BOARD.w / 2, BOARD.h - 60); c.stroke();
+  c.beginPath(); c.arc(BOARD.w / 2, BOARD.h / 2, 90, 0, TAU); c.stroke();
+  c.strokeRect(60, BOARD.h / 2 - 140, 130, 280); c.strokeRect(BOARD.w - 190, BOARD.h / 2 - 140, 130, 280);
+}
+// фишка героя на доске
+function chip(c, x, y, who, k = 1, shake = 0) {
+  if (k <= 0) return;
+  c.save(); c.translate(x + shake, y); c.scale(k, k);
+  c.beginPath(); c.arc(0, 0, 70, 0, TAU); ink(c, who === "swan" ? C.swan : who === "rak" ? C.rak : C.pike, 6, "#fff");
+  c.save(); c.beginPath(); c.arc(0, 0, 64, 0, TAU); c.clip();
+  if (who === "swan") swan(c, -14, 46, 0.42, { flap: 0.2 });
+  else if (who === "rak") rak(c, -40, 14, 0.58, { claw: 0.5 });
+  else pike(c, -78, 6, 0.55, { tail: 0.4, mouth: 0.5 });
+  c.restore(); c.restore();
+}
+// меловая линия с дрожью: путь из точек, видна доля u
+function chalkPath(c, pts, u, lw = 9) {
+  if (u <= 0) return;
+  const n = Math.max(2, Math.floor(pts.length * u));
+  c.save(); c.lineCap = "round"; c.lineJoin = "round";
+  for (const [a, dx, dy] of [[0.85, 0, 0], [0.35, 2, -1.5]]) {
+    c.strokeStyle = `rgba(245,245,235,${a})`; c.lineWidth = lw; c.beginPath();
+    for (let i = 0; i < n; i++) { const [x, y] = pts[i]; if (i) c.lineTo(x + dx, y + dy); else c.moveTo(x + dx, y + dy); }
+    c.stroke();
+  }
+  c.restore();
+}
+function chalkArrow(c, x0, y0, x1, y1, u) {
+  if (u <= 0) return;
+  const pts = []; for (let i = 0; i <= 30; i++) { const q = i / 30; pts.push([lerp(x0, x1, q) + Math.sin(q * 9) * 3, lerp(y0, y1, q) + Math.cos(q * 7) * 3]); }
+  chalkPath(c, pts, u);
+  if (u >= 0.98) { const a = Math.atan2(y1 - y0, x1 - x0);
+    chalkPath(c, [[x1 - Math.cos(a - 0.5) * 40, y1 - Math.sin(a - 0.5) * 40], [x1, y1], [x1 - Math.cos(a + 0.5) * 40, y1 - Math.sin(a + 0.5) * 40]], 1); }
+}
+
+// ---------- Графика спортивного канала (экранные координаты) ----------
+
+// плашка «ПРЯМОЙ ЭФИР» / «ПОВТОР» в левом верхнем углу
+function bug(c, t, k, replay) {
+  if (k <= 0) return;
+  c.save(); c.globalAlpha = k; c.translate(lerp(-300, 0, springSnap(k)), 0);
+  const x = 150, y = 76;
+  slant(c, x, y, 300, 56, 16); c.fillStyle = replay ? C.yellow : C.red; c.fill();
+  slant(c, x + 300 - 16, y, 150, 56, 16); c.fillStyle = C.navy; c.fill();
+  c.textBaseline = "middle"; c.textAlign = "left";
+  if (replay) {
+    c.save(); c.translate(x + 40, y + 28); c.rotate(-t * 4); c.strokeStyle = C.navy; c.lineWidth = 6;
+    c.beginPath(); c.arc(0, 0, 13, 0.4, TAU - 0.2); c.stroke(); c.restore();
+    c.fillStyle = C.navy; font(c, 36); c.fillText("ПОВТОР", x + 66, y + 30);
+  } else {
+    c.fillStyle = "#fff"; c.globalAlpha = k * (0.55 + 0.45 * Math.abs(Math.sin(t * 3))); c.beginPath(); c.arc(x + 38, y + 28, 10, 0, TAU); c.fill();
+    c.globalAlpha = k; font(c, 34); c.fillText("ПРЯМОЙ ЭФИР", x + 58, y + 30);
+  }
+  c.fillStyle = C.yellow; font(c, 30); c.fillText("КУБОК", x + 312, y + 30);
+  c.restore();
+}
+
+// табло: участники, шкалы тяги, дистанция, часы
+function scoreboard(c, t, k, st) {
+  if (k <= 0) return;
+  const y0 = lerp(-150, 0, springSnap(k));
+  c.save(); c.translate(0, y0);
+  const x = 1110, y = 66, w = 660, h = 110;
+  slant(c, x, y, w, h, 22); c.fillStyle = C.navy; c.fill();
+  slant(c, x, y + h - 10, w - 4, 10, 2); c.fillStyle = C.yellow; c.fill();
+  // участники
+  const who = [["swan", C.swan], ["rak", C.rak], ["pike", C.pike]];
+  who.forEach(([w2, col], i) => {
+    const cx = x + 74 + i * 108, cy = y + 42;
+    c.beginPath(); c.arc(cx, cy, 30, 0, TAU); c.fillStyle = col; c.fill(); c.lineWidth = 3; c.strokeStyle = "#fff"; c.stroke();
+    c.save(); c.beginPath(); c.arc(cx, cy, 28, 0, TAU); c.clip();
+    if (w2 === "swan") swan(c, cx - 6, cy + 20, 0.19, { flap: 0.2 }); else if (w2 === "rak") rak(c, cx - 18, cy + 6, 0.26, { claw: 0.5 }); else pike(c, cx - 36, cy + 3, 0.24, { tail: 0.4, mouth: 0.4 });
+    c.restore();
+    // шкала тяги
+    const p = st.pull[i];
+    c.fillStyle = "rgba(255,255,255,0.18)"; c.fillRect(cx - 36, cy + 38, 72, 9);
+    c.fillStyle = p > 0.95 ? C.red : C.yellow; c.fillRect(cx - 36, cy + 38, 72 * p, 9);
+  });
+  // дистанция
+  c.textAlign = "left"; c.textBaseline = "alphabetic";
+  c.fillStyle = "rgba(255,255,255,0.75)"; font(c, 26); c.fillText("ДИСТАНЦИЯ", x + 370, y + 38);
+  const blink = st.blink > 0 && Math.floor(t * 6) % 2 === 0;
+  c.fillStyle = blink ? C.red : C.yellow; font(c, 60, F_NUM); c.fillText("0,0", x + 370, y + 96);
+  c.fillStyle = "#fff"; font(c, 36); c.fillText("м", x + 462, y + 96);
+  // часы матча
+  const sec = Math.max(0, st.clock), mm = String(Math.floor(sec / 60)).padStart(2, "0"), ss = String(Math.floor(sec % 60)).padStart(2, "0");
+  slant(c, x + w - 150, y - 34, 132, 36, 10); c.fillStyle = C.red; c.fill();
+  c.fillStyle = "#fff"; font(c, 28, F_NUM); c.textAlign = "center"; c.fillText(`${mm}:${ss}`, x + w - 84, y - 6);
+  // стартовые огни
+  if (st.lights > 0) {
+    c.save(); c.globalAlpha = st.lights;
+    for (let i = 0; i < 3; i++) {
+      const on = st.light[i], lx = x + 140 + i * 70, ly = y + h + 40;
+      c.beginPath(); c.arc(lx, ly, 24, 0, TAU); c.fillStyle = C.navy; c.fill(); c.lineWidth = 4; c.strokeStyle = "#fff"; c.stroke();
+      c.beginPath(); c.arc(lx, ly, 17, 0, TAU); c.fillStyle = on === 2 ? "#3bea5c" : on === 1 ? C.red : "#2b3550"; c.fill();
+    }
+    c.restore();
+  }
+  c.restore();
+}
+
+// карточка участника
+const CARDS = [
+  { who: "swan", name: "ЛЕБЕДЬ", col: C.swan, icon: iconCloud, x: 520, from: [0, -900], rot: -0.06 },
+  { who: "rak", name: "РАК", col: C.rak, icon: iconBack, x: 960, from: [-1300, 0], rot: 0.04 },
+  { who: "pike", name: "ЩУКА", col: C.pike, icon: iconWave, x: 1400, from: [1300, 200], rot: 0.07 },
+];
+function playerCard(c, t, i, kin, kout) {
+  if (kin <= 0 || kout >= 1) return;
+  const d = CARDS[i], s = springPop(kin), cw = 360, ch = 470, cy = 400;
+  const fx = d.from[0] * (1 - s), fy = d.from[1] * (1 - s);
+  const out = sstep(kout);
+  c.save();
+  c.translate(d.x + fx + (1110 + 74 + i * 108 - d.x) * out, cy + fy + (108 - cy) * out);
+  c.rotate(d.rot * (1 - out) + (1 - s) * 0.4); c.scale(1 - out * 0.85, 1 - out * 0.85);
+  c.globalAlpha = 1 - out * 0.7;
+  slant(c, -cw / 2, -ch / 2, cw, ch, 26); c.fillStyle = C.navy; c.fill();
+  c.save(); slant(c, -cw / 2 + 12, -ch / 2 + 12, cw - 24, ch - 110, 22); c.clip();
+  const g = c.createLinearGradient(0, -ch / 2, 0, ch / 2 - 100); g.addColorStop(0, d.col); g.addColorStop(1, C.navy2); c.fillStyle = g; c.fill();
+  c.fillStyle = "rgba(255,255,255,0.12)"; for (let k = 0; k < 4; k++) { slant(c, -260 + k * 140, -ch / 2, 50, ch, 120); c.fill(); }
+  if (d.who === "swan") swan(c, -30, 70, 0.95, { flap: 0.45 + 0.1 * Math.sin(t * 5) });
+  else if (d.who === "rak") rak(c, -10, 30, 0.95, { claw: 0.5 + 0.4 * Math.sin(t * 6), walk: t * 6 });
+  else pike(c, -20, 10, 0.8, { tail: t * 7, mouth: 0.4 + 0.3 * Math.sin(t * 5) });
+  c.restore();
+  // значок стихии
+  c.beginPath(); c.arc(cw / 2 - 52, -ch / 2 + 54, 36, 0, TAU); c.fillStyle = C.navy; c.fill(); c.lineWidth = 4; c.strokeStyle = C.yellow; c.stroke();
+  d.icon(c, cw / 2 - 52, -ch / 2 + 54, 0.8, C.yellow);
+  // имя
+  slant(c, -cw / 2 + 4, ch / 2 - 92, cw - 8, 80, 22); c.fillStyle = C.yellow; c.fill();
+  c.fillStyle = C.navy; font(c, 62); c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(d.name, 0, ch / 2 - 50);
+  c.restore();
+}
+
+// плашка статистики: вес поклажи
+function weightPanel(c, t, k, needle) {
+  if (k <= 0) return;
+  const s = springPop(k), x = 1340, y = 230, w = 420, h = 300;
+  c.save(); c.globalAlpha = clamp(k * 3, 0, 1); c.translate(x + w / 2, y + h / 2); c.scale(s, s); c.translate(-w / 2, -h / 2);
+  slant(c, 0, 0, w, h, 24); c.fillStyle = "rgba(11,26,58,0.94)"; c.fill();
+  slant(c, 0, 0, w, 52, 8); c.fillStyle = C.yellow; c.fill();
+  c.fillStyle = C.navy; font(c, 34); c.textAlign = "center"; c.textBaseline = "middle"; c.fillText("ВЕС ПОКЛАЖИ", w / 2, 28);
+  // циферблат весов
+  const cx = w / 2 - 50, cy = 210, R = 92;
+  c.beginPath(); c.arc(cx, cy, R, Math.PI, TAU); c.lineTo(cx + R, cy); c.closePath(); c.fillStyle = "#fff"; c.fill();
+  c.strokeStyle = C.navy; c.lineWidth = 4;
+  for (let i = 0; i <= 10; i++) { const a = Math.PI + i * Math.PI / 10; c.beginPath(); c.moveTo(cx + Math.cos(a) * (R - 6), cy + Math.sin(a) * (R - 6)); c.lineTo(cx + Math.cos(a) * (R - (i % 5 ? 18 : 30)), cy + Math.sin(a) * (R - (i % 5 ? 18 : 30))); c.stroke(); }
+  c.beginPath(); c.arc(cx, cy, R * 0.7, Math.PI * 1.75, TAU); c.strokeStyle = C.red; c.lineWidth = 10; c.stroke();
+  const a = Math.PI + needle * 0.35 * Math.PI + Math.sin(t * 9) * 0.02;
+  c.strokeStyle = C.red; c.lineWidth = 6; c.lineCap = "round"; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + Math.cos(a) * (R - 16), cy + Math.sin(a) * (R - 16)); c.stroke();
+  c.beginPath(); c.arc(cx, cy, 9, 0, TAU); c.fillStyle = C.navy; c.fill();
+  // пёрышко
+  c.save(); c.translate(w - 90, 150 + Math.sin(t * 2.4) * 10); c.rotate(-0.6 + Math.sin(t * 2) * 0.15);
+  c.beginPath(); c.moveTo(0, 60); c.quadraticCurveTo(-34, 0, 0, -64); c.quadraticCurveTo(34, 0, 0, 60); c.fillStyle = "#fff"; c.fill(); c.lineWidth = 3; c.strokeStyle = C.ink; c.stroke();
+  c.beginPath(); c.moveTo(0, 74); c.lineTo(0, -56); c.stroke();
+  c.restore();
+  c.restore();
+}
+
+// рамка повтора: виньетка, полосы и угловые скобки
+function replayFrame(c, t, k) {
+  if (k <= 0) return;
+  c.save(); c.globalAlpha = k;
+  const g = c.createRadialGradient(960, 540, 500, 960, 540, 1150); g.addColorStop(0, "rgba(10,20,50,0)"); g.addColorStop(1, "rgba(10,20,50,0.55)");
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
+  c.fillStyle = "rgba(255,255,255,0.05)"; for (let y = (t * 60) % 6; y < H; y += 6) c.fillRect(0, y, W, 2);
+  c.strokeStyle = C.yellow; c.lineWidth = 8;
+  for (const [x, y, sx, sy] of [[60, 60, 1, 1], [1860, 60, -1, 1], [60, 1020, 1, -1], [1860, 1020, -1, -1]]) { c.beginPath(); c.moveTo(x, y + sy * 70); c.lineTo(x, y); c.lineTo(x + sx * 70, y); c.stroke(); }
+  c.restore();
+}
+
+// видеопроверка: три стоп-кадра с вопросами
+function varPanel(c, t, k, ks, kq, kout) {
+  if (k <= 0 || kout >= 1) return;
+  const s = springSnap(k), o = 1 - sstep(kout);
+  c.save(); c.globalAlpha = o;
+  c.fillStyle = `rgba(6,15,38,${0.72 * clamp(k * 2, 0, 1)})`; c.fillRect(0, 0, W, H);
+  c.translate(960, 440); c.scale(lerp(0.6, 1, s) * lerp(1, 0.85, sstep(kout)), lerp(0.6, 1, s)); c.translate(-960, -440);
+  slant(c, 300, 130, 1320, 80, 24); c.fillStyle = C.red; c.fill();
+  c.fillStyle = "#fff"; font(c, 54); c.textAlign = "center"; c.textBaseline = "middle"; c.fillText("ВИДЕОПРОВЕРКА", 960, 172);
+  const who = ["swan", "rak", "pike"], cols = [C.swan, C.rak, C.pike];
+  who.forEach((w2, i) => {
+    const ki = springPop(ks[i]); if (ki <= 0) return;
+    const fx = 380 + i * 400, fy = 250, fw = 360, fh = 380;
+    c.save(); c.translate(fx + fw / 2, fy + fh / 2); c.scale(ki, ki); c.translate(-fw / 2, -fh / 2);
+    c.fillStyle = C.navy; c.fillRect(-8, -8, fw + 16, fh + 16);
+    c.save(); c.beginPath(); c.rect(0, 0, fw, fh); c.clip();
+    const g = c.createLinearGradient(0, 0, 0, fh); g.addColorStop(0, cols[i]); g.addColorStop(1, C.navy2); c.fillStyle = g; c.fillRect(0, 0, fw, fh);
+    if (w2 === "swan") swan(c, 170, 305, 0.78, { flap: 0.3 }); else if (w2 === "rak") rak(c, 175, 290, 0.8, { claw: 0.6 }); else pike(c, 165, 275, 0.68, { tail: 0.3, mouth: 0.5 });
+    c.fillStyle = "rgba(0,0,0,0.25)"; c.fillRect(0, 0, fw, fh);
+    c.restore();
+    // вопрос
+    const q = springPop(kq[i]);
+    if (q > 0) { c.save(); c.translate(fw / 2, 82); c.scale(q * (1 + 0.05 * Math.sin(t * 6 + i)), q * (1 + 0.05 * Math.sin(t * 6 + i)));
+      c.fillStyle = C.yellow; c.strokeStyle = C.navy; c.lineWidth = 12; font(c, 140, F_NUM); c.textAlign = "center"; c.textBaseline = "middle";
+      c.strokeText("?", 0, 0); c.fillText("?", 0, 0); c.restore(); }
+    c.restore();
+  });
+  c.restore();
+}
+
+// итоговое табло крупно
+function finalBoard(c, t, k) {
+  if (k <= 0) return;
+  const s = springPop(k);
+  c.save(); c.translate(960, 250); c.scale(s, s);
+  slant(c, -330, -110, 660, 220, 40); c.fillStyle = C.navy; c.fill(); c.lineWidth = 6; c.strokeStyle = C.yellow; c.stroke();
+  slant(c, -250, -150, 300, 56, 16); c.fillStyle = C.red; c.fill();
+  c.fillStyle = "#fff"; font(c, 40); c.textAlign = "center"; c.textBaseline = "middle"; c.fillText("ИТОГ", -100, -122);
+  c.fillStyle = C.yellow; font(c, 150, F_NUM); c.fillText("0,0", -40, 20);
+  c.fillStyle = "#fff"; font(c, 80); c.fillText("м", 170, 34);
+  c.restore();
+}
+
+// шторка: косые цветные полосы проходят слева направо; u 0..1
+function wipe(c, u) {
+  if (u <= 0 || u >= 1) return;
+  const cols = [C.yellow, C.red, C.navy3, C.navy];
+  cols.forEach((col, i) => {
+    const d = i * 0.08, uu = clamp((u - d) / (1 - 0.24), 0, 1), x = lerp(-1700, 2100, easeInOut(uu));
+    slant(c, x - 300 * 0, 0, 1500, H, 420); c.fillStyle = col; c.fill();
+  });
+}
+const easeInOut = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+
+// нижняя треть: подложка для строк
+function lowerBar(c, k) {
+  if (k <= 0) return;
+  const s = easeOut(k);
+  c.save();
+  c.translate(lerp(-1500, 0, s), 0);
+  slant(c, 210, 812, 1500, 160, 30); c.fillStyle = "rgba(11,26,58,0.93)"; c.fill();
+  slant(c, 210, 812, 44, 160, 30); c.fillStyle = C.yellow; c.fill();
+  slant(c, 254, 966, 1440, 6, 2); c.fillStyle = C.red; c.fill();
+  c.restore();
+}
+
+// телестратор: жёлтая стрелка с обводкой (мировые координаты)
+function teleArrow(c, x0, y0, x1, y1, u) {
+  if (u <= 0) return;
+  arrow(c, x0, y0, x1, y1, u, C.navy, 26, 70);
+  arrow(c, x0, y0, x1, y1, u, C.yellow, 16, 58);
+}
+function teleCircle(c, x, y, rx, ry, u) {
+  if (u <= 0) return;
+  c.save(); c.lineCap = "round";
+  for (const [col, lw] of [[C.navy, 22], [C.yellow, 12]]) { c.strokeStyle = col; c.lineWidth = lw; c.beginPath(); c.ellipse(x, y, rx, ry, -0.05, -Math.PI / 2, -Math.PI / 2 + TAU * u); c.stroke(); }
+  c.restore();
+}
+
+// всплеск воды
+function splash(c, x, y, u) {
+  if (u <= 0 || u >= 1) return;
+  c.save(); c.globalAlpha = 1 - u;
+  c.fillStyle = "#bfe6ff"; c.strokeStyle = C.ink; c.lineWidth = 3;
+  for (let i = 0; i < 9; i++) {
+    const a = -Math.PI / 2 + (i - 4) * 0.28, d = easeOut(u) * (120 + (i % 3) * 30), g = u * u * 160;
+    const px = x + Math.cos(a) * d, py = y + Math.sin(a) * d + g;
+    c.beginPath(); c.arc(px, py, 14 * (1 - u * 0.6), 0, TAU); c.fill(); c.stroke();
+  }
+  c.strokeStyle = "rgba(255,255,255,0.9)"; c.lineWidth = 6;
+  c.beginPath(); c.ellipse(x, y + 10, 60 + u * 140, 14 + u * 30, 0, 0, TAU); c.stroke();
+  c.restore();
+}
+// пыль из-под колёс
+function dust(c, x, y, t, k) {
+  if (k <= 0) return;
+  c.save();
+  for (let i = 0; i < 6; i++) {
+    const ph = (t * 1.3 + i / 6) % 1, px = x + (i - 2.5) * 22 + ph * (i % 2 ? 30 : -30), py = y - ph * 40;
+    c.globalAlpha = k * (1 - ph) * 0.7; c.fillStyle = "#e9d2a8"; c.beginPath(); c.arc(px, py, 14 + ph * 22, 0, TAU); c.fill();
+  }
+  c.restore();
+}
+// линии скорости
+function speedLines(c, x, y, a, k, t) {
+  if (k <= 0) return;
+  c.save(); c.translate(x, y); c.rotate(a); c.strokeStyle = "rgba(255,255,255,0.85)"; c.lineCap = "round"; c.globalAlpha = k;
+  for (let i = 0; i < 7; i++) { const off = ((t * 900 + i * 137) % 420), yy = (i - 3) * 34; c.lineWidth = 6 - (i % 3); c.beginPath(); c.moveTo(-60 - off, yy); c.lineTo(-160 - off, yy); c.stroke(); }
+  c.restore();
+}
+
+// ---------- Сцены: заставка → доска → арена → повтор → видеопроверка → итог → финал ----------
+const ctx = document.getElementById("scene").getContext("2d");
+const E = EV;
+
+// позиции героев в общем плане (мировые координаты)
+const P = { swan: [1000, 285], rak: [300, 714], pike: [1650, 728] };
+const HOOK_F = [CARTX + CART.front[0], GROUND + CART.front[1]], HOOK_R = [CARTX + CART.rear[0], GROUND + CART.rear[1]];
+const START = E.green; // свисток старта: от него идут часы матча
+const STRAIN = [E.green, E.L12]; // тянут изо всех сил
+const tired = (t) => sstep(prog(t, E.L12, E.L12 + 0.9));
+
+// ---------- Камера ----------
+const SHOTS = [
+  // [время, cx, cy, zoom]
+  [0, 980, 545, 1.05],
+  [E.L5, 980, 545, 1.05], [E.L6 - 0.2, 1000, 535, 1.1], [E.L6 + 0.3, 980, 545, 1.05],
+  [E.L8 - 0.1, 980, 545, 1.05], [E.L8 + 0.6, 1000, 565, 1.08], [E.L9 - 0.3, 1000, 565, 1.08],
+  // повтор: Лебедь, Рак, Щука крупно, затем общий
+  [E.L9 - 0.05, P.swan[0] + 60, P.swan[1] + 80, 1.75], [E.L10 - 0.25, P.swan[0] + 60, P.swan[1] + 40, 1.8],
+  [E.L10 + 0.05, P.rak[0] + 40, P.rak[1] - 110, 1.8], [E.w_shch2 - 0.25, P.rak[0] + 20, P.rak[1] - 110, 1.85],
+  [E.w_shch2 + 0.05, P.pike[0], P.pike[1] - 90, 1.7], [E.w_vodu + 0.3, P.pike[0] + 20, P.pike[1] - 70, 1.75],
+  [E.w_vodu + 0.7, 980, 545, 1.05], [E.L12, 980, 545, 1.05], [E.fin, 960, 480, 0.94], [TOTAL, 960, 470, 0.98],
+];
+function cam(t) {
+  let a = SHOTS[0], b = SHOTS[SHOTS.length - 1];
+  for (let i = 0; i < SHOTS.length - 1; i++) if (t >= SHOTS[i][0] && t <= SHOTS[i + 1][0]) { a = SHOTS[i]; b = SHOTS[i + 1]; break; }
+  if (t > b[0]) a = b;
+  const u = easeInOut(prog(t, a[0], b[0]));
+  let cx = lerp(a[1], b[1], u), cy = lerp(a[2], b[2], u), z = lerp(a[3], b[3], u);
+  // тряска при натуге
+  const sh = win(t, STRAIN[0] + 0.2, STRAIN[1], 0.4, 0.3) * (t < E.L9 - 0.3 || t > E.E10 + 0.4 ? 1 : 0.3);
+  cx += wob(t, 31) * 5 * sh; cy += wob(t, 27, 2) * 4 * sh;
+  return { cx, cy, z };
+}
+
+// ---------- Герои на арене ----------
+function heroState(t) {
+  const sIn = prog(t, E.L6 - 0.15, E.w_troe + 0.35), rIn = prog(t, E.L6, E.w_vpr), pIn = prog(t, E.w_troe - 0.2, E.w_vpr - 0.05);
+  const strain = win(t, STRAIN[0], STRAIN[1], 0.3, 0.4), tr = tired(t);
+  const replay = t > E.L9 - 0.3 && t < E.L11;
+  // Лебедь: влетает сверху справа, бьёт крыльями; на «облака» рвётся вверх
+  const up = sstep(prog(t, E.w_obl - 0.2, E.w_obl + 0.5)) * (1 - sstep(prog(t, E.E10 + 0.2, E.E10 + 0.8)));
+  const sx = lerp(P.swan[0] - 60, P.swan[0], easeOut(sIn)) + wob(t, 13) * 6 * strain, sy = lerp(-420, P.swan[1], easeOut(sIn)) - up * 70 + Math.sin(t * 9) * 8 * strain + tr * 275;
+  const flapSpeed = 4 + strain * 9 + up * 6;
+  const swanO = { flap: tr > 0.5 ? 0.1 : 0.5 + 0.5 * Math.sin(t * flapSpeed), fly: tr < 0.5, rot: -0.12 - up * 0.25 + tr * 0.1, tired: tr, neck: -up * 0.3 };
+  // Рак: приползает слева, пятится; на «назад» отползает ещё
+  const back = sstep(prog(t, E.w_nazad - 0.2, E.w_nazad + 0.5)) * (1 - sstep(prog(t, E.E10 + 0.2, E.E10 + 0.8)));
+  const rx = lerp(-320, P.rak[0], easeOut(rIn)) - wob(t, 17, 1) * 6 * strain - back * 40, ry = P.rak[1];
+  const rakO = { walk: t * (6 + strain * 14 + back * 10) * (1 - tr), claw: 0.4 + 0.4 * Math.sin(t * 7) * (1 - tr), tired: tr, rot: tr * 0.05 };
+  // Щука: выпрыгивает из пруда; на «в воду» ныряет носом вниз
+  const dive = sstep(prog(t, E.w_vodu - 0.25, E.w_vodu + 0.35)) * (1 - sstep(prog(t, E.E10 + 0.3, E.E10 + 0.9)));
+  let px = P.pike[0], py = P.pike[1], prot = 0.08;
+  if (pIn < 1) { const q = pIn; px = lerp(P.pike[0] + 160, P.pike[0], q); py = lerp(P.pike[1] + 90, P.pike[1], q) - Math.sin(q * Math.PI) * 230; prot = lerp(-0.7, 0.08, q); }
+  py += Math.sin(t * 11) * 5 * strain + dive * 40 + tr * 18; px += wob(t, 19, 3) * 6 * strain + dive * 40; prot += dive * 0.5 + strain * Math.sin(t * 13) * 0.05 + tr * 0.06;
+  const pikeO = { tail: t * (5 + strain * 16), mouth: 0.3 + 0.3 * Math.sin(t * 8) * (1 - tr) + tr * 0.5, rot: prot, tired: tr };
+  return { sx, sy, swanO, sIn, rx, ry, rakO, rIn, px, py, pikeO, pIn, strain, replay, up, back, dive, tr };
+}
+
+// верёвка: от крюка к герою; snap 0..1 — прищёлкнулась, slack — провисание
+function rope(c, a, b, snap, slack) {
+  if (snap <= 0) return;
+  const s = springSnap(snap), ex = lerp(a[0], b[0], clamp(s, 0, 1.05)), ey = lerp(a[1], b[1], clamp(s, 0, 1.05));
+  const mx = (a[0] + ex) / 2, my = (a[1] + ey) / 2 + slack * 90 + (1 - clamp(s, 0, 1)) * 40;
+  c.save(); c.lineCap = "round";
+  for (const [col, lw] of [[C.ink, 13], ["#e8c98a", 7]]) { c.strokeStyle = col; c.lineWidth = lw; c.beginPath(); c.moveTo(a[0], a[1]); c.quadraticCurveTo(mx, my, ex, ey); c.stroke(); }
+  c.restore();
+}
+
+function drawArena(c, t) {
+  const h = heroState(t);
+  const { cx, cy, z } = cam(t);
+  c.save();
+  c.translate(W / 2, H / 2); c.scale(z, z); c.translate(-cx, -cy);
+  c.drawImage(arenaC, WX0, WY0);
+  clouds(c, t); flags(c, t); pondRipples(c, t);
+  // воз: поклажа падает на «поклажей», дрожит при натуге, колёса дёргаются на «ходу»
+  const load = prog(t, E.w_pokl - 0.15, E.w_voz + 0.35);
+  const jerk = win(t, E.w_hodu - 0.1, E.w_hodu + 0.6, 0.1, 0.3);
+  const shake = (wob(t, 40) * 3 * h.strain + Math.sin(t * 50) * 4 * jerk) * (1 - h.tr);
+  cart(c, CARTX, GROUND, 1, { load: t < E.L5 - 0.3 ? 0 : load, shake, rock: Math.sin(t * 30) * (h.strain * 0.5 + jerk * 2) });
+  dust(c, CARTX - 118, GROUND, t, h.strain * 0.8 + jerk);
+  dust(c, CARTX + 126, GROUND, t + 0.4, h.strain * 0.8 + jerk);
+  // верёвки
+  const snap = prog(t, E.w_vpr - 0.05, E.w_vpr + 0.45), slack = 1 - h.strain * 0.9 + h.tr * 0.9;
+  const swanEnd = [h.sx - 30, h.sy + 40], rakEnd = [h.rx + 175, h.ry + 12], pikeEnd = [h.px - 70, h.py - 6];
+  rope(c, HOOK_F, swanEnd, h.sIn >= 1 ? snap : 0, slack * 0.4);
+  rope(c, HOOK_R, rakEnd, h.rIn >= 1 ? snap : 0, slack * 0.5);
+  rope(c, HOOK_F, pikeEnd, h.pIn >= 1 ? snap : 0, slack * 0.6);
+  // герои
+  if (h.rIn > 0) { rak(c, h.rx, h.ry, 0.92, h.rakO); sweat(c, h.rx + 80, h.ry - 110, t, h.strain * (1 - h.tr) + h.tr * 0.6, 0.3); }
+  if (h.pIn > 0) {
+    pike(c, h.px, h.py, 0.85, h.pikeO); pondFront(c, t);
+    sweat(c, h.px + 120, h.py - 80, t, h.strain * (1 - h.tr), 0.6);
+    splash(c, P.pike[0] + 10, P.pike[1] - 4, prog(t, E.w_vpr - 0.15, E.w_vpr + 0.75));
+    splash(c, h.px + 120, P.pike[1] - 4, prog(t, E.w_vodu - 0.05, E.w_vodu + 0.8));
+  }
+  if (h.sIn > 0) {
+    speedLines(c, h.sx, h.sy + 20, -Math.PI / 2, h.up, t);
+    swan(c, h.sx, h.sy, 0.85, h.swanO); sweat(c, h.sx + 110, h.sy - 170, t, h.strain * (1 - h.tr), 0.1);
+  }
+  // телестратор (повтор): стрелки по словам и круг вокруг воза
+  if (t > E.L9 - 0.3 && t < E.L12 + 0.2) {
+    const fade = 1 - sstep(prog(t, E.L11 + 0.1, E.L11 + 0.45));
+    c.save(); c.globalAlpha = fade;
+    teleArrow(c, P.swan[0] - 210, P.swan[1] + 40, P.swan[0] - 210, P.swan[1] - 190, prog(t, E.w_obl - 0.1, E.w_obl + 0.35));
+    teleArrow(c, P.rak[0] + 120, P.rak[1] - 150, P.rak[0] - 210, P.rak[1] - 150, prog(t, E.w_nazad - 0.1, E.w_nazad + 0.35));
+    teleArrow(c, P.pike[0] + 60, P.pike[1] - 120, P.pike[0] + 230, P.pike[1] + 30, prog(t, E.w_vodu - 0.1, E.w_vodu + 0.35));
+    teleCircle(c, CARTX + 40, GROUND - 120, 300, 170, prog(t, E.w_vodu + 0.6, E.w_vodu + 1.1));
+    c.restore();
+  }
+  c.restore();
+}
+
+// ---------- Доска: предматчевый анализ (строки 1–3) ----------
+function drawBoardScene(c, t) {
+  studioBg(c, t);
+  const z = 1 + 0.05 * prog(t, E.V0 - 0.3, E.L4);
+  c.save(); c.translate(960, 430); c.scale(z, z); c.translate(-960, -430);
+  c.drawImage(boardC, BOARD.x - 20, BOARD.y - 20);
+  // ярлык
+  slant(c, BOARD.x + BOARD.w - 420, BOARD.y - 34, 450, 56, 16); c.fillStyle = C.yellow; c.fill();
+  c.fillStyle = C.navy; font(c, 34); c.textAlign = "left"; c.textBaseline = "middle"; c.fillText("ПРЕДМАТЧЕВЫЙ АНАЛИЗ", BOARD.x + BOARD.w - 390, BOARD.y - 4);
+  // фишки: вместе → разлетаются на «согласья нет»
+  const apart = springPop(prog(t, E.w_net - 0.2, E.w_net + 0.9));
+  const knot = prog(t, E.w_muka - 0.35, E.w_muka + 0.7);
+  const shakeK = sstep(prog(t, E.w_muka - 0.2, E.w_muka + 0.2));
+  const home = { swan: [910, 400], rak: [1000, 400], pike: [955, 475] }, far = { swan: [960, 210], rak: [620, 470], pike: [1300, 560] };
+  const pos = {}; for (const k of ["swan", "rak", "pike"]) pos[k] = [lerp(home[k][0], far[k][0], apart), lerp(home[k][1], far[k][1], apart)];
+  // меловые стрелки в три стороны
+  const ar = prog(t, E.w_net + 0.1, E.w_net + 0.8);
+  chalkArrow(c, 960, 420, 960, 300, ar); chalkArrow(c, 940, 440, 720, 465, ar); chalkArrow(c, 980, 450, 1200, 530, ar);
+  // клубок на «мука»
+  if (knot > 0) {
+    const pts = []; for (let i = 0; i <= 160; i++) { const q = i / 160, a = q * TAU * 5.5; const r = 40 + 50 * Math.sin(q * 13) + q * 30; pts.push([960 + Math.cos(a) * r * 1.3, 440 + Math.sin(a * 1.1) * r * 0.8]); }
+    chalkPath(c, pts, knot, 7);
+  }
+  for (const k of ["swan", "rak", "pike"]) chip(c, pos[k][0], pos[k][1], k, springPop(prog(t, E.V0 - 0.2 + (k === "rak" ? 0.12 : k === "pike" ? 0.24 : 0), E.V0 + 0.8)), wob(t, 30, k.length) * 5 * shakeK);
+  // красный крест на «не пойдёт»
+  const xk = prog(t, E.w_poidet - 0.15, E.w_poidet + 0.6);
+  if (xk > 0) {
+    const s = lerp(2.4, 1, springSnap(xk));
+    c.save(); c.translate(960, 430); c.rotate(-0.12); c.scale(s, s); c.globalAlpha = clamp(xk * 4, 0, 1) * (1 - 0.5 * sstep(prog(t, E.w_muka - 0.3, E.w_muka + 0.3)));
+    c.lineCap = "round"; for (const [col, lw] of [[C.navy, 70], [C.red, 50]]) { c.strokeStyle = col; c.lineWidth = lw; c.beginPath(); c.moveTo(-170, -170); c.lineTo(170, 170); c.moveTo(170, -170); c.lineTo(-170, 170); c.stroke(); }
+    c.restore();
+  }
+  c.restore();
+}
+
+// ---------- Заставка и финал (подложки под HTML-титры) ----------
+function titlePlate(c, t, k, big) {
+  if (k <= 0) return;
+  const s = springSnap(k);
+  c.save(); c.translate(lerp(-1600, 0, s), 0);
+  const y = big ? 130 : 360, h = big ? 300 : 280;
+  slant(c, 260, y, 1400, h, 60); c.fillStyle = "rgba(11,26,58,0.96)"; c.fill();
+  slant(c, 260, y + h - 14, 1380, 14, 4); c.fillStyle = C.yellow; c.fill();
+  slant(c, 300, y - 40, 340, 56, 16); c.fillStyle = C.red; c.fill();
+  c.fillStyle = "#fff"; font(c, 34); c.textAlign = "left"; c.textBaseline = "middle"; c.fillText(big ? "ИТОГИ МАТЧА" : "СЕГОДНЯ В ЭФИРЕ", 330, y - 10);
+  c.restore();
+}
+function introStripes(c, t) {
+  // полосы пролетают и оставляют фон
+  const cols = [C.yellow, C.red, C.navy3];
+  cols.forEach((col, i) => { const u = prog(t, 0.0 + i * 0.1, 0.75 + i * 0.1); if (u <= 0 || u >= 1) return; const x = lerp(-1500, 2100, easeInOut(u)); slant(c, x, 0, 900, H, 380); c.fillStyle = col; c.fill(); });
+}
+
+// ---------- Текст ----------
+const CAPS = [...document.querySelectorAll(".cap")].map((el) => ({ el, n: +el.dataset.n, last: "" }));
+const WORDS = [...document.querySelectorAll(".cap .w")].map((el) => ({ el, at: +el.dataset.at, last: -1 }));
+const ROW = [826, 896];
+function capState(n, t) {
+  // строка появляется снизу, со следующей строкой поднимается, на третьей исчезает; на новом блоке и в финале — исчезает
+  const B = CFG.blocks.find((b) => n >= b[0] && n <= b[1]);
+  const Ln = (k) => E["L" + k];
+  const next = n < B[1] ? Ln(n + 1) : null, next2 = n + 1 < B[1] ? Ln(n + 2) : null;
+  const endBlock = B[1] < 12 ? Ln(B[1] + 1) - 0.42 : E.fin - 0.35;
+  let y = ROW[1], op = sstep(prog(t, Ln(n) - 0.12, Ln(n) + 0.05));
+  if (next !== null) y = lerp(ROW[1], ROW[0], springSoft(prog(t, next - 0.12, next + 0.6)));
+  if (next2 !== null && next2 - 0.12 < endBlock) {
+    const u = sstep(prog(t, next2 - 0.12, next2 + 0.16));
+    y -= 72 * u; op *= 1 - u;
+  }
+  op *= 1 - sstep(prog(t, endBlock, endBlock + 0.25));
+  return { y, op };
+}
+function textAt(t) {
+  for (const cp of CAPS) {
+    const s = capState(cp.n, t), key = s.y.toFixed(1) + "|" + s.op.toFixed(3);
+    if (key !== cp.last) { cp.el.style.transform = `translate(0px, ${s.y.toFixed(1)}px)`; cp.el.style.opacity = s.op.toFixed(3); cp.last = key; }
+  }
+  for (const w of WORDS) {
+    const u = prog(t, w.at - 0.06, w.at + 0.4), k = Math.round(u * 400); if (k === w.last) continue; w.last = k;
+    const s = springPop(u);
+    w.el.style.opacity = u > 0 ? Math.min(1, u * 5).toFixed(3) : "0";
+    w.el.style.transform = u >= 1 ? "none" : `translate(0px, ${((1 - s) * 30).toFixed(1)}px)`;
+  }
+  // титры: заставка и финал
+  const ti = win(t, 0.55, E.V0 - 0.45, 0.45, 0.25), tf = sstep(prog(t, E.fin + 0.25, E.fin + 0.8));
+  setTitle("tt1", ti, 0.55, t); setTitle("tt2", tf, E.fin + 0.25, t);
+}
+const TT = {};
+function setTitle(id, k, t0, t) {
+  const el = TT[id] || (TT[id] = document.getElementById(id)); if (!el) return;
+  const s = springSnap(prog(t, t0, t0 + 0.8));
+  const v = k <= 0 ? "0" : k.toFixed(3);
+  el.style.opacity = v; el.style.transform = `translate(${((1 - s) * -260).toFixed(1)}px, 0px)`;
+}
+
+// ---------- Кадр ----------
+function renderAt(t) {
+  ctx.reset();
+  const boardOn = t >= E.wipe1 + 0.3 && t < E.wipe2 + 0.3;
+  if (t < E.wipe1 + 0.3) { studioBg(ctx, t); introStripes(ctx, t); titlePlate(ctx, t, win(t, 0.4, E.V0 - 0.45, 0.6, 0.25), false); }
+  else if (boardOn) drawBoardScene(ctx, t);
+  else {
+    drawArena(ctx, t);
+    // карточки участников (строка 4) → улетают в табло
+    for (let i = 0; i < 3; i++) {
+      const w = [E.w_leb, E.w_rak, E.w_shch][i];
+      playerCard(ctx, t, i, prog(t, w - 0.2, w + 0.9), prog(t, E.L5 - 0.25 + i * 0.08, E.L5 + 0.45 + i * 0.08));
+    }
+    if (t < E.L5 + 0.6) { ctx.save(); ctx.globalAlpha = 0.55 * (1 - sstep(prog(t, E.L5 - 0.25, E.L5 + 0.4))); ctx.fillStyle = C.navy; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+    replayFrame(ctx, t, win(t, E.L9 - 0.25, E.L11 + 0.1, 0.2, 0.3));
+    // табло
+    const st = {
+      pull: [0, 1, 2].map((i) => Math.min(sstep(prog(t, E.w_lezut - 0.3 + i * 0.15, E.w_vozu + 0.2 + i * 0.1)), 1 - tired(t) * 0.9) * (0.96 + 0.04 * Math.sin(t * 20 + i))),
+      blink: win(t, E.w_voz - 0.05, E.w_voz + 0.7, 0.05, 0.05) + win(t, E.w_hodu - 0.1, E.L8 + 0.4, 0.05, 0.05) + win(t, E.w_nyne - 0.1, TOTAL, 0.05, 0.05),
+      clock: t < START ? 0 : (t - START) * 7, lights: win(t, E.red1 - 0.1, E.green + 0.7, 0.15, 0.3),
+      light: [t >= E.green ? 2 : t >= E.red1 ? 1 : 0, t >= E.green ? 2 : t >= E.red2 ? 1 : 0, t >= E.green ? 2 : 0],
+    };
+    scoreboard(ctx, t, prog(t, E.L5 - 0.05, E.L5 + 0.7) * (1 - sstep(prog(t, E.fin - 0.2, E.fin + 0.2))) * (1 - win(t, E.L11 - 0.05, E.L12 + 0.1, 0.25, 0.3)), st);
+    weightPanel(ctx, t, prog(t, E.L8 - 0.1, E.L8 + 0.7) * (1 - sstep(prog(t, E.L9 - 0.55, E.L9 - 0.25))), sstep(prog(t, E.w_legka - 0.4, E.w_legka + 0.3)) * 0.25 + 0.05);
+    varPanel(ctx, t, prog(t, E.L11 + 0.1, E.L11 + 0.6), [prog(t, E.L11 + 0.15, E.L11 + 0.75), prog(t, E.w_vin - 0.1, E.w_vin + 0.6), prog(t, E.w_prav - 0.15, E.w_prav + 0.55)],
+      [prog(t, E.w_vin, E.w_vin + 0.6), prog(t, E.w_prav, E.w_prav + 0.6), prog(t, E.w_sud - 0.1, E.w_sud + 0.5)], prog(t, E.E11 - 0.1, E.L12 + 0.15));
+    finalBoard(ctx, t, prog(t, E.w_nyne - 0.15, E.w_nyne + 0.8) * (1 - sstep(prog(t, E.fin - 0.25, E.fin + 0.15))));
+    // финал
+    if (t > E.fin - 0.3) { ctx.save(); ctx.globalAlpha = 0.5 * sstep(prog(t, E.fin - 0.2, E.fin + 0.5)); ctx.fillStyle = C.navy; ctx.fillRect(0, 0, W, H); ctx.restore(); titlePlate(ctx, t, prog(t, E.fin, E.fin + 0.8), true); }
+  }
+  bug(ctx, t, sstep(prog(t, 1.0, 1.5)) * (1 - sstep(prog(t, E.fin - 0.3, E.fin))), t > E.L9 - 0.25 && t < E.L11 + 0.05);
+  lowerBar(ctx, sstep(prog(t, E.L1 - 0.6, E.L1 - 0.1)) * (1 - sstep(prog(t, E.fin - 0.3, E.fin + 0.05))));
+  wipe(ctx, prog(t, E.wipe1, E.wipe1 + 0.6));
+  wipe(ctx, prog(t, E.wipe2, E.wipe2 + 0.6));
+  wipe(ctx, prog(t, E.wipe3, E.wipe3 + 0.6));
+  textAt(t);
+}
+
+let fontsReady = false;
+const seek = (t) => renderAt(t);
+window.addEventListener("hf-seek", (e) => seek(e.detail.time));
+seek(0);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { buildArena(); seek(0); });
+
+const tl = gsap.timeline({ paused: true });
+tl.set({}, {}, TOTAL);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+
+    </script>
+  </body>
+</html>

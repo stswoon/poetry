@@ -1,0 +1,50 @@
+{
+ "note": "секунды ролика. Шумы: whoosh_wipe, whoosh_card, thud_load, splash — пики; whistle_start и whistle_final — начало и конец свистка. music — ключевые моменты музыки (удары, разделы).",
+ "V0": 4.5,
+ "OUTRO": 6.5,
+ "total": 49.4,
+ "whoosh_wipe": [
+  4.183,
+  14.66,
+  29.675
+ ],
+ "whoosh_card": [
+  15.76,
+  16.363,
+  16.913
+ ],
+ "thud_load": [
+  18.514,
+  18.714,
+  18.874,
+  19.072
+ ],
+ "whistle_start": [
+  23.333,
+  23.553
+ ],
+ "splash": [
+  22.323,
+  35.123
+ ],
+ "whistle_final": [
+  39.842,
+  40.242
+ ],
+ "music": {
+  "intro_hit": 0.45,
+  "intro_final_hit": 3.95,
+  "stanza_fill": 13.385,
+  "arena_crash": 14.377,
+  "build": 20.334,
+  "red_stabs": 22.612,
+  "go": 23.312,
+  "replay": 29.294,
+  "var": 35.775,
+  "cut": 40.262,
+  "deflate": 40.262,
+  "bom": 41.733,
+  "fin_fanfare": 43.7,
+  "final_chord": 45.7
+ }
+}

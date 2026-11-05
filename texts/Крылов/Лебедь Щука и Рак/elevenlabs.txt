@@ -1,0 +1,25 @@
+==================== ГОЛОС (не для озвучки) ====================
+Голос: Nester Surovy — Gravely yet Refined (ID: pM78bgjPVk0JXtaEnFoj)
+Запасной: Marat — Warm, Calm and Friendly (ID: vQxSi2EuaRWwBw3nn6dK)
+Настройки: stability 0.5, similarity_boost 0.75, модель Eleven v4
+Проверить на слух: «му́ка» (мучение, не «мука́»), «впрягли́сь», «во́зу», «легка́», «пя́тится», «в во́ду», «ны́не»; мораль в начале — неторопливо и мудро, как дедушка-баснописец; строки «Да Лебедь рвётся в облака́… а Щу́ка тя́нет в во́ду» — с живым юмором, три направления раздельно; последняя строка «Да только воз и ны́не там» — медленно, с усмешкой, как поговорка.
+
+=========== ТЕКСТ ДЛЯ ОЗВУЧКИ — копировать отсюда ===========
+[wise old fabulist, warm, unhurried, slowly]
+Когда в товарищах согласья нет, [short pause]
+На лад их дело не пойдёт, [short pause]
+И выйдет из него не дело, только му́ка. [long pause]
+[storyteller, lively, with gentle humor]
+Однажды Лебедь, Рак да Щука [short pause]
+Везти с поклажей воз взялись, [short pause]
+И вместе трое все в него впрягли́сь; [short pause]
+[amused, a little faster]
+Из кожи лезут вон, а во́зу всё нет хо́ду! [short pause]
+Поклажа бы для них казалась и легка́: [short pause]
+[with humor, clearly separating each one]
+Да Лебедь рвётся в облака́, [short pause]
+Рак пя́тится назад, а Щука тянет в во́ду. [short pause]
+[calm, slightly ironic, slowly]
+Кто виноват из них, кто прав, — судить не нам; [short pause]
+[slowly, with a wry smile, like a proverb]
+Да только воз и ны́не там.
