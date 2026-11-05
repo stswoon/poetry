@@ -17,6 +17,9 @@ utils/upload-helper/logs/
 /.env
 /.env.local
 
+# Локальное окружение Claude (пути зависят от компьютера)
+/.claude/settings.local.json
+
 # upload-helper-disk: логи прогонов
 utils/upload-helper-disk/logs/
 

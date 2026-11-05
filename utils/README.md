@@ -3,9 +3,9 @@
 ## Что установлено
 
 - **HyperFrames** (CLI 0.8.204, из плагина Claude) — HTML → видео. Запускается через `npx hyperframes@0.8.204 <команда>`; Chrome для рендера лежит в `~/.cache/hyperframes/chrome`.
-- **FFmpeg / FFprobe** — `brew install ffmpeg`, нужны HyperFrames для рендера.
+- **FFmpeg / FFprobe 9.0.2** — нужны HyperFrames для рендера. В Windows доступны через WinGet, в macOS — через Homebrew.
 - **Framer Motion** — пакет `motion` (новое имя framer-motion, сам `framer-motion` ставится как его зависимость). Установка: `cd utils && npm install`.
-- **Whisper** — `brew install whisper-cpp` (1.9.5), модель `medium` в `~/.cache/hyperframes/whisper/models`. Нужен, чтобы получить таймкоды слов из озвучки.
+- **Whisper** — в Windows установлен whisper.cpp 1.9.4, в macOS использовался Homebrew 1.9.5. Модель `medium` лежит в `~/.cache/hyperframes/whisper/models`. Нужен, чтобы получить таймкоды слов из озвучки.
 
 Проверка окружения: `npx hyperframes@0.8.204 doctor`.
 
@@ -137,4 +137,12 @@ npx hyperframes@0.8.204 transcribe voice.mp3 --engine whisper --model medium --l
 
 - Для русского всегда указывать `--model medium --language ru`: модель по умолчанию `small.en` переводит речь на английский.
 - Whisper иногда пишет слово иначе («златая» → «золотая»), поэтому слова сопоставляются с текстом стиха по порядку, а не по написанию.
-- На GPU (Metal) whisper.cpp 1.9.5 падает, поэтому HyperFrames вызывает его через [whisper-cli-cpu.sh](whisper-cli-cpu.sh) с флагом `-ng`. Обёртку подключает переменная `HYPERFRAMES_WHISPER_PATH` в `.claude/settings.local.json`; в обычном терминале её нужно задать вручную. На CPU модель medium обрабатывает минуту речи примерно за 35 секунд.
+- **Windows:** HyperFrames вызывает нативный `whisper-cli.exe` через переменную `HYPERFRAMES_WHISPER_PATH`. Путь сохранён в окружении пользователя Windows и в локальном `.claude/settings.local.json` (не коммитится). Бинарник находится в `~/.cache/hyperframes/whisper/win-bin-b5130/Release/whisper-cli.exe`; переустановка модели не нужна.
+- После изменения окружения пользователя нужно заново открыть терминал или приложение, из которого запускается HyperFrames. В уже открытом PowerShell можно подхватить сохранённый путь без перезапуска:
+
+  ```powershell
+  $env:HYPERFRAMES_WHISPER_PATH = [Environment]::GetEnvironmentVariable('HYPERFRAMES_WHISPER_PATH', 'User')
+  npx hyperframes@0.8.204 doctor
+  ```
+
+- **macOS:** на GPU (Metal) whisper.cpp 1.9.5 падает, поэтому используется [whisper-cli-cpu.sh](whisper-cli-cpu.sh) с флагом `-ng`. На Mac переменная `HYPERFRAMES_WHISPER_PATH` должна указывать на эту обёртку. На CPU модель medium обрабатывает минуту речи примерно за 35 секунд.
