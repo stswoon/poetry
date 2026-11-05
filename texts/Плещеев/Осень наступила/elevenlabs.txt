@@ -1,0 +1,27 @@
+==================== ГОЛОС (не для озвучки) ====================
+Голос: Marina — Soft, Clear and Warm (ID: ymDCYd8puC7gYjxIamPt)
+Запасной: Marat — Warm, Calm and Friendly (ID: vQxSi2EuaRWwBw3nn6dK)
+Настройки: stability 0.5, similarity_boost 0.75, модель Eleven v4
+Проверить на слух: ударения «о́зимь» (не «ози́мь»), «во́ды» (не «воды́»), «края́» (не «кра́я»); третья строфа — чуть грустнее и тише, без надрыва; последняя строка «В тёплые края́» — мягко, с прощанием.
+
+=========== ТЕКСТ ДЛЯ ОЗВУЧКИ — копировать отсюда ===========
+[gentle storyteller, for little children, slightly wistful, slowly]
+Осень наступила, [short pause]
+Высохли цветы, [short pause]
+И глядят уныло [short pause]
+Голые кусты. [long pause]
+[calm, softly, slowly]
+Вянет и желтеет [short pause]
+Травка на лугах, [short pause]
+Только зеленеет [short pause]
+О́зимь на полях. [long pause]
+[a little sad, quietly, slowly]
+Туча небо кроет, [short pause]
+Солнце не блестит, [short pause]
+Ветер в поле воет, [short pause]
+Дождик моросит. [long pause]
+[livelier, then warm and tender, slowly]
+Зашумели во́ды [short pause]
+Быстрого ручья, [short pause]
+Птички улетели [short pause]
+В тёплые края́.
