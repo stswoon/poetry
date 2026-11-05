@@ -1,0 +1,36 @@
+.gitignore
+  h_06e01297fc405a 20-22
+.claude/skills/stsPoetryMake/references/scenariy.md
+  h_06e01297fc405a 9-13,23-28,37,51,56,58-59
+  h_06e01297fc405a 5-8,14,16-20,22,29-32,36,38-39,41
+AGENTS.md
+  h_06e01297fc405a 5-6,16,19,21-25
+utils/README.md
+  h_06e01297fc405a 6,8,140-148
+.claude/skills/stsPoetryMake/SKILL.md
+  h_06e01297fc405a 3-4,9,11-23,38-48,54,74-76,80-81,89-92,98-100,104-105,107-109,111-113,118-119,123-124,126-134,138-148,152-154,156-164,169-170,175-176,182-188,193-207,213-220,227-228,230-239,246-247,251-252,254-255,257-258,262-263,267-277
+  h_06e01297fc405a 30,51,95-96
+.agents/skills
+  s_abfc59e84e5af7::t_f607816812b4f1 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d149e19c3df5378300c9b955252c197481862447",
+  "prompts": {},
+  "humans": {
+    "h_06e01297fc405a": {
+      "author": "stswoon <xx@xx.xx>"
+    }
+  },
+  "sessions": {
+    "s_abfc59e84e5af7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19d49-d533-7720-b5a6-b760d9d591ca",
+        "model": "unknown"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
