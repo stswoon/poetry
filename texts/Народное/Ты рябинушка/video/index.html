@@ -1,0 +1,647 @@
+<!doctype html>
+<!-- Шаблон: index.html собирается из template.tpl и src/*.js командой `python3 build.py`. Правьте эти файлы, не index.html. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      @font-face { font-family: "Pero"; font-style: italic; font-weight: 700; src: local("PT Serif Bold Italic"), local("PTSerif-BoldItalic"), local("Georgia Bold Italic"); }
+      @font-face { font-family: "Pero"; font-style: italic; font-weight: 400; src: local("PT Serif Italic"), local("PTSerif-Italic"), local("Georgia Italic"); }
+      :root { --gold: #f3cd63; --red: #ef4a2e; --cream: #f6e7c1; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #24150c; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: "Pero", serif; color: var(--gold); background: #24150c; }
+      #stage { position: absolute; inset: 0; width: 1920px; height: 1080px; transform-origin: 960px 540px; }
+      #scene { position: absolute; inset: 0; width: 1920px; height: 1080px; pointer-events: none; z-index: 0; }
+      #preload { position: absolute; left: 0; top: 0; opacity: 0; font: italic 700 30px "Pero"; }
+      #preload i { font: italic 400 30px "Pero"; }
+      .txt { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 3; }
+      .sheet { position: absolute; inset: 0; transform-origin: 1450px 540px; }
+      .w { display: inline-block; white-space: nowrap; padding: 8px 14px; margin: -8px -14px; opacity: 0; }
+      .k { color: var(--red); }
+      .line { position: absolute; left: 1130px; width: 640px; height: 90px; line-height: 90px; text-align: center; font-size: 56px; font-weight: 700; font-style: italic; white-space: nowrap; word-spacing: 0.04em;
+              text-shadow: 0 3px 0 rgba(60, 30, 4, 0.9), 0 0 22px rgba(0, 0, 0, 0.7); }
+      .ct { position: absolute; left: 1110px; width: 680px; text-align: center; font-weight: 700; font-style: italic; white-space: nowrap; color: var(--red);
+            text-shadow: 0 3px 0 rgba(70, 8, 2, 0.9), 0 0 24px rgba(0, 0, 0, 0.7); }
+      .ca { position: absolute; left: 1110px; width: 680px; text-align: center; font-weight: 400; font-style: italic; white-space: nowrap; color: var(--gold);
+            text-shadow: 0 2px 0 rgba(60, 30, 4, 0.9), 0 0 18px rgba(0, 0, 0, 0.7); }
+      .intro .ct { top: 410px; font-size: 64px; line-height: 84px; }
+      .intro .ca { top: 556px; font-size: 38px; line-height: 54px; }
+      .final .ct { top: 396px; font-size: 72px; line-height: 92px; }
+      .final .ca { top: 562px; font-size: 42px; line-height: 58px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="27.880" data-width="1920" data-height="1080">
+      <div id="stage">
+        <canvas id="scene" width="1920" height="1080"></canvas>
+        <div id="preload" aria-hidden="true">Шрифт рябинушка <i>Русская народная песня</i></div>
+        <div id="card1" class="clip txt" data-start="0.000" data-duration="4.835" data-track-index="4" data-track-kind="graphics"><div class="sheet intro" id="card1s"><h1 class="ct"><span class="w" data-at="0.700" data-d="1.100">Ты, рябинушка…</span></h1><p class="ca"><span class="w" data-at="1.600" data-d="0.900">Русская народная песня</span></p></div></div>
+      <div id="st1" class="clip txt" data-start="4.785" data-duration="7.695" data-track-index="3" data-track-kind="captions"><div class="sheet" id="sh1"><div class="line" style="top:335px"><span class="w" data-at="5.045" data-d="0.553">Ты,</span> <span class="w k" data-at="5.660" data-d="0.600">рябинушка</span></div><div class="line" style="top:435px"><span class="w k" data-at="7.165" data-d="0.600">Раскудрявая,</span></div><div class="line" style="top:535px"><span class="w" data-at="8.813" data-d="0.200">Ты</span> <span class="w" data-at="8.900" data-d="0.324">когда</span> <span class="w k" data-at="9.260" data-d="0.546">взошла,</span></div><div class="line" style="top:635px"><span class="w" data-at="10.376" data-d="0.373">Когда</span> <span class="w k" data-at="10.790" data-d="0.535">выросла?</span></div></div></div>
+      <div id="st2" class="clip txt" data-start="12.480" data-duration="8.407" data-track-index="3" data-track-kind="captions"><div class="sheet" id="sh2"><div class="line" style="top:335px"><span class="w" data-at="12.790" data-d="0.202">—</span> <span class="w" data-at="12.790" data-d="0.202">Я</span> <span class="w k" data-at="13.015" data-d="0.600">весной</span> <span class="w k" data-at="13.705" data-d="0.520">взошла,</span></div><div class="line" style="top:435px"><span class="w k" data-at="14.829" data-d="0.514">Летом</span> <span class="w" data-at="15.400" data-d="0.559">выросла,</span></div><div class="line" style="top:535px"><span class="w" data-at="16.665" data-d="0.200">По</span> <span class="w k" data-at="16.760" data-d="0.400">зорям</span> <span class="w" data-at="17.205" data-d="0.526">цвела,</span></div><div class="line" style="top:635px"><span class="w k" data-at="18.188" data-d="0.600">Солнцем</span> <span class="w" data-at="18.955" data-d="0.488">вызрела…</span></div></div></div>
+      <div id="card2" class="clip txt" data-start="20.437" data-duration="7.443" data-track-index="4" data-track-kind="graphics"><div class="sheet final" id="card2s"><h1 class="ct"><span class="w" data-at="20.887" data-d="1.100">Ты, рябинушка…</span></h1><p class="ca"><span class="w" data-at="21.787" data-d="0.900">Русская народная песня</span></p></div></div>
+      </div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="5.000" data-duration="14.880" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="27.880" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>
+      const CFG = {"total": 27.88, "ev": {"L1": 5.085, "L2": 7.205, "L3": 8.853, "L4": 10.416, "L5": 12.83, "L6": 14.869, "L7": 16.705, "L8": 18.228, "E1": 6.594, "E2": 8.155, "E3": 9.907, "E4": 11.425, "E5": 14.323, "E6": 16.061, "E7": 17.829, "E8": 19.537, "rja": 5.7, "ras": 7.205, "vz1": 9.3, "vy1": 10.83, "ves": 13.055, "vz2": 13.745, "let": 14.869, "vy2": 15.44, "zor": 16.8, "cve": 17.245, "sol": 18.228, "vyz": 18.995, "q_out": 12.08, "q_oute": 12.48, "a_in": 12.48, "a_out": 20.437, "a_oute": 20.887, "fin": 20.887, "glint": 20.037, "total": 27.88}};
+// Хохлома: стол, чёрное лаковое блюдо, лаковая доска для текста и хохломские мазки кистью. Всё рисуется кодом.
+const W = 1920, H = 1080, TOTAL = CFG.total, EV = CFG.ev, TAU = Math.PI * 2;
+
+function mulberry32(a) { return function () { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, u) => a + (b - a) * u;
+const sstep = (u) => { u = clamp(u, 0, 1); return u * u * (3 - 2 * u); };
+const prog = (t, a, b) => clamp((t - a) / Math.max(1e-6, b - a), 0, 1);
+const mkCanvas = (w, h) => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
+// пружины Framer Motion как функции времени: 0 → 1 с перелётом
+function makeSpring(opts) {
+  const g = Motion.spring({ ...opts, keyframes: [0, 1] });
+  const pts = []; for (let i = 0; i <= 400; i++) pts.push(g.next(i * 10).value);
+  return (s) => { if (s <= 0) return 0; const f = s * 100; if (f >= 400) return 1; const i = Math.floor(f); return lerp(pts[i], pts[i + 1], f - i); };
+}
+const springPop = makeSpring({ stiffness: 190, damping: 11, mass: 1 });
+const springSoft = makeSpring({ stiffness: 120, damping: 15, mass: 1 });
+
+// ---------- Цвета ----------
+const C = {
+  red: "#cf2a1c", redL: "#f0533a", redD: "#7c120b", black: "#0a0605", cream: "#f8ecd0", creamD: "#d9c39a",
+  green: "#4f8a2c", greenL: "#9cc24a", greenD: "#2c5418", goldL: "#fff0b2", gold: "#efbd4a", goldD: "#9a6516",
+};
+
+// ---------- Золото: пятнистый металл как узор ----------
+const goldC = mkCanvas(512, 512);
+{
+  const c = goldC.getContext("2d"), r = mulberry32(7);
+  const g = c.createLinearGradient(0, 0, 512, 512);
+  g.addColorStop(0, "#f7d56c"); g.addColorStop(0.35, "#e2a93a"); g.addColorStop(0.55, "#fbe39a"); g.addColorStop(0.8, "#d19a2e"); g.addColorStop(1, "#f3c95a");
+  c.fillStyle = g; c.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 70; i++) {
+    const x = r() * 512, y = r() * 512, rad = 20 + r() * 90, gg = c.createRadialGradient(x, y, 0, x, y, rad), lt = r() > 0.5;
+    gg.addColorStop(0, lt ? "rgba(255,246,200,0.35)" : "rgba(150,90,20,0.28)"); gg.addColorStop(1, "rgba(0,0,0,0)");
+    c.fillStyle = gg; c.fillRect(x - rad, y - rad, rad * 2, rad * 2);
+  }
+  for (let i = 0; i < 900; i++) { c.fillStyle = r() > 0.5 ? "rgba(255,250,215,0.25)" : "rgba(120,70,10,0.18)"; c.fillRect(r() * 512, r() * 512, 1.5, 1.5); }
+}
+let GOLD = null; // узор создаётся для основного контекста
+const goldFill = (c) => (GOLD || (GOLD = c.createPattern(goldC, "repeat")));
+
+// ---------- Стол (статичный) ----------
+const deskC = mkCanvas(W, H);
+{
+  const c = deskC.getContext("2d"), r = mulberry32(11);
+  c.fillStyle = "#3a2213"; c.fillRect(0, 0, W, H);
+  for (let i = 0; i < 320; i++) {
+    const y = r() * H, light = r() > 0.55;
+    c.strokeStyle = light ? `rgba(150,95,55,${0.05 + r() * 0.08})` : `rgba(15,6,2,${0.08 + r() * 0.12})`;
+    c.lineWidth = 1 + r() * 3.5; c.beginPath();
+    for (let x = -20; x <= W + 40; x += 40) { const yy = y + 8 * Math.sin(x * 0.003 + i) + 3 * Math.sin(x * 0.011 + i * 2.1); if (x < 0) c.moveTo(x, yy); else c.lineTo(x, yy); }
+    c.stroke();
+  }
+  const g = c.createRadialGradient(W / 2, H / 2, 300, W / 2, H / 2, 1150); g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(5,2,0,0.62)");
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
+}
+
+// ---------- Блюдо ----------
+const PC = { x: 575, y: 540 }, R_OUT = 476, R_GOLD = 446, R_ORN = 410, R_FIELD = 400;
+const plateC = mkCanvas(1000, 1000); // блюдо без росписи: тень, дерево ободка, чёрный лак
+{
+  const c = plateC.getContext("2d"), o = 500;
+  c.save(); c.shadowColor = "rgba(0,0,0,0.6)"; c.shadowBlur = 40; c.shadowOffsetY = 18;
+  c.fillStyle = "#120a07"; c.beginPath(); c.arc(o, o, R_OUT, 0, TAU); c.fill(); c.restore();
+  // чёрный лак: чуть светлее к центру, ободок темнее (выпуклость края)
+  const g = c.createRadialGradient(o - 60, o - 80, 30, o, o, R_OUT);
+  g.addColorStop(0, "#2a1a14"); g.addColorStop(0.7, "#120a07"); g.addColorStop(0.86, "#060302"); g.addColorStop(0.93, "#1d120c"); g.addColorStop(1, "#050201");
+  c.fillStyle = g; c.beginPath(); c.arc(o, o, R_OUT, 0, TAU); c.fill();
+  // ложбинка между полем и ободком
+  c.strokeStyle = "rgba(0,0,0,0.7)"; c.lineWidth = 6; c.beginPath(); c.arc(o, o, R_ORN + 2, 0, TAU); c.stroke();
+  c.strokeStyle = "rgba(255,220,180,0.06)"; c.lineWidth = 2; c.beginPath(); c.arc(o, o, R_ORN + 6, 0, TAU); c.stroke();
+}
+// лаковый блик (статичный), рисуется поверх росписи
+const sheenC = mkCanvas(1000, 1000);
+{
+  const c = sheenC.getContext("2d"), o = 500;
+  c.save(); c.beginPath(); c.arc(o, o, R_OUT, 0, TAU); c.clip();
+  const g = c.createRadialGradient(o - 230, o - 260, 10, o - 230, o - 260, 330);
+  g.addColorStop(0, "rgba(255,240,215,0.13)"); g.addColorStop(0.5, "rgba(255,240,215,0.04)"); g.addColorStop(1, "rgba(255,240,215,0)");
+  c.fillStyle = g; c.fillRect(0, 0, 1000, 1000);
+  c.restore();
+}
+
+// ---------- Лаковая доска для текста ----------
+const BX = 1100, BY = 210, BW = 700, BH = 640;
+const boardC = mkCanvas(BW + 80, BH + 80);
+{
+  const c = boardC.getContext("2d"), o = 40;
+  c.save(); c.shadowColor = "rgba(0,0,0,0.55)"; c.shadowBlur = 30; c.shadowOffsetY = 14;
+  c.fillStyle = "#0b0605"; c.beginPath(); c.roundRect(o, o, BW, BH, 26); c.fill(); c.restore();
+  const g = c.createLinearGradient(o, o, o + BW, o + BH); g.addColorStop(0, "#1f130d"); g.addColorStop(0.5, "#0b0605"); g.addColorStop(1, "#150c08");
+  c.fillStyle = g; c.beginPath(); c.roundRect(o, o, BW, BH, 26); c.fill();
+  c.strokeStyle = "rgba(0,0,0,0.6)"; c.lineWidth = 4; c.beginPath(); c.roundRect(o + 18, o + 18, BW - 36, BH - 36, 16); c.stroke();
+  const sh = c.createLinearGradient(o, o, o + BW * 0.6, o + BH * 0.5); sh.addColorStop(0, "rgba(255,235,210,0.08)"); sh.addColorStop(1, "rgba(255,235,210,0)");
+  c.fillStyle = sh; c.beginPath(); c.roundRect(o, o, BW, BH, 26); c.fill();
+}
+
+// ---------- Геометрия мазков ----------
+function bez(p0, p1, p2, p3, n = 24) {
+  const out = [];
+  for (let i = 0; i <= n; i++) {
+    const u = i / n, v = 1 - u;
+    out.push([v * v * v * p0[0] + 3 * v * v * u * p1[0] + 3 * v * u * u * p2[0] + u * u * u * p3[0],
+              v * v * v * p0[1] + 3 * v * v * u * p1[1] + 3 * v * u * u * p2[1] + u * u * u * p3[1]]);
+  }
+  return out;
+}
+function arcLen(pts) { const L = [0]; for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])); return L; }
+// Точки пути до доли u длины, с интерполяцией конца
+function cut(pts, u) {
+  if (u >= 1) return pts;
+  const L = arcLen(pts), target = L[L.length - 1] * u, out = [pts[0]];
+  for (let i = 1; i < pts.length; i++) {
+    if (L[i] >= target) { const f = (target - L[i - 1]) / Math.max(1e-6, L[i] - L[i - 1]); out.push([lerp(pts[i - 1][0], pts[i][0], f), lerp(pts[i - 1][1], pts[i][1], f)]); return out; }
+    out.push(pts[i]);
+  }
+  return out;
+}
+// Мазок кистью с нажимом: prof(s) — ширина в точке s (0..1 по всей длине), u — какая доля уже написана
+function stroke(c, pts, prof, fill, u = 1, opt = {}) {
+  if (u <= 0.001) return;
+  const L = arcLen(pts), tot = L[L.length - 1], q = cut(pts, u), Lq = arcLen(q), n = q.length;
+  if (n < 2) return;
+  const lft = [], rgt = [], uTip = u < 1 ? 1 : 0;
+  for (let i = 0; i < n; i++) {
+    const a = q[Math.max(0, i - 1)], b = q[Math.min(n - 1, i + 1)];
+    let dx = b[0] - a[0], dy = b[1] - a[1]; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
+    const s = Lq[i] / tot;
+    let w = prof(s);
+    if (uTip) w *= Math.min(1, (Lq[n - 1] - Lq[i]) / 14 + 0.25); // растущий конец — кончик кисти
+    w *= 0.5;
+    lft.push([q[i][0] - dy * w, q[i][1] + dx * w]); rgt.push([q[i][0] + dy * w, q[i][1] - dx * w]);
+  }
+  c.beginPath(); c.moveTo(lft[0][0], lft[0][1]);
+  for (let i = 1; i < n; i++) c.lineTo(lft[i][0], lft[i][1]);
+  for (let i = n - 1; i >= 0; i--) c.lineTo(rgt[i][0], rgt[i][1]);
+  c.closePath();
+  c.fillStyle = fill; c.fill();
+  if (opt.round) { const w0 = prof(0) * 0.5; c.beginPath(); c.arc(q[0][0], q[0][1], w0, 0, TAU); c.fill(); }
+  if (opt.hi) { // блик золота вдоль мазка
+    c.save(); c.globalAlpha *= opt.hi; c.strokeStyle = "rgba(255,248,215,0.9)"; c.lineWidth = 1.6; c.lineCap = "round";
+    c.beginPath(); const k = Math.floor(n * 0.15), m = Math.floor(n * 0.75);
+    for (let i = k; i <= m; i++) { const p = lft[i], cc = q[i], x = lerp(cc[0], p[0], 0.45), y = lerp(cc[1], p[1], 0.45); if (i === k) c.moveTo(x, y); else c.lineTo(x, y); }
+    c.stroke(); c.restore();
+  }
+}
+// профили нажима
+const P = {
+  drop: (wm) => (s) => wm * Math.pow(Math.max(0, 1 - s), 0.85) * (0.55 + 0.45 * Math.min(1, s * 6)), // «капелька»: толстая голова, тонкий хвост
+  blade: (wm) => (s) => wm * Math.pow(Math.sin(Math.PI * clamp(s, 0, 1)), 0.7) + 0.6,          // «осочка»: тонко — нажим — тонко
+  taper: (w0, w1) => (s) => lerp(w0, w1, s),
+  curl: (wm) => (s) => wm * Math.pow(1 - s, 1.1) * Math.min(1, 0.4 + s * 5) + 0.7,                // завиток: нажим в начале, сходит на нет в спирали
+};
+// «капелька»: от основания (x, y) под углом a, длина len, ширина wm, лёгкий изгиб bend
+function drop(c, x, y, a, len, wm, fill, k = 1, bend = 0.25, hi = 0) {
+  if (k <= 0.001) return;
+  const l = len * k, ca = Math.cos(a), sa = Math.sin(a), nx = -sa, ny = ca;
+  const p0 = [x, y], p3 = [x + ca * l, y + sa * l];
+  const p1 = [x + ca * l * 0.35 + nx * l * bend * 0.6, y + sa * l * 0.35 + ny * l * bend * 0.6];
+  const p2 = [x + ca * l * 0.75 + nx * l * bend, y + sa * l * 0.75 + ny * l * bend];
+  stroke(c, bez(p0, p1, p2, p3, 16), P.drop(wm * k), fill, 1, { round: true, hi });
+}
+// спираль-завиток: начинается в (x, y) и закручивается вокруг центра на расстоянии rad
+function curlPts(x, y, a, rad, turns, dir = 1) {
+  const cx = x + Math.cos(a) * rad, cy = y + Math.sin(a) * rad, pts = [], n = 40;
+  const th0 = a + Math.PI;
+  for (let i = 0; i <= n; i++) {
+    const f = i / n, th = th0 + dir * f * turns * TAU, r = rad * (1 - 0.82 * f);
+    pts.push([cx + Math.cos(th) * r, cy + Math.sin(th) * r]);
+  }
+  return pts;
+}
+// тонкая золотая «намётка» по пути
+function sketch(c, pts, u, alpha) {
+  if (u <= 0.001 || alpha <= 0.001) return;
+  const q = cut(pts, u);
+  c.save(); c.globalAlpha *= alpha; c.strokeStyle = "#e9be5c"; c.lineWidth = 2.2; c.lineCap = "round"; c.lineJoin = "round";
+  c.beginPath(); c.moveTo(q[0][0], q[0][1]); for (let i = 1; i < q.length; i++) c.lineTo(q[i][0], q[i][1]); c.stroke(); c.restore();
+}
+// ягода: красный шарик с бликом и чёрной «кисткой»
+function berry(c, x, y, r, k = 1, ripe = 1) {
+  if (k <= 0.001) return;
+  const rr = r * k;
+  const g = c.createRadialGradient(x - rr * 0.35, y - rr * 0.4, rr * 0.1, x, y, rr);
+  g.addColorStop(0, ripe > 0.5 ? C.redL : "#f08a3a"); g.addColorStop(0.6, C.red); g.addColorStop(1, C.redD);
+  c.fillStyle = g; c.beginPath(); c.arc(x, y, rr, 0, TAU); c.fill();
+  c.fillStyle = "rgba(255,240,200,0.85)"; c.beginPath(); c.arc(x - rr * 0.38, y - rr * 0.4, rr * 0.22, 0, TAU); c.fill();
+  // «кистка» — маленькая чёрная звёздочка на кончике ягоды (снизу справа)
+  const kx = x + rr * 0.42, ky = y + rr * 0.46;
+  c.strokeStyle = "#1a0705"; c.lineWidth = Math.max(1, rr * 0.11); c.lineCap = "round";
+  for (let i = 0; i < 4; i++) { const a = 0.4 + i * Math.PI / 4; c.beginPath(); c.moveTo(kx - Math.cos(a) * rr * 0.17, ky - Math.sin(a) * rr * 0.17); c.lineTo(kx + Math.cos(a) * rr * 0.17, ky + Math.sin(a) * rr * 0.17); c.stroke(); }
+}
+// белый цветок рябины: пять лепестков и жёлтая серединка
+function flower(c, x, y, r, k = 1, rot = 0) {
+  if (k <= 0.001) return;
+  const rr = r * k;
+  c.fillStyle = C.cream;
+  for (let i = 0; i < 5; i++) { const a = rot + i * TAU / 5; c.beginPath(); c.ellipse(x + Math.cos(a) * rr * 0.55, y + Math.sin(a) * rr * 0.55, rr * 0.5, rr * 0.36, a, 0, TAU); c.fill(); }
+  c.fillStyle = "#e7b33e"; c.beginPath(); c.arc(x, y, rr * 0.28, 0, TAU); c.fill();
+}
+// кисть: деревянная ручка под хохлому и тёмный ворс; (x, y) — кончик
+function brush(c, x, y, a, alpha) {
+  if (alpha <= 0.001) return;
+  c.save(); c.globalAlpha *= alpha; c.translate(x, y); c.rotate(a);
+  c.shadowColor = "rgba(0,0,0,0.45)"; c.shadowBlur = 14; c.shadowOffsetX = 10; c.shadowOffsetY = 14;
+  c.fillStyle = "#3b2416"; c.beginPath(); c.moveTo(0, 0); c.quadraticCurveTo(10, -14, 14, -44); c.lineTo(-14, -44); c.quadraticCurveTo(-10, -14, 0, 0); c.fill();
+  c.shadowColor = "transparent";
+  c.fillStyle = "#b9b4ac"; c.fillRect(-15, -66, 30, 24);
+  c.fillStyle = "#d9d4cc"; c.fillRect(-15, -66, 9, 24);
+  c.fillStyle = C.red; c.beginPath(); c.moveTo(-13, -66); c.lineTo(13, -66); c.lineTo(9, -330); c.lineTo(-9, -330); c.closePath(); c.fill();
+  c.fillStyle = goldFill(c);
+  for (let i = 0; i < 5; i++) { c.beginPath(); c.ellipse(0, -100 - i * 46, 6, 14, 0, 0, TAU); c.fill(); }
+  c.fillStyle = "rgba(255,255,255,0.18)"; c.fillRect(-8, -326, 4, 258);
+  c.restore();
+}
+
+// ---------- Рябина: геометрия в координатах блюда (центр блюда = 0,0) ----------
+const CROWN = { x: 0, y: -105 };
+const TRUNK = bez([0, 335], [-16, 205], [20, 40], [0, -150], 36);
+const TRUNK_L = arcLen(TRUNK), TRUNK_T = TRUNK_L[TRUNK_L.length - 1];
+function along(pts, L, s) { // точка и угол пути на доле длины s
+  const target = L[L.length - 1] * s;
+  for (let i = 1; i < pts.length; i++) if (L[i] >= target) {
+    const f = (target - L[i - 1]) / Math.max(1e-6, L[i] - L[i - 1]), a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) };
+  }
+  const a = pts[pts.length - 2], b = pts[pts.length - 1]; return { x: b[0], y: b[1], a: Math.atan2(b[1] - a[1], b[0] - a[0]) };
+}
+// Ветви: доля ствола, где растут, конец, изгиб
+const BR = [
+  { s: 0.36, end: [-222, 58], c1: [-70, -26], c2: [70, -40] },
+  { s: 0.40, end: [230, 36], c1: [70, -30], c2: [-70, -40] },
+  { s: 0.62, end: [-214, -126], c1: [-60, -40], c2: [60, -10] },
+  { s: 0.66, end: [196, -150], c1: [60, -40], c2: [-60, -10] },
+  { s: 0.88, end: [-104, -252], c1: [-30, -50], c2: [40, 10] },
+  { s: 0.91, end: [92, -266], c1: [30, -50], c2: [-30, 20] },
+  { s: 1.00, end: [-4, -300], c1: [0, -40], c2: [6, 30] },
+].map((b, i) => {
+  const p = along(TRUNK, TRUNK_L, b.s), p0 = [p.x, p.y];
+  const pts = bez(p0, [p0[0] + b.c1[0], p0[1] + b.c1[1]], [b.end[0] + b.c2[0], b.end[1] + b.c2[1]], b.end, 24);
+  return { ...b, i, p0, pts, L: arcLen(pts), w0: lerp(13, 7, b.s), side: b.end[0] < -10 ? -1 : b.end[0] > 10 ? 1 : 0 };
+});
+// Перистые листья: на ветви (доля s), сторона, длина
+const LEAVES = [];
+{
+  const r = mulberry32(21);
+  for (const b of BR) {
+    const spots = b.i === 6 ? [[0.45, 1], [0.5, -1]] : [[0.42, -1], [0.72, 1], [1.0, 0]];
+    spots.forEach(([s, side], j) => {
+      const p = along(b.pts, b.L, s);
+      const a = side === 0 ? p.a - 0.25 * (b.side || 1) : p.a + side * (0.95 + r() * 0.25);
+      LEAVES.push({ b: b.i, s, x: p.x, y: p.y, a, len: (side === 0 ? 120 : 108) + r() * 26, gold: (b.i + j) % 2 === 0, bend: (r() - 0.5) * 0.5 });
+    });
+  }
+  // нижние листья на стволе
+  for (const [s, side] of [[0.22, -1], [0.27, 1], [0.52, -1], [0.55, 1]]) {
+    const p = along(TRUNK, TRUNK_L, s);
+    LEAVES.push({ b: -1, s, x: p.x, y: p.y, a: p.a + side * 1.05, len: 92 + r() * 18, gold: side > 0, bend: (r() - 0.5) * 0.4 });
+  }
+}
+function leafGeom(lf) { // стержень листа и пары листочков
+  const ca = Math.cos(lf.a), sa = Math.sin(lf.a), nx = -sa, ny = ca, l = lf.len;
+  const p3 = [lf.x + ca * l, lf.y + sa * l];
+  const rach = bez([lf.x, lf.y], [lf.x + ca * l * 0.35 + nx * l * lf.bend * 0.5, lf.y + sa * l * 0.35 + ny * l * lf.bend * 0.5],
+                   [lf.x + ca * l * 0.7 + nx * l * lf.bend, lf.y + sa * l * 0.7 + ny * l * lf.bend], p3, 16);
+  const RL = arcLen(rach), lets = [];
+  [0.28, 0.46, 0.63, 0.79].forEach((s, k) => {
+    const q = along(rach, RL, s), ll = lerp(36, 27, k / 3);
+    lets.push({ x: q.x, y: q.y, a: q.a - 0.78, len: ll, s }, { x: q.x, y: q.y, a: q.a + 0.78, len: ll, s });
+  });
+  const e = along(rach, RL, 0.97); lets.push({ x: e.x, y: e.y, a: e.a, len: 30, s: 1 });
+  return { rach, lets };
+}
+LEAVES.forEach((lf) => Object.assign(lf, leafGeom(lf)));
+// Грозди: висят под концом ветви
+const CLUSTERS = BR.map((b, i) => {
+  const r = mulberry32(40 + i), e = b.end, rot = b.side * 0.18, bs = [];
+  const rows = [[-39, -13, 13, 39], [-26, 0, 26], [-13, 13], [0]];
+  rows.forEach((row, k) => row.forEach((dx) => {
+    const x = dx + (r() - 0.5) * 5, y = 26 + k * 23 + (r() - 0.5) * 5;
+    bs.push({ x: e[0] + x * Math.cos(rot) - y * Math.sin(rot), y: e[1] + x * Math.sin(rot) + y * Math.cos(rot), r: 13.5 + r() * 2, d: r() * 0.25, fr: r() * TAU });
+  }));
+  return { i, e, bs, cx: e[0] - 40 * Math.sin(rot), cy: e[1] + 55 };
+});
+// Завитки «кудри»: растут из ветвей вверх и из ствола у корня
+function curlPath(x, y, a, len, rad, dir) {
+  const ca = Math.cos(a), sa = Math.sin(a), T = [x + ca * len, y + sa * len];
+  const tail = bez([x, y], [x + ca * len * 0.3, y + sa * len * 0.3], [x + ca * len * 0.7, y + sa * len * 0.7], T, 8);
+  const nx = -sa * dir, ny = ca * dir, cx = T[0] + nx * rad, cy = T[1] + ny * rad, th0 = Math.atan2(T[1] - cy, T[0] - cx), sp = [];
+  for (let k = 1; k <= 34; k++) { const f = k / 34, th = th0 + dir * f * 1.15 * TAU, rr = rad * (1 - 0.8 * f); sp.push([cx + Math.cos(th) * rr, cy + Math.sin(th) * rr]); }
+  return tail.concat(sp);
+}
+const CURLS = [];
+BR.forEach((b) => {
+  if (b.side === 0) return;
+  const p = along(b.pts, b.L, 0.84);
+  CURLS.push({ pts: curlPath(p.x, p.y, p.a - b.side * 0.95, 40, 24, b.side), red: CURLS.length % 3 === 1 });
+});
+for (const side of [-1, 1]) {
+  const p = along(TRUNK, TRUNK_L, 0.1);
+  CURLS.push({ pts: curlPath(p.x, p.y, -Math.PI / 2 + side * 1.25, 46, 22, side), red: side > 0 });
+}
+CURLS.forEach((c, i) => (c.i = i));
+// Травка у корня: «осочки» веером
+const GRASS = [];
+{
+  const r = mulberry32(5), cols = ["g", "r", "G", "g", "G", "r", "g", "G", "r"];
+  for (let i = 0; i < 9; i++) {
+    const a = lerp(-2.75, -0.39, i / 8) + (r() - 0.5) * 0.08, l = (i === 4 ? 70 : 92 + 30 * Math.sin(Math.PI * i / 8)) + r() * 14;
+    const x = (i - 4) * 9, y = 340, ca = Math.cos(a), sa = Math.sin(a), side = a < -Math.PI / 2 ? -1 : 1;
+    const pts = bez([x, y], [x + ca * l * 0.4, y + sa * l * 0.4], [x + ca * l * 0.8 + side * l * 0.25, y + sa * l * 0.8 + 0.1 * l], [x + ca * l + side * l * 0.42, y + sa * l + 0.3 * l], 18);
+    GRASS.push({ i, pts, col: cols[i], w: 12 + r() * 3 });
+  }
+}
+const SPROUT = { stem: bez([0, 338], [-4, 312], [4, 288], [0, 262], 10), lv: [[0, 268, -2.45, 44], [0, 262, -0.62, 46]] };
+const SUN = { x: 258, y: -246 };
+// Контур кроны для «намётки»
+const CROWN_SK = [];
+for (let i = 0; i <= 90; i++) { const th = -Math.PI / 2 + TAU * i / 90; const rr = 238 + 12 * Math.sin(th * 7) + 8 * Math.cos(th * 3); CROWN_SK.push([CROWN.x + Math.cos(th) * rr * 1.08, CROWN.y + Math.sin(th) * rr * 0.92]); }
+
+// ---------- Времена ----------
+const TM = {
+  sk: { crown: [EV.L1 - 0.1, EV.E2], cl: [EV.rja - 0.1, EV.rja + 0.9], curls: [EV.ras - 0.05, EV.ras + 0.9], grass: [EV.vz1 - 0.05, EV.vz1 + 0.7], trunk: [EV.vy1 - 0.05, EV.vy1 + 0.95] },
+  grass: [EV.ves - 0.05, EV.ves + 0.75], sprout: [EV.ves + 0.15, EV.ves + 0.75],
+  trunk: [EV.let - 0.05, EV.let + 0.75], curls: [EV.let + 0.45, EV.vy2 + 0.9],
+  dawn: [EV.zor - 0.15, EV.zor + 0.9], flowers: [EV.cve - 0.25, EV.cve + 0.5],
+  sun: [EV.sol - 0.1, EV.sol + 0.75], berries: [EV.vyz - 0.15, EV.vyz + 0.7],
+};
+const branchStart = (b) => lerp(TM.trunk[0], TM.trunk[1], b.s * 0.85);
+const BR_DUR = 0.55;
+
+// ---------- Рисование ----------
+function drawSketch(c, t) {
+  const fade = 1 - sstep(prog(t, EV.let + 0.4, EV.vyz + 0.4));
+  if (fade <= 0) return;
+  const A = 0.6 * fade;
+  sketch(c, CROWN_SK, sstep(prog(t, ...TM.sk.crown)), A * (1 - sstep(prog(t, EV.let, EV.let + 1.0))));
+  CLUSTERS.forEach((cl, i) => {
+    const u = sstep(prog(t, TM.sk.cl[0] + i * 0.08, TM.sk.cl[0] + i * 0.08 + 0.4));
+    if (u <= 0) return;
+    const pts = []; for (let k = 0; k <= 30; k++) { const th = -Math.PI / 2 + TAU * k / 30; pts.push([cl.cx + Math.cos(th) * 46, cl.cy + Math.sin(th) * 50]); }
+    sketch(c, pts, u, A * (1 - sstep(prog(t, EV.cve - 0.2, EV.cve + 0.4))));
+  });
+  CURLS.forEach((cu, i) => sketch(c, cu.pts, sstep(prog(t, TM.sk.curls[0] + i * 0.05, TM.sk.curls[0] + i * 0.05 + 0.45)), A));
+  GRASS.forEach((g, i) => sketch(c, g.pts, sstep(prog(t, TM.sk.grass[0] + i * 0.03, TM.sk.grass[0] + i * 0.03 + 0.4)), A));
+  const ut = prog(t, ...TM.sk.trunk);
+  sketch(c, TRUNK, sstep(ut / 0.7), A);
+  BR.forEach((b) => sketch(c, b.pts, sstep((ut - b.s * 0.55) / 0.4), A));
+}
+
+function drawDawn(c, t) {
+  const u = sstep(prog(t, ...TM.dawn)); if (u <= 0) return;
+  const g = c.createRadialGradient(0, 430, 10, 0, 430, 80 + 520 * u);
+  g.addColorStop(0, `rgba(240,110,40,${0.62 * u})`); g.addColorStop(0.35, `rgba(214,62,30,${0.42 * u})`); g.addColorStop(0.7, `rgba(150,40,20,${0.18 * u})`); g.addColorStop(1, "rgba(120,30,10,0)");
+  c.fillStyle = g; c.fillRect(-R_FIELD, -R_FIELD, R_FIELD * 2, R_FIELD * 2);
+  // лучи зари — тонкие золотые «осочки» от горизонта
+  for (let i = 0; i < 9; i++) {
+    const a = lerp(-2.6, -0.54, i / 8), k = sstep(prog(t, TM.dawn[0] + 0.2 + Math.abs(i - 4) * 0.05, TM.dawn[0] + 0.75 + Math.abs(i - 4) * 0.05));
+    if (k <= 0) continue;
+    c.save(); c.globalAlpha *= 0.33;
+    const x0 = Math.cos(a) * 250, y0 = 430 + Math.sin(a) * 250, x1 = Math.cos(a) * 420, y1 = 430 + Math.sin(a) * 420;
+    stroke(c, [[x0, y0], [lerp(x0, x1, 0.5), lerp(y0, y1, 0.5)], [x1, y1]], P.blade(10), goldFill(c), k);
+    c.restore();
+  }
+}
+
+function fillOf(c, col) { return col === "g" ? goldFill(c) : col === "r" ? C.red : C.green; }
+
+function drawTree(c, t) {
+  // травка у корня
+  GRASS.forEach((g, i) => {
+    const a = TM.grass[0] + i * 0.05, u = sstep(prog(t, a, a + 0.5));
+    stroke(c, g.pts, P.blade(g.w), fillOf(c, g.col), u, { hi: g.col === "g" ? 0.5 : 0 });
+  });
+  // росток
+  const us = sstep(prog(t, ...TM.sprout));
+  stroke(c, SPROUT.stem, P.taper(10, 6), C.green, us);
+  SPROUT.lv.forEach(([x, y, a, l], i) => drop(c, x, y, a, l, 18, i ? goldFill(c) : C.green, springPop(prog(t, TM.sprout[0] + 0.3 + i * 0.1, TM.sprout[0] + 1.3 + i * 0.1)), 0.3 * (i ? -1 : 1)));
+  // ствол
+  const ut = prog(t, ...TM.trunk);
+  if (ut > 0) {
+    stroke(c, TRUNK, P.taper(30, 11), C.redD, sstep(ut));
+    stroke(c, TRUNK, P.taper(24, 8), goldFill(c), sstep(ut), { hi: 0.6 });
+  }
+  // ветви
+  BR.forEach((b) => {
+    const a = branchStart(b), u = sstep(prog(t, a, a + BR_DUR));
+    if (u <= 0) return;
+    stroke(c, b.pts, P.taper(b.w0 + 4, 4), C.redD, u);
+    stroke(c, b.pts, P.taper(b.w0, 3), goldFill(c), u, { hi: 0.5 });
+  });
+  // плодоножки гроздей (тонко, золотом)
+  CLUSTERS.forEach((cl) => {
+    const b = BR[cl.i], u = sstep(prog(t, branchStart(b) + BR_DUR, branchStart(b) + BR_DUR + 0.35));
+    if (u <= 0) return;
+    for (const be of cl.bs.slice(0, 4)) stroke(c, [cl.e, [lerp(cl.e[0], be.x, 0.5), lerp(cl.e[1], be.y, 0.4)], [be.x, be.y]], P.taper(3, 1.5), goldFill(c), u);
+  });
+  // перистые листья
+  LEAVES.forEach((lf, j) => {
+    const a0 = lf.b < 0 ? lerp(TM.trunk[0], TM.trunk[1], lf.s) : branchStart(BR[lf.b]) + BR_DUR * lf.s;
+    const ur = sstep(prog(t, a0, a0 + 0.35));
+    if (ur <= 0) return;
+    stroke(c, lf.rach, P.taper(4, 1.5), goldFill(c), ur);
+    const fill = lf.gold ? goldFill(c) : C.green;
+    lf.lets.forEach((q, k) => {
+      const k0 = a0 + 0.08 + q.s * 0.3, kk = springPop(prog(t, k0, k0 + 1.0));
+      if (kk <= 0) return;
+      drop(c, q.x, q.y, q.a, q.len, 13, fill, kk, 0.18 * (k % 2 ? 1 : -1), lf.gold ? 0.45 : 0);
+      if (!lf.gold) { c.save(); c.globalAlpha *= 0.85; drop(c, q.x, q.y, q.a, q.len * 0.55, 3, C.greenL, kk, 0.18 * (k % 2 ? 1 : -1)); c.restore(); }
+    });
+  });
+  // кудри
+  CURLS.forEach((cu, i) => {
+    const a = lerp(TM.curls[0], TM.curls[1] - 0.5, i / (CURLS.length - 1)), u = sstep(prog(t, a, a + 0.5));
+    stroke(c, cu.pts, P.curl(13), cu.red ? C.red : goldFill(c), u, { round: true, hi: cu.red ? 0 : 0.5 });
+  });
+  // цветы → ягоды
+  CLUSTERS.forEach((cl, i) => {
+    const fa = TM.flowers[0] + i * 0.07, ba = TM.berries[0] + i * 0.08;
+    cl.bs.forEach((be, k) => {
+      const kf = springPop(prog(t, fa + be.d, fa + be.d + 1.0)), kb = springPop(prog(t, ba + be.d, ba + be.d + 1.0));
+      const fl = 1 - sstep(prog(t, ba + be.d, ba + be.d + 0.3));
+      if (kf > 0 && fl > 0) { c.save(); c.globalAlpha *= fl; flower(c, be.x, be.y, be.r * 1.05, kf, be.fr); c.restore(); }
+      if (kb > 0) berry(c, be.x, be.y, be.r, kb, 1);
+    });
+  });
+}
+
+function drawSun(c, t) {
+  const u = prog(t, ...TM.sun); if (u <= 0) return;
+  const k = springSoft(u * 1.6), { x, y } = SUN;
+  const g = c.createRadialGradient(x, y, 5, x, y, 150 * k);
+  g.addColorStop(0, `rgba(255,214,110,${0.45 * k})`); g.addColorStop(1, "rgba(255,190,80,0)");
+  c.fillStyle = g; c.fillRect(x - 160, y - 160, 320, 320);
+  for (let i = 0; i < 14; i++) {
+    const a = i * TAU / 14 + 0.12, kk = springPop(prog(t, TM.sun[0] + 0.15 + i * 0.03, TM.sun[0] + 1.15 + i * 0.03));
+    drop(c, x + Math.cos(a) * 34, y + Math.sin(a) * 34, a, i % 2 ? 26 : 34, 11, i % 2 ? C.red : goldFill(c), kk, 0.2, i % 2 ? 0 : 0.5);
+  }
+  c.fillStyle = goldFill(c); c.beginPath(); c.arc(x, y, 30 * k, 0, TAU); c.fill();
+  c.fillStyle = C.red; c.beginPath(); c.arc(x, y, 17 * k, 0, TAU); c.fill();
+  c.fillStyle = goldFill(c); c.beginPath(); c.arc(x, y, 7 * k, 0, TAU); c.fill();
+}
+
+// ---------- Кадр: стол, доска, блюдо, роспись, кисть, текст ----------
+const ctx = document.getElementById("scene").getContext("2d");
+const stageEl = document.getElementById("stage");
+const RIM = [0.25, 2.35]; // кисть обходит ободок
+const RIM_A0 = -Math.PI / 2;
+
+// орнамент ободка: ягодка и две «капельки» по кругу
+const ORN = []; for (let i = 0; i < 28; i++) ORN.push({ a: RIM_A0 + (i + 0.5) * TAU / 28, i });
+function drawRim(c, t) {
+  const u = sstep(prog(t, ...RIM)); if (u <= 0) return;
+  const a1 = RIM_A0 + TAU * u;
+  c.save(); c.translate(PC.x, PC.y);
+  // золотой ободок
+  c.strokeStyle = goldFill(c); c.lineCap = "round";
+  c.lineWidth = 22; c.beginPath(); c.arc(0, 0, (R_GOLD + R_OUT - 8) / 2 + 1, RIM_A0, a1); c.stroke();
+  c.lineWidth = 3.5; c.beginPath(); c.arc(0, 0, R_ORN, RIM_A0, a1); c.stroke();
+  c.lineWidth = 2; c.beginPath(); c.arc(0, 0, R_GOLD - 4, RIM_A0, a1); c.stroke();
+  c.strokeStyle = "rgba(255,248,215,0.55)"; c.lineWidth = 2; c.beginPath(); c.arc(0, 0, R_OUT - 15, RIM_A0, a1); c.stroke();
+  // орнамент появляется следом за кистью
+  for (const o of ORN) {
+    const tt = RIM[0] + (RIM[1] - RIM[0]) * ((o.a - RIM_A0) / TAU), k = springPop(prog(t, tt + 0.1, tt + 1.1));
+    if (k <= 0) continue;
+    const rr = (R_ORN + R_GOLD) / 2 - 2, x = Math.cos(o.a) * rr, y = Math.sin(o.a) * rr, ta = o.a + Math.PI / 2;
+    if (o.i % 2 === 0) berry(c, x, y, 8.5, k, 1);
+    else { c.fillStyle = C.cream; c.beginPath(); c.arc(x, y, 4.2 * k, 0, TAU); c.fill(); }
+    drop(c, x + Math.cos(ta) * 11, y + Math.sin(ta) * 11, ta, 15, 7, goldFill(c), k, 0.35);
+    drop(c, x - Math.cos(ta) * 11, y - Math.sin(ta) * 11, ta + Math.PI, 15, 7, goldFill(c), k, -0.35);
+  }
+  c.restore();
+}
+
+// золотая рамка доски и ягодки по углам
+function drawBoard(c, t) {
+  c.drawImage(boardC, BX - 40, BY - 40);
+  const u = sstep(prog(t, 0.45, 2.3)); if (u <= 0) return;
+  const per = 2 * (BW - 60 + BH - 60);
+  c.save(); c.strokeStyle = goldFill(c); c.lineWidth = 4; c.setLineDash([per * u, per]);
+  c.beginPath(); c.roundRect(BX + 22, BY + 22, BW - 44, BH - 44, 14); c.stroke();
+  c.lineWidth = 1.6; c.setLineDash([per * u, per]); c.beginPath(); c.roundRect(BX + 32, BY + 32, BW - 64, BH - 64, 10); c.stroke();
+  c.restore();
+  const corners = [[BX + 56, BY + 56, 0.785], [BX + BW - 56, BY + 56, 2.356], [BX + BW - 56, BY + BH - 56, -2.356], [BX + 56, BY + BH - 56, -0.785]];
+  corners.forEach(([x, y, a], i) => {
+    const k = springPop(prog(t, 1.4 + i * 0.12, 2.4 + i * 0.12)); if (k <= 0) return;
+    drop(c, x, y, a - 0.6, 30, 10, goldFill(c), k, 0.3, 0.4); drop(c, x, y, a + 0.6, 30, 10, goldFill(c), k, -0.3, 0.4);
+    berry(c, x + Math.cos(a) * 6, y + Math.sin(a) * 6, 9, k, 1);
+  });
+}
+// узор под названием: ягодки и капельки
+function titleOrnament(c, y, t0, t, alpha) {
+  if (alpha <= 0) return;
+  c.save(); c.globalAlpha *= alpha;
+  const x = 1450;
+  for (const s of [-1, 1]) {
+    const k = springPop(prog(t, t0 + 0.1, t0 + 1.1));
+    drop(c, x + s * 30, y, s > 0 ? 0 : Math.PI, 70, 12, goldFill(c), k, 0.25 * s, 0.4);
+    drop(c, x + s * 30, y, s > 0 ? -0.5 : Math.PI + 0.5, 34, 9, C.red, k, -0.2 * s);
+  }
+  const k = springPop(prog(t, t0, t0 + 1));
+  berry(c, x - 12, y - 6, 11, k); berry(c, x + 12, y - 6, 11, k); berry(c, x, y + 12, 11, k);
+  c.restore();
+}
+
+// кисть: обходит ободок на заставке, потом расписывает росток и ствол
+function brushAt(t) {
+  if (t < RIM[1] + 0.6) {
+    const u = sstep(prog(t, ...RIM)), a = RIM_A0 + TAU * u, r = (R_GOLD + R_OUT - 8) / 2;
+    let x = PC.x + Math.cos(a) * r, y = PC.y + Math.sin(a) * r, al = sstep(prog(t, 0.0, 0.3));
+    const off = sstep(prog(t, RIM[1], RIM[1] + 0.6)); x += off * 260; y -= off * 360; al *= 1 - off;
+    return { x, y, a: 0.45, al };
+  }
+  const a0 = TM.grass[0] - 0.55, a1 = TM.trunk[1] + 0.1;
+  if (t < a0 || t > a1 + 0.6) return null;
+  let x, y;
+  if (t < TM.trunk[0]) { // приходит снизу справа и пишет травку, затем росток
+    const u = sstep(prog(t, a0, TM.grass[0])), w = prog(t, TM.grass[0], TM.trunk[0]);
+    const gx = PC.x + lerp(-70, 70, sstep(w)), gy = PC.y + 300 - 40 * Math.sin(Math.PI * w);
+    x = lerp(PC.x + 320, gx, u); y = lerp(PC.y + 560, gy, u);
+  } else { // ведёт ствол вверх
+    const q = along(TRUNK, TRUNK_L, sstep(prog(t, ...TM.trunk)));
+    x = PC.x + q.x; y = PC.y + q.y;
+  }
+  const off = sstep(prog(t, a1, a1 + 0.6)); x += off * 300; y += off * 120;
+  return { x, y, a: 0.5, al: sstep(prog(t, a0, a0 + 0.25)) * (1 - off) };
+}
+
+function drawGlint(c, t) {
+  const u = prog(t, EV.glint, EV.glint + 1.1); if (u <= 0 || u >= 1) return;
+  c.save(); c.beginPath(); c.arc(PC.x, PC.y, R_OUT, 0, TAU); c.clip();
+  c.globalCompositeOperation = "lighter";
+  const x = lerp(PC.x - 700, PC.x + 700, sstep(u)), g = c.createLinearGradient(x - 160, 0, x + 160, 0);
+  g.addColorStop(0, "rgba(255,230,190,0)"); g.addColorStop(0.5, `rgba(255,236,200,${0.16 * Math.sin(Math.PI * u)})`); g.addColorStop(1, "rgba(255,230,190,0)");
+  c.translate(x, PC.y); c.rotate(0.45); c.translate(-x, -PC.y);
+  c.fillStyle = g; c.fillRect(x - 160, PC.y - 700, 320, 1400);
+  c.restore();
+}
+
+// ---------- Текст: слова «пишутся» слева направо под голос ----------
+const WORDS = [...document.querySelectorAll(".w")].map((el) => ({ el, at: parseFloat(el.dataset.at), d: parseFloat(el.dataset.d), last: -1 }));
+const SHEETS = {}; for (const el of document.querySelectorAll(".sheet")) SHEETS[el.id] = { el, op: "" };
+function setOp(id, op) { const s = SHEETS[id]; if (!s) return; const v = op.toFixed(3); if (s.op !== v) { s.el.style.opacity = v; s.op = v; } }
+function textAt(t) {
+  for (const w of WORDS) {
+    const a = clamp((t - w.at) / w.d, 0, 1), key = Math.round(a * 300); if (key === w.last) continue; w.last = key;
+    // clip-path только на время, пока слово пишется
+    w.el.style.opacity = a > 0 ? "1" : "0";
+    w.el.style.clipPath = a > 0 && a < 1 ? `inset(-20% ${((1 - a) * 100).toFixed(2)}% -20% 0)` : "";
+  }
+  setOp("card1s", 1 - sstep(prog(t, EV.L1 - 0.75, EV.L1 - 0.3)));
+  setOp("sh1", 1 - sstep(prog(t, EV.q_out, EV.q_oute)));
+  setOp("sh2", 1 - sstep(prog(t, EV.a_out, EV.a_oute)));
+  setOp("card2s", 1);
+}
+
+function renderAt(t) {
+  ctx.reset();
+  ctx.drawImage(deskC, 0, 0);
+  drawBoard(ctx, t);
+  ctx.drawImage(plateC, PC.x - 500, PC.y - 500);
+  ctx.save(); ctx.translate(PC.x, PC.y);
+  ctx.beginPath(); ctx.arc(0, 0, R_FIELD, 0, TAU); ctx.clip();
+  drawDawn(ctx, t);
+  drawSketch(ctx, t);
+  drawTree(ctx, t);
+  drawSun(ctx, t);
+  ctx.restore();
+  drawRim(ctx, t);
+  ctx.drawImage(sheenC, PC.x - 500, PC.y - 500);
+  drawGlint(ctx, t);
+  // узоры под названием на заставке и в финале
+  titleOrnament(ctx, 522, 1.5, t, 1 - sstep(prog(t, EV.L1 - 0.75, EV.L1 - 0.3)));
+  titleOrnament(ctx, 522, EV.fin + 0.9, t, 1);
+  const b = brushAt(t); if (b) brush(ctx, b.x, b.y, b.a, b.al);
+  textAt(t);
+  // лёгкий наезд на заставке и медленный в финале
+  let z = 1;
+  if (t < EV.L1) z = 1 + 0.02 * sstep(t / EV.L1) ; else if (t < EV.L1 + 0.8) z = lerp(1.02, 1, sstep(prog(t, EV.L1, EV.L1 + 0.8)));
+  else if (t > EV.fin) z = 1 + 0.03 * sstep(prog(t, EV.fin, TOTAL));
+  stageEl.style.transform = z === 1 ? "none" : `scale(${z.toFixed(5)})`;
+}
+
+const seek = (t) => renderAt(t);
+window.addEventListener("hf-seek", (e) => seek(e.detail.time));
+seek(0);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => seek(0));
+
+const tl = gsap.timeline({ paused: true });
+tl.set({}, {}, TOTAL);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+
+    </script>
+  </body>
+</html>
