@@ -1,0 +1,15 @@
+{
+  "video": "Весенняя гроза - Тютчев - v2.mp4",
+  "thumb": "cover.png",
+  "title": "Весенняя гроза - Тютчев",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 3"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}

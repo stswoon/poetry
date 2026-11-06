@@ -1,0 +1,108 @@
+{
+ "note": "секунды ролика. sfx — шумы (гром: пик; rain/brook/birds/downpour: начало и конец; whoosh_rise: пик; pour: начало; splash: удар). accents — музыкальные акценты под голосом (тайко, колокольчики): начало. music — опорные моменты музыки.",
+ "V0": 4,
+ "OUTRO": 6,
+ "total": 48.08,
+ "sfx": {
+  "thunder_intro": [
+   1.033
+  ],
+  "thunder_grom": [
+   7.873
+  ],
+  "thunder_gremyat": [
+   13.557
+  ],
+  "thunder_rask": [
+   14.063
+  ],
+  "thunder_molod": [
+   14.783
+  ],
+  "thunder_vse": [
+   29.905
+  ],
+  "thunder_gromam": [
+   31.363
+  ],
+  "rain": [
+   16.323,
+   22.366
+  ],
+  "brook": [
+   22.588,
+   25.318,
+   28.413,
+   29.829
+  ],
+  "birds": [
+   25.07,
+   29.729
+  ],
+  "whoosh_rise": [
+   32.579
+  ],
+  "pour": [
+   41.403
+  ],
+  "splash": [
+   42.795
+  ],
+  "downpour": [
+   41.912,
+   45.212
+  ]
+ },
+ "accents": {
+  "taiko_grom": [
+   7.873
+  ],
+  "taiko_gremyat": [
+   13.557
+  ],
+  "taiko_rask": [
+   14.063
+  ],
+  "taiko_molod": [
+   14.783
+  ],
+  "taiko_vse": [
+   29.905
+  ],
+  "taiko_gromam": [
+   31.363
+  ],
+  "taiko_gromok": [
+   37.663
+  ],
+  "bells_hops": [
+   9.393,
+   10.073,
+   10.513,
+   11.009
+  ],
+  "bells_sun": [
+   20.263
+  ],
+  "bells_kubok": [
+   38.715,
+   38.865
+  ],
+  "bells_cascade": [
+   41.453
+  ]
+ },
+ "music": {
+  "intro_hit": 1.033,
+  "landing": 3.033,
+  "gap1_fill": 12.033,
+  "gap1_hit": 13.033,
+  "gap2_phrase": 22.033,
+  "rise_start": 32.033,
+  "push_rise": 32.783,
+  "fall_fill": 42.033,
+  "push_land": 42.783,
+  "finale_theme": 43.033,
+  "final_chord": 45.033
+ }
+}
