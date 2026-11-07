@@ -1,0 +1,100 @@
+{
+ "note": "секунды ролика. Шумы: pop, chair, ding, stamp, bigstamp, flap — пики; tune, timid, screech, buzzer — начала; applause, fight, trill, trombone — начало и конец. music — ключевые моменты музыки (удары, разделы).",
+ "V0": 3.6,
+ "OUTRO": 7.5,
+ "total": 106.898,
+ "pop": [
+  0.483,
+  11.213,
+  102.032
+ ],
+ "applause": [
+  18.347,
+  20.69
+ ],
+ "tune": [
+  21.031,
+  44.733,
+  59.914
+ ],
+ "screech": [
+  22.683,
+  47.793,
+  61.733
+ ],
+ "buzzer": [
+  24.236,
+  47.966,
+  61.906
+ ],
+ "timid": [
+  46.213
+ ],
+ "chair": [
+  16.463,
+  44.139,
+  58.642
+ ],
+ "ding": [
+  50.747
+ ],
+ "fight": [
+  65.253,
+  68.733
+ ],
+ "flap": [
+  69.253,
+  69.463,
+  69.672,
+  69.881,
+  70.091,
+  70.3,
+  70.51,
+  70.719,
+  70.929
+ ],
+ "trill": [
+  71.043,
+  71.713
+ ],
+ "stamp": [
+  98.921,
+  99.141,
+  99.361,
+  99.581
+ ],
+ "bigstamp": [
+  99.776
+ ],
+ "trombone": [
+  99.936,
+  101.719
+ ],
+ "music": {
+  "intro_hit": 0.45,
+  "intro_final_hit": 3.107,
+  "vyhod": 3.55,
+  "sting_kvartet": 11.869,
+  "efir": 11.869,
+  "sting_svet": 20.57,
+  "plan": 24.933,
+  "dance": 41.07,
+  "sting_gory": 43.169,
+  "rasselis": 43.169,
+  "sekret": 48.883,
+  "sting_sekret": 56.256,
+  "chinno": 56.256,
+  "spor": 63.187,
+  "draka": 65.22,
+  "draka_stop": 68.4,
+  "solovey": 68.769,
+  "harp_gliss": 69.06,
+  "sting_prosba": 75.018,
+  "prosba": 75.018,
+  "tishina": 86.5,
+  "otvet": 86.978,
+  "drob": 96.924,
+  "fin_fanfare": 101.799,
+  "final_chord": 104.456
+ }
+}

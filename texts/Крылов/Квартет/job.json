@@ -1,0 +1,16 @@
+{
+  "video": "Квартет - Крылов - v2.mp4",
+  "thumb": "cover.png",
+  "title": "Квартет - Крылов",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 4",
+    "класс 5"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
