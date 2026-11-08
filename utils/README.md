@@ -5,6 +5,9 @@
 - **HyperFrames** (CLI 0.8.204, из плагина Claude) — HTML → видео. Запускается через `npx hyperframes@0.8.204 <команда>`; Chrome для рендера лежит в `~/.cache/hyperframes/chrome`.
 - **FFmpeg / FFprobe 9.0.2** — нужны HyperFrames для рендера. В Windows доступны через WinGet, в macOS — через Homebrew.
 - **Framer Motion** — пакет `motion` (новое имя framer-motion, сам `framer-motion` ставится как его зависимость). Установка: `cd utils && npm install`.
+- **NumPy 2.0.2** — синтез музыки к роликам: векторные операции над сэмплами считают трек в разы быстрее, чем чистый
+  Node или Python. В macOS стоит в системном Python 3.9 (`python3 -m pip install --user numpy`), в Windows — `py -m pip
+  install numpy`. Проверка: `python3 -c "import numpy; print(numpy.__version__)"`.
 - **Whisper** — в Windows установлен whisper.cpp 1.9.4, в macOS использовался Homebrew 1.9.5. Модель `medium` лежит в `~/.cache/hyperframes/whisper/models`. Нужен, чтобы получить таймкоды слов из озвучки.
 
 Проверка окружения: `npx hyperframes@0.8.204 doctor`.

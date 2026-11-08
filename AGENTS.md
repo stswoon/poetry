@@ -23,6 +23,9 @@
   .claude/settings.local.json. В уже открытой сессии PowerShell подхватывай её через
   `$env:HYPERFRAMES_WHISPER_PATH = [Environment]::GetEnvironmentVariable('HYPERFRAMES_WHISPER_PATH', 'User')`.
   На macOS из-за падения Metal используется utils/whisper-cli-cpu.sh. Подробности — utils/README.md.
+- NumPy 2.0.2 (macOS, системный Python 3.9, `pip install --user`) — синтез музыки к роликам (шаг 5 stsPoetryMake): в разы
+  быстрее чистого Node или Python. Проверка: `python3 -c "import numpy; print(numpy.__version__)"`. На другой машине,
+  если его нет: macOS — `python3 -m pip install --user numpy`, Windows — `py -m pip install numpy` (только с согласия).
 
 Правила:
 
