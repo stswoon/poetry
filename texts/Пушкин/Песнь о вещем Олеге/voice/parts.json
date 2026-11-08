@@ -1,0 +1,29 @@
+[
+ {
+  "name": "01-рассказчик",
+  "role": "рассказчик",
+  "stanza_end": true,
+  "chars": 988,
+  "start": 0.0,
+  "duration": 49.44,
+  "gain_db": 4.5
+ },
+ {
+  "name": "02-кудесник",
+  "role": "кудесник",
+  "stanza_end": true,
+  "chars": 1242,
+  "start": 50.94,
+  "duration": 74.32,
+  "gain_db": 5.44
+ },
+ {
+  "name": "03-рассказчик",
+  "role": "рассказчик",
+  "stanza_end": false,
+  "chars": 3212,
+  "start": 126.76,
+  "duration": 168.64,
+  "gain_db": 5.01
+ }
+]

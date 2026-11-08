@@ -1,0 +1,147 @@
+{
+ "note": "секунды ролика. Шумы: thunder, swords, blaze, shield, storm, ricochet, clash, clink, fist, crunch, strike — пики; hooves, walk, gallop, rain, dust, wind, wind2, hiss, arrows — начало и конец окна; perun, wave, whoosh, memory, shatter, slither — начало. music — ключевые моменты музыки (удары, разделы).",
+ "V0": 4.5,
+ "OUTRO": 7.5,
+ "total": 309.648,
+ "thunder": [
+  0.323,
+  1.573
+ ],
+ "hooves": [
+  4.15,
+  8.91,
+  15.776,
+  17.96,
+  19.055,
+  22.411
+ ],
+ "swords": [
+  13.763
+ ],
+ "blaze": [
+  14.373
+ ],
+ "perun": [
+  28.503
+ ],
+ "walk": [
+  35.964,
+  38.125,
+  232.073,
+  237.397
+ ],
+ "shield": [
+  84.823
+ ],
+ "storm": [
+  95.963
+ ],
+ "wave": [
+  95.61
+ ],
+ "whoosh": [
+  98.723,
+  99.533,
+  100.953
+ ],
+ "ricochet": [
+  99.323,
+  100.133,
+  101.553
+ ],
+ "arrows": [
+  117.339,
+  119.234
+ ],
+ "gallop": [
+  120.071,
+  126.439
+ ],
+ "clash": [
+  123.613
+ ],
+ "clink": [
+  185.473
+ ],
+ "memory": [
+  207.448
+ ],
+ "fist": [
+  224.81
+ ],
+ "shatter": [
+  224.81
+ ],
+ "rain": [
+  243.434,
+  245.144
+ ],
+ "dust": [
+  244.894,
+  246.524
+ ],
+ "wind": [
+  245.824,
+  257.116
+ ],
+ "crunch": [
+  251.087
+ ],
+ "wind2": [
+  265.889,
+  281.648
+ ],
+ "hiss": [
+  274.611,
+  278.49
+ ],
+ "slither": [
+  278.523
+ ],
+ "strike": [
+  281.801
+ ],
+ "music": {
+  "intro": 0,
+  "intro_bramm": 0.9,
+  "pohod": 4.15,
+  "les": 22.411,
+  "vopros": 39.002,
+  "card_prorochestvo": 53.964,
+  "prorochestvo": 53.964,
+  "slava": 75.281,
+  "shield": 84.823,
+  "shtorm": 93.427,
+  "zamedlenie": 98.728,
+  "hranitel": 104.405,
+  "kon": 110.761,
+  "strely": 117.27,
+  "galop": 120.071,
+  "secha": 122.569,
+  "smert_udar": 126.472,
+  "proshchanie": 130.969,
+  "card_gody": 182.044,
+  "pir": 182.586,
+  "pamyat": 192.27,
+  "gde_kon": 197.845,
+  "trevoga": 209.165,
+  "ponik": 215.909,
+  "gnev": 221.366,
+  "fist": 224.81,
+  "pamyat2": 226.471,
+  "vstaet": 229.295,
+  "vyezd": 232.073,
+  "holm": 237.397,
+  "card_sudba": 248.113,
+  "spi_drug": 251.531,
+  "trizna": 257.116,
+  "napryazhenie": 264.571,
+  "napryazhenie_udar": 266.022,
+  "zmeya": 274.578,
+  "vskriknul": 281.801,
+  "epilog": 283.001,
+  "epilog_pohod": 296.167,
+  "k_finalu": 302.058,
+  "final": 304.291
+ }
+}

@@ -1,0 +1,16 @@
+{
+  "video": "Песнь о вещем Олеге - Пушкин - v3.mp4",
+  "thumb": "cover.png",
+  "title": "Песнь о вещем Олеге - Пушкин",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 4",
+    "класс 6"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
