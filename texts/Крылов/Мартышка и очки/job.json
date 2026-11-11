@@ -1,0 +1,15 @@
+{
+  "video": "Мартышка и очки - Крылов - v3.mp4",
+  "thumb": "cover.png",
+  "title": "Мартышка и очки - Крылов",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 3"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
