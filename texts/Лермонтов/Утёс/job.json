@@ -1,0 +1,17 @@
+{
+  "video": "Утёс - Лермонтов - v2.mp4",
+  "thumb": "cover.png",
+  "title": "Утёс - Лермонтов",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 3",
+    "класс 4",
+    "класс 6"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
