@@ -1,0 +1,1322 @@
+<!doctype html>
+<!-- Шаблон: index.html собирается из template.tpl и src/*.js командой `python3 build.py`. Правьте эти файлы, не index.html. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      @font-face { font-family: "Narrow"; font-weight: 700; src: local("PT Sans Narrow Bold"), local("PTSans-NarrowBold"); }
+      @font-face { font-family: "SansB"; font-weight: 700; font-style: italic; src: local("PT Sans Bold Italic"), local("PTSans-BoldItalic"); }
+      @font-face { font-family: "Arcade"; src: local("Impact"); }
+      :root { --gold: #ffcc3d; --pink: #ff6fae; --ink: #1b1026; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #1b1026; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: "Narrow", sans-serif; color: #fff; background: #1b1026; }
+      #scene { position: absolute; inset: 0; width: 1920px; height: 1080px; z-index: 0; }
+      #preload { position: absolute; left: 0; top: 0; opacity: 0; font: 700 30px "Narrow"; }
+      #preload i { font: italic 700 30px "SansB"; } #preload b { font: 30px "Arcade"; }
+      .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 3; }
+      #caps { clip-path: inset(830px 0 90px 0); }
+      .cap { position: absolute; left: 170px; top: 0; height: 70px; line-height: 70px; font-size: 58px; font-weight: 700; white-space: nowrap; word-spacing: 0.06em; opacity: 0;
+             text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5); }
+      .w { display: inline-block; opacity: 0; }
+      .k { color: #ffe14a; }
+      .tt { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; opacity: 0; }
+      .tt h1 { position: absolute; left: 0; width: 1920px; text-align: center; white-space: nowrap; font-family: "Arcade", sans-serif; font-weight: 400; color: var(--gold);
+               -webkit-text-stroke: 10px var(--ink); paint-order: stroke fill; text-shadow: 0 12px 0 #c23a7a, 0 18px 24px rgba(0, 0, 0, 0.5); letter-spacing: 0.04em; }
+      .tt p { position: absolute; left: 0; width: 1920px; text-align: center; white-space: nowrap; font-family: "SansB", sans-serif; font-style: italic; font-weight: 700; color: #fff;
+              -webkit-text-stroke: 6px var(--ink); paint-order: stroke fill; }
+      .tt h2 { position: absolute; left: 0; width: 1920px; text-align: center; white-space: nowrap; font-family: "Narrow", sans-serif; font-weight: 700; color: #ffe14a;
+               -webkit-text-stroke: 6px var(--ink); paint-order: stroke fill; }
+      #tt1 h1 { top: 150px; font-size: 190px; line-height: 220px; }
+      #tt1 p { top: 384px; font-size: 56px; line-height: 70px; }
+      #tt1 h2 { top: 456px; font-size: 48px; line-height: 60px; }
+      #tt2 h1 { top: 170px; font-size: 230px; line-height: 260px; }
+      #tt2 p { top: 448px; font-size: 60px; line-height: 76px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="148.380" data-width="1920" data-height="1080">
+      <canvas id="scene" width="1920" height="1080"></canvas>
+      <div id="preload" aria-hidden="true">Перчатка ДЕЛОРЖ <i>Фридрих Шиллер</i> <b>ROUND FIGHT K.O. ЛЕВ ТИГР БАРСЫ 0123456789</b></div>
+      <div id="caps" class="clip layer" data-start="3.825" data-duration="139.211" data-track-index="3" data-track-kind="captions"><div class="cap" id="c1" data-n="1"><span class="w" data-at="4.425">Перед</span> <span class="w" data-at="4.685">своим</span> <span class="w" data-at="5.080">зверинцем,</span></div><div class="cap" id="c2" data-n="2"><span class="w" data-at="6.549">С</span> <span class="w" data-at="6.670">баронами,</span> <span class="w" data-at="7.630">с</span> <span class="w" data-at="7.700">наследным</span> <span class="w" data-at="8.399">принцем,</span></div><div class="cap" id="c3" data-n="3"><span class="w" data-at="9.396">Король</span> <span class="w k" data-at="9.741">Франциск</span> <span class="w" data-at="10.372">сидел;</span></div><div class="cap" id="c4" data-n="4"><span class="w" data-at="11.588">С</span> <span class="w" data-at="11.688">высокого</span> <span class="w" data-at="12.348">балкона</span> <span class="w" data-at="12.968">он</span> <span class="w" data-at="13.150">глядел</span></div><div class="cap" id="c5" data-n="5"><span class="w" data-at="14.027">На</span> <span class="w" data-at="14.182">поприще,</span> <span class="w" data-at="15.092">сраженья</span> <span class="w" data-at="15.730">ожидая;</span></div><div class="cap" id="c6" data-n="6"><span class="w" data-at="16.873">За</span> <span class="w" data-at="17.040">королём,</span> <span class="w" data-at="17.732">обворожая</span></div><div class="cap" id="c7" data-n="7"><span class="w" data-at="18.802">Цветущей</span> <span class="w" data-at="19.532">прелестию</span> <span class="w" data-at="20.317">взгляд,</span></div><div class="cap" id="c8" data-n="8"><span class="w" data-at="21.253">Придворных</span> <span class="w" data-at="21.893">дам</span> <span class="w" data-at="22.240">являлся</span> <span class="w" data-at="22.842">пышный</span> <span class="w" data-at="23.360">ряд.</span></div><div class="cap" id="c9" data-n="9"><span class="w" data-at="24.700">Король</span> <span class="w" data-at="25.100">дал</span> <span class="w" data-at="25.400">знак</span> <span class="w" data-at="25.780">рукою</span> <span class="w" data-at="25.780">—</span></div><div class="cap" id="c10" data-n="10"><span class="w" data-at="26.716">Со</span> <span class="w" data-at="26.896">стуком</span> <span class="w" data-at="27.396">растворилась</span> <span class="w" data-at="28.056">дверь,</span></div><div class="cap" id="c11" data-n="11"><span class="w" data-at="28.666">И</span> <span class="w" data-at="28.746">грозный</span> <span class="w k" data-at="29.336">зверь</span></div><div class="cap" id="c12" data-n="12"><span class="w" data-at="29.860">С</span> <span class="w" data-at="30.036">огромной</span> <span class="w" data-at="30.681">головою,</span></div><div class="cap" id="c13" data-n="13"><span class="w" data-at="31.544">Косматый</span> <span class="w k" data-at="32.244">лев</span></div><div class="cap" id="c14" data-n="14"><span class="w" data-at="32.662">Выходит;</span></div><div class="cap" id="c15" data-n="15"><span class="w" data-at="34.026">Кругом</span> <span class="w" data-at="34.536">глаза</span> <span class="w" data-at="35.200">угрюмо</span> <span class="w" data-at="35.820">водит;</span></div><div class="cap" id="c16" data-n="16"><span class="w" data-at="36.805">И</span> <span class="w" data-at="36.870">вот,</span> <span class="w" data-at="37.538">всё</span> <span class="w" data-at="37.900">оглядев,</span></div><div class="cap" id="c17" data-n="17"><span class="w" data-at="38.899">Наморщил</span> <span class="w" data-at="39.459">лоб</span> <span class="w" data-at="39.880">с</span> <span class="w" data-at="39.980">осанкой</span> <span class="w" data-at="40.560">горделивой,</span></div><div class="cap" id="c18" data-n="18"><span class="w" data-at="41.631">Пошевелил</span> <span class="w" data-at="42.231">густою</span> <span class="w" data-at="42.731">гривой,</span></div><div class="cap" id="c19" data-n="19"><span class="w" data-at="43.691">И</span> <span class="w" data-at="43.802">потянулся,</span> <span class="w" data-at="45.044">и</span> <span class="w k" data-at="45.170">зевнул,</span></div><div class="cap" id="c20" data-n="20"><span class="w" data-at="46.308">И</span> <span class="w" data-at="46.380">лёг.</span> <span class="w" data-at="47.770">Король</span> <span class="w" data-at="48.112">опять</span> <span class="w" data-at="48.520">рукой</span> <span class="w" data-at="48.910">махнул</span> <span class="w" data-at="48.910">—</span></div><div class="cap" id="c21" data-n="21"><span class="w" data-at="49.711">Затвор</span> <span class="w" data-at="50.201">железной</span> <span class="w" data-at="50.656">двери</span> <span class="w" data-at="50.981">грянул,</span></div><div class="cap" id="c22" data-n="22"><span class="w" data-at="51.697">И</span> <span class="w" data-at="51.757">смелый</span> <span class="w k" data-at="52.242">тигр</span> <span class="w" data-at="52.517">из-за</span> <span class="w" data-at="52.827">решётки</span> <span class="w k" data-at="53.307">прянул;</span></div><div class="cap" id="c23" data-n="23"><span class="w" data-at="54.160">Но</span> <span class="w" data-at="54.330">видит</span> <span class="w k" data-at="54.670">льва,</span> <span class="w" data-at="55.110">робеет</span> <span class="w" data-at="55.785">и</span> <span class="w" data-at="55.870">ревёт,</span></div><div class="cap" id="c24" data-n="24"><span class="w" data-at="56.502">Себя</span> <span class="w" data-at="56.790">хвостом</span> <span class="w" data-at="57.372">по</span> <span class="w" data-at="57.537">рёбрам</span> <span class="w" data-at="57.952">бьёт,</span></div><div class="cap" id="c25" data-n="25"><span class="w" data-at="58.592">И</span> <span class="w" data-at="58.640">кра́дется,</span> <span class="w" data-at="59.360">косяся</span> <span class="w" data-at="59.810">взглядом,</span></div><div class="cap" id="c26" data-n="26"><span class="w" data-at="60.612">И</span> <span class="w" data-at="60.710">лижет</span> <span class="w" data-at="61.067">морду</span> <span class="w" data-at="61.530">языком,</span></div><div class="cap" id="c27" data-n="27"><span class="w" data-at="62.440">И,</span> <span class="w" data-at="62.485">обошедши</span> <span class="w k" data-at="63.135">льва</span> <span class="w" data-at="63.330">кругом,</span></div><div class="cap" id="c28" data-n="28"><span class="w" data-at="64.157">Рычит</span> <span class="w" data-at="64.940">и</span> <span class="w" data-at="65.047">с</span> <span class="w" data-at="65.227">ним</span> <span class="w" data-at="65.490">ложится</span> <span class="w" data-at="66.017">рядом.</span></div><div class="cap" id="c29" data-n="29"><span class="w" data-at="67.057">И</span> <span class="w" data-at="67.122">в</span> <span class="w" data-at="67.180">третий</span> <span class="w" data-at="67.617">раз</span> <span class="w" data-at="67.847">король</span> <span class="w" data-at="68.112">махнул</span> <span class="w" data-at="68.437">рукой</span> <span class="w" data-at="68.437">—</span></div><div class="cap" id="c30" data-n="30"><span class="w" data-at="69.104">Два</span> <span class="w k" data-at="69.374">барса</span> <span class="w" data-at="69.844">дружною</span> <span class="w" data-at="70.324">четой</span></div><div class="cap" id="c31" data-n="31"><span class="w" data-at="70.902">В</span> <span class="w" data-at="70.984">один</span> <span class="w k" data-at="71.254">прыжок</span> <span class="w" data-at="71.774">над</span> <span class="w k" data-at="71.922">тигром</span> <span class="w" data-at="72.340">очутились;</span></div><div class="cap" id="c32" data-n="32"><span class="w" data-at="73.233">Но</span> <span class="w" data-at="73.530">он</span> <span class="w" data-at="73.730">удар</span> <span class="w" data-at="73.883">им</span> <span class="w" data-at="74.062">тяжкой</span> <span class="w" data-at="74.473">лапой</span> <span class="w" data-at="74.943">дал,</span></div><div class="cap" id="c33" data-n="33"><span class="w" data-at="75.506">А</span> <span class="w k" data-at="75.560">лев</span> <span class="w" data-at="75.866">с</span> <span class="w k" data-at="76.046">рыканьем</span> <span class="w" data-at="76.696">встал…</span></div><div class="cap" id="c34" data-n="34"><span class="w" data-at="77.709">Они</span> <span class="w k" data-at="77.929">смирились,</span></div><div class="cap" id="c35" data-n="35"><span class="w" data-at="79.027">Оскалив</span> <span class="w" data-at="79.597">зубы,</span> <span class="w" data-at="79.967">отошли,</span></div><div class="cap" id="c36" data-n="36"><span class="w" data-at="80.898">И</span> <span class="w" data-at="80.998">зарычали,</span> <span class="w" data-at="82.172">и</span> <span class="w" data-at="82.250">легли.</span></div><div class="cap" id="c37" data-n="37"><span class="w" data-at="83.746">И</span> <span class="w" data-at="83.846">гости</span> <span class="w" data-at="84.396">ждут,</span> <span class="w" data-at="84.730">чтоб</span> <span class="w" data-at="85.046">битва</span> <span class="w" data-at="85.466">началася.</span></div><div class="cap" id="c38" data-n="38"><span class="w" data-at="86.588">Вдруг</span> <span class="w" data-at="86.790">женская</span> <span class="w" data-at="87.265">с</span> <span class="w" data-at="87.320">балкона</span> <span class="w k" data-at="87.780">сорвалася</span></div><div class="cap" id="c39" data-n="39"><span class="w k" data-at="88.724">Перчатка…</span> <span class="w" data-at="89.646">все</span> <span class="w" data-at="89.876">глядят</span> <span class="w" data-at="90.276">за</span> <span class="w" data-at="90.406">ней…</span></div><div class="cap" id="c40" data-n="40"><span class="w" data-at="90.982">Она</span> <span class="w" data-at="91.170">упала</span> <span class="w" data-at="91.640">меж</span> <span class="w" data-at="91.832">зверей.</span></div><div class="cap" id="c41" data-n="41"><span class="w" data-at="92.819">Тогда</span> <span class="w" data-at="93.200">на</span> <span class="w" data-at="93.390">рыцаря</span> <span class="w k" data-at="93.850">Делоржа</span> <span class="w" data-at="94.600">с</span> <span class="w" data-at="94.769">лицемерной</span></div><div class="cap" id="c42" data-n="42"><span class="w" data-at="95.842">И</span> <span class="w" data-at="96.092">колкою</span> <span class="w" data-at="96.600">улыбкою</span> <span class="w" data-at="97.300">глядит</span></div><div class="cap" id="c43" data-n="43"><span class="w" data-at="98.025">Его</span> <span class="w" data-at="98.325">красавица</span> <span class="w" data-at="99.363">и</span> <span class="w" data-at="99.458">говорит:</span></div><div class="cap" id="c44" data-n="44"><span class="w" data-at="100.459">«Когда</span> <span class="w" data-at="100.670">меня,</span> <span class="w" data-at="100.970">мой</span> <span class="w" data-at="101.430">рыцарь</span> <span class="w" data-at="102.050">верный,</span></div><div class="cap" id="c45" data-n="45"><span class="w" data-at="102.817">Ты</span> <span class="w" data-at="102.910">любишь</span> <span class="w" data-at="103.322">так,</span> <span class="w" data-at="103.762">как</span> <span class="w" data-at="103.892">говоришь,</span></div><div class="cap" id="c46" data-n="46"><span class="w" data-at="104.828">Ты</span> <span class="w" data-at="104.900">мне</span> <span class="w k" data-at="105.122">перчатку</span> <span class="w" data-at="105.803">возвратишь».</span></div><div class="cap" id="c47" data-n="47"><span class="w k" data-at="107.498">Делорж,</span> <span class="w" data-at="108.270">не</span> <span class="w" data-at="108.400">отвечав</span> <span class="w" data-at="108.950">ни</span> <span class="w" data-at="109.070">слова,</span></div><div class="cap" id="c48" data-n="48"><span class="w" data-at="109.861">К</span> <span class="w" data-at="109.900">зверям</span> <span class="w" data-at="110.400">идёт,</span></div><div class="cap" id="c49" data-n="49"><span class="w k" data-at="111.151">Перчатку</span> <span class="w" data-at="111.701">смело</span> <span class="w" data-at="112.271">он</span> <span class="w" data-at="112.381">берёт</span></div><div class="cap" id="c50" data-n="50"><span class="w" data-at="113.122">И</span> <span class="w" data-at="113.227">возвращается</span> <span class="w" data-at="114.070">к</span> <span class="w" data-at="114.130">собранью</span> <span class="w" data-at="114.697">снова.</span></div><div class="cap" id="c51" data-n="51"><span class="w" data-at="115.499">У</span> <span class="w" data-at="115.620">рыцарей</span> <span class="w" data-at="116.250">и</span> <span class="w" data-at="116.310">дам</span> <span class="w" data-at="116.692">при</span> <span class="w" data-at="117.012">дерзости</span> <span class="w" data-at="117.589">такой</span></div><div class="cap" id="c52" data-n="52"><span class="w" data-at="118.755">От</span> <span class="w" data-at="118.820">страха</span> <span class="w" data-at="119.305">сердце</span> <span class="w" data-at="119.765">помутилось;</span></div><div class="cap" id="c53" data-n="53"><span class="w" data-at="121.172">А</span> <span class="w k" data-at="121.290">витязь</span> <span class="w" data-at="121.812">молодой,</span></div><div class="cap" id="c54" data-n="54"><span class="w" data-at="122.838">Как</span> <span class="w" data-at="122.945">будто</span> <span class="w" data-at="123.290">ничего</span> <span class="w" data-at="123.800">с</span> <span class="w" data-at="123.890">ним</span> <span class="w" data-at="124.180">не</span> <span class="w" data-at="124.310">случилось,</span></div><div class="cap" id="c55" data-n="55"><span class="w" data-at="125.140">Спокойно</span> <span class="w" data-at="125.820">всходит</span> <span class="w" data-at="126.260">на</span> <span class="w" data-at="126.370">балкон;</span></div><div class="cap" id="c56" data-n="56"><span class="w" data-at="127.288">Рукоплесканьем</span> <span class="w" data-at="128.198">встречен</span> <span class="w" data-at="128.708">он;</span></div><div class="cap" id="c57" data-n="57"><span class="w" data-at="129.299">Его</span> <span class="w" data-at="129.529">приветствуют</span> <span class="w" data-at="130.250">красавицыны</span> <span class="w" data-at="131.009">взгляды…</span></div><div class="cap" id="c58" data-n="58"><span class="w" data-at="132.177">Но,</span> <span class="w" data-at="132.630">холодно</span> <span class="w" data-at="133.580">приняв</span> <span class="w" data-at="133.952">привет</span> <span class="w" data-at="134.427">её</span> <span class="w" data-at="134.730">очей,</span></div><div class="cap" id="c59" data-n="59"><span class="w" data-at="135.702">В</span> <span class="w" data-at="135.760">лицо</span> <span class="w k" data-at="136.142">перчатку</span> <span class="w" data-at="136.842">ей</span></div><div class="cap" id="c60" data-n="60"><span class="w" data-at="137.474">Он</span> <span class="w k" data-at="137.644">бросил</span> <span class="w" data-at="138.369">и</span> <span class="w" data-at="138.410">сказал:</span> <span class="w" data-at="139.587">«Не</span> <span class="w" data-at="139.750">требую</span> <span class="w k" data-at="140.250">награды».</span></div></div>
+      <div id="title1" class="clip layer" data-start="0" data-duration="4.000" data-track-index="4" data-track-kind="graphics"><div class="tt" id="tt1"><h1>Перчатка</h1><p>Фридрих Шиллер · 1797</p><h2>перевод Василия Жуковского · 1831</h2></div></div>
+      <div id="title2" class="clip layer" data-start="143.036" data-duration="5.344" data-track-index="4" data-track-kind="graphics"><div class="tt" id="tt2"><h1>Перчатка</h1><p>Фридрих Шиллер · перевод В. А. Жуковского</p></div></div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="4.000" data-duration="136.880" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="148.380" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>
+      const CFG = {"total": 148.38, "ev": {"V0": 4.0, "L1": 4.425, "L2": 6.549, "L3": 9.396, "L4": 11.588, "L5": 14.027, "L6": 16.873, "L7": 18.802, "L8": 21.253, "L9": 24.7, "L10": 26.716, "L11": 28.666, "L12": 29.86, "L13": 31.544, "L14": 32.662, "L15": 34.026, "L16": 36.805, "L17": 38.899, "L18": 41.631, "L19": 43.691, "L20": 46.308, "L21": 49.711, "L22": 51.697, "L23": 54.16, "L24": 56.502, "L25": 58.592, "L26": 60.612, "L27": 62.44, "L28": 64.157, "L29": 67.057, "L30": 69.104, "L31": 70.902, "L32": 73.233, "L33": 75.506, "L34": 77.709, "L35": 79.027, "L36": 80.898, "L37": 83.746, "L38": 86.588, "L39": 88.724, "L40": 90.982, "L41": 92.819, "L42": 95.842, "L43": 98.025, "L44": 100.459, "L45": 102.817, "L46": 104.828, "L47": 107.498, "L48": 109.861, "L49": 111.151, "L50": 113.122, "L51": 115.499, "L52": 118.755, "L53": 121.172, "L54": 122.838, "L55": 125.14, "L56": 127.288, "L57": 129.299, "L58": 132.177, "L59": 135.702, "L60": 137.474, "E1": 5.916, "E2": 9.011, "E3": 10.947, "E4": 13.7, "E5": 16.31, "E6": 18.631, "E7": 20.893, "E8": 23.652, "E9": 26.383, "E10": 28.391, "E11": 29.86, "E12": 31.293, "E13": 32.662, "E14": 33.452, "E15": 36.458, "E16": 38.532, "E17": 41.383, "E18": 43.368, "E19": 45.828, "E20": 49.402, "E21": 51.424, "E22": 53.824, "E23": 56.315, "E24": 58.287, "E25": 60.388, "E26": 62.122, "E27": 63.909, "E28": 66.435, "E29": 68.875, "E30": 70.772, "E31": 72.929, "E32": 75.286, "E33": 77.165, "E34": 78.732, "E35": 80.55, "E36": 82.671, "E37": 86.161, "E38": 88.495, "E39": 90.664, "E40": 92.327, "E41": 95.722, "E42": 97.83, "E43": 100.015, "E44": 102.539, "E45": 104.481, "E46": 106.454, "E47": 109.683, "E48": 110.794, "E49": 112.782, "E50": 115.111, "E51": 118.057, "E52": 120.462, "E53": 122.514, "E54": 124.82, "E55": 126.887, "E56": 128.924, "E57": 131.598, "E58": 135.254, "E59": 137.158, "E60": 140.636, "w_zverin": 5.08, "w_baron": 6.67, "w_prinz": 8.399, "w_franc": 9.741, "w_balk1": 12.348, "w_glyadel": 13.15, "w_popr": 14.182, "w_srazh": 15.092, "w_korol": 17.04, "w_obvor": 17.732, "w_dam": 21.893, "w_ryad": 23.36, "w_znak": 25.4, "w_stuk": 26.896, "w_dver": 28.056, "w_grozn": 28.746, "w_golov": 30.681, "w_lev": 32.244, "w_vyh": 32.662, "w_glaza": 34.536, "w_ogl": 37.9, "w_morsh": 38.899, "w_osank": 39.98, "w_shevel": 41.631, "w_potyan": 43.802, "w_zevn": 45.17, "w_leg": 46.38, "w_mahn2": 48.91, "w_zatv": 49.711, "w_gryan": 50.981, "w_tigr": 52.242, "w_pryan": 53.307, "w_vidit": 54.33, "w_rob": 55.11, "w_rev": 55.87, "w_hvost": 56.79, "w_krad": 58.64, "w_kos": 59.36, "w_lizh": 60.71, "w_obosh": 62.485, "w_rych": 64.157, "w_lozh": 65.49, "w_tret": 67.18, "w_mahn3": 68.112, "w_bars": 69.374, "w_pryzh": 71.254, "w_ochut": 72.34, "w_udar": 73.73, "w_lapoy": 74.473, "w_lev2": 75.56, "w_ryk": 76.046, "w_vstal": 76.696, "w_smir": 77.929, "w_oskal": 79.027, "w_otosh": 79.967, "w_zaryc": 80.998, "w_legli": 82.25, "w_gosti": 83.846, "w_bitva": 85.046, "w_vdrug": 86.588, "w_sorv": 87.78, "w_perch1": 88.724, "w_glyad": 89.876, "w_upala": 91.17, "w_zver2": 91.832, "w_rycar": 93.39, "w_licem": 94.769, "w_ulyb": 96.6, "w_krasav": 98.325, "w_kogda": 100.459, "w_lyub": 102.91, "w_perch2": 105.122, "w_vozvr": 105.803, "w_delorzh": 107.498, "w_slova": 109.07, "w_zveryam": 109.9, "w_idet": 110.4, "w_smelo": 111.701, "w_beret": 112.381, "w_vozvr2": 113.227, "w_sobr": 114.13, "w_dersk": 117.012, "w_strah": 118.82, "w_serdce": 119.305, "w_vityaz": 121.29, "w_nichego": 123.29, "w_spok": 125.14, "w_vshod": 125.82, "w_balkon": 126.37, "w_rukopl": 127.288, "w_privet": 129.529, "w_vzglyad": 131.009, "w_holod": 132.63, "w_ochey": 134.73, "w_lico": 135.76, "w_brosil": 137.644, "w_skazal": 138.41, "w_ne": 139.587, "w_nagr": 140.25, "fin": 143.036, "total": 148.38}, "blocks": [[1, 3], [4, 5], [6, 8], [9, 10], [11, 14], [15, 16], [17, 19], [20, 22], [23, 24], [25, 26], [27, 28], [29, 31], [32, 33], [34, 36], [37, 40], [41, 43], [44, 46], [47, 50], [51, 52], [53, 56], [57, 58], [59, 60]]};
+// Файтинг-аркада «Королевский зверинец». Всё рисуется кодом на одном canvas.
+const W = 1920, H = 1080, TOTAL = CFG.total, EV = CFG.ev, TAU = Math.PI * 2;
+
+function mulberry32(a) { return function () { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, u) => a + (b - a) * u;
+const sstep = (u) => { u = clamp(u, 0, 1); return u * u * (3 - 2 * u); };
+const prog = (t, a, b) => clamp((t - a) / Math.max(1e-6, b - a), 0, 1);
+const win = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(sstep(prog(t, a, a + fi)), 1 - sstep(prog(t, b - fo, b)));
+const mkCanvas = (w, h) => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
+const easeOut = (u) => 1 - Math.pow(1 - clamp(u, 0, 1), 3);
+const easeIn = (u) => Math.pow(clamp(u, 0, 1), 2.2);
+const easeInOut = (u) => { u = clamp(u, 0, 1); return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+// пружины Framer Motion как функции времени: 0 → 1 с перелётом (детерминированно, по таблице)
+function makeSpring(opts) {
+  const g = Motion.spring({ ...opts, keyframes: [0, 1] });
+  const pts = []; for (let i = 0; i <= 400; i++) pts.push(g.next(i * 10).value);
+  return (s) => { if (s <= 0) return 0; const f = s * 100; if (f >= 400) return 1; const i = Math.floor(f); return lerp(pts[i], pts[i + 1], f - i); };
+}
+const springPop = makeSpring({ stiffness: 260, damping: 13, mass: 1 });
+const springSoft = makeSpring({ stiffness: 140, damping: 17, mass: 1 });
+const springSnap = makeSpring({ stiffness: 420, damping: 22, mass: 1 });
+const springSlam = makeSpring({ stiffness: 600, damping: 16, mass: 1 });
+// пружина от момента t0: секунды после t0
+const popAt = (t, t0, f = springPop) => (t < t0 ? 0 : f(t - t0));
+// детерминированный «шум» для дрожи
+const wob = (t, f, s = 0) => Math.sin(t * f + s) * 0.6 + Math.sin(t * f * 2.31 + s * 1.7) * 0.4;
+
+// ключи: [время, значение, длительность] → значение в момент t (числа или массивы)
+function kf(list, t, f = springSoft) {
+  let i = -1; for (let k = 0; k < list.length; k++) if (t >= list[k][0]) i = k;
+  if (i <= 0) return list[0][1];
+  const a = list[i - 1][1], b = list[i][1], u = f(prog(t, list[i][0], list[i][0] + (list[i][2] || 0.4)));
+  const mix = (x, y) => (Array.isArray(x) ? x.map((v, j) => mix(v, y[j])) : lerp(x, y, u));
+  return mix(a, b);
+}
+// шаг пешехода: короткий разгон и торможение, в середине ровная скорость (пик всего ×1.25 от средней)
+function trapEase(u, a = 0.2) { u = clamp(u, 0, 1); const v = 1 / (1 - a);
+  if (u < a) return v * u * u / (2 * a); if (u > 1 - a) return 1 - v * (1 - u) * (1 - u) / (2 * a); return v * (u - a / 2); }
+// то же, но плавно (без перелёта)
+const kfe = (list, t) => kf(list, t, easeInOut);
+
+const C = {
+  ink: "#1b1026", sky1: "#2a1450", sky2: "#c2426b", sky3: "#ffb04a", sun: "#ffe08a",
+  stone: "#8a7a8f", stoneD: "#5e4f66", stoneL: "#b3a3b3", stoneDD: "#3d3045",
+  sand: "#e9b86a", sandD: "#c98f45", sandL: "#f7d394",
+  red: "#d42b3a", redD: "#8f1426", gold: "#ffcc3d", goldD: "#c08a12", blue: "#2f6fe0", blueD: "#1b3f8f", blueL: "#7fb2ff",
+  pink: "#ff6fae", pinkD: "#c23a7a", pinkL: "#ffc2dc", white: "#ffffff", yellow: "#ffe14a", cyan: "#3ee8ff", green: "#3fd46b",
+  hpG: "#48f07a", hpY: "#ffd23a", hpR: "#ff3b3b", steel: "#c9d3e6", steelD: "#7d8aa6",
+  skin: "#f6c9a0", skinD: "#d79a74",
+  lion: "#e8a63a", lionD: "#b8741c", mane: "#a8501a", maneD: "#6e2f0d", tiger: "#f08a22", tigerD: "#b85a10", bars: "#f3d27a", barsD: "#c9a24a",
+};
+const F_CAP = '"Narrow"', F_HUD = '"Arcade"', F_ITAL = '"SansB"';
+function font(c, px, fam = F_CAP, style = "") { c.font = `${style} ${px}px ${fam}`.trim(); }
+
+function rrect(c, x, y, w, h, r) { c.beginPath(); c.roundRect(x, y, w, h, r); }
+function slant(c, x, y, w, h, s) { c.beginPath(); c.moveTo(x + s, y); c.lineTo(x + w, y); c.lineTo(x + w - s, y + h); c.lineTo(x, y + h); c.closePath(); }
+// заливка + мультяшный контур текущего пути
+function ink(c, fill, lw = 5, stroke = C.ink) { c.fillStyle = fill; c.fill(); if (lw > 0) { c.lineWidth = lw; c.strokeStyle = stroke; c.lineJoin = "round"; c.stroke(); } }
+function circle(c, x, y, r) { c.beginPath(); c.arc(x, y, r, 0, TAU); }
+function ellipse(c, x, y, rx, ry, rot = 0) { c.beginPath(); c.ellipse(x, y, Math.max(0.1, rx), Math.max(0.1, ry), rot, 0, TAU); }
+function line(c, pts, w, col, cap = "round") { c.save(); c.lineCap = cap; c.lineJoin = "round"; c.lineWidth = w; c.strokeStyle = col; c.beginPath(); c.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) c.lineTo(pts[i][0], pts[i][1]); c.stroke(); c.restore(); }
+// толстая линия с контуром
+function stroke2(c, pts, w, col, lw = 5) { line(c, pts, w + lw * 2, C.ink); line(c, pts, w, col); }
+// двухзвенная конечность: колено/локоть по IK, bend = ±1 — в какую сторону гнётся
+function ik(sx, sy, tx, ty, a, b, bend) {
+  let dx = tx - sx, dy = ty - sy, d = Math.hypot(dx, dy);
+  const dd = clamp(d, Math.abs(a - b) + 0.01, a + b - 0.01);
+  if (d < 1e-6) { dx = 0; dy = 1; d = 1; }
+  const base = Math.atan2(dy, dx), al = Math.acos(clamp((a * a + dd * dd - b * b) / (2 * a * dd), -1, 1));
+  const ang = base - bend * al;
+  const ex = sx + Math.cos(ang) * a, ey = sy + Math.sin(ang) * a;
+  const ux = dx / d, uy = dy / d;
+  return { ex, ey, hx: sx + ux * Math.min(d, a + b - 0.01), hy: sy + uy * Math.min(d, a + b - 0.01) };
+}
+function limb(c, sx, sy, tx, ty, a, b, bend, w, col, lw = 5) {
+  const k = ik(sx, sy, tx, ty, a, b, bend);
+  stroke2(c, [[sx, sy], [k.ex, k.ey], [k.hx, k.hy]], w, col, lw);
+  return k;
+}
+function star4(c, x, y, r, col) { if (r <= 0.5) return; c.save(); c.fillStyle = col; c.beginPath();
+  for (let i = 0; i < 8; i++) { const a = (i / 8) * TAU - Math.PI / 2, rr = i % 2 ? r * 0.28 : r; c.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
+  c.closePath(); c.fill(); c.restore(); }
+function star5(c, x, y, r, col, lw = 4) { c.beginPath();
+  for (let i = 0; i < 10; i++) { const a = (i / 10) * TAU - Math.PI / 2, rr = i % 2 ? r * 0.45 : r; c.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
+  c.closePath(); ink(c, col, lw); }
+function heart(c, x, y, s, col, crack = 0) {
+  c.save(); c.translate(x, y); c.scale(s, s);
+  c.beginPath(); c.moveTo(0, 12); c.bezierCurveTo(-26, -6, -14, -26, 0, -12); c.bezierCurveTo(14, -26, 26, -6, 0, 12); c.closePath();
+  ink(c, col, 3 / s);
+  if (crack > 0) line(c, [[0, -12], [-4, -4], [3, 0], [-2, 8 * crack]], 3 / s, C.ink);
+  c.restore();
+}
+// текст с толстым контуром (аркадный)
+function arcadeText(c, txt, x, y, px, fill, opt = {}) {
+  c.save(); font(c, px, opt.fam || F_HUD); c.textAlign = opt.align || "center"; c.textBaseline = "middle";
+  c.lineJoin = "round"; c.miterLimit = 2;
+  if (opt.shadow !== false) { c.fillStyle = opt.shadowCol || "rgba(0,0,0,0.55)"; c.fillText(txt, x + px * 0.06, y + px * 0.08); }
+  c.lineWidth = opt.lw || px * 0.16; c.strokeStyle = opt.stroke || C.ink; c.strokeText(txt, x, y);
+  if (opt.grad) { const g = c.createLinearGradient(0, y - px / 2, 0, y + px / 2); opt.grad.forEach((col, i) => g.addColorStop(i / (opt.grad.length - 1), col)); c.fillStyle = g; }
+  else c.fillStyle = fill;
+  c.fillText(txt, x, y); c.restore();
+}
+
+// ---------- Звери: лев, тигр, барс. Вид сбоку, морда к зрителю, мультяшный контур ----------
+// p: { x, y (земля), s, dir (1 вправо, -1 влево), walk (фаза), stride, lie, crouch, stretch, jump, look [x,y],
+//      mouth, brow, blink, tail (взмах), lash, lick, fear, snarl, mane (встряхивание), sleep, breathe }
+const KIND = {
+  lion: { body: C.lion, bodyD: C.lionD, belly: "#f6cf86", len: 1.0, h: 1.0, head: 1.0 },
+  tiger: { body: C.tiger, bodyD: C.tigerD, belly: "#fff1d8", len: 1.02, h: 0.92, head: 0.92 },
+  bars: { body: C.bars, bodyD: C.barsD, belly: "#fff6dc", len: 0.82, h: 0.78, head: 0.74 },
+};
+// кошачья лапа: плоская подошва, округлый верх, полоски между пальцами; claws > 0 — выпущенные когти
+function pawShape(c, x, y, k, col, claws = 0) {
+  c.save(); c.translate(x, y); c.scale(k, k);
+  if (claws > 0.3) { c.fillStyle = "#fff"; c.strokeStyle = C.ink; c.lineWidth = 2.5;
+    for (const dy of [-14, -6, 2]) { c.beginPath(); c.moveTo(30, dy - 3); c.lineTo(44 + 4 * claws, dy + 1); c.lineTo(30, dy + 4); c.closePath(); c.fill(); c.stroke(); } }
+  c.beginPath(); c.moveTo(-16, 2); c.lineTo(26, 2);
+  c.bezierCurveTo(36, 2, 38, -18, 24, -21); c.bezierCurveTo(14, -24, -6, -24, -14, -17); c.bezierCurveTo(-20, -12, -20, 2, -16, 2); c.closePath();
+  ink(c, col, 4.5);
+  c.strokeStyle = C.ink; c.lineWidth = 3.2; c.lineCap = "round";
+  for (const tx of [8, 18]) { c.beginPath(); c.moveTo(tx + 2, 1); c.lineTo(tx, -9); c.stroke(); }
+  c.restore();
+}
+// леопардовые розетки: охристое пятно и разорванное кольцо из тёмных дужек, по сетке с разбросом
+const ROSETTES = (() => { const r = mulberry32(3), a = [];
+  for (let gy = -62; gy <= 40; gy += 30) for (let gx = -150; gx <= 150; gx += 34) {
+    const x = gx + (gy / 30) % 2 * 17 + (r() - 0.5) * 12, y = gy + (r() - 0.5) * 10;
+    if ((x / 150) ** 2 + ((y + 4) / 66) ** 2 < 0.85 && y < 18) a.push([x, y, 6 + r() * 3, r() * TAU]); }
+  return a; })();
+function rosettes(c) {
+  for (const [x, y, rad, a0] of ROSETTES) {
+    ellipse(c, x, y, rad * 0.75, rad * 0.6, a0); c.fillStyle = "#d99a3a"; c.fill();
+    c.strokeStyle = "#4a2c0a"; c.lineWidth = 3.6; c.lineCap = "round";
+    for (let k = 0; k < 3; k++) { c.beginPath(); c.arc(x, y, rad + 2, a0 + k * 2.1, a0 + k * 2.1 + 1.35); c.stroke(); }
+  }
+}
+// капля пота
+function sweat(c, x, y, k) { c.save(); c.translate(x, y); c.scale(k, k); c.beginPath(); c.moveTo(0, -9); c.quadraticCurveTo(7, 2, 0, 5); c.quadraticCurveTo(-7, 2, 0, -9); ink(c, C.blueL, 2.5); c.restore(); }
+function beast(c, kind, p, t) {
+  const K = KIND[kind], s = p.s || 1, dir = p.dir || 1;
+  const lie = p.lie || 0, crouch = p.crouch || 0, stretch = p.stretch || 0, jump = p.jump || 0;
+  const shiver = (p.fear || 0) > 0.3 ? Math.sin(t * 57) * 2.5 * p.fear : 0; // дрожит от страха
+  c.save(); c.translate(p.x + shiver, p.y); c.scale(s * dir, s);
+  // тень
+  c.save(); c.scale(1, 1); c.fillStyle = "rgba(60,20,30,0.28)"; ellipse(c, 0, 9, 160 * K.len * (1 - 0.3 * jump), 9 * (1 - 0.5 * jump)); c.fill(); c.restore();
+  const air = p.air || 0; // высота прыжка
+  const breathe = Math.sin(t * (p.sleep ? 2.2 : 3.4) + (p.ph || 0)) * (p.sleep ? 4 : 2.5);
+  const bodyH = lerp(lerp(118, 52, lie), 80, crouch * (1 - lie)) * K.h;
+  const shX = 92 * K.len, hpX = -98 * K.len;
+  let shY = -bodyH - air, hpY = -bodyH - air - 4;
+  shY += stretch * 48; hpY -= stretch * 18;
+  const tiltBody = Math.atan2(shY - hpY, shX - hpX);
+  // лапы: цели
+  const ph = p.walk || 0, st = (p.stride || 0) * 34;
+  const legs = [ // [якорь x, якорь y, смещение фазы, ближняя?, передняя?]
+    [shX - 8, shY + 20, Math.PI, false, true], [hpX + 6, hpY + 22, 0, false, false],
+    [shX + 4, shY + 22, 0, true, true], [hpX - 4, hpY + 24, Math.PI, true, false],
+  ];
+  const UL = 58 * K.h, LL = 58 * K.h;
+  const legPath = (L) => {
+    const [ax, ay, off, near, front] = L;
+    const gy = near ? 10 : 6; // подошвы на земле; дальние лапы чуть глубже
+    let tx = ax + Math.sin(ph + off) * st, ty = gy - Math.max(0, Math.cos(ph + off)) * st * 0.5;
+    if (front && stretch > 0) { tx = lerp(tx, ax + 120, stretch); ty = lerp(ty, gy, stretch); }
+    if (lie > 0) {
+      const lx = front ? ax + 86 : ax + 34, ly = gy;
+      tx = lerp(tx, lx, lie); ty = lerp(ty, ly, lie);
+    }
+    if (front && near && (p.swipe || 0) > 0) { tx = lerp(tx, ax + 120, p.swipe); ty = lerp(ty, ay - 60, p.swipe); }
+    if (jump > 0) { tx = lerp(tx, front ? ax + 95 : ax - 95, jump); ty = lerp(ty, ay + 40, jump) - air * (1 - jump); }
+    ty -= air * (1 - jump);
+    // у кошек и локоть передней лапы, и скакательный сустав задней смотрят назад, к хвосту
+    return { ax, ay, tx, ty, bend: -1, near, front };
+  };
+  const drawLeg = (L, col) => {
+    const q = legPath(L);
+    // нога заканчивается щиколоткой над лапой, подошва лапы стоит в точке цели
+    const ank = 16 * K.h, fold = q.front ? 1 : lerp(1, 0.5, lie); // лёжа задняя лапа поджата под бедро
+    const k = limb(c, q.ax, q.ay, q.tx - 4 * K.h, q.ty - ank, UL * fold, (LL - ank * 0.6) * fold, q.bend, 28 * K.h, col);
+    pawShape(c, k.hx + 4 * K.h, k.hy + ank, K.h, col, q.front && q.near ? (p.swipe || 0) : 0);
+    // бедро задней лапы и плечо передней — мясистые, как у кошки
+    ellipse(c, q.ax + (q.front ? 2 : -4), q.ay - 4, (q.front ? 26 : 38) * K.h, (q.front ? 34 : 46) * K.h, q.front ? 0.2 : -0.25); ink(c, col, 5);
+  };
+  drawLeg(legs[0], K.bodyD); drawLeg(legs[1], K.bodyD);
+  // хвост
+  const lash = p.lash || 0, tw = Math.sin(t * (lash > 0 ? 16 : 2.4) + (p.ph || 0)) * (0.35 + lash * 0.9) + (p.tail || 0);
+  const tb = [hpX - 10, hpY + 6], tm = [hpX - 80, hpY + 40 - 40 * tw], te = [hpX - 140 + 30 * Math.abs(tw) * lash, hpY - 10 - 70 * tw + lie * 40];
+  c.save(); c.lineCap = "round"; c.lineWidth = 22 * K.h; c.strokeStyle = C.ink; c.beginPath(); c.moveTo(...tb); c.quadraticCurveTo(...tm, ...te); c.stroke();
+  c.lineWidth = 12 * K.h; c.strokeStyle = K.body; c.stroke(); c.restore();
+  if (kind === "lion") { ellipse(c, te[0], te[1], 18, 14, tw); ink(c, C.mane, 4); }
+  if (kind === "tiger") for (let i = 1; i < 5; i++) { // поперечные полоски на хвосте
+    const u = i / 5, x = lerp(lerp(tb[0], tm[0], u), lerp(tm[0], te[0], u), u), y = lerp(lerp(tb[1], tm[1], u), lerp(tm[1], te[1], u), u);
+    const dx = lerp(tm[0] - tb[0], te[0] - tm[0], u), dy = lerp(tm[1] - tb[1], te[1] - tm[1], u), d = Math.hypot(dx, dy) || 1, nx = -dy / d * 8, ny = dx / d * 8;
+    line(c, [[x - nx, y - ny], [x + nx, y + ny]], 5, C.ink, "butt"); }
+  // тело
+  const bx = (shX + hpX) / 2, by = (shY + hpY) / 2 + 6;
+  c.save(); c.translate(bx, by); c.rotate(tiltBody);
+  ellipse(c, 0, 0, 150 * K.len, (58 + breathe) * K.h); ink(c, K.body, 6);
+  ellipse(c, 10, 24 * K.h, 110 * K.len, 26 * K.h); c.fillStyle = K.belly; c.fill();
+  c.save(); ellipse(c, 0, 0, 150 * K.len - 3, (58 + breathe) * K.h - 3); c.clip();
+  if (kind === "tiger") { c.strokeStyle = C.ink; c.lineWidth = 9; c.lineCap = "round"; for (let i = -4; i <= 4; i++) { const x = i * 30; c.beginPath(); c.moveTo(x - 6, -70); c.quadraticCurveTo(x + 10, -30, x - 4, -8); c.stroke(); } }
+  if (kind === "bars") rosettes(c);
+  c.restore();
+  c.restore();
+  drawLeg(legs[2], K.body); drawLeg(legs[3], K.body);
+  // голова (морда к зрителю)
+  const hx = shX + 52 - stretch * 10 + crouch * 14, hy = shY - 44 * K.h + stretch * 22 + crouch * 30 + lie * 10;
+  c.save(); c.translate(hx, hy); c.scale(dir, 1); // морда не отражается
+  c.rotate((p.tilt || 0) + (p.mane || 0) * Math.sin(t * 22) * 0.18);
+  head(c, kind, K, p, t);
+  c.restore();
+  c.restore();
+}
+
+function head(c, kind, K, p, t) {
+  const hs = K.head, op = clamp(p.mouth || 0, 0, 1), fear = p.fear || 0, snarl = p.snarl || 0;
+  c.save(); c.scale(hs, hs);
+  // грива / уши
+  if (kind === "lion") {
+    const sh = (p.mane || 0) * Math.sin(t * 22);
+    for (let ring = 0; ring < 2; ring++) {
+      c.beginPath();
+      const n = 18, R = ring ? 78 : 96;
+      for (let i = 0; i <= n * 2; i++) { const a = (i / (n * 2)) * TAU + sh * 0.15 * (ring ? -1 : 1), rr = i % 2 ? R * 0.78 : R + 6 * Math.sin(i * 1.7 + t * 2); c.lineTo(Math.cos(a) * rr, Math.sin(a) * rr + 6); }
+      c.closePath(); ink(c, ring ? C.mane : C.maneD, 5);
+    }
+  }
+  for (const sx of [-1, 1]) {
+    const ex = sx * 44, ey = -42 - (kind === "lion" ? 6 : 0), back = fear * 0.9 * sx;
+    c.save(); c.translate(ex, ey); c.rotate(back);
+    ellipse(c, 0, 0, 20, 18); ink(c, K.body, 5); ellipse(c, 0, 2, 10, 9); c.fillStyle = "#f2a0a8"; c.fill(); c.restore();
+  }
+  // морда
+  ellipse(c, 0, 0, 58, 54); ink(c, K.body, 5);
+  if (kind === "tiger") { c.strokeStyle = C.ink; c.lineWidth = 6; c.lineCap = "round";
+    for (const sx of [-1, 1]) { c.beginPath(); c.moveTo(sx * 56, -10); c.lineTo(sx * 38, -6); c.stroke(); c.beginPath(); c.moveTo(sx * 55, 8); c.lineTo(sx * 40, 8); c.stroke(); }
+    for (const dx of [-12, 0, 12]) { c.beginPath(); c.moveTo(dx, -52); c.lineTo(dx * 0.8, -38); c.stroke(); } }
+  if (kind === "bars") { c.fillStyle = "#5a3a10"; for (const [x, y] of [[-30, -30], [-16, -40], [20, -36], [34, -24], [-40, -8], [42, -6]]) { circle(c, x, y, 4); c.fill(); } }
+  // брови (морщит лоб)
+  const brow = p.brow || 0;
+  if (brow > 0) { c.strokeStyle = K.bodyD; c.lineWidth = 4; for (let i = 0; i < 3; i++) { c.beginPath(); c.moveTo(-20, -30 - i * 7 + brow * 2); c.quadraticCurveTo(0, -36 - i * 7 - brow * 4, 20, -30 - i * 7 + brow * 2); c.globalAlpha = brow; c.stroke(); } c.globalAlpha = 1; }
+  // глаза
+  const look = p.look || [0, 0], bl = Math.max(p.blink || 0, p.sleep || 0);
+  for (const sx of [-1, 1]) {
+    const ex = sx * 22, ey = -12;
+    const ry = 13 * (1 + fear * 0.35) * (1 - bl * 0.92);
+    ellipse(c, ex, ey, 12 * (1 + fear * 0.3), ry); ink(c, "#fff", 3);
+    if (ry > 3) { circle(c, ex + look[0] * 5, ey + look[1] * 4, 6 * (1 - fear * 0.45)); c.fillStyle = C.ink; c.fill(); }
+    if (brow > 0 || snarl > 0) { c.strokeStyle = C.ink; c.lineWidth = 5; c.beginPath(); c.moveTo(ex - sx * 14, ey - 16 - 2 * snarl); c.lineTo(ex + sx * 10, ey - 12 + 4 * Math.max(brow, snarl)); c.stroke(); }
+  }
+  if (fear > 0.25) { c.save(); c.globalAlpha = clamp((fear - 0.25) * 2.5, 0, 1); for (const sx of [-1, 1]) sweat(c, sx * 66, -46 + ((t * 46 + (sx > 0 ? 13 : 0)) % 26), 1.5); c.restore(); }
+  if ((p.sleep || 0) > 0.5) { for (const sx of [-1, 1]) { c.strokeStyle = C.ink; c.lineWidth = 4; c.beginPath(); c.arc(sx * 22, -14, 9, 0.2, Math.PI - 0.2); c.stroke(); } }
+  // морда: нос, рот
+  ellipse(c, -13, 18, 17, 13); ink(c, K.belly, 3); ellipse(c, 13, 18, 17, 13); ink(c, K.belly, 3);
+  c.fillStyle = C.ink; for (const sx of [-1, 1]) for (let i = 0; i < 3; i++) { circle(c, sx * (8 + i * 6), 18 + (i % 2) * 5, 2); c.fill(); }
+  c.beginPath(); c.moveTo(-9, 4); c.lineTo(9, 4); c.lineTo(0, 13); c.closePath(); ink(c, "#3a1a22", 3);
+  if (op > 0.02) {
+    const mw = 20 + op * 16, mh = op * 46;
+    ellipse(c, 0, 30 + mh * 0.5, mw, mh * 0.5 + 2); ink(c, "#5a0f22", 4);
+    c.fillStyle = "#fff"; for (const sx of [-1, 1]) { c.beginPath(); c.moveTo(sx * (mw - 10), 28); c.lineTo(sx * (mw - 3), 28); c.lineTo(sx * (mw - 7), 28 + 10 + op * 6); c.fill(); }
+    ellipse(c, 0, 30 + mh * 0.85, mw * 0.55, mh * 0.18); c.fillStyle = "#f27a8a"; c.fill();
+  } else if (snarl > 0.05) {
+    rrect(c, -22, 28, 44, 14 * snarl + 2, 4); ink(c, "#fff", 3);
+    c.strokeStyle = C.ink; c.lineWidth = 2; for (let x = -15; x <= 15; x += 10) { c.beginPath(); c.moveTo(x, 28); c.lineTo(x, 30 + 14 * snarl); c.stroke(); }
+  } else {
+    c.strokeStyle = C.ink; c.lineWidth = 3.5; c.beginPath(); c.moveTo(0, 13); c.lineTo(0, 22); c.moveTo(-12, 26); c.quadraticCurveTo(-6, 31, 0, 22); c.quadraticCurveTo(6, 31, 12, 26); c.stroke();
+  }
+  // язык: облизывается
+  const lick = p.lick || 0;
+  if (lick > 0) { const a = Math.sin(lick * Math.PI * 3) * 0.9; c.save(); c.translate(0, 30); c.rotate(a); rrect(c, -9, -4, 18, 22 + 10 * Math.sin(lick * Math.PI), 9); ink(c, "#f27a8a", 3); c.restore(); }
+  c.restore();
+}
+
+// ---------- Люди ----------
+// o: { kind: king|prince|baron|lady|beauty|knight, x, y (ступни), s, dir, walk, stride, arms: [[x,y],[x,y]] (от плеча, в единицах фигуры), look, mouth, smile, blink, fear, sly, cold, wince, cheer, legs (рисовать ноги) }
+const PPL = {
+  king: { coat: C.red, coatD: C.redD, trim: C.gold, hair: "#5a3416", h: 1.0 },
+  prince: { coat: "#2e9b6a", coatD: "#1d6a47", trim: C.gold, hair: "#c98a3a", h: 0.86 },
+  baron1: { coat: "#6a3fb0", coatD: "#432377", trim: "#e0d0ff", hair: "#2b1a12", h: 1.0 },
+  baron2: { coat: "#2f8fb0", coatD: "#1c5c73", trim: "#d8f4ff", hair: "#8a8a8a", h: 0.98 },
+  lady1: { coat: "#e8c34a", coatD: "#b08f1e", trim: "#fff", hair: "#6b3a1e", h: 0.92 },
+  lady2: { coat: "#4fb87a", coatD: "#2f7d50", trim: "#fff", hair: "#1f1410", h: 0.92 },
+  lady3: { coat: "#8a5ad9", coatD: "#5b3796", trim: "#fff", hair: "#d9a441", h: 0.92 },
+  beauty: { coat: C.pink, coatD: C.pinkD, trim: C.pinkL, hair: "#f2c94a", h: 0.94 },
+  knight: { coat: C.blue, coatD: C.blueD, trim: C.gold, hair: "#6b3a1e", h: 1.1 },
+};
+// рука: из двух решений IK берём то, где локоть смотрит наружу и вниз (как у человека анфас)
+function arm(c, sx, sy, tx, ty, a, b, side, w, col, lw) {
+  const k1 = ik(sx, sy, tx, ty, a, b, 1), k2 = ik(sx, sy, tx, ty, a, b, -1);
+  const sc = (k) => side * (k.ex - sx) + (k.ey - sy);
+  const k = sc(k1) >= sc(k2) ? k1 : k2;
+  stroke2(c, [[sx, sy], [k.ex, k.ey], [k.hx, k.hy]], w, col, lw);
+  return k;
+}
+// сапог: подошва на y, носок вперёд (+x), голенище шириной с ногу
+function boot(c, x, y, hw, col, plate) {
+  c.beginPath(); c.moveTo(x - hw, y - 30); c.lineTo(x + hw, y - 30); c.lineTo(x + hw, y - 15);
+  c.quadraticCurveTo(x + hw + 16, y - 13, x + hw + 15, y); c.lineTo(x - hw, y); c.closePath(); ink(c, col, 4);
+  if (plate) { c.strokeStyle = C.ink; c.lineWidth = 2.5; for (const yy of [-20, -11]) { c.beginPath(); c.moveTo(x - hw + 3, y + yy); c.lineTo(x + hw + (yy > -15 ? 8 : 0), y + yy); c.stroke(); } }
+}
+function person(c, who, o, t) {
+  const P = PPL[who], s = (o.s || 1) * P.h, dir = o.dir || 1;
+  c.save(); c.translate(o.x, o.y); c.scale(s * dir, s);
+  const lady = who.startsWith("lady") || who === "beauty", kn = who === "knight";
+  const breathe = Math.sin(t * 2.6 + (o.ph || 0)) * 2;
+  const up = kn ? 24 : 0; // рыцарь выше и длинноногий
+  const hipY = -120 - up, shY = -205 - up + breathe, neckY = -215 - up, shX = kn ? 40 : 30;
+  // плащ рыцаря — за спиной
+  if (kn) { const fl = Math.sin(t * 2.2 + 0.5) * 8;
+    c.beginPath(); c.moveTo(-40, shY + 2); c.lineTo(40, shY + 2); c.quadraticCurveTo(58 + fl * 0.3, hipY + 40, 50 + fl, hipY + 96);
+    for (let i = 0; i <= 6; i++) c.lineTo(50 + fl - i * (100 + fl * 0.4) / 6, hipY + 96 + (i % 2 ? -12 : 0) - Math.abs(i - 3) * 2);
+    c.quadraticCurveTo(-60 - fl * 0.3, hipY + 40, -40, shY + 2); c.closePath(); ink(c, "#16306b", 5); }
+  // ноги: ступни в точках o.feet (в единицах фигуры от точки опоры), иначе — шаг по фазе
+  if (o.legs) {
+    const ph = o.walk || 0, st = (o.stride || 0) * 26;
+    const feet = o.feet || [Math.PI, 0].map((off) => [Math.sin(ph + off) * st, -Math.max(0, Math.cos(ph + off)) * st * 0.6]);
+    const hw = kn ? 18 : 16;
+    // тень под подошвой — ступня стоит на земле, а не висит
+    if (o.shadows) for (const [sx, sy] of o.shadows) { c.fillStyle = "rgba(60,20,30,0.3)"; ellipse(c, sx + 6, sy + 1, 34, 6); c.fill(); }
+    feet.forEach(([fx, fy], i) => {
+      const col = kn ? (i ? C.steel : C.steelD) : (i ? "#2b2a40" : P.coatD);
+      const hx = (i ? 1 : -1) * (kn ? 12 : 6);
+      // нога кончается над подошвой, коленом вперёд; сапог стоит подошвой ровно на опоре
+      const k = limb(c, hx, hipY, fx, fy - 26, kn ? 70 : 58, kn ? 68 : 56, 1, kn ? 26 : 22, col);
+      if (kn) { circle(c, k.ex, k.ey, 13); ink(c, C.steel, 4); circle(c, k.ex, k.ey, 5); c.fillStyle = C.steelD; c.fill(); }
+      boot(c, k.hx, k.hy + 26, hw, kn ? (i ? C.steel : C.steelD) : "#3a2414", kn);
+    });
+  }
+  // туловище
+  c.beginPath();
+  if (lady) { c.moveTo(-26, shY); c.lineTo(26, shY); c.lineTo(20, hipY); c.quadraticCurveTo(70, hipY + 40, 66, 4); c.lineTo(-66, 4); c.quadraticCurveTo(-70, hipY + 40, -20, hipY); c.closePath(); }
+  else if (kn) { c.moveTo(-48, shY); c.lineTo(48, shY); c.lineTo(36, hipY + 30); c.lineTo(-36, hipY + 30); c.closePath(); }
+  else { c.moveTo(-34, shY); c.lineTo(34, shY); c.lineTo(30, hipY + 26); c.lineTo(-30, hipY + 26); c.closePath(); }
+  ink(c, P.coat, 5);
+  if (who === "king") { c.beginPath(); c.moveTo(-40, shY - 2); c.quadraticCurveTo(0, shY + 26, 40, shY - 2); c.lineTo(36, shY + 14); c.quadraticCurveTo(0, shY + 40, -36, shY + 14); c.closePath(); ink(c, "#fff", 4);
+    c.fillStyle = C.ink; for (let i = -3; i <= 3; i++) { circle(c, i * 10, shY + 18 + Math.abs(i) * -2, 2.5); c.fill(); } }
+  if (kn) { // кираса с ребром, лилия, пояс, набедренные пластины, меч у бедра
+    c.beginPath(); c.moveTo(-40, shY + 4); c.lineTo(40, shY + 4); c.lineTo(32, hipY + 6); c.quadraticCurveTo(0, hipY + 24, -32, hipY + 6); c.closePath(); ink(c, C.steel, 4);
+    line(c, [[0, shY + 10], [0, hipY + 12]], 3, C.steelD);
+    c.fillStyle = "rgba(255,255,255,0.55)"; rrect(c, -26, shY + 12, 9, 52, 4); c.fill(); lily(c, 14, shY + 46, 1.25, C.gold);
+    for (let i = 0; i < 3; i++) { rrect(c, -36 + i * 25, hipY + 18, 22, 20, 5); ink(c, i === 1 ? C.steel : C.steelD, 3.5); }
+    c.fillStyle = "#3a2210"; c.fillRect(-38, hipY + 6, 76, 14); c.lineWidth = 3; c.strokeStyle = C.ink; c.strokeRect(-38, hipY + 6, 76, 14);
+    rrect(c, -9, hipY + 4, 18, 18, 3); ink(c, C.gold, 3);
+    stroke2(c, [[34, hipY + 18], [64, hipY + 108]], 11, "#3a2210", 3); // ножны
+    stroke2(c, [[22, hipY + 12], [46, hipY + 4]], 7, C.gold, 3);    // гарда
+    stroke2(c, [[30, hipY + 6], [24, hipY - 16]], 7, "#5a3416", 3); circle(c, 23, hipY - 20, 6); ink(c, C.gold, 3);
+  }
+  if (lady) { c.fillStyle = P.trim; c.beginPath(); c.moveTo(-22, shY + 2); c.quadraticCurveTo(0, shY + 22, 22, shY + 2); c.lineTo(18, shY + 10); c.quadraticCurveTo(0, shY + 30, -18, shY + 10); c.fill();
+    c.fillStyle = "rgba(255,255,255,0.35)"; for (let i = 0; i < 4; i++) { c.beginPath(); c.arc(0, hipY + 18 + i * 22, 30 + i * 8, 0.3, Math.PI - 0.3); c.lineWidth = 3; c.strokeStyle = "rgba(0,0,0,0.12)"; c.stroke(); } }
+  // голова
+  const hy = neckY - 36;
+  const look = o.look || [0, 0], bl = o.blink || 0, fear = o.fear || 0, sly = o.sly || 0, cold = o.cold || 0, wince = o.wince || 0;
+  if (kn) knightHead(c, hy, neckY, o, t);
+  else {
+  c.fillStyle = C.skin; rrect(c, -9, neckY - 8, 18, 16, 4); c.fill();
+  // волосы сзади
+  if (lady) { ellipse(c, 0, hy - 4, 40, 42); ink(c, P.hair, 5); }
+  ellipse(c, 0, hy, 32, 36); ink(c, C.skin, 5);
+  // лицо
+  for (const sx of [-1, 1]) {
+    const ex = sx * 12, ey = hy - 4;
+    if (wince > 0.5) { c.strokeStyle = C.ink; c.lineWidth = 4; c.beginPath(); c.moveTo(ex - 6, ey); c.lineTo(ex + 6 * sx, ey); c.lineTo(ex - 6, ey + 4); c.stroke(); continue; }
+    const ry = 7 * (1 + fear * 0.5) * (1 - bl * 0.9) * (1 - cold * 0.45) * (sx === 1 ? 1 - sly * 0.35 : 1);
+    ellipse(c, ex, ey, 6 * (1 + fear * 0.4), ry); ink(c, "#fff", 2.5);
+    if (ry > 2) { circle(c, ex + look[0] * 3, ey + look[1] * 2, 3.4 * (1 - fear * 0.4)); c.fillStyle = C.ink; c.fill(); }
+    if (lady) { c.strokeStyle = C.ink; c.lineWidth = 2.5; for (let k = 0; k < 2; k++) { c.beginPath(); c.moveTo(ex + sx * 5, ey - ry + 1); c.lineTo(ex + sx * (8 + k * 2), ey - ry - 4 + k * 3); c.stroke(); } }
+    // брови
+    c.strokeStyle = who === "king" || who.startsWith("baron") ? P.hair : "#7a4a2a"; c.lineWidth = 3.5;
+    const bu = fear * 6 + (sx === 1 ? sly * 6 : -sly * 1) - cold * 2;
+    c.beginPath(); c.moveTo(ex - 7, ey - 11 - bu + cold * sx * 3); c.lineTo(ex + 7, ey - 11 - bu - cold * sx * 3); c.stroke();
+  }
+  // щёки
+  if (lady) { c.fillStyle = "rgba(255,110,150,0.35)"; circle(c, -18, hy + 8, 6); c.fill(); circle(c, 18, hy + 8, 6); c.fill(); }
+  // нос и рот
+  c.strokeStyle = C.skinD; c.lineWidth = 3; c.beginPath(); c.moveTo(2, hy - 2); c.lineTo(who === "king" ? 8 : 5, hy + 8); c.lineTo(0, hy + 9); c.stroke();
+  if (who === "king") { ellipse(c, 0, hy + 30, 24, 16); ink(c, P.hair, 4); }
+  const mo = o.mouth || 0, sm = o.smile || 0;
+  if (mo > 0.05) { ellipse(c, 0, hy + 19, 6 + mo * 2, 3 + mo * 7); ink(c, "#5a0f22", 2.5); }
+  else { c.strokeStyle = "#7a2a2a"; c.lineWidth = 3; c.beginPath(); c.moveTo(-9, hy + 18 - sly * 2); c.quadraticCurveTo(0, hy + 18 + sm * 8 - cold * 2, 9 + sly * 2, hy + 17 - sm * 3 - sly * 6); c.stroke(); }
+  // волосы и головные уборы
+  if (lady) {
+    c.beginPath(); c.moveTo(-34, hy - 6); c.quadraticCurveTo(-30, hy - 40, 0, hy - 40); c.quadraticCurveTo(30, hy - 40, 34, hy - 6); c.quadraticCurveTo(20, hy - 26, 0, hy - 26); c.quadraticCurveTo(-20, hy - 26, -34, hy - 6); ink(c, P.hair, 4);
+    // французский чепец
+    c.beginPath(); c.arc(0, hy - 10, 42, Math.PI * 1.08, Math.PI * 1.92); c.lineWidth = 9; c.strokeStyle = C.ink; c.stroke(); c.lineWidth = 5; c.strokeStyle = who === "beauty" ? C.gold : "#fff"; c.stroke();
+    if (who === "beauty") { for (let i = 0; i < 5; i++) { const a = Math.PI * (1.15 + i * 0.17); circle(c, Math.cos(a) * 42, hy - 10 + Math.sin(a) * 42, 4); ink(c, "#fff", 2); } }
+  } else {
+    c.beginPath(); c.moveTo(-32, hy - 2); c.quadraticCurveTo(-34, hy - 40, 0, hy - 38); c.quadraticCurveTo(34, hy - 40, 32, hy - 2); c.quadraticCurveTo(24, hy - 22, 0, hy - 24); c.quadraticCurveTo(-24, hy - 22, -32, hy - 2); ink(c, P.hair, 4);
+  }
+  if (who === "king" || who === "prince") {
+    const cw = who === "king" ? 30 : 22, ch = who === "king" ? 30 : 20, cy = hy - 30;
+    c.beginPath(); c.moveTo(-cw, cy); c.lineTo(-cw, cy - ch * 0.5); c.lineTo(-cw * 0.5, cy - ch * 0.15); c.lineTo(0, cy - ch); c.lineTo(cw * 0.5, cy - ch * 0.15); c.lineTo(cw, cy - ch * 0.5); c.lineTo(cw, cy); c.closePath(); ink(c, C.gold, 4);
+    circle(c, 0, cy - 8, 4); c.fillStyle = C.red; c.fill();
+  }
+  if (who.startsWith("baron")) {
+    ellipse(c, 0, hy - 32, 40, 10); ink(c, P.coatD, 4); rrect(c, -24, hy - 54, 48, 24, 8); ink(c, P.coatD, 4);
+    c.beginPath(); c.moveTo(14, hy - 50); c.quadraticCurveTo(50, hy - 90, 60, hy - 60 + Math.sin(t * 3 + o.x) * 6); c.quadraticCurveTo(40, hy - 60, 14, hy - 44); ink(c, "#fff", 3);
+  }
+  }
+  // руки (от плеч к целям); по умолчанию свободно опущены
+  const arms = o.arms || [[-14, 88], [14, 88]];
+  [[-shX, -1], [shX, 1]].forEach(([sx, side], i) => {
+    const [tx, ty] = arms[i];
+    const k = arm(c, sx, shY + 10, sx + tx, shY + 10 + ty, 48, 46, side, kn ? 22 : 16, kn ? C.steel : P.coat, 4);
+    if (kn) { rrect(c, k.hx - 12, k.hy - 11, 24, 22, 6); ink(c, C.steelD, 3.5); }
+    else { circle(c, k.hx, k.hy, 10); ink(c, (who === "beauty" && i === 0 && o.gloveOn) ? C.pink : C.skin, 3.5); }
+    if (o.hand && o.hand[i]) o.hand[i](c, k.hx, k.hy);
+  });
+  // наплечники рыцаря — поверх плеч
+  if (kn) for (const sx of [-1, 1]) { ellipse(c, sx * 46, shY + 20, 20, 12, sx * 0.3); ink(c, C.steelD, 4); ellipse(c, sx * 42, shY + 6, 26, 18, sx * 0.25); ink(c, C.steel, 4);
+    c.fillStyle = "rgba(255,255,255,0.5)"; ellipse(c, sx * 36, shY + 0, 9, 4, sx * 0.25); c.fill(); }
+  // испуг: капли пота
+  if (fear > 0.3) { c.save(); c.globalAlpha = fear; for (const sx of [-1, 1]) sweat(c, sx * 38, hy - 12 + ((t * 40) % 20), 1); c.restore(); }
+  c.restore();
+}
+// голова рыцаря: шлем с наносником и плюмажем, тяжёлые брови, борода, шрам
+function knightHead(c, hy, neckY, o, t) {
+  const look = o.look || [0, 0], bl = o.blink || 0, cold = o.cold || 0, mo = o.mouth || 0;
+  rrect(c, -24, neckY - 14, 48, 26, 8); ink(c, C.steel, 4); // горжет
+  // лицо с квадратной челюстью
+  c.beginPath(); c.moveTo(-31, hy - 8); c.quadraticCurveTo(-33, hy + 28, -18, hy + 38); c.quadraticCurveTo(0, hy + 46, 18, hy + 38); c.quadraticCurveTo(33, hy + 28, 31, hy - 8);
+  c.quadraticCurveTo(30, hy - 40, 0, hy - 40); c.quadraticCurveTo(-30, hy - 40, -31, hy - 8); c.closePath(); ink(c, "#e8b58c", 5);
+  // борода и усы
+  c.beginPath(); c.moveTo(-31, hy + 6); c.quadraticCurveTo(-30, hy + 34, -16, hy + 44); c.quadraticCurveTo(0, hy + 54, 16, hy + 44); c.quadraticCurveTo(30, hy + 34, 31, hy + 6);
+  c.quadraticCurveTo(24, hy + 22, 14, hy + 20); c.quadraticCurveTo(0, hy + 14, -14, hy + 20); c.quadraticCurveTo(-24, hy + 22, -31, hy + 6); c.closePath(); ink(c, "#4a2a14", 4);
+  // рот
+  if (mo > 0.05) { ellipse(c, 0, hy + 28, 7 + mo * 2, 2 + mo * 6); ink(c, "#5a0f22", 2.5); }
+  else { c.strokeStyle = C.ink; c.lineWidth = 3.5; c.beginPath(); c.moveTo(-10, hy + 28); c.lineTo(10, hy + 28 - cold * 2); c.stroke(); }
+  // шрам через щёку
+  c.strokeStyle = "#b04a44"; c.lineWidth = 3; c.lineCap = "round"; c.beginPath(); c.moveTo(-24, hy - 2); c.lineTo(-14, hy + 14); c.stroke();
+  for (const u of [0.3, 0.7]) { const x = lerp(-24, -14, u), y = lerp(hy - 2, hy + 14, u); c.beginPath(); c.moveTo(x - 4, y + 2); c.lineTo(x + 4, y - 2); c.stroke(); }
+  // глаза: прищур, зрачки, тяжёлые брови к переносице
+  for (const sx of [-1, 1]) {
+    const ex = sx * 13, ey = hy - 4, ry = 5 * (1 - bl * 0.9) * (1 - cold * 0.3);
+    ellipse(c, ex, ey, 7, ry); ink(c, "#fff", 2.5);
+    if (ry > 1.5) { circle(c, ex + look[0] * 3, ey + look[1] * 1.5, 3.2); c.fillStyle = C.ink; c.fill(); }
+    c.strokeStyle = "#3a2010"; c.lineWidth = 6; c.lineCap = "round";
+    c.beginPath(); c.moveTo(ex + sx * 10, ey - 12 - cold * 2); c.lineTo(ex - sx * 7, ey - 7 + cold * 2); c.stroke();
+  }
+  // шлем: купол, нащёчники, наносник, заклёпки
+  c.beginPath(); c.moveTo(-37, hy + 16); c.lineTo(-37, hy - 12); c.quadraticCurveTo(-38, hy - 56, 0, hy - 58); c.quadraticCurveTo(38, hy - 56, 37, hy - 12); c.lineTo(37, hy + 16);
+  c.lineTo(27, hy + 12); c.lineTo(27, hy - 14); c.lineTo(-27, hy - 14); c.lineTo(-27, hy + 12); c.closePath(); ink(c, C.steel, 5);
+  rrect(c, -39, hy - 22, 78, 11, 4); ink(c, C.steelD, 4);
+  rrect(c, -5, hy - 18, 10, 26, 3); ink(c, C.steel, 3.5);
+  c.fillStyle = C.ink; for (const x of [-30, -15, 15, 30]) { circle(c, x, hy - 16.5, 2.2); c.fill(); }
+  c.fillStyle = "rgba(255,255,255,0.55)"; ellipse(c, -16, hy - 42, 10, 5, -0.5); c.fill();
+  // плюмаж
+  const sw = Math.sin(t * 3.1) * 5;
+  for (let i = 0; i < 3; i++) { c.beginPath(); c.moveTo(-4 + i * 4, hy - 56); c.quadraticCurveTo(-8 + i * 6 + sw, hy - 100 - i * 6, -40 + i * 12 + sw * 1.6, hy - 92 + i * 10);
+    c.quadraticCurveTo(-18 + i * 6 + sw, hy - 84 - i * 4, 4 + i * 4, hy - 56); c.closePath(); ink(c, i === 1 ? "#ff4a5a" : C.red, 3.5); }
+}
+// веер
+function fan(c, x, y, a, col) { c.save(); c.translate(x, y); c.rotate(a); c.beginPath(); c.moveTo(0, 0); c.arc(0, 0, 40, -Math.PI * 0.95, -Math.PI * 0.05); c.closePath(); ink(c, col, 3);
+  c.strokeStyle = "rgba(0,0,0,0.25)"; c.lineWidth = 2; for (let i = 1; i < 7; i++) { const aa = -Math.PI * (0.95 - i * 0.13); c.beginPath(); c.moveTo(0, 0); c.lineTo(Math.cos(aa) * 40, Math.sin(aa) * 40); c.stroke(); } c.restore(); }
+// перчатка
+function glove(c, x, y, s, a, glow = 0) {
+  c.save(); c.translate(x, y); c.rotate(a); c.scale(s, s);
+  if (glow > 0) { c.save(); c.globalAlpha = glow; const g = c.createRadialGradient(0, 0, 4, 0, 0, 70); g.addColorStop(0, "rgba(255,240,150,0.9)"); g.addColorStop(1, "rgba(255,200,80,0)"); c.fillStyle = g; circle(c, 0, 0, 70); c.fill(); c.restore(); }
+  c.beginPath();
+  c.moveTo(-14, 22); c.lineTo(-16, -2);
+  c.quadraticCurveTo(-30, -8, -26, -16); c.quadraticCurveTo(-20, -18, -12, -10); // большой палец
+  c.lineTo(-12, -30); c.quadraticCurveTo(-6, -36, -2, -30); c.lineTo(-2, -12);
+  c.lineTo(-1, -36); c.quadraticCurveTo(5, -42, 9, -36); c.lineTo(9, -12);
+  c.lineTo(11, -32); c.quadraticCurveTo(17, -37, 20, -30); c.lineTo(19, -10);
+  c.lineTo(22, -22); c.quadraticCurveTo(28, -25, 29, -18); c.lineTo(26, 4);
+  c.quadraticCurveTo(22, 20, 14, 22); c.closePath();
+  ink(c, C.pink, 4);
+  rrect(c, -18, 18, 36, 14, 5); ink(c, "#fff", 3.5);
+  c.restore();
+}
+// трон
+function throne(c, x, y) {
+  c.beginPath(); c.moveTo(x - 60, y); c.lineTo(x - 60, y - 210); c.quadraticCurveTo(x, y - 270, x + 60, y - 210); c.lineTo(x + 60, y); c.closePath(); ink(c, C.gold, 5);
+  c.beginPath(); c.moveTo(x - 44, y); c.lineTo(x - 44, y - 196); c.quadraticCurveTo(x, y - 244, x + 44, y - 196); c.lineTo(x + 44, y); c.closePath(); ink(c, C.redD, 4);
+  for (let i = 0; i < 3; i++) lily(c, x, y - 200 + i * 50, 1.1, C.gold);
+}
+
+// ---------- Арена: фон рисуется один раз в 2× (небо, трибуны, полог, драпировка; перила, стена с воротами, лестница, песок) ----------
+const WS = 2;                          // запас разрешения фона для крупных планов
+const GROUND = 800;                    // линия земли на песке
+const RAIL = 330;                      // верх перил балкона
+const BFLOOR = 398;                    // пол балкона (ноги скрыты перилами)
+const GATES = [300, 780, 1260];        // ворота: лев, барсы, тигр
+const GATE_TOP = 530, GATE_BOT = 700, GATE_R = 95;
+// лестница прижата к стене арены: с балкона вниз до основания стены (GATE_BOT), на песок не выходит
+const STAIR = { x0: 1600, y0: BFLOOR, n: 8, run: 37, rise: (GATE_BOT - BFLOOR) / 8 };
+const STAIR_END = STAIR.x0 + (STAIR.n - 1) * STAIR.run;   // последний подступенок, дальше — пол
+const QB = STAIR.x0 + (STAIR.n - 0.5) * STAIR.run;        // точка у подножия лестницы
+const WW = 2240;                       // мир шире кадра: справа место под лестницу и проход рыцаря
+const BG_BACK = mkCanvas(WW * WS, H * WS), BG_FRONT = mkCanvas(WW * WS, H * WS);
+
+function lily(c, x, y, s, col) {
+  c.save(); c.translate(x, y); c.scale(s, s); c.fillStyle = col;
+  c.beginPath(); c.moveTo(0, -14); c.bezierCurveTo(6, -6, 5, 2, 0, 6); c.bezierCurveTo(-5, 2, -6, -6, 0, -14); c.fill();
+  c.beginPath(); c.moveTo(-2, 3); c.bezierCurveTo(-10, -4, -16, 0, -12, 6); c.bezierCurveTo(-9, 4, -6, 6, -2, 6); c.fill();
+  c.beginPath(); c.moveTo(2, 3); c.bezierCurveTo(10, -4, 16, 0, 12, 6); c.bezierCurveTo(9, 4, 6, 6, 2, 6); c.fill();
+  c.fillRect(-7, 6, 14, 3); c.beginPath(); c.moveTo(-3, 9); c.lineTo(3, 9); c.lineTo(0, 15); c.fill();
+  c.restore();
+}
+
+// высота опоры в точке x: балкон, ступень i (уровень i+1) или пол у стены
+function stairLevel(x) { if (x < STAIR.x0) return STAIR.y0; return STAIR.y0 + Math.min(STAIR.n, Math.floor((x - STAIR.x0) / STAIR.run) + 1) * STAIR.rise; }
+
+function buildWorld() {
+  const r = mulberry32(7);
+  // ===== задний фон =====
+  let c = BG_BACK.getContext("2d"); c.scale(WS, WS);
+  let g = c.createLinearGradient(0, 0, 0, 520);
+  g.addColorStop(0, C.sky1); g.addColorStop(0.55, C.sky2); g.addColorStop(1, C.sky3);
+  c.fillStyle = g; c.fillRect(0, 0, WW, 560);
+  // солнце и полосы облаков
+  const sg = c.createRadialGradient(1760, 250, 10, 1760, 250, 260); sg.addColorStop(0, "rgba(255,240,170,1)"); sg.addColorStop(0.25, "rgba(255,210,120,0.8)"); sg.addColorStop(1, "rgba(255,160,90,0)");
+  c.fillStyle = sg; c.fillRect(1400, 0, 520, 520);
+  circle(c, 1760, 250, 62); c.fillStyle = C.sun; c.fill();
+  c.fillStyle = "rgba(255,190,150,0.35)";
+  for (let i = 0; i < 8; i++) { const y = 40 + i * 34 + r() * 10, x = r() * 2000; rrect(c, x, y, 200 + r() * 300, 10, 5); c.fill(); }
+  // трибуны по бокам: ряды зрителей
+  for (const [x0, x1] of [[0, 250], [1570, WW]]) {
+    for (let row = 0; row < 7; row++) {
+      const y = 160 + row * 44;
+      c.fillStyle = row % 2 ? "#6b5470" : "#7d6683"; c.fillRect(x0, y, x1 - x0, 44);
+      c.fillStyle = "rgba(0,0,0,0.18)"; c.fillRect(x0, y + 36, x1 - x0, 8);
+      for (let x = x0 + 14 + (row % 2) * 12; x < x1 - 8; x += 26) {
+        const cols = ["#d94f5c", "#4f7ad9", "#e8c34a", "#5bb874", "#b06ad9", "#f08a3a"];
+        c.fillStyle = cols[Math.floor(r() * cols.length)]; rrect(c, x - 10, y + 14, 20, 24, 6); c.fill();
+        c.fillStyle = r() < 0.5 ? "#f2c39b" : "#c98e66"; circle(c, x, y + 10, 8); c.fill();
+      }
+    }
+    c.fillStyle = C.stoneDD; c.fillRect(x0, 140, x1 - x0, 20);
+  }
+  // полог королевской ложи
+  const cx0 = 225, cx1 = 1595;
+  for (let x = cx0, i = 0; x < cx1; x += 50, i++) { c.fillStyle = i % 2 ? C.gold : C.red; c.fillRect(x, 58, 50, 70); }
+  c.fillStyle = C.ink; c.fillRect(cx0 - 8, 50, cx1 - cx0 + 16, 12);
+  for (let x = cx0, i = 0; x < cx1; x += 50, i++) { c.beginPath(); c.arc(x + 25, 128, 25, 0, Math.PI); c.fillStyle = i % 2 ? C.gold : C.red; c.fill(); c.lineWidth = 4; c.strokeStyle = C.ink; c.stroke(); }
+  c.lineWidth = 5; c.strokeStyle = C.ink; c.strokeRect(cx0, 58, cx1 - cx0, 70);
+  // драпировка за двором
+  g = c.createLinearGradient(0, 130, 0, 400); g.addColorStop(0, "#5a0f22"); g.addColorStop(1, "#8f1a33");
+  c.fillStyle = g; c.fillRect(240, 128, 1340, 280);
+  for (let x = 240; x < 1580; x += 60) { c.fillStyle = "rgba(0,0,0,0.16)"; c.fillRect(x + 36, 128, 18, 280); c.fillStyle = "rgba(255,255,255,0.05)"; c.fillRect(x + 8, 128, 10, 280); }
+  for (let y = 170; y < 400; y += 70) for (let x = 270 + ((y / 70) % 2) * 35; x < 1570; x += 70) lily(c, x, y, 0.9, "rgba(255,204,61,0.35)");
+  // столбы полога
+  for (const x of [240, 1580]) { c.fillStyle = C.gold; c.fillRect(x - 9, 60, 18, 345); c.lineWidth = 4; c.strokeStyle = C.ink; c.strokeRect(x - 9, 60, 18, 345); }
+
+  // ===== передний фон =====
+  c = BG_FRONT.getContext("2d"); c.scale(WS, WS);
+  // стена арены
+  c.fillStyle = C.stone; c.fillRect(0, 440, WW, GATE_BOT - 440 + 4);
+  for (let y = 440, row = 0; y < GATE_BOT; y += 44, row++) {
+    for (let x = -((row % 2) * 40); x < WW; x += 80) {
+      const sh = r() * 0.12; c.fillStyle = `rgba(${r() < 0.5 ? "255,255,255" : "0,0,0"},${sh})`; c.fillRect(x + 3, y + 3, 74, 38);
+      c.strokeStyle = C.stoneDD; c.lineWidth = 3; c.strokeRect(x + 1.5, y + 1.5, 77, 41);
+    }
+  }
+  // арки ворот (внутри темно)
+  for (const gx of GATES) {
+    c.save(); c.beginPath(); c.moveTo(gx - GATE_R, GATE_BOT); c.lineTo(gx - GATE_R, GATE_TOP + GATE_R); c.arc(gx, GATE_TOP + GATE_R, GATE_R, Math.PI, 0); c.lineTo(gx + GATE_R, GATE_BOT); c.closePath();
+    const ig = c.createLinearGradient(0, GATE_TOP, 0, GATE_BOT); ig.addColorStop(0, "#0b0610"); ig.addColorStop(1, "#24142c"); c.fillStyle = ig; c.fill(); c.restore();
+    // кладка арки
+    for (let i = 0; i <= 8; i++) { const a = Math.PI + (i / 8) * Math.PI;
+      c.save(); c.translate(gx + Math.cos(a) * (GATE_R + 16), GATE_TOP + GATE_R + Math.sin(a) * (GATE_R + 16)); c.rotate(a + Math.PI / 2);
+      c.fillStyle = C.stoneL; c.fillRect(-15, -16, 30, 32); c.lineWidth = 3; c.strokeStyle = C.stoneDD; c.strokeRect(-15, -16, 30, 32); c.restore(); }
+    for (const sx of [-1, 1]) { c.fillStyle = C.stoneL; c.fillRect(gx + sx * (GATE_R + 16) - 15, GATE_TOP + GATE_R, 30, GATE_BOT - GATE_TOP - GATE_R); c.lineWidth = 3; c.strokeStyle = C.stoneDD; c.strokeRect(gx + sx * (GATE_R + 16) - 15, GATE_TOP + GATE_R, 30, GATE_BOT - GATE_TOP - GATE_R); }
+    // факелы
+    for (const sx of [-1, 1]) { const fx = gx + sx * 150; c.fillStyle = C.ink; c.fillRect(fx - 5, 560, 10, 40); c.fillStyle = C.goldD; c.fillRect(fx - 12, 552, 24, 12); }
+  }
+  // перила и фасад ложи
+  c.fillStyle = C.stoneL; c.fillRect(230, RAIL, 1360, 18); c.lineWidth = 4; c.strokeStyle = C.ink; c.strokeRect(230, RAIL, 1360, 18);
+  for (let x = 252; x < 1580; x += 34) {
+    c.beginPath(); c.moveTo(x - 8, RAIL + 18); c.bezierCurveTo(x - 16, RAIL + 34, x - 4, RAIL + 44, x - 9, RAIL + 66); c.lineTo(x + 9, RAIL + 66); c.bezierCurveTo(x + 4, RAIL + 44, x + 16, RAIL + 34, x + 8, RAIL + 18); c.closePath();
+    ink(c, C.stoneL, 3);
+  }
+  c.fillStyle = C.stone; c.fillRect(220, RAIL + 66, 1380, 64); c.lineWidth = 4; c.strokeStyle = C.ink; c.strokeRect(220, RAIL + 66, 1380, 64);
+  c.fillStyle = C.stoneL; c.fillRect(214, RAIL + 62, 1392, 12); c.strokeRect(214, RAIL + 62, 1392, 12);
+  for (let x = 300; x < 1560; x += 160) { c.fillStyle = C.goldD; circle(c, x, RAIL + 102, 12); c.fill(); }
+  // знамёна между воротами
+  for (const bx of [540, 1020]) {
+    c.beginPath(); c.moveTo(bx - 46, RAIL + 72); c.lineTo(bx + 46, RAIL + 72); c.lineTo(bx + 46, 548); c.lineTo(bx, 520); c.lineTo(bx - 46, 548); c.closePath(); ink(c, C.blue, 4);
+    lily(c, bx, RAIL + 128, 1.6, C.gold); lily(c, bx - 22, RAIL + 168, 0.9, C.gold); lily(c, bx + 22, RAIL + 168, 0.9, C.gold);
+    c.fillStyle = C.gold; c.fillRect(bx - 50, RAIL + 66, 100, 10);
+  }
+  // песок
+  g = c.createLinearGradient(0, GATE_BOT, 0, H); g.addColorStop(0, C.sandD); g.addColorStop(0.12, C.sand); g.addColorStop(1, C.sandL);
+  c.fillStyle = g; c.fillRect(0, GATE_BOT, WW, H - GATE_BOT);
+  c.fillStyle = "rgba(60,20,40,0.28)"; c.fillRect(0, GATE_BOT, WW, 14);
+  c.strokeStyle = "rgba(150,90,40,0.22)"; c.lineWidth = 3;
+  for (let i = -12; i <= 16; i++) { c.beginPath(); c.moveTo(960 + i * 60, GATE_BOT); c.lineTo(960 + i * 220, H); c.stroke(); }
+  for (let i = 0; i < 160; i++) { c.fillStyle = r() < 0.5 ? "rgba(160,100,50,0.35)" : "rgba(255,240,200,0.5)"; ellipse(c, r() * WW, GATE_BOT + 20 + r() * (H - GATE_BOT), 3 + r() * 5, 1.5 + r() * 2); c.fill(); }
+  // лестница с балкона вдоль стены: каменный массив под ступенями до основания стены
+  const S = STAIR, sx0 = S.x0 - 8;
+  const stairPath = () => { c.beginPath(); c.moveTo(sx0, S.y0);
+    for (let i = 0; i < S.n; i++) { const x = S.x0 + i * S.run; c.lineTo(x, S.y0 + i * S.rise); c.lineTo(x, S.y0 + (i + 1) * S.rise); }
+    c.lineTo(STAIR_END, GATE_BOT); c.lineTo(sx0, GATE_BOT); c.closePath(); };
+  stairPath(); c.fillStyle = C.stoneD; c.fill();
+  c.save(); stairPath(); c.clip();
+  for (let y = S.y0, row = 0; y < GATE_BOT; y += 34, row++) for (let x = sx0 - (row % 2) * 30; x < STAIR_END + S.run; x += 60) {
+    c.fillStyle = `rgba(${r() < 0.5 ? "255,255,255" : "0,0,0"},${r() * 0.1})`; c.fillRect(x + 2, y + 2, 56, 30);
+    c.strokeStyle = C.stoneDD; c.lineWidth = 2.5; c.strokeRect(x + 1, y + 1, 58, 32); }
+  c.restore();
+  stairPath(); c.lineWidth = 5; c.strokeStyle = C.ink; c.lineJoin = "round"; c.stroke();
+  // каменные плиты ступеней с выступающим краем
+  for (let i = 0; i < S.n - 1; i++) { const x = S.x0 + i * S.run, y = S.y0 + (i + 1) * S.rise; rrect(c, x - 2, y - 2, S.run + 6, 10, 3); ink(c, C.stoneL, 3); }
+  rrect(c, sx0 - 4, S.y0 - 2, S.x0 - sx0 + 10, 10, 3); ink(c, C.stoneL, 3);
+  // тень у основания на песке
+  c.fillStyle = "rgba(60,20,40,0.25)"; c.fillRect(sx0, GATE_BOT, STAIR_END - sx0 + 10, 12);
+  // перила вдоль ступеней
+  const rx0 = S.x0 - 4, ry0 = S.y0 - 64, rx1 = STAIR_END + 6, ry1 = GATE_BOT - 64;
+  stroke2(c, [[rx0, ry0], [rx1, ry1]], 9, C.goldD, 4);
+  for (let i = 0; i < S.n; i += 2) { const x = S.x0 + i * S.run + 12, y = S.y0 + (i + 1) * S.rise; stroke2(c, [[x, y - 2], [x, lerp(ry0, ry1, (x - rx0) / (rx1 - rx0))]], 5, C.goldD, 3); }
+}
+
+// решётка ворот: open 0 — закрыта, 1 — поднята
+function gate(c, gx, open, t) {
+  c.save(); c.beginPath(); c.moveTo(gx - GATE_R, GATE_BOT); c.lineTo(gx - GATE_R, GATE_TOP + GATE_R); c.arc(gx, GATE_TOP + GATE_R, GATE_R, Math.PI, 0); c.lineTo(gx + GATE_R, GATE_BOT); c.closePath(); c.clip();
+  const dy = -open * (GATE_BOT - GATE_TOP + 10);
+  for (let x = gx - GATE_R + 12; x < gx + GATE_R; x += 24) line(c, [[x, GATE_TOP - 10 + dy], [x, GATE_BOT + dy]], 7, "#2b2633", "butt");
+  for (let y = GATE_TOP + 30; y < GATE_BOT; y += 40) line(c, [[gx - GATE_R, y + dy], [gx + GATE_R, y + dy]], 7, "#2b2633", "butt");
+  for (let x = gx - GATE_R + 12; x < gx + GATE_R; x += 24) { c.fillStyle = "#4b4553"; c.beginPath(); c.moveTo(x - 5, GATE_BOT + dy); c.lineTo(x + 5, GATE_BOT + dy); c.lineTo(x, GATE_BOT + 14 + dy); c.fill(); }
+  c.restore();
+}
+// глаза в темноте за решёткой
+function gateEyes(c, gx, k, t, col = "#ffd84a") {
+  if (k <= 0) return;
+  const bl = ((t * 0.9 + gx * 0.01) % 2.7) < 0.12 ? 0.15 : 1;
+  c.save(); c.globalAlpha = k; c.fillStyle = col; c.shadowColor = col; c.shadowBlur = 18;
+  for (const sx of [-1, 1]) { ellipse(c, gx + sx * 22 + Math.sin(t * 0.8 + gx) * 8, 640, 10, 6 * bl, sx * 0.25); c.fill(); }
+  c.restore();
+}
+// пламя факелов
+function torches(c, t) {
+  for (const gx of GATES) for (const sx of [-1, 1]) {
+    const fx = gx + sx * 150, f = 1 + 0.15 * wob(t, 13, fx);
+    c.save(); c.translate(fx, 552); c.scale(1, f);
+    c.beginPath(); c.moveTo(-11, 0); c.bezierCurveTo(-14, -18, -2, -26, 0, -40); c.bezierCurveTo(4, -26, 14, -18, 11, 0); c.closePath();
+    c.fillStyle = "#ff7a1a"; c.fill(); c.beginPath(); c.moveTo(-6, 0); c.bezierCurveTo(-7, -10, -1, -16, 0, -24); c.bezierCurveTo(2, -16, 7, -10, 6, 0); c.fillStyle = "#ffe36a"; c.fill();
+    c.restore();
+  }
+}
+
+// ---------- Режиссура: двор → раунд 1 (лев) → раунд 2 (тигр) → раунд 3 (барсы) → перчатка → бонусный раунд Делоржа → K.O. ----------
+const ctx = document.getElementById("scene").getContext("2d");
+const E = EV;
+const LIONX = 520, TIGX = 800, BAR_A = 1180, BAR_B = 1600, GLOVE_G = [1400, 806];
+const S_LION = 0.8, S_TIG = 0.78, S_BAR = 0.86, S_BALC = 0.55, S_KN = 0.86;
+const speedOf = (f, t) => Math.abs(f(t + 0.04) - f(t - 0.04)) / 0.08;
+
+// ===== ворота =====
+const GATE_OPEN = [
+  [[0, 0], [E.w_stuk - 0.1, 1, 0.35]],                       // лев
+  [[0, 0], [E.w_mahn3 + 0.05, 1, 0.3]],                      // барсы
+  [[0, 0], [E.w_zatv - 0.05, 1, 0.22]],                      // тигр
+];
+
+// ===== лев =====
+const LW0 = E.w_grozn - 0.15, LW1 = Math.max(E.E14 + 0.2, LW0 + 1.6), LW2 = Math.max(E.w_glaza + 0.2, LW1 + 0.4);
+const lionX = (t) => kfe([[0, GATES[0]], [LW0, LIONX, LW2 - LW0]], t);
+const lionY = (t) => kfe([[0, GATE_BOT], [LW0, GROUND, LW1 - LW0]], t);
+const lionS = (t) => kfe([[0, 0.5], [LW0, S_LION, LW1 - LW0]], t);
+function lionP(t) {
+  const x = lionX(t), sp = speedOf(lionX, t) + speedOf(lionY, t);
+  const lie = Math.max(sstep(prog(t, E.w_leg - 0.15, E.w_leg + 0.5)) * (1 - sstep(prog(t, E.w_vstal - 0.25, E.w_vstal + 0.3))), sstep(prog(t, E.w_legli - 0.2, E.w_legli + 0.5)));
+  const look = t < E.L15 ? [0.3, 0.2] : t < E.w_morsh ? [Math.sin((t - E.L15) * 2.6) , -0.3 + 0.3 * Math.sin((t - E.L15) * 1.7)] : [0.2, 0];
+  const watch = win(t, E.L48, E.E50 + 0.4, 0.4, 0.4); // следит за Делоржем
+  const kx = clamp((knightX(t) - x) / 500, -1, 1);
+  return {
+    x, y: lionY(t), s: lionS(t), dir: 1, walk: x / 52 + (t > E.w_vstal - 0.3 && t < E.w_otosh ? 0 : 0), stride: clamp(sp / 70, 0, 1),
+    lie, look: watch > 0 ? [lerp(look[0], kx, watch), 0] : look,
+    brow: win(t, E.w_morsh - 0.1, E.L18 + 0.2, 0.2, 0.3) + win(t, E.w_ryk - 0.1, E.w_smir + 0.6, 0.1, 0.4),
+    mane: win(t, E.w_shevel - 0.05, E.L19, 0.1, 0.25) + 0.6 * win(t, E.w_ryk - 0.05, E.w_ryk + 0.9, 0.05, 0.3),
+    stretch: win(t, E.w_potyan - 0.1, E.w_zevn + 0.1, 0.35, 0.35),
+    mouth: Math.max(win(t, E.w_zevn - 0.05, E.w_zevn + 1.0, 0.3, 0.35) * 1.0, win(t, E.w_ryk - 0.12, E.w_ryk + 1.0, 0.08, 0.3), 0.35 * win(t, E.w_lev - 0.05, E.w_lev + 0.5, 0.08, 0.2)),
+    sleep: win(t, E.w_leg + 0.6, E.w_vidit, 0.4, 0.2) * 0.7 + win(t, E.w_legli + 0.5, E.L41, 0.5, 0.4) * 0.6,
+    blink: blinkAt(t, 0.3), tilt: t < E.w_morsh ? 0.12 * Math.sin((t - E.L15) * 2.6) * win(t, E.L15, E.w_morsh, 0.3, 0.3) : 0,
+    tail: lie * 0.5, ph: 0.4,
+  };
+}
+// ===== тигр =====
+const TJ0 = E.w_pryan - 0.18, TJ1 = TJ0 + 0.7;
+const CIRC0 = E.w_obosh - 0.15, CIRC1 = Math.max(E.w_rych + 0.2, CIRC0 + 2.2);
+function tigerBase(t) {
+  // прыжок из ворот
+  if (t < TJ1) { const u = prog(t, TJ0, TJ1); return { x: lerp(GATES[2], 1050, u), y: lerp(GATE_BOT, GROUND, u) - Math.sin(u * Math.PI) * 170, s: lerp(0.55, S_TIG, u), dir: -1, air: 0, jump: Math.sin(u * Math.PI) }; }
+  // робеет: отступает, крадётся ко льву
+  if (t < CIRC0) {
+    const x = kfe([[TJ1, 1050], [E.w_rob, 1100, 0.5], [E.w_krad + 0.05, 880, Math.max(0.8, CIRC0 - E.w_krad - 0.1)]], t);
+    return { x, y: GROUND, s: S_TIG, dir: -1 };
+  }
+  // обходит льва кругом
+  if (t < CIRC1) {
+    const u = easeInOut(prog(t, CIRC0, CIRC1)), th = u * TAU, R = 360;
+    const x = LIONX + R * Math.cos(th), dep = Math.sin(th);
+    return { x, y: GROUND - 34 * dep, s: S_TIG * (1 - 0.12 * dep), dir: th < Math.PI ? -1 : 1 };
+  }
+  const x = kfe([[CIRC1, LIONX + 360], [CIRC1, TIGX, Math.max(0.3, E.w_lozh + 0.3 - CIRC1)]], t);
+  return { x, y: GROUND, s: S_TIG, dir: 1 };
+}
+const tigerXf = (t) => tigerBase(t).x;
+function tigerP(t) {
+  const b = tigerBase(t), sp = speedOf(tigerXf, t);
+  const lie = sstep(prog(t, E.w_lozh - 0.1, E.w_lozh + 0.5));
+  const watch = win(t, E.L48, E.E50 + 0.4, 0.4, 0.4), kx = clamp((knightX(t) - b.x) / 500, -1, 1);
+  return {
+    ...b, walk: b.x / (t > E.w_krad && t < CIRC0 ? 30 : 46) * (b.dir), stride: clamp(sp / 80, 0, 1) * (t > E.w_krad && t < CIRC0 ? 0.6 : 1),
+    lie, crouch: win(t, E.w_vidit - 0.05, E.w_lozh, 0.2, 0.3) * (t > E.w_krad - 0.1 && t < CIRC0 ? 1 : 0.45),
+    fear: win(t, E.w_vidit, E.w_lozh, 0.15, 0.4) * (t < E.w_krad ? 1 : 0.5) + win(t, E.w_ryk, E.w_smir + 0.5, 0.1, 0.4) * 0.6,
+    mouth: Math.max(win(t, E.w_rev - 0.08, E.w_rev + 0.8, 0.08, 0.25), win(t, E.w_rych - 0.08, E.w_rych + 0.6, 0.08, 0.2) * 0.7, win(t, E.w_lapoy - 0.1, E.w_lapoy + 0.6, 0.08, 0.2) * 0.6),
+    lash: win(t, E.w_hvost - 0.1, E.L25, 0.1, 0.2), lick: prog(t, E.w_lizh - 0.05, E.w_lizh + 1.1) * (t < E.w_lizh + 1.1 ? 1 : 0),
+    look: watch > 0 ? [kx * watch, 0] : t > E.w_krad - 0.1 && t < CIRC0 ? [-1, 0.3] : t > E.w_vidit - 0.1 && t < E.w_krad ? [-1, 0] : t > E.w_lapoy - 0.3 && t < E.w_vstal ? [0, -1] : [0, 0],
+    swipe: win(t, E.w_lapoy - 0.2, E.w_lapoy + 0.45, 0.12, 0.25), blink: blinkAt(t, 1.3), ph: 1.1,
+    sleep: win(t, E.w_lozh + 0.6, E.w_tret, 0.3, 0.2) * 0.5,
+  };
+}
+// ===== барсы =====
+const BJ = [[E.w_pryzh - 0.45, E.w_ochut + 0.35, 990], [E.w_pryzh - 0.3, E.w_ochut + 0.5, 1110]];
+const HIT = E.w_lapoy + 0.05;
+function barsBase(i, t) {
+  const [j0, j1, lx] = BJ[i];
+  if (t < j1) { const u = prog(t, j0, j1); return { x: lerp(GATES[1], lx, u), y: lerp(GATE_BOT - 10, GROUND, u) - Math.sin(u * Math.PI) * 260, s: lerp(0.5, S_BAR, u), dir: 1, jump: Math.sin(u * Math.PI), rot: 0 }; }
+  // отброшены лапой
+  const kx = lx + 130 + i * 30;
+  if (t < E.w_smir) { const u = prog(t, HIT, HIT + 0.55); const x = lerp(lx, kx, easeOut(u)); return { x, y: GROUND - Math.sin(u * Math.PI) * 70, s: S_BAR, dir: -1, rot: Math.sin(u * Math.PI) * 0.5 * (i ? -1 : 1), jump: Math.sin(u * Math.PI) * 0.6 }; }
+  const tx = i ? BAR_B : BAR_A;
+  const x = kfe([[E.w_smir, kx], [E.w_oskal, tx, Math.max(0.8, E.w_otosh + 0.7 - E.w_oskal)]], t);
+  return { x, y: GROUND, s: S_BAR, dir: -1, rot: 0 };
+}
+function barsP(i, t) {
+  const b = barsBase(i, t), sp = speedOf((tt) => barsBase(i, tt).x, t);
+  const watch = win(t, E.L48, E.E50 + 0.4, 0.4, 0.4), kx = clamp((knightX(t) - b.x) / 500, -1, 1);
+  return {
+    ...b, walk: -b.x / 34, stride: clamp(sp / 70, 0, 1), lie: sstep(prog(t, E.w_legli - 0.15 + i * 0.12, E.w_legli + 0.45 + i * 0.12)),
+    fear: win(t, E.w_ryk, E.w_legli, 0.1, 0.4), crouch: win(t, E.w_smir - 0.1, E.w_legli, 0.2, 0.2) * 0.6,
+    snarl: win(t, E.w_oskal - 0.1, E.w_legli + 0.2, 0.15, 0.3),
+    mouth: win(t, E.w_zaryc - 0.05, E.w_zaryc + 0.5, 0.08, 0.2) * 0.6 + win(t, E.w_bars - 0.05, E.w_bars + 0.5, 0.1, 0.2) * 0.5,
+    look: watch > 0 ? [kx * watch, 0] : [-0.6, 0], blink: blinkAt(t, 2.1 + i), ph: 2 + i,
+  };
+}
+// ===== Делорж =====
+// весь путь — одна координата q: на балконе и лестнице q = x, после подножия (QB) — путь по песку / SAND_K.
+// Ступни ставятся в узлы сетки q с шагом в ступень: на лестнице каждая нога встаёт ровно на ступень, на песке шаг длиннее.
+const PICKX = 1452, KN_BALC = 1470, SAND_K = 3, Q_TOP = STAIR.x0 - 6;
+const SANDP = [[QB, GATE_BOT], [1826, GROUND + 30], [PICKX, GROUND + 30]];   // от подножия вперёд, к зрителю, и влево к перчатке
+const SAND_LEN = SANDP.slice(1).reduce((acc, q, i) => acc + Math.hypot(q[0] - SANDP[i][0], q[1] - SANDP[i][1]), 0);
+const Q_PICK = QB + SAND_LEN / SAND_K;
+function sandAt(d) {
+  for (let i = 1; i < SANDP.length; i++) {
+    const [x0, y0] = SANDP[i - 1], [x1, y1] = SANDP[i], L = Math.hypot(x1 - x0, y1 - y0);
+    if (d <= L || i === SANDP.length - 1) { const u = clamp(d / L, 0, 1); return [lerp(x0, x1, u), lerp(y0, y1, u)]; }
+    d -= L;
+  }
+}
+const pathAt = (q) => (q <= QB ? [q, stairLevel(q)] : sandAt((q - QB) * SAND_K));
+const KW0 = E.w_delorzh - 0.05, KW1 = KW0 + 0.7;                        // по балкону к лестнице
+const KS0 = KW1, KS1 = KS0 + 2.4;                                        // вниз по лестнице
+const KP = Math.max(E.w_beret - 0.1, KS1 + 1.6);                         // по песку к перчатке, берёт
+const KB0 = E.w_vozvr2 - 0.1, KB1 = Math.max(E.E50 + 0.2, KB0 + 1.8);    // обратно к лестнице
+const KU0 = E.w_vityaz - 0.1, KU1 = E.w_balkon + 0.35;                  // спокойно вверх
+const KR1 = Math.min(E.w_rukopl + 0.9, E.L57 - 0.1);                    // по балкону к красавице
+const KQ = [[0, KN_BALC], [KW0, Q_TOP, KW1 - KW0], [KS0, QB, KS1 - KS0], [KS1, Q_PICK, KP - KS1], [KB0, QB, KB1 - KB0], [KU0, Q_TOP, KU1 - KU0], [KU1, KN_BALC, KR1 - KU1]];
+const knightQ = (t) => kf(KQ, t, trapEase);
+const knightX = (t) => pathAt(knightQ(t))[0];
+// ступня j (0/1) при положении тела q: стоит на узле a, либо летит с узла a на a+2
+// на полу у лестницы и на песке земля под ступнёй — на глубине тела (сдвиг по глубине не должен выглядеть как высота)
+function stepFoot(q, j) {
+  const v = (q - STAIR.x0) / STAIR.run - 0.5, w = v - j + 0.5, cyc = Math.floor(w / 2), r = w - 2 * cyc, a = 2 * cyc + j;
+  const g0 = pathAt(q)[1], flat = q >= STAIR_END;
+  const node = (f) => { const qn = STAIR.x0 + (f + 0.5) * STAIR.run, pt = pathAt(qn); return [pt[0], flat && qn >= STAIR_END ? g0 : pt[1]]; };
+  if (r < 1) { const [x, y] = node(a); return { x, g: y, lift: 0 }; }
+  const u = r - 1, e = sstep(u), A = node(a), B = node(a + 2), M = pathAt(STAIR.x0 + (a + 2 * e + 0.5) * STAIR.run);
+  return { x: M[0], g: lerp(A[1], B[1], e), lift: Math.sin(u * Math.PI) };
+}
+function knightP(t) {
+  const q = knightQ(t), [x, g0] = pathAt(q);
+  const sq = Math.abs(knightQ(t + 0.04) - knightQ(t - 0.04)) / 0.08, go = sstep(clamp(sq / 30, 0, 1)); // 0 — стоит, 1 — идёт
+  const v = knightX(t + 0.05) - knightX(t - 0.05);
+  let dir = v > 0.5 ? 1 : v < -0.5 ? -1 : (t < KW0 ? -1 : t < KB0 ? (t < KP + 0.5 ? -1 : 1) : t < KU0 + 0.5 ? -1 : t > KR1 - 0.05 && t < E.w_nagr + 0.3 ? -1 : 1);
+  if (t > E.w_nagr + 0.25) dir = 1;
+  // ступни в мире: шаг по сетке, а когда стоит — рядом под телом
+  const fw = [0, 1].map((j) => { const f = stepFoot(q, j), rx = x + (j ? 7 : -7);
+    return { x: lerp(rx, f.x, go), g: lerp(g0, f.g, go), lift: f.lift * go * 15 }; });
+  let y = Math.max(fw[0].g, fw[1].g);             // тело опирается на нижнюю ступню — до неё нога дотягивается
+  const s = lerp(S_BALC, S_KN, (y - BFLOOR) / (GROUND - BFLOOR)), st = s * PPL.knight.h;
+  const feet = fw.map((f) => [(f.x - x) * dir / st, (f.g - f.lift - y) / st]), shadows = fw.map((f) => [(f.x - x) * dir / st, (f.g - y) / st]);
+  const onBalc = q < STAIR.x0 + 4, sand = q > QB + 1;
+  const pop = springPop(prog(t, E.w_ryad - 0.2, E.w_ryad + 0.6));
+  if (t < E.w_ryad + 0.6) y += (1 - pop) * 200;
+  const bend = win(t, KP - 0.25, KP + 0.45, 0.2, 0.25), hold = sstep(prog(t, KP, KP + 0.5));
+  const throwK = prog(t, E.w_brosil - 0.25, E.w_brosil + 0.1), thr = win(t, E.w_brosil - 0.3, E.w_brosil + 0.6, 0.12, 0.3);
+  let arms = null;
+  if (bend > 0 || (t > KP && t < E.w_brosil + 0.1)) {
+    const reach = [lerp(14, 56, bend), lerp(88, 150, bend)];
+    arms = [[-14, 88], t > KP ? [lerp(reach[0], 48, hold), lerp(reach[1], 10, hold)] : reach];
+  }
+  if (thr > 0) arms = [[-14, 88], [lerp(-40, 80, easeOut(throwK)), lerp(-60, -10, easeOut(throwK))]];
+  return {
+    x, y, s, dir, onBalc, sand, legs: true, feet, shadows, arms, bend,
+    look: [0.4, t > KR1 && t < E.w_brosil ? 0.2 : 0], cold: win(t, E.w_holod - 0.2, E.w_nagr + 0.8, 0.3, 0.4), blink: blinkAt(t, 0.9), ph: 0.7,
+    mouth: win(t, E.w_ne - 0.05, E.E60, 0.05, 0.1) * (0.5 + 0.5 * Math.sin(t * 22)),
+    holdGlove: t > KP + 0.05 && t < E.w_brosil - 0.02,
+  };
+}
+// ===== перчатка =====
+const GF0 = E.w_sorv - 0.05, GF1 = Math.max(E.w_upala + 0.05, GF0 + 1.2), GT0 = E.w_brosil - 0.02, GT1 = GT0 + 0.32;
+const FACE_B = [1342, BFLOOR - 0.94 * S_BALC * 251];
+function gloveState(t) {
+  if (t < GF0) return null;
+  if (t < GF1) {
+    const u = prog(t, GF0, GF1), uy = easeIn(u);
+    return { x: lerp(1318, GLOVE_G[0], u) + Math.sin(u * 9) * 26 * (1 - u), y: lerp(318, GLOVE_G[1], uy), a: u * 7 + Math.sin(u * 6) * 0.5, s: lerp(0.55, 0.9, u), glow: 0 };
+  }
+  if (t < KP + 0.05) { const land = prog(t, GF1, GF1 + 0.3); return { x: GLOVE_G[0], y: GLOVE_G[1] - Math.sin(land * Math.PI) * 18, a: 1.5, s: 0.9, glow: 0.5 + 0.5 * Math.sin(t * 5), ground: true }; }
+  if (t < GT0) return null; // в руке рыцаря
+  const kn = knightP(GT0);
+  if (t < GT1) { const u = prog(t, GT0, GT1); const sx = kn.x - 40, sy = kn.y - 200 * kn.s; return { x: lerp(sx, FACE_B[0] + 6, u), y: lerp(sy, FACE_B[1], u) - Math.sin(u * Math.PI) * 30, a: -u * 9, s: 0.5, glow: 0, top: true }; }
+  const u = prog(t, GT1, GT1 + 0.7); if (u >= 1) return null;
+  return { x: FACE_B[0] + 6 - u * 30, y: FACE_B[1] + easeIn(u) * 110, a: -9 - u * 3, s: 0.5, glow: 0, top: true };
+}
+
+// ===== двор на балконе =====
+const COURT = [
+  { who: "baron2", x: 400, ph: 0.3 }, { who: "baron1", x: 520, ph: 1.1 }, { who: "prince", x: 680, ph: 2.0 }, { who: "king", x: 860, ph: 0.5 },
+  { who: "lady1", x: 1010, ph: 1.7, pop: "w_obvor" }, { who: "lady2", x: 1115, ph: 0.9, pop: "w_dam" }, { who: "lady3", x: 1222, ph: 2.4, pop: "w_dam", d: 0.25 },
+  { who: "beauty", x: 1342, ph: 0.2, pop: "w_ryad", d: -0.1 },
+];
+function blinkAt(t, s = 0) { const p = (t + s) % 3.3; return p < 0.13 ? Math.sin((p / 0.13) * Math.PI) : 0; }
+const KING_WAVES = [E.w_znak, E.w_mahn2, E.w_mahn3];
+function courtPose(m, t) {
+  const o = { x: m.x, y: BFLOOR, s: S_BALC, dir: 1, ph: m.ph, blink: blinkAt(t, m.ph * 3), look: [0, 0.6] };
+  if (m.pop) { const t0 = E[m.pop] + (m.d || 0); o.y += (1 - springPop(prog(t, t0 - 0.2, t0 + 0.7))) * 220; }
+  // общие реакции
+  const excite = Math.max(win(t, E.w_lev - 0.1, E.L15, 0.2, 0.4), win(t, E.w_pryan, E.L24, 0.2, 0.4), win(t, E.w_pryzh, E.L34, 0.2, 0.4), win(t, E.w_gosti, E.w_vdrug, 0.3, 0.2));
+  const fear = win(t, E.L51 - 0.1, E.L53, 0.3, 0.5) + 0.6 * win(t, E.w_ryk - 0.05, E.w_smir + 0.3, 0.1, 0.4);
+  const watchGlove = win(t, E.w_vdrug, E.E40 + 0.5, 0.2, 0.4);
+  const clap = win(t, E.w_rukopl - 0.15, E.L57 + 0.3, 0.2, 0.4);
+  o.mouth = Math.max(excite * 0.5 * (0.5 + 0.5 * Math.sin(t * 9 + m.ph)), fear * 0.9, watchGlove * 0.6);
+  o.fear = fear; o.smile = 0.5 + clap * 0.5;
+  const kx = knightX(t);
+  const watchKnight = win(t, E.L47, E.L57, 0.4, 0.4);
+  if (watchGlove > 0) o.look = [clamp((GLOVE_G[0] - m.x) / 500, -1, 1) * watchGlove, 1];
+  if (watchKnight > 0) o.look = [clamp((kx - m.x) / 400, -1, 1), kx > STAIR.x0 ? 1 : 0];
+  if (clap > 0) { const k = Math.abs(Math.sin(t * 14 + m.ph)), hx = 26 - 22 * (1 - k); o.arms = [[hx, 50], [-hx, 50]]; } // ладони сходятся перед грудью
+  else if (m.who.startsWith("lady") || m.who === "beauty") o.arms = [[-14, 88], [36, 4]]; // левая опущена, правая с веером у плеча
+  if (m.who.startsWith("lady") || m.who === "beauty") o.hand = [null, (c, x, y) => fan(c, x, y - 6, -0.6 + Math.sin(t * 7 + m.ph) * 0.25 * (1 - clap), PPL[m.who].trim === "#fff" ? "#ffe9a8" : C.pinkL)];
+  if (m.who === "king") {
+    o.y = BFLOOR + 18; o.look = [0.2, 0.8];
+    let up = 0; for (const tw of KING_WAVES) up = Math.max(up, win(t, tw - 0.25, tw + 0.9, 0.15, 0.35));
+    const lean = win(t, E.L4 - 0.1, E.L6, 0.4, 0.4);
+    o.look = [lean > 0.2 ? 0.3 : 0.2, 0.6 + lean * 0.4];
+    o.arms = [[-14, 88], [lerp(14, 46, up), lerp(88, -96, up) + Math.sin(t * 16) * 10 * up]];
+    o.mouth = Math.max(o.mouth, up * 0.6);
+  }
+  if (m.who === "beauty") {
+    const lean = win(t, E.L37, E.w_sorv + 0.3, 0.3, 0.2);
+    o.gloveOn = t < GF0;
+    if (lean > 0) o.arms = [[lerp(-14, -44, lean), lerp(88, 78, lean)], o.arms[1]];
+    const sly = win(t, E.L41 - 0.1, E.E46 + 0.3, 0.3, 0.3);
+    o.sly = sly; if (sly > 0) { o.look = [1, -0.2]; o.smile = 0.7; }
+    o.dir = 1;
+    if (t > E.L44 - 0.1 && t < E.E46) o.mouth = 0.5 + 0.5 * Math.sin(t * 20);
+    const love = win(t, E.L57 - 0.1, E.w_holod + 0.2, 0.3, 0.3);
+    if (love > 0) { o.smile = 1; o.look = [1, 0]; }
+    o.love = love;
+    const hit = prog(t, GT1 - 0.02, GT1 + 0.15);
+    if (t > GT1 - 0.02) { o.wince = win(t, GT1 - 0.02, GT1 + 1.4, 0.05, 0.4); o.x -= 10 * Math.sin(Math.min(1, hit) * Math.PI) + 6 * o.wince; o.mouth = 0.8 * win(t, GT1 + 0.3, E.fin, 0.3, 0.3); o.fear = 0.5 * o.wince; }
+  }
+  return o;
+}
+
+// ===== камера =====
+const SH = {
+  WIDE: [960, 540, 1.0], GATES: [620, 600, 1.55], BARONS: [470, 268, 2.1], PRINCE: [690, 262, 2.4], KING: [860, 250, 2.6], BALC: [900, 330, 1.45],
+  ARENA: [960, 640, 1.22], LADIES: [1180, 262, 1.95], LADIES2: [1320, 262, 2.0], G1: [320, 620, 2.1], G1b: [420, 650, 1.65], LION: [540, 650, 1.7],
+  LFACE: [600, 662, 2.7], LFACE2: [610, 664, 3.2], LMANE: [580, 655, 2.2], LSTRETCH: [560, 680, 1.6], LYAWN: [610, 668, 2.6], LLIE: [600, 690, 1.5],
+  G3: [1250, 620, 2.1], TIGJUMP: [1080, 620, 1.35], TSEE: [880, 640, 1.45], TROAR: [1090, 672, 2.4], TTAIL: [1070, 660, 1.8], TCRAWL: [930, 670, 1.6],
+  CIRC: [560, 650, 1.3], TLIE: [660, 680, 1.55], G2: [790, 610, 1.9], BJUMP: [880, 600, 1.4], SWIPE: [900, 650, 1.75], ROAR: [600, 655, 2.2],
+  BBACK: [1180, 640, 1.35], BEAUTY: [1342, 262, 2.6], BFACE: [1345, 250, 3.3], TWO: [1405, 262, 2.4], KFACE: [1470, 252, 3.2], LAND: [1380, 700, 1.7],
+  BALCR: [1150, 280, 1.6], FEAR1: [1100, 268, 2.0], FEAR2: [640, 268, 2.1],
+};
+const CAM = [
+  [0, [960, 540, 1.0]], [E.V0 - 0.35, [520, 610, 1.6], 0.7], [E.L1 + 0.6, [1020, 610, 1.6], E.E1 - E.L1 + 0.4],
+  [E.w_baron - 0.15, SH.BARONS, 0.4], [E.w_prinz - 0.15, SH.PRINCE, 0.35], [E.w_franc - 0.2, SH.KING, 0.35],
+  [E.L4 - 0.1, SH.BALC, 0.5], [E.w_popr - 0.15, SH.ARENA, 0.5], [E.L6 - 0.1, SH.LADIES, 0.45], [E.w_dam - 0.2, SH.LADIES2, 1.2],
+  [E.L9 - 0.1, SH.KING, 0.35], [E.w_stuk - 0.15, SH.G1, 0.3], [E.L13 - 0.1, SH.G1b, 0.5], [E.L14, SH.LION, 0.5],
+  [E.L15 - 0.1, SH.LFACE, 0.35], [E.L16 - 0.1, SH.LION, 0.4], [E.w_morsh - 0.12, SH.LFACE2, 0.3], [E.L18 - 0.1, SH.LMANE, 0.3],
+  [E.L19 - 0.1, SH.LSTRETCH, 0.4], [E.w_zevn - 0.1, SH.LYAWN, 0.3], [E.w_leg - 0.1, SH.LLIE, 0.4], [E.w_mahn2 - 0.2, SH.KING, 0.3],
+  [E.L21 - 0.05, SH.G3, 0.3], [E.w_pryan - 0.2, SH.TIGJUMP, 0.35], [E.w_vidit - 0.1, SH.TSEE, 0.35], [E.w_rev - 0.15, SH.TROAR, 0.25],
+  [E.L24 - 0.1, SH.TTAIL, 0.35], [E.L25 - 0.1, SH.TCRAWL, 0.5], [E.L26 - 0.05, [900, 668, 2.3], 0.4], [E.L27 - 0.1, SH.CIRC, 0.5],
+  [E.L28 - 0.1, SH.TLIE, 0.5], [E.L29 - 0.1, SH.KING, 0.3], [E.L30 - 0.1, SH.G2, 0.35], [E.w_pryzh - 0.35, SH.BJUMP, 0.35],
+  [E.L32 - 0.1, SH.SWIPE, 0.3], [E.L33 - 0.05, SH.ROAR, 0.3], [E.L34 - 0.1, SH.BBACK, 0.45], [E.w_legli - 0.2, SH.WIDE, 0.8],
+  [E.L37 - 0.1, SH.BALC, 0.5], [E.L38 - 0.1, SH.BEAUTY, 0.3], [E.L40 - 0.05, SH.LAND, 0.35], [E.L41 - 0.1, SH.TWO, 0.4],
+  [E.w_ulyb - 0.2, SH.BFACE, 0.35], [E.L44 - 0.1, SH.BEAUTY, 0.35], [E.L46 - 0.1, SH.TWO, 0.35], [E.L47 - 0.1, SH.KFACE, 0.35],
+  [E.L51 - 0.1, SH.FEAR1, 0.35], [E.w_serdce - 0.2, SH.FEAR2, 0.35], [E.L56 - 0.1, SH.BALCR, 0.4], [E.L57 - 0.1, SH.BFACE, 0.35],
+  [E.L58 - 0.1, SH.KFACE, 0.3], [E.L59 - 0.1, SH.TWO, 0.3], [E.w_ne - 0.1, [1400, 300, 1.9], 0.4], [E.E60 + 0.3, SH.WIDE, 1.2],
+];
+// следование за перчаткой и рыцарем: [начало, конец, функция → кадр]
+const FOLLOW = [
+  [E.w_sorv + 0.1, E.L40 + 0.1, (t) => { const g = gloveState(t) || { x: GLOVE_G[0], y: GLOVE_G[1] }; return [1360, g.y, 2.0]; }],
+  [KW0 + 0.6, E.L51 - 0.1, (t) => { const k = knightP(t); return [k.x - 120 * (t > KP ? 0.3 : 1), k.y - 150 * k.s, k.sand ? 1.45 : 1.6]; }],
+  [E.E52 - 0.2, E.L56 - 0.1, (t) => { const k = knightP(t); return [k.x - 100, k.y - 160 * k.s, 1.55]; }],
+];
+// встряски: [время, сила]
+const SHAKES = [[E.w_stuk, 14], [E.w_gryan, 14], [TJ1, 12], [E.w_lapoy + 0.05, 16], [E.w_ryk, 26], [GF1, 8], [GT1, 14], [E.w_znak + 0.1, 6]];
+// камера: цель — ключи CAM (с упреждением) и слежение; сама камера догоняет цель критически задемпфированной
+// пружиной (без перелёта), посчитанной заранее таблицей — так переезды плавные и кадр детерминирован
+const CAM_DT = 1 / 120, CAM_W = 5.2, CAM_LEAD = 0.3, CAM_VMAX = 1500, CAM_ZMAX = 1.1;
+function camTarget(t) {
+  let [cx, cy, z] = kf(CAM, t + CAM_LEAD, easeInOut);
+  for (const [a, b, fn] of FOLLOW) { const w = win(t, a, b, 0.5, 0.5); if (w > 0) { const f = fn(Math.min(t + 0.15, b)); cx = lerp(cx, f[0], w); cy = lerp(cy, f[1], w); z = lerp(z, f[2], w); } }
+  return [cx, cy, Math.log(Math.max(1, z))];
+}
+const CAM_TAB = (() => {
+  const n = Math.ceil((TOTAL + 1) / CAM_DT) + 2, tab = new Float64Array(n * 3), x = camTarget(0), v = [0, 0, 0];
+  for (let i = 0; i < n; i++) {
+    const g = camTarget(i * CAM_DT);
+    for (let j = 0; j < 3; j++) v[j] += (CAM_W * CAM_W * (g[j] - x[j]) - 2 * CAM_W * v[j]) * CAM_DT;
+    // предел скорости: панорама не быстрее CAM_VMAX px/с на экране, зум — не быстрее CAM_ZMAX
+    const z = Math.exp(x[2]), sv = Math.hypot(v[0], v[1]) * z;
+    if (sv > CAM_VMAX) { v[0] *= CAM_VMAX / sv; v[1] *= CAM_VMAX / sv; }
+    v[2] = clamp(v[2], -CAM_ZMAX, CAM_ZMAX);
+    for (let j = 0; j < 3; j++) { x[j] += v[j] * CAM_DT; tab[i * 3 + j] = x[j]; }
+  }
+  return tab;
+})();
+function camAt(t) {
+  const f = clamp(t / CAM_DT, 0, CAM_TAB.length / 3 - 2), i = Math.floor(f), u = f - i, at = (j) => lerp(CAM_TAB[i * 3 + j], CAM_TAB[i * 3 + 3 + j], u);
+  let cx = at(0), cy = at(1), z = Math.max(1, Math.exp(at(2)));
+  const hw = W / (2 * z), hh = H / (2 * z);
+  cx = clamp(cx, hw, WW - hw); cy = clamp(cy, hh, H - hh);
+  let sx = 0, sy = 0;
+  for (const [te, a] of SHAKES) if (t >= te && t < te + 0.8) { const d = Math.exp(-(t - te) * 6) * a; sx += Math.sin((t - te) * 71) * d; sy += Math.cos((t - te) * 53) * d; }
+  return { cx, cy, z, sx, sy };
+}
+
+// ===== эффекты в мире =====
+function dust(c, x, y, t, t0, k = 1) {
+  const u = prog(t, t0, t0 + 0.9); if (u <= 0 || u >= 1) return;
+  c.save(); c.globalAlpha = (1 - u) * 0.7;
+  for (let i = 0; i < 9; i++) { const a = (i / 8) * Math.PI, r = (30 + 110 * easeOut(u)) * k, px = x - Math.cos(a) * r * 1.3, py = y - Math.sin(a) * r * 0.22 - 12 * k, rad = (26 + 30 * u) * k;
+    const g = c.createRadialGradient(px, py, 0, px, py, rad); g.addColorStop(0, "rgba(245,220,174,0.75)"); g.addColorStop(1, "rgba(245,220,174,0)"); c.fillStyle = g; circle(c, px, py, rad); c.fill(); }
+  c.restore();
+}
+function shock(c, x, y, t, t0) {
+  const u = prog(t, t0, t0 + 0.8); if (u <= 0 || u >= 1) return;
+  c.save(); c.globalAlpha = 1 - u; c.lineWidth = 14 * (1 - u) + 2; c.strokeStyle = "#fff6c8";
+  for (const k of [1, 0.65]) { ellipse(c, x, y, 120 + 900 * u * k, 40 + 300 * u * k); c.stroke(); }
+  c.restore();
+}
+function zzz(c, x, y, t, k) {
+  if (k <= 0) return;
+  for (let i = 0; i < 3; i++) { const p = ((t * 0.6 + i / 3) % 1); arcadeText(c, "z", x + p * 60 + i * 8, y - p * 110, 26 + p * 30, "#fff", { lw: 6, shadow: false }); }
+}
+function hitStars(c, x, y, t, t0) {
+  const u = prog(t, t0, t0 + 0.7); if (u <= 0 || u >= 1) return;
+  c.save(); c.globalAlpha = 1 - u * u;
+  for (let i = 0; i < 8; i++) { const a = (i / 8) * TAU + 0.3, r = 30 + 120 * easeOut(u); star4(c, x + Math.cos(a) * r, y + Math.sin(a) * r * 0.7, 26 * (1 - u) + 8, i % 2 ? "#fff" : C.yellow); }
+  c.restore();
+}
+function worldText(c, txt, x, y, t, t0, dur, px, col) {
+  const k = win(t, t0, t0 + dur, 0.06, 0.25); if (k <= 0) return;
+  const s = springSlam(prog(t, t0, t0 + 0.6));
+  c.save(); c.globalAlpha = k; c.translate(x, y - 30 * prog(t, t0, t0 + dur)); c.scale(s, s); c.rotate(-0.08);
+  arcadeText(c, txt, 0, 0, px, col, { grad: [C.white, col] }); c.restore();
+}
+
+// ===== мир =====
+function drawWorld(c, t) {
+  const cam = camAt(t);
+  c.save();
+  c.translate(W / 2, H / 2); c.scale(cam.z, cam.z); c.translate(-cam.cx + cam.sx, -cam.cy + cam.sy);
+  c.drawImage(BG_BACK, 0, 0, WW, H);
+  // двор
+  c.save(); c.translate(860, BFLOOR); c.scale(S_BALC, S_BALC); throne(c, 0, 0); c.restore();
+  const kn = knightP(t);
+  const kHand = (cc, x, y) => { if (kn.holdGlove) glove(cc, x + 4, y + 8, 0.9, 0.4 + Math.sin(t * 2) * 0.1); };
+  for (const m of COURT) {
+    const o = courtPose(m, t);
+    person(c, m.who, o, t);
+    if (m.who === "beauty" && o.love > 0) { for (const sx of [-1, 1]) heart(c, o.x + sx * 7 * S_BALC * 0.94 * 1.0, o.y - S_BALC * 0.94 * 255, 0.42 * springPop(prog(t, E.L57 - 0.1, E.L57 + 0.6)) * o.love * (1 + 0.15 * Math.sin(t * 9)), C.red); }
+  }
+  if (kn.onBalc) person(c, "knight", { ...kn, hand: [null, kHand] }, t);
+  // сердечки дам трескаются от страха
+  const hk = win(t, E.w_strah - 0.1, E.L53 + 0.3, 0.2, 0.3);
+  if (hk > 0) for (const m of COURT.slice(4)) heart(c, m.x + 18, 175 + Math.sin(t * 4 + m.ph) * 6, 0.9 * hk, C.red, prog(t, E.w_serdce - 0.1, E.w_serdce + 0.4));
+  c.drawImage(BG_FRONT, 0, 0, WW, H);
+  // ворота, глаза, факелы
+  for (let i = 0; i < 3; i++) gate(c, GATES[i], kf(GATE_OPEN[i], t), t);
+  const eyesK = win(t, E.V0 - 0.5, E.L4, 0.4, 0.4);
+  gateEyes(c, GATES[0], eyesK * (1 - prog(t, E.w_stuk - 0.2, E.w_stuk)), t);
+  gateEyes(c, GATES[1], eyesK + win(t, E.L29, E.w_bars, 0.3, 0.1), t, "#9cff6a");
+  gateEyes(c, GATES[2], eyesK + win(t, E.L20, E.w_zatv, 0.3, 0.1), t, "#ff9a3a");
+  torches(c, t);
+  // звери и рыцарь по глубине
+  const actors = [];
+  if (t > E.w_grozn - 0.2) actors.push({ y: lionY(t), d: () => beast(c, "lion", lionP(t), t) });
+  if (t > TJ0) { const p = tigerP(t); actors.push({ y: p.y, d: () => beast(c, "tiger", p, t) }); }
+  for (let i = 0; i < 2; i++) if (t > BJ[i][0]) { const p = barsP(i, t); actors.push({ y: p.y + (p.jump > 0.3 ? 40 : 0), d: () => { c.save(); if (p.rot) { c.translate(p.x, p.y - 60); c.rotate(p.rot); c.translate(-p.x, -(p.y - 60)); } beast(c, "bars", p, t); c.restore(); } }); }
+  if (!kn.onBalc) actors.push({ y: kn.y + 2, d: () => person(c, "knight", { ...kn, hand: [null, kHand] }, t) });
+  const gs = gloveState(t);
+  if (gs && !gs.top) actors.push({ y: gs.ground ? GLOVE_G[1] + 1 : 9999, d: () => glove(c, gs.x, gs.y, gs.s, gs.a, gs.glow) });
+  actors.sort((a, b) => a.y - b.y).forEach((a) => a.d());
+  if (gs && gs.top) glove(c, gs.x, gs.y, gs.s, gs.a, 0);
+  // эффекты
+  dust(c, GATES[0] + 40, GATE_BOT + 10, t, E.w_stuk - 0.05, 0.8);
+  dust(c, 1050, GROUND, t, TJ1 - 0.05);
+  dust(c, BJ[0][2], GROUND, t, BJ[0][1] - 0.05, 0.8); dust(c, BJ[1][2], GROUND, t, BJ[1][1] - 0.05, 0.8);
+  dust(c, LIONX, GROUND, t, E.w_leg + 0.2, 0.7);
+  dust(c, GLOVE_G[0], GLOVE_G[1], t, GF1 - 0.03, 0.5);
+  shock(c, LIONX + 90, GROUND - 120, t, E.w_ryk);
+  hitStars(c, 960, GROUND - 120, t, E.w_lapoy + 0.05);
+  hitStars(c, FACE_B[0], FACE_B[1], t, GT1);
+  zzz(c, LIONX + 110, GROUND - 140, t, win(t, E.w_leg + 0.6, E.w_mahn2 + 0.3, 0.4, 0.3));
+  worldText(c, "HIT!", 980, GROUND - 230, t, E.w_lapoy + 0.05, 1.0, 70, C.yellow);
+  worldText(c, "РРРР!", LIONX + 160, GROUND - 300, t, E.w_ryk, 1.1, 92, "#ff7a1a");
+  worldText(c, "+1 ПЕРЧАТКА", PICKX, GROUND - 300, t, KP + 0.1, 1.3, 46, C.pinkL);
+  worldText(c, "!", 1030, GROUND - 230, t, E.w_vidit - 0.05, 0.9, 110, C.red);
+  c.restore();
+}
+
+// ===== HUD файтинга =====
+const SEG = [
+  [E.L9 - 0.2, { p1: ["ЛЕВ", "lion"], p2: ["???", null], b1: [[0, 0], [E.w_lev, 1, 0.8]], b2: [[0, 0]] }],
+  [E.w_mahn2 - 0.1, { p1: ["ЛЕВ", "lion"], p2: ["ТИГР", "tiger"], b1: [[0, 1]], b2: [[0, 0], [E.w_tigr, 1, 0.8], [E.w_rob, 0.45, 0.6]] }],
+  [E.w_mahn3 - 0.1, { p1: ["ТИГР", "tiger"], p2: ["БАРСЫ ×2", "bars"], b1: [[0, 0.45], [E.w_tret, 0.8, 0.6]], b2: [[0, 0], [E.w_bars, 1, 0.8], [E.w_lapoy + 0.05, 0.55, 0.4], [E.w_ryk, 0.15, 0.5]] }],
+  [E.L41 - 0.2, { p1: ["КРАСАВИЦА", "beauty"], p2: ["ДЕЛОРЖ", "knight"], b1: [[0, 1]], b2: [[0, 1]] }],
+  [E.w_delorzh - 0.1, { p1: ["ДЕЛОРЖ", "knight"], p2: ["ЗВЕРИ ×4", "lion"], b1: [[0, 1]], b2: [[0, 1]] }],
+  [E.L57 - 0.2, { p1: ["ДЕЛОРЖ", "knight"], p2: ["ГОРДОСТЬ", "beauty"], b1: [[0, 1]], b2: [[0, 1], [GT1, 0, 0.5]] }],
+];
+function portrait(c, x, y, sz, kind, t, flip) {
+  c.save(); rrect(c, x, y, sz, sz, 10); c.fillStyle = "#2a1a40"; c.fill(); c.clip();
+  const g = c.createLinearGradient(0, y, 0, y + sz); g.addColorStop(0, "#5a3c9e"); g.addColorStop(1, "#1b1026"); c.fillStyle = g; c.fillRect(x, y, sz, sz);
+  if (kind === "lion" || kind === "tiger" || kind === "bars") { c.translate(x + sz / 2, y + sz * 0.56); c.scale(sz / 190, sz / 190); head(c, kind, KIND[kind], { look: [flip ? -0.6 : 0.6, 0], blink: blinkAt(t, x * 0.01) }, t); }
+  else if (kind) { const sc = sz / 105, hh = PPL[kind].h; c.translate(x + sz / 2, y + sz * 0.5 + (kind === "king" ? 262 : kind === "knight" ? 275 : 251) * hh * sc); c.scale(sc, sc); person(c, kind, { x: 0, y: 0, s: 1, dir: 1, look: [flip ? -0.6 : 0.6, 0], blink: blinkAt(t, x * 0.01), smile: 0.6, sly: kind === "beauty" ? 0.6 : 0 }, t); }
+  else arcadeText(c, "?", x + sz / 2, y + sz / 2, sz * 0.7, "#fff");
+  c.restore();
+  rrect(c, x, y, sz, sz, 10); c.lineWidth = 6; c.strokeStyle = C.gold; c.stroke();
+}
+function hpBar(c, x, y, w, h, v, flip, label, k) {
+  c.save(); slant(c, x - 6, y - 6, w + 12, h + 12, 18); ink(c, "#20142e", 5);
+  const col = v > 0.5 ? C.hpG : v > 0.25 ? C.hpY : C.hpR;
+  const vw = Math.max(0, w * v);
+  c.save(); slant(c, x, y, w, h, 14); c.clip(); c.fillStyle = "#5a1020"; c.fillRect(x, y, w, h);
+  c.fillStyle = col; if (flip) c.fillRect(x + w - vw, y, vw, h); else c.fillRect(x, y, vw, h);
+  c.fillStyle = "rgba(255,255,255,0.35)"; c.fillRect(x, y + 4, w, h * 0.28); c.restore();
+  font(c, 34, F_HUD); c.textBaseline = "top"; c.textAlign = flip ? "right" : "left";
+  c.lineWidth = 7; c.strokeStyle = C.ink; c.strokeText(label, flip ? x + w : x, y + h + 8); c.fillStyle = "#fff"; c.fillText(label, flip ? x + w : x, y + h + 8);
+  c.restore();
+}
+function hud(c, t) {
+  const k = sstep(prog(t, E.L9 - 0.3, E.L9 + 0.3)) * (1 - sstep(prog(t, E.E60 + 0.6, E.E60 + 1.1)));
+  if (k <= 0) return;
+  let seg = SEG[0]; for (const s of SEG) if (t >= s[0]) seg = s;
+  const S = seg[1], sw = springSnap(prog(t, seg[0], seg[0] + 0.5));
+  c.save(); c.globalAlpha = k; c.translate(0, -140 * (1 - k));
+  portrait(c, 40, 30, 110, S.p1[1], t, false);
+  portrait(c, W - 150, 30, 110, S.p2[1], t, true);
+  hpBar(c, 176, 48, 640, 44, kf(S.b1, t) * sw, false, S.p1[0], k);
+  hpBar(c, W - 176 - 640, 48, 640, 44, kf(S.b2, t) * sw, true, S.p2[0], k);
+  // таймер
+  const r0 = E.L9 - 0.2, fast = prog(t, E.L37, E.w_vdrug) * 30;
+  let tv = Math.max(0, 99 - Math.floor((t - r0) * 0.7 + fast)); if (t > E.w_vdrug) tv = Math.max(0, 99 - Math.floor((E.w_vdrug - r0) * 0.7 + 30));
+  rrect(c, W / 2 - 66, 26, 132, 100, 14); ink(c, "#20142e", 5);
+  arcadeText(c, String(tv).padStart(2, "0"), W / 2, 78, 78, C.yellow, { grad: ["#fff6b0", C.gold] });
+  c.restore();
+}
+// карточки бойцов
+const CARDS = [
+  [E.w_franc - 0.1, E.L4 + 0.6, "right", "КОРОЛЬ ФРАНЦИСК", "king", ["ХОЗЯИН АРЕНЫ"]],
+  [E.w_lev - 0.05, E.L15 + 0.4, "right", "ЛЕВ", "lion", [["СИЛА", 5], ["ГРИВА", 5]]],
+  [E.w_tigr - 0.05, E.w_rev + 0.3, "left", "ТИГР", "tiger", [["СИЛА", 4], ["СМЕЛОСТЬ", 4]]],
+  [E.w_bars - 0.05, E.L32 - 0.2, "left", "БАРСЫ ×2", "bars", [["ПРЫЖОК", 5], ["СИЛА", 3]]],
+  [E.w_licem - 0.1, E.L43 + 0.4, "left", "КРАСАВИЦА", "beauty", [["КОВАРСТВО", 5], ["ДОБРОТА", 1]]],
+  [E.w_delorzh - 0.05, E.L48 + 0.6, "left", "ДЕЛОРЖ", "knight", [["СМЕЛОСТЬ", 9], ["СЛОВ", 0]]],
+];
+function card(c, t, cd) {
+  const [t0, t1, side, name, kind, stats] = cd;
+  const k = win(t, t0, t1, 0.05, 0.3); if (k <= 0) return;
+  const s = springPop(prog(t, t0, t0 + 0.9)), w = 520, h = 250, y = 168;
+  const x = side === "left" ? lerp(-w - 40, 50, s) : lerp(W + 40, W - w - 50, s);
+  c.save(); c.globalAlpha = Math.min(1, k * 1.4);
+  slant(c, x, y, w, h, 26); ink(c, "rgba(27,16,38,0.92)", 6, C.gold);
+  portrait(c, x + 36, y + 24, 150, kind, t, side === "right");
+  arcadeText(c, name, x + 214, y + 58, name.length > 12 ? 34 : name.length > 9 ? 40 : 54, C.yellow, { align: "left", grad: ["#fff6b0", C.gold] });
+  stats.forEach((st, i) => {
+    const yy = y + 118 + i * 54;
+    if (typeof st === "string") { arcadeText(c, st, x + 214, yy, 36, "#fff", { align: "left" }); return; }
+    const [lab, v] = st;
+    font(c, 30, F_HUD); c.fillStyle = "#fff"; c.textAlign = "left"; c.textBaseline = "middle"; c.fillText(lab, x + 214, yy);
+    const n = v > 5 ? 5 : v, fill = prog(t, t0 + 0.3 + i * 0.15, t0 + 0.9 + i * 0.15);
+    for (let j = 0; j < 5; j++) { rrect(c, x + 214 + j * 34, yy + 18, 28, 16, 4); ink(c, j < n * fill ? (lab === "СЛОВ" || lab === "ДОБРОТА" ? C.hpR : C.hpG) : "#3a2a50", 3); }
+    if (v > 5) arcadeText(c, "∞", x + 214 + 5 * 34 + 26, yy + 24, 48, C.yellow);
+    if (v === 0) arcadeText(c, "0", x + 214 + 5 * 34 + 22, yy + 24, 36, C.hpR);
+  });
+  c.restore();
+}
+// большие надписи
+const BANNERS = [
+  [E.w_znak - 0.05, 1.3, "ROUND 1", C.yellow], [E.w_vyh - 0.05, 0.9, "FIGHT!", C.red],
+  [E.w_mahn2 - 0.05, 1.2, "ROUND 2", C.yellow], [E.w_pryan - 0.1, 0.9, "FIGHT!", C.red], [E.w_lozh + 0.25, 1.3, "НИЧЬЯ", C.cyan],
+  [E.w_mahn3 - 0.05, 1.2, "ROUND 3", C.yellow], [E.w_pryzh - 0.1, 1.0, "2 VS 1", C.red], [E.w_legli + 0.3, 1.3, "НИЧЬЯ", C.cyan],
+  [E.w_vozvr + 0.1, 1.7, "БОНУСНЫЙ РАУНД", C.pink], [E.w_zveryam - 0.05, 0.9, "FIGHT!", C.red], [E.w_sobr - 0.05, 1.4, "FLAWLESS!", C.cyan],
+  [E.w_rukopl - 0.05, 1.5, "PERFECT!", C.yellow], [GT1, 1.6, "K.O.", C.red],
+];
+function banner(c, t, b) {
+  const [t0, dur, txt, col] = b, k = win(t, t0, t0 + dur, 0.04, 0.22); if (k <= 0) return;
+  const s = springSlam(prog(t, t0, t0 + 0.7)), px = txt.length > 9 ? 110 : 170;
+  c.save(); c.globalAlpha = k; c.translate(W / 2, 400); c.scale(lerp(2.4, 1, s), lerp(2.4, 1, s));
+  // полосы скорости за надписью
+  c.save(); c.globalAlpha = 0.5 * k; c.fillStyle = col; for (let i = -4; i <= 4; i++) { const yy = i * 26, len = 500 + 300 * Math.abs(Math.sin(i * 7.1)); c.fillRect(-len - 200 + ((t * 2400 + i * 300) % 400), yy - 3, len, 6); }
+  c.restore();
+  arcadeText(c, txt, 0, 0, px, col, { grad: ["#ffffff", col], lw: px * 0.13 });
+  c.restore();
+}
+// квест-плашка
+function questPlate(c, t) {
+  const k = win(t, E.w_vozvr + 0.1, E.w_delorzh + 0.2, 0.3, 0.3); if (k <= 0) return;
+  const s = springPop(prog(t, E.w_vozvr + 0.1, E.w_vozvr + 0.9));
+  c.save(); c.globalAlpha = k; c.translate(W / 2, 540); c.scale(s, s);
+  rrect(c, -360, -40, 720, 80, 18); ink(c, "rgba(27,16,38,0.92)", 5, C.pink);
+  glove(c, -300, 0, 0.75, 0.3); arcadeText(c, "ЗАДАНИЕ: ВЕРНУТЬ ПЕРЧАТКУ", 30, 2, 40, "#fff", { lw: 7 });
+  c.restore();
+}
+// экран «НАГРАДА?»
+function rewardBox(c, t) {
+  const k = win(t, E.w_ne - 0.1, E.E60 + 1.0, 0.25, 0.3); if (k <= 0) return;
+  const s = springPop(prog(t, E.w_ne - 0.1, E.w_ne + 0.7)), pick = prog(t, E.w_nagr - 0.1, E.w_nagr + 0.25);
+  c.save(); c.globalAlpha = k; c.translate(W / 2 + 540, 610); c.scale(s, s);
+  rrect(c, -230, -110, 460, 220, 22); ink(c, "rgba(27,16,38,0.94)", 6, C.gold);
+  arcadeText(c, "НАГРАДА?", 0, -60, 54, C.yellow, { grad: ["#fff6b0", C.gold] });
+  const bx = [[-100, "ДА", "#2b6a3a"], [100, "НЕТ", C.redD]];
+  for (const [x, lab, col] of bx) {
+    const sel = lab === "НЕТ" ? pick : 0;
+    rrect(c, x - 80, 0, 160, 76, 14); ink(c, sel > 0.5 ? C.red : col, 5, sel > 0.5 ? "#fff" : C.ink);
+    arcadeText(c, lab, x, 40, 46, "#fff", { lw: 6 });
+  }
+  // курсор
+  const cx = lerp(-100, 100, sstep(prog(t, E.w_ne + 0.2, E.w_nagr - 0.15)));
+  c.fillStyle = C.yellow; c.beginPath(); c.moveTo(cx - 10, 96); c.lineTo(cx + 10, 96); c.lineTo(cx, 80); c.fill();
+  c.restore();
+}
+// конфетти
+const CONF = (() => { const r = mulberry32(11), a = []; for (let i = 0; i < 90; i++) a.push({ x: r() * W, v: 260 + r() * 260, sw: r() * 6, col: [C.yellow, C.pink, C.cyan, C.green, "#fff"][i % 5], d: r() * 0.6 }); return a; })();
+function confetti(c, t) {
+  const t0 = E.w_rukopl - 0.1, k = win(t, t0, E.L57 + 0.5, 0.05, 0.4); if (k <= 0) return;
+  c.save(); c.globalAlpha = k;
+  for (const p of CONF) { const tt = t - t0 - p.d; if (tt < 0) continue; const y = -30 + p.v * tt, x = p.x + Math.sin(tt * 3 + p.sw) * 40; c.save(); c.translate(x, y); c.rotate(tt * 5 + p.sw); c.fillStyle = p.col; c.fillRect(-8, -4, 16, 8); c.restore(); }
+  c.restore();
+}
+// «WINNER»
+function winner(c, t) {
+  const t0 = E.E60 + 0.5, k = win(t, t0, E.fin + 0.2, 0.05, 0.3); if (k <= 0) return;
+  const s = springSlam(prog(t, t0, t0 + 0.7));
+  c.save(); c.globalAlpha = k; c.translate(W / 2, 380); c.scale(lerp(2, 1, s), lerp(2, 1, s));
+  arcadeText(c, "ПОБЕДИТЕЛЬ:", 0, -70, 80, "#fff", { grad: ["#ffffff", C.cyan] });
+  arcadeText(c, "ДЕЛОРЖ", 0, 50, 150, C.yellow, { grad: ["#fff6b0", C.gold] });
+  c.restore();
+}
+// заставка: монетка и PRESS START
+function intro(c, t) {
+  const k = 1 - sstep(prog(t, E.V0 - 0.5, E.V0 - 0.1)); if (k <= 0) return;
+  c.save(); c.globalAlpha = k;
+  const coin = prog(t, 0.05, 0.55);
+  if (coin < 1) { const y = lerp(470, 690, easeIn(coin)); c.save(); c.translate(W / 2, y); c.scale(Math.abs(Math.cos(coin * 9)) * 0.9 + 0.1, 1); circle(c, 0, 0, 34); ink(c, C.gold, 5); arcadeText(c, "$", 0, 2, 40, C.goldD, { lw: 0, shadow: false }); c.restore(); }
+  rrect(c, W / 2 - 60, 690, 120, 18, 9); ink(c, "#20142e", 4);
+  const blink = Math.floor(t * 3) % 2 === 0;
+  if (t < 0.6 && blink) arcadeText(c, "INSERT COIN", W / 2, 760, 50, "#fff");
+  if (t > 1.0 && blink) arcadeText(c, "PRESS START", W / 2, 760, 50, C.yellow);
+  const fl = win(t, 0.55, 0.9, 0.03, 0.3); if (fl > 0) { c.fillStyle = `rgba(255,255,255,${0.8 * fl})`; c.fillRect(0, 0, W, H); }
+  c.restore();
+}
+
+// ===== плашка строк и ярлык говорящего =====
+const SPEAK = {}; for (let n = 44; n <= 46; n++) SPEAK[n] = ["КРАСАВИЦА", C.pink];
+SPEAK[60] = ["ДЕЛОРЖ", C.blue];
+function curLine(t) { let n = 0; for (let k = 1; k <= NL; k++) if (t >= E["L" + k] - 0.12) n = k; return n; }
+function captionsPlate(c, t) {
+  const k = sstep(prog(t, E.L1 - 0.6, E.L1 - 0.1)) * (1 - sstep(prog(t, E.fin - 0.3, E.fin + 0.05)));
+  if (k <= 0) return;
+  c.save(); c.globalAlpha = k;
+  rrect(c, 120, 830, 1680, 160, 18); c.fillStyle = "rgba(22,12,40,0.93)"; c.fill(); c.lineWidth = 6; c.strokeStyle = C.gold; c.stroke();
+  rrect(c, 132, 842, 1656, 136, 12); c.lineWidth = 2.5; c.strokeStyle = "rgba(255,204,61,0.55)"; c.stroke();
+  // мигающий треугольник «дальше»
+  if (Math.floor(t * 2.5) % 2 === 0) { c.fillStyle = C.gold; c.beginPath(); c.moveTo(1752, 958); c.lineTo(1772, 958); c.lineTo(1762, 970); c.fill(); }
+  c.restore();
+  const cur = curLine(t), spk = SPEAK[cur];
+  if (spk && k > 0.5 && !(cur === 60 && t < E.w_ne - 0.1)) {
+    const st = cur === 60 ? E.w_ne - 0.1 : E["L" + cur] - 0.15;
+    const first = SPEAK[cur - 1] && SPEAK[cur - 1][0] === spk[0] ? 1 : prog(t, st, st + 0.45);
+    c.save(); font(c, 32, F_HUD); const w = c.measureText(spk[0]).width + 40;
+    c.translate(150, 812); c.scale(springPop(first), springPop(first)); slant(c, 0, -24, w, 48, 12); ink(c, spk[1], 4);
+    c.fillStyle = "#fff"; c.textBaseline = "middle"; c.fillText(spk[0], 18, 2); c.restore();
+  }
+}
+
+// ===== кадр =====
+function renderAt(t) {
+  ctx.reset();
+  ctx.fillStyle = C.ink; ctx.fillRect(0, 0, W, H);
+  drawWorld(ctx, t);
+  // тон кадра: замедление перчатки, холод Делоржа, заставка и финал
+  const slow = win(t, E.w_sorv, GF1 + 0.2, 0.15, 0.3);
+  if (slow > 0) { ctx.fillStyle = `rgba(40,20,80,${0.22 * slow})`; ctx.fillRect(0, 0, W, H); arcadeText(ctx, "ЗАМЕДЛЕНИЕ", 1700, 240, 34, C.cyan, { lw: 6 }); }
+  const cold = win(t, E.w_holod - 0.1, GT0, 0.25, 0.1);
+  if (cold > 0) { ctx.fillStyle = `rgba(60,130,255,${0.22 * cold})`; ctx.fillRect(0, 0, W, H); }
+  const hitFlash = Math.max(win(t, GT1, GT1 + 0.25, 0.02, 0.2), win(t, E.w_ryk, E.w_ryk + 0.2, 0.02, 0.15) * 0.6, win(t, E.w_gryan, E.w_gryan + 0.15, 0.02, 0.1) * 0.5);
+  if (hitFlash > 0) { ctx.fillStyle = `rgba(255,255,255,${0.55 * hitFlash})`; ctx.fillRect(0, 0, W, H); }
+  const dim = Math.max(0.62 * (1 - sstep(prog(t, E.V0 - 0.6, E.V0 - 0.1))), 0.6 * sstep(prog(t, E.fin - 0.2, E.fin + 0.5)));
+  if (dim > 0) { ctx.fillStyle = `rgba(20,8,36,${dim})`; ctx.fillRect(0, 0, W, H); }
+  // виньетка
+  const vg = ctx.createRadialGradient(W / 2, H / 2, 500, W / 2, H / 2, 1150); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(10,0,20,0.45)"); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+  hud(ctx, t);
+  for (const cd of CARDS) card(ctx, t, cd);
+  for (const b of BANNERS) banner(ctx, t, b);
+  questPlate(ctx, t); rewardBox(ctx, t); confetti(ctx, t); winner(ctx, t); intro(ctx, t);
+  // финал: «GAME OVER» мигает под заголовком
+  const fk = sstep(prog(t, E.fin + 0.6, E.fin + 1.2));
+  if (fk > 0) { ctx.save(); ctx.globalAlpha = fk; if (Math.floor(t * 2) % 2 === 0) arcadeText(ctx, "PRESS START", W / 2, 640, 50, C.yellow); for (let i = 0; i < 10; i++) { const a = i * 0.63; star4(ctx, W / 2 + Math.cos(a) * (700 + 40 * (i % 3)), 330 + Math.sin(a * 1.3) * 200, 24 * Math.abs(Math.sin(t * 2.2 + i)), "#fffbe0"); } ctx.restore(); }
+  captionsPlate(ctx, t);
+  textAt(t);
+}
+
+// ===== текст =====
+const NL = Object.keys(E).filter((k) => /^L\d+$/.test(k)).length;
+const CAPS = [...document.querySelectorAll(".cap")].map((el) => ({ el, n: +el.dataset.n, last: "" }));
+const WORDS = [...document.querySelectorAll(".cap .w")].map((el) => ({ el, at: +el.dataset.at, last: -1 }));
+const ROWS = [844, 912];
+function capState(n, t) {
+  const B = CFG.blocks.find((b) => n >= b[0] && n <= b[1]);
+  const Ln = (k) => E["L" + k];
+  const next = n < B[1] ? Ln(n + 1) : null, next2 = n + 1 < B[1] ? Ln(n + 2) : null;
+  const endBlock = B[1] < NL ? Ln(B[1] + 1) - 0.3 : E.fin - 0.35;
+  let y = ROWS[1], op = sstep(prog(t, Ln(n) - 0.12, Ln(n) + 0.05));
+  if (next !== null) y = lerp(ROWS[1], ROWS[0], springSoft(prog(t, next - 0.12, next + 0.6)));
+  if (next2 !== null && next2 - 0.12 < endBlock) { const u = sstep(prog(t, next2 - 0.12, next2 + 0.16)); y -= 72 * u; op *= 1 - u; }
+  op *= 1 - sstep(prog(t, endBlock, endBlock + 0.25));
+  return { y, op };
+}
+function textAt(t) {
+  for (const cp of CAPS) {
+    const s = capState(cp.n, t), key = s.y.toFixed(1) + "|" + s.op.toFixed(3);
+    if (key !== cp.last) { cp.el.style.transform = `translate(0px, ${s.y.toFixed(1)}px)`; cp.el.style.opacity = s.op.toFixed(3); cp.last = key; }
+  }
+  for (const w of WORDS) {
+    const u = prog(t, w.at - 0.06, w.at + 0.4), k = Math.round(u * 400); if (k === w.last) continue; w.last = k;
+    const s = springPop(u);
+    w.el.style.opacity = u > 0 ? Math.min(1, u * 5).toFixed(3) : "0";
+    w.el.style.transform = u >= 1 ? "none" : `translate(0px, ${((1 - s) * 30).toFixed(1)}px)`;
+  }
+  const ti = win(t, 0.6, E.V0 - 0.25, 0.3, 0.25), tf = sstep(prog(t, E.fin + 0.25, E.fin + 0.8));
+  setTitle("tt1", ti, 0.6, t); setTitle("tt2", tf, E.fin + 0.25, t);
+}
+const TT = {};
+function setTitle(id, k, t0, t) {
+  const el = TT[id] || (TT[id] = document.getElementById(id)); if (!el) return;
+  const s = springSlam(prog(t, t0, t0 + 0.8));
+  el.style.opacity = k <= 0 ? "0" : k.toFixed(3); el.style.transform = `translate(0px, ${((1 - s) * -160).toFixed(1)}px) scale(${(0.8 + 0.2 * s).toFixed(3)})`;
+}
+
+const seek = (t) => renderAt(t);
+buildWorld();
+window.addEventListener("hf-seek", (e) => seek(e.detail.time));
+seek(0);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => seek(0));
+
+const tl = gsap.timeline({ paused: true });
+tl.set({}, {}, TOTAL);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+
+    </script>
+  </body>
+</html>
