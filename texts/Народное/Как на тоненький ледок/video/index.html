@@ -1,0 +1,1154 @@
+<!doctype html>
+<!-- Шаблон: index.html собирается из template.tpl и src/*.js командой `python3 build.py`. Правьте эти файлы, не index.html. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      @font-face { font-family: "CapB"; font-weight: 700; src: local("Avenir Next Bold"), local("AvenirNext-Bold"); }
+      @font-face { font-family: "TitleR"; font-weight: 700; src: local("Comic Sans MS Bold"), local("ComicSansMS-Bold"); }
+      :root { --ink: #2b2340; --key: #c8322a; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #dfe9f5; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: "CapB", "Avenir Next", sans-serif; color: var(--ink); background: #dfe9f5; }
+      #scene { position: absolute; inset: 0; width: 1920px; height: 1080px; z-index: 0; }
+      #preload { position: absolute; left: 0; top: 0; opacity: 0; font: 700 30px "CapB"; }
+      #preload i { font: normal 700 30px "TitleR"; }
+      .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 3; }
+      #caps { clip-path: inset(826px 0 84px 0); }
+      .cap { position: absolute; left: 0; width: 1920px; text-align: center; top: 0; height: 72px; line-height: 72px; font-size: 58px; font-weight: 700; white-space: nowrap; word-spacing: 0.14em; opacity: 0;
+             text-shadow: 0 2px 0 rgba(255, 255, 255, 0.7); }
+      .w { display: inline-block; opacity: 0; transform-origin: 50% 90%; }
+      .k { color: var(--key); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="47.360" data-width="1920" data-height="1080">
+      <canvas id="scene" width="1920" height="1080"></canvas>
+      <div id="preload" aria-hidden="true">Как на тоненький ледок <i>Как на тоненький ледок… Русская народная песня</i></div>
+      <div id="caps" class="clip layer" data-start="3.420" data-duration="39.330" data-track-index="3" data-track-kind="captions"><div class="cap" id="c1" data-n="1"><span class="w" data-at="4.020">Как</span> <span class="w" data-at="4.300">на</span> <span class="w" data-at="4.680">тоненький</span> <span class="w k" data-at="5.300">ледок</span></div><div class="cap" id="c2" data-n="2"><span class="w" data-at="6.460">Выпал</span> <span class="w" data-at="6.850">беленький</span> <span class="w k" data-at="7.720">снежок.</span></div><div class="cap" id="c3" data-n="3"><span class="w" data-at="8.890">Выпал</span> <span class="w" data-at="9.470">беленький</span> <span class="w k" data-at="10.120">снежок.</span></div><div class="cap" id="c4" data-n="4"><span class="w" data-at="11.260">Ехал</span> <span class="w k" data-at="11.850">Ванюшка-дружок.</span></div><div class="cap" id="c5" data-n="5"><span class="w" data-at="13.520">Ваня</span> <span class="w" data-at="13.900">ехал,</span> <span class="w k" data-at="14.510">поспешал,</span></div><div class="cap" id="c6" data-n="6"><span class="w" data-at="15.490">Со</span> <span class="w" data-at="15.730">добра</span> <span class="w k" data-at="16.190">коня</span> <span class="w k" data-at="16.520">упал.</span></div><div class="cap" id="c7" data-n="7"><span class="w" data-at="17.470">Он</span> <span class="w k" data-at="17.650">упал,</span> <span class="w k" data-at="18.300">упал,</span> <span class="w k" data-at="18.910">лежит</span> <span class="w" data-at="18.910">—</span></div><div class="cap" id="c8" data-n="8"><span class="w" data-at="20.000">Никто</span> <span class="w" data-at="20.480">к</span> <span class="w" data-at="20.570">Ване</span> <span class="w" data-at="20.920">не</span> <span class="w" data-at="21.050">бежит.</span></div><div class="cap" id="c9" data-n="9"><span class="w" data-at="22.240">Две</span> <span class="w k" data-at="22.520">девушки</span> <span class="w" data-at="23.050">увидали,</span></div><div class="cap" id="c10" data-n="10"><span class="w" data-at="23.990">Прямо</span> <span class="w" data-at="24.370">к</span> <span class="w" data-at="24.480">Ване</span> <span class="w k" data-at="24.840">подбежали,</span></div><div class="cap" id="c11" data-n="11"><span class="w" data-at="25.890">Прямо</span> <span class="w" data-at="26.290">к</span> <span class="w" data-at="26.390">Ване</span> <span class="w k" data-at="26.800">подбежали,</span></div><div class="cap" id="c12" data-n="12"><span class="w" data-at="27.840">На</span> <span class="w k" data-at="27.980">коня</span> <span class="w" data-at="28.350">Ваню</span> <span class="w" data-at="28.700">сажали.</span></div><div class="cap" id="c13" data-n="13"><span class="w" data-at="29.600">На</span> <span class="w k" data-at="29.750">коня</span> <span class="w" data-at="30.160">Ваню</span> <span class="w" data-at="30.510">сажали,</span></div><div class="cap" id="c14" data-n="14"><span class="w k" data-at="31.530">Путь-дорогу</span> <span class="w" data-at="32.300">показали.</span></div><div class="cap" id="c15" data-n="15"><span class="w k" data-at="33.320">Путь-дорогу</span> <span class="w" data-at="34.000">показали</span></div><div class="cap" id="c16" data-n="16"><span class="w" data-at="34.950">Да</span> <span class="w" data-at="35.170">наказывали:</span></div><div class="cap" id="c17" data-n="17"><span class="w" data-at="36.410">«Как</span> <span class="w" data-at="36.660">поедешь</span> <span class="w" data-at="37.320">ты,</span> <span class="w k" data-at="37.520">Иван,</span></div><div class="cap" id="c18" data-n="18"><span class="w" data-at="38.200">Не</span> <span class="w k" data-at="38.300">зевай</span> <span class="w" data-at="38.800">по</span> <span class="w" data-at="38.940">сторонам!»</span></div></div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="4.000" data-duration="35.760" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="47.360" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>
+      const CFG = {"total": 47.36, "ev": {"V0": 4.0, "L1": 4.02, "L2": 6.46, "L3": 8.89, "L4": 11.26, "L5": 13.52, "L6": 15.49, "L7": 17.47, "L8": 20.0, "L9": 22.24, "L10": 23.99, "L11": 25.89, "L12": 27.84, "L13": 29.6, "L14": 31.53, "L15": 33.32, "L16": 34.95, "L17": 36.41, "L18": 38.2, "E1": 5.97, "E2": 8.3, "E3": 10.74, "E4": 12.83, "E5": 15.22, "E6": 16.98, "E7": 19.57, "E8": 21.55, "E9": 23.66, "E10": 25.54, "E11": 27.51, "E12": 29.25, "E13": 31.13, "E14": 32.97, "E15": 34.66, "E16": 36.02, "E17": 37.94, "E18": 39.55, "w_led": 5.3, "w_vyp2": 6.46, "w_vyp3": 8.89, "w_ehal": 11.26, "w_van4": 11.85, "w_posp": 14.51, "w_dobra": 15.73, "w_upal6": 16.52, "w_lezh": 18.91, "w_nikto": 20.0, "w_bezh": 21.05, "w_dve": 22.24, "w_uvid": 23.05, "w_podb10": 24.84, "w_podb11": 26.8, "w_kon12": 27.98, "w_sazh12": 28.7, "w_kon13": 29.75, "w_sazh13": 30.51, "w_put14": 31.53, "w_pok14": 32.3, "w_put15": 33.32, "w_nak": 35.17, "w_kak": 36.41, "w_ivan": 37.52, "w_zev": 38.3, "w_stor": 38.94, "fin": 42.75, "total": 47.36}, "blocks": [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12], [13, 14], [15, 16], [17, 18]]};
+// Как на тоненький ледок — пластилиновый мультфильм. Всё лепится кодом на одном canvas; кадр — функция времени.
+const W = 1920, H = 1080, TOTAL = CFG.total, E = CFG.ev, TAU = Math.PI * 2;
+
+function mulberry32(a) { return function () { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, u) => a + (b - a) * u;
+const sstep = (u) => { u = clamp(u, 0, 1); return u * u * (3 - 2 * u); };
+const prog = (t, a, b) => clamp((t - a) / Math.max(1e-6, b - a), 0, 1);
+const win = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(sstep(prog(t, a, a + fi)), 1 - sstep(prog(t, b - fo, b)));
+const easeOut = (u) => 1 - Math.pow(1 - clamp(u, 0, 1), 3);
+const easeIn = (u) => Math.pow(clamp(u, 0, 1), 3);
+const easeInOut = (u) => { u = clamp(u, 0, 1); return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+// пружины Framer Motion как функции времени: 0 → 1 с перелётом
+function makeSpring(opts) {
+  const g = Motion.spring({ ...opts, keyframes: [0, 1] });
+  const pts = []; for (let i = 0; i <= 400; i++) pts.push(g.next(i * 10).value);
+  return (s) => { if (s <= 0) return 0; const f = s * 100; if (f >= 400) return 1; const i = Math.floor(f); return lerp(pts[i], pts[i + 1], f - i); };
+}
+const springPop = makeSpring({ stiffness: 260, damping: 13, mass: 1 });
+const springSoft = makeSpring({ stiffness: 120, damping: 18, mass: 1 });
+const springBounce = makeSpring({ stiffness: 320, damping: 9, mass: 1 });
+// пружина по реальному времени от события a (сек.)
+const spr = (fn, t, a) => fn(Math.max(0, t - a));
+const bump = (t, a, d = 0.5) => { const u = prog(t, a, a + d); return u <= 0 || u >= 1 ? 0 : Math.sin(u * Math.PI) * (1 - u); };
+const wob = (t, f, s = 0) => Math.sin(t * f + s) * 0.6 + Math.sin(t * f * 2.31 + s * 1.7) * 0.4;
+
+// ---------- цвет ----------
+const hexRgb = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+const rgbStr = (c, a = 1) => a >= 1 ? `rgb(${c[0] | 0},${c[1] | 0},${c[2] | 0})` : `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a.toFixed(3)})`;
+const mixRgb = (a, b, u) => [lerp(a[0], b[0], u), lerp(a[1], b[1], u), lerp(a[2], b[2], u)];
+const CC = {}; // кэш производных цветов
+function shades(hex) {
+  if (CC[hex]) return CC[hex];
+  const b = hexRgb(hex);
+  return (CC[hex] = { base: hex, rgb: b, light: rgbStr(mixRgb(b, [255, 255, 255], 0.38)), dark: rgbStr(mixRgb(b, [20, 18, 40], 0.42)),
+    deep: mixRgb(b, [10, 10, 30], 0.6), spec: rgbStr(mixRgb(b, [255, 255, 255], 0.75)) });
+}
+
+// ---------- стоп-моушен: фактура «дрожит» 12 раз в секунду ----------
+let BOIL = 0;          // номер «кадра» лепки, ставится в renderAt
+const BOIL_FPS = 12;
+function noise1(seed, i) { const r = mulberry32((seed * 7919 + i * 104729) | 0); r(); return r() * 2 - 1; }
+// гладкий шум по углу: n гармоник с фазами из seed
+function lumpR(seed, a, amt) {
+  const r = mulberry32(seed | 0);
+  const p1 = r() * TAU, p2 = r() * TAU, p3 = r() * TAU;
+  const bp = BOIL * 1.7 + seed;
+  return 1 + amt * (0.55 * Math.sin(2 * a + p1) + 0.3 * Math.sin(3 * a + p2) + 0.15 * Math.sin(5 * a + p3))
+    + 0.012 * Math.sin(4 * a + bp) + 0.008 * Math.sin(7 * a + bp * 1.3);
+}
+
+// ---------- формы: Path2D + рамка ----------
+function shapeFromPts(pts) {
+  const p = new Path2D(), n = pts.length;
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (const q of pts) { x0 = Math.min(x0, q[0]); y0 = Math.min(y0, q[1]); x1 = Math.max(x1, q[0]); y1 = Math.max(y1, q[1]); }
+  const m0 = [(pts[n - 1][0] + pts[0][0]) / 2, (pts[n - 1][1] + pts[0][1]) / 2];
+  p.moveTo(m0[0], m0[1]);
+  for (let i = 0; i < n; i++) { const a = pts[i], b = pts[(i + 1) % n]; p.quadraticCurveTo(a[0], a[1], (a[0] + b[0]) / 2, (a[1] + b[1]) / 2); }
+  p.closePath();
+  return { p, bb: [x0, y0, x1, y1] };
+}
+// комок: эллипс с неровным краем
+function blob(cx, cy, rx, ry, rot = 0, seed = 1, lump = 0.05, n = 26) {
+  const pts = [], cr = Math.cos(rot), sr = Math.sin(rot);
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * TAU, k = lumpR(seed, a, lump);
+    const x = Math.cos(a) * rx * k, y = Math.sin(a) * ry * k;
+    pts.push([cx + x * cr - y * sr, cy + x * sr + y * cr]);
+  }
+  return shapeFromPts(pts);
+}
+// колбаска между двумя точками
+function sausage(x1, y1, r1, x2, y2, r2, seed = 1, lump = 0.04) {
+  const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy) || 1e-3, ux = dx / L, uy = dy / L, nx = -uy, ny = ux;
+  const pts = [], N = 9;
+  for (let i = 0; i <= N; i++) { // полукруг вокруг конца 2
+    const a = -Math.PI / 2 + (i / N) * Math.PI, k = lumpR(seed, a, lump);
+    pts.push([x2 + (ux * Math.cos(a) + nx * Math.sin(a)) * r2 * k, y2 + (uy * Math.cos(a) + ny * Math.sin(a)) * r2 * k]);
+  }
+  for (let i = 0; i <= N; i++) { // полукруг вокруг конца 1
+    const a = Math.PI / 2 + (i / N) * Math.PI, k = lumpR(seed + 3, a, lump);
+    pts.push([x1 + (ux * Math.cos(a) + nx * Math.sin(a)) * r1 * k, y1 + (uy * Math.cos(a) + ny * Math.sin(a)) * r1 * k]);
+  }
+  return shapeFromPts(pts);
+}
+// многоугольник со скруглёнными углами и лёгкой «лепкой»
+function lumpPoly(pts, seed = 1, j = 2) {
+  const q = pts.map((p, i) => [p[0] + noise1(seed + BOIL * 3, i) * j, p[1] + noise1(seed + 11 + BOIL * 3, i) * j]);
+  return shapeFromPts(q);
+}
+
+// ---------- пластилин: заливка с объёмом, бликом и отпечатками ----------
+let CLAYM = 1; // 1 — свет слева; −1 — фигура зеркалена (scale(−1,1)), блик и тень переносим, чтобы свет оставался слева
+function clay(c, s, hex, o = {}) {
+  const M = CLAYM, sh = shades(hex), [x0, y0, x1, y1] = s.bb, w = x1 - x0, h = y1 - y0, m = Math.min(w, h);
+  const rim = o.rim ?? Math.max(3, m * 0.16);
+  if (o.shadow !== false) { // отбрасываемая тень на то, что сзади
+    c.save(); c.translate(M * (o.sx ?? Math.max(2, m * 0.05)), o.sy ?? Math.max(3, m * 0.08)); c.fillStyle = "rgba(28,36,70,0.2)"; c.fill(s.p); c.restore();
+  }
+  c.fillStyle = hex; c.fill(s.p);
+  c.save(); c.clip(s.p);
+  const g = M > 0 ? c.createLinearGradient(x0, y0, x0 + w * 0.7, y1) : c.createLinearGradient(x1, y0, x1 - w * 0.7, y1);
+  const sd = o.shade ?? 1;
+  g.addColorStop(0, `rgba(255,255,255,${0.26 * sd})`); g.addColorStop(0.45, "rgba(255,255,255,0)"); g.addColorStop(1, rgbStr(sh.deep, 0.45 * sd));
+  c.fillStyle = g; c.fillRect(x0 - 2, y0 - 2, w + 4, h + 4);
+  // край темнее — форма скатана, а не вырезана
+  c.lineJoin = "round";
+  c.strokeStyle = rgbStr(sh.deep, 0.16); c.lineWidth = rim * 2.2; c.stroke(s.p);
+  c.strokeStyle = rgbStr(sh.deep, 0.14); c.lineWidth = rim * 1.0; c.stroke(s.p);
+  // мягкий блик сверху-слева
+  if (o.spec !== false) {
+    const hx = o.hx ?? 0.33, bx = x0 + w * (M > 0 ? hx : 1 - hx), by = y0 + h * (o.hy ?? 0.26), br = Math.max(4, m * 0.36);
+    const gs = c.createRadialGradient(bx, by, 0, bx, by, br);
+    gs.addColorStop(0, `rgba(255,255,255,${o.gloss ?? 0.42})`); gs.addColorStop(1, "rgba(255,255,255,0)");
+    c.fillStyle = gs; c.fillRect(bx - br, by - br, 2 * br, 2 * br);
+  }
+  // отпечатки пальцев и вмятины
+  if (o.prints !== false && m > 26) {
+    const r = mulberry32((o.seed ?? 7) * 31 + 5);
+    const n = o.prints ?? (m > 120 ? 2 : 1);
+    c.lineWidth = Math.max(0.8, Math.min(1.6, m * 0.008)); c.strokeStyle = rgbStr(sh.deep, 0.07);
+    for (let k = 0; k < n; k++) {
+      const px = x0 + w * (0.25 + 0.5 * r()), py = y0 + h * (0.3 + 0.45 * r()), rr = Math.min(m * 0.16, 34), a0 = r() * TAU, rot = r() * 3;
+      for (let i = 0; i < 8; i++) { const e = 0.25 + i * 0.1; c.beginPath(); c.ellipse(px, py, rr * e * 1.25, rr * e * 0.85, rot, a0 + i * 0.3, a0 + i * 0.3 + 2.2 + r() * 1.2); c.stroke(); }
+    }
+    c.fillStyle = "rgba(255,255,255,0.18)";
+    for (let k = 0; k < 3; k++) { const px = x0 + w * r(), py = y0 + h * r(); c.beginPath(); c.ellipse(px, py, m * 0.03 + 1, m * 0.018 + 1, r() * 3, 0, TAU); c.fill(); }
+  }
+  c.restore();
+}
+// быстрые помощники
+const clayBlob = (c, x, y, rx, ry, hex, rot = 0, seed = 1, o = {}) => clay(c, blob(x, y, rx, ry, rot, seed, o.lump ?? 0.05), hex, { seed, ...o });
+const claySaus = (c, x1, y1, r1, x2, y2, r2, hex, seed = 1, o = {}) => clay(c, sausage(x1, y1, r1, x2, y2, r2, seed, o.lump ?? 0.04), hex, { seed, ...o });
+// бусина-глаз: чёрная с бликом
+function bead(c, x, y, r, open = 1) {
+  if (open <= 0.08) { c.save(); c.strokeStyle = "#1b1622"; c.lineWidth = Math.max(2, r * 0.45); c.lineCap = "round"; c.beginPath(); c.moveTo(x - r, y); c.quadraticCurveTo(x, y + r * 0.6, x + r, y); c.stroke(); c.restore(); return; }
+  c.save(); c.fillStyle = "#17131f"; c.beginPath(); c.ellipse(x, y, r, r * open, 0, 0, TAU); c.fill();
+  c.fillStyle = "rgba(255,255,255,0.9)"; c.beginPath(); c.arc(x - r * 0.35, y - r * 0.35 * open, r * 0.32, 0, TAU); c.fill(); c.restore();
+}
+function circle(c, x, y, r) { c.beginPath(); c.arc(x, y, Math.max(0.1, r), 0, TAU); }
+function rrect(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+// мягкая тень на полу (овал)
+function floorShadow(c, x, y, rx, a = 0.22) {
+  if (rx <= 1) return;
+  const g = c.createRadialGradient(x, y, 0, x, y, rx);
+  g.addColorStop(0, `rgba(40,60,110,${a})`); g.addColorStop(1, "rgba(40,60,110,0)");
+  c.save(); c.fillStyle = g; c.translate(x, y); c.scale(1, 0.24); c.translate(-x, -y); c.fillRect(x - rx, y - rx, 2 * rx, 2 * rx); c.restore();
+}
+// двухзвенная IK: от a до цели t, длины l1 l2, bend = +1/−1 — с какой стороны сустав
+function ik2(ax, ay, tx, ty, l1, l2, bend) {
+  let dx = tx - ax, dy = ty - ay, d = Math.hypot(dx, dy);
+  const dmax = l1 + l2 - 0.5; if (d > dmax) { dx *= dmax / d; dy *= dmax / d; d = dmax; }
+  d = Math.max(d, Math.abs(l1 - l2) + 0.5);
+  const a = Math.atan2(dy, dx), cosA = clamp((l1 * l1 + d * d - l2 * l2) / (2 * l1 * d), -1, 1);
+  const ang = a + bend * Math.acos(cosA);
+  return { jx: ax + Math.cos(ang) * l1, jy: ay + Math.sin(ang) * l1, ex: ax + dx, ey: ay + dy };
+}
+// шаги по точкам мира: s — пройденный путь, off — сдвиг фазы ноги, stance — доля опоры
+function stepFoot(s, stride, off, stance, lift) {
+  const u = s / stride + off, k = Math.floor(u), f = u - k;
+  const Xk = (k + stance / 2 - off) * stride;
+  if (f < stance) return { x: Xk, y: 0, air: 0 };
+  const w = (f - stance) / (1 - stance);
+  return { x: Xk + stride * sstep(w), y: -lift * Math.sin(Math.PI * w), air: Math.sin(Math.PI * w) };
+}
+
+// ---------- мир: пластилиновая диорама зимы ----------
+const HOR = 560;                                  // линия горизонта
+const POND = { x: 1950, y: 892, rx: 440, ry: 74 };
+const BIRD_TREE = { x: 1180, y: 868 };
+const DRIFT = { x: 2540, y: 892 };
+const FENCE = { x0: 2760, x1: 3080, y: 800 };
+const CROW = { x: 2952, y: 676 };
+const SIGN = { x: 3200, y: 918 };
+const HILL = { x: 3580, y: 886, top: 690, half: 400 };
+const FINAL_TREE = { x: 3900, y: 962 };
+const ROAD = [[3200, 942], [3450, 950], [3800, 946], [4100, 930], [4300, 880], [4430, 770], [4510, 650], [4540, 590]];
+const C = {
+  sky0: "#bcd7ee", sky1: "#e9eef2", sky2: "#f7ecd9", snow: "#f2f6fb", snowD: "#d5e2f0", ice: "#9fd3ea", water: "#2e5f8c",
+  fir: "#2f8a55", firD: "#246b45", trunk: "#8a5a32", wood: "#b07a44", woodD: "#7d5330", red: "#d8352a", hill: "#e8eff8",
+  far: "#c9d8ea", far2: "#b5c8de", house: "#c8643a", roof: "#7a4a8c", win: "#ffd36a", sun: "#ffe9a8",
+};
+function hillY(x) { const u = (x - HILL.x) / HILL.half; return Math.abs(u) >= 1 ? HILL.y : HILL.y - (HILL.y - HILL.top) * Math.pow(Math.cos(u * Math.PI / 2), 2); }
+function driftY(x) { const u = (x - DRIFT.x) / 190; return Math.abs(u) >= 1 ? DRIFT.y : DRIFT.y - 70 * Math.pow(Math.cos(u * Math.PI / 2), 1.6); }
+
+// ---------- небо и дальний план (экранные координаты с параллаксом) ----------
+function drawSky(c, cam) {
+  const g = c.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, C.sky0); g.addColorStop(0.55, C.sky1); g.addColorStop(1, C.sky2);
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
+  // мазки пальцем по фону-картону
+  const r = mulberry32(91);
+  c.save(); c.lineCap = "round";
+  for (let i = 0; i < 22; i++) {
+    const x = r() * W * 1.2 - 100 - cam.x * 0.05 % 200, y = r() * H * 0.6, l = 120 + r() * 260;
+    c.strokeStyle = r() < 0.5 ? "rgba(255,255,255,0.16)" : "rgba(120,150,190,0.08)"; c.lineWidth = 14 + r() * 22;
+    c.beginPath(); c.moveTo(x, y); c.quadraticCurveTo(x + l / 2, y - 10 + r() * 20, x + l, y + (r() - 0.5) * 30); c.stroke();
+  }
+  c.restore();
+}
+function withLayer(c, cam, f, fn) {
+  // слой с параллаксом f (0 — прибит к экрану, 1 — мир)
+  const z = 1 + (cam.z - 1) * f, ax = 2400, ay = 560;
+  const cx = ax + (cam.x - ax) * f, cy = ay + (cam.y - ay) * f;
+  c.save(); c.translate(W / 2, H / 2); c.scale(z, z); c.translate(-cx, -cy); fn(c); c.restore();
+}
+function drawFar(c, t) {
+  // солнце, облака, дальние холмы, деревня на горизонте
+  clayBlob(c, 3500, 140, 70, 70, "#ffe39a", 0, 41, { shadow: false, gloss: 0.6 });
+  for (const [x, y, s, sd] of [[1200, 120, 1, 51], [2300, 60, 1.3, 52], [3050, 200, 0.9, 53], [4300, 110, 1.1, 54], [600, 240, 0.8, 55]]) {
+    const dx = (t * 6 * s) % 400;
+    for (let k = 0; k < 4; k++) clayBlob(c, x + dx + (k - 1.5) * 70 * s, y + (k % 2 ? -18 : 6) * s, 70 * s, 42 * s, "#ffffff", 0, sd + k, { shadow: false, gloss: 0.2, prints: 0 });
+  }
+  clay(c, lumpPoly([[-800, HOR + 40], [-200, HOR - 60], [500, HOR - 20], [1200, HOR - 90], [1900, HOR - 30], [2600, HOR - 80], [3300, HOR - 20], [4000, HOR - 70], [4700, HOR - 30], [5600, HOR - 60], [5600, HOR + 120], [-800, HOR + 120]], 61, 3), C.far2, { shadow: false, seed: 61, gloss: 0.15 });
+  clay(c, lumpPoly([[-800, HOR + 60], [0, HOR - 10], [800, HOR + 20], [1600, HOR - 25], [2400, HOR + 15], [3200, HOR - 15], [4100, HOR + 10], [5600, HOR - 10], [5600, HOR + 140], [-800, HOR + 140]], 62, 3), C.far, { shadow: false, seed: 62, gloss: 0.15 });
+  // деревня
+  for (const [x, s, sd] of [[4390, 0.5, 71], [4530, 0.42, 72], [4660, 0.55, 73], [4800, 0.45, 74]]) house(c, x, HOR + 14, s, sd);
+}
+function house(c, x, y, s, sd) {
+  const w = 160 * s, h = 110 * s;
+  clay(c, lumpPoly([[x - w / 2, y], [x - w / 2, y - h], [x + w / 2, y - h], [x + w / 2, y]], sd, 1.5), C.house, { seed: sd, prints: 0 });
+  clay(c, lumpPoly([[x - w / 2 - 14 * s, y - h + 4], [x, y - h - 80 * s], [x + w / 2 + 14 * s, y - h + 4]], sd + 1, 1.5), C.roof, { seed: sd + 1, prints: 0 });
+  clayBlob(c, x, y - h - 52 * s, 50 * s, 18 * s, "#ffffff", 0, sd + 2, { shadow: false, prints: 0 }); // снег на крыше
+  c.fillStyle = C.win; rrect(c, x - 22 * s, y - h * 0.68, 44 * s, 38 * s, 6 * s); c.fill();
+}
+
+// ---------- ближний мир ----------
+function drawFloor(c, cam) {
+  const x0 = cam.x - W / cam.z, x1 = cam.x + W / cam.z;
+  const g = c.createLinearGradient(0, HOR, 0, 1500);
+  g.addColorStop(0, "#e6eef8"); g.addColorStop(0.3, C.snow); g.addColorStop(1, "#dfe9f5");
+  c.fillStyle = g; c.fillRect(x0 - 100, HOR + 20, x1 - x0 + 200, 1600);
+  // размазанный пальцами снег: светлые и голубые дуги
+  const r = mulberry32(17);
+  c.save(); c.lineCap = "round";
+  for (let i = 0; i < 70; i++) {
+    const x = -400 + r() * 5600, y = HOR + 60 + r() * 700, l = 90 + r() * 240;
+    if (x + l < x0 - 50 || x > x1 + 50) { r(); r(); continue; }
+    c.strokeStyle = r() < 0.55 ? "rgba(255,255,255,0.7)" : "rgba(150,180,215,0.22)"; c.lineWidth = 8 + r() * 14;
+    c.beginPath(); c.moveTo(x, y); c.quadraticCurveTo(x + l / 2, y - 8, x + l, y + 2); c.stroke();
+  }
+  c.restore();
+  // кромка поля у горизонта — валик снега
+  clay(c, lumpPoly([[x0 - 200, HOR + 40], [x0 - 200, HOR + 8], [(x0 + x1) / 2, HOR + 2], [x1 + 200, HOR + 10], [x1 + 200, HOR + 44]], 18, 2), "#eef3fa", { shadow: false, seed: 18, prints: 0, gloss: 0.3 });
+}
+
+// пруд: вода → лёд → под снегом; ice — доля замёрзшего, cover — доля снега, scrape — процарапанная полоса
+const SNOW_ON_ICE = (() => { const r = mulberry32(303), a = []; for (let i = 0; i < 26; i++) a.push({ x: POND.x + (r() * 2 - 1) * POND.rx * 0.82, y: POND.y + (r() * 2 - 1) * POND.ry * 0.6, r: 26 + r() * 30, k: r() }); return a; })();
+function drawPond(c, st) {
+  const { x, y, rx, ry } = POND;
+  // берег — валик снега вокруг
+  clay(c, blob(x, y + 6, rx + 34, ry + 22, 0, 81, 0.03), C.snowD, { seed: 81, shadow: false, prints: 0, gloss: 0.25 });
+  // вода
+  clay(c, blob(x, y, rx, ry, 0, 82, 0.02), C.water, { seed: 82, shadow: false, gloss: 0.5, prints: 0 });
+  if (st.ice > 0) {
+    // лёд нарастает от берега к середине
+    c.save();
+    const s = blob(x, y, rx, ry, 0, 82, 0.02);
+    c.clip(s.p);
+    const k = 1 - easeOut(st.ice);
+    const hole = new Path2D(); hole.rect(x - rx - 10, y - ry - 10, 2 * rx + 20, 2 * ry + 20);
+    if (k > 0.01) hole.ellipse(x, y, rx * k, ry * k, 0, 0, TAU);
+    c.fillStyle = C.ice; c.fill(hole, "evenodd");
+    // глянец и узоры трещин
+    const gl = c.createLinearGradient(x - rx, y - ry, x + rx * 0.4, y + ry);
+    gl.addColorStop(0, "rgba(255,255,255,0.55)"); gl.addColorStop(0.5, "rgba(255,255,255,0.05)"); gl.addColorStop(1, "rgba(40,90,140,0.25)");
+    c.globalAlpha = st.ice; c.fillStyle = gl; c.fill(hole, "evenodd");
+    const r = mulberry32(83); c.strokeStyle = "rgba(255,255,255,0.75)"; c.lineWidth = 2.2; c.lineCap = "round";
+    for (let i = 0; i < 18; i++) {
+      const a = r() * TAU, d0 = 0.35 + r() * 0.5, len = 0.12 + r() * 0.25;
+      if (d0 < k + 0.02) { r(); continue; }
+      c.beginPath(); c.moveTo(x + Math.cos(a) * rx * d0, y + Math.sin(a) * ry * d0);
+      c.lineTo(x + Math.cos(a + 0.1) * rx * (d0 + len), y + Math.sin(a + 0.1) * ry * (d0 + len)); c.stroke(); r();
+    }
+    // блик бежит по льду
+    const sw = st.glint;
+    if (sw > 0 && sw < 1) { const gx = x - rx + 2 * rx * sw; const bg = c.createLinearGradient(gx - 80, 0, gx + 80, 0);
+      bg.addColorStop(0, "rgba(255,255,255,0)"); bg.addColorStop(0.5, "rgba(255,255,255,0.85)"); bg.addColorStop(1, "rgba(255,255,255,0)");
+      c.globalAlpha = 1; c.fillStyle = bg; c.fillRect(gx - 80, y - ry, 160, 2 * ry); }
+    c.restore();
+  }
+  // снег на льду: сначала отдельные комочки-лепёшки, потом сплошной слой
+  if (st.lumps > 0 || st.cover > 0) {
+    c.save(); c.clip(blob(x, y, rx, ry, 0, 82, 0.02).p);
+    if (st.cover > 0) { c.globalAlpha = st.cover; clay(c, blob(x, y - 4, rx + 6, ry + 6, 0, 84, 0.02), C.snow, { shadow: false, seed: 84, gloss: 0.35 }); c.globalAlpha = 1; }
+    for (let i = 0; i < SNOW_ON_ICE.length; i++) {
+      const q = SNOW_ON_ICE[i], a = st.lumps * SNOW_ON_ICE.length - i;
+      if (a <= 0) continue;
+      const sq = springPop(clamp(a * 0.6, 0, 4));
+      clayBlob(c, q.x, q.y, q.r * (0.6 + 0.6 * sq), q.r * 0.42 * (1.6 - 0.6 * sq), "#ffffff", 0, 400 + i, { prints: 0, sy: 4, sx: 2 });
+    }
+    // процарапанная копытами полоса — под снегом блестит лёд
+    if (st.scrape > 0) {
+      const sx0 = st.scrapeX0, sx1 = lerp(st.scrapeX0, st.scrapeX1, st.scrape);
+      const p = new Path2D(); p.ellipse((sx0 + sx1) / 2, y - 6, Math.max(4, (sx1 - sx0) / 2 + 20), 20, 0, 0, TAU);
+      c.fillStyle = C.ice; c.fill(p);
+      c.fillStyle = "rgba(255,255,255,0.6)"; c.fillRect(sx0, y - 12, (sx1 - sx0) * 0.8, 4);
+      clay(c, sausage(sx0 - 10, y - 26, 10, sx1 + 10, y - 26, 12, 87), "#ffffff", { seed: 87, prints: 0 });
+      clay(c, sausage(sx0 - 10, y + 16, 9, sx1 + 10, y + 16, 11, 88), "#ffffff", { seed: 88, prints: 0 });
+    }
+    c.restore();
+  }
+}
+
+function fir(c, x, y, s, sd, snowK = 1, shake = 0) {
+  claySaus(c, x, y, 14 * s, x, y - 60 * s, 12 * s, C.trunk, sd);
+  const tiers = [[0, 150, 120], [1, 118, 205], [2, 84, 280], [3, 50, 340]];
+  for (const [i, w, h] of tiers) {
+    const yy = y - 40 * s - i * 72 * s, sh = shake * Math.sin(i * 1.3 + shake * 30) * 6;
+    const pts = [[x - w * s + sh, yy], [x + sh * 0.5, yy - 120 * s], [x + w * s + sh, yy]];
+    clay(c, lumpPoly(pts.concat([[x + w * 0.4 * s, yy + 12 * s], [x - w * 0.4 * s, yy + 12 * s]]), sd + i * 7, 2), i % 2 ? C.firD : C.fir, { seed: sd + i * 7, prints: 1 });
+    if (snowK > 0) { c.save(); c.globalAlpha = snowK; clay(c, lumpPoly([[x - w * 0.62 * s + sh, yy - 30 * s], [x + sh * 0.5, yy - 116 * s], [x + w * 0.55 * s + sh, yy - 34 * s], [x + sh * 0.2, yy - 46 * s]], sd + i * 7 + 3, 2), "#ffffff", { seed: sd + i * 7 + 3, prints: 0, shadow: false }); c.restore(); }
+  }
+}
+function drawFence(c) {
+  const { x0, x1, y } = FENCE;
+  claySaus(c, x0 - 10, y - 70, 9, x1 + 10, y - 66, 9, C.woodD, 501);
+  claySaus(c, x0 - 10, y - 30, 9, x1 + 10, y - 28, 9, C.woodD, 502);
+  for (let i = 0, x = x0; x <= x1; i++, x += 64) {
+    clay(c, lumpPoly([[x - 15, y], [x - 15, y - 100], [x, y - 120], [x + 15, y - 100], [x + 15, y]], 510 + i, 1.5), C.wood, { seed: 510 + i, prints: 0 });
+    clayBlob(c, x, y - 116, 16, 8, "#ffffff", 0, 530 + i, { prints: 0, shadow: false });
+  }
+}
+function drawHill(c) {
+  const pts = [];
+  for (let i = 0; i <= 24; i++) { const x = HILL.x - HILL.half - 60 + (i / 24) * (2 * HILL.half + 120); pts.push([x, hillY(x)]); }
+  pts.push([HILL.x + HILL.half + 60, HILL.y + 30], [HILL.x - HILL.half - 60, HILL.y + 30]);
+  clay(c, lumpPoly(pts, 601, 1.5), C.hill, { seed: 601, gloss: 0.35, rim: 30 });
+}
+function drawDrift(c) {
+  const pts = [];
+  for (let i = 0; i <= 16; i++) { const x = DRIFT.x - 200 + i * 25; pts.push([x, driftY(x)]); }
+  pts.push([DRIFT.x + 200, DRIFT.y + 16], [DRIFT.x - 200, DRIFT.y + 16]);
+  clay(c, lumpPoly(pts, 611, 1.5), "#f7faff", { seed: 611, gloss: 0.45, rim: 18 });
+}
+// указатель: pop 0..1 — выскакивает из снега; высокий — табличка на уровне головы всадника
+const SIGN_H = 372;
+function drawSign(c, pop, t, cap = 1, shake = 0) {
+  if (pop <= 0) return;
+  const { x, y } = SIGN, s = springBounce(pop), h = SIGN_H * s;
+  c.save(); c.translate(x, y); c.rotate(0.06 * Math.sin(t * 3) * (1 - clamp(pop, 0, 1)) + shake);
+  claySaus(c, 0, 0, 14, 0, -h, 11, C.wood, 621);
+  if (s > 0.3) {
+    const k = clamp((s - 0.3) / 0.7, 0, 1.3), yy = -h + 26;
+    clay(c, lumpPoly([[-34, yy - 26 * k], [120 * k, yy - 26 * k], [160 * k, yy], [120 * k, yy + 26 * k], [-34, yy + 26 * k]], 622, 1.5), C.red, { seed: 622 });
+    if (cap > 0) { c.save(); c.globalAlpha = cap; clayBlob(c, 40 * k, yy - 30 * k, 64 * k, 11, "#ffffff", 0, 623, { prints: 0, shadow: false }); c.restore(); }
+  }
+  c.restore();
+  floorShadow(c, x + 10, y + 4, 40, 0.25);
+}
+// дорожка-колбаска раскатывается к деревне: k 0..1
+function drawRoad(c, k) {
+  if (k <= 0) return;
+  const segs = []; let L = 0;
+  for (let i = 1; i < ROAD.length; i++) { const d = Math.hypot(ROAD[i][0] - ROAD[i - 1][0], ROAD[i][1] - ROAD[i - 1][1]); segs.push(d); L += d; }
+  let rem = L * easeInOut(k); const pts = [ROAD[0]];
+  for (let i = 1; i < ROAD.length && rem > 0; i++) {
+    const d = segs[i - 1], u = Math.min(1, rem / d); rem -= d;
+    pts.push([lerp(ROAD[i - 1][0], ROAD[i][0], u), lerp(ROAD[i - 1][1], ROAD[i][1], u)]);
+  }
+  c.save(); c.lineCap = "round"; c.lineJoin = "round";
+  const width = (p) => lerp(46, 10, clamp((ROAD[0][1] - p[1]) / 360, 0, 1));
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i - 1], b = pts[i];
+    c.strokeStyle = "#b9a07a"; c.lineWidth = width(a); c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke();
+    c.strokeStyle = "rgba(255,255,255,0.35)"; c.lineWidth = width(a) * 0.3; c.beginPath(); c.moveTo(a[0], a[1] - width(a) * 0.2); c.lineTo(b[0], b[1] - width(a) * 0.2); c.stroke();
+  }
+  // валик на конце — раскатываемый ком
+  const e = pts[pts.length - 1];
+  if (k < 1) clayBlob(c, e[0], e[1] - width(e) * 0.4, width(e) * 0.7, width(e) * 0.6, "#c9ad84", 0, 631, { prints: 0 });
+  c.restore();
+}
+
+// ---------- персонажи из пластилина ----------
+const PAL = {
+  horse: "#d9772f", mane: "#7a3a1c", hoof: "#3b2a24", muzzle: "#eaa274", saddle: "#2f7d4f", cloth: "#d8352a", gold: "#f2c232",
+  skin: "#f3c49c", cheek: "rgba(240,110,110,0.45)", shirt: "#d8352a", pants: "#2f4a8a", felt: "#5b5560", hat: "#3f6fc4", hat2: "#6b95e0",
+  hair: "#e3b04b", mitt: "#3a9a5a", blouse: "#f6f0e4", boot: "#7a2f25", hare: "#e9e5dd", crow: "#3b3f4c", finch: "#e3553f", finchB: "#7d8794",
+};
+// выбор решения IK: локоть наружу (side) и вниз
+function ikArm(ax, ay, tx, ty, l1, l2, side) {
+  const a = ik2(ax, ay, tx, ty, l1, l2, 1), b = ik2(ax, ay, tx, ty, l1, l2, -1);
+  const sc = (q) => side * (q.jx - ax) + 0.6 * (q.jy - ay);
+  return sc(a) >= sc(b) ? a : b;
+}
+function limb(c, ax, ay, jx, jy, ex, ey, r1, r2, r3, hex, seed) {
+  claySaus(c, ax, ay, r1, jx, jy, r2, hex, seed, { prints: 0 });
+  claySaus(c, jx, jy, r2, ex, ey, r3, hex, seed + 1, { prints: 0 });
+}
+
+// ======================= КОНЬ =======================
+// H: { gait: 'stand'|'walk'|'trot'|'gallop'|'slip'|'sit', s: путь, k: доля позы, head, tail, t, blink }
+const HB = { shx: 80, hpx: -82, jy: -142, l1: 76, l2: 72 };
+const GAITS = {
+  walk:   { stride: 130, stance: 0.66, lift: 18, off: { NF: 0.25, FF: 0.75, NH: 0.0, FH: 0.5 }, bob: 3, rock: 0.01 },
+  trot:   { stride: 190, stance: 0.52, lift: 30, off: { NF: 0.0, FF: 0.5, NH: 0.5, FH: 0.0 }, bob: 6, rock: 0.015 },
+  gallop: { stride: 300, stance: 0.34, lift: 46, off: { NF: 0.45, FF: 0.57, NH: 0.0, FH: 0.12 }, bob: 12, rock: 0.06 },
+};
+function horsePose(H) {
+  // тело: смещение по y, наклон вокруг центра, ноги: цели копыт
+  const out = { dy: 0, rot: 0, piv: [0, -180], hooves: {} };
+  const base = { NF: HB.shx + 4, FF: HB.shx - 12, NH: HB.hpx - 2, FH: HB.hpx + 12 };
+  const hipX = { NF: HB.shx, FF: HB.shx - 14, NH: HB.hpx, FH: HB.hpx + 14 };
+  if (H.gait in GAITS) {
+    const g = GAITS[H.gait], ph = H.s / g.stride;
+    out.dy = -g.bob * Math.abs(Math.sin(ph * TAU)) + g.bob * 0.5; out.rot = g.rock * Math.sin(ph * TAU);
+    for (const L in base) { const f = stepFoot(H.s, g.stride, g.off[L], g.stance, g.lift); out.hooves[L] = [hipX[L] + (f.x - H.s), f.y]; }
+  } else if (H.gait === "slip") {
+    const k = H.k; out.dy = 26 * k; out.rot = -0.08 * k;
+    out.hooves = { NF: [lerp(base.NF, 175, k), 0], FF: [lerp(base.FF, 150, k), 0], NH: [lerp(base.NH, -170, k), 0], FH: [lerp(base.FH, -150, k), 0] };
+  } else if (H.gait === "rise") { // из «сидя» обратно на ноги
+    const k = H.k; out.piv = [-90, -150]; out.rot = -0.42 * (1 - k); out.dy = 92 * (1 - easeOut(k));
+    out.hooves = { NF: [lerp(128, base.NF, k), 0], FF: [lerp(104, base.FF, k), 0], NH: [lerp(-22, base.NH, k), 0], FH: [lerp(-6, base.FH, k), 0] };
+  } else if (H.gait === "sit") {
+    const k = H.k; out.piv = [-90, -150]; out.rot = -0.42 * k; out.dy = 92 * k;
+    out.hooves = { NF: [lerp(175, 128, k), 0], FF: [lerp(150, 104, k), 0], NH: [lerp(-170, -22, k), 0], FH: [lerp(-150, -6, k), 0] };
+  } else {
+    out.hooves = { NF: [base.NF, 0], FF: [base.FF, 0], NH: [base.NH, 0], FH: [base.FH, 0] };
+    out.dy = 2 * Math.sin((H.t || 0) * 2.2);
+  }
+  return out;
+}
+function horseXf(P, x, y) { // точка тела → локальные координаты с учётом наклона
+  const [px, py] = P.piv, cr = Math.cos(P.rot), sr = Math.sin(P.rot), dx = x - px, dy = y - py;
+  return [px + dx * cr - dy * sr, py + dx * sr + dy * cr + P.dy];
+}
+function horseSaddle(H) { const P = horsePose(H); return horseXf(P, -4, -240); }
+function horseMuzzle(H) { const P = horsePose(H); return horseXf(P, 214, -276 + (H.head || 0) * 30); }
+function drawHorse(c, x, y, dir, H, rider) {
+  const P = horsePose(H), t = H.t || 0;
+  c.save(); c.translate(x, y);
+  const turn = H.turn ?? 1; // поворот на месте: scaleX от 1 к −1
+  c.scale(dir * turn, 1); CLAYM = dir * turn < 0 ? -1 : 1;
+  // тень на полу
+  const shK = H.gait === "sit" ? 1.1 : 1;
+  c.save(); c.scale(1 / (dir * turn), 1); floorShadow(c, 0, 4, 190 * shK * Math.abs(turn) + 40, 0.28); c.restore();
+  const leg = (L, col, sd) => {
+    const hip = L[1] === "F" ? [HB.shx - (L[0] === "F" ? 14 : 0), HB.jy] : [HB.hpx + (L[0] === "F" ? 14 : 0), HB.jy];
+    const J = horseXf(P, hip[0], hip[1]), hv = P.hooves[L];
+    const front = L[1] === "F", k = ik2(J[0], J[1], hv[0], hv[1] - 10, HB.l1, HB.l2, front ? -1 : 1);
+    claySaus(c, J[0], J[1] - 10, front ? 20 : 24, k.jx, k.jy, 13, col, sd, { prints: 0 });
+    claySaus(c, k.jx, k.jy, 12, k.ex, k.ey, 11, col, sd + 1, { prints: 0 });
+    clayBlob(c, k.ex + 3, k.ey + 2, 16, 10, PAL.hoof, 0, sd + 2, { prints: 0, sy: 3 });
+  };
+  const far = "#b45f24";
+  leg("FH", far, 701); leg("FF", far, 705);
+  // хвост
+  const sw = Math.sin(t * 3.1) * 0.25 + (H.tailK || 0);
+  const t0 = horseXf(P, -128, -196), t1 = [t0[0] - 34 * Math.cos(sw) - 6, t0[1] + 34 + 10 * Math.sin(sw)], t2 = [t1[0] - 16 + 12 * Math.sin(sw * 1.5), t1[1] + 56];
+  claySaus(c, t0[0], t0[1], 15, t1[0], t1[1], 17, PAL.mane, 711, { prints: 0 }); claySaus(c, t1[0], t1[1], 17, t2[0], t2[1], 10, PAL.mane, 712, { prints: 0 });
+  // туловище
+  c.save(); const B = horseXf(P, 0, -180); c.translate(B[0], B[1]); c.rotate(P.rot); c.translate(0, 180);
+  clay(c, blob(0, -182, 128, 62, 0, 721, 0.04), PAL.horse, { seed: 721, prints: 2 });
+  clayBlob(c, 88, -186, 56, 54, PAL.horse, 0, 722, { prints: 0, shadow: false });
+  clayBlob(c, -86, -188, 60, 56, PAL.horse, 0, 723, { prints: 0, shadow: false });
+  // шея и голова
+  const hd = H.head || 0, nod = Math.sin(t * 2) * 0.03;
+  c.save(); c.translate(100, -205); c.rotate(hd * 0.4 + nod); c.translate(-100, 205);
+  claySaus(c, 92, -200, 40, 150, -288, 28, PAL.horse, 724, { prints: 0 });
+  for (let i = 0; i < 6; i++) { const u = i / 5; clayBlob(c, lerp(84, 142, u) - 8, lerp(-222, -318, u), 15 - u * 3, 13, PAL.mane, 0.6, 730 + i, { prints: 0, shadow: false }); }
+  clay(c, blob(182, -298, 54, 31, 0.5, 725, 0.04), PAL.horse, { seed: 725, prints: 0 });
+  clayBlob(c, 214, -276, 27, 22, PAL.muzzle, 0.3, 726, { prints: 0, shadow: false });
+  c.fillStyle = "#5a2a18"; circle(c, 226, -272, 4); c.fill();
+  claySaus(c, 156, -318, 9, 166, -352, 5, PAL.horse, 727, { prints: 0 });
+  clayBlob(c, 166, -330, 14, 9, PAL.mane, -0.6, 728, { prints: 0, shadow: false });
+  bead(c, 178, -309, 6, H.blink ?? 1);
+  c.restore();
+  // попона и седло
+  clay(c, lumpPoly([[-52, -232], [44, -232], [50, -170], [-58, -170]], 741, 1.5), PAL.cloth, { seed: 741, prints: 0 });
+  claySaus(c, -56, -172, 5, 48, -172, 5, PAL.gold, 742, { prints: 0, shadow: false });
+  clayBlob(c, -4, -236, 46, 15, PAL.saddle, 0, 743, { prints: 0 });
+  c.restore();
+  if (rider) rider(c, horseXf(P, -4, -244));
+  leg("NH", PAL.horse, 751); leg("NF", PAL.horse, 755);
+  CLAYM = 1;
+  c.restore();
+}
+
+// ======================= ВАНЯ =======================
+// V: { look, legs: 'stand'|'ride'|'fly', arms: [[lx,ly],[rx,ry]] (цели кистей от таза), mouth, blink, sx, sy, rot, wave }
+function drawVanya(c, x, y, V) {
+  c.save(); c.translate(x, y); if (V.rot) c.rotate(V.rot); c.scale(V.sx ?? 1, V.sy ?? 1);
+  const look = V.look ?? 0.6, legs = V.legs ?? "stand";
+  // ноги
+  const legDraw = (hx, kx, ky, fx, fy, seed) => {
+    claySaus(c, hx, 0, 17, kx, ky, 15, PAL.pants, seed, { prints: 0 });
+    claySaus(c, kx, ky, 15, fx, fy - 18, 14, PAL.pants, seed + 1, { prints: 0 });
+    claySaus(c, fx, fy - 26, 16, fx + 7 * Math.sign(look || 1), fy - 10, 17, PAL.felt, seed + 2, { prints: 0 });
+  };
+  if (legs === "stand") { const st = V.step || 0; legDraw(-18, -21, 44, -22 + st, 100, 801); legDraw(18, 21, 44, 22 - st, 100, 804); }
+  else if (legs === "fly") { legDraw(-18, -46, 30, -60, 74, 801); legDraw(18, 46, 30, 62, 70, 804); }
+  // руки: дальняя за телом
+  const SH = [[-40, -92], [40, -92]], arms = V.arms || [[-46, -8], [46, -8]];
+  const armDraw = (i) => {
+    const [ax, ay] = SH[i], side = i === 0 ? -1 : 1, [tx, ty] = arms[i], k = ikArm(ax, ay, tx, ty, 36, 34, side);
+    claySaus(c, ax, ay, 15, k.jx, k.jy, 13, PAL.shirt, 811 + i * 3, { prints: 0 });
+    claySaus(c, k.jx, k.jy, 13, k.ex, k.ey, 11, PAL.shirt, 812 + i * 3, { prints: 0 });
+    clayBlob(c, k.ex, k.ey, 14, 13, PAL.mitt, 0, 813 + i * 3, { prints: 0 });
+  };
+  const farArm = look >= 0 ? 0 : 1;
+  armDraw(farArm);
+  // туловище
+  clay(c, blob(0, -50, 47, 60, 0, 821, 0.04), PAL.shirt, { seed: 821, prints: 1 });
+  claySaus(c, 10 + look * 8, -104, 5, 12 + look * 8, -70, 5, PAL.gold, 822, { prints: 0, shadow: false });
+  claySaus(c, -44, -10, 9, 44, -10, 9, PAL.gold, 823, { prints: 0 });
+  clayBlob(c, 26, 6, 7, 12, PAL.gold, 0.3, 824, { prints: 0 });
+  if (legs === "ride") { // ближняя нога вдоль бока коня
+    claySaus(c, 16 * Math.sign(look || 1), 0, 18, 46, 18, 15, PAL.pants, 831, { prints: 0 });
+    claySaus(c, 46, 18, 15, 42, 58, 14, PAL.pants, 832, { prints: 0 });
+    claySaus(c, 40, 52, 16, 50, 70, 17, PAL.felt, 833, { prints: 0 });
+  }
+  armDraw(1 - farArm);
+  // голова
+  const fx = look * 14, hb = V.headBob || 0;
+  c.save(); c.translate(0, hb); if (V.headRot) { c.translate(0, -110); c.rotate(V.headRot); c.translate(0, 110); }
+  if (Math.abs(look) < 0.85) clayBlob(c, -46 - look * 6, -146, 10, 13, PAL.skin, 0, 841, { prints: 0 });
+  clayBlob(c, 46 - look * 6, -146, 10, 13, PAL.skin, 0, 842, { prints: 0 });
+  clay(c, blob(0, -150, 47, 46, 0, 843, 0.03), PAL.skin, { seed: 843, prints: 0, gloss: 0.35 });
+  clayBlob(c, fx * 0.5, -184, 40, 14, PAL.hair, 0, 844, { prints: 0, shadow: false });
+  // шапка
+  if (!V.noHat) {
+    clayBlob(c, 0, -198, 49, 32, PAL.hat, 0, 845, { prints: 1 });
+    claySaus(c, -48, -182, 12, 48, -182, 12, PAL.hat2, 846, { prints: 0 });
+    clayBlob(c, 4, -236, 16, 15, "#ffffff", 0, 847, { prints: 0 });
+    if (V.snowHat > 0) { c.save(); c.globalAlpha = clamp(V.snowHat, 0, 1); clayBlob(c, 0, -236 + 30 * (1 - clamp(V.snowHat, 0, 1)), 64, 34, "#ffffff", 0, 848, { prints: 0 }); c.restore(); }
+  }
+  // лицо
+  const bl = V.blink ?? 1, ey = -150;
+  c.fillStyle = PAL.cheek; circle(c, fx - 27, -130, 10); c.fill(); circle(c, fx + 27, -130, 10); c.fill();
+  if (V.dizzy) { c.save(); c.strokeStyle = "#17131f"; c.lineWidth = 3; for (const s of [-1, 1]) { c.beginPath(); for (let a = 0; a < 10; a += 0.3) c.lineTo(fx + s * 16 + Math.cos(a + V.dizzy) * a * 0.8, ey + Math.sin(a + V.dizzy) * a * 0.8); c.stroke(); } c.restore(); }
+  else { bead(c, fx - 16 + (V.eyeX || 0), ey, 6.5, bl); bead(c, fx + 16 + (V.eyeX || 0), ey, 6.5, bl); }
+  clayBlob(c, fx + look * 5, -136, 9, 8, "#e7a982", 0, 849, { prints: 0, shadow: false });
+  c.strokeStyle = "#7a2e22"; c.lineWidth = 3.5; c.lineCap = "round";
+  const m = V.mouth ?? 1;
+  if (m === "o") { c.fillStyle = "#7a2e22"; c.beginPath(); c.ellipse(fx, -114, 7, 9, 0, 0, TAU); c.fill(); }
+  else { c.beginPath(); c.moveTo(fx - 12, -117); c.quadraticCurveTo(fx, -117 + 10 * m, fx + 12, -117); c.stroke(); }
+  c.restore();
+  c.restore();
+}
+// Ваня-лепёшка в сугробе: голова вправо. F: { flat 0..1, kick, headUp 0..1, t, stars }
+function drawVanyaFlat(c, x, y, F) {
+  const f = F.flat, sy = lerp(1, 0.42, f), sx = lerp(1, 1.35, f);
+  c.save(); c.translate(x, y);
+  // ноги: бёдра по снегу, голени вверх и дрыгают
+  for (const [i, ph] of [[0, 0], [1, 1.7]]) {
+    const kick = F.kick * Math.sin(F.t * 9 + ph * 2);
+    const hx = -70 * sx, hy = -14 * sy, kx = -128 * sx, ky = -10, ang = -1.25 + 0.45 * kick;
+    const fx = kx + Math.cos(ang + Math.PI) * -50, fy = ky + Math.sin(ang) * 50;
+    claySaus(c, hx, hy - i * 4, 16 * sy + 4, kx - i * 10, ky - i * 3, 14, PAL.pants, 861 + i * 4, { prints: 0 });
+    claySaus(c, kx - i * 10, ky - i * 3, 14, fx - i * 10, fy, 13, PAL.pants, 862 + i * 4, { prints: 0 });
+    claySaus(c, fx - i * 10, fy + 4, 15, fx - i * 10 - 6, fy - 16, 16, PAL.felt, 863 + i * 4, { prints: 0 });
+  }
+  // руки в стороны по снегу
+  claySaus(c, 30 * sx, -18 * sy, 13, 80 * sx, 6, 11, PAL.shirt, 871, { prints: 0 }); clayBlob(c, 92 * sx, 8, 14, 10, PAL.mitt, 0, 872, { prints: 0 });
+  // туловище-лепёшка
+  clay(c, blob(0, -30 * sy, 78 * sx, 40 * sy, 0, 873, 0.05), PAL.shirt, { seed: 873, prints: 2 });
+  claySaus(c, -54 * sx, -26 * sy, 8, -40 * sx, -50 * sy, 8, PAL.gold, 874, { prints: 0, shadow: false });
+  // голова: лицом в снег; поднимает — видно лицо в профиль
+  const up = F.headUp || 0, hx = 112 * sx - 6 * up, hy = -34 * sy - 16 * up;
+  claySaus(c, 62 * sx, -28 * sy, 22 * sy + 6, hx - 18, hy + 8, 20, PAL.shirt, 879, { prints: 0, shadow: false }); // плечи-ворот: голова не отрывается от тела
+  c.save(); c.translate(hx, hy); c.rotate(-0.25 * up);
+  clay(c, blob(0, 0, 46 * lerp(sx, 1, up), 44 * lerp(sy, 1, up) * 0.9, 0, 875, 0.03), PAL.skin, { seed: 875, prints: 0 });
+  clayBlob(c, -14, -30 * lerp(sy, 1, up), 48, 26 * lerp(sy, 1, up), PAL.hat, -0.3, 876, { prints: 0 });
+  clayBlob(c, -46, -40 * lerp(sy, 1, up), 15, 14, "#ffffff", 0, 877, { prints: 0 });
+  if (up > 0.15) {
+    c.globalAlpha = clamp((up - 0.15) * 3, 0, 1);
+    bead(c, 24, -4, 6, F.blink ?? 1); bead(c, 38, -2, 5, F.blink ?? 1);
+    clayBlob(c, 46, 8, 8, 7, "#e7a982", 0, 878, { prints: 0, shadow: false });
+    c.fillStyle = PAL.cheek; circle(c, 26, 14, 9); c.fill();
+    c.strokeStyle = "#7a2e22"; c.lineWidth = 3; c.beginPath(); c.moveTo(28, 26); c.quadraticCurveTo(36, 21, 44, 25); c.stroke();
+  }
+  c.restore();
+  // звёздочки вокруг головы
+  if (F.stars > 0) {
+    for (let i = 0; i < 4; i++) {
+      const a = F.t * 3.4 + i * TAU / 4, sx2 = hx + Math.cos(a) * 70, sy2 = hy - 58 + Math.sin(a) * 18;
+      c.save(); c.globalAlpha = F.stars; c.translate(sx2, sy2); c.rotate(a);
+      const pts = []; for (let k = 0; k < 10; k++) { const r = k % 2 ? 7 : 17; pts.push([Math.cos(k * TAU / 10 - Math.PI / 2) * r, Math.sin(k * TAU / 10 - Math.PI / 2) * r]); }
+      clay(c, shapeFromPts(pts), PAL.gold, { seed: 880 + i, prints: 0, shadow: false });
+      c.restore();
+    }
+  }
+  c.restore();
+}
+
+// ======================= ДЕВУШКИ =======================
+// G: { sar, scarf, dots, braidSide, look, arms: [[lx,ly],[rx,ry]] от плеч-центра, feet: [[x,y],[x,y]], bob, lean, mouth, blink, finger: угол }
+function drawGirl(c, x, y, G) {
+  c.save(); c.translate(x, y + (G.bob || 0)); if (G.lean) c.rotate(G.lean);
+  const look = G.look ?? 0, t = G.t || 0;
+  // валенки под подолом
+  const feet = G.feet || [[-22, 0], [22, 0]];
+  for (const [i, [fx, fy]] of feet.entries()) clayBlob(c, fx, fy - 12 - (G.bob || 0), 20, 13, PAL.boot, 0, 901 + i, { prints: 0 });
+  // коса за спиной/через плечо
+  const bs = G.braidSide || -1, bsw = G.braidSwing || 0;
+  const braid = () => { let px = bs * 30, py = -282; for (let i = 0; i < 5; i++) { const nx = px + bs * (4 + i * 1.5) + Math.sin(bsw + i * 0.5) * i * 4, ny = py + 26; clayBlob(c, nx, ny, 13 - i, 14, G.hair || "#c58a3a", 0.2, 910 + i, { prints: 0, shadow: false }); px = nx; py = ny; } clayBlob(c, px + bs * 2, py + 16, 14, 9, G.ribbon || PAL.cloth, 0, 916, { prints: 0 }); };
+  // руки
+  const SH = [[-34, -236], [34, -236]], arms = G.arms || [[-50, -150], [50, -150]];
+  const hands = [];
+  const armDraw = (i) => {
+    const [ax, ay] = SH[i], side = i === 0 ? -1 : 1, [tx, ty] = arms[i], k = ikArm(ax, ay, tx, ty, 48, 44, side);
+    claySaus(c, ax, ay, 17, k.jx, k.jy, 14, PAL.blouse, 921 + i * 3, { prints: 0 });
+    claySaus(c, k.jx, k.jy, 13, k.ex, k.ey, 11, PAL.blouse, 922 + i * 3, { prints: 0 });
+    clayBlob(c, k.ex, k.ey, 12, 12, PAL.skin, 0, 923 + i * 3, { prints: 0 });
+    hands[i] = [k.ex, k.ey];
+    if (G.finger !== undefined && i === 1) { // указательный палец вверх, качается
+      c.save(); c.translate(k.ex, k.ey - 6); c.rotate(G.finger); claySaus(c, 0, 0, 5, 0, -26, 4.5, PAL.skin, 930, { prints: 0 }); c.restore();
+    }
+  };
+  // сарафан
+  clay(c, lumpPoly([[-34, -246], [34, -246], [74, -24], [56, -10], [-56, -10], [-74, -24]], 941 + (G.seed || 0), 1.5), G.sar, { seed: 941, prints: 2, rim: 16 });
+  claySaus(c, -70, -30, 7, 70, -30, 7, G.trim || PAL.cloth, 942, { prints: 0, shadow: false });
+  for (let i = -2; i <= 2; i++) { c.fillStyle = "rgba(255,255,255,0.7)"; circle(c, i * 26, -62, 5); c.fill(); }
+  clayBlob(c, 0, -246, 34, 14, PAL.blouse, 0, 943, { prints: 0, shadow: false });
+  if (bs * look <= 0) braid();
+  armDraw(0); armDraw(1);
+  // голова в платке
+  const fx = look * 12;
+  claySaus(c, -42, -310, 15, -46, -258, 17, G.scarf, 951, { prints: 0 });
+  claySaus(c, 42, -310, 15, 46, -258, 17, G.scarf, 952, { prints: 0 });
+  clay(c, blob(0, -296, 41, 42, 0, 953, 0.03), PAL.skin, { seed: 953, prints: 0, gloss: 0.35 });
+  clay(c, blob(0, -326, 48, 30, 0, 954, 0.04), G.scarf, { seed: 954, prints: 1 });
+  c.fillStyle = "rgba(255,255,255,0.8)"; for (const [dx, dy] of [[-22, -336], [6, -344], [28, -330], [-8, -318]]) { circle(c, dx, dy, 4); c.fill(); }
+  clayBlob(c, 0, -249, 13, 8, G.scarf, 0, 955, { prints: 0, shadow: false }); // узелок под подбородком
+  if (bs * look > 0) braid();
+  // лицо
+  const bl = G.blink ?? 1;
+  c.fillStyle = PAL.cheek; circle(c, fx - 22, -284, 9); c.fill(); circle(c, fx + 22, -284, 9); c.fill();
+  bead(c, fx - 13 + (G.eyeX || 0), -302, 6, bl); bead(c, fx + 13 + (G.eyeX || 0), -302, 6, bl);
+  if (G.brow) { c.strokeStyle = "#5a3a22"; c.lineWidth = 3; c.lineCap = "round"; for (const s of [-1, 1]) { c.beginPath(); c.moveTo(fx + s * 7, -316 + G.brow * 1.2); c.lineTo(fx + s * 19, -318 - G.brow * 1.2); c.stroke(); } }
+  clayBlob(c, fx + look * 4, -290, 6, 6, "#e7a982", 0, 956, { prints: 0, shadow: false });
+  const m = G.mouth ?? 1; c.strokeStyle = "#8a2e2a"; c.lineWidth = 3; c.lineCap = "round";
+  if (m === "o") { c.fillStyle = "#8a2e2a"; c.beginPath(); c.ellipse(fx, -270, 6, 8, 0, 0, TAU); c.fill(); }
+  else { c.beginPath(); c.moveTo(fx - 9, -272); c.quadraticCurveTo(fx, -272 + 8 * m, fx + 9, -272); c.stroke(); }
+  c.restore();
+  return hands;
+}
+
+// ======================= ЗВЕРИ И ПТИЦЫ =======================
+function drawHare(c, x, y, dir, hop, t) {
+  // hop 0..1 — фаза прыжка; в воздухе лапы вытянуты
+  const air = Math.sin(Math.PI * hop), hy = -70 * air;
+  c.save(); floorShadow(c, x, y + 2, 50 * (1 - 0.4 * air), 0.25); c.translate(x, y + hy); c.scale(dir, 1); CLAYM = dir;
+  claySaus(c, -6, -10, 9, -34 - 20 * air, -4 + 6 * air, 8, PAL.hare, 961, { prints: 0 });
+  clay(c, blob(0, -40, 36, 26, -0.15 * air, 962, 0.05), PAL.hare, { seed: 962, prints: 1 });
+  clayBlob(c, -34, -48, 11, 11, "#ffffff", 0, 963, { prints: 0 });
+  claySaus(c, 24, -30, 7, 36 + 14 * air, -10 + 4 * air, 6, PAL.hare, 964, { prints: 0 });
+  clay(c, blob(34, -64, 22, 19, 0, 965, 0.04), PAL.hare, { seed: 965, prints: 0 });
+  const fl = 0.3 * air + 0.08 * Math.sin(t * 6);
+  claySaus(c, 28, -78, 7, 18 - 30 * fl, -124 + 10 * fl, 6, PAL.hare, 966, { prints: 0 });
+  claySaus(c, 38, -78, 7, 40 - 26 * fl, -122 + 12 * fl, 6, PAL.hare, 967, { prints: 0 });
+  bead(c, 42, -68, 4.5, 1); c.fillStyle = "#e88a9a"; circle(c, 55, -60, 4); c.fill();
+  CLAYM = 1; c.restore();
+}
+function drawCrow(c, x, y, dir, t, huff) {
+  c.save(); c.translate(x, y); c.scale(dir, 1); CLAYM = dir;
+  claySaus(c, -18, -30, 10, -50, -18 + 4 * Math.sin(t * 3), 6, PAL.crow, 971, { prints: 0 });
+  clay(c, blob(0, -34, 30, 22, -0.2, 972, 0.05), PAL.crow, { seed: 972, prints: 0, gloss: 0.5 });
+  c.save(); c.translate(20, -56); c.rotate(-0.35 * huff);
+  clay(c, blob(0, 0, 16, 15, 0, 973, 0.04), PAL.crow, { seed: 973, prints: 0, gloss: 0.5 });
+  claySaus(c, 12, 0, 6, 30, 2, 2, "#6a6a70", 974, { prints: 0, shadow: false });
+  bead(c, 6, -4, 3.5, huff > 0.5 ? 0 : 1);
+  c.restore();
+  c.strokeStyle = "#5a4a3a"; c.lineWidth = 3; c.beginPath(); c.moveTo(-4, -14); c.lineTo(-6, 0); c.moveTo(6, -14); c.lineTo(8, 0); c.stroke();
+  CLAYM = 1; c.restore();
+}
+function drawFinch(c, x, y, dir, flap, t, chirp = 0) {
+  c.save(); c.translate(x, y); c.scale(dir, 1); CLAYM = dir;
+  claySaus(c, -14, -16, 7, -34, -10, 4, "#2a2a33", 981, { prints: 0, shadow: false });
+  clay(c, blob(0, -20, 22, 20, 0, 982, 0.04), PAL.finchB, { seed: 982, prints: 0 });
+  c.save(); c.clip(blob(0, -20, 22, 20, 0, 982, 0.04).p); clayBlob(c, 10, -8, 22, 18, PAL.finch, 0, 983, { prints: 0, shadow: false }); c.restore();
+  clayBlob(c, 10, -36, 13, 12, "#2a2a33", 0, 984, { prints: 0, shadow: false });
+  clayBlob(c, 22, -32, 5, 4, "#3a3a40", 0, 985, { prints: 0, shadow: false });
+  bead(c, 13, -38, 2.6, 1);
+  const wa = flap > 0 ? Math.sin(t * 40) * 0.9 : 0.15;
+  c.save(); c.translate(-4, -24); c.rotate(-0.4 - wa); clayBlob(c, -14, 0, 18, 8, "#4a5060", 0, 986, { prints: 0, shadow: false }); c.restore();
+  if (chirp > 0) { c.save(); c.globalAlpha = chirp; c.strokeStyle = "#5a5a6a"; c.lineWidth = 3; c.lineCap = "round"; for (let i = 0; i < 3; i++) { c.beginPath(); c.arc(30, -36, 10 + i * 8, -0.6, 0.6); c.stroke(); } c.restore(); }
+  CLAYM = 1; c.restore();
+}
+
+// ---------- режиссура ----------
+const cv = document.getElementById("scene"), ctx = cv.getContext("2d");
+const L = (n) => E["L" + n], EN = (n) => E["E" + n];
+const NL = Object.keys(E).filter((k) => /^L\d+$/.test(k)).length;
+
+// ключевые моменты
+const T_SLIP = E.w_dobra - 0.08;                       // копыто на скрытом льду
+const T_FLY0 = T_SLIP + 0.14, T_LAND = Math.max(EN(6) - 0.05, T_FLY0 + 0.8);
+const T_HSIT = T_SLIP + 0.55;                           // конь садится на лёд
+const T_RISE = L(10) - 0.2, T_HWALK0 = T_RISE + 0.6, T_HWALK1 = EN(11) - 0.3;
+const T_UP = E.w_kon12 - 0.15, T_JUMP = E.w_kon13 - 0.25, T_JUMPE = T_JUMP + 0.75;
+const T_RUN0 = L(10) - 0.15, T_RUN1 = EN(11) - 0.25;
+const T_GO = EN(NL) + 0.3, T_BUMP = EN(NL) + 2.3;
+const HX_START = 520, HX_TROT = 1150, HX_SLIP = 1720, HX_ICE = 1960, HX_STAND = 2160, HX_BUMP = 3125;
+const VX_LIE = 2470, VX_UP = 2560;
+const G1 = { x0: 3530, x1: 2770, sar: "#f2b632", scarf: "#d84a3a", trim: "#d84a3a", hair: "#c58a3a", ribbon: "#3a9a5a", braidSide: -1, seed: 0 };
+const G2 = { x0: 3630, x1: 2895, sar: "#3d9a5b", scarf: "#4a78c8", trim: "#f2c232", hair: "#8a5a2a", ribbon: "#d84a3a", braidSide: 1, seed: 3 };
+const GY = (x) => { const h = hillY(x); return h + 19 * (1 - (HILL.y - h) / (HILL.y - HILL.top)); };
+
+function blinkAt(t, off) { const p = (t + off) % 3.3; return p < 0.16 ? Math.max(0.05, Math.abs(p - 0.08) / 0.08) : 1; }
+
+// ---------- конь: положение и аллюр ----------
+function horseAt(t) {
+  const H = { t, gait: "stand", s: 0, k: 1, head: 0, blink: blinkAt(t, 0.7) };
+  let x = HX_START - 600, y = 905, dir = 1;
+  if (t < L(4) - 0.6) return { x, y, dir, H, vis: false };
+  const tA = L(4) - 0.6, tB = L(5), tC = T_SLIP;
+  if (t < tB) { const u = prog(t, tA, tB); x = lerp(HX_START - 300, HX_TROT, u); H.gait = "trot"; H.s = x; }
+  else if (t < tC) { const u = prog(t, tB, tC); x = lerp(HX_TROT, HX_SLIP, u); H.gait = "gallop"; H.s = x; H.head = -0.25; }
+  else if (t < T_HSIT) { const u = easeOut(prog(t, tC, tC + 1.0)); x = lerp(HX_SLIP, HX_ICE, u); H.gait = "slip"; H.k = sstep(prog(t, tC, tC + 0.25)); H.head = 0.5; }
+  else if (t < T_RISE) {
+    const u = easeOut(prog(t, tC, tC + 1.0)); x = lerp(HX_SLIP, HX_ICE, u);
+    H.gait = "sit"; H.k = sstep(prog(t, T_HSIT, T_HSIT + 0.45)); H.head = 0.35;
+    // растерянно ёрзает на льду: съезжает туда-сюда, мотает головой
+    const sp = win(t, L(7) + 0.2, EN(8), 0.3, 0.3); x += 14 * Math.sin((t - L(7)) * 5) * sp; H.head = 0.35 + 0.25 * Math.sin((t - L(7)) * 7) * sp;
+  } else if (t < T_HWALK0) { x = HX_ICE; H.gait = "rise"; H.k = sstep(prog(t, T_RISE, T_HWALK0 - 0.05)); }
+  else if (t < T_HWALK1) { const u = sstep(prog(t, T_HWALK0, T_HWALK1)); x = lerp(HX_ICE, HX_STAND, u); H.gait = "walk"; H.s = x - HX_ICE; }
+  else if (t < T_GO) { x = HX_STAND; H.gait = "stand"; H.head = 0.1 * bump(t, T_JUMPE - 0.1, 0.6); }
+  else if (t < T_BUMP) { const u = prog(t, T_GO, T_BUMP); x = lerp(HX_STAND, HX_BUMP, u * u * 0.25 + u * 0.75); H.gait = "trot"; H.s = x - HX_STAND; y = lerp(905, 940, sstep(u * 3)); }
+  else { x = HX_BUMP - 26 * easeOut(prog(t, T_BUMP, T_BUMP + 0.35)); y = 940; H.gait = "stand"; H.head = 0.4 * bump(t, T_BUMP, 0.8); }
+  if (t >= T_GO) y = lerp(905, 940, sstep(prog(t, T_GO, T_GO + 0.6)));
+  return { x, y, dir, H, vis: true };
+}
+
+// ---------- Ваня ----------
+function vanyaState(t) {
+  if (t < T_FLY0) return { mode: "ride" };
+  if (t < T_LAND) return { mode: "fly", u: prog(t, T_FLY0, T_LAND) };
+  if (t < T_UP) return { mode: "flat" };
+  if (t < T_JUMP) return { mode: "stand" };
+  if (t < T_JUMPE) return { mode: "jump", u: prog(t, T_JUMP, T_JUMPE) };
+  return { mode: "ride" };
+}
+function riderPose(t) {
+  const V = { legs: "ride", look: 0.7, arms: [[58, -36], [64, -30]], sx: 0.82, sy: 0.82, mouth: 1, blink: blinkAt(t, 0.2) };
+  if (t < T_FLY0) {
+    // глазеет на снегиря, отвернувшись назад
+    const back = sstep(prog(t, E.w_posp - 0.45, E.w_posp - 0.1)) * (1 - sstep(prog(t, T_SLIP - 0.05, T_SLIP + 0.1)));
+    V.look = lerp(0.7, -0.95, back); V.eyeX = -3 * back; V.mouth = back > 0.5 ? 1.4 : 1;
+    if (t < L(5)) { V.arms[1] = [62 + 10 * Math.sin(t * 9) * win(t, E.w_van4 - 0.1, L(5), 0.15, 0.2), -36 - 70 * win(t, E.w_van4 - 0.1, L(5), 0.15, 0.2)]; }
+    V.headBob = -3 * Math.abs(Math.sin(t * 11));
+    if (t > T_SLIP - 0.05) { V.mouth = "o"; V.look = 0.6; }
+    return V;
+  }
+  // после прыжка — сидит; посадка с пружиной
+  const land = spr(springBounce, t, T_JUMPE);
+  V.sy = 0.82 * (1 - 0.18 * (1 - land)); V.sx = 0.82 * (1 + 0.12 * (1 - land));
+  V.look = 0.75; V.mouth = 1.2;
+  if (t >= L(16) - 0.1 && t < T_GO) { V.look = 0.8; V.mouth = 0.3; V.headBob = 6 * bump(t, E.w_ivan - 0.05, 0.5) + 6 * bump(t, E.w_zev, 0.5); }
+  // «не зевай по сторонам» — глаза бегают
+  if (t >= E.w_stor - 0.1 && t < T_GO) V.eyeX = 5 * Math.sign(Math.sin((t - E.w_stor) * 9)) * win(t, E.w_stor - 0.1, T_GO, 0.05, 0.2);
+  if (t >= T_GO) {
+    const back = sstep(prog(t, T_GO + 0.6, T_GO + 0.9)) * (1 - sstep(prog(t, T_BUMP - 0.05, T_BUMP + 0.1)));
+    V.look = lerp(0.75, -0.95, back); V.mouth = 1.4;
+    if (back > 0.01) V.arms[0] = [-60 - 14 * Math.sin(t * 12), -150 - 10 * Math.cos(t * 12)];
+    if (t >= T_BUMP) { const k = spr(springBounce, t, T_BUMP); V.sy = 0.82 * (0.78 + 0.22 * k); V.sx = 0.82 * (1.12 - 0.12 * k); V.mouth = "o"; V.dizzy = t * 6; V.look = 0.7; }
+    V.snowHat = prog(t, T_BUMP + 0.4, T_BUMP + 0.5);
+  }
+  return V;
+}
+
+// ---------- девушки ----------
+function girlState(t, G, idx) {
+  const S = { ...G, t, look: idx ? -0.4 : 0.4, mouth: 1, blink: blinkAt(t, idx * 1.3), arms: [[-50, -150], [50, -150]], braidSwing: Math.sin(t * 1.8 + idx) * 0.3 };
+  let x = G.x0;
+  // болтают на горке
+  if (t < L(9)) { S.bob = -2 * Math.abs(Math.sin(t * 3 + idx)); }
+  // увидали — ахают, ладошки к щекам
+  const see = sstep(prog(t, E.w_dve - 0.05, E.w_dve + 0.25));
+  if (t >= E.w_dve - 0.05 && t < T_RUN0) {
+    S.look = -0.9; S.mouth = "o";
+    const g = spr(springPop, t, E.w_uvid - 0.15 + idx * 0.08);
+    S.arms = [[lerp(-50, -30, g), lerp(-150, -278, g)], [lerp(50, 30, g), lerp(-150, -278, g)]];
+    S.bob = -24 * bump(t, E.w_uvid - 0.1 + idx * 0.08, 0.45) * see;
+  }
+  // бегут к Ване
+  let run = 0;
+  if (t >= T_RUN0) {
+    const u = prog(t, T_RUN0, T_RUN1), ue = u < 1 ? sstep(u) * 0.3 + u * 0.7 : 1;
+    x = lerp(G.x0, G.x1, ue); run = u < 1 ? 1 : 0;
+    const s = Math.abs(x - G.x0);
+    if (run) {
+      S.look = -1; S.mouth = 0.8; S.lean = -0.08;
+      const ph = s / 110 * TAU + idx;
+      S.bob = -5 * Math.abs(Math.sin(ph / 2 * 2));
+      S.arms = [[-52 + 18 * Math.sin(ph), -168 - 34 * Math.sin(ph)], [52 - 18 * Math.sin(ph), -168 + 34 * Math.sin(ph)]];
+      S.braidSwing = s * 0.03;
+      const feet = [];
+      for (const [i, sx] of [[0, -18], [1, 18]]) {
+        const f = stepFoot(s, 110, i * 0.5 + idx * 0.25, 0.45, 26), fxw = x - (f.x - s);
+        feet.push([sx - (f.x - s), Math.min(2, GY(fxw + sx) - GY(x) + f.y)]);
+      }
+      S.feet = feet;
+    }
+  }
+  // тормозят с волной снега
+  if (t >= T_RUN1 && t < T_UP - 0.3) { S.look = -0.85; S.lean = -0.12 * bump(t, T_RUN1, 0.5); S.arms = [[-70, -120], [50, -150]]; }
+  // тянут Ваню за руки / подсаживают
+  if (t >= EN(11) - 0.1 && t < T_JUMPE + 0.2) {
+    S.look = -0.9; S.mouth = 1.2;
+    const reach = sstep(prog(t, EN(11) - 0.1, EN(11) + 0.3)), pull = sstep(prog(t, T_UP - 0.1, T_UP + 0.3));
+    const push = win(t, T_JUMP - 0.2, T_JUMPE + 0.2, 0.2, 0.25);
+    const dl = idx ? 0.6 : 1;
+    S.arms = [[lerp(-50, -96 * dl, reach) + 30 * pull, lerp(-150, -96, reach) - 60 * pull - 80 * push], [lerp(50, -40 * dl, reach) + 20 * pull, lerp(-150, -100, reach) - 50 * pull - 90 * push]];
+    S.lean = -0.22 * reach * (1 - pull) - 0.12 * push;
+  }
+  // показывают путь-дорогу
+  if (t >= E.w_put14 - 0.2 && t < E.w_nak - 0.1) {
+    const pt = idx === 1 ? spr(springPop, t, E.w_put14 - 0.15) : spr(springPop, t, E.w_put15 - 0.15) * (t >= E.w_put15 - 0.15 ? 1 : 0);
+    S.look = lerp(-0.6, 0.9, Math.min(1, pt)); S.mouth = 1.3;
+    if (pt > 0) S.arms = [[-50, -150], [lerp(50, 150, pt), lerp(-150, -268, pt)]];
+  }
+  // наказывают: руки в боки, палец
+  if (t >= E.w_nak - 0.1 && t < T_BUMP + 0.25) {
+    const ak = sstep(prog(t, E.w_nak - 0.1, E.w_nak + 0.2));
+    S.look = -0.75; S.mouth = 0.2; S.brow = ak;
+    S.arms = [[lerp(-50, -46, ak), lerp(-150, -138, ak)], [lerp(50, 46, ak), lerp(-150, -138, ak)]];
+    const wag = (idx === 0 && t >= E.w_kak - 0.1) || t >= E.w_zev - 0.15;
+    if (wag && t < T_GO + 0.4) { S.arms[1] = [62, -310]; S.finger = 0.35 * Math.sin((t - E.w_kak) * 9); S.mouth = "o"; }
+    if (t >= T_GO + 0.4) { S.brow = 0; S.mouth = 1.2; S.look = 0.6; S.arms = [[-50, -150], [lerp(50, 120, sstep(prog(t, T_GO + 0.4, T_GO + 0.8))), lerp(-150, -300, sstep(prog(t, T_GO + 0.4, T_GO + 0.8))) + 14 * Math.sin(t * 12)]]; }
+  }
+  // финал: хватаются за голову
+  if (t >= T_BUMP + 0.25) {
+    const k = spr(springPop, t, T_BUMP + 0.25 + idx * 0.1);
+    S.look = 0.7; S.mouth = "o"; S.arms = [[lerp(-50, -44, k), lerp(-150, -334, k)], [lerp(50, 44, k), lerp(-150, -334, k)]];
+    S.bob = -10 * bump(t, T_BUMP + 0.25 + idx * 0.1, 0.4);
+  }
+  const y = GY(x);
+  return { x, y, S, run };
+}
+
+// ---------- камера: цели планов → плавное следование (критическое демпфирование) + предел скорости ----------
+function camTarget(t) {
+  const hz = horseAt(t);
+  if (t < L(1) - 0.5) return [2300, 470, 0.6];
+  if (t < L(2)) return [POND.x - 80, 770, 1.45];
+  if (t < L(3)) return [POND.x, 720, 1.15];
+  if (t < L(4) - 0.5) return [1800, 640, 0.82];
+  if (t < L(5)) return [hz.x + 300, 650, 1.0];
+  if (t < T_SLIP) return [hz.x + 240, 650, 0.95];
+  if (t < L(7) - 0.15) { const vp = flyPos(t); return [lerp(hz.x + 240, vp[0] + 40, sstep(prog(t, T_SLIP, T_LAND))), 650, 0.92]; }
+  if (t < L(8)) return [2560, 735, 1.42];
+  if (t < L(9) - 0.15) return [2660, 690, 1.0];
+  if (t < T_RUN0) return [(G1.x0 + G2.x0) / 2, 600, 1.25];
+  if (t < T_RUN1) { const a = girlState(t, G1, 0), b = girlState(t, G2, 1); return [(a.x + b.x) / 2 - 140, lerp(600, 690, prog(t, T_RUN0, T_RUN1)), 1.0]; }
+  if (t < T_UP - 0.2) return [2640, 700, 1.25];
+  if (t < T_JUMP - 0.1) return [2600, 700, 1.22];
+  if (t < L(14)) return [2460, 680, 1.08];
+  if (t < L(15) - 0.1) return [2760, 680, 1.0];
+  if (t < L(16) - 0.1) return [3420, 640, 0.72];
+  if (t < L(17)) return [2560, 720, 1.2];
+  if (t < T_GO) return [2540, 716, 1.28];
+  if (t < E.fin) return [2790, 690, 0.95];
+  return [2790, 450, 0.95];
+}
+const CAM_DT = 1 / 120, CAM = [];
+(function precomputeCam() {
+  // цели планов сглаживаем окном ~0,5 с (дважды скользящее среднее), чтобы новый план не дёргал ускорение
+  const N = Math.ceil((TOTAL + 0.1) / CAM_DT) + 1, R = [];
+  for (let i = 0; i < N; i++) { const q = camTarget(i * CAM_DT); R.push([q[0], q[1], Math.log(q[2])]); }
+  const box = (A, h) => { const out = [], n = A.length; for (let i = 0; i < n; i++) { let sx = 0, sy = 0, sz = 0, k = 0; for (let j = Math.max(0, i - h); j <= Math.min(n - 1, i + h); j++) { sx += A[j][0]; sy += A[j][1]; sz += A[j][2]; k++; } out.push([sx / k, sy / k, sz / k]); } return out; };
+  const T2 = box(box(R, 30), 30);
+  let [x, y, lz0] = T2[0], z = Math.exp(lz0), vx = 0, vy = 0, vz = 0;
+  const w = 5.0, maxPx = 46 * 30; // ω и предел скорости (экранных px/с)
+  for (let i = 0; i < N; i++) {
+    const [tx, ty, ltz] = T2[i], lz = Math.log(z);
+    let ax = w * w * (tx - x) - 2 * w * vx, ay = w * w * (ty - y) - 2 * w * vy, az = w * w * (ltz - lz) - 2 * w * vz;
+    vx += ax * CAM_DT; vy += ay * CAM_DT; vz += az * CAM_DT;
+    const sp = Math.hypot(vx, vy) * z; if (sp > maxPx) { vx *= maxPx / sp; vy *= maxPx / sp; }
+    vz = clamp(vz, -0.55, 0.55);
+    x += vx * CAM_DT; y += vy * CAM_DT; z = Math.exp(lz + vz * CAM_DT);
+    CAM.push([x, y, z]);
+  }
+})();
+function camAt(t) { const f = clamp(t / CAM_DT, 0, CAM.length - 1.001), i = Math.floor(f), u = f - i, a = CAM[i], b = CAM[i + 1]; return { x: lerp(a[0], b[0], u), y: lerp(a[1], b[1], u), z: lerp(a[2], b[2], u) }; }
+
+// ---------- полёт Вани ----------
+function flyPos(t) {
+  const hz0 = horseAt(T_FLY0), sp = horseSaddle(hz0.H), x0 = hz0.x + sp[0], y0 = hz0.y + sp[1];
+  const x1 = VX_LIE + 20, y1 = driftY(VX_LIE) - 40, u = prog(t, T_FLY0, T_LAND);
+  return [lerp(x0, x1, 1 - Math.pow(1 - u, 1.6)), lerp(y0, y1, u) - 370 * Math.sin(Math.PI * u) * (1 - 0.15 * u)];
+}
+
+// ---------- частицы снега ----------
+function burst(c, x, y, t, t0, n, seed, spread = 1, up = 1) {
+  const u = t - t0; if (u < 0 || u > 1.1) return;
+  const r = mulberry32(seed);
+  for (let i = 0; i < n; i++) {
+    const vx = (r() * 2 - 1) * 320 * spread, vy = -(180 + r() * 380) * up, rr = 6 + r() * 10;
+    const px = x + vx * u, py = y + vy * u + 900 * u * u;
+    if (py > y + 10) continue;
+    c.globalAlpha = 1 - u / 1.1; c.fillStyle = "#ffffff"; circle(c, px, py, rr); c.fill();
+    c.fillStyle = "rgba(150,180,220,0.5)"; circle(c, px + rr * 0.3, py + rr * 0.35, rr * 0.55); c.fill();
+  }
+  c.globalAlpha = 1;
+}
+const FLAKES = (() => { const r = mulberry32(1234), a = []; for (let i = 0; i < 130; i++) a.push({ x: r() * W, y: r() * H, v: 90 + r() * 120, s: 5 + r() * 9, ph: r() * TAU, k: r() }); return a; })();
+function snowAmount(t) { return 0.18 + 0.82 * win(t, L(2) - 0.4, EN(3) + 0.6, 0.4, 0.8) + 0.1 * win(t, EN(NL), TOTAL, 1, 0.1); }
+function drawSnowfall(c, t) {
+  const amt = snowAmount(t);
+  for (const f of FLAKES) {
+    if (f.k > amt) continue;
+    const y = (f.y + t * f.v) % (H + 40) - 20, x = (f.x + Math.sin(t * 1.3 + f.ph) * 26 + t * 12) % (W + 40) - 20;
+    c.fillStyle = "rgba(150,175,215,0.45)"; circle(c, x + f.s * 0.25, y + f.s * 0.3, f.s); c.fill();
+    c.fillStyle = "#ffffff"; circle(c, x, y, f.s); c.fill();
+  }
+}
+
+// ---------- кадр ----------
+function renderAt(t) {
+  BOIL = Math.floor(t * BOIL_FPS);
+  const c = ctx, cam = camAt(t);
+  c.setTransform(1, 0, 0, 1, 0, 0);
+  drawSky(c, cam);
+  withLayer(c, cam, 0.45, (c) => drawFar(c, t));
+  c.save(); c.translate(W / 2, H / 2); c.scale(cam.z, cam.z); c.translate(-cam.x, -cam.y);
+  drawFloor(c, cam);
+  const snowK = 0.35 + 0.65 * sstep(prog(t, L(2), EN(3)));
+  for (const [x, y, s, sd] of [[420, 760, 0.7, 311], [760, 720, 0.55, 312], [1560, 700, 0.5, 313], [3980, 700, 0.6, 314], [4240, 690, 0.5, 315], [2400, 690, 0.45, 316]]) fir(c, x, y, s, sd, snowK);
+  drawFence(c);
+  const crowTurn = sstep(prog(t, E.w_nikto + 0.15, E.w_nikto + 0.35));
+  drawCrow(c, CROW.x, CROW.y, crowTurn > 0.5 ? 1 : -1, t, win(t, E.w_nikto + 0.25, EN(8) + 0.6, 0.15, 0.3));
+  drawHill(c);
+  // пруд
+  const ice = prog(t, L(1) - 0.05, EN(1) + 0.15);
+  drawPond(c, { ice: t < L(1) - 0.05 ? 0 : ice, glint: prog(t, EN(1) - 0.2, EN(1) + 0.9), lumps: prog(t, L(2) - 0.1, EN(2) + 0.3), cover: sstep(prog(t, L(3), EN(3) + 0.2)),
+    scrape: prog(t, T_SLIP, T_SLIP + 0.8), scrapeX0: HX_SLIP + 40, scrapeX1: HX_ICE + 150 });
+  drawRoad(c, prog(t, E.w_put15 - 0.1, EN(15) + 0.4));
+  drawDrift(c);
+  // всё, что стоит на земле, — по глубине
+  const items = [];
+  items.push([BIRD_TREE.y, () => fir(c, BIRD_TREE.x, BIRD_TREE.y, 1, 301, snowK)]);
+  items.push([FINAL_TREE.y, () => fir(c, FINAL_TREE.x, FINAL_TREE.y, 0.9, 331, snowK)]);
+  const signShake = t > T_BUMP ? Math.exp(-(t - T_BUMP) * 4) * Math.sin((t - T_BUMP) * 34) * 0.07 : 0;
+  items.push([SIGN.y, () => drawSign(c, prog(t, E.w_put14 + 0.05, E.w_put14 + 0.85), t, 1 - prog(t, T_BUMP + 0.02, T_BUMP + 0.06), signShake)]);
+  const hz = horseAt(t), vs = vanyaState(t);
+  if (hz.vis) {
+    const rider = vs.mode === "ride" ? (c2, p) => drawVanya(c2, p[0], p[1], riderPose(t)) : null;
+    items.push([hz.y, () => drawHorse(c, hz.x, hz.y, hz.dir, hz.H, rider)]);
+  }
+  if (vs.mode === "fly") items.push([2000, () => { const p = flyPos(t), u = vs.u;
+    drawVanya(c, p[0], p[1], { legs: "fly", look: 0.5, rot: easeInOut(u) * TAU * 1.25, arms: [[-70, -150], [70, -150]], mouth: "o" }); }]);
+  if (vs.mode === "flat") items.push([driftY(VX_LIE) + 1, () => {
+    const land = spr(springBounce, t, T_LAND);
+    const lift = sstep(prog(t, E.w_nikto - 0.1, E.w_nikto + 0.3)) * (1 - sstep(prog(t, E.w_bezh, E.w_bezh + 0.25)));
+    const hope = sstep(prog(t, EN(11) - 0.3, EN(11) + 0.2));
+    drawVanyaFlat(c, VX_LIE, driftY(VX_LIE) - 4, { flat: 1.15 - 0.15 * land, kick: win(t, T_LAND + 0.3, EN(7) + 0.3, 0.2, 0.3) + 0.35 * win(t, L(9), EN(10), 0.3, 0.3), headUp: Math.max(lift, 0.8 * hope), t, stars: win(t, T_LAND + 0.15, E.w_nikto + 0.5, 0.2, 0.3), blink: blinkAt(t, 0.4) });
+    burst(c, VX_LIE + 40, driftY(VX_LIE) - 10, t, T_LAND, 18, 77, 1.4, 1);
+  }]);
+  if (vs.mode === "stand") items.push([driftY(VX_UP) + 1, () => {
+    const k = spr(springBounce, t, T_UP), gy = driftY(VX_UP);
+    burst(c, VX_UP, gy - 30, t, T_UP - 0.06, 18, 4242, 1.0, 0.9);
+    floorShadow(c, VX_UP, gy + 2, 60, 0.25);
+    drawVanya(c, VX_UP, gy - 100 * (0.35 + 0.65 * k), { legs: "stand", look: -0.3, sy: 0.35 + 0.65 * k, sx: 1.4 - 0.4 * k, arms: [[-80, -120 + 20 * Math.sin(t * 20) * bump(t, T_UP + 0.3, 0.6)], [80, -120]], mouth: 1.3, headRot: 0.15 * Math.sin(t * 26) * bump(t, T_UP + 0.35, 0.7), blink: blinkAt(t, 0.4) });
+  }]);
+  if (vs.mode === "jump") items.push([2000, () => {
+    const hzz = horseAt(T_JUMPE), sp = horseSaddle(hzz.H), x1 = hzz.x + sp[0], y1 = hzz.y + sp[1], gy = driftY(VX_UP), u = vs.u;
+    const x = lerp(VX_UP, x1, easeInOut(u)), y = lerp(gy - 100, y1, u) - 210 * Math.sin(Math.PI * u);
+    drawVanya(c, x, y, { legs: "fly", look: -0.5, rot: -0.3 * Math.sin(Math.PI * u), arms: [[-80, -140], [70, -150]], mouth: "o", sx: lerp(1, 0.82, u), sy: lerp(1, 0.82, u) });
+  }]);
+  // заяц пробегает мимо
+  if (t > L(8) - 0.4 && t < EN(8) + 0.8) items.push([952, () => { const u = prog(t, L(8) - 0.4, EN(8) + 0.8), x = lerp(3080, 2060, u); drawHare(c, x, 952, -1, (u * 5.5) % 1, t); }]);
+  // девушки
+  for (const [G, i] of [[G1, 0], [G2, 1]]) {
+    const g = girlState(t, G, i);
+    items.push([g.y + 0.6 - i * 0.1, () => {
+      floorShadow(c, g.x, g.y + 2, 70, 0.22);
+      drawGirl(c, g.x, g.y, g.S);
+      if (t >= T_RUN1 && t < T_RUN1 + 1.1) burst(c, g.x - 40, g.y - 6, t, T_RUN1 + i * 0.06, 10, 300 + i, 0.9, 0.8);
+    }]);
+  }
+  // снегирь
+  items.push([BIRD_TREE.y + 0.1, () => {
+    const land = 3.0, bx1 = BIRD_TREE.x + 98, by1 = BIRD_TREE.y - 40 - 72 - 2;
+    if (t < land) { const u = prog(t, 0.4, land), x = lerp(700, bx1, easeOut(u)), y = lerp(420, by1, easeOut(u)) - 120 * Math.sin(Math.PI * u); drawFinch(c, x, y, 1, 1, t); }
+    else { const hop = 14 * bump(t, E.w_posp - 0.3, 0.4) + 10 * bump(t, E.w_posp + 0.1, 0.4); drawFinch(c, bx1, by1 - hop, t > E.w_posp - 0.6 && t < L(7) ? -1 : 1, 0, t, win(t, E.w_posp - 0.6, E.w_posp + 0.6, 0.1, 0.2)); }
+  }]);
+  items.sort((a, b) => a[0] - b[0]);
+  for (const [, fn] of items) fn();
+  // брызги снега из-под копыт и при скольжении
+  if (hz.vis && (hz.H.gait === "gallop" || hz.H.gait === "trot")) { const k = Math.floor(t * 6); burst(c, hz.x - 80, hz.y - 4, t, k / 6, 5, 900 + k, 0.5, 0.5); }
+  burst(c, HX_SLIP + 220, POND.y - 10, t, T_SLIP + 0.05, 16, 501, 1.2, 0.9);
+  // снег с таблички падает Ване на шапку
+  if (t > T_BUMP + 0.04 && t < T_BUMP + 0.42) { const u = prog(t, T_BUMP + 0.04, T_BUMP + 0.42), hz2 = horseAt(t), sp = horseSaddle(hz2.H);
+    clayBlob(c, lerp(SIGN.x + 40, hz2.x + sp[0], u), lerp(SIGN.y - SIGN_H - 6, hz2.y + sp[1] - 210 * 0.82, u * u), 60, 18 + 14 * u, "#ffffff", 0, 990); }
+  c.restore();
+  drawSnowfall(c, t);
+  // лёгкая виньетка
+  const vg = c.createRadialGradient(W / 2, H / 2, H * 0.45, W / 2, H / 2, H * 1.05);
+  vg.addColorStop(0, "rgba(40,50,90,0)"); vg.addColorStop(1, "rgba(40,50,90,0.22)"); c.fillStyle = vg; c.fillRect(0, 0, W, H);
+  captionsPlate(c, t);
+  drawTitles(c, t);
+  textAt(t);
+}
+
+// ---------- лента для строк: раскатанный светлый пластилин ----------
+function captionsPlate(c, t) {
+  const k = sstep(prog(t, L(1) - 0.6, L(1) - 0.1)) * (1 - sstep(prog(t, E.fin - 0.3, E.fin + 0.05)));
+  if (k <= 0) return;
+  c.save(); c.globalAlpha = k;
+  const y = 828 + 30 * (1 - k);
+  clay(c, lumpPoly([[170, y + 10], [190, y], [1730, y], [1750, y + 10], [1750, y + 152], [1730, y + 162], [190, y + 162], [170, y + 152]], 1001, 2), "#f7ecd2", { seed: 1001, rim: 16, gloss: 0.3, prints: 2, shade: 0.35 });
+  c.restore();
+}
+
+// ---------- заголовок: буквы, скатанные из пластилина ----------
+const TITLE_L1 = "Как на тоненький", TITLE_L2 = "ледок…", SUB = "Русская народная песня";
+const T_COLORS = ["#d8352a", "#3f6fc4", "#f2b632", "#3a9a5a", "#e2679a", "#f07a2a"];
+let SPRITES = null;
+function makeLetter(ch, px, hex) {
+  const f = `700 ${px}px "Comic Sans MS", "Trebuchet MS", sans-serif`, pad = 40;
+  const m = document.createElement("canvas").getContext("2d"); m.font = f;
+  const w = Math.ceil(m.measureText(ch).width) + pad * 2, h = Math.ceil(px * 1.35) + pad * 2;
+  const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+  const a = cv.getContext("2d"), bx = pad, by = pad + px * 1.0;
+  const shape = (g, col) => { g.font = f; g.lineJoin = "round"; g.lineWidth = px * 0.08; g.fillStyle = col; g.strokeStyle = col; g.fillText(ch, bx, by); g.strokeText(ch, bx, by); };
+  // тень
+  a.save(); a.filter = `blur(${px * 0.04}px)`; a.globalAlpha = 0.35; a.translate(px * 0.035, px * 0.06); shape(a, "#28304f"); a.restore();
+  const b = document.createElement("canvas"); b.width = w; b.height = h; const bc = b.getContext("2d"); shape(bc, hex);
+  // объём: внутренняя тень снизу-справа и блик сверху-слева через размытую «изнанку»
+  const inv = (col) => { const q = document.createElement("canvas"); q.width = w; q.height = h; const g = q.getContext("2d"); g.fillStyle = col; g.fillRect(0, 0, w, h); g.globalCompositeOperation = "destination-out"; shape(g, "#000"); return q; };
+  bc.globalCompositeOperation = "source-atop";
+  bc.save(); bc.filter = `blur(${px * 0.05}px)`; bc.globalAlpha = 0.55; bc.drawImage(inv("#1e1a3a"), -px * 0.04, -px * 0.05); bc.restore();
+  bc.save(); bc.filter = `blur(${px * 0.04}px)`; bc.globalAlpha = 0.75; bc.drawImage(inv("#ffffff"), px * 0.035, px * 0.045); bc.restore();
+  // отпечаток пальца
+  bc.strokeStyle = "rgba(30,20,50,0.08)"; bc.lineWidth = 1.2;
+  for (let i = 0; i < 6; i++) { bc.beginPath(); bc.ellipse(bx + px * 0.25, by - px * 0.35, px * (0.05 + i * 0.03), px * (0.035 + i * 0.022), 0.4, 0.3 * i, 0.3 * i + 2.4); bc.stroke(); }
+  a.drawImage(b, 0, 0);
+  return { cv, w, h, adv: m.measureText(ch).width, bx, by };
+}
+function layoutLine(str, px, cx, baseY, ci) {
+  const out = []; let x = 0;
+  const m = document.createElement("canvas").getContext("2d"); m.font = `700 ${px}px "Comic Sans MS", "Trebuchet MS", sans-serif`;
+  const total = m.measureText(str).width + px * 0.05 * (str.length - 1);
+  for (const ch of str) {
+    if (ch !== " ") { const sp = makeLetter(ch, px, T_COLORS[ci.n++ % T_COLORS.length]); out.push({ sp, x: cx - total / 2 + x, y: baseY }); }
+    x += m.measureText(ch).width + px * 0.05;
+  }
+  return out;
+}
+function buildSprites() {
+  const ci = { n: 0 };
+  SPRITES = { a: layoutLine(TITLE_L1, 140, W / 2, 205, ci), b: layoutLine(TITLE_L2, 160, W / 2, 375, ci) };
+  SPRITES.all = SPRITES.a.concat(SPRITES.b);
+}
+function drawTitleSet(c, t, t0, out) {
+  if (!SPRITES) return;
+  const n = SPRITES.all.length;
+  SPRITES.all.forEach((L1, i) => {
+    const st = t0 + i * 0.045, u = t - st; if (u < 0) return;
+    const fall = clamp(u / 0.32, 0, 1), y = L1.y - 520 * (1 - fall * fall);
+    let sx = 1, sy = 1;
+    if (u > 0.32) { const k = springBounce(u - 0.32); sy = 0.62 + 0.38 * k; sx = 1.3 - 0.3 * k; }
+    let oy = 0, a = 1;
+    if (out !== undefined && t > out) { const v = t - out - i * 0.02; if (v > 0) { oy = -700 * v * v * 3; a = 1 - clamp(v / 0.4, 0, 1); } }
+    if (a <= 0) return;
+    const wob = Math.sin(t * 2 + i) * 2;
+    c.save(); c.globalAlpha = a; c.translate(L1.x + L1.sp.adv / 2, y + oy + wob); c.scale(sx, sy);
+    c.drawImage(L1.sp.cv, -L1.sp.adv / 2 - L1.sp.bx, -L1.sp.by); c.restore();
+  });
+}
+function drawSub(c, t, t0, y, out) {
+  const k = spr(springPop, t, t0); if (k <= 0) return;
+  let a = clamp((t - t0) * 4, 0, 1); if (out !== undefined) a *= 1 - clamp((t - out) / 0.3, 0, 1);
+  if (a <= 0) return;
+  c.save(); c.globalAlpha = a; c.translate(W / 2, y); c.scale(0.7 + 0.3 * k, 0.7 + 0.3 * k);
+  c.font = '700 54px "Avenir Next", sans-serif'; c.textAlign = "center"; c.textBaseline = "middle";
+  const w = c.measureText(SUB).width + 70;
+  clay(c, lumpPoly([[-w / 2, -40], [w / 2, -40], [w / 2 + 16, 0], [w / 2, 40], [-w / 2, 40], [-w / 2 - 16, 0]], 1101, 1.5), "#ffffff", { seed: 1101, rim: 10, gloss: 0.3, prints: 1 });
+  c.fillStyle = "#2c3a72"; c.fillText(SUB, 0, 3); c.restore();
+}
+function drawTitles(c, t) {
+  if (t < E.V0 + 0.2) { drawTitleSet(c, t, 0.25, E.V0 - 0.55); drawSub(c, t, 1.4, 478, E.V0 - 0.5); }
+  if (t > E.fin) { drawTitleSet(c, t, E.fin + 0.2); drawSub(c, t, E.fin + 1.3, 478); }
+}
+
+// ---------- строки ----------
+const CAPS = [...document.querySelectorAll(".cap")].map((el) => ({ el, n: +el.dataset.n, last: "" }));
+const WORDS = [...document.querySelectorAll(".cap .w")].map((el) => ({ el, at: +el.dataset.at, last: -1 }));
+const ROWS = [842, 916];
+function capState(n, t) {
+  const B = CFG.blocks.find((b) => n >= b[0] && n <= b[1]);
+  const next = n < B[1] ? L(n + 1) : null;
+  const endBlock = B[1] < NL ? L(B[1] + 1) - 0.25 : E.fin - 0.35;
+  let y = n === B[0] ? ROWS[0] : ROWS[1], op = sstep(prog(t, L(n) - 0.12, L(n) + 0.05));
+  if (B[0] === B[1]) y = (ROWS[0] + ROWS[1]) / 2;
+  op *= 1 - sstep(prog(t, endBlock, endBlock + 0.22));
+  return { y, op };
+}
+function textAt(t) {
+  for (const cp of CAPS) {
+    const s = capState(cp.n, t), key = s.y.toFixed(1) + "|" + s.op.toFixed(3);
+    if (key !== cp.last) { cp.el.style.transform = `translate(0px, ${s.y.toFixed(1)}px)`; cp.el.style.opacity = s.op.toFixed(3); cp.last = key; }
+  }
+  for (const w of WORDS) {
+    const u = prog(t, w.at - 0.06, w.at + 0.4), k = Math.round(u * 400); if (k === w.last) continue; w.last = k;
+    const s = springPop(u);
+    w.el.style.opacity = u > 0 ? Math.min(1, u * 5).toFixed(3) : "0";
+    w.el.style.transform = u >= 1 ? "none" : `translate(0px, ${((1 - s) * 26).toFixed(1)}px) scale(${Math.min(1, 0.7 + 0.3 * s).toFixed(3)}, ${(1.25 - 0.25 * s).toFixed(3)})`;
+  }
+}
+
+const seek = (t) => renderAt(t);
+buildSprites();
+window.addEventListener("hf-seek", (e) => seek(e.detail.time));
+seek(0);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { buildSprites(); seek(0); });
+
+const tl = gsap.timeline({ paused: true });
+tl.set({}, {}, TOTAL);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+
+    </script>
+  </body>
+</html>
