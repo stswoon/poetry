@@ -1,0 +1,15 @@
+{
+  "video": "Перчатка (пер. Лермонтова) - Шиллер - v2.mp4",
+  "thumb": "cover.png",
+  "title": "Перчатка (пер. Лермонтова) - Шиллер",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 6"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}

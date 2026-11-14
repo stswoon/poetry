@@ -128,7 +128,8 @@ function findPlaylists() {
 
 function isPoemRow(line) {
   const cells = line.split('|').map((cell) => cell.trim());
-  if (cells.includes(`texts/${poet}/${poem}`)) return true;
+  // в «Реализовано» может быть несколько путей через запятую (например, два перевода одного стиха)
+  if (cells.some((cell) => cell.split(/,\s*/).includes(`texts/${poet}/${poem}`))) return true;
   return cells.some((cell) => cell.endsWith(poet)) && cells.includes(poem);
 }
 
