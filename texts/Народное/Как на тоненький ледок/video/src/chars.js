@@ -109,10 +109,10 @@ function drawVanya(c, x, y, V) {
   c.save(); c.translate(x, y); if (V.rot) c.rotate(V.rot); c.scale(V.sx ?? 1, V.sy ?? 1);
   const look = V.look ?? 0.6, legs = V.legs ?? "stand";
   // ноги
-  const legDraw = (hx, kx, ky, fx, fy, seed) => {
+  const legDraw = (hx, kx, ky, fx, fy, seed) => { // носок валенка — по развороту тела
     claySaus(c, hx, 0, 17, kx, ky, 15, PAL.pants, seed, { prints: 0 });
     claySaus(c, kx, ky, 15, fx, fy - 18, 14, PAL.pants, seed + 1, { prints: 0 });
-    claySaus(c, fx, fy - 26, 16, fx + 7 * Math.sign(look || 1), fy - 10, 17, PAL.felt, seed + 2, { prints: 0 });
+    claySaus(c, fx, fy - 26, 16, fx + 7 * (V.face ?? Math.sign(look || 1)), fy - 10, 17, PAL.felt, seed + 2, { prints: 0 });
   };
   if (legs === "stand") { const st = V.step || 0; legDraw(-18, -21, 44, -22 + st, 100, 801); legDraw(18, 21, 44, 22 - st, 100, 804); }
   else if (legs === "fly") { legDraw(-18, -46, 30, -60, 74, 801); legDraw(18, 46, 30, 62, 70, 804); }
@@ -124,18 +124,19 @@ function drawVanya(c, x, y, V) {
     claySaus(c, k.jx, k.jy, 13, k.ex, k.ey, 11, PAL.shirt, 812 + i * 3, { prints: 0 });
     clayBlob(c, k.ex, k.ey, 14, 13, PAL.mitt, 0, 813 + i * 3, { prints: 0 });
   };
-  const farArm = look >= 0 ? 0 : 1;
-  armDraw(farArm);
+  const face = V.face ?? (look >= 0 ? 1 : -1), farArm = face >= 0 ? 0 : 1;
+  if (!V.armsFront) armDraw(farArm); // всадник держит поводья обеими руками перед животом — обе руки спереди
   // туловище
   clay(c, blob(0, -50, 47, 60, 0, 821, 0.04), PAL.shirt, { seed: 821, prints: 1 });
   claySaus(c, 10 + look * 8, -104, 5, 12 + look * 8, -70, 5, PAL.gold, 822, { prints: 0, shadow: false });
   claySaus(c, -44, -10, 9, 44, -10, 9, PAL.gold, 823, { prints: 0 });
   clayBlob(c, 26, 6, 7, 12, PAL.gold, 0.3, 824, { prints: 0 });
   if (legs === "ride") { // ближняя нога вдоль бока коня
-    claySaus(c, 16 * Math.sign(look || 1), 0, 18, 46, 18, 15, PAL.pants, 831, { prints: 0 });
+    claySaus(c, 16, 0, 18, 46, 18, 15, PAL.pants, 831, { prints: 0 });
     claySaus(c, 46, 18, 15, 42, 58, 14, PAL.pants, 832, { prints: 0 });
     claySaus(c, 40, 52, 16, 50, 70, 17, PAL.felt, 833, { prints: 0 });
   }
+  if (V.armsFront) armDraw(farArm);
   armDraw(1 - farArm);
   // голова
   const fx = look * 14, hb = V.headBob || 0;
@@ -177,11 +178,13 @@ function drawVanyaFlat(c, x, y, F) {
     claySaus(c, kx - i * 10, ky - i * 3, 14, fx - i * 10, fy, 13, PAL.pants, 862 + i * 4, { prints: 0 });
     claySaus(c, fx - i * 10, fy + 4, 15, fx - i * 10 - 6, fy - 16, 16, PAL.felt, 863 + i * 4, { prints: 0 });
   }
-  // руки в стороны по снегу
-  claySaus(c, 30 * sx, -18 * sy, 13, 80 * sx, 6, 11, PAL.shirt, 871, { prints: 0 }); clayBlob(c, 92 * sx, 8, 14, 10, PAL.mitt, 0, 872, { prints: 0 });
+  // дальняя рука раскинута в сторону от зрителя — видна над спиной
+  claySaus(c, 40 * sx, -26 * sy, 12, 58 * sx, -30 * sy - 34, 10, PAL.shirt, 869, { prints: 0 }); clayBlob(c, 62 * sx, -30 * sy - 44, 13, 12, PAL.mitt, 0, 870, { prints: 0 });
   // туловище-лепёшка
   clay(c, blob(0, -30 * sy, 78 * sx, 40 * sy, 0, 873, 0.05), PAL.shirt, { seed: 873, prints: 2 });
   claySaus(c, -54 * sx, -26 * sy, 8, -40 * sx, -50 * sy, 8, PAL.gold, 874, { prints: 0, shadow: false });
+  // ближняя рука раскинута к зрителю — лежит на снегу перед туловищем
+  claySaus(c, 44 * sx, -18 * sy, 13, 64 * sx, 16, 11, PAL.shirt, 871, { prints: 0 }); clayBlob(c, 70 * sx, 22, 14, 10, PAL.mitt, 0, 872, { prints: 0 });
   // голова: лицом в снег; поднимает — видно лицо в профиль
   const up = F.headUp || 0, hx = 112 * sx - 6 * up, hy = -34 * sy - 16 * up;
   claySaus(c, 62 * sx, -28 * sy, 22 * sy + 6, hx - 18, hy + 8, 20, PAL.shirt, 879, { prints: 0, shadow: false }); // плечи-ворот: голова не отрывается от тела
@@ -220,7 +223,8 @@ function drawGirl(c, x, y, G) {
   for (const [i, [fx, fy]] of feet.entries()) clayBlob(c, fx, fy - 12 - (G.bob || 0), 20, 13, PAL.boot, 0, 901 + i, { prints: 0 });
   // коса за спиной/через плечо
   const bs = G.braidSide || -1, bsw = G.braidSwing || 0;
-  const braid = () => { let px = bs * 30, py = -282; for (let i = 0; i < 5; i++) { const nx = px + bs * (4 + i * 1.5) + Math.sin(bsw + i * 0.5) * i * 4, ny = py + 26; clayBlob(c, nx, ny, 13 - i, 14, G.hair || "#c58a3a", 0.2, 910 + i, { prints: 0, shadow: false }); px = nx; py = ny; } clayBlob(c, px + bs * 2, py + 16, 14, 9, G.ribbon || PAL.cloth, 0, 916, { prints: 0 }); };
+  // коса через плечо ложится на грудь: звенья идут вниз и чуть к середине, а не в воздух сбоку
+  const braid = () => { let px = bs * 28, py = -272; for (let i = 0; i < 5; i++) { const nx = px - bs * 1.5 + Math.sin(bsw + i * 0.5) * i * 1.6, ny = py + 24; clayBlob(c, nx, ny, 13 - i, 14, G.hair || "#c58a3a", 0.2, 910 + i, { prints: 0, shadow: false }); px = nx; py = ny; } clayBlob(c, px + bs * 2, py + 16, 14, 9, G.ribbon || PAL.cloth, 0, 916, { prints: 0 }); };
   // руки
   const SH = [[-34, -236], [34, -236]], arms = G.arms || [[-50, -150], [50, -150]];
   const hands = [];
@@ -293,6 +297,7 @@ function drawCrow(c, x, y, dir, t, huff) {
 }
 function drawFinch(c, x, y, dir, flap, t, chirp = 0) {
   c.save(); c.translate(x, y); c.scale(dir, 1); CLAYM = dir;
+  if (!flap) { c.strokeStyle = "#5a4a3a"; c.lineWidth = 2.5; c.lineCap = "round"; c.beginPath(); c.moveTo(-4, -4); c.lineTo(-6, 4); c.moveTo(5, -4); c.lineTo(6, 4); c.stroke(); }
   claySaus(c, -14, -16, 7, -34, -10, 4, "#2a2a33", 981, { prints: 0, shadow: false });
   clay(c, blob(0, -20, 22, 20, 0, 982, 0.04), PAL.finchB, { seed: 982, prints: 0 });
   c.save(); c.clip(blob(0, -20, 22, 20, 0, 982, 0.04).p); clayBlob(c, 10, -8, 22, 18, PAL.finch, 0, 983, { prints: 0, shadow: false }); c.restore();

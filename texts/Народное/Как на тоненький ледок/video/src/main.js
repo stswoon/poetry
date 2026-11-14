@@ -13,8 +13,8 @@ const T_RUN0 = L(10) - 0.15, T_RUN1 = EN(11) - 0.25;
 const T_GO = EN(NL) + 0.3, T_BUMP = EN(NL) + 2.3;
 const HX_START = 520, HX_TROT = 1150, HX_SLIP = 1720, HX_ICE = 1960, HX_STAND = 2160, HX_BUMP = 3125;
 const VX_LIE = 2470, VX_UP = 2560;
-const G1 = { x0: 3530, x1: 2770, sar: "#f2b632", scarf: "#d84a3a", trim: "#d84a3a", hair: "#c58a3a", ribbon: "#3a9a5a", braidSide: -1, seed: 0 };
-const G2 = { x0: 3630, x1: 2895, sar: "#3d9a5b", scarf: "#4a78c8", trim: "#f2c232", hair: "#8a5a2a", ribbon: "#d84a3a", braidSide: 1, seed: 3 };
+const G1 = { x0: 3530, x1: 2755, sar: "#f2b632", scarf: "#d84a3a", trim: "#d84a3a", hair: "#c58a3a", ribbon: "#3a9a5a", braidSide: -1, seed: 0 };
+const G2 = { x0: 3630, x1: 2915, sar: "#3d9a5b", scarf: "#4a78c8", trim: "#f2c232", hair: "#8a5a2a", ribbon: "#d84a3a", braidSide: 1, seed: 3 };
 const GY = (x) => { const h = hillY(x); return h + 19 * (1 - (HILL.y - h) / (HILL.y - HILL.top)); };
 
 function blinkAt(t, off) { const p = (t + off) % 3.3; return p < 0.16 ? Math.max(0.05, Math.abs(p - 0.08) / 0.08) : 1; }
@@ -52,7 +52,7 @@ function vanyaState(t) {
   return { mode: "ride" };
 }
 function riderPose(t) {
-  const V = { legs: "ride", look: 0.7, arms: [[58, -36], [64, -30]], sx: 0.82, sy: 0.82, mouth: 1, blink: blinkAt(t, 0.2) };
+  const V = { legs: "ride", face: 1, armsFront: true, look: 0.7, arms: [[30, -40], [60, -34]], sx: 0.82, sy: 0.82, mouth: 1, blink: blinkAt(t, 0.2) };
   if (t < T_FLY0) {
     // глазеет на снегиря, отвернувшись назад
     const back = sstep(prog(t, E.w_posp - 0.45, E.w_posp - 0.1)) * (1 - sstep(prog(t, T_SLIP - 0.05, T_SLIP + 0.1)));
@@ -327,26 +327,30 @@ function captionsPlate(c, t) {
 const TITLE_L1 = "Как на тоненький", TITLE_L2 = "ледок…", SUB = "Русская народная песня";
 const T_COLORS = ["#d8352a", "#3f6fc4", "#f2b632", "#3a9a5a", "#e2679a", "#f07a2a"];
 let SPRITES = null;
-function makeLetter(ch, px, hex) {
-  const f = `700 ${px}px "Comic Sans MS", "Trebuchet MS", sans-serif`, pad = 40;
+const TS = 2; // буквы рисуем в 2× и уменьшаем при выводе — край остаётся чётким
+function makeLetter(ch, pxOut, hex) {
+  const px = pxOut * TS, f = `700 ${px}px "Comic Sans MS", "Trebuchet MS", sans-serif`, pad = 40 * TS;
   const m = document.createElement("canvas").getContext("2d"); m.font = f;
   const w = Math.ceil(m.measureText(ch).width) + pad * 2, h = Math.ceil(px * 1.35) + pad * 2;
   const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
   const a = cv.getContext("2d"), bx = pad, by = pad + px * 1.0;
   const shape = (g, col) => { g.font = f; g.lineJoin = "round"; g.lineWidth = px * 0.08; g.fillStyle = col; g.strokeStyle = col; g.fillText(ch, bx, by); g.strokeText(ch, bx, by); };
   // тень
-  a.save(); a.filter = `blur(${px * 0.04}px)`; a.globalAlpha = 0.35; a.translate(px * 0.035, px * 0.06); shape(a, "#28304f"); a.restore();
+  a.save(); a.filter = `blur(${px * 0.012}px)`; a.globalAlpha = 0.3; a.translate(px * 0.025, px * 0.04); shape(a, "#28304f"); a.restore();
   const b = document.createElement("canvas"); b.width = w; b.height = h; const bc = b.getContext("2d"); shape(bc, hex);
   // объём: внутренняя тень снизу-справа и блик сверху-слева через размытую «изнанку»
   const inv = (col) => { const q = document.createElement("canvas"); q.width = w; q.height = h; const g = q.getContext("2d"); g.fillStyle = col; g.fillRect(0, 0, w, h); g.globalCompositeOperation = "destination-out"; shape(g, "#000"); return q; };
   bc.globalCompositeOperation = "source-atop";
-  bc.save(); bc.filter = `blur(${px * 0.05}px)`; bc.globalAlpha = 0.55; bc.drawImage(inv("#1e1a3a"), -px * 0.04, -px * 0.05); bc.restore();
-  bc.save(); bc.filter = `blur(${px * 0.04}px)`; bc.globalAlpha = 0.75; bc.drawImage(inv("#ffffff"), px * 0.035, px * 0.045); bc.restore();
+  bc.save(); bc.filter = `blur(${px * 0.022}px)`; bc.globalAlpha = 0.5; bc.drawImage(inv("#1e1a3a"), -px * 0.025, -px * 0.03); bc.restore();
+  bc.save(); bc.filter = `blur(${px * 0.018}px)`; bc.globalAlpha = 0.7; bc.drawImage(inv("#ffffff"), px * 0.02, px * 0.026); bc.restore();
+  // чёткий край буквы
+  bc.globalCompositeOperation = "source-over"; bc.save(); bc.font = f; bc.lineJoin = "round"; bc.lineWidth = Math.max(2, px * 0.012); bc.strokeStyle = rgbStr(shades(hex).deep, 0.55);
+  bc.fillStyle = "rgba(0,0,0,0)"; bc.lineWidth = px * 0.08 + Math.max(2, px * 0.012) * 2; bc.globalCompositeOperation = "destination-over"; bc.strokeText(ch, bx, by); bc.restore();
   // отпечаток пальца
   bc.strokeStyle = "rgba(30,20,50,0.08)"; bc.lineWidth = 1.2;
   for (let i = 0; i < 6; i++) { bc.beginPath(); bc.ellipse(bx + px * 0.25, by - px * 0.35, px * (0.05 + i * 0.03), px * (0.035 + i * 0.022), 0.4, 0.3 * i, 0.3 * i + 2.4); bc.stroke(); }
   a.drawImage(b, 0, 0);
-  return { cv, w, h, adv: m.measureText(ch).width, bx, by };
+  return { cv, w, h, adv: m.measureText(ch).width / TS, bx, by };
 }
 function layoutLine(str, px, cx, baseY, ci) {
   const out = []; let x = 0;
@@ -374,9 +378,9 @@ function drawTitleSet(c, t, t0, out) {
     let oy = 0, a = 1;
     if (out !== undefined && t > out) { const v = t - out - i * 0.02; if (v > 0) { oy = -700 * v * v * 3; a = 1 - clamp(v / 0.4, 0, 1); } }
     if (a <= 0) return;
-    const wob = Math.sin(t * 2 + i) * 2;
-    c.save(); c.globalAlpha = a; c.translate(L1.x + L1.sp.adv / 2, y + oy + wob); c.scale(sx, sy);
-    c.drawImage(L1.sp.cv, -L1.sp.adv / 2 - L1.sp.bx, -L1.sp.by); c.restore();
+    const wob = Math.round(Math.sin(t * 2 + i) * 2);
+    c.save(); c.globalAlpha = a; c.translate(Math.round(L1.x + L1.sp.adv / 2), Math.round(y + oy) + wob); c.scale(sx, sy);
+    c.drawImage(L1.sp.cv, -L1.sp.adv / 2 - L1.sp.bx / TS, -L1.sp.by / TS, L1.sp.w / TS, L1.sp.h / TS); c.restore();
   });
 }
 function drawSub(c, t, t0, y, out) {
