@@ -1,0 +1,16 @@
+{
+  "video": "Листья - Тютчев - v3.mp4",
+  "thumb": "cover.png",
+  "title": "Листья - Тютчев",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 3",
+    "класс 6"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
