@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="../lib/motion.js"></script>
+<style>body{margin:0;background:#9cc8e0}canvas{image-rendering:pixelated;width:1920px;height:1080px}</style></head><body>
+<canvas id="cv" width="960" height="540"></canvas>
+<script>const CFG={lines:[],ev:{}};</script>
+<script src="../src/gfx.js"></script><script src="../src/hero.js"></script><script src="../src/poses.js"></script>
+<script>
+const c=document.getElementById('cv').getContext('2d');
+c.fillStyle='#9cc8e0';c.fillRect(0,0,960,540);
+const list=[];
+for(let i=0;i<8;i++){const d=i*2;list.push({name:'run '+d,p:poseRun(d,i*0.05)});}
+list.push({name:'stand',p:poseStand(0)});
+[0.3,0.55,0.65].forEach(k=>list.push({name:'stomp'+k,p:poseStomp(k)}));
+[0.3,0.5,0.7].forEach(k=>list.push({name:'kick'+k,p:poseKick(k)}));
+list.push({name:'shrug',p:poseShrug(1)});
+list.push({name:'crouch',p:poseCrouch(1)});
+[0.3,0.5].forEach(k=>list.push({name:'slip'+k,p:poseSlip(k,0.4)}));
+list.push({name:'shiver',p:poseShiver(1,0.3)});
+list.push({name:'lookup',p:poseLookUp(1)});
+list.push({name:'sing',p:poseSing(1,0.2)});
+list.push({name:'pick',p:posePick(1)});
+list.push({name:'sit',p:poseSit(0)});
+list.push({name:'sitbook',p:poseSit(0,true)});
+[0.2,0.5].forEach(k=>list.push({name:'jump'+k,p:poseJump(k)}));
+list.push({name:'runL',p:poseRun(4,0),dir:-1});list.push({name:'runL2',p:poseRun(12,0),dir:-1});
+list.push({name:'singL',p:poseSing(1,0.2),dir:-1});
+list.forEach((it,i)=>{const col=i%8,row=Math.floor(i/8);const x=20+col*40,y=40+row*44;
+ rect(c,x-18,y,36,2,'#6a4a2a');
+ heroShadow(c,x,y,it.p.lift||0); drawHero(c,x,y,it.p,it.dir||1,it.t||0);
+ c.fillStyle='#000';c.font='15px monospace';c.fillText(it.name,(x-18)*3,(y+8)*3);});
+</script></body></html>
