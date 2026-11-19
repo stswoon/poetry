@@ -1,0 +1,1418 @@
+<!doctype html>
+<!-- Шаблон: index.html собирается из template.tpl и src/*.js командой `python3 build.py`. Правьте эти файлы, не index.html. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      @font-face { font-family: "Amatic SC"; font-weight: 700; src: url("assets/fonts/amaticsc-700-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "Amatic SC"; font-weight: 700; src: url("assets/fonts/amaticsc-700-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/fonts/caveat-700-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/fonts/caveat-700-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #2b4a3d; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #2b4a3d; }
+      #scene { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+      #preload { position: absolute; left: 0; top: 0; opacity: 0; }
+      #preload b { font: 700 40px "Amatic SC"; }
+      #preload i { font: 700 40px "Caveat"; font-style: normal; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="47.720" data-width="1920" data-height="1080">
+      <canvas id="scene" width="1920" height="1080"></canvas>
+      <div id="preload" aria-hidden="true"><b>Мама! глянь-ка из окошка Фет AZ</b> <i>Мама! глянь-ка Ну, скорей гулять! «»</i></div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="3.400" data-duration="38.720" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="47.720" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>
+      const CFG = {"total": 47.72, "ev": {"V0": 3.4, "L1": 3.435, "L2": 6.074, "L3": 8.506, "L4": 10.001, "L5": 12.838, "L6": 14.928, "L7": 17.442, "L8": 20.435, "L9": 22.509, "L10": 24.328, "L11": 26.589, "L12": 29.2, "L13": 31.594, "L14": 33.492, "L15": 35.354, "L16": 36.848, "L17": 38.99, "L18": 40.69, "E1": 5.55, "E2": 8.101, "E3": 9.445, "E4": 12.496, "E5": 14.597, "E6": 16.088, "E7": 19.834, "E8": 22.173, "E9": 23.56, "E10": 26.135, "E11": 28.865, "E12": 30.406, "E13": 33.208, "E14": 35.235, "E15": 36.384, "E16": 38.608, "E17": 40.44, "E18": 41.99, "w_mama": 3.435, "w_glyan": 4.249, "w_okoshka": 4.86, "w_vchera": 6.733, "w_koshka": 7.578, "w_umyv": 8.506, "w_nos": 9.03, "w_gryazi": 10.001, "w_dvor": 11.42, "w_odelo": 11.78, "w_posvet": 12.838, "w_pobel": 13.725, "w_vidno": 14.928, "w_moroz": 15.62, "w_kol": 17.573, "w_sin": 18.61, "w_vetv": 20.535, "w_iney": 21.743, "w_pogl": 22.509, "w_ty": 23.34, "w_slovno": 24.328, "w_torov": 25.2, "w_svezh": 26.589, "w_beloy": 27.35, "w_puhl": 27.887, "w_vatoy": 28.3, "w_vse": 29.2, "w_kusty": 29.88, "w_uzh": 31.594, "w_sporu": 32.67, "w_salaz": 33.67, "w_goru": 34.745, "w_veselo": 35.354, "w_bezh": 35.91, "w_pravda": 36.848, "w_mama2": 37.195, "w_otkazh": 37.995, "w_sama": 39.08, "w_skazh": 39.9, "w_nu": 40.69, "w_skorey": 41.0, "w_gulyat": 41.51, "fin": 42.89, "total": 47.72}, "blocks": [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15], [16, 17, 18]], "lines": [{"n": 1, "stanza": 1, "s": 3.435, "e": 5.55, "w": [{"t": "Мама!", "s": 3.435, "e": 3.965, "k": "pink"}, {"t": "глянь-ка", "s": 4.249, "e": 4.638, "k": ""}, {"t": "из", "s": 4.638, "e": 4.86, "k": ""}, {"t": "окошка:", "s": 4.86, "e": 5.55, "k": "yellow"}]}, {"n": 2, "stanza": 1, "s": 6.074, "e": 8.101, "w": [{"t": "Знать,", "s": 6.074, "e": 6.538, "k": ""}, {"t": "вчера", "s": 6.733, "e": 7.04, "k": ""}, {"t": "недаром", "s": 7.04, "e": 7.578, "k": ""}, {"t": "кошка", "s": 7.578, "e": 8.101, "k": "ochre"}]}, {"n": 3, "stanza": 1, "s": 8.506, "e": 9.445, "w": [{"t": "Умывала", "s": 8.506, "e": 9.03, "k": ""}, {"t": "нос.", "s": 9.03, "e": 9.445, "k": "pink"}]}, {"n": 4, "stanza": 1, "s": 10.001, "e": 12.496, "w": [{"t": "Грязи", "s": 10.001, "e": 10.515, "k": ""}, {"t": "нет,", "s": 10.515, "e": 10.94, "k": ""}, {"t": "весь", "s": 11.165, "e": 11.42, "k": ""}, {"t": "двор", "s": 11.42, "e": 11.78, "k": ""}, {"t": "одело,", "s": 11.78, "e": 12.496, "k": ""}]}, {"n": 5, "stanza": 1, "s": 12.838, "e": 14.597, "w": [{"t": "Посветлело,", "s": 12.838, "e": 13.725, "k": ""}, {"t": "побелело:", "s": 13.725, "e": 14.597, "k": "white"}]}, {"n": 6, "stanza": 1, "s": 14.928, "e": 16.088, "w": [{"t": "Видно,", "s": 14.928, "e": 15.35, "k": ""}, {"t": "есть", "s": 15.35, "e": 15.62, "k": ""}, {"t": "мороз.", "s": 15.62, "e": 16.088, "k": "blue"}]}, {"n": 7, "stanza": 2, "s": 17.442, "e": 19.834, "w": [{"t": "Не", "s": 17.442, "e": 17.573, "k": ""}, {"t": "колючий,", "s": 17.573, "e": 18.35, "k": ""}, {"t": "светло-синий", "s": 18.61, "e": 19.834, "k": "blue"}]}, {"n": 8, "stanza": 2, "s": 20.435, "e": 22.173, "w": [{"t": "По", "s": 20.435, "e": 20.535, "k": ""}, {"t": "ветвям", "s": 20.535, "e": 20.935, "k": ""}, {"t": "развешан", "s": 20.935, "e": 21.606, "k": ""}, {"t": "иней,", "s": 21.743, "e": 22.173, "k": "blue"}]}, {"n": 9, "stanza": 2, "s": 22.509, "e": 23.56, "w": [{"t": "Погляди", "s": 22.509, "e": 22.975, "k": ""}, {"t": "хоть", "s": 22.975, "e": 23.19, "k": ""}, {"t": "ты!", "s": 23.34, "e": 23.56, "k": ""}]}, {"n": 10, "stanza": 2, "s": 24.328, "e": 26.135, "w": [{"t": "Словно", "s": 24.328, "e": 24.77, "k": ""}, {"t": "кто-то", "s": 24.77, "e": 25.2, "k": ""}, {"t": "тороватый", "s": 25.2, "e": 26.135, "k": "yellow"}]}, {"n": 11, "stanza": 2, "s": 26.589, "e": 28.865, "w": [{"t": "Свежей,", "s": 26.589, "e": 27.35, "k": ""}, {"t": "белой,", "s": 27.35, "e": 27.752, "k": ""}, {"t": "пухлой", "s": 27.887, "e": 28.3, "k": ""}, {"t": "ватой", "s": 28.3, "e": 28.865, "k": "white"}]}, {"n": 12, "stanza": 2, "s": 29.2, "e": 30.406, "w": [{"t": "Все", "s": 29.2, "e": 29.4, "k": ""}, {"t": "убрал", "s": 29.4, "e": 29.88, "k": ""}, {"t": "кусты.", "s": 29.88, "e": 30.406, "k": "green"}]}, {"n": 13, "stanza": 3, "s": 31.594, "e": 33.208, "w": [{"t": "Уж", "s": 31.594, "e": 31.759, "k": ""}, {"t": "теперь", "s": 31.759, "e": 32.095, "k": ""}, {"t": "не", "s": 32.095, "e": 32.28, "k": ""}, {"t": "будет", "s": 32.28, "e": 32.67, "k": ""}, {"t": "спору:", "s": 32.67, "e": 33.208, "k": ""}]}, {"n": 14, "stanza": 3, "s": 33.492, "e": 35.235, "w": [{"t": "За", "s": 33.492, "e": 33.67, "k": ""}, {"t": "салазки,", "s": 33.67, "e": 34.39, "k": "ochre"}, {"t": "да", "s": 34.39, "e": 34.665, "k": ""}, {"t": "и", "s": 34.665, "e": 34.725, "k": ""}, {"t": "в", "s": 34.725, "e": 34.745, "k": ""}, {"t": "гору", "s": 34.745, "e": 35.235, "k": "yellow"}]}, {"n": 15, "stanza": 3, "s": 35.354, "e": 36.384, "w": [{"t": "Весело", "s": 35.354, "e": 35.91, "k": ""}, {"t": "бежать!", "s": 35.91, "e": 36.384, "k": "pink"}]}, {"n": 16, "stanza": 3, "s": 36.848, "e": 38.608, "w": [{"t": "Правда,", "s": 36.848, "e": 37.195, "k": ""}, {"t": "мама?", "s": 37.195, "e": 37.586, "k": "pink"}, {"t": "Не", "s": 37.876, "e": 37.995, "k": ""}, {"t": "откажешь,", "s": 37.995, "e": 38.608, "k": ""}]}, {"n": 17, "stanza": 3, "s": 38.99, "e": 40.44, "w": [{"t": "А", "s": 38.99, "e": 39.08, "k": ""}, {"t": "сама,", "s": 39.08, "e": 39.435, "k": ""}, {"t": "наверно,", "s": 39.435, "e": 39.9, "k": ""}, {"t": "скажешь:", "s": 39.9, "e": 40.44, "k": ""}]}, {"n": 18, "stanza": 3, "s": 40.69, "e": 41.99, "w": [{"t": "«Ну,", "s": 40.69, "e": 41.0, "k": ""}, {"t": "скорей", "s": 41.0, "e": 41.51, "k": ""}, {"t": "гулять!»", "s": 41.51, "e": 41.99, "k": "yellow"}]}]};
+// «Мама! глянь-ка из окошка…» — мел на школьной доске. Всё рисуется кодом на canvas; кадр — функция времени.
+const W = 1920, H = 1080, TOTAL = CFG.total, E = CFG.ev, TAU = Math.PI * 2;
+
+function mulberry32(a) { return function () { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, u) => a + (b - a) * u;
+const sstep = (u) => { u = clamp(u, 0, 1); return u * u * (3 - 2 * u); };
+const prog = (t, a, b) => clamp((t - a) / Math.max(1e-6, b - a), 0, 1);
+const win = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(sstep(prog(t, a, a + fi)), 1 - sstep(prog(t, b - fo, b)));
+const easeOut = (u) => 1 - Math.pow(1 - clamp(u, 0, 1), 3);
+const easeIn = (u) => Math.pow(clamp(u, 0, 1), 3);
+const easeInOut = (u) => { u = clamp(u, 0, 1); return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+// пружины Framer Motion как функции времени: 0 → 1 с перелётом
+function makeSpring(opts) {
+  const g = Motion.spring({ ...opts, keyframes: [0, 1] });
+  const pts = []; for (let i = 0; i <= 400; i++) pts.push(g.next(i * 10).value);
+  return (s) => { if (s <= 0) return 0; const f = s * 100; if (f >= 400) return 1; const i = Math.floor(f); return lerp(pts[i], pts[i + 1], f - i); };
+}
+const springPop = makeSpring({ stiffness: 260, damping: 13, mass: 1 });
+const springSoft = makeSpring({ stiffness: 110, damping: 17, mass: 1 });
+const springBounce = makeSpring({ stiffness: 330, damping: 9, mass: 1 });
+const spr = (fn, t, a) => fn(Math.max(0, t - a));
+// импульс: 0 → пик → 0 за d секунд
+const bump = (t, a, d = 0.5) => { const u = prog(t, a, a + d); return u <= 0 || u >= 1 ? 0 : Math.sin(u * Math.PI) * (1 - u * 0.5); };
+// затухающее покачивание после события
+const ring = (t, a, f = 9, d = 1.2) => { const s = t - a; return s <= 0 ? 0 : Math.sin(s * f) * Math.exp(-s * 3.2 / d); };
+const wob = (t, f, s = 0) => Math.sin(t * f + s) * 0.6 + Math.sin(t * f * 2.31 + s * 1.7) * 0.4;
+
+// ---------- цвет ----------
+function circle(c, x, y, r) { c.beginPath(); c.arc(x, y, Math.max(0.1, r), 0, TAU); }
+// детерминированный шум 1D по целому ключу
+const hash = (n) => { let x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const noise1 = (x, s = 0) => { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return lerp(hash(i + s * 57), hash(i + 1 + s * 57), u) * 2 - 1; };
+function polyPath(pts, close = true) { const p = new Path2D(); pts.forEach((q, i) => (i ? p.lineTo(q[0], q[1]) : p.moveTo(q[0], q[1]))); if (close) p.closePath(); return p; }
+// двухзвенная IK: от a к цели b, длины l1, l2; bend = +1/−1 — в какую сторону сгиб
+function ik(a, b, l1, l2, bend) {
+  let dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy);
+  const dd = clamp(d, Math.abs(l1 - l2) + 0.01, l1 + l2 - 0.01);
+  if (d < 1e-6) { dx = 0; dy = 1; d = 1; }
+  const ux = dx / d, uy = dy / d, ex = a[0] + ux * dd, ey = a[1] + uy * dd;
+  const x = (l1 * l1 - l2 * l2 + dd * dd) / (2 * dd), h = Math.sqrt(Math.max(0, l1 * l1 - x * x));
+  return { mid: [a[0] + ux * x - uy * h * bend, a[1] + uy * x + ux * h * bend], end: [ex, ey] };
+}
+
+// ---------- мел на доске ----------
+// Рисунок кладётся на прозрачный слой обычными штрихами, потом слой умножается на маску зерна (destination-in):
+// так у любой линии и буквы рваный меловой край. Мел «дышит»: дрожание точек меняется BOIL_FPS раз в секунду.
+const BOIL_FPS = 10;
+let BOIL = 0;
+let GA = 1;   // общая прозрачность героя: умножается на прозрачность каждого штриха
+const CH = {
+  white: "#f4f2ea", cream: "#fbf3d6", blue: "#9fd2f3", sky: "#cfeafc", deep: "#6fa7e0", yellow: "#f7e07a",
+  pink: "#f5a9bd", red: "#ee7a6c", ochre: "#dca55e", brown: "#a7825e", mud: "#8d7357", green: "#a6d99a",
+  violet: "#c7b2ee", skin: "#f8d2b6", hair: "#e9b765", grey: "#b9c2bd"
+};
+const BOARD = "#2b4a3d";
+
+function makeCanvas(w, h) { const cv = document.createElement("canvas"); cv.width = w; cv.height = h; return cv; }
+
+// бесшовная плитка: рисуем пятно и его копии через края
+function wrapDraw(size, x, y, r, fn) {
+  for (const dx of [-size, 0, size]) for (const dy of [-size, 0, size]) {
+    if (x + dx + r < 0 || x + dx - r > size || y + dy + r < 0 || y + dy - r > size) continue;
+    fn(x + dx, y + dy);
+  }
+}
+
+let BOARD_TILE = null, GRAIN_W = null, GRAIN_S = null;
+function buildBoard() {
+  const S = 1024, cv = makeCanvas(S, S), c = cv.getContext("2d"), R = mulberry32(7);
+  c.fillStyle = BOARD; c.fillRect(0, 0, S, S);
+  // крупные пятна: доска неровно тёмная
+  for (let i = 0; i < 46; i++) {
+    const x = R() * S, y = R() * S, r = 120 + R() * 300, light = R() < 0.55;
+    wrapDraw(S, x, y, r, (px, py) => {
+      const g = c.createRadialGradient(px, py, 0, px, py, r);
+      g.addColorStop(0, light ? "rgba(200,225,210,0.07)" : "rgba(10,25,18,0.12)"); g.addColorStop(1, "rgba(0,0,0,0)");
+      c.fillStyle = g; c.fillRect(px - r, py - r, r * 2, r * 2);
+    });
+  }
+  // следы губки: широкие дуги стёртого мела
+  c.lineCap = "round";
+  for (let i = 0; i < 30; i++) {
+    const x = R() * S, y = R() * S, r = 90 + R() * 220, a0 = R() * TAU, da = 0.6 + R() * 1.4;
+    wrapDraw(S, x, y, r + 60, (px, py) => {
+      c.strokeStyle = `rgba(235,240,232,${0.018 + R() * 0.03})`; c.lineWidth = 40 + R() * 70;
+      c.beginPath(); c.arc(px, py, r, a0, a0 + da); c.stroke();
+    });
+  }
+  // призраки старых надписей
+  for (let i = 0; i < 70; i++) {
+    const x = R() * S, y = R() * S, len = 10 + R() * 40;
+    wrapDraw(S, x, y, len, (px, py) => {
+      c.strokeStyle = `rgba(240,240,230,${0.03 + R() * 0.04})`; c.lineWidth = 2 + R() * 3;
+      c.beginPath(); c.moveTo(px, py); c.quadraticCurveTo(px + len * 0.5, py - 10 + R() * 20, px + len, py + R() * 8 - 4); c.stroke();
+    });
+  }
+  // мелкий шум
+  const im = c.getImageData(0, 0, S, S), d = im.data;
+  for (let i = 0; i < d.length; i += 4) { const n = (R() - 0.5) * 12; d[i] += n; d[i + 1] += n; d[i + 2] += n; }
+  c.putImageData(im, 0, 0);
+  BOARD_TILE = cv;
+}
+
+// маска зерна: в основном непрозрачная, с продолговатыми «дырками», как мел на шершавой доске
+function buildGrain(seed, holes, base, size = 512) {
+  const cv = makeCanvas(size, size), c = cv.getContext("2d"), R = mulberry32(seed);
+  const im = c.createImageData(size, size), d = im.data, A = new Float32Array(size * size);
+  for (let i = 0; i < A.length; i++) A[i] = base + (1 - base) * R();
+  for (let k = 0; k < holes; k++) {
+    const x0 = R() * size, y0 = R() * size, len = 1.5 + R() * 6, wd = 0.6 + R() * 1.1, ang = -0.35 + (R() - 0.5) * 0.9, depth = 0.25 + R() * 0.65;
+    const ca = Math.cos(ang), sa = Math.sin(ang), rr = Math.ceil(len + 2);
+    for (let dy = -rr; dy <= rr; dy++) for (let dx = -rr; dx <= rr; dx++) {
+      const u = (dx * ca + dy * sa) / len, v = (-dx * sa + dy * ca) / wd, q = u * u + v * v;
+      if (q > 1) continue;
+      const xi = ((Math.round(x0 + dx) % size) + size) % size, yi = ((Math.round(y0 + dy) % size) + size) % size, j = yi * size + xi;
+      A[j] *= 1 - depth * (1 - q);
+    }
+  }
+  for (let i = 0; i < A.length; i++) { d[i * 4] = d[i * 4 + 1] = d[i * 4 + 2] = 255; d[i * 4 + 3] = Math.round(clamp(A[i], 0, 1) * 255); }
+  c.putImageData(im, 0, 0);
+  return cv;
+}
+
+function buildChalk() {
+  buildBoard();
+  GRAIN_W = buildGrain(11, 5200, 0.62);
+  GRAIN_S = buildGrain(23, 1800, 0.86);
+}
+
+// ---------- штрих ----------
+const jit = (seed, i, amp) => (hash(seed * 13.7 + i * 7.31 + BOIL * 1.913) - 0.5) * 2 * amp;
+// обрезать ломаную по доле длины (мел «дописывает» линию)
+function trunc(P, u) {
+  if (u >= 1) return P; if (u <= 0) return [];
+  let L = 0; const seg = [];
+  for (let i = 1; i < P.length; i++) { const l = Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]); seg.push(l); L += l; }
+  let left = L * u; const out = [P[0]];
+  for (let i = 1; i < P.length; i++) {
+    if (left >= seg[i - 1]) { out.push(P[i]); left -= seg[i - 1]; continue; }
+    const k = left / Math.max(1e-6, seg[i - 1]); out.push([lerp(P[i - 1][0], P[i][0], k), lerp(P[i - 1][1], P[i][1], k)]); break;
+  }
+  return out;
+}
+// сгладить: Катмулл–Ром, n точек на отрезок
+function curve(P, n = 6, closed = false) {
+  const out = [], m = P.length, get = (i) => closed ? P[(i + m) % m] : P[clamp(i, 0, m - 1)];
+  const last = closed ? m : m - 1;
+  for (let i = 0; i < last; i++) {
+    const p0 = get(i - 1), p1 = get(i), p2 = get(i + 1), p3 = get(i + 2);
+    for (let k = 0; k < n; k++) {
+      const t = k / n, t2 = t * t, t3 = t2 * t;
+      out.push([0, 1].map((j) => 0.5 * (2 * p1[j] + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3)));
+    }
+  }
+  out.push(closed ? [...P[0]] : [...P[m - 1]]);
+  return out;
+}
+function ellPts(cx, cy, rx, ry, rot = 0, n = 28, a0 = 0, a1 = TAU) {
+  const out = [], cr = Math.cos(rot), sr = Math.sin(rot);
+  for (let i = 0; i <= n; i++) { const a = lerp(a0, a1, i / n), x = Math.cos(a) * rx, y = Math.sin(a) * ry; out.push([cx + x * cr - y * sr, cy + x * sr + y * cr]); }
+  return out;
+}
+// меловая линия: основной штрих и тонкий сдвинутый «край» мелка
+function chalkLine(c, P, w, col, o = {}) {
+  const seed = o.seed || 1, amp = o.jit ?? 1.3, a = (o.alpha ?? 1) * GA;
+  const Q = o.prog != null ? trunc(P, o.prog) : P;
+  if (Q.length < 2 || a <= 0.003) return;
+  c.save(); c.lineCap = "round"; c.lineJoin = "round"; c.strokeStyle = col;
+  for (let pass = 0; pass < 2; pass++) {
+    c.globalAlpha = a * (pass ? 0.6 : 0.96); c.lineWidth = w * (pass ? 0.5 : 1);
+    c.beginPath();
+    for (let i = 0; i < Q.length; i++) {
+      const x = Q[i][0] + jit(seed + pass * 3, i, amp) + (pass ? w * 0.22 : 0), y = Q[i][1] + jit(seed + pass * 3 + 1, i, amp) - (pass ? w * 0.16 : 0);
+      i ? c.lineTo(x, y) : c.moveTo(x, y);
+    }
+    c.stroke();
+  }
+  c.restore();
+}
+// заливка «плашмя» мелом + штриховка; P — замкнутый контур
+function chalkFill(c, P, col, o = {}) {
+  if (P.length < 3) return;
+  const a = (o.alpha ?? 1) * GA; if (a <= 0.003) return;
+  const path = polyPath(P);
+  c.save(); c.clip(path);
+  // подложка цвета доски: то, что позади фигуры, не просвечивает
+  if (o.under !== false) { c.globalAlpha = a; c.fillStyle = BOARD; c.fill(path); }
+  c.globalAlpha = (o.base ?? 0.3) * a; c.fillStyle = col; c.fill(path);
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (const p of P) { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); }
+  const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, R = Math.hypot(x1 - x0, y1 - y0) / 2 + 4, ang = o.ang ?? -1.0, sp = o.sp ?? 8, seed = o.seed || 3;
+  const dx = Math.cos(ang), dy = Math.sin(ang), nx = -dy, ny = dx;
+  c.strokeStyle = col; c.lineWidth = o.lw ?? 3; c.lineCap = "round"; c.globalAlpha = (o.hatch ?? 0.7) * a;
+  c.beginPath();
+  for (let k = -R, i = 0; k <= R; k += sp, i++) {
+    const off = k + jit(seed, i, sp * 0.18), l0 = -R + jit(seed + 1, i, 6), l1 = R + jit(seed + 2, i, 6);
+    c.moveTo(cx + nx * off + dx * l0, cy + ny * off + dy * l0); c.lineTo(cx + nx * off + dx * l1 + jit(seed + 4, i, 1.5), cy + ny * off + dy * l1);
+  }
+  c.stroke();
+  c.restore();
+}
+// фигура: заливка + контур
+function chalkShape(c, P, fill, line, w, o = {}) {
+  if (fill) chalkFill(c, P, fill, o);
+  if (line) chalkLine(c, [...P, P[0]], w, line, { seed: (o.seed || 3) + 50, alpha: o.alpha, jit: o.jit, prog: o.prog });
+}
+function chalkDot(c, x, y, r, col, a = 1) { c.save(); c.globalAlpha = a * GA; c.fillStyle = col; circle(c, x, y, r); c.fill(); c.restore(); }
+
+// меловая пыль: облачко точек, разлетается и оседает
+function dust(c, x, y, t0, t, n = 26, spread = 90, col = CH.white, seed = 5) {
+  const u = t - t0; if (u < 0 || u > 1.6) return;
+  const R = mulberry32(seed), fade = 1 - sstep(u / 1.6);
+  c.save(); c.fillStyle = col;
+  for (let i = 0; i < n; i++) {
+    const ang = R() * TAU, sp = spread * (0.3 + R() * 0.9), r = 1.5 + R() * 3.5;
+    const px = x + Math.cos(ang) * sp * easeOut(u * 1.4), py = y + Math.sin(ang) * sp * 0.6 * easeOut(u * 1.4) + u * u * 40;
+    c.globalAlpha = fade * (0.35 + R() * 0.5); circle(c, px, py, r); c.fill();
+  }
+  c.restore();
+}
+
+// ---------- герои мелом ----------
+// Все герои рисуются «лицом вправо» в своих координатах: начало — земля под ногами, y вверх отрицательный.
+// face = −1 отражает героя целиком. Руки и ноги — двухзвенная IK; цели задаются в тех же координатах.
+const rot = (p, a) => [p[0] * Math.cos(a) - p[1] * Math.sin(a), p[0] * Math.sin(a) + p[1] * Math.cos(a)];
+const add = (a, b) => [a[0] + b[0], a[1] + b[1]];
+const LWD = 5;           // толщина контура при масштабе 1
+const OUT = CH.white;   // цвет контура
+
+function limb(c, a, tgt, l1, l2, bend, col, w, seed) {
+  const k = ik(a, tgt, l1, l2, bend);
+  chalkLine(c, [a, k.mid, k.end], w, col, { seed, jit: 0.9 });
+  return k;
+}
+function mitten(c, p, r, col, seed, ang = 0) {
+  chalkShape(c, ellPts(p[0], p[1], r, r * 0.85, ang, 14), col, OUT, 3.2, { seed, sp: 5, lw: 2.4, base: 0.55 });
+}
+function shoe(c, ank, col, seed, dir = 1, len = 30, ht = 15) {
+  // подошва ровно на уровне ank.y + ht*0.8; носок по направлению dir
+  const g = ank[1] + ht * 0.8, x = ank[0];
+  const P = [[x - 8 * dir, ank[1] - 2], [x + 8 * dir, ank[1] - 1], [x + (len - 4) * dir, g - 9], [x + len * dir, g - 3], [x + (len - 2) * dir, g], [x - 10 * dir, g], [x - 11 * dir, g - 6]];
+  chalkShape(c, curve(P, 3, true), col, OUT, 3.4, { seed, sp: 5, lw: 2.5, base: 0.5 });
+}
+
+// ===== девочка =====
+// s: {x, y, face, sc, outfit:'gown'|'coat', lean, bob, feet:[far, near] (точки на земле), hands:[far, near],
+//     look, tilt, mouth (0 улыбка … 1 «о!»), blink (0…1), sway (косички), sit (0/1), seed}
+function girlDefault() {
+  return { x: 0, y: 0, face: 1, sc: 1, outfit: "gown", lean: 0, bob: 0, feet: [[-14, 0], [14, 0]], hands: [[-36, -110], [36, -110]],
+           look: 0, tilt: 0, mouth: 0, blink: 0, sway: 0, sit: 0, seed: 1, hipX: 0, scarf: 0, alpha: 1 };
+}
+function drawGirl(c, s) {
+  const sd = s.seed * 100, coat = s.outfit === "coat";
+  c.save(); c.translate(s.x, s.y); c.scale(s.sc * s.face, s.sc);
+  const ga0 = GA; GA *= s.alpha ?? 1;
+  if (s.jump > 0) { const k = 1 - s.jump / 120; c.save(); c.globalAlpha = 0.35; c.fillStyle = "#13261d"; c.beginPath(); c.ellipse(0, 2, 46 * k, 9 * k, 0, 0, TAU); c.fill(); c.restore(); }
+  const H = [s.hipX || 0, -100 + s.bob + (s.sit ? 46 : 0)];
+  const T = (p) => add(H, rot(p, s.lean));           // точка туловища → локальная
+  const N = T([0, -95]);
+  const shF = T([-5, -86]), shN = T([6, -84]);
+  const hipF = T([-7, 0]), hipN = T([7, 0]);
+  const legCol = coat ? CH.violet : CH.skin, shoeCol = coat ? CH.brown : CH.pink;
+  const ank = (f) => [f[0], f[1] - 12];
+  const handCol = coat ? CH.red : CH.skin;
+  // дальняя рука — за туловищем, но кисть выглядывает (farFront — рука перед грудью, рисуется поверх туловища)
+  const farArm = () => { const k = limb(c, shF, s.hands[0], 44, 42, 1, coat ? CH.red : CH.skin, coat ? 15 : 10, sd + 1); mitten(c, k.end, 10, handCol, sd + 2); };
+  if (!s.farFront) farArm();
+  // косичка дальняя (за головой)
+  const head = T([8, -140]), tilt = s.lean * 0.4 + s.tilt;
+  const hp = (p) => add(head, rot(p, tilt));
+  const tail = (root, side, sw) => {
+    const P = [root, add(root, [-10 - sw * 6, 22]), add(root, [-16 - sw * 14, 46]), add(root, [-14 - sw * 22, 66])];
+    chalkLine(c, curve(P, 4), 13, CH.hair, { seed: sd + side, jit: 0.8 });
+    chalkLine(c, curve(P, 4), 3, CH.ochre, { seed: sd + side + 5, jit: 0.6, alpha: 0.8 });
+    const b = add(root, [-6 - sw * 3, 12]);
+    chalkShape(c, [[b[0] - 14, b[1] - 9], [b[0], b[1]], [b[0] - 14, b[1] + 9]], CH.pink, CH.pink, 3, { seed: sd + side + 7, base: 0.7 });
+    chalkShape(c, [[b[0] + 14, b[1] - 9], [b[0], b[1]], [b[0] + 14, b[1] + 9]], CH.pink, CH.pink, 3, { seed: sd + side + 8, base: 0.7 });
+  };
+  if (!coat || true) tail(hp([-30, 4]), 30, s.sway);
+  // ноги
+  const bendLeg = -1;
+  if (s.sit) {
+    limb(c, hipF, ank(s.feet[0]), 50, 48, bendLeg, legCol, 13, sd + 3); shoe(c, ank(s.feet[0]), shoeCol, sd + 4);
+    limb(c, hipN, ank(s.feet[1]), 50, 48, bendLeg, legCol, 13, sd + 5); shoe(c, ank(s.feet[1]), shoeCol, sd + 6);
+  } else {
+    limb(c, hipF, ank(s.feet[0]), 50, 50, bendLeg, legCol, 13, sd + 3); shoe(c, ank(s.feet[0]), shoeCol, sd + 4);
+    limb(c, hipN, ank(s.feet[1]), 50, 50, bendLeg, legCol, 13, sd + 5); shoe(c, ank(s.feet[1]), shoeCol, sd + 6);
+  }
+  // туловище
+  if (coat) {
+    const P = [[-24, -96], [22, -96], [32, -50], [34, -10], [50, 30], [0, 36], [-46, 30], [-34, -10], [-30, -50]].map(T);
+    chalkShape(c, curve(P, 3, true), CH.red, OUT, LWD, { seed: sd + 9, sp: 7, ang: -1.1 });
+    chalkLine(c, [T([20, -80]), T([24, -20]), T([30, 26])], 3, OUT, { seed: sd + 10, alpha: 0.7 });
+    for (let i = 0; i < 3; i++) chalkDot(c, ...T([28, -66 + i * 26]), 4.5, CH.yellow);
+    // шарф: петля на шее и конец, который полощется
+    const sc0 = T([0, -92]);
+    chalkShape(c, curve([T([-26, -98]), T([24, -100]), T([26, -82]), T([-24, -80])], 3, true), CH.yellow, OUT, 4, { seed: sd + 11, sp: 6, ang: 0.4, base: 0.55 });
+    const fl = s.scarf;
+    const end = [sc0, add(sc0, [-26, 14 + fl * -10]), add(sc0, [-54 - fl * 20, 26 - fl * 22 + Math.sin(fl * 9 + s.seed) * 6]), add(sc0, [-78 - fl * 38, 36 - fl * 30])];
+    chalkLine(c, curve(end, 4), 16, CH.yellow, { seed: sd + 12, jit: 0.8 });
+  } else {
+    const P = [[-22, -96], [22, -96], [30, -62], [56, 66], [28, 72], [0, 68], [-30, 72], [-56, 66], [-32, -62]].map(T);
+    chalkShape(c, curve(P, 3, true), CH.sky, OUT, LWD, { seed: sd + 9, sp: 8, ang: -1.1 });
+    for (let i = 0; i < 5; i++) chalkDot(c, ...T([-26 + i * 13, 40 + (i % 2) * 8]), 3.5, CH.pink, 0.9);
+    chalkLine(c, curve([T([-18, -94]), T([0, -84]), T([18, -94])], 4), 3, OUT, { seed: sd + 13 });
+  }
+  if (s.farFront) farArm();
+  // ближняя рука
+  const kn = limb(c, shN, s.hands[1], 44, 42, 1, coat ? CH.red : CH.skin, coat ? 15 : 10, sd + 14);
+  mitten(c, kn.end, 10, handCol, sd + 15);
+  // голова
+  chalkShape(c, ellPts(head[0], head[1], 46, 44, tilt, 30), CH.skin, OUT, LWD, { seed: sd + 16, sp: 14, base: 0.88, hatch: 0.12, lw: 2.2 });
+  // волосы: шапочка сзади и чёлка
+  if (!coat) {
+    const hair = [hp([-46, 4]), hp([-48, -22]), hp([-30, -44]), hp([0, -50]), hp([26, -44]), hp([40, -30]), hp([30, -24]), hp([14, -30]), hp([0, -24]), hp([-12, -30]), hp([-24, -12]), hp([-36, 10])];
+    chalkShape(c, curve(hair, 3, true), CH.hair, CH.ochre, 3.5, { seed: sd + 17, sp: 6, ang: 0.6, base: 0.55 });
+  } else {
+    const hat = [hp([-50, 6]), hp([-50, -24]), hp([-30, -48]), hp([2, -54]), hp([30, -44]), hp([46, -22]), hp([44, -12]), hp([-40, -6])];
+    chalkShape(c, curve(hat, 3, true), CH.blue, OUT, 4, { seed: sd + 17, sp: 6, ang: 1.2, base: 0.55 });
+    chalkLine(c, [hp([-48, -8]), hp([44, -16])], 9, CH.white, { seed: sd + 18 });
+    const pom = hp([-26, -56]);
+    chalkShape(c, ellPts(pom[0], pom[1], 16, 15, 0, 14), CH.white, OUT, 3, { seed: sd + 19, sp: 4, base: 0.7 });
+    // ушко шапки
+    chalkShape(c, [hp([-42, -6]), hp([-22, -6]), hp([-30, 22])], CH.blue, OUT, 3.5, { seed: sd + 20, base: 0.6 });
+  }
+  // лицо (3/4 вправо)
+  const look = s.look * 4;
+  const eye = (p, r) => {
+    const q = hp([p[0] + look, p[1]]);
+    if (s.blink > 0.5) chalkLine(c, [[q[0] - r * 1.4, q[1]], [q[0], q[1] + r * 0.6], [q[0] + r * 1.4, q[1]]], 3, OUT, { seed: sd + 21 });
+    else chalkDot(c, q[0], q[1], r, OUT);
+  };
+  eye([8, -6], 5); eye([30, -8], 5.5);
+  chalkFill(c, ellPts(...hp([2, 12]), 9, 6, 0, 12), CH.pink, { base: 0.6, hatch: 0.5, sp: 4, lw: 2 });
+  chalkFill(c, ellPts(...hp([38, 10]), 7, 5, 0, 12), CH.pink, { base: 0.6, hatch: 0.5, sp: 4, lw: 2 });
+  chalkDot(c, ...hp([44, 4]), 3, CH.red, 0.8);
+  const m = clamp(s.mouth, 0, 1), mc = hp([24, 20]);
+  if (m < 0.15) chalkLine(c, curve([[mc[0] - 9, mc[1] - 2], [mc[0], mc[1] + 4], [mc[0] + 9, mc[1] - 3]], 3), 3, OUT, { seed: sd + 22 });
+  else chalkShape(c, ellPts(mc[0], mc[1] + 2, 6 + m * 2, 3 + m * 7, 0, 12), CH.red, OUT, 2.6, { seed: sd + 22, base: 0.8, sp: 3 });
+  // ближняя косичка — из-под волос на затылке, ложится за плечо
+  tail(hp([-38, 14]), 40, s.sway * 0.8);
+  GA = ga0; c.restore();
+}
+
+// ===== мама =====
+// s: {x, y, face, sc, lean, feet:[far, near] (x на полу), hands:[far, near], cup (0/1), tilt, look, mouth, blink, smile, hat (0…1)}
+function momDefault() {
+  return { x: 0, y: 0, face: 1, sc: 1, lean: 0, feet: [-12, 14], step: 0, hands: [[30, -210], [40, -200]], cup: 1, tilt: 0, look: 0, mouth: 0, blink: 0, seed: 7, sway: 0, alpha: 1 };
+}
+function drawMom(c, s) {
+  const sd = s.seed * 100;
+  c.save(); c.translate(s.x, s.y); c.scale(s.sc * s.face, s.sc); const ga0 = GA; GA *= s.alpha ?? 1;
+  const H = [0, -200];
+  const T = (p) => add(H, rot(p, s.lean));
+  const shF = T([-8, -140]), shN = T([8, -138]);
+  // дальняя рука (farFront — перед туловищем)
+  const farArm = () => { const k = limb(c, shF, s.hands[0], 64, 60, 1, CH.violet, 14, sd + 1); mitten(c, k.end, 11, CH.skin, sd + 2); };
+  if (!s.farFront) farArm();
+  // туфли выглядывают из-под юбки; при шаге — по очереди
+  shoe(c, [s.feet[0], -14 - Math.max(0, s.step) * 10], CH.brown, sd + 3, 1, 34, 16);
+  shoe(c, [s.feet[1], -14 - Math.max(0, -s.step) * 10], CH.brown, sd + 4, 1, 34, 16);
+  // юбка до пола
+  const sw = s.sway * 10;
+  const skirt = [T([-34, 0]), T([34, 0]), [62 + sw, -26], [70 + sw, -12], [30, -8], [0, -12], [-30, -8], [-66 + sw, -12], [-58 + sw, -26]];
+  chalkShape(c, curve(skirt, 3, true), CH.deep, OUT, LWD, { seed: sd + 5, sp: 8, ang: -1.2 });
+  // фартук
+  const ap = [T([14, -6]), T([40, -2]), [58 + sw, -40], [26 + sw * 0.6, -36]];
+  chalkShape(c, curve(ap, 3, true), CH.white, OUT, 3, { seed: sd + 6, sp: 9, ang: 0.4, base: 0.25, hatch: 0.45 });
+  // кофта
+  const top = [[-30, -146], [26, -146], [34, -100], [36, 0], [-34, 0], [-36, -100]].map(T);
+  chalkShape(c, curve(top, 3, true), CH.pink, OUT, LWD, { seed: sd + 7, sp: 7, ang: -0.9 });
+  // шаль на плечах
+  const sh = [[-36, -150], [30, -152], [40, -118], [10, -96], [-40, -108]].map(T);
+  chalkShape(c, curve(sh, 3, true), CH.violet, OUT, 4, { seed: sd + 8, sp: 6, ang: 0.9, base: 0.45 });
+  // голова
+  const head = T([10, -186]), tilt = s.lean * 0.5 + s.tilt, hp = (p) => add(head, rot(p, tilt));
+  chalkLine(c, [T([4, -150]), hp([0, 30])], 14, CH.skin, { seed: sd + 9 });
+  chalkShape(c, ellPts(head[0], head[1], 38, 42, tilt, 28), CH.skin, OUT, LWD, { seed: sd + 10, sp: 14, base: 0.88, hatch: 0.12, lw: 2.2 });
+  // волосы с пучком
+  const hair = [hp([-40, 12]), hp([-42, -20]), hp([-22, -44]), hp([8, -46]), hp([32, -32]), hp([38, -16]), hp([22, -24]), hp([0, -22]), hp([-20, -10]), hp([-28, 16])];
+  chalkShape(c, curve(hair, 3, true), CH.brown, OUT, 3.5, { seed: sd + 11, sp: 6, ang: 0.7, base: 0.6 });
+  const bun = hp([-36, -36]);
+  chalkShape(c, ellPts(bun[0], bun[1], 20, 18, 0, 16), CH.brown, OUT, 3.5, { seed: sd + 12, sp: 5, base: 0.6 });
+  if (s.hat > 0.01) {
+    const hy = lerp(-90, 0, easeOut(s.hat));
+    const hat = [hp([-46, -10 + hy]), hp([-40, -40 + hy]), hp([-10, -58 + hy]), hp([24, -50 + hy]), hp([42, -24 + hy]), hp([42, -12 + hy])];
+    chalkShape(c, curve(hat, 3, true), CH.green, OUT, 4, { seed: sd + 13, sp: 6, ang: 1.1, base: 0.55 });
+    chalkLine(c, [hp([-46, -12 + hy]), hp([42, -14 + hy])], 9, CH.white, { seed: sd + 14 });
+  }
+  const look = s.look * 4;
+  const eye = (p) => {
+    const q = hp([p[0] + look, p[1]]);
+    if (s.blink > 0.5 || s.smileEyes) chalkLine(c, curve([[q[0] - 6, q[1] + 1], [q[0], q[1] - 3], [q[0] + 6, q[1] + 1]], 3), 3, OUT, { seed: sd + 15 });
+    else chalkDot(c, q[0], q[1], 4.2, OUT);
+  };
+  eye([6, -4]); eye([26, -6]);
+  chalkFill(c, ellPts(...hp([30, 12]), 6, 4, 0, 12), CH.pink, { base: 0.55, hatch: 0.4, sp: 4, lw: 2 });
+  chalkDot(c, ...hp([38, 4]), 3, CH.red, 0.7);
+  const m = clamp(s.mouth, 0, 1), mc = hp([22, 20]);
+  if (m < 0.15) chalkLine(c, curve([[mc[0] - 10, mc[1] - 3], [mc[0], mc[1] + 4], [mc[0] + 9, mc[1] - 3]], 3), 3, OUT, { seed: sd + 16 });
+  else chalkShape(c, ellPts(mc[0], mc[1] + 2, 6 + m * 2, 3 + m * 6, 0, 12), CH.red, OUT, 2.6, { seed: sd + 16, base: 0.8, sp: 3 });
+  if (s.farFront) farArm();
+  // ближняя рука
+  const kn = limb(c, shN, s.hands[1], 64, 60, 1, CH.violet, 14, sd + 17);
+  mitten(c, kn.end, 11, CH.skin, sd + 18);
+  if (s.cup) {
+    const h = kn.end;
+    chalkShape(c, [[h[0] - 4, h[1] - 26], [h[0] + 26, h[1] - 26], [h[0] + 22, h[1] + 4], [h[0], h[1] + 4]], CH.white, OUT, 3, { seed: sd + 19, base: 0.4, sp: 5 });
+    chalkLine(c, ellPts(h[0] + 28, h[1] - 12, 8, 9, 0, 10, -1.6, 1.6), 3, OUT, { seed: sd + 20 });
+    const st = s.steam || 0;
+    for (let i = 0; i < 2; i++) {
+      const x0 = h[0] + 6 + i * 10, P = [];
+      for (let k = 0; k < 6; k++) P.push([x0 + Math.sin(st * 3 + k * 1.2 + i) * 5, h[1] - 32 - k * 9]);
+      chalkLine(c, P, 2.5, OUT, { seed: sd + 21 + i, alpha: 0.5 });
+    }
+  }
+  GA = ga0; c.restore();
+}
+
+// ===== кошка (сидит боком, лицом вправо) =====
+// s: {x, y, sc, face, wash (0…1 фаза умывания), wag, blink, lick (лапа у рта 0/1)}
+function drawCat(c, s) {
+  const sd = 900;
+  c.save(); c.translate(s.x, s.y); c.scale(s.sc * (s.face || 1), s.sc); const ga0 = GA; GA *= s.alpha ?? 1;
+  const col = CH.ochre;
+  // хвост по полу и вверх
+  const wg = s.wag || 0;
+  chalkLine(c, curve([[-50, -6], [-90, -4], [-118, -18 + wg * 6], [-122 - wg * 8, -48 + wg * 4]], 5), 15, col, { seed: sd + 1 });
+  // туловище-груша и бедро
+  const body = [[-56, -4], [-62, -40], [-40, -78], [-6, -98], [26, -96], [36, -70], [30, -30], [24, -4]];
+  chalkShape(c, curve(body, 3, true), col, OUT, LWD, { seed: sd + 4, sp: 8, ang: -0.9, base: 0.4 });
+  chalkLine(c, curve([[-50, -8], [-56, -38], [-30, -52], [-8, -30], [-6, -6]], 4), 4, OUT, { seed: sd + 5 });
+  for (let i = 0; i < 3; i++) chalkLine(c, [[-46 + i * 12, -70 + i * 4], [-36 + i * 12, -58 + i * 4]], 5, CH.brown, { seed: sd + 6 + i });
+  chalkShape(c, ellPts(-22, -4, 16, 6, 0, 10), col, OUT, 3, { seed: sd + 9, base: 0.6 });
+  // дальняя передняя лапа: от груди к полу, чуть впереди ближней
+  const leg = (P0, sd0) => { chalkLine(c, P0, 18, OUT, { seed: sd0, jit: 0.6 }); chalkLine(c, P0, 11, col, { seed: sd0 + 1, jit: 0.6 }); };
+  leg([[24, -62], [40, -32], [52, -8]], sd + 2);
+  chalkShape(c, ellPts(56, -6, 12, 6, 0, 10), col, OUT, 3, { seed: sd + 3, base: 0.6 });
+  // голова: при умывании наклоняется к лапе
+  const w = s.wash || 0, lick = s.lick || 0;
+  const hc = [30 + lick * 4, -118 + lick * 10], ht = -0.15 + lick * 0.25;
+  const hp = (p) => add(hc, rot(p, ht));
+  chalkShape(c, [hp([-26, -14]), hp([-20, -48]), hp([-4, -24])], col, OUT, 4, { seed: sd + 10, base: 0.6 });
+  chalkShape(c, [hp([6, -26]), hp([22, -50]), hp([26, -16])], col, OUT, 4, { seed: sd + 11, base: 0.6 });
+  chalkShape(c, ellPts(hc[0], hc[1], 34, 30, ht, 24), col, OUT, LWD, { seed: sd + 12, sp: 7, base: 0.45 });
+  chalkFill(c, [hp([16, -40]), hp([20, -46]), hp([22, -36])], CH.pink, { base: 0.9 });
+  const ey = (p) => { const q = hp(p); if (s.blink > 0.5 || lick > 0.5) chalkLine(c, curve([[q[0] - 6, q[1]], [q[0], q[1] + 3], [q[0] + 6, q[1]]], 3), 3, OUT, { seed: sd + 13 }); else chalkDot(c, q[0], q[1], 4.5, CH.green); };
+  ey([6, -6]); ey([24, -8]);
+  const ns = hp([32, 4]);
+  chalkDot(c, ns[0], ns[1], 4, CH.pink);
+  for (let i = -1; i <= 1; i += 2) chalkLine(c, [hp([28, 10]), hp([54, 8 + i * 8])], 2, OUT, { seed: sd + 14 + i, alpha: 0.7 });
+  if (lick > 0.5) chalkShape(c, ellPts(...hp([30, 16]), 5, 4, 0, 10), CH.pink, CH.pink, 2, { base: 0.9 });
+  // ближняя передняя лапа: от плеча к цели (у рта или у носа); локоть смотрит назад-вниз
+  // плечо → локоть вниз (не вперёд) → лапа к цели
+  const sh = [14, -80], el = [20, -44];
+  const paw = s.paw || [34, -8];
+  leg([sh, el, paw], sd + 16);
+  chalkShape(c, ellPts(paw[0] + 4, paw[1], 11, 7, 0, 12), col, OUT, 3, { seed: sd + 17, base: 0.6 });
+  GA = ga0; c.restore();
+}
+
+// ===== рука с мелком («кто-то тороватый») =====
+// tip — кончик мелка в мировых координатах; ang — наклон руки; рукав уходит за край кадра вверх-вправо
+function drawHand(c, tip, ang = 0, sc = 1, holding = "chalk", alpha = 1) {
+  c.save(); c.translate(tip[0], tip[1]); c.rotate(ang); c.scale(sc, sc); const ga0 = GA; GA *= alpha;
+  const sd = 700;
+  // рукав
+  chalkShape(c, [[96, -150], [380, -560], [520, -460], [176, -60]], CH.deep, OUT, 6, { seed: sd + 1, sp: 10, ang: 0.6 });
+  chalkLine(c, [[96, -150], [176, -60]], 12, CH.white, { seed: sd + 2 });
+  if (holding === "chalk") chalkShape(c, [[-4, -4], [8, -14], [62, -70], [50, -60]], CH.white, OUT, 3, { seed: sd + 3, base: 0.9, sp: 4 });
+  else chalkShape(c, cloudPts(0, -8, 46, 38, 7, 3), CH.white, CH.white, 3, { seed: sd + 3, base: 0.8, sp: 5, ang: 0.7 });
+  // ладонь и пальцы
+  const palm = [[40, -46], [72, -84], [120, -110], [170, -90], [180, -40], [140, -10], [90, -10], [56, -24]];
+  chalkShape(c, curve(palm, 3, true), CH.skin, OUT, 5, { seed: sd + 4, sp: 8, base: 0.45 });
+  chalkLine(c, curve([[54, -40], [30, -38], [22, -22], [38, -14], [70, -22]], 4), 13, CH.skin, { seed: sd + 5 });   // указательный
+  chalkLine(c, curve([[64, -78], [40, -64], [28, -46]], 4), 12, CH.skin, { seed: sd + 6 });                        // большой
+  chalkLine(c, curve([[54, -40], [30, -38], [22, -22], [38, -14], [70, -22]], 4), 2.5, OUT, { seed: sd + 7, alpha: 0.6 });
+  chalkLine(c, curve([[90, -12], [76, 4], [96, 10], [120, -6]], 4), 12, CH.skin, { seed: sd + 8 });
+  GA = ga0; c.restore();
+}
+
+// ---------- комната и двор ----------
+// Комната: мир 1920×1080, пол y = FLOOR. Окно — 16:9, через него виден двор с текущей камерой двора.
+const FLOOR = 792;
+const WIN = { x: 452, y: 236, w: 544, h: 306 };          // проём окна (16:9)
+const DOOR = { x: 1500, y: 300, w: 230, h: FLOOR - 300 };
+const GROUND = 690;                                       // земля во дворе
+
+// доля нарисованного: мел дописывает элемент от a до b
+const drawn = (t, a, d = 0.6) => sstep(prog(t, a, a + d));
+
+function drawRoom(c, t, R) {
+  const p0 = R.sketch;  // 0…1 — комната дорисовывается в начале
+  // пол
+  chalkLine(c, curve([[-400, FLOOR + 4], [300, FLOOR - 2], [900, FLOOR + 3], [1500, FLOOR - 1], [2400, FLOOR + 2]], 6), 6, CH.white, { seed: 11, prog: p0 });
+  for (let i = 0; i < 9; i++) chalkLine(c, [[-200 + i * 260, FLOOR + 10], [-260 + i * 260, FLOOR + 40]], 3, CH.brown, { seed: 12 + i, alpha: 0.6 * p0 });
+  // обои: редкие ромбики
+  for (let i = 13; i < 26; i++) {   // только нижний ряд: верх стены свободен под заголовок
+    const x = 80 + (i % 13) * 150 + (Math.floor(i / 13) % 2) * 75, y = 120 + Math.floor(i / 13) * 300;
+    if (x > WIN.x - 40 && x < WIN.x + WIN.w + 40 && y > WIN.y - 40) continue;
+    if (x > DOOR.x - 30 && x < DOOR.x + DOOR.w + 30 && y > DOOR.y - 30) continue;
+    chalkLine(c, [[x, y - 12], [x + 9, y], [x, y + 12], [x - 9, y], [x, y - 12]], 2.5, CH.violet, { seed: 30 + i, alpha: 0.4 * p0 });
+  }
+  // дверь
+  const d = DOOR;
+  chalkShape(c, [[d.x, d.y + d.h], [d.x, d.y], [d.x + d.w, d.y], [d.x + d.w, d.y + d.h]], CH.brown, CH.ochre, 6,
+             { seed: 60, sp: 12, ang: -1.5, base: 0.22, hatch: 0.45, prog: p0, alpha: p0 });
+  chalkLine(c, [[d.x + 26, d.y + 30], [d.x + d.w - 26, d.y + 30], [d.x + d.w - 26, d.y + 200], [d.x + 26, d.y + 200], [d.x + 26, d.y + 30]], 3, CH.ochre, { seed: 61, alpha: 0.7 * p0 });
+  chalkDot(c, d.x + d.w - 30, d.y + 270, 9, CH.yellow, p0);
+  // вешалка выше головы мамы: шапка, шарф и пальто девочки (в них она катается на горке)
+  chalkLine(c, [[d.x - 170, 236], [d.x - 20, 236]], 6, CH.ochre, { seed: 62, prog: p0 });
+  if (!R.hatGone) {
+    chalkShape(c, curve([[d.x - 150, 240], [d.x - 156, 300], [d.x - 128, 330], [d.x - 100, 300], [d.x - 104, 240]], 3, true), CH.red, OUT, 3, { seed: 65, alpha: p0, base: 0.5 });
+    chalkShape(c, curve([[d.x - 90, 244], [d.x - 86, 270], [d.x - 72, 290], [d.x - 52, 270], [d.x - 50, 244]], 3, true), CH.blue, OUT, 3, { seed: 63, alpha: p0, base: 0.5 });
+    chalkLine(c, [[d.x - 40, 240], [d.x - 36, 300], [d.x - 30, 336]], 12, CH.yellow, { seed: 64, prog: p0 });
+  }
+  // окно: проём, рама, подоконник, занавески
+  drawWindowFrame(c, t, R);
+}
+
+function drawWindowFrame(c, t, R) {
+  const p0 = R.sketch, w = WIN, fa = R.frameAlpha ?? 1;
+  const x0 = w.x, y0 = w.y, x1 = w.x + w.w, y1 = w.y + w.h;
+  // рама
+  chalkLine(c, [[x0 - 14, y1 + 2], [x0 - 14, y0 - 14], [x1 + 14, y0 - 14], [x1 + 14, y1 + 2]], 12, CH.ochre, { seed: 70, prog: p0, alpha: fa });
+  chalkLine(c, [[x0, y1], [x0, y0], [x1, y0], [x1, y1], [x0, y1]], 4, CH.white, { seed: 71, prog: p0, alpha: fa });
+  // переплёт крестом (бледнеет, когда камера пролетает сквозь окно)
+  const ca = fa * (R.crossAlpha ?? 1);
+  chalkLine(c, [[(x0 + x1) / 2, y0], [(x0 + x1) / 2, y1]], 7, CH.ochre, { seed: 72, prog: p0, alpha: ca });
+  chalkLine(c, [[x0, y0 + w.h * 0.36], [x1, y0 + w.h * 0.36]], 7, CH.ochre, { seed: 73, prog: p0, alpha: ca });
+  // подоконник
+  chalkShape(c, [[x0 - 40, y1], [x1 + 40, y1], [x1 + 30, y1 + 26], [x0 - 30, y1 + 26]], CH.ochre, CH.white, 4, { seed: 74, sp: 7, base: 0.4, alpha: fa * p0 });
+  // горшок с цветком на подоконнике
+  const fx = x0 + 70;
+  chalkShape(c, [[fx - 26, y1 - 46], [fx + 26, y1 - 46], [fx + 18, y1], [fx - 18, y1]], CH.red, OUT, 3, { seed: 75, base: 0.5, alpha: fa * p0 });
+  chalkLine(c, curve([[fx, y1 - 46], [fx - 4, y1 - 80], [fx + 4, y1 - 110]], 4), 4, CH.green, { seed: 76, alpha: fa * p0 });
+  chalkShape(c, ellPts(fx + 4, y1 - 120, 16, 14, 0, 12), CH.pink, OUT, 3, { seed: 77, base: 0.6, alpha: fa * p0 });
+  chalkShape(c, ellPts(fx + 22, y1 - 84, 16, 7, -0.5, 12), CH.green, null, 3, { seed: 78, base: 0.6, alpha: fa * p0 });
+  // занавески, собранные по бокам
+  const cur = (sx, s) => {
+    const P = [[sx, y0 - 30], [sx + s * 70, y0 - 30], [sx + s * 40, y0 + 120], [sx + s * 64, y1 + 10], [sx, y1 + 20]];
+    chalkShape(c, curve(P, 3, true), CH.pink, OUT, 4, { seed: 79 + s, sp: 9, ang: 1.3, base: 0.3, alpha: fa * p0 });
+    chalkLine(c, [[sx, y0 + 130], [sx + s * 46, y0 + 120]], 6, CH.yellow, { seed: 81 + s, alpha: fa * p0 });
+  };
+  cur(x0 - 74, 1); cur(x1 + 74, -1);
+  chalkLine(c, [[x0 - 100, y0 - 34], [x1 + 100, y0 - 34]], 6, CH.brown, { seed: 83, prog: p0, alpha: fa });
+}
+
+// облачко мысли: кружки-ступеньки от головы и облако
+function cloudPts(cx, cy, rx, ry, n = 9, seed = 1) {
+  const P = [], Rn = mulberry32(seed);
+  for (let i = 0; i < n; i++) {
+    const a0 = (i / n) * TAU, a1 = ((i + 1) / n) * TAU, bx = cx + Math.cos((a0 + a1) / 2) * rx, by = cy + Math.sin((a0 + a1) / 2) * ry;
+    const r = (Math.hypot(Math.cos(a0) * rx - Math.cos(a1) * rx, Math.sin(a0) * ry - Math.sin(a1) * ry) / 2) * (1.05 + Rn() * 0.2);
+    const ang = Math.atan2(by - cy, bx - cx);
+    for (let k = 0; k <= 6; k++) { const a = ang - Math.PI / 2 - 0.3 + (k / 6) * (Math.PI + 0.6); P.push([bx + Math.cos(a) * r, by + Math.sin(a) * r]); }
+  }
+  return P;
+}
+
+// ===== двор =====
+// Y: состояние двора. Длина двора ~8200; камера двора задаётся в main.js.
+const PUDDLES = [[300, 760, 120, 22], [760, 742, 150, 26], [1240, 770, 110, 20], [1700, 748, 90, 18]];
+const TREE_X = 2900, TREE_TOP = 120;
+const BUSHES = [3600, 3950, 4310, 4670, 5030];
+const HILL = { x0: 5850, top: [6900, 330], x1: 8050 };
+function hillY(x) {
+  if (x <= HILL.x0 || x >= HILL.x1) return GROUND;
+  if (x <= HILL.top[0]) { const u = (x - HILL.x0) / (HILL.top[0] - HILL.x0); return GROUND - (GROUND - HILL.top[1]) * (0.5 - 0.5 * Math.cos(u * Math.PI)); }
+  const u = (x - HILL.top[0]) / (HILL.x1 - HILL.top[0]); return GROUND - (GROUND - HILL.top[1]) * (0.5 + 0.5 * Math.cos(u * Math.PI));
+}
+// наклон склона (рад)
+const hillAng = (x) => Math.atan2(hillY(x + 4) - hillY(x - 4), 8);
+
+function drawYard(c, t, Y, view) {
+  // view: [xmin, xmax] — рисуем только то, что видно
+  const vis = (a, b) => b > view[0] - 200 && a < view[1] + 200;
+  const snow = Y.snow;      // 0…1 — белая волна прошла (доля по x)
+  const snowX = lerp(-300, 2300, snow);
+  // дальние дома и крыши
+  if (vis(-200, 2400)) {
+    const houses = [[60, 520, 260, 130], [420, 540, 200, 110], [1180, 510, 300, 140], [1640, 530, 220, 120], [2000, 520, 260, 130]];
+    houses.forEach(([x, y, w, h], i) => {
+      chalkLine(c, [[x, y + h], [x, y], [x + w, y], [x + w, y + h]], 4, CH.grey, { seed: 200 + i, alpha: 0.75 });
+      chalkLine(c, [[x - 16, y + 4], [x + w / 2, y - 64], [x + w + 16, y + 4]], 5, CH.red, { seed: 210 + i, alpha: 0.8 });
+      chalkShape(c, [[x + w * 0.4, y + 30], [x + w * 0.6, y + 30], [x + w * 0.6, y + 66], [x + w * 0.4, y + 66]], CH.yellow, CH.yellow, 3, { seed: 220 + i, base: 0.45, alpha: 0.8 });
+      // снежная шапка на крыше
+      const sx = x + w / 2, sa = sstep((snowX - x + 100) / 260);
+      if (sa > 0) chalkShape(c, curve([[x - 14, y + 2], [sx, y - 62], [x + w + 14, y + 2], [x + w - 10, y - 4], [sx, y - 48], [x + 10, y - 2]], 3, true), CH.white, CH.white, 3, { seed: 230 + i, base: 0.75, alpha: sa });
+    });
+  }
+  // забор
+  if (vis(-200, 2500)) {
+    for (let i = 0; i < 18; i++) {
+      const x = -100 + i * 140, top = 588 + (i % 2) * 6;
+      chalkShape(c, [[x, GROUND - 4], [x, top + 16], [x + 22, top], [x + 44, top + 16], [x + 44, GROUND - 4]], CH.brown, CH.ochre, 4, { seed: 240 + i, sp: 8, ang: -1.45, base: 0.22, hatch: 0.4 });
+      const sa = sstep((snowX - x + 40) / 200);
+      if (sa > 0) chalkShape(c, curve([[x - 4, top + 18], [x + 22, top - 8], [x + 48, top + 18], [x + 22, top + 6]], 3, true), CH.white, CH.white, 3, { seed: 260 + i, base: 0.85, alpha: sa });
+    }
+    chalkLine(c, [[-120, 626], [2420, 630]], 6, CH.ochre, { seed: 280, alpha: 0.8 });
+    chalkLine(c, [[-120, 676], [2420, 672]], 6, CH.ochre, { seed: 281, alpha: 0.8 });
+  }
+  // земля
+  chalkLine(c, curve([[view[0] - 300, GROUND + 4], [view[0] + 600, GROUND - 4], [view[0] + 1300, GROUND + 3], [view[1] + 300, GROUND]], 6), 6, CH.white, { seed: 290 });
+  // грязь и лужи (под снегом)
+  if (vis(-200, 2200)) {
+    PUDDLES.forEach(([x, y, rx, ry], i) => {
+      chalkShape(c, ellPts(x, y, rx, ry, 0, 26), CH.mud, CH.brown, 4, { seed: 300 + i, sp: 7, ang: 0.1, base: 0.45 });
+      chalkLine(c, [[x - rx * 0.5, y - 4], [x - rx * 0.1, y - 6]], 3, CH.blue, { seed: 310 + i, alpha: 0.7 });
+    });
+    for (let i = 0; i < 14; i++) { const x = 120 + i * 130, y = 712 + (i % 3) * 18; chalkLine(c, [[x, y], [x + 22, y - 4]], 6, CH.mud, { seed: 320 + i, alpha: 0.8 }); }
+    // белая волна: мел плашмя закрашивает двор
+    if (snow > 0) {
+      const top = [];
+      for (let x = -300; x <= snowX; x += 60) top.push([x, GROUND - 8 + Math.sin(x * 0.013) * 6]);
+      const edge = snowX, front = [];
+      for (let k = 0; k <= 12; k++) { const y = lerp(GROUND - 8, 1400, k / 12); front.push([edge + Math.sin(k * 1.9 + edge * 0.01) * 26 + (k < 3 ? 30 - k * 10 : 0) - Math.max(0, y - 860) * 0.6, y]); }
+      const P = [...top, ...front, [-300, 1400]];
+      chalkShape(c, P, CH.white, null, 0, { seed: 330, sp: 6, ang: -0.5, base: 0.82, hatch: 0.9, lw: 4 });
+      // сугробы-бугорки
+      for (let i = 0; i < 8; i++) { const x = -100 + i * 280; if (x < snowX - 60) chalkLine(c, curve([[x, GROUND + 2], [x + 60, GROUND - 22], [x + 130, GROUND]], 4), 4, CH.sky, { seed: 340 + i, alpha: 0.8 }); }
+      if (snow < 1) dust(c, snowX, GROUND + 40, Y.tSnow + (snow * 1.2) % 0.4, Y.tSnow + (snow * 1.2) % 0.4 + 0.5, 30, 110, CH.white, 31);
+    }
+  }
+  // градусник на столбе
+  if (vis(1500, 1800) && Y.thermo > 0) drawThermo(c, 1640, 360, Y.thermo, Y.merc);
+  // снежинки
+  if (Y.flakes > 0) drawFlakes(c, t, view, Y.flakes);
+  // дерево с инеем
+  if (vis(TREE_X - 900, TREE_X + 900)) drawTree(c, t, Y);
+  // кусты
+  if (vis(BUSHES[0] - 300, BUSHES[4] + 300)) BUSHES.forEach((x, i) => drawBush(c, t, x, i, Y.cotton[i]));
+  // горка
+  if (vis(HILL.x0 - 200, HILL.x1 + 200)) drawHill(c, t, Y);
+  // снег по всей земле после волны (кроме первого участка, где идёт волна)
+  if (snow >= 1) {
+    const x0 = Math.max(2100, view[0] - 200), x1 = view[1] + 200;
+    if (x1 > x0) {
+      const P = [];
+      for (let x = x0; x <= x1; x += 60) P.push([x, Math.min(GROUND, hillY(x)) - 8 + Math.sin(x * 0.013) * 5]);
+      P.push([x1, 1400], [x0, 1400]);
+      chalkShape(c, P, CH.white, null, 0, { seed: 350, sp: 6, ang: -0.5, base: 0.8, hatch: 0.85, lw: 4 });
+    }
+  }
+}
+
+function drawThermo(c, x, y, a, merc) {
+  // столбик-доска с градусником; merc: 1 тепло … 0 мороз
+  chalkLine(c, [[x, y + 40], [x, GROUND]], 12, CH.ochre, { seed: 400, alpha: a, prog: a });
+  chalkShape(c, curve([[x - 40, y - 140], [x + 40, y - 140], [x + 40, y + 70], [x - 40, y + 70]], 2, true), CH.white, OUT, 4, { seed: 401, base: 0.14, hatch: 0.2, alpha: a });
+  chalkLine(c, [[x, y - 118], [x, y + 30]], 16, CH.white, { seed: 402, alpha: a });
+  chalkDot(c, x, y + 42, 18, CH.red, a);
+  const top = lerp(y + 30, y - 110, merc);
+  chalkLine(c, [[x, y + 36], [x, top]], 9, CH.red, { seed: 403, alpha: a, jit: 0.4 });
+  for (let i = 0; i < 6; i++) chalkLine(c, [[x + 14, y - 106 + i * 26], [x + 28, y - 106 + i * 26]], 3, OUT, { seed: 404 + i, alpha: a * 0.8 });
+  chalkLine(c, [[x - 30, y - 16], [x - 14, y - 16]], 4, CH.blue, { seed: 411, alpha: a });   // «0»: ртуть ниже — мороз
+}
+
+function snowflake(c, x, y, r, rotA, col = CH.white, a = 1) {
+  for (let k = 0; k < 3; k++) {
+    const an = rotA + (k * Math.PI) / 3, dx = Math.cos(an) * r, dy = Math.sin(an) * r;
+    chalkLine(c, [[x - dx, y - dy], [x + dx, y + dy]], 2.6, col, { seed: 500 + k, alpha: a, jit: 0.3 });
+  }
+}
+function drawFlakes(c, t, view, a) {
+  const Rn = mulberry32(42);
+  for (let i = 0; i < 70; i++) {
+    const bx = Rn() * 9000 - 300, sp = 40 + Rn() * 50, ph = Rn() * 20, r = 6 + Rn() * 8;
+    const y = ((Rn() * 900 + (t + ph) * sp) % 900) - 40, x = bx + Math.sin(t * 0.9 + ph) * 30;
+    if (x < view[0] - 50 || x > view[1] + 50) continue;
+    snowflake(c, x, y, r, t * 0.6 + ph, CH.white, a * 0.85);
+  }
+}
+
+// дерево: ветки — ломаные; иней растёт ёлочкой вдоль веток
+const TREE = (() => {
+  const Rn = mulberry32(77), br = [];
+  const grow = (x, y, ang, len, depth) => {
+    const pts = [[x, y]]; let cx = x, cy = y, a = ang;
+    const n = Math.max(3, Math.round(len / 40));
+    for (let i = 0; i < n; i++) { a += (Rn() - 0.5) * 0.35; cx += Math.cos(a) * len / n; cy += Math.sin(a) * len / n; pts.push([cx, cy]); }
+    br.push({ pts, w: Math.max(3, depth * 5), depth });
+    if (depth > 1) {
+      const k = 2 + (depth > 2 ? 1 : 0);
+      for (let j = 0; j < k; j++) {
+        const at = pts[Math.floor(n * (0.4 + Rn() * 0.5))];
+        grow(at[0], at[1], a + (j % 2 ? 1 : -1) * (0.45 + Rn() * 0.5), len * (0.5 + Rn() * 0.2), depth - 1);
+      }
+    }
+  };
+  grow(TREE_X, GROUND, -Math.PI / 2, 420, 4.0);
+  br[0].w = 40;
+  return br;
+})();
+function drawTree(c, t, Y) {
+  TREE.forEach((b, i) => chalkLine(c, curve(b.pts, 3), b.w, CH.brown, { seed: 600 + i, jit: 1 }));
+  TREE.forEach((b, i) => { if (b.depth >= 3) chalkLine(c, curve(b.pts, 3), Math.max(2, b.w * 0.25), CH.ochre, { seed: 640 + i, alpha: 0.6 }); });
+  // снег на ветках
+  const sa = Y.treeSnow;
+  if (sa > 0) TREE.forEach((b, i) => { if (b.depth <= 3) chalkLine(c, curve(b.pts.map((p) => [p[0], p[1] - b.w * 0.5 - 2]), 3), 5, CH.white, { seed: 680 + i, alpha: sa, prog: sa }); });
+  // иней: голубые иголочки вдоль веток, растут от ствола к кончикам
+  const fr = Y.frost;
+  if (fr <= 0) return;
+  TREE.forEach((b, i) => {
+    if (b.depth > 3) return;
+    const P = curve(b.pts, 3), L = P.length;
+    for (let k = 1; k < L; k += 1) {
+      const u = k / (L - 1), on = clamp((fr * 1.25 - u * 0.6 - (3 - b.depth) * 0.12) * 4, 0, 1);
+      if (on <= 0) continue;
+      const p = P[k], q = P[k - 1], an = Math.atan2(p[1] - q[1], p[0] - q[0]), len = (9 + (k % 3) * 4) * on;
+      for (const s of [-1, 1]) {
+        const aa = an + s * 2.3;
+        chalkLine(c, [p, [p[0] + Math.cos(aa) * len, p[1] + Math.sin(aa) * len]], 2.4, k % 2 ? CH.blue : CH.white, { seed: 700 + i * 50 + k + s, jit: 0.3 });
+      }
+    }
+  });
+  // искры на кончиках
+  if (Y.sparkle > 0) {
+    TREE.forEach((b, i) => {
+      if (b.depth > 1.5) return;
+      const p = b.pts[b.pts.length - 1], tw = Math.max(0, Math.sin(t * 5 + i * 1.7)) * Y.sparkle;
+      if (tw < 0.2) return;
+      const r = 10 * tw;
+      chalkLine(c, [[p[0] - r, p[1]], [p[0] + r, p[1]]], 2.5, CH.yellow, { seed: 900 + i, jit: 0.2, alpha: tw });
+      chalkLine(c, [[p[0], p[1] - r], [p[0], p[1] + r]], 2.5, CH.yellow, { seed: 901 + i, jit: 0.2, alpha: tw });
+    });
+  }
+}
+
+// куст: голые прутья; ваты — пухлые комки, которые шлёпает рука
+function drawBush(c, t, x, idx, cot) {
+  const Rn = mulberry32(1000 + idx);
+  const twigs = [];
+  for (let k = 0; k < 9; k++) {
+    const a = -Math.PI / 2 + (k - 4) * 0.22 + (Rn() - 0.5) * 0.2, l = 120 + Rn() * 70;
+    twigs.push([[x + (k - 4) * 4, GROUND], [x + Math.cos(a) * l * 0.55, GROUND + Math.sin(a) * l * 0.55 - 6], [x + Math.cos(a) * l, GROUND + Math.sin(a) * l]]);
+  }
+  twigs.forEach((tw, k) => chalkLine(c, curve(tw, 3), 5, CH.brown, { seed: 1100 + idx * 20 + k }));
+  // cot: время шлепка (или null)
+  if (cot == null || t < cot) return;
+  const s = spr(springBounce, t, cot), puffs = [[0, -150, 70], [-62, -112, 52], [64, -116, 54], [-26, -70, 50], [36, -64, 46], [0, -196, 40]];
+  puffs.forEach(([dx, dy, r], k) => {
+    const sk = clamp(spr(springBounce, t, cot + k * 0.04) * 1.0, 0, 1.3);
+    if (sk <= 0.01) return;
+    const P = cloudPts(x + dx, GROUND + dy, r * sk, r * 0.86 * sk, 7, idx * 10 + k);
+    chalkShape(c, P, CH.white, CH.white, 3.5, { seed: 1200 + idx * 10 + k, sp: 5, ang: 0.7, base: 0.7, hatch: 0.8, lw: 2.6 });
+  });
+  if (s < 1.05) dust(c, x, GROUND - 130, cot, t, 22, 130, CH.white, idx + 9);
+}
+
+function drawHill(c, t, Y) {
+  const P = [];
+  for (let x = HILL.x0 - 100; x <= HILL.x1 + 100; x += 30) P.push([x, hillY(x)]);
+  chalkLine(c, P, 7, CH.white, { seed: 1300 });
+  const F = [...P, [HILL.x1 + 100, 1400], [HILL.x0 - 100, 1400]];
+  chalkShape(c, F, CH.white, null, 0, { seed: 1301, sp: 7, ang: -0.6, base: 0.55, hatch: 0.7, lw: 3.5 });
+  chalkShape(c, F, CH.sky, null, 0, { seed: 1302, sp: 22, ang: 0.8, base: 0, hatch: 0.35, lw: 3, under: false });
+  // ёлочки на горке
+  [[6250, 0.7], [6500, 0.9], [7350, 0.85], [7650, 0.65]].forEach(([x, k], i) => {
+    const y = hillY(x);
+    for (let j = 0; j < 3; j++) {
+      const w = (70 - j * 18) * k, top = y - (60 + j * 46) * k;
+      chalkShape(c, [[x - w, top + 60 * k], [x, top - 30 * k], [x + w, top + 60 * k]], CH.green, OUT, 3.5, { seed: 1310 + i * 3 + j, sp: 7, ang: 1.2, base: 0.4 });
+    }
+  });
+  // след салазок
+  if (Y.track) {
+    const [a, b] = Y.track, Q = [];
+    for (let x = a; x <= b; x += 30) Q.push([x, hillY(x) + 6]);
+    if (Q.length > 1) chalkLine(c, Q, 3, CH.sky, { seed: 1330, alpha: 0.9 });
+  }
+}
+
+// салазки: полозья загнуты вперёд; ang — наклон по склону
+function drawSled(c, x, y, ang, dir = 1, rope = null) {
+  c.save(); c.translate(x, y); c.rotate(ang); c.scale(dir, 1);
+  chalkLine(c, curve([[-70, 0], [50, 0], [76, -10], [80, -28], [66, -30]], 4), 6, CH.ochre, { seed: 1400 });
+  chalkLine(c, [[-50, 0], [-50, -24]], 5, CH.ochre, { seed: 1401 });
+  chalkLine(c, [[30, 0], [30, -24]], 5, CH.ochre, { seed: 1402 });
+  chalkShape(c, [[-74, -24], [56, -24], [56, -38], [-74, -38]], CH.red, OUT, 3.5, { seed: 1403, sp: 6, base: 0.45 });
+  c.restore();
+  if (rope) chalkLine(c, curve(rope, 4), 3, CH.white, { seed: 1404 });
+}
+
+// ---------- сцены по времени ----------
+const L = (n) => E[`L${n}`], EN = (n) => E[`E${n}`];
+const cv = document.getElementById("scene"), ctx = cv.getContext("2d");
+const LW = makeCanvas(W, H), lw = LW.getContext("2d");   // мел комнаты/двора (камера)
+const LY = makeCanvas(W, H), ly = LY.getContext("2d");   // двор в окне
+const LS = makeCanvas(W, H), ls = LS.getContext("2d");   // строки и заголовок
+const GL = makeCanvas(480, 270), gl = GL.getContext("2d");
+let PAT_B = null, PAT_W = null, PAT_S = null;
+
+// ===== ключевые моменты =====
+const T_TITLE0 = 0.35, T_TITLE1 = 2.0, T_AUTH1 = 2.75;
+const T_IN1 = L(4) + 0.25, T_IN0 = T_IN1 - 0.95;           // пролёт сквозь окно во двор
+const T_OUT0 = L(9) - 0.45, T_OUT1 = L(9) + 0.35;          // назад в комнату («Погляди хоть ты!»)
+const T_IN2_1 = L(10) + 0.15, T_IN2_0 = T_IN2_1 - 0.75;     // снова во двор, к кустам
+const T_WIPE0 = L(16) - 0.55, T_WIPE1 = L(16) + 0.2;       // губка стирает горку — дома
+const T_BUBBLE = E.w_vchera - 0.25, T_BUBBLE_OUT = EN(3) + 0.05;
+const T_RUN0 = L(13) - 0.2, T_HILL_TOP = E.w_veselo - 0.15, T_RIDE1 = T_WIPE0 + 0.15;
+const T_EXIT0 = E.fin - 0.2, T_EXIT1 = T_EXIT0 + 2.2;
+const T_FTITLE0 = E.fin + 0.2, T_FTITLE1 = T_FTITLE0 + 1.6;
+
+// ===== камеры =====
+// ключи камеры: [t, x, y, z]; между ключами — плавно (easeInOut), масштаб в логарифме
+function camKeys(K, t) {
+  if (t <= K[0][0]) return { x: K[0][1], y: K[0][2], z: K[0][3] };
+  for (let i = 1; i < K.length; i++) {
+    if (t <= K[i][0]) {
+      const a = K[i - 1], b = K[i], u = easeInOut(prog(t, a[0], b[0]));
+      return { x: lerp(a[1], b[1], u), y: lerp(a[2], b[2], u), z: Math.exp(lerp(Math.log(a[3]), Math.log(b[3]), u)) };
+    }
+  }
+  const k = K[K.length - 1]; return { x: k[1], y: k[2], z: k[3] };
+}
+const ROOM_K = [
+  [0, 960, 420, 0.9], [V0() - 0.9, 960, 420, 0.9], [E.w_mama + 0.4, 1180, 470, 1.12], [E.w_okoshka, 900, 440, 1.2],
+  [T_BUBBLE + 0.3, 1220, 560, 1.2], [EN(3) - 0.2, 1240, 560, 1.24],
+  // назад в комнату в L9 — общий план с мамой
+  [T_OUT1, 1000, 470, 1.0], [T_IN2_0, 900, 430, 1.1],
+  // после губки — девочка и мама
+  [T_WIPE0, 1240, 500, 1.15], [T_WIPE1, 1240, 500, 1.15], [E.w_otkazh, 1180, 470, 1.25], [L(17), 1320, 440, 1.3], [E.w_nu - 0.1, 1300, 470, 1.15],
+  [E.fin, 1150, 470, 1.0], [T_FTITLE0 + 0.5, 960, 380, 0.82]
+];
+function V0() { return E.V0; }
+const winCam = { x: WIN.x + WIN.w / 2, y: WIN.y + WIN.h / 2, z: W / WIN.w };
+// доля пролёта сквозь окно: 0 — комната, 1 — двор во весь кадр
+function winZoom(t) {
+  if (t < T_IN0) return 0;
+  if (t < T_IN1) return easeIn(prog(t, T_IN0, T_IN1)) * 0.35 + 0.65 * sstep(prog(t, T_IN0, T_IN1)) ;
+  if (t < T_OUT0) return 1;
+  if (t < T_OUT1) return 1 - sstep(prog(t, T_OUT0, T_OUT1));
+  if (t < T_IN2_0) return 0;
+  if (t < T_IN2_1) return sstep(prog(t, T_IN2_0, T_IN2_1));
+  if (t < T_WIPE0) return 1;
+  return 0;
+}
+function roomCam(t) {
+  const c0 = camKeys(ROOM_K, t), k = winZoom(t);
+  c0.y = Math.max(c0.y, FLOOR - 262 / c0.z);   // пол не уходит под строки
+  if (k <= 0) return c0;
+  // наезд на окно: центр и масштаб к раме; масштаб в логарифме, центр так, чтобы окно росло ровно
+  const z = Math.exp(lerp(Math.log(c0.z), Math.log(winCam.z), k));
+  const kk = (z - c0.z) / (winCam.z - c0.z || 1);
+  return { x: lerp(c0.x, winCam.x, kk), y: lerp(c0.y, winCam.y, kk), z };
+}
+// камера двора; позиция героини на горке нужна для слежения
+const YARD_K = () => [
+  [0, 960, 540, 1], [E.w_odelo, 960, 540, 1], [E.w_pobel + 0.3, 1150, 520, 1.02], [E.w_vidno - 0.05, 1500, 460, 1.3], [E.w_moroz + 0.4, 1580, 430, 1.38],
+  [L(7) - 0.05, 2860, 440, 1.0], [L(8), 2820, 330, 1.3], [EN(8) + 0.1, 2840, 280, 1.55],
+  // пока мы в комнате, двор в окне уезжает к кустам
+  [T_OUT1, 2830, 380, 1.15], [T_IN2_0, 2830, 380, 1.15], [T_IN2_1 + 0.3, 3650, 470, 1.0], [E.w_svezh, 3670, 480, 1.0], [E.w_vatoy, 4290, 470, 1.0],
+  [E.w_vse + 0.1, 4350, 450, 0.82], [EN(12) + 0.2, 4350, 450, 0.82], [T_RUN0 - 0.15, 5450, 480, 0.95]
+];
+let YK = null;
+function yardCam(t) {
+  if (!YK) YK = YARD_K();
+  if (t < T_RUN0 + 0.9) return camKeys(YK, t);
+  const g = sledGirl(t);
+  const c1 = { x: g.x + 120, y: Math.min(480, g.y - 160), z: 0.95 };
+  const c0 = camKeys(YK, T_RUN0 + 0.9), u = sstep(prog(t, T_RUN0 + 0.9, T_RUN0 + 1.8));
+  return { x: lerp(c0.x, c1.x, u), y: lerp(c0.y, c1.y, u), z: c1.z };
+}
+
+// ===== ходьба: ступни в точках мира =====
+// x0 — откуда пошёл, x — где тело; SL — шаг; dir — направление. Возвращает мировые x ступней и подъём.
+function walkFeet(x0, x, dir, SL, lift) {
+  const d = Math.max(0, (x - x0) * dir), out = [];
+  for (let j = 0; j < 2; j++) {
+    const cyc = (d / SL + j) / 2, n = Math.floor(cyc), f = cyc - n;
+    const Xp = (m) => x0 + dir * (2 * m + 0.5 - j) * SL;
+    if (f < 0.5) out.push([Xp(n), 0]);
+    else { const u = (f - 0.5) * 2; out.push([lerp(Xp(n), Xp(n + 1), easeInOut(u)), Math.sin(u * Math.PI) * lift]); }
+  }
+  return out;  // [far, near]
+}
+
+// ===== девочка в комнате =====
+const STOOL_X = 1060, STOOL_TOP = FLOOR - 82;
+function roomGirl(t) {
+  const s = girlDefault();
+  s.seed = 1; s.sc = 1;
+  const blink = (a) => (Math.abs(((t + a) % 3.1) - 0.1) < 0.07 ? 1 : 0);
+  if (t < T_WIPE0) {
+    // на табурете у окна
+    s.x = STOOL_X; s.y = STOOL_TOP; s.face = -1; s.blink = blink(0.4);
+    s.feet = [[-12, 0], [14, 0]];
+    s.hands = [[52, -126], [30, -112]];   // дальняя ладонь у живота — не под показывающей рукой
+    s.bob = Math.sin(t * 3) * 1.5;
+    s.sway = Math.sin(t * 2.2) * 0.4;
+    // «Мама!» — поворот к маме и взмах
+    const turn = t > E.w_mama - 0.12 && t < E.w_glyan - 0.05;
+    if (turn) {
+      s.face = 1; s.mouth = 0.8;
+      const wv = Math.sin((t - E.w_mama) * 18);
+      s.hands[1] = [42 + wv * 8, -210 + wv * 6]; s.hands[0] = [40, -132]; s.farFront = true;
+      s.tilt = -0.08; s.bob += bump(t, E.w_mama - 0.1, 0.4) * -8;
+    } else if (t >= E.w_glyan - 0.05 && t < T_OUT0) {
+      // показывает в окно; оглядывается на маму в «Погляди хоть ты!»
+      const pt = sstep(prog(t, E.w_glyan - 0.05, E.w_glyan + 0.25));
+      s.hands[1] = [lerp(30, 84, pt), lerp(-112, -186, pt)];
+      s.mouth = t < EN(1) ? 0.5 : 0;
+      s.look = 0.6;
+      // вспоминает кошку: пальчик у подбородка
+      if (t > T_BUBBLE && t < T_BUBBLE_OUT) { s.tilt = -0.12; s.look = 0.2; s.hands[1] = [52, -196]; s.hands[0] = [44, -168]; s.mouth = 0.3; }
+    }
+    if (t >= T_OUT0) {
+      // «Погляди хоть ты!» — оборачивается к маме и зовёт рукой
+      const call = t < E.w_ty + 0.6;
+      s.face = call ? 1 : -1;
+      if (call) { const wv = Math.sin((t - E.w_pogl) * 14); s.hands[1] = [56 + wv * 14, -150 + wv * 10]; s.hands[0] = [40, -124]; s.mouth = 0.6; s.look = 0.3; }
+      else { s.hands[1] = [80, -190]; s.hands[0] = [52, -126]; s.mouth = 0.2; s.look = 0.6; }
+    }
+    s.stool = true;
+    return s;
+  }
+  // после губки: на полу, просит маму
+  s.x = 1200; s.y = FLOOR; s.face = 1; s.blink = blink(0.9);
+  s.feet = [[-12, 0], [14, 0]];
+  const hop = Math.abs(Math.sin((t - T_WIPE1) * 7)) * 6 * (t < L(17) ? 1 : 0.3);
+  s.bob = -hop;
+  s.hands = [[30, -150], [34, -144]]; s.farFront = true;   // ладошки у груди — «ну пожалуйста»
+  s.tilt = -0.14 + Math.sin(t * 3) * 0.04; s.look = 0.6; s.mouth = t < EN(16) ? 0.4 : 0;
+  s.sway = Math.sin(t * 7) * 0.6;
+  // «гулять!» — прыжок, руки вверх
+  if (t >= E.w_gulyat - 0.1) {
+    const j = bump(t, E.w_gulyat - 0.1, 0.55);
+    const k = sstep(prog(t, E.w_gulyat - 0.1, E.w_gulyat + 0.05)) * (1 - sstep(prog(t, E.w_gulyat + 0.6, E.w_gulyat + 0.9)));
+    s.bob = -j * 90; s.hands = [[lerp(30, 76, k), lerp(-150, -252, k) + s.bob], [lerp(34, -64, k), lerp(-144, -248, k) + s.bob]];   // руки буквой V — за контуром головы
+    s.farFront = k < 0.5; s.mouth = 0.9; s.tilt = 0;
+    if (j > 0) { s.feet = [[-10, -j * 72], [12, -j * 72]]; s.jump = j * 80; }
+  }
+  if (t > T_EXIT0) {
+    const x = lerp(1200, 1630, easeInOut(prog(t, T_EXIT0, T_EXIT0 + 1.3)));
+    const f = walkFeet(1200, x, 1, 46, 14);
+    s.x = x; s.feet = f.map(([fx, fy]) => [fx - x, -fy]);
+    s.bob = -Math.abs(Math.sin((x - 1200) / 46 * Math.PI)) * 6;
+    s.hands = [[42 + Math.sin(x / 30) * 8, -112], [-34 - Math.sin(x / 30) * 10, -110]]; s.farFront = false;
+    s.mouth = 0.3; s.tilt = 0;
+    if (t > T_EXIT0 + 0.3) { s.outfit = "coat"; s.scarf = 0.4; }   // мел «переодевает» её в пальто с вешалки
+    s.alpha = 1 - sstep(prog(t, T_EXIT0 + 1.15, T_EXIT0 + 1.5));
+  }
+  return s;
+}
+
+// ===== мама =====
+const MOM_X0 = 1610, MOM_X1 = 1290;
+function roomMom(t) {
+  const s = momDefault();
+  s.face = -1; s.x = MOM_X0; s.y = FLOOR; s.steam = t;
+  s.hands = [[56, -240], [46, -266]]; s.cup = 1;   // чашка в ближней руке, дальняя придерживает снизу (из-за туловища)
+  s.blink = Math.abs(((t + 1.3) % 3.7) - 0.1) < 0.07 ? 1 : 0;
+  s.look = 0.4;
+  if (t > E.w_mama && t < T_IN0) { s.tilt = 0.06; s.mouth = t > E.w_okoshka - 0.2 && t < EN(1) + 0.3 ? 0.4 : 0; }
+  if (t < T_WIPE0) {
+    // «Погляди хоть ты!» — идёт к окну и наклоняется, ахает
+    if (t >= T_OUT0) {
+      const u = easeInOut(prog(t, E.w_pogl - 0.1, E.w_ty + 0.5));
+      const x = lerp(MOM_X0, MOM_X1, u);
+      const f = walkFeet(MOM_X0, x, -1, 52, 10);
+      s.x = x; s.feet = f.map(([fx]) => (fx - x) * -1); s.step = Math.sin(((MOM_X0 - x) / 52) * Math.PI);
+      s.sway = Math.sin(((MOM_X0 - x) / 52) * Math.PI) * 0.6;
+      const bend = sstep(prog(t, E.w_ty + 0.3, E.w_ty + 0.8));
+      s.lean = bend * 0.28; s.mouth = bend * 0.7; s.tilt = bend * 0.08;   // «ах!» — наклон и открытый рот, чашка в руках
+    }
+    return s;
+  }
+  // дома после губки: мама у двери, слушает дочку
+  s.x = 1470; s.face = -1; s.cup = 0;
+  s.hands = [[70, -252], [-28, -226]];   // ближняя рука на поясе, дальняя ладонью вперёд — «ну-ну»
+  s.tilt = 0.05; s.look = 0.6;
+  if (t > L(17) - 0.1) { s.smileEyes = t > E.w_sama; s.hands = [[54, -262], [58, -338]]; s.tilt = -0.05 + Math.sin(t * 2) * 0.03; }  // хитро подпирает щёку
+  if (t > E.w_nu - 0.1) { s.mouth = t < EN(18) + 0.1 ? 0.7 : 0; s.hands = [[58, -250], [96, -300 + Math.sin(t * 9) * 14]]; s.smileEyes = 1; }
+  if (t > T_EXIT0 + 0.3) {
+    s.face = 1;
+    const x = lerp(1470, 1640, easeInOut(prog(t, T_EXIT0 + 1.2, T_EXIT1)));
+    const f = walkFeet(1470, x, 1, 52, 10);
+    s.x = x; s.feet = f.map(([fx]) => fx - x); s.step = Math.sin(((x - 1470) / 52) * Math.PI); s.hat = prog(t, T_EXIT0 + 0.3, T_EXIT0 + 0.9);
+    const sw2 = Math.sin(((x - 1470) / 52) * Math.PI); s.hands = [[54 + sw2 * 10, -244], [-36 - sw2 * 10, -244]]; s.farFront = false; s.mouth = 0; s.smileEyes = 1;
+    s.alpha = 1 - sstep(prog(t, T_EXIT1 - 0.5, T_EXIT1));
+  }
+  return s;
+}
+
+// ===== кошка: умывается в облачке и в финале на подоконнике =====
+function catState(t, x, y, sc, t0) {
+  const u = Math.max(0, t - t0), cyc = (u * 1.6) % 1;
+  // лизнуть лапу (у рта) → провести по носу → опустить
+  let paw = [34, -8], lick = 0;
+  if (u > 0) {
+    if (cyc < 0.35) { const k = sstep(cyc / 0.25); paw = [lerp(34, 52, k), lerp(-8, -96, k)]; lick = k > 0.8 ? 1 : 0; }
+    else if (cyc < 0.75) { const k = sstep((cyc - 0.35) / 0.4); paw = [lerp(52, 58, k), lerp(-96, -124, k)]; }
+    else { const k = sstep((cyc - 0.75) / 0.25); paw = [lerp(58, 34, k), lerp(-124, -8, k)]; }
+  }
+  return { x, y, sc, face: 1, paw, lick, wag: Math.sin(t * 2.4), blink: lick };
+}
+
+// ===== девочка на горке =====
+const GIRL_X0 = 4380;   // левее левого края кадра (камера 5450, z 0.95): вбегает из-за края
+function sledGirl(t) {
+  const x0 = GIRL_X0, xTop = HILL.top[0] - 10;
+  let x, mode;
+  if (t < T_HILL_TOP) { x = lerp(x0, xTop, easeInOut(prog(t, T_RUN0, T_HILL_TOP)) * 0.15 + 0.85 * prog(t, T_RUN0, T_HILL_TOP)); mode = "walk"; }
+  else if (t < E.w_veselo + 0.12) { x = xTop; mode = "sit"; }
+  else { x = lerp(xTop, HILL.x1 - 120, easeIn(prog(t, E.w_veselo + 0.12, T_RIDE1)) * 0.6 + 0.4 * prog(t, E.w_veselo + 0.12, T_RIDE1)); mode = "ride"; }
+  return { x, y: hillY(x), mode };
+}
+function drawSledScene(c, t) {
+  if (t < T_RUN0 || t > T_WIPE1 + 0.05) return;
+  const g = sledGirl(t), s = girlDefault();
+  s.outfit = "coat"; s.seed = 2; s.sc = 0.95; s.face = 1;
+  if (g.mode === "walk") {
+    const f = walkFeet(GIRL_X0, g.x, 1, 78, 26);
+    const ang = hillAng(g.x);
+    s.lean = 0.18 + Math.max(0, -ang) * 0.4;
+    s.feet = f.map(([fx, fy]) => [fx - g.x, hillY(fx) - g.y - fy]);
+    const ph = ((g.x - GIRL_X0) / 78) * Math.PI;
+    s.bob = -Math.abs(Math.sin(ph)) * 7;
+    s.hands = [[46 + Math.sin(ph) * 12, -118], [-30, -104]];   // ближняя рука тянет верёвку назад
+    s.mouth = 0.4; s.scarf = 0.5 + Math.sin(ph) * 0.2; s.sway = Math.sin(ph) * 0.5;
+    s.x = g.x; s.y = g.y;
+    // салазки сзади на верёвке
+    const sx = g.x - 150, sy = hillY(sx);
+    const hand = [g.x + (-30) * s.sc, g.y + (-104 + s.bob) * s.sc];
+    drawSled(c, sx, sy, hillAng(sx), 1, [hand, [(hand[0] + sx + 70) / 2, (hand[1] + sy - 30) / 2 + 20], [sx + 72, sy - 28]]);
+    drawGirl(c, s);
+    return;
+  }
+  // сидит на салазках и мчит вниз
+  const ang = g.mode === "ride" ? hillAng(g.x) : 0, sp = g.mode === "ride" ? prog(t, E.w_veselo + 0.12, T_RIDE1) : 0;
+  c.save(); c.translate(g.x, g.y); c.rotate(ang);
+  drawSled(c, 0, 0, 0, 1, null);
+  s.x = -6; s.y = 10; s.sit = 1; s.lean = -0.08 - sp * 0.12; s.farFront = true;
+  s.feet = [[86, -40], [60, -22]];
+  s.hands = [[54, -72], [62, -68]];
+  chalkLine(c, curve([[62 * s.sc - 6, -68 * s.sc + 10], [72, -40], [80, -30]], 4), 3, CH.white, { seed: 1405 });
+  s.mouth = g.mode === "ride" ? 1 : 0.3; s.scarf = g.mode === "ride" ? 1 : 0.2; s.sway = g.mode === "ride" ? 1.4 : 0;
+  drawGirl(c, s);
+  c.restore();
+  if (g.mode === "ride") {
+    // линии скорости и снежный хвост
+    for (let i = 0; i < 6; i++) {
+      const yy = g.y - 30 - i * 26, len = 120 + (i % 3) * 60;
+      chalkLine(c, [[g.x - 140 - i * 12, yy], [g.x - 140 - len - i * 12, yy - Math.tan(ang) * len]], 3, CH.white, { seed: 1500 + i, alpha: 0.7 * sstep(sp * 5) });
+    }
+    dust(c, g.x - 70, g.y - 6, E.w_veselo + 0.15, t, 40, 160, CH.white, 77);
+  }
+}
+
+// ===== рука с ватой =====
+const SLAPS = () => [E.w_svezh, E.w_beloy, E.w_puhl, E.w_vatoy, E.w_vse];
+function handState(t) {
+  const S = SLAPS(), t0 = E.w_slovno - 0.15, t1 = EN(12) + 0.35;
+  if (t < t0 || t > t1 + 0.6) return null;
+  // путь: влетает сверху-справа, показывает комок ваты («тороватый»), затем шлёпает по кустам
+  let tip = [4500, -200], ang = 0, hold = "cotton";
+  const enter = spr(springSoft, t, t0);
+  tip = [lerp(4250, BUSHES[0] + 60, enter), lerp(-300, 330 + Math.sin(t * 4) * 12, enter)];
+  if (t > E.w_torov - 0.1 && t < S[0] - 0.3) ang = Math.sin((t - E.w_torov) * 10) * 0.08;
+  for (let i = 0; i < 5; i++) {
+    const a = S[i] - 0.28, b = S[i];
+    const prevX = i ? BUSHES[i - 1] + 60 : BUSHES[0] + 60;
+    if (t >= a) {
+      const u = prog(t, a, b);
+      tip = [lerp(prevX, BUSHES[i] + 60, easeInOut(u)), lerp(330, GROUND - 150, easeIn(u))];
+      if (t > b) { const r = prog(t, b, b + 0.25); tip = [BUSHES[i] + 60, lerp(GROUND - 150, 330, easeOut(r))]; }
+    }
+  }
+  if (t > t1) tip = [tip[0] + (t - t1) * 1600, tip[1] - (t - t1) * 1800];
+  return { tip, ang, hold };
+}
+
+// ===== строки мелом =====
+const FONT_L = '700 60px "Caveat"', LINE_Y0 = 872, LINE_DY = 66;
+const KEYCOL = { pink: CH.pink, yellow: CH.yellow, ochre: CH.ochre, white: "#ffffff", blue: CH.blue, green: CH.green };
+function blockOf(n) { return CFG.blocks.findIndex((b) => b.includes(n)); }
+function drawCaptions(c, t) {
+  const B = CFG.blocks, lines = CFG.lines;
+  for (let bi = 0; bi < B.length; bi++) {
+    const first = lines[B[bi][0] - 1], nextB = B[bi + 1];
+    const tOn = first.s - 0.12;
+    const tOff = nextB ? lines[nextB[0] - 1].s - 0.45 : E.fin + 0.3;
+    if (t < tOn || t > tOff + 0.3) continue;
+    const fade = 1 - sstep(prog(t, tOff, tOff + 0.3)), smear = prog(t, tOff, tOff + 0.3) * 40;
+    c.save(); c.font = FONT_L; c.textBaseline = "middle"; c.globalAlpha = fade;
+    B[bi].forEach((n, li) => {
+      const l = lines[n - 1], y = LINE_Y0 + li * LINE_DY;
+      const widths = l.w.map((w) => c.measureText(w.t).width), sp = c.measureText(" ").width;
+      const tot = widths.reduce((a, b) => a + b, 0) + sp * (l.w.length - 1);
+      let x = W / 2 - tot / 2;
+      l.w.forEach((w, k) => {
+        const d = clamp(w.e - w.s, 0.16, 0.34), u = prog(t, w.s - 0.08, w.s - 0.08 + d);
+        if (u > 0) {
+          c.save(); c.beginPath(); c.rect(x - 10, y - 50, (widths[k] + 20) * u, 100); c.clip();
+          c.fillStyle = w.k ? KEYCOL[w.k] : CH.white;
+          c.fillText(w.t, x + smear, y);
+          c.restore();
+        }
+        x += widths[k] + sp;
+      });
+    });
+    c.restore();
+  }
+}
+// тёмная «вымытая» полоса под строками
+function drawBand(c, t) {
+  const on = sstep(prog(t, CFG.lines[0].s - 0.5, CFG.lines[0].s)) * (1 - sstep(prog(t, E.fin + 0.2, E.fin + 0.7)));
+  if (on <= 0) return;
+  const g = c.createLinearGradient(0, 800, 0, 860);
+  g.addColorStop(0, "rgba(20,38,30,0)"); g.addColorStop(1, `rgba(20,38,30,${0.86 * on})`);
+  c.fillStyle = g; c.fillRect(0, 800, W, 60);
+  c.fillStyle = `rgba(20,38,30,${0.86 * on})`; c.fillRect(0, 860, W, H - 860);
+}
+
+// заголовок мелом: пишется слева направо (u 0…1)
+const TITLE = "Мама! глянь-ка из окошка…";
+function drawTitle(c, x, y, size, u, ua, authSize, alpha = 1) {
+  c.save(); c.globalAlpha = alpha; c.textAlign = "left"; c.textBaseline = "alphabetic";
+  c.font = `700 ${size}px "Amatic SC"`;
+  const w = c.measureText(TITLE).width, x0 = x - w / 2;
+  c.save(); c.beginPath(); c.rect(x0 - 20, y - size * 1.1, (w + 40) * u, size * 1.5); c.clip();
+  c.fillStyle = CH.white; c.fillText(TITLE, x0, y); c.restore();
+  // подчёркивание волной
+  const ul = []; for (let i = 0; i <= 30; i++) ul.push([x0 + (w * i) / 30, y + size * 0.16 + Math.sin(i * 0.9) * 3]);
+  chalkLine(c, ul, size * 0.04, CH.yellow, { prog: sstep((u - 0.6) / 0.4), seed: 33 });
+  c.font = `700 ${authSize}px "Caveat"`;
+  const AU = "Афанасий Фет · 1887", aw = c.measureText(AU).width;
+  c.save(); c.beginPath(); c.rect(x - aw / 2 - 10, y + size * 0.2, (aw + 20) * ua, authSize * 1.6); c.clip();
+  c.fillStyle = CH.sky; c.fillText(AU, x - aw / 2, y + size * 0.22 + authSize); c.restore();
+  c.restore();
+  return { x0, w };
+}
+
+// ===== кадр =====
+const camMat = (cam) => [cam.z, 0, 0, cam.z, W / 2 - cam.x * cam.z, H / 2 - cam.y * cam.z];
+function setCam(c, cam) { c.setTransform(...camMat(cam)); }
+function boardFill(c, m) {
+  PAT_B.setTransform(new DOMMatrix(m));
+  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = PAT_B; c.fillRect(0, 0, W, H); c.restore();
+}
+function grain(c, pat, m) {
+  pat.setTransform(new DOMMatrix(m));
+  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalCompositeOperation = "destination-in"; c.fillStyle = pat; c.fillRect(0, 0, W, H); c.restore();
+}
+function composite(layer, a = 1) {
+  gl.clearRect(0, 0, 480, 270); gl.drawImage(layer, 0, 0, 480, 270);
+  ctx.save(); ctx.globalAlpha = 0.22 * a; ctx.drawImage(GL, 0, 0, W, H); ctx.globalAlpha = a; ctx.drawImage(layer, 0, 0); ctx.restore();
+}
+const mul = (A, B) => [A[0] * B[0] + A[2] * B[1], A[1] * B[0] + A[3] * B[1], A[0] * B[2] + A[2] * B[3], A[1] * B[2] + A[3] * B[3], A[0] * B[4] + A[2] * B[5] + A[4], A[1] * B[4] + A[3] * B[5] + A[5]];
+
+function yardState(t) {
+  return {
+    snow: sstep(prog(t, E.w_odelo - 0.1, E.w_pobel + 0.5)), tSnow: t,
+    thermo: sstep(prog(t, E.w_vidno - 0.2, E.w_vidno + 0.3)),
+    merc: 1 - spr(springSoft, t, E.w_moroz - 0.05),
+    flakes: sstep(prog(t, E.w_moroz, E.w_moroz + 0.6)),
+    treeSnow: 1,
+    frost: sstep(prog(t, L(7) - 0.1, EN(8) + 0.1)),
+    sparkle: sstep(prog(t, E.w_iney - 0.2, E.w_iney + 0.3)),
+    cotton: SLAPS(),
+    track: t > E.w_veselo + 0.12 ? [HILL.top[0], sledGirl(t).x] : null
+  };
+}
+function yardView(cam) { const hw = W / 2 / cam.z; return [cam.x - hw, cam.x + hw]; }
+function drawYardAll(c, t, cam) {
+  drawYard(c, t, yardState(t), yardView(cam));
+  drawSledScene(c, t);
+  const h = handState(t);
+  if (h) drawHand(c, h.tip, h.ang, 1.7, h.hold);
+}
+
+// комната со всем содержимым (в мировых координатах комнаты)
+function drawRoomAll(c, t) {
+  const R = { sketch: sstep(prog(t, 0.05, 1.5)), crossAlpha: 1 - sstep(prog(winZoom(t), 0.35, 0.8)), hatGone: t > T_EXIT0 + 0.3 };
+  drawRoom(c, t, R);
+  // дверь открывается на выходе
+  const dOpen = sstep(prog(t, T_EXIT0 + 0.5, T_EXIT0 + 0.95)) * (1 - sstep(prog(t, T_EXIT1 + 0.1, T_EXIT1 + 0.5)));
+  if (dOpen > 0) {
+    const d = DOOR;
+    chalkShape(c, [[d.x + 8, d.y + 8], [d.x + d.w - 8, d.y + 8], [d.x + d.w - 8, d.y + d.h], [d.x + 8, d.y + d.h]], CH.cream, null, 0, { seed: 90, base: 0.5 * dOpen, hatch: 0.7 * dOpen, sp: 9 });
+    chalkShape(c, [[d.x, d.y], [d.x + d.w * (1 - dOpen * 0.75), d.y + 24 * dOpen], [d.x + d.w * (1 - dOpen * 0.75), d.y + d.h - 10 * dOpen], [d.x, d.y + d.h]], CH.brown, CH.ochre, 5, { seed: 91, base: 0.5, sp: 10, ang: -1.5 });
+  }
+  // табурет
+  const st = sstep(prog(t, 0.4, 1.4));
+  chalkShape(c, [[STOOL_X - 60, STOOL_TOP], [STOOL_X + 60, STOOL_TOP], [STOOL_X + 60, STOOL_TOP + 16], [STOOL_X - 60, STOOL_TOP + 16]], CH.ochre, OUT, 4, { seed: 95, base: 0.5, alpha: st });
+  chalkLine(c, [[STOOL_X - 48, STOOL_TOP + 16], [STOOL_X - 56, FLOOR]], 9, CH.ochre, { seed: 96, alpha: st });
+  chalkLine(c, [[STOOL_X + 48, STOOL_TOP + 16], [STOOL_X + 56, FLOOR]], 9, CH.ochre, { seed: 97, alpha: st });
+  // меловая пыль: девочка одевается
+  if (t > T_EXIT0 + 0.1 && t < T_EXIT0 + 1.8) { const gx = lerp(1200, 1630, easeInOut(prog(T_EXIT0 + 0.3, T_EXIT0, T_EXIT0 + 1.3))); dust(c, gx, FLOOR - 160, T_EXIT0 + 0.3, t, 34, 120, CH.white, 66); }
+  // кошка на подоконнике в финале
+  if (t > T_EXIT0) {
+    const a = sstep(prog(t, T_EXIT0, T_EXIT0 + 0.6));
+    drawCat(c, { ...catState(t, WIN.x + WIN.w - 120, WIN.y + WIN.h, 0.62, T_EXIT0 + 0.3), alpha: a });
+  }
+  // мама и девочка: появляются в начале
+  const pop = spr(springPop, t, 0.9), pop2 = spr(springPop, t, 1.15);
+  const m = roomMom(t), g = roomGirl(t);
+  if (pop2 > 0.01) { m.sc *= 0.75 + 0.25 * clamp(pop2, 0, 1.2); m.alpha = (m.alpha ?? 1) * clamp(pop2 * 1.6, 0, 1); drawMom(c, m); }
+  if (pop > 0.01) { g.sc *= 0.75 + 0.25 * clamp(pop, 0, 1.2); g.alpha = (g.alpha ?? 1) * clamp(pop * 1.6, 0, 1); drawGirl(c, g); }
+  // облачко мысли с кошкой («вчера»)
+  if (t > T_BUBBLE && t < T_BUBBLE_OUT + 0.4) {
+    const k = spr(springPop, t, T_BUBBLE), out = sstep(prog(t, T_BUBBLE_OUT, T_BUBBLE_OUT + 0.3));
+    const cx = 1335, cy = 330, sc = k * (1 + out * 0.25), a = 1 - out;
+    // кружки-ступеньки от головы
+    [[1112, 418, 9], [1140, 392, 13], [1172, 368, 18]].forEach(([x, y, r], i) => chalkShape(c, ellPts(x, y, r * k, r * k, 0, 12), null, CH.white, 3.5, { seed: 120 + i, alpha: a }));
+    c.save(); c.translate(cx, cy); c.scale(sc, sc); c.translate(-cx, -cy);
+    const P = cloudPts(cx, cy, 180, 118, 10, 4);
+    chalkShape(c, P, BOARD, CH.white, 4.5, { seed: 125, base: 0.92 * a, hatch: 0, alpha: a });
+    chalkFill(c, P, CH.white, { base: 0.05, hatch: 0.08, sp: 14, alpha: a });
+    // «вчера» мелом и подоконник
+    c.save(); c.globalAlpha = a; c.font = '700 40px "Caveat"'; c.fillStyle = CH.yellow; c.fillText("вчера", cx - 150, cy - 52); c.restore();
+    chalkLine(c, [[cx - 140, cy + 74], [cx + 140, cy + 74]], 6, CH.ochre, { seed: 126, alpha: a });
+    drawCat(c, { ...catState(t, cx - 10, cy + 72, 0.82, E.w_umyv - 0.3), alpha: a });
+    c.restore();
+  }
+}
+
+function renderScene(t, kind, clipX0 = 0, clipX1 = W) {
+  const clip = (c) => { c.beginPath(); c.rect(clipX0, 0, clipX1 - clipX0, H); c.clip(); };
+  if (kind === "yard") {
+    const yc = yardCam(t), m = camMat(yc);
+    ctx.save(); clip(ctx); boardFill(ctx, m);
+    lw.setTransform(1, 0, 0, 1, 0, 0); lw.clearRect(0, 0, W, H);
+    lw.save(); clip(lw); lw.setTransform(...m); drawYardAll(lw, t, yc); lw.restore();
+    grain(lw, PAT_W, m); composite(LW);
+    ctx.restore();
+    return;
+  }
+  const rc = roomCam(t), m = camMat(rc);
+  ctx.save(); clip(ctx); boardFill(ctx, m);
+  // двор в окне: своя доска и свой мел
+  const yc = yardCam(t);
+  const wm = mul(m, [WIN.w / W, 0, 0, WIN.h / H, WIN.x, WIN.y]), ym = mul(wm, camMat(yc));
+  const wr = [m[4] + WIN.x * m[0], m[5] + WIN.y * m[3], WIN.w * m[0], WIN.h * m[3]];
+  ctx.save(); ctx.beginPath(); ctx.rect(...wr); ctx.clip();
+  const wa = sstep(prog(t, 0.3, 1.3));
+  ctx.globalAlpha = wa; boardFill(ctx, ym); ctx.fillStyle = "rgba(160,200,230,0.06)"; ctx.fillRect(...wr); ctx.globalAlpha = 1;
+  ly.setTransform(1, 0, 0, 1, 0, 0); ly.clearRect(0, 0, W, H);
+  ly.save(); ly.beginPath(); ly.rect(...wr); ly.clip(); ly.setTransform(...ym); drawYardAll(ly, t, yc); ly.restore();
+  grain(ly, PAT_W, ym); composite(LY, sstep(prog(t, 0.6, 1.6)));   // двор в окне проявляется вслед за рамой
+  ctx.restore();
+  lw.setTransform(1, 0, 0, 1, 0, 0); lw.clearRect(0, 0, W, H);
+  lw.save(); clip(lw); lw.setTransform(...m); drawRoomAll(lw, t); lw.restore();
+  grain(lw, PAT_W, m); composite(LW);
+  ctx.restore();
+}
+
+function renderAt(t) {
+  BOIL = Math.floor(t * BOIL_FPS);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const wz = winZoom(t);
+  if (t >= T_WIPE0 && t < T_WIPE1) {
+    // губка: слева уже комната, справа ещё горка
+    const u = easeInOut(prog(t, T_WIPE0, T_WIPE1)), xe = lerp(-160, W + 160, u);
+    renderScene(t, "room", 0, Math.max(0, xe));
+    renderScene(t, "yard", Math.max(0, xe), W);
+    drawSponge(xe, t);
+  } else renderScene(t, wz >= 1 ? "yard" : "room");
+  // строки и заголовок
+  drawBand(ctx, t);
+  ls.setTransform(1, 0, 0, 1, 0, 0); ls.clearRect(0, 0, W, H);
+  drawCaptions(ls, t);
+  // заголовок в начале — на стене над окном (в координатах комнаты)
+  if (t < E.L1 + 0.6) {
+    const rc = roomCam(t); ls.save(); ls.setTransform(...camMat(rc));
+    const u = sstep(prog(t, T_TITLE0, T_TITLE1)), ua = sstep(prog(t, T_TITLE1 - 0.1, T_AUTH1));
+    const a = 1 - sstep(prog(t, E.L1 - 0.2, E.L1 + 0.5));
+    const r = drawTitle(ls, 960, 100, 118, u, ua, 46, a);
+    ls.restore();
+    // рука пишет заголовок
+    if (t < T_AUTH1 + 0.7) {
+      const hx = r.x0 + r.w * u, hy = 100 - 30 + Math.sin(t * 22) * 8;
+      const away = sstep(prog(t, T_AUTH1, T_AUTH1 + 0.6));
+      handOnScreen(rc, [hx + away * 700, hy - away * 600], -0.1);
+    }
+  }
+  // финальный заголовок
+  if (t > T_FTITLE0 - 0.1) {
+    const rc = roomCam(t); ls.save(); ls.setTransform(...camMat(rc));
+    const u = sstep(prog(t, T_FTITLE0, T_FTITLE1)), ua = sstep(prog(t, T_FTITLE1 - 0.1, T_FTITLE1 + 0.6));
+    const r = drawTitle(ls, 960, 95, 150, u, ua, 58, 1);
+    ls.restore();
+    if (t < T_FTITLE1 + 1.4) {
+      const hx = r.x0 + r.w * u, away = sstep(prog(t, T_FTITLE1 + 0.6, T_FTITLE1 + 1.3));
+      handOnScreen(rc, [hx + away * 800, 65 + Math.sin(t * 22) * 8 - away * 700], -0.1);
+    }
+  }
+  grain(ls, PAT_S, [1, 0, 0, 1, 0, 0]);
+  composite(LS);
+}
+// рука поверх всего — в координатах комнаты
+function handOnScreen(rc, tip, ang) {
+  lw.setTransform(1, 0, 0, 1, 0, 0); lw.clearRect(0, 0, W, H);
+  lw.setTransform(...camMat(rc)); drawHand(lw, tip, ang, 1.0, "chalk");
+  grain(lw, PAT_W, camMat(rc));
+  ls.save(); ls.setTransform(1, 0, 0, 1, 0, 0); ls.drawImage(LW, 0, 0); ls.restore();
+}
+// губка
+function drawSponge(x, t) {
+  lw.setTransform(1, 0, 0, 1, 0, 0); lw.clearRect(0, 0, W, H);
+  // меловые разводы за губкой
+  for (let i = 0; i < 7; i++) chalkLine(lw, [[x - 40, 120 + i * 120], [x - 300 - (i % 3) * 80, 140 + i * 120 + Math.sin(i) * 20]], 50, CH.white, { seed: 1600 + i, alpha: 0.12 });
+  const y = 520 + Math.sin(t * 9) * 160;
+  lw.save(); lw.translate(x, y); lw.rotate(0.12 + Math.sin(t * 9) * 0.1);
+  chalkShape(lw, [[-70, -150], [70, -150], [70, 150], [-70, 150]], CH.yellow, OUT, 6, { seed: 1610, base: 0.75, sp: 7 });
+  chalkShape(lw, [[-70, -150], [70, -150], [70, -90], [-70, -90]], CH.brown, OUT, 5, { seed: 1611, base: 0.6, sp: 6 });
+  lw.restore();
+  grain(lw, PAT_W, [1, 0, 0, 1, 0, 0]); composite(LW);
+  dust(ctx, x, y, T_WIPE0 + 0.2, t, 30, 150, CH.white, 55);
+}
+
+// ===== пробы: ?probe=girl|coat|sled|mom|cat|hand|cam =====
+const PQ = new URLSearchParams(location.search), PROBE = PQ.get("probe");
+function probe(kind) {
+  const c = lw; ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = BOARD; ctx.fillRect(0, 0, W, H);
+  c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, W, H);
+  const cols = 8, rows = 4, cw = W / cols, chh = H / rows, n = cols * rows;
+  const span = { girl: [E.L1 - 0.3, T_WIPE0], girl2: [T_WIPE1, T_EXIT1], sled: [T_RUN0, T_WIPE1], mom: [E.L1, T_EXIT1], cat: [E.w_umyv - 0.3, E.w_umyv + 1.6], hand: [E.w_slovno - 0.1, EN(12) + 0.5] }[kind];
+  const labels = [];
+  for (let k = 0; k < n; k++) {
+    const t = lerp(span[0], span[1], k / (n - 1)), x0 = (k % cols) * cw, y0 = Math.floor(k / cols) * chh;
+    BOIL = Math.floor(t * BOIL_FPS);
+    c.save(); c.beginPath(); c.rect(x0, y0, cw, chh); c.clip();
+    c.strokeStyle = "rgba(255,255,255,0.25)"; c.lineWidth = 2; c.strokeRect(x0, y0, cw, chh);
+    if (kind === "girl" || kind === "girl2") {
+      const s = roomGirl(t), sc = 0.62;
+      c.translate(x0 + cw / 2, y0 + chh - 14); c.scale(sc, sc); s.x = 0; s.y = 0; s.sc = 1; drawGirl(c, s);
+      chalkLine(c, [[-140, 0], [140, 0]], 3, CH.grey, { seed: 1 });
+    } else if (kind === "mom") {
+      const s = roomMom(t), sc = 0.5;
+      c.translate(x0 + cw / 2, y0 + chh - 10); c.scale(sc, sc); s.x = 0; s.y = 0; s.sc = 1; s.alpha = 1; drawMom(c, s);
+      chalkLine(c, [[-180, 0], [180, 0]], 3, CH.grey, { seed: 1 });
+    } else if (kind === "sled") {
+      const g = sledGirl(t);
+      c.translate(x0 + cw / 2, y0 + chh / 2 + 40); c.scale(0.5, 0.5); c.translate(-g.x, -g.y);
+      drawHill(c, t, { track: null }); drawSledScene(c, t);
+    } else if (kind === "cat") {
+      c.translate(x0 + cw / 2 - 20, y0 + chh - 20); c.scale(1.2, 1.2); drawCat(c, catState(t, 0, 0, 1, span[0]));
+    } else if (kind === "hand") {
+      const h = handState(t);
+      c.translate(x0 + cw / 2, y0 + chh / 2); c.scale(0.16, 0.16); c.translate(-4300, -450);
+      BUSHES.forEach((x, i) => drawBush(c, t, x, i, SLAPS()[i]));
+      if (h) drawHand(c, h.tip, h.ang, 1.7, h.hold);
+    }
+    c.restore();
+    labels.push([t, x0, y0]);
+  }
+  grain(c, PAT_W, [1, 0, 0, 1, 0, 0]); composite(LW);
+  ctx.fillStyle = "#ff0"; ctx.font = "18px monospace"; labels.forEach(([t, x, y]) => ctx.fillText(t.toFixed(2), x + 6, y + 20));
+}
+// ?probe=cam — скорость камеры (px экрана за кадр)
+function probeCam() {
+  const c = ctx; c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = "#fff"; c.fillRect(0, 0, W, H);
+  let prev = null, maxV = 0, tv = 0; const vs = [];
+  for (let f = 0; f <= TOTAL * 30; f++) {
+    const t = f / 30, wz = winZoom(t), cam = wz >= 1 && t < T_WIPE0 ? yardCam(t) : roomCam(t);
+    if (prev && prev.kind === (wz >= 1)) { const v = Math.hypot(cam.x - prev.x, cam.y - prev.y) * cam.z + Math.abs(Math.log(cam.z / prev.z)) * 1100; vs.push([t, v]); if (v > maxV) { maxV = v; tv = t; } }
+    prev = { ...cam, kind: wz >= 1 };
+  }
+  c.fillStyle = "#000"; c.font = "40px monospace"; c.fillText(`maxV ${maxV.toFixed(1)} px/frame at ${tv.toFixed(2)}s`, 40, 80);
+  c.strokeStyle = "#c00"; c.beginPath(); vs.forEach(([t, v]) => c.lineTo(40 + (t / TOTAL) * (W - 80), 1000 - v * 8)); c.stroke();
+  c.fillStyle = "#555"; c.font = "18px monospace"; for (let s = 0; s < TOTAL; s += 2) c.fillText(s, 40 + (s / TOTAL) * (W - 80), 1040);
+}
+
+function setup() {
+  buildChalk();
+  PAT_B = ctx.createPattern(BOARD_TILE, "repeat"); PAT_W = ctx.createPattern(GRAIN_W, "repeat"); PAT_S = ctx.createPattern(GRAIN_S, "repeat");
+}
+const seek = (t) => (PROBE === "cam" ? probeCam() : PROBE ? probe(PROBE) : renderAt(t));
+const T_Q = PQ.has("t") ? +PQ.get("t") : 0;   // ?t=12.3 — кадр для проверки без плеера
+let LAST_T = T_Q;
+setup();
+window.addEventListener("hf-seek", (e) => { LAST_T = e.detail.time; seek(LAST_T); });
+seek(T_Q);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => seek(LAST_T));
+
+const tl = gsap.timeline({ paused: true });
+tl.set({}, {}, TOTAL);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+
+    </script>
+  </body>
+</html>

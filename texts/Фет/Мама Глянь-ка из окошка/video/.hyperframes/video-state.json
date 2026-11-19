@@ -1,0 +1,393 @@
+{
+  "version": 1,
+  "historyId": "04bc91f5-a318-4896-b467-b45abb783e9d",
+  "currentRevision": "e120bce6-b455-4abf-b0f8-8f09ee4a1b8f",
+  "pendingChanges": false,
+  "files": {
+    "assets/fonts/amaticsc-700-cyrillic.woff2": {
+      "hash": "69696db9506b95a120171b81ca362c8e1bb53fcea9a144722369e6df95695073",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/69/69696db9506b95a120171b81ca362c8e1bb53fcea9a144722369e6df95695073"
+    },
+    "assets/fonts/amaticsc-700-latin.woff2": {
+      "hash": "1f4f9795f331a22adbb5e31a4526f01728e7ee6839440141e2d124bb1e7e02a2",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/1f/1f4f9795f331a22adbb5e31a4526f01728e7ee6839440141e2d124bb1e7e02a2"
+    },
+    "assets/fonts/caveat-600-cyrillic.woff2": {
+      "hash": "cb0aa78eef73dfb083068a56ba321a4a5cc9841721d261ea8ab5f549db8c7e18",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/cb/cb0aa78eef73dfb083068a56ba321a4a5cc9841721d261ea8ab5f549db8c7e18"
+    },
+    "assets/fonts/caveat-600-latin.woff2": {
+      "hash": "7a0049db01fdd8fc7af7ef36675862a72a5c76d0cb45ae63c9f5b6f1b769dac7",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/7a/7a0049db01fdd8fc7af7ef36675862a72a5c76d0cb45ae63c9f5b6f1b769dac7"
+    },
+    "assets/fonts/caveat-700-cyrillic.woff2": {
+      "hash": "cb0aa78eef73dfb083068a56ba321a4a5cc9841721d261ea8ab5f549db8c7e18",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/cb/cb0aa78eef73dfb083068a56ba321a4a5cc9841721d261ea8ab5f549db8c7e18"
+    },
+    "assets/fonts/caveat-700-latin.woff2": {
+      "hash": "7a0049db01fdd8fc7af7ef36675862a72a5c76d0cb45ae63c9f5b6f1b769dac7",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/7a/7a0049db01fdd8fc7af7ef36675862a72a5c76d0cb45ae63c9f5b6f1b769dac7"
+    },
+    "assets/voice.mp3": {
+      "hash": "bbb70d7ed83ad007d9ae272527304e6041f2d2412444bc09d7c60faa5a23f625",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/bb/bbb70d7ed83ad007d9ae272527304e6041f2d2412444bc09d7c60faa5a23f625"
+    },
+    "build.py": {
+      "hash": "6e974c8ba91e279b9eebe8716e24960f5f8d43191ce2294683af59cd02091c73",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/6e/6e974c8ba91e279b9eebe8716e24960f5f8d43191ce2294683af59cd02091c73"
+    },
+    "hyperframes.json": {
+      "hash": "35a6d4ea79ebe911f0d81705f7aace5d8ff0316b745b0311d56af50c9c237cb7",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/35/35a6d4ea79ebe911f0d81705f7aace5d8ff0316b745b0311d56af50c9c237cb7"
+    },
+    "index.html": {
+      "hash": "d2ea59d420454f35c92cb9bbcbf0ceb58dcee9e03f0e02ba765b0b9faa5f5eb2",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/d2/d2ea59d420454f35c92cb9bbcbf0ceb58dcee9e03f0e02ba765b0b9faa5f5eb2"
+    },
+    "lib/gsap.min.js": {
+      "hash": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/c1/c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280"
+    },
+    "lib/motion.js": {
+      "hash": "9d626ab329c703b3fa824651166973900fd425a84b752f2f53411ad85b3e923e",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/9d/9d626ab329c703b3fa824651166973900fd425a84b752f2f53411ad85b3e923e"
+    },
+    "meta.json": {
+      "hash": "9cb8539b4c09aa7d41612b76b50755f8eb76fab5e29904c875f6a6c7ef19e3ed",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/9c/9cb8539b4c09aa7d41612b76b50755f8eb76fab5e29904c875f6a6c7ef19e3ed"
+    },
+    "package.json": {
+      "hash": "3618b986f11b888360d400a016f26846caf5b10179a968f4f623b03848b1f8a0",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/36/3618b986f11b888360d400a016f26846caf5b10179a968f4f623b03848b1f8a0"
+    },
+    "src/base.js": {
+      "hash": "5b382d7c6e2a419b0b7bc31e94bdbed584e71e9adfe08247f2e9fb14e4dc2417",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/5b/5b382d7c6e2a419b0b7bc31e94bdbed584e71e9adfe08247f2e9fb14e4dc2417"
+    },
+    "src/chalk.js": {
+      "hash": "44b1dd2808008e411caae63c9aee03e2d3ebf1822e6e0d56c11a0fb0bc93f369",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/44/44b1dd2808008e411caae63c9aee03e2d3ebf1822e6e0d56c11a0fb0bc93f369"
+    },
+    "src/main.js": {
+      "hash": "1c123019e6c48d5cae5aa33f21ba90b58ef6dd00cce05443064fc611b8047659",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/1c/1c123019e6c48d5cae5aa33f21ba90b58ef6dd00cce05443064fc611b8047659"
+    },
+    "src/people.js": {
+      "hash": "92944f11707a2348946bd4841582bd1771ab280403a7946144be66368abeccf4",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/92/92944f11707a2348946bd4841582bd1771ab280403a7946144be66368abeccf4"
+    },
+    "src/world.js": {
+      "hash": "eddfe341e03b5347f0942e0dbe76b6672ff6ee5116a1eb20be61a74213951b20",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/ed/eddfe341e03b5347f0942e0dbe76b6672ff6ee5116a1eb20be61a74213951b20"
+    },
+    "template.tpl": {
+      "hash": "a46951741c9f11453fb9da70b5c33eb9f19a3fdabd7a01f193263a7d8e0d0484",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/a4/a46951741c9f11453fb9da70b5c33eb9f19a3fdabd7a01f193263a7d8e0d0484"
+    },
+    "assets/music.wav": {
+      "hash": "06a837d42d9762b5785e320e85eb832b1772e800004d271d579033b3dcba0fc3",
+      "content": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/06/06a837d42d9762b5785e320e85eb832b1772e800004d271d579033b3dcba0fc3"
+    }
+  },
+  "revisions": {
+    "daec15d7-e3eb-4e45-8c6e-f425f57de864": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795068506578,
+      "endedAt": 1795068506585,
+      "files": {
+        "index.html": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/a9/a95e5705b5a9c6bded6b5f5e7d4f77fd7b866263e541e3c4e73cd9d2d8ef7aca",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/52/5213af6b818378c411a719097bfe8fb08772a4c00abc4fe78be58656e8081855"
+        },
+        "src/main.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/6e/6e0c100b1afb5f1793f8c83cdc1bfc39dccbed37feb93c8e38546081b26ddcfb",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/54/54b22ccd0fdb9486e345d59fde80d956763d3ba018c2eeba5c54d785aca42781"
+        },
+        "src/people.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/d1/d1239933d386c9cca0bd04f10d48f73209f9b263786ea9ea372cc018f69188a3",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/c4/c49212176a47cba6a35b96cdba37163a7bbd49d7df16943d8743ad141ade72d8"
+        }
+      }
+    },
+    "0919f304-902d-4122-bce7-e1570c86f423": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795068536526,
+      "endedAt": 1795068536527,
+      "files": {
+        "assets/music.wav": {
+          "before": null,
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/f0/f07b45b97fc75ffff84ad12a6f3a0f0155a67da426ed78ddb524973d84edef6f"
+        }
+      }
+    },
+    "726fa5ec-7a0f-47bd-a8d0-e6db37f1177d": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795068610978,
+      "endedAt": 1795068610982,
+      "files": {
+        "index.html": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/52/5213af6b818378c411a719097bfe8fb08772a4c00abc4fe78be58656e8081855",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/9b/9b8b5fb489a8f578cd581ac6b41e938638fe40e29740da9acda694d97a9425b5"
+        },
+        "src/main.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/54/54b22ccd0fdb9486e345d59fde80d956763d3ba018c2eeba5c54d785aca42781",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/22/22824e47e9f7fd6cda57ece24ef835314d023d6d341c7cf0af260f630ba65350"
+        }
+      }
+    },
+    "7a080e3a-8f3f-4486-b8bd-445c81764f1b": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795068623330,
+      "endedAt": 1795068625332,
+      "files": {
+        "index.html": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/9b/9b8b5fb489a8f578cd581ac6b41e938638fe40e29740da9acda694d97a9425b5",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/1e/1ef06ba1332aa42c0ad7e52c676eea6bb6dd6c1eda35553d20014338ffd664f2"
+        },
+        "src/main.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/22/22824e47e9f7fd6cda57ece24ef835314d023d6d341c7cf0af260f630ba65350",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/4d/4d3a03047123026cb9170a7519d440692aa5cbbd505dde70aec73e5e913b3db7"
+        }
+      }
+    },
+    "dfbff187-b189-4e12-98a4-852fcafe21fa": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795068646318,
+      "endedAt": 1795068648333,
+      "files": {
+        "index.html": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/1e/1ef06ba1332aa42c0ad7e52c676eea6bb6dd6c1eda35553d20014338ffd664f2",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/f5/f552ecf0b4b44ca4d1d7526612bef6eea980127fbf1eb3deab207ef7d3743d69"
+        },
+        "src/main.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/4d/4d3a03047123026cb9170a7519d440692aa5cbbd505dde70aec73e5e913b3db7",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/42/42cb5fd17c8a04450aa0248bfd243b511b0feff3e09f52ed88a8c2fabaeecbb3"
+        },
+        "src/world.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/cf/cf053b2fc7283b4ed747200e0a235d55657779447455b3340d57ad6c28f8672a",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/45/450ddd84584f5d4d8d2a19a6149ef92e94d62c2a24c0135f8e528e51a69ab526"
+        }
+      }
+    },
+    "462518b1-6f28-4854-8df5-ec250232ca22": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795068673237,
+      "endedAt": 1795068675251,
+      "files": {
+        "index.html": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/f5/f552ecf0b4b44ca4d1d7526612bef6eea980127fbf1eb3deab207ef7d3743d69",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/8a/8ab6bffdc3fe70b8334522c273a65c15a423fa165b1376626b0583e928166c80"
+        },
+        "src/chalk.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/81/816c175efe88ba3ea171dda94f0075d00bf2dc06e84e75f066ccb10a6281209c",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/44/44b1dd2808008e411caae63c9aee03e2d3ebf1822e6e0d56c11a0fb0bc93f369"
+        },
+        "src/people.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/c4/c49212176a47cba6a35b96cdba37163a7bbd49d7df16943d8743ad141ade72d8",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/3f/3f70a3cca96b7cc21783461de5d6d2d47b1918ea1f8c470f850905fb41b9c50d"
+        }
+      }
+    },
+    "0ddde2d3-94cb-4b46-81d7-fa82753b697f": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795069128337,
+      "endedAt": 1795069129833,
+      "files": {
+        "assets/music.wav": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/f0/f07b45b97fc75ffff84ad12a6f3a0f0155a67da426ed78ddb524973d84edef6f",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/06/06a837d42d9762b5785e320e85eb832b1772e800004d271d579033b3dcba0fc3"
+        }
+      }
+    },
+    "5dd12e63-12f5-4d2c-b19d-8f224d71261a": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795070102621,
+      "endedAt": 1795070104625,
+      "files": {
+        "src/main.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/42/42cb5fd17c8a04450aa0248bfd243b511b0feff3e09f52ed88a8c2fabaeecbb3",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/80/807fb4ee4d6ed362425fac753364069dab3a2988c72f9f2d842383206945e45f"
+        },
+        "src/people.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/3f/3f70a3cca96b7cc21783461de5d6d2d47b1918ea1f8c470f850905fb41b9c50d",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/13/134671c4f50a38e9bebf45ff582cef97e13247cc91e446c053c92dca1df5816e"
+        },
+        "src/world.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/45/450ddd84584f5d4d8d2a19a6149ef92e94d62c2a24c0135f8e528e51a69ab526",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/21/215a0470b193e415721aa28c2033f15c1b2f1a02994e87d4bf3fdcd493c66f3d"
+        }
+      }
+    },
+    "e120bce6-b455-4abf-b0f8-8f09ee4a1b8f": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1795070119611,
+      "endedAt": 1795070121639,
+      "files": {
+        "index.html": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/8a/8ab6bffdc3fe70b8334522c273a65c15a423fa165b1376626b0583e928166c80",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/d2/d2ea59d420454f35c92cb9bbcbf0ceb58dcee9e03f0e02ba765b0b9faa5f5eb2"
+        },
+        "src/main.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/80/807fb4ee4d6ed362425fac753364069dab3a2988c72f9f2d842383206945e45f",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/1c/1c123019e6c48d5cae5aa33f21ba90b58ef6dd00cce05443064fc611b8047659"
+        },
+        "src/people.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/13/134671c4f50a38e9bebf45ff582cef97e13247cc91e446c053c92dca1df5816e",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/92/92944f11707a2348946bd4841582bd1771ab280403a7946144be66368abeccf4"
+        },
+        "src/world.js": {
+          "before": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/21/215a0470b193e415721aa28c2033f15c1b2f1a02994e87d4bf3fdcd493c66f3d",
+          "after": "/Users/alfa/.cache/hyperframes/history/04bc91f5-a318-4896-b467-b45abb783e9d/blobs/ed/eddfe341e03b5347f0942e0dbe76b6672ff6ee5116a1eb20be61a74213951b20"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": "0ddde2d3-94cb-4b46-81d7-fa82753b697f",
+      "id": "ef4b21b8-be8b-4b07-b2f1-a293cebd6b6b"
+    },
+    "revisions": {
+      "0ddde2d3-94cb-4b46-81d7-fa82753b697f": [
+        {
+          "id": "ef4b21b8-be8b-4b07-b2f1-a293cebd6b6b",
+          "scope": "project",
+          "report": "/Users/alfa/_opencode/poetry/texts/Фет/Мама Глянь-ка из окошка/video/.hyperframes/artifacts/checks/ef4b21b8-be8b-4b07-b2f1-a293cebd6b6b.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 3000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1795069134165,
+          "contentHash": "ba1718266c704aef140be04c33d4296c426615e3da918d8eb44d587bf42cafec",
+          "revision": "0ddde2d3-94cb-4b46-81d7-fa82753b697f",
+          "inputFingerprint": "dc563b4e3975c76b23ba06057fab7d670062074cb784f1736b5c7e45f199c5bb",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": [
+      {
+        "id": "b0acbab2-76d2-465d-8aaa-af927d3504c8",
+        "scope": "project",
+        "report": "/Users/alfa/_opencode/poetry/texts/Фет/Мама Глянь-ка из окошка/video/.hyperframes/artifacts/checks/b0acbab2-76d2-465d-8aaa-af927d3504c8.json",
+        "metadata": {
+          "ok": false,
+          "browserSkipped": true,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 3000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1795068299675,
+        "contentHash": "a093aa461536d7175cb26c44d3dee57c939240a4439aac7e0c15a6bae7b1f105",
+        "revision": null,
+        "inputFingerprint": "6dd17f9685c7f203a4cfe3fc36093fac8b891a2e7efac4f67ec20c177977864b",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      },
+      {
+        "id": "815d620b-7698-459c-a723-0eacfbb9403b",
+        "scope": "project",
+        "report": "/Users/alfa/_opencode/poetry/texts/Фет/Мама Глянь-ка из окошка/video/.hyperframes/artifacts/checks/815d620b-7698-459c-a723-0eacfbb9403b.json",
+        "metadata": {
+          "ok": false,
+          "browserSkipped": true,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 3000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1795068307447,
+        "contentHash": "a093aa461536d7175cb26c44d3dee57c939240a4439aac7e0c15a6bae7b1f105",
+        "revision": null,
+        "inputFingerprint": "6dd17f9685c7f203a4cfe3fc36093fac8b891a2e7efac4f67ec20c177977864b",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "1f29f1dc-bcfd-4fef-8914-cebb6b800885",
+      "completedAt": 1795070243609,
+      "output": "/Users/alfa/_opencode/poetry/texts/Фет/Мама Глянь-ка из окошка/video/renders/final.mp4",
+      "status": "completed",
+      "revision": "e120bce6-b455-4abf-b0f8-8f09ee4a1b8f"
+    },
+    "retainedRevisions": [
+      "e120bce6-b455-4abf-b0f8-8f09ee4a1b8f",
+      "0ddde2d3-94cb-4b46-81d7-fa82753b697f"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}
