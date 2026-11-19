@@ -87,7 +87,7 @@ function drawHeroBody(c, x, y, P, dir, t) {
   const hip = [0, P.hipY + lift];
   const up = (vx, vy) => { const r = rot(vx, vy, P.lean); return [hip[0] + r[0], hip[1] + r[1]]; };
   const neck = up(0, 8.4);
-  const shN = up(2.0, 7.2), shF = up(-4.5, 7.2);
+  const shN = up(2.0, 7.2), shF = up(P.farSh === undefined ? -4.5 : P.farSh, 7.2); // farSh: позы, где дальняя рука тянется вперёд
   const hipN = [1.4, hip[1]], hipF = [-1.6, hip[1]];
   const INK = "#1b1226";
 

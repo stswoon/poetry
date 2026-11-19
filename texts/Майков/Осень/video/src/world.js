@@ -256,9 +256,40 @@ function stump(c, x, y) {
   rect(c, x + 5, y - 8, 2, 8, PAL.barkD); px(c, x - 2, y - 9, "#8a6a3a"); px(c, x + 1, y - 9, "#8a6a3a");
   line(c, x - 8, y, x - 11, y + 1, PAL.barkD, 1); line(c, x + 6, y, x + 10, y + 1, PAL.barkD, 1);
 }
+// кочка мха: подушка из бугорков, по ней звёздочки кукушкина льна и коробочки на тонких ножках.
+// lift — кочку приподняли за край: она поднимается, под ней видна тёмная земля.
 function mossMound(c, x, y, lift) {
-  ell(c, x, y - 2 - (lift || 0), 12, 4 + (lift || 0), PAL.mossD); ell(c, x, y - 3 - (lift || 0), 10, 3, PAL.moss);
-  for (let k = 0; k < 10; k++) px(c, x - 9 + k * 2, y - 5 + (k % 2) - (lift || 0), "#7aaa4a");
+  const l = lift || 0, yy = y - l;
+  const MD = "#2c5422", MM = "#43762c", ML = "#62963a", MT = "#8cbe4a", MH = "#c8e67c";
+  const H = (dx) => 6.4 * Math.sqrt(Math.max(0, 1 - (dx / 12.6) ** 2)); // высота подушки над землёй
+  c.globalAlpha = 0.5; ell(c, x + 0.5, y + 0.3, 13.5, 1.3, "#24160c"); c.globalAlpha = 1;
+  if (l > 0.05) ell(c, x, y - 0.5, 11.8, 1.2 + l * 0.8, "#2a1a10");
+  if (l > 0.05) for (let i = 0; i < 8; i++) { const rx = x - 9.6 + i * 2.75 + hash(i * 7.3) * 0.8; line(c, rx, y - 0.2, rx + (hash(i) - 0.5) * 0.8, yy - 1.0, "#a08050", 0.34); } // корешки тянутся
+  // тёмный низ и бугорки по контуру
+  ell(c, x, yy - 2.0, 12.6, 2.4, MD);
+  for (let i = 0; i < 12; i++) { const dx = -11.4 + i * 2.07, r = 1.9 + hash(i * 5.3) * 0.9; disc(c, x + dx, yy - H(dx) + r * 0.85, r, MD); }
+  // средний тон, сдвинут к свету (слева сверху)
+  for (let i = 0; i < 11; i++) { const dx = -10.4 + i * 2.08 + hash(i * 2.1) * 0.5, r = 1.6 + hash(i * 3.7) * 0.7; disc(c, x + dx - 0.35, yy - H(dx) + r * 0.85 + 0.45, r, MM); }
+  // светлые макушки бугорков
+  for (let i = 0; i < 9; i++) { const dx = -9.2 + i * 2.25, r = 0.85 + hash(i * 9.1) * 0.45; disc(c, x + dx - 0.6, yy - H(dx) + r + 0.55, r, ML); }
+  // звёздочки-верхушки стебельков: крестик в пиксель буфера, у верха — светлее
+  for (let i = 0; i < 54; i++) {
+    const dx = (hash(i * 4.7) * 2 - 1) * 11.2, top = yy - H(dx) + 0.7, sy = top + hash(i * 6.1) * Math.max(0.5, H(dx) - 1.4);
+    const col = sy < top + 1.6 ? MH : hash(i * 1.9) > 0.45 ? MT : ML;
+    const X = Math.round((x + dx) * K), Y = Math.round(sy * K);
+    c.fillStyle = col; c.fillRect(X, Y - 1, 1, 3); c.fillRect(X - 1, Y, 3, 1);
+    if (i % 3 === 0) { c.fillStyle = MD; c.fillRect(X + 2, Y + 1, 1, 2); }
+  }
+  // коробочки мха на рыжих ножках
+  for (const [dx, h, lean] of [[-6.5, 4.6, -0.7], [-2.6, 6.0, 0.2], [2.4, 5.2, 0.7], [6.8, 4.2, 1.1]]) {
+    const bx = x + dx, by = yy - H(dx) + 1.2, tx = bx + lean, ty = by - h;
+    line(c, bx, by, tx, ty, "#a8542c", 0.34);
+    dp(c, tx - 0.34, ty - 1.0, "#c27a36", 2, 3); dp(c, tx - 0.34, ty - 1.0, "#f0c070", 1, 1); dp(c, tx - 0.34, ty - 1.34, "#6a3a1c", 2, 1);
+  }
+  // жёлтый листик упал на кочку
+  const lx = Math.round((x + 4.2) * K), ly = Math.round((yy - H(4.2) + 0.9) * K);
+  c.fillStyle = "#f6b21b"; c.fillRect(lx, ly, 5, 2); c.fillRect(lx + 1, ly - 1, 3, 1); c.fillRect(lx + 1, ly + 2, 2, 1);
+  c.fillStyle = "#c8781a"; c.fillRect(lx + 1, ly + 1, 4, 1);
 }
 function mushroom(c, x, y, a) { // груздь: светлая шляпка-воронка
   c.globalAlpha = a; rect(c, x - 1, y - 3, 2, 3, "#efe6d0"); ell(c, x, y - 4, 4, 1.6, "#f4ecd6"); rect(c, x - 2, y - 5, 4, 1, "#d8c8a0"); c.globalAlpha = 1;

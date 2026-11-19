@@ -1,6 +1,7 @@
 // ---------- Позы героя для сцен ----------
 // hands — смещение кисти от плеча (x вперёд, y вниз), feet — ступня от бедра по x и высота подошвы над землёй.
-// farFront: дальняя рука перед пальто (обнимает себя, держит книгу) — тогда она рисуется поверх туловища.
+// farFront: дальняя рука перед пальто (обнимает себя) — тогда она рисуется поверх туловища.
+// farSh: дальнее плечо по x (по умолчанию −4.5, за спиной); ближе к груди — когда дальняя рука тянется вперёд.
 function P0(o) { return Object.assign(poseStand(0), o); }
 
 // топнуть: k 0…1 — нога поднимается, потом бьёт по земле
@@ -23,11 +24,13 @@ function poseShrug(k) {
     hands: [[lerp(-0.6, -4.2, u), lerp(7.6, 3.2, u)], [lerp(1, 4.6, u), lerp(7.6, 3.0, u)]], elbows: ["down", "down"],
     mouth: "sad", blush: 0.4, tilt: 0.2 * u });
 }
-// присел у кочки, ближняя рука тянется вниз
-function poseCrouch(k, reach) {
-  const u = smooth(k), r = reach === undefined ? 1 : reach;
-  return P0({ hipY: lerp(10.2, 5.6, u), lean: lerp(0.02, 0.55, u), feet: [[-2.6, 0], [2.8, 0]],
-    hands: [[lerp(-0.6, -5.4, u), lerp(7.6, 2.6, u)], [lerp(1, 5.6 + r, u), lerp(7.6, 6.6 + r * 1.4, u)]], elbows: ["down", "down"],
+// присел у кочки, ближняя рука тянется вниз. Дальняя (плечо сдвинуто вперёд) — far: [x, y] от плеча;
+// по умолчанию кисть у подбородка («задумался»), она видна между пальто и головой
+const CROUCH_CHIN = [7.0, 0.2], CROUCH_TALK = [7.6, 1.6];
+function poseCrouch(k, reach, far) {
+  const u = smooth(k), r = reach === undefined ? 1 : reach, f = far || CROUCH_CHIN;
+  return P0({ hipY: lerp(10.2, 5.6, u), lean: lerp(0.02, 0.55, u), feet: [[-2.6, 0], [2.8, 0]], farSh: lerp(-4.5, -1.5, u),
+    hands: [[lerp(-0.6, f[0], u), lerp(7.6, f[1], u)], [lerp(1, 5.6 + r, u), lerp(7.6, 6.6 + r * 1.4, u)]], elbows: ["down", "down"],
     mouth: "o", blush: 0.6, tilt: 0.3 * u });
 }
 // поскользнулся на инее: нога уезжает вперёд, руки машут
@@ -57,13 +60,15 @@ function poseSing(k, t) {
 // наклонился сорвать цветок
 function posePick(k) {
   const u = smooth(k);
-  return P0({ hipY: lerp(10.2, 8.2, u), lean: lerp(0.02, 0.85, u), feet: [[-2.2, 0], [2.4, 0]],
-    hands: [[lerp(-0.6, -5.4, u), lerp(7.6, 1.4, u)], [lerp(1, 4.2, u), lerp(7.6, 9.6, u)]], elbows: ["down", "back"], mouth: "smile", blush: 0.7, tilt: 0.4 * u });
+  // дальняя рука упирается в колено (плечо сдвинуто вперёд), ближняя тянется к земле
+  return P0({ hipY: lerp(10.2, 8.2, u), lean: lerp(0.02, 0.85, u), feet: [[-2.2, 0], [2.4, 0]], farSh: lerp(-4.5, -1.5, u),
+    hands: [[lerp(-0.6, 1.1, u), lerp(7.6, 6.4, u)], [lerp(1, 4.2, u), lerp(7.6, 9.6, u)]], elbows: ["back", "back"], mouth: "smile", blush: 0.7, tilt: 0.4 * u });
 }
 // сидит (на куче листьев, у окна): ноги вперёд, колени вверх
 function poseSit(t, book) {
   const br = Math.sin(t * 2.2) * 0.2;
-  return P0({ hipY: 2.2, lean: -0.06 + br * 0.05, feet: [[4.4, 0], [7.8, 0]], farFront: !!book, legsFront: true,
-    hands: book ? [[9.6, 3.0], [8.2, 3.6]] : [[-2.4, 7.0], [3.8, 5.2 + br]], elbows: ["down", "down"],
+  // с альбомом: ближняя рука держит нижний край, дальняя (плечо сдвинуто вперёд, за туловищем) — левый край повыше
+  return P0({ hipY: 2.2, lean: -0.06 + br * 0.05, feet: [[4.4, 0], [7.8, 0]], legsFront: true, farSh: book ? 0.5 : undefined,
+    hands: book ? [[5.2, -1.6], [8.2, 3.6]] : [[-2.4, 7.0], [3.8, 5.2 + br]], elbows: ["down", "down"],
     mouth: "smile", eyes: book ? "happy" : "open", blush: 0.8, scarfWave: 0.2, knee: "up" });
 }

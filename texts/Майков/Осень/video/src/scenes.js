@@ -477,7 +477,7 @@ function sc8(b, t) {
       const sw = Math.sin(t * 3 + i) * (t > L(30) ? 0.25 : 0.08);
       flower(b, 168 + i * 9, HY - 1, k, sw < 0 ? 0 : sw);
     });
-    const P8 = poseCrouch(prog(t, L(29) - 0.3, L(29) + 0.2), 0.1);
+    const P8 = poseCrouch(prog(t, L(29) - 0.3, L(29) + 0.2), 0.1, [CROUCH_TALK[0] + Math.sin(t * 3.4) * 0.6, CROUCH_TALK[1] + Math.cos(t * 3.4) * 0.6]); // дальняя рука жестикулирует
     P8.tilt = 0.25 + Math.sin(t * 4.2) * 0.25; P8.mouth = Math.floor(t * 5) % 2 ? "open" : "smile"; P8.eyes = t > L(30) ? "happy" : "open";
     P8.hands[1] = [P8.hands[1][0] + Math.sin(t * 3) * 0.8, P8.hands[1][1] - 1.5 + Math.sin(t * 3) * 0.6];
     heroAt(b, 140, P8, 1, t);
