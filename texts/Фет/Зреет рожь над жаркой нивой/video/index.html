@@ -1,0 +1,1555 @@
+<!doctype html>
+<!-- Собрано build.py из template.tpl и src/*.js — правьте их, не этот файл. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      @font-face { font-family: "Yeseva One"; src: url("assets/fonts/yeseva-cyr.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "Yeseva One"; src: url("assets/fonts/yeseva-lat.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Lora"; font-style: italic; font-weight: 600; src: url("assets/fonts/lora-600i-cyr.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "Lora"; font-style: italic; font-weight: 600; src: url("assets/fonts/lora-600i-lat.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #1a1430; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #1a1430; }
+      #scene { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #fontwarm { position: absolute; left: -9999px; top: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="37.280" data-width="1920" data-height="1080">
+      <canvas id="scene" width="1920" height="1080" data-layout-allow-overflow></canvas>
+      <div id="fontwarm"><span style="font-family:'Yeseva One'">Зреет рожь Фет</span><span style="font-family:'Lora';font-style:italic;font-weight:600">Зреет рожь…</span></div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="3.600" data-duration="27.680" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="37.280" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>const CFG = {"v0":3.6,"total":37.28,"ev":{"V0":3.6,"total":37.28,"L1":3.795,"L2":6.54,"L3":8.67,"L4":10.68,"L5":13.31,"L6":15.64,"L7":17.87,"L8":19.83,"L9":22.77,"L10":25.295,"L11":27.585,"L12":29.645,"E1":5.915,"E2":8.245,"E3":10.275,"E4":12.11,"E5":15.185,"E6":17.34,"E7":19.555,"E8":21.24,"E9":24.77,"E10":27.045,"E11":29.255,"E12":31.03,"zreet":3.795,"rozh":4.32,"zharkoy":4.985,"niva2":6.84,"do":7.58,"gonit":8.67,"veter":9.025,"prih":9.49,"zolot":10.68,"perel":11.4,"robko":13.31,"mesyac":13.715,"ochi":14.73,"izum":15.64,"den1":16.47,"minul":16.91,"shiroko":17.98,"noch":19.03,"den2":19.83,"obyat":20.09,"raskin":20.685,"bezbr":22.99,"zhatv":23.79,"zakat":25.48,"vostok":26.36,"mig":27.95,"smezh":28.25,"nebo":28.81,"oko":29.645,"oko2":30.665,"fin":32.03},"lines":[{"n":1,"text":"Зреет рожь над жаркой нивой,","stanza":1,"s":3.795,"e":5.915,"words":[{"w":"Зреет","s":3.795,"e":4.32},{"w":"рожь","s":4.32,"e":4.79},{"w":"над","s":4.79,"e":4.985},{"w":"жаркой","s":4.985,"e":5.41},{"w":"нивой,","s":5.41,"e":5.915}]},{"n":2,"text":"И от нивы и до нивы","stanza":1,"s":6.54,"e":8.245,"words":[{"w":"И","s":6.54,"e":6.6},{"w":"от","s":6.6,"e":6.84},{"w":"нивы","s":6.84,"e":7.43},{"w":"и","s":7.485,"e":7.58},{"w":"до","s":7.58,"e":7.74},{"w":"нивы","s":7.74,"e":8.245}]},{"n":3,"text":"Гонит ветер прихотливый","stanza":1,"s":8.67,"e":10.275,"words":[{"w":"Гонит","s":8.67,"e":9.025},{"w":"ветер","s":9.025,"e":9.49},{"w":"прихотливый","s":9.49,"e":10.275}]},{"n":4,"text":"Золотые переливы.","stanza":1,"s":10.68,"e":12.11,"words":[{"w":"Золотые","s":10.68,"e":11.4},{"w":"переливы.","s":11.4,"e":12.11}]},{"n":5,"text":"Робко месяц смотрит в очи,","stanza":2,"s":13.31,"e":15.185,"words":[{"w":"Робко","s":13.31,"e":13.715},{"w":"месяц","s":13.715,"e":14.21},{"w":"смотрит","s":14.21,"e":14.68},{"w":"в","s":14.68,"e":14.73},{"w":"очи,","s":14.73,"e":15.185}]},{"n":6,"text":"Изумлён, что день не минул,","stanza":2,"s":15.64,"e":17.34,"words":[{"w":"Изумлён,","s":15.64,"e":16.235},{"w":"что","s":16.235,"e":16.47},{"w":"день","s":16.47,"e":16.77},{"w":"не","s":16.77,"e":16.91},{"w":"минул,","s":16.91,"e":17.34}]},{"n":7,"text":"Но широко в область ночи","stanza":2,"s":17.87,"e":19.555,"words":[{"w":"Но","s":17.87,"e":17.98},{"w":"широко","s":17.98,"e":18.54},{"w":"в","s":18.54,"e":18.61},{"w":"область","s":18.61,"e":19.03},{"w":"ночи","s":19.03,"e":19.555}]},{"n":8,"text":"День объятия раскинул.","stanza":2,"s":19.83,"e":21.24,"words":[{"w":"День","s":19.83,"e":20.09},{"w":"объятия","s":20.09,"e":20.685},{"w":"раскинул.","s":20.685,"e":21.24}]},{"n":9,"text":"Над безбрежной жатвой хлеба","stanza":3,"s":22.77,"e":24.77,"words":[{"w":"Над","s":22.77,"e":22.99},{"w":"безбрежной","s":22.99,"e":23.79},{"w":"жатвой","s":23.79,"e":24.22},{"w":"хлеба","s":24.22,"e":24.77}]},{"n":10,"text":"Меж заката и востока,","stanza":3,"s":25.295,"e":27.045,"words":[{"w":"Меж","s":25.295,"e":25.48},{"w":"заката","s":25.48,"e":26.12},{"w":"и","s":26.295,"e":26.36},{"w":"востока,","s":26.36,"e":27.045}]},{"n":11,"text":"Лишь на миг смежает небо","stanza":3,"s":27.585,"e":29.255,"words":[{"w":"Лишь","s":27.585,"e":27.815},{"w":"на","s":27.815,"e":27.95},{"w":"миг","s":27.95,"e":28.25},{"w":"смежает","s":28.25,"e":28.81},{"w":"небо","s":28.81,"e":29.255}]},{"n":12,"text":"Огнедышащее око.","stanza":3,"s":29.645,"e":31.03,"words":[{"w":"Огнедышащее","s":29.645,"e":30.58},{"w":"око.","s":30.665,"e":31.03}]}],"probe":""};</script>
+    <script>
+// ---------- Пастозная живопись: мазок с гребнем, холст, палитра ----------
+const W = 1920, H = 1080, TAU = Math.PI * 2;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, u) => a + (b - a) * u;
+const inv = (a, b, v) => clamp((v - a) / (b - a));
+const ease = (u) => { u = clamp(u); return u * u * (3 - 2 * u); };
+const easeOut = (u) => 1 - Math.pow(1 - clamp(u), 3);
+const easeIn = (u) => Math.pow(clamp(u), 3);
+const hash = (n) => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+// пружина Motion → функция u(0…1) с перелётом
+const SPRING = (() => {
+  try {
+    const gen = Motion.spring({ keyframes: [0, 1], stiffness: 170, damping: 11, mass: 1 });
+    const N = 120, arr = [];
+    for (let i = 0; i <= N; i++) arr.push(gen.next(i * 1200 / N).value);
+    return (u) => { u = clamp(u); const f = u * N, i = Math.floor(f); return i >= N ? arr[N] : lerp(arr[i], arr[i + 1], f - i); };
+  } catch (e) { return (u) => { u = clamp(u); return 1 - Math.cos(u * 9) * Math.exp(-u * 6); }; }
+})();
+
+// цвет: [r,g,b] 0…255
+const mix = (a, b, u) => [lerp(a[0], b[0], u), lerp(a[1], b[1], u), lerp(a[2], b[2], u)];
+const shade = (c, k) => k >= 0 ? mix(c, [255, 250, 232], k) : mix(c, [28, 16, 30], -k);
+const css = (c, a = 1) => a >= 1 ? `rgb(${c[0] | 0},${c[1] | 0},${c[2] | 0})` : `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a.toFixed(3)})`;
+const jit = (c, n, amt) => [c[0] + (hash(n) - 0.5) * amt, c[1] + (hash(n + 7.3) - 0.5) * amt, c[2] + (hash(n + 3.1) - 0.5) * amt * 0.8];
+// палитра по ключам: keys = [[t, color], …]
+function ramp(keys, t) {
+  if (t <= keys[0][0]) return keys[0][1];
+  for (let i = 1; i < keys.length; i++) if (t <= keys[i][0]) return mix(keys[i - 1][1], keys[i][1], ease(inv(keys[i - 1][0], keys[i][0], t)));
+  return keys[keys.length - 1][1];
+}
+
+const C = {
+  cad: [246, 190, 40], gold: [232, 162, 34], ochre: [196, 128, 40], sienna: [150, 78, 30], umber: [86, 50, 30],
+  ultra: [40, 62, 160], cobalt: [62, 104, 196], cerul: [108, 170, 226], cream: [250, 240, 206], white: [255, 250, 236],
+  verm: [222, 70, 36], rose: [236, 128, 110], lemon: [250, 240, 150], night: [24, 30, 78], violet: [92, 70, 140],
+  shirt: [192, 58, 44], pants: [68, 84, 120], skin: [234, 176, 128], hair: [236, 206, 120], green: [110, 150, 60],
+};
+
+// Мазок: тело + тень у нижнего края + гребень краски сверху. dx,dy — направление мазка (единичный вектор)
+function dab(g, x, y, len, w, ang, col, a = 1) {
+  const c = Math.cos(ang), s = Math.sin(ang);
+  g.setTransform(c, s, -s, c, x, y);
+  g.globalAlpha = a;
+  const h = len / 2, r = w / 2;
+  g.fillStyle = css(shade(col, -0.26));
+  brush(g, h, r, w * 0.13); g.fill();
+  g.fillStyle = css(col);
+  brush(g, h, r * 0.92, 0); g.fill();
+  g.globalAlpha = a * 0.75;
+  g.fillStyle = css(shade(col, 0.36));
+  brush(g, h * 0.62, Math.max(0.7, w * 0.09), -r * 0.42); g.fill();
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1;
+}
+// форма мазка: тупое начало слева, сужение и рваный кончик справа
+function brush(g, h, r, dy) {
+  g.beginPath();
+  g.moveTo(-h, dy);
+  g.quadraticCurveTo(-h, dy - r, -h + r, dy - r);
+  g.lineTo(h * 0.45, dy - r * 0.9);
+  g.quadraticCurveTo(h, dy - r * 0.55, h, dy - r * 0.05);
+  g.quadraticCurveTo(h * 0.8, dy + r * 0.5, h * 0.4, dy + r * 0.85);
+  g.lineTo(-h + r, dy + r);
+  g.quadraticCurveTo(-h, dy + r, -h, dy);
+}
+function rr(g, x, y, w, h, r) {
+  r = Math.min(r, w / 2, h / 2);
+  g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r);
+  g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
+}
+const reset = (g) => { g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; };
+
+// Толстая «живописная» линия (рука, нога, стебель): тень, тело, блик
+function limb(g, pts, w, col) {
+  reset(g);
+  g.lineCap = "round"; g.lineJoin = "round";
+  const path = () => { g.beginPath(); g.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) g.lineTo(pts[i][0], pts[i][1]); };
+  path(); g.strokeStyle = css(shade(col, -0.45)); g.lineWidth = w + 5; g.stroke();
+  path(); g.strokeStyle = css(col); g.lineWidth = w; g.stroke();
+  g.save(); g.translate(-w * 0.18, -w * 0.18); path(); g.strokeStyle = css(shade(col, 0.35)); g.lineWidth = Math.max(2, w * 0.22); g.stroke(); g.restore();
+}
+// пятно-эллипс, покрытое мазками (голова, облако, солнце): заливка + штрихи по форме
+function blob(g, x, y, rx, ry, col, seed, n = 14, ang0 = 0.4) {
+  reset(g);
+  g.fillStyle = css(shade(col, -0.4));
+  g.beginPath(); g.ellipse(x + 2, y + 3, rx + 2.5, ry + 2.5, 0, 0, TAU); g.fill();
+  g.fillStyle = css(col);
+  g.beginPath(); g.ellipse(x, y, rx, ry, 0, 0, TAU); g.fill();
+  for (let i = 0; i < n; i++) {
+    const a = hash(seed + i) * TAU, rr0 = Math.sqrt(hash(seed + i * 2.1)) * 0.75;
+    const px = x + Math.cos(a) * rx * rr0, py = y + Math.sin(a) * ry * rr0;
+    dab(g, px, py, Math.min(rx, ry) * 0.7, Math.min(rx, ry) * 0.2, ang0 + (hash(seed + i * 5) - 0.5) * 0.8, jit(shade(col, (0.5 - (py - y + ry) / (2 * ry)) * 0.2), seed + i, 14), 0.45);
+  }
+  reset(g);
+}
+
+// Холст: фактура переплетения и рельеф (один раз), накладывается поверх кадра
+const CANVAS_TEX = (() => {
+  const c = document.createElement("canvas"); c.width = 512; c.height = 512;
+  const x = c.getContext("2d");
+  const im = x.createImageData(512, 512), d = im.data;
+  for (let j = 0; j < 512; j++) for (let i = 0; i < 512; i++) {
+    const w = (Math.sin(i * 1.9) * Math.sin(j * 0.31) + Math.sin(j * 1.9) * Math.sin(i * 0.29)) * 0.5;
+    const n = hash(i * 0.913 + j * 7.17) - 0.5;
+    const v = 128 + w * 30 + n * 34;
+    const k = (j * 512 + i) * 4;
+    d[k] = d[k + 1] = d[k + 2] = v; d[k + 3] = 255;
+  }
+  x.putImageData(im, 0, 0);
+  return c;
+})();
+let TEX_PAT = null;
+function canvasGrain(g, amt = 0.16) {
+  reset(g);
+  if (!TEX_PAT) TEX_PAT = g.createPattern(CANVAS_TEX, "repeat");
+  g.globalCompositeOperation = "overlay";
+  g.globalAlpha = amt;
+  g.fillStyle = TEX_PAT; g.fillRect(0, 0, W, H);
+  g.globalCompositeOperation = "source-over"; g.globalAlpha = 1;
+}
+
+// ---------- Мир: небо из вихрей мазков, нива, солнце, месяц, змей ----------
+// Мировые координаты: горизонт на HZ, запад (закат) слева, восток справа. Вид V = {x, y, z}: точка (x, y) в центре кадра.
+const HZ = 560;
+const P = (V, x, y) => [(x - V.x) * V.z + W / 2, (y - V.y) * V.z + H / 2];
+const EV = CFG.ev;
+
+// ---- время суток: 0 — жаркий день, .5 — золотой вечер, .7 — сумерки, .85 — солнце зажмурилось, 1 — рассвет
+function todAt(t) {
+  return ramp([[0, [0, 0, 0]], [EV.L5 - 1.2, [0, 0, 0]], [EV.L5 + 0.4, [0.5, 0, 0]], [EV.L7, [0.6, 0, 0]], [EV.L9, [0.7, 0, 0]],
+    [EV.smezh, [0.72, 0, 0]], [EV.smezh + 0.9, [0.86, 0, 0]], [EV.oko - 0.1, [0.86, 0, 0]], [EV.oko + 0.9, [1, 0, 0]]], t)[0];
+}
+const ZEN = [[0, C.cobalt], [0.5, [70, 80, 170]], [0.7, [38, 40, 104]], [0.86, [20, 22, 62]], [1, [70, 110, 190]]];
+const HOR_W = [[0, [176, 214, 236]], [0.5, [246, 176, 96]], [0.7, [232, 92, 52]], [0.86, [120, 48, 70]], [1, [250, 196, 140]]];
+const HOR_E = [[0, [176, 214, 236]], [0.5, [190, 160, 190]], [0.7, [70, 70, 140]], [0.86, [80, 50, 96]], [1, [252, 214, 120]]];
+function skyCol(x, y, td) {
+  const v = clamp((y + 700) / (HZ + 700)); // 0 — зенит, 1 — горизонт
+  const e = clamp((x + 600) / 3200);       // 0 — запад, 1 — восток
+  const hor = mix(ramp(HOR_W, td), ramp(HOR_E, td), e);
+  let c = mix(ramp(ZEN, td), hor, Math.pow(v, 1.5));
+  // заря на востоке: летом закат и восход горят одновременно
+  const ke = ramp([[0.55, [0, 0, 0]], [0.7, [0.55, 0, 0]], [0.86, [0.35, 0, 0]], [1, [0.9, 0, 0]]], td)[0];
+  if (ke > 0) c = mix(c, [252, 206, 150], ke * Math.exp(-Math.pow((x - 2300) / 800, 2)) * Math.pow(v, 3));
+  return c;
+}
+// солнце: дуга с запада вниз, под горизонтом на север, восход на востоке
+function sunPos(t) {
+  const td = todAt(t);
+  if (t < EV.oko - 0.2) return [lerp(lerp(560, 120, inv(0, 0.5, td)), -260, inv(0.5, 0.86, td)), lerp(lerp(40, 330, inv(0, 0.5, td)), HZ + 90, inv(0.5, 0.86, td))];
+  const u = easeOut(inv(EV.oko - 0.2, EV.oko + 1.6, t));
+  return [2300, lerp(HZ + 120, HZ - 120, u)];
+}
+
+// ---- мазки неба: сетка с дрожанием, направление по полю вихрей
+const SKY = [];
+(() => {
+  const st = 36; let n = 0;
+  for (let y = -760; y < HZ + 10; y += st * 0.62) for (let x = -2400; x < 6200; x += st) {
+    n++;
+    SKY.push([x + (hash(n) - 0.5) * st * 0.9, y + (hash(n * 1.3) - 0.5) * st * 0.5, 40 + hash(n * 2.7) * 34, 11 + hash(n * 3.3) * 6, n]);
+  }
+})();
+const SWIRLS = [[300, -260, 260, 1], [1350, -120, 300, -1], [2500, -300, 280, 1], [-900, -150, 260, -1], [3500, -150, 300, 1]];
+function flowAng(x, y, t) {
+  let vx = 1, vy = 0.18 * Math.sin(x * 0.003 + y * 0.004 + t * 0.25);
+  for (const [cx, cy, r, s] of SWIRLS) {
+    const dx = x - cx, dy = y - cy, k = Math.exp(-(dx * dx + dy * dy) / (r * r)) * 2.2;
+    vx += -dy / r * k * s; vy += dx / r * k * s;
+  }
+  return Math.atan2(vy, vx);
+}
+function drawSky(g, V, t, opt = {}) {
+  const td = todAt(t);
+  // подложка — сплошной градиент, чтобы между мазками не было дыр
+  reset(g);
+  const [, y0] = P(V, 0, -760), [, y1] = P(V, 0, HZ);
+  const gr = g.createLinearGradient(0, y0, 0, y1 + 40);
+  gr.addColorStop(0, css(skyCol(V.x, -700, td))); gr.addColorStop(1, css(skyCol(V.x, HZ, td)));
+  g.fillStyle = gr; g.fillRect(0, 0, W, Math.max(0, y1 + 60));
+  const x0 = V.x - W / 2 / V.z - 80, x1 = V.x + W / 2 / V.z + 80, ya = V.y - H / 2 / V.z - 60, yb = Math.min(HZ + 10, V.y + H / 2 / V.z + 60);
+  const sz = clamp(V.z, 0.55, 2.2);
+  for (const [sx, sy, len, w, n] of SKY) {
+    if (sy < ya || sy > yb) continue;
+    const drift = ((t * 22 + hash(n * 9) * 60) % 60) - 30;
+    const a = flowAng(sx, sy, t);
+    const x = sx + Math.cos(a) * drift, y = sy + Math.sin(a) * drift;
+    if (x < x0 || x > x1) continue;
+    let col = jit(skyCol(x, y, td), n, 26);
+    // светлые завитки вокруг солнца
+    const [sux, suy] = sunPos(t), ds = Math.hypot(x - sux, y - suy);
+    if (ds < 520) col = mix(col, td > 0.75 && td < 0.95 ? col : C.lemon, (1 - ds / 520) * 0.55);
+    const [px, py] = P(V, x, y);
+    const fade = Math.min(1, Math.abs(drift) < 26 ? 1 : (30 - Math.abs(drift)) / 4);
+    dab(g, px, py, len * sz, w * sz, a, col, 0.92 * fade);
+  }
+  reset(g);
+  if (td > 0.55) drawStars(g, V, t, td);
+}
+function drawStars(g, V, t, td) {
+  const k = inv(0.6, 0.86, td) * (1 - inv(0.9, 1, td));
+  if (k <= 0) return;
+  for (let i = 0; i < 70; i++) {
+    const x = 400 + hash(i * 4.1) * 3600, y = -700 + hash(i * 2.9) * 900;
+    const [px, py] = P(V, x, y);
+    if (px < -20 || px > W + 20 || py < -20 || py > H) continue;
+    const tw = 0.6 + 0.4 * Math.sin(t * 3 + i);
+    dab(g, px, py, 14 * V.z, 5 * V.z, 0.3, C.lemon, k * tw);
+    dab(g, px, py, 14 * V.z, 5 * V.z, 1.9, C.lemon, k * tw);
+  }
+  reset(g);
+}
+
+// ---- солнце: круг из мазков по окружности и кольца ореола (как у Ван Гога)
+function drawSun(g, cx, cy, r, t, heat = 1, a = 1) {
+  reset(g);
+  for (let ring = 3; ring >= 1; ring--) {
+    const rr0 = r * (1 + ring * 0.55);
+    const n = 26 + ring * 10;
+    for (let i = 0; i < n; i++) {
+      const ang = i / n * TAU + t * 0.25 * (ring % 2 ? 1 : -1) + ring;
+      dab(g, cx + Math.cos(ang) * rr0, cy + Math.sin(ang) * rr0, r * 0.42, r * 0.14, ang + Math.PI / 2, jit(mix(C.lemon, C.cad, ring / 3), i + ring * 50, 30), a * (0.55 - ring * 0.1) * heat);
+    }
+  }
+  g.globalAlpha = a; reset(g); g.globalAlpha = a;
+  g.fillStyle = css(C.cad); g.beginPath(); g.arc(cx, cy, r, 0, TAU); g.fill();
+  for (let k = 0; k < 3; k++) {
+    const rr0 = r * (0.85 - k * 0.3), n = 18 - k * 5;
+    for (let i = 0; i < n; i++) {
+      const ang = i / n * TAU - t * 0.6 + k;
+      dab(g, cx + Math.cos(ang) * rr0, cy + Math.sin(ang) * rr0, r * 0.36, r * 0.13, ang + Math.PI / 2, jit(k === 2 ? C.white : C.lemon, i + k * 30, 24), a);
+    }
+  }
+  reset(g);
+}
+
+// ---- месяц: серп с лицом. look: −1…1 куда глядит; brow: 0…1 удивление; peek: 0…1 насколько вышел из-за облака
+function drawMoon(g, cx, cy, r, t, o = {}) {
+  const a = o.a === undefined ? 1 : o.a;
+  reset(g); g.globalAlpha = a;
+  // серп: круг минус смещённый круг (рисуем на отдельном слое)
+  const L = moonLayer(r);
+  g.drawImage(L, cx - r * 1.3, cy - r * 1.3);
+  // лицо на внутренней кромке серпа
+  const ex = cx - r * 0.53 + (o.look || 0) * r * 0.03, ey = cy - r * 0.2;
+  const brow = o.brow || 0, open = o.blink ? 0.15 : 1;
+  g.fillStyle = css([90, 70, 60], a);
+  g.beginPath(); g.ellipse(ex, ey, r * 0.075, r * 0.11 * open * (1 + brow * 0.45), 0, 0, TAU); g.fill();
+  g.fillStyle = css(C.white, a); g.beginPath(); g.arc(ex - r * 0.02, ey - r * 0.04, r * 0.025, 0, TAU); g.fill();
+  g.strokeStyle = css([120, 90, 70], a); g.lineWidth = r * 0.035; g.lineCap = "round";
+  g.beginPath(); g.moveTo(ex - r * 0.1, ey - r * (0.2 + brow * 0.12)); g.quadraticCurveTo(ex + r * 0.01, ey - r * (0.27 + brow * 0.16), ex + r * 0.1, ey - r * (0.19 + brow * 0.1)); g.stroke();
+  // рот: робкая улыбка или «о» от изумления
+  if (brow > 0.4) { g.fillStyle = css([150, 80, 70], a); g.beginPath(); g.ellipse(cx - r * 0.44, cy + r * 0.3, r * 0.05, r * 0.07 * brow, 0, 0, TAU); g.fill(); }
+  else { g.beginPath(); g.moveTo(cx - r * 0.56, cy + r * 0.27); g.quadraticCurveTo(cx - r * 0.45, cy + r * 0.35, cx - r * 0.34, cy + r * 0.26); g.stroke(); }
+  // румянец смущения
+  g.fillStyle = css(C.rose, 0.45 * a * (o.blush || 0)); g.beginPath(); g.ellipse(cx - r * 0.64, cy + r * 0.08, r * 0.08, r * 0.05, 0, 0, TAU); g.fill();
+  reset(g);
+}
+const MOON_CACHE = {};
+function moonLayer(r) {
+  const key = Math.round(r);
+  if (MOON_CACHE[key]) return MOON_CACHE[key];
+  const c = document.createElement("canvas"); c.width = c.height = Math.ceil(r * 2.6);
+  const x = c.getContext("2d"), cx = r * 1.3, cy = r * 1.3;
+  x.fillStyle = css(C.lemon); x.beginPath(); x.arc(cx, cy, r, 0, TAU); x.fill();
+  x.save(); x.beginPath(); x.arc(cx, cy, r * 0.99, 0, TAU); x.clip();
+  for (let i = 0; i < 30; i++) {
+    const a = hash(i * 3.7) * TAU, d = Math.sqrt(hash(i * 1.9)) * r * 0.85;
+    dab(x, cx + Math.cos(a) * d, cy + Math.sin(a) * d, r * 0.38, r * 0.12, Math.PI / 2 + Math.cos(a) * 0.3, jit(mix(C.lemon, C.cream, hash(i)), i, 12), 0.9);
+  }
+  x.restore();
+  reset(x);
+  x.globalCompositeOperation = "destination-out";
+  x.beginPath(); x.arc(cx + r * 0.55, cy - r * 0.1, r * 0.86, 0, TAU); x.fill();
+  x.globalCompositeOperation = "source-over";
+  return (MOON_CACHE[key] = c);
+}
+
+// облако-клубок из мазков
+function drawCloud(g, cx, cy, s, col, seed, a = 1) {
+  // клубы: 5 кругов, каждый закручен мазками по окружности
+  for (let k = 0; k < 6; k++) {
+    const bx = cx + (k - 2.5) * 70 * s + (hash(seed + k) - 0.5) * 30 * s, by = cy - Math.sin((k + 0.5) / 6 * Math.PI) * 50 * s;
+    const R = (46 + hash(seed + k * 3) * 26) * s;
+    reset(g); g.globalAlpha = a; g.fillStyle = css(shade(col, -0.08)); g.beginPath(); g.ellipse(bx, by, R * 1.02, R * 0.84, 0, 0, TAU); g.fill(); g.globalAlpha = 1;
+  }
+  for (let k = 0; k < 6; k++) {
+    const bx = cx + (k - 2.5) * 70 * s + (hash(seed + k) - 0.5) * 30 * s, by = cy - Math.sin((k + 0.5) / 6 * Math.PI) * 50 * s;
+    const R = (46 + hash(seed + k * 3) * 26) * s;
+    for (let i = 0; i < 16; i++) {
+      const an = i / 16 * TAU + k, rr0 = R * (0.35 + 0.6 * hash(seed + k * 16 + i));
+      const x = bx + Math.cos(an) * rr0, y = by + Math.sin(an) * rr0 * 0.8;
+      dab(g, x, y, 40 * s, 17 * s, (hash(seed + i * 5 + k) - 0.5) * 0.7, jit(shade(col, (by - y) / R * 0.25), seed + k * 16 + i, 18), a);
+    }
+  }
+  reset(g);
+}
+
+// ---- нива: ряды колосьев в перспективе; ветер гонит золотые волны
+const ROWS = [];
+(() => {
+  let n = 0;
+  for (let i = 0; i < 46; i++) {
+    const u = Math.pow((i + 1) / 46, 1.0);
+    ROWS.push({ y: HZ + 700 * Math.pow(u, 1.7), s: 0.16 + u * 1.25, step: 10 + u * 46, seed: ++n * 101 });
+  }
+})();
+function fieldLight(td) { return ramp([[0, [1, 0, 0]], [0.5, [0.95, 0, 0]], [0.7, [0.78, 0, 0]], [0.86, [0.4, 0, 0]], [1, [0.97, 0, 0]]], td)[0]; }
+const RYE_DAY = [[0, C.gold], [0.5, [236, 146, 40]], [0.7, [196, 96, 50]], [0.86, [70, 60, 90]], [1, [240, 170, 70]]];
+// волна ветра 0…1 в точке (x, глубина u) в момент t
+function windWave(x, y, t) {
+  const gust = windGust(t);
+  return gust * Math.sin(x * 0.0042 - t * 3.1 + y * 0.006) * 0.5 + 0.5 * gust;
+}
+function windGust(t) {
+  return 0.35 + 0.65 * ease(inv(EV.L2 - 0.5, EV.gonit, t)) * (1 - 0.6 * ease(inv(EV.E4 + 0.3, EV.L5 + 1.5, t))) + 0.25 * ease(inv(EV.oko, EV.oko + 1, t));
+}
+function drawField(g, V, t, opt = {}) {
+  const td = todAt(t), lit = fieldLight(td), base = ramp(RYE_DAY, td);
+  const [, hy] = P(V, 0, HZ);
+  // подложка поля и дальний лес
+  reset(g);
+  const gr = g.createLinearGradient(0, hy, 0, H);
+  gr.addColorStop(0, css(shade(base, -0.2))); gr.addColorStop(1, css(shade(base, -0.45)));
+  g.fillStyle = gr; g.fillRect(0, Math.max(0, hy - 2), W, H);
+  drawTreeLine(g, V, t, td);
+  if (opt.stooks) drawStooks(g, V, t, td, opt.stooks);
+  const x0 = V.x - W / 2 / V.z - 60, x1 = V.x + W / 2 / V.z + 60;
+  for (const R of ROWS) {
+    const [, py] = P(V, 0, R.y);
+    if (py < -40 || py > H + 160) continue;
+    const s = R.s * V.z;
+    const step = R.step;
+    const start = Math.floor(x0 / step) * step;
+    for (let x = start; x < x1; x += step) {
+      const k = Math.round(x / step) + R.seed;
+      const xx = x + (hash(k) - 0.5) * step * 0.8;
+      const wv = windWave(xx, R.y, t);
+      const bend = -Math.PI / 2 + 0.12 + wv * 0.55 + (hash(k * 1.3) - 0.5) * 0.25;
+      let col = jit(base, k, 34);
+      // гребень волны — золотой перелив, впадина — тень
+      col = wv > 0.62 ? mix(col, C.lemon, (wv - 0.62) * 1.6 * lit) : shade(col, -(0.62 - wv) * 0.35);
+      col = shade(col, (lit - 1) * 0.9);
+      if (opt.mezha && Math.abs(mezhaD(xx, R.y, opt.mezha)) < 26 + R.s * 30) col = mix(col, C.green, 0.7);
+      const [px, py2] = P(V, xx, R.y + (hash(k * 2.1) - 0.5) * R.step * 0.25);
+      const len = 46 * s, w = 11 * s;
+      dab(g, px + Math.cos(bend) * len * 0.5, py2 + Math.sin(bend) * len * 0.5, len, w, bend, col);
+      // колос — светлый мазок на конце
+      if (R.s > 0.5) dab(g, px + Math.cos(bend) * len * 1.05, py2 + Math.sin(bend) * len * 1.05, len * 0.45, w * 1.25, bend, shade(col, 0.25 * lit));
+      // васильки
+      if (hash(k * 7.7) > 0.985 && R.s > 0.35) dab(g, px, py2 - len * 0.3, 10 * s, 10 * s, 0, shade([60, 90, 220], (lit - 1) * 0.8));
+    }
+  }
+  reset(g);
+}
+// межа между нивами — косая полоса травы; знак — с какой стороны
+const MEZHA_X = 1500;
+function mezhaD(x, y, per) { const q = x + (y - HZ) * 0.7 - MEZHA_X; return ((q % per) + per * 1.5) % per - per / 2; }
+function drawTreeLine(g, V, t, td) {
+  const col = shade(mix([60, 90, 80], [40, 40, 80], inv(0.5, 0.86, td)), td > 0.95 ? 0 : 0);
+  for (let i = 0; i < 150; i++) {
+    const x = -2400 + i * 46 + hash(i) * 30;
+    const hgt = 14 + hash(i * 3.1) * 26 + (i % 23 === 7 ? 30 : 0);
+    const [px, py] = P(V, x, HZ - hgt * 0.4);
+    if (px < -80 || px > W + 80) continue;
+    dab(g, px, py, hgt * V.z * 1.2, 30 * V.z, -Math.PI / 2 + 0.2, jit(col, i, 26));
+  }
+  // деревня с церковкой на востоке
+  const [cx, cy] = P(V, 2650, HZ - 6);
+  if (cx > -200 && cx < W + 200) {
+    const s = V.z, roof = shade([150, 70, 60], -inv(0.5, 0.86, td) * 0.5);
+    for (let i = 0; i < 5; i++) { dab(g, cx + i * 46 * s, cy - 10 * s, 36 * s, 22 * s, 0, shade([200, 170, 130], -inv(0.5, 0.86, td) * 0.6)); dab(g, cx + i * 46 * s, cy - 26 * s, 40 * s, 12 * s, 0, roof); }
+    dab(g, cx - 60 * s, cy - 30 * s, 60 * s, 18 * s, -Math.PI / 2, shade(C.cream, -inv(0.5, 0.86, td) * 0.6));
+    dab(g, cx - 60 * s, cy - 66 * s, 22 * s, 18 * s, 0, shade([90, 130, 80], -inv(0.5, 0.86, td) * 0.6));
+    dab(g, cx - 60 * s, cy - 82 * s, 14 * s, 4 * s, -Math.PI / 2, C.gold);
+  }
+  reset(g);
+}
+// копны сжатого хлеба
+function drawStooks(g, V, t, td, k) {
+  const lit = fieldLight(td);
+  for (let i = 0; i < 16; i++) {
+    const x = -200 + i * 260 + hash(i) * 140, y = HZ + 30 + hash(i * 2.3) * 300;
+    const sc = 0.6 + (y - HZ) / 120;
+    const [px, py] = P(V, x, y);
+    const s = sc * V.z, a = k;
+    reset(g); g.fillStyle = css(shade(C.sienna, (lit - 1) * 0.9 - 0.1));
+    g.beginPath(); g.moveTo(px - 36 * s, py); g.quadraticCurveTo(px - 20 * s, py - 50 * s, px, py - 74 * s); g.quadraticCurveTo(px + 20 * s, py - 50 * s, px + 36 * s, py); g.closePath(); g.fill();
+    for (let j = 0; j < 7; j++) dab(g, px + (j - 3) * 9 * s, py - 30 * s, 64 * s, 13 * s, -Math.PI / 2 + (j - 3) * 0.16, shade(jit(C.gold, i * 9 + j, 30), (lit - 1) * 0.9), a);
+    dab(g, px, py - 66 * s, 30 * s, 16 * s, 0, shade(C.sienna, (lit - 1) * 0.9), a);
+  }
+  reset(g);
+}
+
+// ---- змей: ромб с хвостом бантиков; нитка до руки
+function drawKite(g, x, y, s, ang, t, hand) {
+  if (hand) {
+    reset(g);
+    g.strokeStyle = "rgba(255,248,230,0.85)"; g.lineWidth = Math.max(1.5, 2.2 * s);
+    g.beginPath(); g.moveTo(hand[0], hand[1]);
+    g.quadraticCurveTo((hand[0] + x) / 2 + 40 * s, Math.max(hand[1], y) - 20 * s + Math.abs(hand[0] - x) * 0.18, x, y + 40 * s); g.stroke();
+  }
+  // хвост
+  reset(g);
+  let px = x, py = y + 60 * s;
+  for (let i = 0; i < 7; i++) {
+    const nx = px - 22 * s + Math.sin(t * 6 + i * 0.9) * 12 * s, ny = py + 22 * s;
+    g.strokeStyle = "rgba(255,240,220,0.9)"; g.lineWidth = 2 * s; g.beginPath(); g.moveTo(px, py); g.lineTo(nx, ny); g.stroke();
+    dab(g, nx, ny, 16 * s, 9 * s, 0.6, i % 2 ? C.cerul : C.verm); dab(g, nx, ny, 16 * s, 9 * s, -0.6, i % 2 ? C.cerul : C.verm);
+    reset(g); px = nx; py = ny;
+  }
+  const c = Math.cos(ang), sn = Math.sin(ang);
+  const pt = (u, v) => [x + (u * c - v * sn) * s, y + (u * sn + v * c) * s];
+  const top = pt(0, -60), rt = pt(42, -6), bot = pt(0, 64), lf = pt(-42, -6);
+  const cen = pt(0, -6);
+  const tri2 = (a, b, col) => { reset(g); g.fillStyle = css(col); g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.lineTo(cen[0], cen[1]); g.closePath(); g.fill(); };
+  tri2(top, rt, C.verm); tri2(rt, bot, C.cad); tri2(bot, lf, C.verm); tri2(lf, top, C.cad);
+  for (let i = 0; i < 8; i++) { const u = (hash(i) - 0.5) * 50, v = (hash(i * 3) - 0.5) * 90; const p = pt(u * 0.6, v * 0.7); dab(g, p[0], p[1], 26 * s, 7 * s, ang + 0.5, jit(i % 2 ? C.verm : C.cad, i, 30), 0.8); }
+  reset(g); g.strokeStyle = css(C.umber); g.lineWidth = 3 * s;
+  g.beginPath(); g.moveTo(top[0], top[1]); g.lineTo(rt[0], rt[1]); g.lineTo(bot[0], bot[1]); g.lineTo(lf[0], lf[1]); g.closePath(); g.stroke();
+  g.beginPath(); g.moveTo(top[0], top[1]); g.lineTo(bot[0], bot[1]); g.moveTo(lf[0], lf[1]); g.lineTo(rt[0], rt[1]); g.stroke();
+  reset(g);
+}
+
+// ---------- Мальчик: живописные мазки. Сбоку (бег, стоит), анфас (руки раскинуты, лёжа сверху), крупно лицо ----------
+// Сбоку: начало координат — земля под тазом, единица — пиксель при s = 1 (рост ≈ 215).
+const B = { hip: 94, thigh: 48, shin: 44, torso: 70, head: 25, up: 34, fore: 32 };
+const STRIDE = 200; // путь за полный цикл бега (два шага); опорная стопа неподвижна относительно земли
+
+const add = (a, b) => [a[0] + b[0], a[1] + b[1]];
+const dirv = (ang, l) => [Math.sin(ang) * l, Math.cos(ang) * l]; // угол от вертикали вниз, + вперёд
+
+// Поза сбоку. o = {kind: "run"|"stand", dist — пройденный путь (лок. ед.), look, holdRel — куда тянется рука с ниткой, jump}
+// Бег: опорная ступня неподвижна относительно земли (едет назад ровно со скоростью тела), маховая переносится по дуге.
+function sidePose(o) {
+  const p = {};
+  if (o.kind === "run") {
+    // бег с фазой полёта: опора 35 % цикла на каждую ногу, таз высоко, колено на опоре согнуто ≈35–40°
+    const D = STRIDE, c = o.dist / D, f = 0.35, half = D * f / 2;
+    p.c = c;
+    const leg = (off) => {
+      let q = c + off; q -= Math.floor(q);
+      if (q < f) return { st: true, x: lerp(half, -half, q / f), y: -10 };
+      const u = (q - f) / (1 - f), e = 0.5 - 0.5 * Math.cos(Math.PI * u);
+      // маховая: сначала пятка уходит вверх-назад, потом стопа выносится вперёд
+      return { st: false, x: lerp(-half, half, Math.pow(e, 1.25)), y: -10 - Math.sin(Math.PI * Math.pow(u, 0.7)) * 19 };
+    };
+    const A = leg(0), Bl = leg(0.5), st = A.st ? A : (Bl.st ? Bl : null);
+    const hEdge = Math.sqrt(91 * 91 - half * half);
+    let hv;
+    if (st) hv = Math.min(86.5, Math.sqrt(91 * 91 - st.x * st.x));
+    else { const q = c - Math.floor(c), u = q < 0.5 ? (q - f) / (0.5 - f) : (q - 0.5 - f) / (0.5 - f); hv = hEdge + Math.sin(Math.PI * clamp(u)) * 4; }
+    p.feet = [[A.x, A.y], [Bl.x, Bl.y]];                 // [ближняя, дальняя]
+    p.jump = o.jump || 0;
+    p.hipY = -(10 + hv) - p.jump;
+    p.lean = 0.22 + 0.03 * Math.sin(c * 4 * Math.PI + 0.6);
+    p.farArm = [0.75 * Math.cos(TAU * c), 1.75 + 0.25 * Math.sin(TAU * c)]; // против дальней ноги
+    p.kj = ease(clamp(p.jump / 58));
+    p.leap = [[0.75, 0.35], [-0.65, 1.05]];
+  } else {
+    p.legs = [[0.1, 0.06], [-0.12, 0.04]];
+    p.lean = -0.04;
+    p.farArm = [0.25, 1.5];
+    p.jump = 0;
+  }
+  p.look = o.look || 0;
+  p.hold = o.hold;
+  p.holdRel = o.holdRel;
+  return p;
+}
+// двухзвенная IK для ноги: колено вперёд (+x)
+function legIK(hip, f) {
+  let dx = f[0] - hip[0], dy = f[1] - hip[1], d = Math.hypot(dx, dy);
+  const L1 = B.thigh, L2 = B.shin, maxd = L1 + L2 - 0.5;
+  if (d > maxd) { dx *= maxd / d; dy *= maxd / d; d = maxd; }
+  const a = Math.atan2(dy, dx), cA = clamp((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d), -1, 1);
+  const k1 = [hip[0] + Math.cos(a + Math.acos(cA)) * L1, hip[1] + Math.sin(a + Math.acos(cA)) * L1];
+  const k2 = [hip[0] + Math.cos(a - Math.acos(cA)) * L1, hip[1] + Math.sin(a - Math.acos(cA)) * L1];
+  return [k1[0] > k2[0] ? k1 : k2, [hip[0] + dx, hip[1] + dy]];
+}
+function sideJoints(p) {
+  const J = {};
+  if (p.feet) {
+    J.hip = [0, p.hipY];
+    J.legs = p.feet.map((f, i) => {
+      const [kn, an] = legIK(J.hip, [f[0], f[1] - p.jump]);
+      if (!p.kj) return [kn, an];
+      const [th, kb] = p.leap[i], k2 = add(J.hip, dirv(th, B.thigh)), a2 = add(k2, dirv(th - kb, B.shin));
+      return [lerp2(kn, k2, p.kj), lerp2(an, a2, p.kj)];
+    });
+  } else {
+    const legPts = p.legs.map(([th, kb]) => { const kn = dirv(th, B.thigh); return [kn, add(kn, dirv(th - kb, B.shin))]; });
+    const low = Math.max(legPts[0][1][1], legPts[1][1][1]);
+    J.hip = [0, -(low + 10) - p.jump];
+    J.legs = legPts.map(([kn, an]) => [add(J.hip, kn), add(J.hip, an)]);
+  }
+  J.neck = add(J.hip, [Math.sin(p.lean) * B.torso, -Math.cos(p.lean) * B.torso]);
+  J.head = add(J.neck, [Math.sin(p.lean + p.look * 0.3) * 6 + 4, -B.head - 4]);
+  J.shN = add(J.neck, [-3, 8]);
+  J.shF = add(J.neck, [5, 6]);
+  const [ua, eb] = p.farArm;
+  const el = add(J.shF, dirv(ua, B.up));
+  J.farArm = [J.shF, el, add(el, dirv(ua + eb, B.fore))];
+  J.nearArm = armIK(J.shN, p.hold || add(J.shN, p.holdRel || [30, 40]), p.holdRel && p.holdRel[1] < 0 ? -1 : 1);
+  return J;
+}
+// двухзвенная IK: локоть наружу и вниз (side = 1 — локоть ниже линии плечо–кисть)
+function armIK(sh, target, side) {
+  let dx = target[0] - sh[0], dy = target[1] - sh[1];
+  let d = Math.hypot(dx, dy);
+  const maxd = B.up + B.fore - 1;
+  if (d > maxd) { dx *= maxd / d; dy *= maxd / d; d = maxd; }
+  const a = Math.atan2(dy, dx);
+  const cosA = clamp((B.up * B.up + d * d - B.fore * B.fore) / (2 * B.up * d), -1, 1);
+  const ang = a + Math.acos(cosA) * side;
+  const el = [sh[0] + Math.cos(ang) * B.up, sh[1] + Math.sin(ang) * B.up];
+  return [sh, el, [sh[0] + dx, sh[1] + dy]];
+}
+
+// ---------- Живописная отрисовка: сегменты из мазков, свет слева сверху ----------
+const LIGHT = [-0.55, -0.83];
+// цвет под освещение сцены: lit 0…1 — яркость, warm 0…1 — тёплая подсветка заката
+function litCol(c, o) { if (o.env) c = mix(c, o.env, 0.16); return shade(mix(mix(c, [255, 140, 80], (o.warm || 0) * 0.35), [56, 64, 130], (o.cool || 0) * 0.45), ((o.lit === undefined ? 1 : o.lit) - 1) * 0.95); }
+function capsule(g, a, b, ra, rb) {
+  const ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
+  g.beginPath();
+  g.arc(b[0], b[1], rb, ang - Math.PI / 2, ang + Math.PI / 2);
+  g.arc(a[0], a[1], ra, ang + Math.PI / 2, ang + Math.PI * 1.5);
+  g.closePath();
+}
+// сегмент тела: рваная тёмная кайма, тело, мазки тени и света вдоль формы
+function paintSeg(g, a, b, ra, rb, col, seed, k) {
+  reset(g);
+  const L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1e-3, ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
+  let nx = -(b[1] - a[1]) / L, ny = (b[0] - a[0]) / L;
+  if (nx * LIGHT[0] + ny * LIGHT[1] < 0) { nx = -nx; ny = -ny; } // n — к свету
+  g.fillStyle = css(shade(col, -0.5), 0.75); capsule(g, [a[0] - nx * 0.8 * k, a[1] - ny * 0.8 * k], [b[0] - nx * 0.8 * k, b[1] - ny * 0.8 * k], ra + 1.4 * k, rb + 1.4 * k); g.fill();
+  g.fillStyle = css(col); capsule(g, a, b, ra, rb); g.fill();
+  const m = Math.max(1, Math.round(L / (9 * k)));
+  for (let i = 0; i < m; i++) {
+    const u = (i + 0.5) / m, r = lerp(ra, rb, u);
+    const px = lerp(a[0], b[0], u), py = lerp(a[1], b[1], u);
+    dab(g, px - nx * r * 0.5, py - ny * r * 0.5, L / m * 1.35, r * 0.75, ang + (hash(seed + i) - 0.5) * 0.12, jit(shade(col, -0.24), seed + i, 14), 0.85);
+    dab(g, px + nx * r * 0.38, py + ny * r * 0.38, L / m * 1.2, r * 0.48, ang + (hash(seed + i * 3) - 0.5) * 0.16, jit(shade(col, 0.2), seed + i * 7, 16), 0.85);
+  }
+  reset(g);
+}
+// цельная конечность через точки pts с радиусами rs: без шва на суставе, мазки тени и света вдоль формы
+function limbPath(g, pts, rs, grow, ox, oy) {
+  const n = pts.length, L = [], R = [];
+  for (let i = 0; i < n; i++) {
+    const a = pts[Math.max(0, i - 1)], b = pts[Math.min(n - 1, i + 1)];
+    const d = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1e-3, nx = -(b[1] - a[1]) / d, ny = (b[0] - a[0]) / d, r = rs[i] + grow;
+    L.push([pts[i][0] + nx * r + ox, pts[i][1] + ny * r + oy]); R.push([pts[i][0] - nx * r + ox, pts[i][1] - ny * r + oy]);
+  }
+  const e = pts[n - 1], s0 = pts[0];
+  const ae = Math.atan2(e[1] - pts[n - 2][1], e[0] - pts[n - 2][0]), as = Math.atan2(pts[1][1] - s0[1], pts[1][0] - s0[0]);
+  g.beginPath(); g.moveTo(L[0][0], L[0][1]);
+  for (let i = 1; i < n; i++) g.lineTo(L[i][0], L[i][1]);
+  g.arc(e[0] + ox, e[1] + oy, rs[n - 1] + grow, ae + Math.PI / 2, ae - Math.PI / 2, true);
+  for (let i = n - 1; i >= 0; i--) g.lineTo(R[i][0], R[i][1]);
+  g.arc(s0[0] + ox, s0[1] + oy, rs[0] + grow, as - Math.PI / 2, as + Math.PI / 2, true);
+  g.closePath();
+}
+function paintLimb(g, pts, rs, col, seed, k) {
+  reset(g);
+  g.fillStyle = css(shade(col, -0.45), 0.45); limbPath(g, pts, rs, 1.0 * k, 0.7 * k, 0.9 * k); g.fill();
+  g.fillStyle = css(col); limbPath(g, pts, rs, 0, 0, 0); g.fill();
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const a = pts[i], b = pts[i + 1], Ls = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1e-3, ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
+    let nx = -(b[1] - a[1]) / Ls, ny = (b[0] - a[0]) / Ls;
+    if (nx * LIGHT[0] + ny * LIGHT[1] < 0) { nx = -nx; ny = -ny; }
+    const r = (rs[i] + rs[i + 1]) / 2;
+    for (let j = 0; j < 3; j++) {
+      const u = 0.2 + j * 0.3 + (hash(seed + i * 7 + j) - 0.5) * 0.12;
+      dab(g, lerp(a[0], b[0], u) - nx * r * 0.42, lerp(a[1], b[1], u) - ny * r * 0.42, Ls * 0.5, r * 0.9, ang + (hash(seed + i + j * 3) - 0.5) * 0.14, jit(shade(col, -0.18), seed + i * 5 + j, 16), 0.85);
+    }
+    for (let j = 0; j < 2; j++) {
+      const u = 0.3 + j * 0.4 + (hash(seed + i * 11 + j) - 0.5) * 0.2;
+      dab(g, lerp(a[0], b[0], u) + nx * r * 0.3, lerp(a[1], b[1], u) + ny * r * 0.3, Ls * 0.55, r * 0.6, ang + (hash(seed + i * 13 + j) - 0.5) * 0.16, jit(shade(col, 0.16), seed + i * 17 + j, 14), 0.8);
+    }
+  }
+  reset(g);
+}
+// ступня сбоку: пятка, плоская подошва на земле, носок; dir — куда смотрит
+function footSide(g, an, s, dir, sk, seed, T) {
+  paintShape(g, [T(add(an, [-4, -2])), T(add(an, [5, -1])), T(add(an, [12, 4])), T(add(an, [17, 6.5])), T(add(an, [17.5, 9.5])), T(add(an, [14, 11])), T(add(an, [-2, 11])), T(add(an, [-6, 8])), T(add(an, [-6, 3]))], sk, seed, s, 0, 6);
+}
+// ступня анфас: укорочена, носок наружу, пальцы
+function footFront(g, a, s, sd, sk, seed, W0) {
+  const c = add(a, [sd * 4, 5]), pts = [];
+  for (let i = 0; i < 10; i++) { const an = i / 10 * TAU; const v = rot([Math.cos(an) * 8.5, Math.sin(an) * 4.6], sd * 0.35); pts.push(W0(add(c, v))); }
+  paintShape(g, pts, sk, seed, s, sd * 0.35, 5);
+  for (let i = 0; i < 3; i++) { const q = W0(add(c, rot([sd * (5 + i * 1.6), 1.5 + i * 0.6], sd * 0.35))); dab(g, q[0], q[1], 3.2 * s, 2.6 * s, 0, shade(sk, -0.12), 0.8); }
+}
+// замкнутая форма (рубаха, волосы) с каймой и мазками по направлению ang
+// сглаживание замкнутого контура (Чайкин): без угловатых «касок» и прямоугольного торса
+function chaikin(P) { const out = []; for (let i = 0; i < P.length; i++) { const a = P[i], b = P[(i + 1) % P.length]; out.push([a[0] * 0.75 + b[0] * 0.25, a[1] * 0.75 + b[1] * 0.25], [a[0] * 0.25 + b[0] * 0.75, a[1] * 0.25 + b[1] * 0.75]); } return out; }
+function paintShape(g, pts, col, seed, k, ang, n) {
+  pts = chaikin(chaikin(pts));
+  reset(g);
+  const path = (dx, dy) => { g.beginPath(); g.moveTo(pts[0][0] + dx, pts[0][1] + dy); for (let i = 1; i < pts.length; i++) g.lineTo(pts[i][0] + dx, pts[i][1] + dy); g.closePath(); };
+  g.lineJoin = "round"; g.strokeStyle = css(shade(col, -0.45), 0.45); g.lineWidth = 2 * k; path(0.6 * k, 0.6 * k); g.stroke();
+  g.fillStyle = css(col); path(0, 0); g.fill();
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  for (const [x, y] of pts) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+  g.save(); path(0, 0); g.clip();
+  for (let i = 0; i < Math.round(n * 1.6); i++) {
+    const x = lerp(x0, x1, hash(seed + i * 1.3)), y = lerp(y0, y1, hash(seed + i * 2.7));
+    const lx = (x - (x0 + x1) / 2) / (x1 - x0 + 1e-3), ly = (y - (y0 + y1) / 2) / (y1 - y0 + 1e-3);
+    const light = -(lx * 0.9 + ly * 0.6);
+    dab(g, x, y, 19 * k, 7 * k, ang + (hash(seed + i * 5) - 0.5) * 0.35, jit(shade(col, light * 0.45), seed + i, 20), 0.9);
+  }
+  g.restore();
+  reset(g);
+}
+const rot = (v, a) => [v[0] * Math.cos(a) - v[1] * Math.sin(a), v[0] * Math.sin(a) + v[1] * Math.cos(a)];
+
+// ---------- Сбоку ----------
+function drawBoySide(g, x, y, s, dir, o, t) {
+  const p = sidePose(o);
+  const ph = o.kind === "run" ? o.dist / STRIDE * TAU : 0;
+  if (p.holdRel) p.holdRel = [p.holdRel[0] + Math.sin(ph) * 9 + Math.sin(t * 2.3) * 3, p.holdRel[1] + Math.cos(ph * 2) * 6 + Math.sin(t * 1.7) * 4];
+  const J = sideJoints(p);
+  const T = (pt) => [x + pt[0] * s * dir, y + pt[1] * s];
+  const LC = (c) => litCol(c, o);
+  const shirt = LC(C.shirt), pants = LC(C.pants), skin = LC(C.skin), hair = LC(C.hair), farK = -0.2;
+  // тень на земле (в прыжке меньше)
+  reset(g);
+  const sh = 1 - clamp(p.jump / 60) * 0.5;
+  g.fillStyle = "rgba(60,30,20,0.35)"; g.beginPath(); g.ellipse(x, y + 2, 46 * s * sh, 9 * s * sh, 0, 0, TAU); g.fill();
+  // дальняя рука: рукав сужается к запястью, кисть
+  const arm = (A, col, sk, seed) => {
+    paintLimb(g, A.map(T), [7.2 * s, 6.2 * s, 5 * s], col, seed, s);
+    hand(g, T(A[1]), T(A[2]), s, sk, seed);
+  };
+  arm(J.farArm, shade(shirt, farK), shade(skin, farK), 11);
+  // ноги: дальняя, ближняя
+  const leg = (L, col, sk, seed) => {
+    const [kn, an] = L;
+    footSide(g, an, s, dir, sk, seed + 20, T);
+    paintLimb(g, [T(J.hip), T(kn), T(add(an, [0, -2]))], [9.5 * s, 7 * s, 5.2 * s], col, seed, s);
+  };
+  leg(J.legs[1], shade(pants, farK), shade(skin, farK), 31);
+  leg(J.legs[0], pants, skin, 41);
+  // рубаха навыпуск: подол развевается на бегу
+  // позвоночник с изгибом: у таза наклон меньше, у груди больше — торс гнётся в поясе
+  const P2 = (u, v) => {
+    const N = 6; let px = J.hip[0], py = J.hip[1];
+    const step = u / N;
+    for (let i = 0; i < N; i++) { const a = p.lean + 0.22 * ((i + 0.5) * step / 70 - 0.5); px += Math.sin(a) * step; py -= Math.cos(a) * step; }
+    const a = p.lean + 0.22 * (u / 70 - 0.5);
+    return T([px + Math.cos(a) * v, py + Math.sin(a) * v]);
+  };
+  const sp = [Math.sin(p.lean), -Math.cos(p.lean)];
+  const fl = o.kind === "run" ? Math.sin(ph * 2) : Math.sin(t * 2);
+  const torso = [P2(-13, -16 - 4 - fl * 3), P2(0, -13), P2(24, -12), P2(48, -13.5), P2(66, -10), P2(70, 0), P2(68, 6), P2(56, 13), P2(34, 12.5), P2(16, 12), P2(0, 14), P2(-12, 15 + fl)];
+  paintShape(g, torso, shirt, 61, s, Math.atan2(sp[1], sp[0] * dir), 26);
+  // вышивка по подолу и вороту, разрез косоворотки
+  for (let i = 0; i < 6; i++) { const q = P2(-9 + i * 0.3, lerp(-14, 13, i / 5)); dab(g, q[0], q[1], 6 * s, 3 * s, 0.6, LC(C.cad), 0.9); }
+  for (let i = 0; i < 4; i++) { const q = P2(66 - i * 4, 7 - i * 0.5); dab(g, q[0], q[1], 5 * s, 2.6 * s, 1.2, LC(C.cad), 0.9); }
+  // пояс-кушак и кисть сзади (летит по ветру)
+  const b0 = P2(22, -12), b1 = P2(22, 12.5);
+  paintSeg(g, b0, b1, 3.3 * s, 3.3 * s, LC([120, 40, 40]), 71, s);
+  const tw = o.kind === "run" ? Math.sin(ph * 2 + 1) : Math.sin(t * 2.4);
+  const k0 = P2(20, -14), k1 = [k0[0] - dir * (9 + 3 * tw) * s, k0[1] + (13 - 4 * Math.abs(tw)) * s];
+  paintSeg(g, k0, k1, 2.2 * s, 3.4 * s, LC([140, 46, 44]), 75, s);
+  // шея и голова
+  const nk = T(J.neck), hd = T(J.head);
+  paintSeg(g, nk, [lerp(nk[0], hd[0], 0.6), lerp(nk[1], hd[1], 0.6)], 7.5 * s, 7 * s, shade(skin, -0.1), 81, s);
+  headSide(g, hd, s, dir, p.look, o, t, ph, LC);
+  // ближняя рука (с ниткой змея)
+  arm(J.nearArm, shade(shirt, 0.04), skin, 21);
+  reset(g);
+  return { hand: T(J.nearArm[2]), head: hd, J };
+}
+// кисть: овал ладони по направлению предплечья и большой палец
+function hand(g, el, wr, s, sk, seed) {
+  const a = Math.atan2(wr[1] - el[1], wr[0] - el[0]);
+  const c = [wr[0] + Math.cos(a) * 4 * s, wr[1] + Math.sin(a) * 4 * s];
+  paintSeg(g, wr, c, 4.6 * s, 5.4 * s, sk, seed + 50, s);
+  dab(g, c[0] + Math.cos(a - 1.2) * 4 * s, c[1] + Math.sin(a - 1.2) * 4 * s, 7 * s, 3.4 * s, a - 0.6, sk);
+}
+function headSide(g, hd, s, dir, look, o, t, ph, LC) {
+  const skin = LC(C.skin), hair = LC(C.hair);
+  const H = (dx, dy) => [hd[0] + dx * dir * s, hd[1] + dy * s];
+  // череп и подбородок
+  reset(g);
+  g.fillStyle = css(shade(skin, -0.5), 0.75);
+  g.beginPath(); g.ellipse(hd[0] + 0.8 * s, hd[1] + 0.8 * s, 25.5 * s, 26.5 * s, 0, 0, TAU); g.fill();
+  const rg = g.createRadialGradient(...H(6, -8), 4 * s, ...H(0, 0), 28 * s);
+  rg.addColorStop(0, css(shade(skin, 0.14))); rg.addColorStop(1, css(shade(skin, -0.14)));
+  g.fillStyle = rg; g.beginPath(); g.ellipse(hd[0], hd[1], 24.5 * s, 25.5 * s, 0, 0, TAU); g.fill();
+  const ch = H(11, 16); g.beginPath(); g.ellipse(ch[0], ch[1], 12 * s, 9 * s, 0, 0, TAU); g.fill();
+  // нос, ухо, румянец
+  const ns = H(25, 1); dab(g, ns[0], ns[1], 9 * s, 7 * s, dir > 0 ? 0.9 : Math.PI - 0.9, shade(skin, -0.04));
+  reset(g); const er = H(-3, 3); g.fillStyle = css(shade(skin, -0.16)); g.beginPath(); g.ellipse(er[0], er[1], 5 * s, 7 * s, 0, 0, TAU); g.fill();
+  g.fillStyle = css(shade(skin, -0.32)); g.beginPath(); g.ellipse(er[0] + dir * 1 * s, er[1], 2 * s, 3.5 * s, 0, 0, TAU); g.fill();
+  g.fillStyle = css(C.rose, 0.45); const bl = H(13, 9); g.beginPath(); g.ellipse(bl[0], bl[1], 5 * s, 3.2 * s, 0, 0, TAU); g.fill();
+  // глаз и бровь
+  const ey = H(14, -3 - look * 3);
+  g.fillStyle = css([40, 26, 30]); g.beginPath(); g.ellipse(ey[0], ey[1], 2.4 * s, (o.blink ? 0.6 : 3.4) * s, 0, 0, TAU); g.fill();
+  const bw = H(13, -10 - look * 3); dab(g, bw[0], bw[1], 9 * s, 2.6 * s, dir > 0 ? -0.15 : Math.PI + 0.15, shade(hair, -0.35));
+  // рот: на бегу приоткрыт
+  reset(g); const mo = H(18, 12); g.fillStyle = css([150, 60, 56]);
+  g.beginPath(); g.ellipse(mo[0], mo[1], 2.6 * s, (o.kind === "run" ? 2.4 : 1.2) * s, 0, 0, TAU); g.fill();
+  // волосы: шапка с вихрами, чёлка вперёд, на бегу вихры летят назад
+  const wind = o.kind === "run" ? 1 : 0.4;
+  const cap = [H(21, -12), H(14, -22), H(0, -28), H(-14, -25), H(-24, -12), H(-25, 2), H(-19, 11), H(-9, 3), H(2, -6), H(10, -9)];
+  paintShape(g, cap, hair, 91, s, dir > 0 ? -2.6 : -0.5, 18);
+  for (let i = 0; i < 11; i++) {
+    const u = i / 10, a0 = lerp(-0.25, -2.9, u);
+    const base = H(Math.cos(a0) * 22, Math.sin(a0) * 23 - 2);
+    const fl = Math.sin(t * 9 + i * 1.7 + ph) * 0.25 * wind;
+    const ang = (dir > 0 ? Math.PI : 0) + (dir > 0 ? -1 : 1) * (0.5 + u * 0.5) + fl * dir;
+    dab(g, base[0] - Math.cos(ang) * 2 * s, base[1] + Math.sin(ang) * 1 * s, (10 + 4 * hash(i)) * s, 4.2 * s, ang + (dir > 0 ? 0 : 0), jit(shade(hair, 0.12), i + 95, 22), 0.95);
+  }
+  reset(g);
+}
+
+// ---------- Анфас ----------
+// o = {arms: 0…1 раскинуты, lie: true — вид сверху, eyes, smile, tilt — наклон головы, lit, warm}
+function drawBoyFront(g, x, y, s, o, t) {
+  const op = o.arms || 0, lie = !!o.lie;
+  const LC = (c) => litCol(c, o);
+  const shirt = LC(C.shirt), pants = LC(C.pants), skin = LC(C.skin);
+  const sw = lie ? 0 : Math.sin(t * 1.3) + 0.4 * Math.sin(t * 2.9);
+  const breathe = Math.sin(t * 2.2) * (lie ? 3 : 1.6);
+  const W0 = (v) => [x + v[0] * s, y + v[1] * s];
+  // таз: вес на левой (для зрителя) ноге, бедро правой опущено
+  const hipTilt = lie ? 0.03 : 0.07 + sw * 0.015;
+  const hop = lie ? 0 : Math.sin(Math.PI * clamp(op * 1.4)) * 16;
+  const hipC = [lie ? 0 : -4 + sw * 6, -90 - hop];
+  const hL = add(hipC, rot([-11, 0], hipTilt)), hR = add(hipC, rot([11, 0], hipTilt));
+  const aL = lie ? [-34, -9] : [-15, -9 - hop * 0.6], aR = lie ? [20, -24] : [17, -9 - hop * 0.6];
+  const kL = add([lerp(hL[0], aL[0], 0.5), lerp(hL[1], aL[1], 0.52)], [-2.5, 0]);
+  const kR = add([lerp(hR[0], aR[0], 0.5), lerp(hR[1], aR[1], 0.52)], lie ? [17, 4] : [-6, 2.5]);  // опорная прямее, свободная колено внутрь
+  // корпус в противоходе тазу, голова к змею
+  const tA = lie ? 0 : -hipTilt * 1.4 + sw * 0.012;
+  const up = rot([0, -1], tA), rt = rot([1, 0], tA);
+  // корпус чуть изогнут в сторону опорной ноги — не доска
+  const bend = lie ? 0 : 0.05 + sw * 0.01;
+  const TP = (u, v) => { const c = bend * (u / 72) * (u / 72) * 72 * 0.5; return [hipC[0] + up[0] * u + rt[0] * (v + c), hipC[1] + up[1] * u + rt[1] * (v + c)]; };
+  const neckB = TP(72 + breathe * 0.3, 0);
+  const shL = TP(64 + breathe * 0.5, -19), shR = TP(64 + breathe * 0.5, 19);
+  const hA = (o.tilt || 0) + (lie ? 0 : sw * 0.05) - (lie ? 0.06 * Math.sin(t * 0.9) : Math.sin(Math.PI * clamp(op * 1.2)) * 0.2);
+  const head = add(neckB, rot([0, -30], hA));
+  // руки: IK с локтем наружу и вниз
+  // взмах по дуге: угол и длина руки интерполируются, рука не складывается посередине
+  const polar = (sh, a, b, u) => { const ra = Math.hypot(...a), rb = Math.hypot(...b); let aa = Math.atan2(a[1], a[0]), ab = Math.atan2(b[1], b[0]);
+    if (ab - aa > Math.PI) ab -= TAU; if (aa - ab > Math.PI) ab += TAU; const an = lerp(aa, ab, u), r = lerp(ra, rb, u); return add(sh, [Math.cos(an) * r, Math.sin(an) * r]); };
+  const uo = ease(op);
+  const tug = o.hold === false || lie ? 0 : Math.pow(Math.max(0, Math.sin(t * 2.7)), 3) * 14;
+  const wave = lie ? 0 : Math.sin(t * 3.2) * 6 * uoW(op);
+  const tgtL = add(polar(shL, [-10, 63.5], lie ? [-61, -6] : [-50, -36], uo), [0, wave]);
+  const tgtR = add(polar(shR, o.hold === false ? [7, 62] : [20 - tug * 0.3, 54 - tug], lie ? [56, 18] : [50, -38], uo), [0, -wave]);
+  const armL = ikPick(shL, tgtL, [-1, 0.7]), armR = ikPick(shR, tgtR, op < 0.5 ? [0.45, 1] : [1, 0.7]);
+  // тень
+  reset(g);
+  if (!lie) { g.fillStyle = "rgba(60,30,20,0.35)"; g.beginPath(); g.ellipse(x, y + 2, 62 * s, 10 * s, 0, 0, TAU); g.fill(); }
+  else { g.fillStyle = "rgba(60,30,20,0.26)"; g.beginPath(); g.ellipse(x + 8 * s, y - 100 * s, 125 * s, 150 * s, 0, 0, TAU); g.fill(); }
+  // ноги
+  [[hL, kL, aL, -1, 31], [hR, kR, aR, 1, 41]].forEach(([h, k, a, sd, seed]) => {
+    footFront(g, a, s, sd, skin, seed + 20, W0);
+    paintLimb(g, [W0(h), W0(k), W0(add(a, [0, -2]))], [10 * s, 7.6 * s, 5.6 * s], pants, seed, s);
+  });
+  // рубаха: шире в плечах, расширяется к подолу
+  const fl = Math.sin(t * 2.3) * (lie ? 0 : 1);
+  const torso = [TP(72, -8), TP(68, -20), TP(58, -21), TP(40, -18.5), TP(22, -16), TP(4, -19), TP(-12, -22 - fl), TP(-14, -6), TP(-12, 8), TP(-13, 22 + fl), TP(4, 19), TP(22, 16), TP(40, 18.5), TP(58, 21), TP(68, 20), TP(72, 8)].map(W0);
+  paintShape(g, torso, shirt, 61, s, Math.atan2(up[1], up[0]), 34);
+  // ворот с вышивкой и разрезом слева, вышивка по подолу
+  for (let i = 0; i < 7; i++) { const q = W0(TP(71 - Math.sin(i / 6 * Math.PI) * 4, lerp(-8, 8, i / 6))); dab(g, q[0], q[1], 5 * s, 2.6 * s, 0, LC(C.cad), 0.9); }
+  for (let i = 0; i < 5; i++) { const q = W0(TP(66 - i * 6, -5)); dab(g, q[0], q[1], 5 * s, 2.6 * s, Math.PI / 2, LC(C.cad), 0.9); }
+  for (let i = 0; i < 9; i++) { const q = W0(TP(-9, lerp(-19, 19, i / 8))); dab(g, q[0], q[1], 6 * s, 3 * s, 0.5, LC(C.cad), 0.9); }
+  // кушак и кисть у бедра
+  paintSeg(g, W0(TP(18, -16.5)), W0(TP(18, 16.5)), 3.6 * s, 3.6 * s, LC([120, 40, 40]), 71, s);
+  const kk = W0(TP(16, -14)), sway = Math.sin(t * 2.6) * (lie ? 0 : 1);
+  paintSeg(g, kk, [kk[0] - (3 + sway * 3) * s, kk[1] + 14 * s], 2.2 * s, 3.4 * s, LC([140, 46, 44]), 75, s);
+  // шея и голова
+  paintSeg(g, W0(neckB), W0(lerp2(neckB, head, 0.55)), 8.8 * s, 8.2 * s, shade(skin, -0.1), 81, s);
+  headFront(g, W0(head), s, hA, o, t, LC);
+  // руки поверх боков
+  [[armL, 11], [armR, 21]].forEach(([A, seed]) => {
+    paintLimb(g, A.map(W0), [7.4 * s, 6.4 * s, 5.2 * s], shade(shirt, 0.04), seed, s);
+    hand(g, W0(A[1]), W0(A[2]), s, skin, seed);
+  });
+  // в гнезде: соломинки поверх краёв фигуры — лежит во ржи, а не на ней
+  if (lie) for (let i = 0; i < 16; i++) {
+    const a = hash(i * 4.1) * TAU, r = (70 + hash(i * 2.3) * 60) * s;
+    const px = x + Math.cos(a) * r * 0.8, py = y - 100 * s + Math.sin(a) * r * 1.05;
+    const hh = W0(head);
+    if (Math.hypot(px - hh[0], py - hh[1]) < 48 * s) continue;
+    dab(g, px, py, 34 * s, 3 * s, a + Math.PI / 2 + (hash(i) - 0.5) * 0.6, LC(C.gold), 0.9);
+  }
+  reset(g);
+  return { handR: W0(armR[2]), handL: W0(armL[2]), head: W0(head) };
+}
+const lerp2 = (a, b, u) => [lerp(a[0], b[0], u), lerp(a[1], b[1], u)];
+const uoW = (op) => clamp((op - 0.8) / 0.2);
+// IK с выбором локтя: из двух решений — то, что больше смотрит в сторону pref
+function ikPick(sh, target, pref) {
+  const A = armIK(sh, target, 1), Bb = armIK(sh, target, -1);
+  const mid = lerp2(sh, A[2], 0.5);
+  const sc = (E) => (E[1][0] - mid[0]) * pref[0] + (E[1][1] - mid[1]) * pref[1];
+  return sc(A) >= sc(Bb) ? A : Bb;
+}
+function headFront(g, hd, s, tilt, o, t, LC) {
+  const skin = LC(C.skin), hair = LC(C.hair);
+  const H = (dx, dy) => { const v = rot([dx, dy], tilt); return [hd[0] + v[0] * s, hd[1] + v[1] * s]; };
+  // уши
+  for (const sd of [-1, 1]) { reset(g); const e = H(sd * 24, 3); g.fillStyle = css(shade(skin, -0.14)); g.beginPath(); g.ellipse(e[0], e[1], 5 * s, 7.5 * s, tilt, 0, TAU); g.fill(); }
+  reset(g);
+  g.fillStyle = css(shade(skin, -0.5), 0.75); g.beginPath(); g.ellipse(hd[0] + 0.8 * s, hd[1] + 0.8 * s, 25 * s, 27.5 * s, tilt, 0, TAU); g.fill();
+  const rg = g.createRadialGradient(...H(-8, -8), 4 * s, ...H(0, 2), 30 * s);
+  rg.addColorStop(0, css(shade(skin, 0.14))); rg.addColorStop(1, css(shade(skin, -0.14)));
+  g.fillStyle = rg; g.beginPath(); g.ellipse(hd[0], hd[1], 24 * s, 26.5 * s, tilt, 0, TAU); g.fill();
+  g.save(); g.beginPath(); g.ellipse(hd[0], hd[1], 24 * s, 26.5 * s, tilt, 0, TAU); g.clip();
+  for (let i = 0; i < 44; i++) { const a = hash(i * 5.1) * TAU, d = Math.sqrt(hash(i * 2.9)) * 23; const dx = Math.cos(a) * d, dy = Math.sin(a) * d * 1.1, q = H(dx, dy);
+    const side = (dx * 0.6 + dy * 0.5) / 24; // >0 — теневая сторона
+    dab(g, q[0], q[1], 9 * s, 4.6 * s, 0.5 + tilt + (hash(i) - 0.5) * 0.6 + (dx > 0 ? 0.6 : 0), jit(shade(skin, -side * 0.2 + 0.03), i + 200, 10), 0.42); }
+  // подбородок и скула — мягкая тень под нижней губой и по правой щеке
+  { const q = H(2, 20); dab(g, q[0], q[1], 16 * s, 5 * s, tilt, shade(skin, -0.14), 0.35); const r = H(17, 6); dab(g, r[0], r[1], 13 * s, 5 * s, Math.PI / 2 + tilt, shade(skin, -0.12), 0.35); }
+  g.restore();
+  // волосы: шапка и рваная чёлка
+  const cap = [H(-25, 2), H(-24, -14), H(-14, -26), H(0, -29), H(14, -26), H(24, -14), H(25, 1), H(19, -7), H(11, -11), H(4, -9), H(-4, -12), H(-12, -9), H(-19, -7)];
+  paintShape(g, cap, hair, 101, s, -Math.PI / 2 + tilt, 20);
+  for (let i = 0; i < 9; i++) {
+    const u = i / 8, bx = lerp(-19, 19, u), by = -13 - Math.sin(u * Math.PI) * 4;
+    const b0 = H(bx, by), fl = Math.sin(t * 4 + i * 1.3) * 0.25;
+    const a = Math.PI / 2 + tilt + (u - 0.5) * 0.8 + fl;
+    dab(g, b0[0] + Math.cos(a) * 3 * s, b0[1] + Math.sin(a) * 3 * s, (10 + hash(i * 3) * 4) * s, 4 * s, a, jit(shade(hair, 0.12), i + 120, 22), 0.95);
+  }
+  // глаза, брови, нос, румянец, рот
+  const eo = o.eyes === undefined ? 1 : o.eyes, lk = o.lookUp || 0;
+  for (const sd of [-1, 1]) {
+    reset(g);
+    const e = H(sd * 9, 1 - lk * 2);
+    if (eo > 0.35) {
+      g.fillStyle = css([40, 26, 30]); g.beginPath(); g.ellipse(e[0], e[1], 2.8 * s, 3.8 * eo * s, tilt, 0, TAU); g.fill();
+      if (o.moonEyes) { const mr = 1.25 * s, Lm = moonLayer(mr); g.globalAlpha = o.moonEyes; g.drawImage(Lm, e[0] + 0.6 * s - mr * 1.3, e[1] + 0.4 * s - mr * 1.3); g.globalAlpha = 1; }
+      g.fillStyle = css(C.white, 0.9); g.beginPath(); g.arc(e[0] - 0.9 * s, e[1] - 1.2 * s, 0.9 * s, 0, TAU); g.fill();
+    }
+    else { g.strokeStyle = css([90, 50, 46]); g.lineWidth = 1.8 * s; g.lineCap = "round"; g.beginPath(); g.arc(e[0], e[1] - 1.5 * s, 3.6 * s, 0.25 + tilt, Math.PI - 0.25 + tilt); g.stroke(); }
+    const b = H(sd * 9.5, -6.5 - lk * 2); dab(g, b[0], b[1], 8 * s, 2.4 * s, tilt - sd * 0.18, shade(hair, -0.35));
+    reset(g); const c = H(sd * 14, 9); g.fillStyle = css(C.rose, 0.4); g.beginPath(); g.ellipse(c[0], c[1], 4.5 * s, 3 * s, tilt, 0, TAU); g.fill();
+  }
+  const n = H(0, 6); dab(g, n[0], n[1], 7 * s, 5 * s, Math.PI / 2 + tilt, shade(skin, -0.08));
+  reset(g);
+  const sm = o.smile === undefined ? 1 : o.smile;
+  const m0 = H(-6.5, 13), m1 = H(0, 13 + 5 * sm), m2 = H(6.5, 13);
+  g.strokeStyle = css([150, 60, 56]); g.lineWidth = 2.2 * s; g.lineCap = "round";
+  g.beginPath(); g.moveTo(m0[0], m0[1]); g.quadraticCurveTo(m1[0], m1[1], m2[0], m2[1]); g.stroke();
+  reset(g);
+}
+
+// ---------- Крупно: лицо мальчика, в глазах отражается месяц ----------
+function drawFaceClose(g, cx, cy, s, t, o = {}) {
+  reset(g);
+  // уши
+  blob(g, cx - 300 * s, cy + 30 * s, 50 * s, 80 * s, shade(C.skin, -0.06), 71, 4);
+  blob(g, cx + 300 * s, cy + 30 * s, 50 * s, 80 * s, shade(C.skin, -0.06), 72, 4);
+  const rg = g.createRadialGradient(cx - 80 * s, cy - 80 * s, 40 * s, cx, cy, 340 * s);
+  rg.addColorStop(0, css(shade(C.skin, 0.18))); rg.addColorStop(1, css(shade(C.skin, -0.12)));
+  g.fillStyle = css(shade(C.skin, -0.4)); g.beginPath(); g.ellipse(cx + 4 * s, cy + 6 * s, 306 * s, 336 * s, 0, 0, TAU); g.fill();
+  g.fillStyle = rg; g.beginPath(); g.ellipse(cx, cy, 300 * s, 330 * s, 0, 0, TAU); g.fill();
+  for (let i = 0; i < 22; i++) {
+    const a = hash(i * 3.3) * TAU, d = Math.sqrt(hash(i * 1.7)) * 250 * s;
+    dab(g, cx + Math.cos(a) * d, cy + Math.sin(a) * d * 1.1, 110 * s, 30 * s, 0.5 + (hash(i) - 0.5) * 0.5, jit(C.skin, i + 300, 14), 0.22);
+  }
+  // румянец
+  for (const sd of [-1, 1]) { reset(g); g.fillStyle = css(C.rose, 0.35); g.beginPath(); g.ellipse(cx + sd * 170 * s, cy + 120 * s, 60 * s, 36 * s, 0, 0, TAU); g.fill(); }
+  // волосы-чёлка
+  for (let i = 0; i < 26; i++) {
+    const a = -Math.PI * (0.05 + i * 0.035);
+    dab(g, cx + Math.cos(a) * 250 * s, cy + Math.sin(a) * 280 * s - 30 * s, 210 * s, 60 * s, a + Math.PI / 2 + (hash(i) - 0.5) * 0.4, jit(C.hair, i + 90, 30));
+  }
+  const eo = o.eyes === undefined ? 1 : o.eyes;
+  for (const sd of [-1, 1]) {
+    const ex = cx + sd * 112 * s, ey = cy + 10 * s;
+    reset(g);
+    g.fillStyle = css(C.white); g.beginPath(); g.ellipse(ex, ey, 62 * s, 44 * s * eo, 0, 0, TAU); g.fill();
+    g.save(); g.beginPath(); g.ellipse(ex, ey, 62 * s, 44 * s * eo, 0, 0, TAU); g.clip();
+    const ix = ex + (o.lookX || 0) * 14 * s, iy = ey - (o.lookY || 0) * 10 * s;
+    g.fillStyle = css([90, 130, 170]); g.beginPath(); g.arc(ix, iy, 34 * s, 0, TAU); g.fill();
+    g.fillStyle = css([20, 24, 40]); g.beginPath(); g.arc(ix, iy, 17 * s, 0, TAU); g.fill();
+    // отражение: маленький серп месяца
+    if (o.moon) { const mr = 20 * s, L = moonLayer(mr); g.globalAlpha = o.moon; g.drawImage(L, ix + 4 * s - mr * 1.3, iy - 2 * s - mr * 1.3); g.globalAlpha = 1; }
+    g.fillStyle = css(C.white); g.beginPath(); g.arc(ix - 11 * s, iy - 12 * s, 7 * s, 0, TAU); g.fill();
+    g.restore();
+    // веко и бровь
+    limb(g, [[ex - 66 * s, ey - 46 * s * eo - 4 * s], [ex, ey - 54 * s * eo - 8 * s], [ex + 66 * s, ey - 46 * s * eo - 4 * s]], 10 * s, shade(C.skin, -0.25));
+    limb(g, [[ex - 60 * s, ey - 110 * s], [ex + 4 * s, ey - 126 * s - (o.brow || 0) * 20 * s], [ex + 62 * s, ey - 108 * s]], 18 * s, shade(C.hair, -0.1));
+  }
+  // нос, веснушки, улыбка
+  dab(g, cx, cy + 90 * s, 70 * s, 40 * s, Math.PI / 2, shade(C.skin, -0.08));
+  for (let i = 0; i < 14; i++) dab(g, cx + (i % 2 ? 1 : -1) * (70 + hash(i) * 80) * s, cy + (80 + hash(i * 2) * 50) * s, 10 * s, 8 * s, 0, [196, 116, 80], 0.55);
+  limb(g, [[cx - 70 * s, cy + 175 * s], [cx, cy + 205 * s], [cx + 70 * s, cy + 172 * s]], 12 * s, [170, 70, 60]);
+  reset(g);
+}
+
+// ---------- Текст: строки стиха на мазковой плашке, заголовок густой золотой краской ----------
+const FONT_T = '"Yeseva One", serif', FONT_V = 'italic 600 {px}px "Lora", serif';
+const fontsReady = () => document.fonts && document.fonts.check('100px "Yeseva One"') && document.fonts.check('italic 600 50px "Lora"');
+const SPR = {};
+
+// плашка под строки: тёмные мазки умбры и фиолета
+function bandSprite() {
+  if (SPR.band) return SPR.band;
+  const c = document.createElement("canvas"); c.width = 1500; c.height = 210;
+  const x = c.getContext("2d");
+  x.save(); x.translate(750, 105); x.scale(1, 92 / 700);
+  const rg = x.createRadialGradient(0, 0, 0, 0, 0, 700);
+  rg.addColorStop(0, "rgba(34,22,40,0.66)"); rg.addColorStop(0.7, "rgba(34,22,40,0.55)"); rg.addColorStop(1, "rgba(34,22,40,0)");
+  x.fillStyle = rg; x.beginPath(); x.arc(0, 0, 700, 0, TAU); x.fill(); x.restore();
+  let n = 0;
+  for (let row = 0; row < 6; row++) for (let i = 0; i < 12; i++) {
+    n++;
+    const px = 120 + i * 115 + (hash(n) - 0.5) * 50, py = 40 + row * 26 + (hash(n * 2) - 0.5) * 8;
+    const e = Math.hypot((px - 750) / 700, (py - 105) / 92);
+    dab(x, px, py, 220, 30, (hash(n * 3) - 0.5) * 0.08, jit([44, 30, 50], n, 12), clamp((1 - e) * 2.2) * 0.55);
+  }
+  reset(x);
+  return (SPR.band = c);
+}
+
+// слово заголовка: белая маска → мазки золота поверх (source-atop) → тёмная кайма снизу (2×, выводится в 1×)
+function goldWord(word, px) {
+  const key = word + px;
+  if (SPR[key]) return SPR[key];
+  const k = 2, f = `${px * k}px ${FONT_T}`;
+  const m = document.createElement("canvas").getContext("2d"); m.font = f;
+  const w = Math.ceil(m.measureText(word).width) + 40 * k, h = Math.ceil(px * 1.5 * k);
+  const c = document.createElement("canvas"); c.width = w; c.height = h;
+  const x = c.getContext("2d");
+  x.font = f; x.textBaseline = "alphabetic"; x.fillStyle = "#fff";
+  const bx = 20 * k, by = Math.round(h * 0.74);
+  x.fillText(word, bx, by);
+  x.globalCompositeOperation = "source-atop";
+  const lg = x.createLinearGradient(0, by - px * k, 0, by);
+  lg.addColorStop(0, css(C.lemon)); lg.addColorStop(0.55, css(C.cad)); lg.addColorStop(1, css(C.ochre));
+  x.fillStyle = lg; x.fillRect(0, 0, w, h);
+  let n = 0;
+  for (let yy = by - px * k; yy < by + 10; yy += 9 * k) for (let xx = 0; xx < w; xx += 26 * k) {
+    n++;
+    const v = (yy - (by - px * k)) / (px * k);
+    dab(x, xx + hash(n) * 20 * k, yy, 34 * k, 8 * k, -0.35 + (hash(n * 2) - 0.5) * 0.3, jit(mix(C.lemon, C.ochre, v), n + word.length, 34), 0.85);
+  }
+  reset(x);
+  // кайма и тень (под буквами)
+  x.globalCompositeOperation = "destination-over";
+  x.lineJoin = "round"; x.strokeStyle = css([70, 32, 20]); x.lineWidth = 7 * k;
+  x.strokeText(word, bx, by);
+  x.fillStyle = "rgba(40,16,10,0.55)"; x.fillText(word, bx + 4 * k, by + 6 * k);
+  x.globalCompositeOperation = "source-over";
+  return (SPR[key] = { c, w: w / k, h: h / k, base: by / k, k });
+}
+function plainText(txt, font, col, edge) {
+  const key = txt + font + col;
+  if (SPR[key]) return SPR[key];
+  const k = 2;
+  const m = document.createElement("canvas").getContext("2d"); m.font = font.replace(/(\d+)px/, (_, p) => p * k + "px");
+  const w = Math.ceil(m.measureText(txt).width) + 24 * k, h = Math.ceil(parseInt(font.match(/(\d+)px/)[1]) * 1.6 * k);
+  const c = document.createElement("canvas"); c.width = w; c.height = h;
+  const x = c.getContext("2d"); x.font = m.font; x.lineJoin = "round";
+  const by = Math.round(h * 0.72);
+  x.strokeStyle = edge; x.lineWidth = 6 * k; x.strokeText(txt, 12 * k, by);
+  x.fillStyle = col; x.fillText(txt, 12 * k, by);
+  return (SPR[key] = { c, w: w / k, h: h / k, base: by / k, k });
+}
+const cacheable = () => fontsReady();
+function drawSprite(g, S, x, y, sc = 1, a = 1, rot = 0) {
+  reset(g); g.globalAlpha = a;
+  g.imageSmoothingEnabled = true; g.imageSmoothingQuality = "high";
+  if (rot === 0 && Math.abs(sc - 1) < 1e-3) { g.drawImage(S.c, Math.round(x - S.w / 2), Math.round(y - S.base), S.w, S.h); }
+  else { g.translate(x, y); g.rotate(rot); g.scale(sc, sc); g.drawImage(S.c, -S.w / 2, -S.base, S.w, S.h); }
+  reset(g);
+  if (!cacheable()) for (const k in SPR) if (k !== "band") delete SPR[k];
+}
+
+// Заголовок: «Зреет рожь» / «над жаркой нивой…»; prog 0…1 — влёт слов на пружине; author 0…1
+const TITLE = [["Зреет", "рожь"], ["над", "жаркой", "нивой…"]];
+function drawTitle(g, cx, cy, size, prog, authorA, year) {
+  const gap = size * 0.32;
+  let wi = 0;
+  TITLE.forEach((line, li) => {
+    const spr = line.map((w) => goldWord(w, size));
+    const tw = spr.reduce((s, S) => s + S.w - 40, 0) + (spr.length - 1) * gap;
+    let x = cx - tw / 2;
+    const y = cy + (li === 0 ? -size * 0.42 : size * 0.78);
+    spr.forEach((S) => {
+      const d = clamp(prog * 6 - wi * 0.9);
+      const u = d >= 1 ? 1 : SPRING(d);
+      const w0 = S.w - 40;
+      if (d > 0) drawSprite(g, S, x + w0 / 2, y - (1 - u) * 90, lerp(0.4, 1, u), clamp(d * 3), (1 - u) * (wi % 2 ? 0.25 : -0.25));
+      x += w0 + gap;
+      wi++;
+    });
+  });
+  if (authorA > 0) {
+    const A = plainText(year ? "Афанасий Фет · 1859" : "Афанасий Фет", 'italic 600 56px "Lora", serif', "#fff4dc", "rgba(50,22,14,0.9)");
+    drawSprite(g, A, cx, cy + size * 1.62, 1, authorA);
+  }
+}
+
+// Строки: пары строк на плашке; слово появляется мазком в момент, когда его произносит голос
+function drawVerse(g, t) {
+  const L = CFG.lines;
+  let cur = -1;
+  for (let i = 0; i < L.length; i++) if (t >= L[i].s - 0.05) cur = i;
+  if (cur < 0) return;
+  const pair = Math.floor(cur / 2);
+  const shown = [L[pair * 2], L[pair * 2 + 1]].filter(Boolean);
+  const out = L[pair * 2 + 2] ? 0 : clamp((t - CFG.ev.fin + 0.6) / 0.5);
+  if (out >= 1) return;
+  const inA = clamp((t - shown[0].s + 0.35) / 0.3);
+  const band = bandSprite();
+  reset(g); g.globalAlpha = inA * (1 - out) * 0.92;
+  // плашка по числу строк: одна строка — ниже и уже
+  const two = shown.length > 1 ? ease(clamp((t - (shown[1].s - 0.4)) / 0.35)) : 0;
+  const bh = lerp(130, 210, two), bc = lerp(914, 958, two);
+  g.drawImage(band, W / 2 - band.width / 2, bc - bh / 2, band.width, bh);
+  reset(g);
+  const px = 58;
+  const font = FONT_V.replace("{px}", px);
+  shown.forEach((ln, li) => {
+    const y = 930 + li * 82;
+    g.font = font;
+    const words = ln.words, sp = g.measureText(" ").width;
+    const widths = words.map((w) => g.measureText(w.w).width);
+    const tw = widths.reduce((a, b) => a + b, 0) + sp * (words.length - 1);
+    let x = Math.round(W / 2 - tw / 2);
+    words.forEach((w, i) => {
+      const u = clamp((t - w.s + 0.06) / 0.22);
+      if (u > 0) {
+        reset(g); g.globalAlpha = (1 - out);
+        g.save(); g.beginPath(); g.rect(x - 6, y - px - 10, (widths[i] + 12) * easeOut(u), px * 1.6); g.clip();
+        g.font = font; g.lineJoin = "round";
+        g.strokeStyle = "rgba(30,14,18,0.9)"; g.lineWidth = 6; g.strokeText(w.w, x, y);
+        g.fillStyle = u < 1 ? css(mix(C.cad, C.cream, u)) : css(C.cream); g.fillText(w.w, x, y);
+        g.restore();
+        // мазок кисти, который «пишет» слово
+        if (u < 1) dab(g, x + (widths[i] + 6) * easeOut(u), y - px * 0.35, 26, 10, -0.5, C.cad, 0.9 * (1 - u));
+      }
+      x += widths[i] + sp;
+    });
+  });
+  reset(g);
+}
+
+// ---------- Сцены ----------
+// каждая сцена: fn(g, t, u) — рисует весь кадр в экранных координатах
+const camLerp = (a, b, u) => ({ x: lerp(a.x, b.x, u), y: lerp(a.y, b.y, u), z: Math.exp(lerp(Math.log(a.z), Math.log(b.z), u)) });
+
+// большие колосья у объектива (пролёт)
+function nearStalks(g, t, speed, n, a = 1) {
+  for (let i = 0; i < n; i++) {
+    const x = ((hash(i) * 2600 - t * speed * (0.8 + hash(i * 3) * 0.6)) % 2600 + 2600) % 2600 - 340;
+    const h = 380 + hash(i * 5) * 380, bx = x, by = H + 40;
+    const bend = Math.sin(t * 2.4 + i) * 0.12 + 0.18;
+    const tx = bx + Math.sin(bend) * h, ty = by - Math.cos(bend) * h;
+    const col = jit(C.gold, i * 13, 40);
+    limb(g, [[bx, by], [lerp(bx, tx, 0.6) - 10, lerp(by, ty, 0.6)], [tx, ty]], 9 + hash(i) * 6, shade(col, -0.15));
+    ear(g, tx, ty, 1.1 + hash(i * 7), -Math.PI / 2 + bend, col, 1, i);
+  }
+  reset(g);
+}
+// колос: зёрна мазками в два ряда и ости. ripe 0…1 — от зелёного к золоту (снизу вверх)
+function ear(g, x, y, s, ang, col, ripe, seed) {
+  const c = Math.cos(ang), sn = Math.sin(ang);
+  for (let i = 0; i < 9; i++) {
+    const along = i * 15 * s, k = clamp(ripe * 1.4 - (i / 9) * 0.4);
+    const gc = mix([120, 160, 60], col, k);
+    for (const sd of [-1, 1]) {
+      const ox = x + c * along - sn * sd * 7 * s, oy = y + sn * along + c * sd * 7 * s;
+      dab(g, ox, oy, 20 * s, 11 * s, ang + sd * 0.45, jit(gc, seed * 31 + i * 2 + sd, 24));
+      // ость
+      reset(g); g.strokeStyle = css(shade(gc, 0.25), 0.85); g.lineWidth = 1.6 * s;
+      g.beginPath(); g.moveTo(ox, oy); g.lineTo(ox + Math.cos(ang + sd * 0.5) * 46 * s, oy + Math.sin(ang + sd * 0.5) * 46 * s); g.stroke();
+    }
+  }
+  reset(g);
+}
+// светлый вихрь ветра: лента мазков, голова в точке hx
+function windRibbon(g, hx, y0, t, a = 1, s = 1) {
+  for (let i = 0; i < 44; i++) {
+    const x = hx - i * 30 * s, y = y0 + Math.sin(i * 0.28 - t * 7) * 46 * s + Math.sin(i * 0.11) * 30 * s;
+    const ang = Math.atan2(Math.cos(i * 0.28 - t * 7) * 0.28 * 46, 30);
+    dab(g, x, y, 54 * s, 13 * s * (1 - i / 50), -ang, jit(i % 3 ? C.cream : C.cerul, i, 20), a * (1 - i / 46) * 0.85);
+  }
+  reset(g);
+}
+// ночь, ползущая с востока: тёмная синь со звёздами правее границы bx (экран)
+function nightCurtain(g, bx, t) {
+  reset(g);
+  const gr = g.createLinearGradient(bx - 260, 0, bx + 200, 0);
+  gr.addColorStop(0, "rgba(22,24,70,0)"); gr.addColorStop(1, "rgba(22,24,70,0.82)");
+  g.fillStyle = gr; g.fillRect(bx - 260, 0, W - bx + 260, 760);
+  for (let i = 0; i < 40; i++) {
+    const x = bx + hash(i * 3.3) * (W - bx + 100), y = 30 + hash(i * 1.7) * 600;
+    if (x < bx) continue;
+    const tw = 0.6 + 0.4 * Math.sin(t * 4 + i);
+    dab(g, x, y, 16, 5, 0.3, C.lemon, tw * clamp((x - bx) / 160)); dab(g, x, y, 16, 5, 1.9, C.lemon, tw * clamp((x - bx) / 160));
+  }
+  reset(g);
+}
+// руки Дня: золотые полосы мазков из солнца, на концах ладони-лучи. p 0…1
+function dayArms(g, sx, sy, p, t) {
+  if (p <= 0) return;
+  for (const sd of [-1, 1]) {
+    const L = (sd > 0 ? 860 : 520) * p;
+    const N = Math.max(2, Math.floor(L / 22));
+    const path = [];
+    for (let i = 0; i <= N; i++) {
+      const u = i / N, d = u * L;
+      path.push([sx + sd * d, sy - Math.sin(u * Math.PI * 0.85) * 210 * p - u * 120 * p + Math.sin(d * 0.015 - t * 4) * 6]);
+    }
+    // рукав из света: 5 рядов мазков, к кисти уже
+    for (let i = 1; i < path.length; i++) {
+      const [x, y] = path[i], [x0, y0] = path[i - 1], u = i / N;
+      const a = Math.atan2(y - y0, x - x0), nx = -Math.sin(a), ny = Math.cos(a);
+      const half = lerp(70, 26, u);
+      for (let r = -2; r <= 2; r++) {
+        const off = r / 2 * half;
+        dab(g, x + nx * off, y + ny * off, 60, half * 0.55, a + (hash(i * 7 + r) - 0.5) * 0.15, jit(mix(C.white, C.cad, Math.abs(r) / 2 * 0.8 + u * 0.2), i * 5 + r + sd * 400, 22), (0.55 + 0.35 * (1 - Math.abs(r) / 2)) * clamp(p * 3));
+      }
+    }
+    // ладонь и пять лучей-пальцев
+    const [lx, ly] = path[path.length - 1], [px0, py0] = path[path.length - 2];
+    const la = Math.atan2(ly - py0, lx - px0);
+    blob(g, lx, ly, 34, 30, C.lemon, 61, 6);
+    for (let f = 0; f < 5; f++) {
+      const fa = la + (f - 2) * 0.36 - sd * 0.1;
+      for (let j = 1; j <= 3; j++) dab(g, lx + Math.cos(fa) * (20 + j * 22), ly + Math.sin(fa) * (20 + j * 22), 34, 17 - j * 3, fa, jit(C.lemon, f * 10 + j, 16), 0.95);
+    }
+  }
+  reset(g);
+}
+// веки солнца-ока: облачные мазки вне миндалины; open 0…1
+function sunLids(g, cx, cy, r, open, td) {
+  const Rw = r * 2.4, Ho = r * 1.75, h = r * 1.3 * Math.max(0.02, open);
+  const lid = ramp([[0.6, [170, 96, 140]], [0.86, [100, 70, 136]], [1, [238, 156, 118]]], td);
+  const alm = (hh) => { g.moveTo(cx + Rw, cy); g.quadraticCurveTo(cx, cy - hh * 2, cx - Rw, cy); g.quadraticCurveTo(cx, cy + hh * 2, cx + Rw, cy); };
+  reset(g);
+  g.save();
+  g.beginPath(); alm(Ho); alm(h); g.clip("evenodd");
+  let n = 0;
+  for (let y = cy - Ho * 1.1; y < cy + Ho * 1.1; y += r * 0.17) for (let x = cx - Rw; x < cx + Rw; x += r * 0.36) {
+    n++;
+    const up = y < cy;
+    dab(g, x + hash(n) * r * 0.25, y, r * 0.55, r * 0.2, (up ? 1 : -1) * (x - cx) / Rw * 0.5 + (hash(n * 2) - 0.5) * 0.25, jit(shade(lid, up ? 0.05 : -0.1), n, 26));
+  }
+  g.restore();
+  // тёмная кромка век
+  reset(g); g.strokeStyle = css(shade(lid, -0.5)); g.lineWidth = r * 0.07; g.lineCap = "round";
+  g.beginPath(); alm(h); g.stroke();
+  g.strokeStyle = css(shade(lid, -0.3), 0.8); g.lineWidth = r * 0.05; g.beginPath(); alm(Ho); g.stroke();
+  // ресницы-лучи по кромке верхнего века
+  if (open > 0.15) for (let i = 1; i < 8; i++) {
+    const u = i / 8, x = lerp(cx - Rw, cx + Rw, u), y = cy - h * 2 * 2 * u * (1 - u);
+    const a = -Math.PI / 2 + (u - 0.5) * 1.6;
+    dab(g, x + Math.cos(a) * r * 0.3, y + Math.sin(a) * r * 0.3, r * 0.5, r * 0.11, a, shade(lid, -0.45), 0.95);
+  }
+  reset(g);
+}
+// гнездо примятой ржи (вид сверху)
+function strawNest(g, cx, cy, t, td) {
+  const lit = fieldLight(td), base = ramp(RYE_DAY, td);
+  reset(g); g.fillStyle = css(shade(base, -0.35)); g.fillRect(0, 0, W, H);
+  let n = 0;
+  for (let y = -40; y < H + 60; y += 26) for (let x = -40; x < W + 60; x += 30) {
+    n++;
+    const dx = x - cx, dy = y - cy, d = Math.hypot(dx, dy);
+    const inNest = d < 330;
+    const ang = inNest ? Math.atan2(dy, dx) + Math.PI / 2 + (hash(n) - 0.5) * 0.6 : (hash(n) - 0.5) * 3 + Math.sin(t * 2 + x * 0.01) * 0.2;
+    let col = jit(base, n, 40);
+    if (!inNest) { col = shade(col, -0.1); if (hash(n * 3) > 0.7) col = shade(col, 0.25 * lit); }
+    dab(g, x + hash(n * 5) * 18, y, inNest ? 60 : 30, inNest ? 13 : 16, ang, shade(col, (lit - 1) * 0.9));
+    if (!inNest && hash(n * 9) > 0.993) dab(g, x, y, 18, 18, 0, shade([60, 90, 220], (lit - 1) * 0.8));
+  }
+  reset(g);
+}
+
+// ---------- Мальчик в мире: бег ----------
+const ROW_B = HZ + 330;                 // ряд нивы, по которому он бежит
+const RUN_V = 480;                      // мировых px/с
+const RUN_T0 = () => EV.L2 - 0.15;
+const XB_AT = (t) => (MEZHA_X - (ROW_B - HZ) * 0.7 - 30) + RUN_V * (t - EV.do);
+function boyJump(xb) {
+  const dx = xb + (ROW_B - HZ) * 0.7 - MEZHA_X;
+  const per = 2600, q = ((dx % per) + per * 1.5) % per - per / 2;
+  return Math.abs(q) < 115 ? Math.sin(Math.PI * (q + 115) / 230) * 62 : 0;
+}
+
+// колосья у ног героя: редкие, не выше середины голени, качаются ветром; xw — мировая x для привязки к полю
+function frontRye(g, x, y, s, t, lit, xw) {
+  const base = ramp(RYE_DAY, todAt(t));
+  for (let i = 0; i < 7; i++) {
+    const k = Math.floor((xw || 0) / 30) + i;
+    const ox = (i - 3) * 30 * s / 1.3 - ((((xw || 0) % 30) + 30) % 30) * s / 1.3 + (hash(k * 3.7) - 0.5) * 8 * s;
+    const h = (26 + hash(k * 2.1) * 12) * s, bendA = -Math.PI / 2 + 0.15 + windWave(x + ox, ROW_B, t) * 0.4;
+    const px = x + ox, py = y + (5 + hash(k) * 6) * s;
+    const col = shade(jit(base, k, 30), (lit - 1) * 0.9);
+    dab(g, px + Math.cos(bendA) * h * 0.5, py + Math.sin(bendA) * h * 0.5, h, 4.2 * s, bendA, col, 0.95);
+    dab(g, px + Math.cos(bendA) * h * 1.05, py + Math.sin(bendA) * h * 1.05, h * 0.42, 5.4 * s, bendA, shade(col, 0.22 * lit), 0.95);
+  }
+  reset(g);
+}
+
+// ---------- Список сцен ----------
+function sIntro(g, t) {
+  const V = { x: 700 + t * 700, y: HZ - 80, z: 1.0 };
+  drawSky(g, V, t); drawSun(g, ...P(V, sunPos(t)[0] + t * 700 * 0.0, sunPos(t)[1]), 70, t);
+  drawField(g, V, t);
+  nearStalks(g, t, 1500, 9);
+  drawTitle(g, W / 2, 300, 132, inv(0.25, 2.4, t), clamp((t - 1.5) / 0.5) * (1 - clamp((t - EV.L1 + 0.5) / 0.4)), true);
+}
+function sMacro(g, t) {
+  const t0 = EV.L1 - 0.1, back = ease(inv(EV.zharkoy - 0.1, EV.E1 + 0.15, t));
+  const V = camLerp({ x: 900, y: HZ - 40, z: 1.9 }, { x: 960, y: HZ + 40, z: 1.0 }, back);
+  drawSky(g, V, t);
+  const sp = sunPos(t); drawSun(g, ...P(V, sp[0], sp[1]), 70 * V.z, t);
+  drawField(g, V, t);
+  // марево: дрожащие светлые мазки над полем
+  for (let i = 0; i < 26; i++) {
+    const x = (i * 83 + t * 40) % W, y = P(V, 0, HZ)[1] - 30 + Math.sin(t * 6 + i) * 10;
+    dab(g, x, y, 60, 6, Math.sin(t * 5 + i) * 0.2, C.cream, 0.25);
+  }
+  // колос крупно: зреет на «Зреет», уходит вдаль на «жаркой»
+  const ripe = ease(inv(EV.zreet - 0.1, EV.zreet + 1.0, t));
+  const s = lerp(5.2, 1.0, back), ex = lerp(1000, 1380, back), ey = lerp(600, 690, back);
+  const sway = Math.sin(t * 2.2) * 0.06;
+  limb(g, [[ex - 20 * s, H + 60], [ex + 2 * s, ey + 60 * s]], 9 * s * 0.7, shade(mix([120, 160, 60], C.gold, ripe), -0.2));
+  ear(g, ex + 2 * s, ey + 50 * s, s, -Math.PI / 2 + sway, C.gold, ripe, 3);
+  reset(g);
+  return {};
+}
+function sRun(g, t) {
+  const xb = XB_AT(t);
+  const wide = ease(inv(EV.zolot - 0.2, EV.perel + 0.3, t));
+  const z = lerp(1.0, 0.62, wide);
+  const V = { x: xb + 200 / z * lerp(1, 0.5, wide), y: lerp(ROW_B - 100, ROW_B - 200, wide), z };
+  drawSky(g, V, t);
+  const sp = sunPos(t); drawSun(g, ...P(V, sp[0], sp[1]), 70 * V.z, t);
+  drawField(g, V, t, { mezha: 2600 });
+  // ветер обгоняет мальчика
+  const wu = inv(EV.gonit - 0.5, EV.E4 + 0.4, t);
+  if (wu > 0 && wu < 1) for (let k = 0; k < 3; k++) windRibbon(g, lerp(-300, 2700, wu) - k * 160, lerp(420, 640, wide) + k * 70 - 70, t + k * 0.4, 1 - k * 0.2, lerp(1.5, 1.1, wide) * (1 - k * 0.15));
+  const [bx, by] = P(V, xb, ROW_B);
+  const s = 1.3 * V.z;
+  const prih = inv(EV.prih - 0.1, EV.prih + 1.0, t);
+  const swerve = Math.sin(prih * Math.PI * 3) * (1 - prih) * (prih > 0 ? 1 : 0);
+  const kx = bx - 330 * s + swerve * 240 * s + Math.sin(t * 1.7) * 20, ky = by - 440 * s + Math.cos(t * 2.3) * 16 - Math.abs(swerve) * 60 * s;
+  const r = drawBoySide(g, bx, by, s, 1, { kind: "run", dist: xb / 1.3, jump: boyJump(xb), holdRel: [-50, -30], env: [232, 170, 60] }, t);
+  frontRye(g, bx, by, s, t, 1, xb);
+  drawKite(g, kx, ky, s * 0.9, swerve * 0.7 - 0.15, t, r.hand);
+  return {};
+}
+function sMoonPeek(g, t) {
+  const t0 = EV.L5 - 0.25;
+  const V = { x: 1600 - (t - t0) * 30, y: 20, z: 1.25 };
+  drawSky(g, V, t);
+  const pk = 0.7 * ease(inv(EV.robko - 0.3, EV.mesyac + 0.2, t)) + 0.3 * ease(inv(EV.mesyac + 0.3, EV.ochi + 0.2, t)) + 0.02 * Math.sin(t * 1.8);
+  const [mx, my] = P(V, 1560 + pk * 190, 40);
+  drawMoon(g, mx, my, 105 * V.z, t, { blush: ease(inv(EV.mesyac, EV.ochi, t)), look: -0.6 });
+  const [cx, cy] = P(V, 1500, 80);
+  drawCloud(g, cx, cy, 1.5, mix([240, 170, 140], [200, 150, 190], 0.4), 7);
+  drawCloud(g, cx + 600, cy + 230, 1.1, [236, 160, 120], 21);
+}
+function sFace(g, t) {
+  const u = inv(EV.ochi - 0.1, EV.L6 - 0.1, t);
+  drawSky(g, { x: 1500 + u * 40, y: 120, z: 1.5 }, t);
+  drawCloud(g, 300, 760, 1.6, [236, 160, 130], 31, 0.9);
+  const sc = 8.6 + u * 0.5;
+  drawBoyFront(g, 960, 470 + 192 * sc, sc, { arms: 0, hold: false, tilt: 0.06, lookUp: 1, moonEyes: 1, smile: 0.7, warm: 0.4, lit: 0.97, env: [150, 120, 200] }, t);
+}
+function sMoonSurprise(g, t) {
+  const pan = ease(inv(EV.den1 - 0.25, EV.E6 + 0.15, t));
+  const V = camLerp({ x: 1720, y: 50, z: 2.0 }, { x: 700, y: 330, z: 0.95 }, pan);
+  drawSky(g, V, t);
+  const sp = sunPos(t); drawSun(g, ...P(V, sp[0], sp[1]), 70 * V.z, t);
+  drawField(g, V, t);
+  const [mx, my] = P(V, 1720, 40);
+  drawMoon(g, mx, my, 105 * V.z, t, { brow: ease(inv(EV.izum - 0.1, EV.izum + 0.3, t)), look: -1, blush: 0.6 });
+}
+function sDayArms(g, t) {
+  const V = { x: 700 + (t - EV.L7) * 25, y: 330, z: 0.85 };
+  drawSky(g, V, t);
+  const sp = sunPos(t), [sx, sy] = P(V, sp[0], sp[1]);
+  // ночь наступает до «День», руки отталкивают её
+  const p = ease(inv(EV.den2 - 0.25, EV.raskin + 0.45, t));
+  const nb = lerp(lerp(1500, 1050, ease(inv(EV.L7 - 0.2, EV.noch + 0.2, t))), 2100, p);
+  nightCurtain(g, nb, t);
+  const [mx, my] = P(V, 1720, 40);
+  drawMoon(g, mx, my, 105 * V.z, t, { look: -1, brow: 0.5 * (1 - p) });
+  drawSun(g, sx, sy, 70 * V.z * (1 + p * 0.25), t);
+  dayArms(g, sx, sy, p, t);
+  drawField(g, V, t);
+  const pb = ease(inv(EV.raskin - 0.35, EV.raskin + 0.35, t));
+  const r = drawBoyFront(g, 1380, 830, 1.45, { arms: pb, smile: 0.4 + pb * 0.6, tilt: lerp(0.16, 0.04, pb), lookUp: 1 - pb * 0.5, lit: fieldLight(todAt(t)) * 0.95, warm: 0.85, env: [150, 90, 150] }, t);
+  frontRye(g, 1380, 830, 1.45, t, fieldLight(todAt(t)) * 0.95, 0);
+  drawKite(g, 1570 + Math.sin(t * 1.4) * 16, 230 + Math.cos(t * 1.9) * 12, 0.8, 0.2, t, r.handR);
+}
+// стайка ласточек: мазки-галочки, машут крыльями
+function birds(g, t, x0, y0, vx, n, s) {
+  for (let i = 0; i < n; i++) {
+    const x = x0 + vx * t + (hash(i) - 0.5) * 500 * s + Math.sin(t * 1.3 + i) * 30, y = y0 + (hash(i * 2) - 0.5) * 220 * s + Math.sin(t * 2 + i * 1.7) * 20;
+    const fl = Math.sin(t * 14 + i * 2) * 0.5;
+    dab(g, x - 12 * s, y - 4 * s * fl, 26 * s, 4.5 * s, 0.35 + fl, [40, 30, 50]); dab(g, x + 12 * s, y - 4 * s * fl, 26 * s, 4.5 * s, -0.35 - fl, [40, 30, 50]);
+  }
+}
+function sCrane(g, t) {
+  const u = ease(inv(EV.L9 - 0.15, EV.L10 - 0.1, t));
+  const V = camLerp({ x: 900, y: HZ + 120, z: 0.95 }, { x: 1350, y: HZ - 60, z: 0.5 }, u);
+  drawSky(g, V, t);
+  const sp = sunPos(t); drawSun(g, ...P(V, sp[0], sp[1]), 70 * V.z, t);
+  drawField(g, V, t, { stooks: 1 });
+  birds(g, t - EV.L9, 200, 330, 300, 9, 2.2);
+}
+function sPan(g, t) {
+  const u = ease(inv(EV.L10 - 0.1, EV.L11 + 0.15, t));
+  const V = { x: lerp(-150, 2450, u), y: HZ - 120, z: 0.62 };
+  drawSky(g, V, t);
+  const sp = sunPos(t); drawSun(g, ...P(V, sp[0], sp[1]), 70 * V.z, t);
+  drawField(g, V, t, { stooks: 1 });
+  birds(g, t - EV.L10, 1700, 280, -260, 7, 1.8);
+}
+function sEyeClose(g, t) {
+  const V = { x: -60, y: HZ - 120, z: 1.1 };
+  drawSky(g, V, t);
+  const [ex, ey] = P(V, -120, HZ - 70);
+  const sink = ease(inv(EV.smezh - 0.2, EV.nebo + 0.2, t));
+  drawSun(g, ex, ey + sink * 40, 80 * V.z, t, 1 - sink * 0.3);
+  // зрачок-искра в центре солнца: око
+  reset(g); g.fillStyle = css(C.verm); g.beginPath(); g.arc(ex, ey + sink * 40, 22, 0, TAU); g.fill();
+  sunLids(g, ex, ey, 80 * V.z, 1 - ease(inv(EV.smezh - 0.15, EV.smezh + 0.45, t)), todAt(t));
+  drawField(g, V, t);
+}
+function sLie(g, t) {
+  const td = todAt(t);
+  const zoom = 1 + (t - EV.nebo) * 0.04, rot = Math.sin(t * 0.3) * 0.04;
+  g.setTransform(zoom * Math.cos(rot), zoom * Math.sin(rot), -zoom * Math.sin(rot), zoom * Math.cos(rot), W / 2 - W / 2 * zoom, H / 2 - H / 2 * zoom);
+  strawNest(g, 960, 400, t, td);
+  const eyes = t < EV.oko ? 1 - ease(inv(EV.nebo - 0.1, EV.nebo + 0.3, t)) : ease(inv(EV.oko + 0.15, EV.oko + 0.5, t));
+  const pb = 0.85;
+  drawBoyFront(g, 960, 660, 2.3, { arms: pb, lie: true, eyes, tilt: -0.08, lit: Math.min(1, fieldLight(td) + 0.38), cool: 0.6 * (1 - ease(inv(EV.oko - 0.1, EV.oko + 0.6, t))), env: mix([80, 80, 150], [236, 180, 80], ease(inv(EV.oko - 0.1, EV.oko + 0.6, t))), warm: ease(inv(EV.oko - 0.1, EV.oko + 0.6, t)) * 0.5, smile: t < EV.oko ? 0.3 : 0.3 + ease(inv(EV.oko + 0.3, EV.oko + 0.8, t)) * 0.7 }, t);
+  // тёмная синь ночи / золотой рассвет поверх
+  reset(g);
+  const dark = clamp((0.95 - fieldLight(td)) * 0.9);
+  g.fillStyle = `rgba(20,24,70,${(dark * 0.55).toFixed(3)})`; g.fillRect(0, 0, W, H);
+  const dawn = ease(inv(EV.oko - 0.1, EV.oko + 0.6, t));
+  if (dawn > 0) {
+    const gr = g.createLinearGradient(W, 0, 0, 0);
+    gr.addColorStop(0, `rgba(255,200,90,${(0.32 * dawn).toFixed(3)})`); gr.addColorStop(lerp(0.05, 1, dawn), "rgba(255,200,90,0)");
+    g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  }
+}
+function sOko(g, t) {
+  const u = ease(inv(EV.oko2 - 0.1, EV.fin, t));
+  const V = camLerp({ x: 2300, y: HZ - 90, z: 1.25 }, { x: 2150, y: HZ - 160, z: 0.8 }, u);
+  drawSky(g, V, t);
+  const sp = sunPos(t), [sx, sy] = P(V, sp[0], sp[1]);
+  // огонь: языки мазков вырываются из ока
+  const fire = ease(inv(EV.oko2 - 0.05, EV.oko2 + 0.6, t));
+  for (let i = 0; i < 46; i++) {
+    const a = i / 46 * TAU, L = (120 + hash(i) * 160) * fire * V.z * (0.8 + 0.2 * Math.sin(t * 9 + i));
+    for (let j = 1; j <= 4; j++) dab(g, sx + Math.cos(a) * (70 * V.z + L * j / 4), sy + Math.sin(a) * (70 * V.z + L * j / 4), 40 * V.z, (16 - j * 2) * V.z, a, mix(C.cad, C.verm, j / 4), 0.85 * fire * (1 - j / 5));
+  }
+  drawSun(g, sx, sy, 78 * V.z, t, 1, 1);
+  sunLids(g, sx, sy, 78 * V.z, ease(inv(EV.oko2 - 0.25, EV.oko2 + 0.35, t)), todAt(t));
+  drawField(g, V, t, { stooks: 1 });
+}
+function sOutro(g, t) {
+  const u = inv(EV.fin, CFG.total, t);
+  const V = { x: 1800 - u * 60, y: HZ - 170, z: 0.8 };
+  drawSky(g, V, t);
+  const sp = sunPos(t); drawSun(g, ...P(V, sp[0], sp[1]), 78 * V.z, t);
+  drawField(g, V, t, { stooks: 1 });
+  drawKite(g, 1720 + Math.sin(t * 1.2) * 18, 300 + Math.cos(t * 1.7) * 12, 0.7, 0.15, t, null);
+  // тёмная виньетка под заголовком для читаемости
+  reset(g);
+  const gr = g.createRadialGradient(W / 2, 400, 100, W / 2, 400, 900);
+  gr.addColorStop(0, "rgba(30,20,40,0.38)"); gr.addColorStop(1, "rgba(30,20,40,0)");
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  drawTitle(g, W / 2, 380, 150, inv(EV.fin + 0.1, EV.fin + 1.3, t), clamp((t - EV.fin - 1.0) / 0.5), false);
+}
+
+// [функция, начало, переход в неё]
+const SCENES = [
+  [sIntro, 0, ""],
+  [sMacro, EV.L1 - 0.1, "gust"],
+  [sRun, EV.L2 - 0.15, "gust"],
+  [sMoonPeek, EV.L5 - 0.25, "rise"],
+  [sFace, EV.ochi - 0.1, "fade"],
+  [sMoonSurprise, EV.L6 - 0.1, "fade"],
+  [sDayArms, EV.L7 - 0.15, "gust"],
+  [sCrane, EV.L9 - 0.15, "gust"],
+  [sPan, EV.L10 - 0.1, "fade"],
+  [sEyeClose, EV.L11 - 0.1, "cut"],
+  [sLie, EV.nebo - 0.05, "cut"],
+  [sOko, EV.oko2 - 0.1, "flash"],
+  [sOutro, EV.fin, "gust"],
+];
+
+// ---------- Склейка: сцена → строки → холст → переходы ----------
+const cv = document.getElementById("scene");
+const g = cv.getContext("2d", { alpha: false });
+const TOTAL = CFG.total;
+
+// переход «порыв»: полоса мазков проносится слева направо и закрывает склейку; u 0…1 (0.5 — склейка)
+function gustWipe(g, u, warm) {
+  if (u <= 0 || u >= 1) return;
+  const cx = lerp(-1300, W + 1300, u);
+  for (let i = 0; i < 240; i++) {
+    const row = i % 24, k = Math.floor(i / 24);
+    const y = row * 48 - 20 + hash(i) * 20;
+    const x = cx + (k - 5) * 120 + (hash(i * 3) - 0.5) * 120 + Math.sin(row * 0.7) * 120;
+    dab(g, x, y, 260, 64, -0.08 + (hash(i * 5) - 0.5) * 0.2, jit(warm ? mix(C.cad, C.cream, hash(i * 7)) : mix(C.cerul, C.cream, hash(i * 7)), i, 30), 0.97);
+  }
+  reset(g);
+}
+// «вверх»: мазки летят снизу вверх (камера за змеем в небо)
+function riseWipe(g, u) {
+  if (u <= 0 || u >= 1) return;
+  const cy = lerp(H + 1200, -1200, u);
+  for (let i = 0; i < 240; i++) {
+    const col = i % 20, k = Math.floor(i / 20);
+    const x = col * 104 - 20 + hash(i) * 30;
+    const y = cy + (k - 6) * 110 + (hash(i * 3) - 0.5) * 110 + Math.sin(col * 0.8) * 100;
+    dab(g, x, y, 240, 70, -Math.PI / 2 + (hash(i * 5) - 0.5) * 0.2, jit(mix([240, 160, 120], [150, 130, 200], hash(i * 7)), i, 30), 0.97);
+  }
+  reset(g);
+}
+function flash(g, a) { if (a <= 0) return; reset(g); g.fillStyle = `rgba(255,236,170,${clamp(a).toFixed(3)})`; g.fillRect(0, 0, W, H); }
+
+// наплыв: соседняя сцена рисуется в отдельный холст и проступает поверх (в момент склейки — 50 %)
+const offC = document.createElement("canvas"); offC.width = W; offC.height = H;
+const og = offC.getContext("2d", { alpha: false });
+const FADE = 0.5;
+function blendScene(j, t, a) {
+  if (a <= 0 || j < 0 || j >= SCENES.length) return;
+  reset(og); og.fillStyle = "#1a1430"; og.fillRect(0, 0, W, H);
+  SCENES[j][0](og, t, t - SCENES[j][1]); reset(og);
+  reset(g); g.globalAlpha = clamp(a); g.drawImage(offC, 0, 0); reset(g);
+}
+function wipePart(j, t, region) {
+  if (j < 0 || j >= SCENES.length) return;
+  reset(og); og.fillStyle = "#1a1430"; og.fillRect(0, 0, W, H);
+  SCENES[j][0](og, t, t - SCENES[j][1]); reset(og);
+  reset(g); g.save(); g.beginPath(); region(g); g.clip(); g.drawImage(offC, 0, 0); g.restore(); reset(g);
+}
+function render(t) {
+  let i = 0;
+  while (i + 1 < SCENES.length && t >= SCENES[i + 1][1]) i++;
+  const [fn, start, kind] = SCENES[i];
+  reset(g); g.globalCompositeOperation = "source-over";
+  g.fillStyle = "#1a1430"; g.fillRect(0, 0, W, H);
+  fn(g, t, t - start);
+  reset(g);
+  // шторка: за полосой мазков уже новая сцена, перед ней — ещё старая (обе рисуются, шов под полосой)
+  const D = 0.65, next = SCENES[i + 1], till = next ? next[1] - t : 99, nk = next && next[2], u0 = t - start;
+  const gx = (u) => lerp(-1300, W + 1300, u) - 60, ry = (u) => lerp(H + 1200, -1200, u) - 55;
+  if (nk === "gust" && till < D / 2) wipePart(i + 1, t, (c) => c.rect(-10, -10, gx(0.5 - till / D) + 10, H + 20));
+  if (kind === "gust" && u0 < D / 2) wipePart(i - 1, t, (c) => { const x = gx(0.5 + u0 / D); c.rect(x, -10, W - x + 10, H + 20); });
+  if (nk === "rise" && till < D / 2) wipePart(i + 1, t, (c) => { const y = ry(0.5 - till / D); c.rect(-10, y, W + 20, H - y + 10); });
+  if (kind === "rise" && u0 < D / 2) wipePart(i - 1, t, (c) => c.rect(-10, -10, W + 20, ry(0.5 + u0 / D) + 10));
+  { const nx = SCENES[i + 1], tl = nx ? nx[1] - t : 99, u = t - start;
+    if (nx && nx[2] === "fade" && tl < FADE / 2) blendScene(i + 1, t, ease(0.5 - tl / FADE) );
+    if (kind === "fade" && u < FADE / 2) blendScene(i - 1, t, ease(0.5 - u / FADE)); }
+  canvasGrain(g, 0.22);
+  // вспышка — под подписью, чтобы строка не мигала
+  if (kind === "flash") flash(g, 0.85 * (1 - (t - start) / 0.35));
+  if (SCENES[i + 1] && SCENES[i + 1][2] === "flash" && SCENES[i + 1][1] - t < 0.12) flash(g, 0.85 * (1 - (SCENES[i + 1][1] - t) / 0.12));
+  drawVerse(g, t);
+  // полоса мазков поверх шва
+  if (kind === "gust" && u0 < D / 2) gustWipe(g, 0.5 + u0 / D, i !== 6);
+  if (nk === "gust" && till < D / 2) gustWipe(g, 0.5 - till / D, i + 1 !== 6);
+  if (kind === "rise" && u0 < D / 2) riseWipe(g, 0.5 + u0 / D);
+  if (nk === "rise" && till < D / 2) riseWipe(g, 0.5 - till / D);
+  if (t < 0.25) { reset(g); g.fillStyle = `rgba(26,20,48,${(1 - t / 0.25).toFixed(3)})`; g.fillRect(0, 0, W, H); }
+  if (t > TOTAL - 0.7) { reset(g); g.fillStyle = `rgba(26,20,48,${clamp((t - TOTAL + 0.7) / 0.6).toFixed(3)})`; g.fillRect(0, 0, W, H); }
+  reset(g);
+}
+
+// ---------- Проба: все позы мальчика крупно ----------
+function probeBoy() {
+  reset(g); g.fillStyle = "#e9dcc0"; g.fillRect(0, 0, W, H);
+  g.fillStyle = "#333"; g.font = "22px monospace";
+  // бег: 8 фаз цикла + прыжок
+  for (let k = 0; k < 8; k++) {
+    const x = 120 + k * 230, y = 330;
+    g.strokeStyle = "#999"; g.beginPath(); g.moveTo(x - 100, y); g.lineTo(x + 100, y); g.stroke();
+    drawBoySide(g, x, y, 1, 1, { kind: "run", dist: k / 8 * STRIDE, holdRel: [-50, -30] }, k * 0.1);
+    reset(g); g.fillStyle = "#333"; g.font = "22px monospace"; g.fillText(`run ${k}/8`, x - 50, y + 40);
+  }
+  const extra = [
+    ["jump", { kind: "run", dist: STRIDE * 0.3, jump: 62, holdRel: [-50, -30] }],
+    ["stand", { kind: "stand", look: 1, holdRel: [-50, -30] }],
+  ];
+  extra.forEach(([lab, o], k) => {
+    const x = 160 + k * 260, y = 720;
+    g.strokeStyle = "#999"; g.beginPath(); g.moveTo(x - 100, y); g.lineTo(x + 100, y); g.stroke();
+    drawBoySide(g, x, y, 1, 1, o, 0);
+    reset(g); g.fillStyle = "#333"; g.font = "22px monospace"; g.fillText(lab, x - 40, y + 40);
+  });
+  [[0, 1, false], [0.5, 1, false], [1, 1, false], [0.85, 1, true], [0.85, 0, true]].forEach(([arms, eyes, lie], k) => {
+    const x = 760 + k * 250, y = 720;
+    drawBoyFront(g, x, y, 0.95, { arms, eyes, lie, smile: 1, tilt: lie ? -0.08 : 0.12, lookUp: 1 }, k * 0.7);
+    reset(g); g.fillStyle = "#333"; g.font = "22px monospace"; g.fillText(`front a${arms}${lie ? " lie" : ""} e${eyes}`, x - 90, y + 40);
+  });
+  drawFaceClose(g, 1700, 940, 0.25, 0, { lookY: 1, moon: 1 });
+}
+
+const PQ = new URLSearchParams(location.search);
+const T_Q = PQ.has("t") ? +PQ.get("t") : 0;
+let LAST_T = T_Q;
+const seek = (t) => (CFG.probe === "boy" ? probeBoy() : render(t));
+window.addEventListener("hf-seek", (e) => { LAST_T = e.detail.time; seek(LAST_T); });
+seek(T_Q);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => seek(LAST_T));
+
+const tl = gsap.timeline({ paused: true });
+tl.set({}, {}, TOTAL);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+
+    </script>
+  </body>
+</html>
