@@ -1,0 +1,1250 @@
+<!doctype html>
+<!-- Собрано build.py из template.tpl и src/*.js — правьте их, не этот файл. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      @font-face { font-family: "M PLUS Rounded 1c"; font-weight: 700; src: url("assets/fonts/mplusr-700.woff2") format("woff2"); }
+      @font-face { font-family: "M PLUS Rounded 1c"; font-weight: 800; src: url("assets/fonts/mplusr-800.woff2") format("woff2"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #2a1e4a; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #2a1e4a; }
+      #scene { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #fontwarm { position: absolute; left: -9999px; top: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="37.900" data-width="1920" data-height="1080">
+      <canvas id="scene" width="1920" height="1080" data-layout-allow-overflow></canvas>
+      <div id="fontwarm"><span style="font-family:'M PLUS Rounded 1c';font-weight:700">Кот поёт Фет</span><span style="font-family:'M PLUS Rounded 1c';font-weight:800">Кот поёт, глаза прищуря…</span></div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="3.400" data-duration="28.000" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="37.900" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>const CFG = {"v0":3.4,"total":37.9,"ev":{"V0":3.4,"total":37.9,"L1":3.576,"L2":6.737,"L3":8.985,"L4":10.981,"L5":13.663,"L6":15.47,"L7":17.661,"L8":19.357,"L9":21.867,"L10":24.951,"L11":27.384,"L12":29.72,"E1":6.091,"E2":8.341,"E3":10.599,"E4":12.516,"E5":15.128,"E6":17.13,"E7":19.036,"E8":20.617,"E9":24.545,"E10":26.726,"E11":29.293,"E12":31.204,"kot":3.576,"poet1":3.865,"glaza1":4.863,"prish":5.29,"malch":6.737,"dreml":7.245,"kovre":7.865,"dvore3":9.105,"igraet":9.605,"buria3":10.095,"veter":10.981,"svish4":11.445,"dvore4":12.095,"polno":13.663,"valya":14.515,"spryach":15.47,"igrush":15.855,"vstavai":16.595,"podoidi":17.661,"proshch":18.35,"spat":19.57,"stupai":20.165,"vstal":22.365,"kot2":23.505,"glazami":23.835,"povodil":24.951,"poet2":26.125,"okna":27.475,"sneg":27.825,"valit":28.305,"klok":28.645,"buria12":29.72,"svish12":30.13,"vorot":30.78,"fin":32.204},"lines":[{"n":1,"text":"Кот поёт, глаза прищуря,","stanza":1,"s":3.576,"e":6.091,"words":[{"w":"Кот","s":3.576,"e":3.865},{"w":"поёт,","s":3.865,"e":4.48},{"w":"глаза","s":4.863,"e":5.29},{"w":"прищуря,","s":5.29,"e":6.091}]},{"n":2,"text":"Мальчик дремлет на ковре,","stanza":1,"s":6.737,"e":8.341,"words":[{"w":"Мальчик","s":6.737,"e":7.245},{"w":"дремлет","s":7.245,"e":7.755},{"w":"на","s":7.755,"e":7.865},{"w":"ковре,","s":7.865,"e":8.341}]},{"n":3,"text":"На дворе играет буря,","stanza":1,"s":8.985,"e":10.599,"words":[{"w":"На","s":8.985,"e":9.105},{"w":"дворе","s":9.105,"e":9.605},{"w":"играет","s":9.605,"e":10.095},{"w":"буря,","s":10.095,"e":10.599}]},{"n":4,"text":"Ветер свищет на дворе.","stanza":1,"s":10.981,"e":12.516,"words":[{"w":"Ветер","s":10.981,"e":11.445},{"w":"свищет","s":11.445,"e":11.985},{"w":"на","s":11.985,"e":12.095},{"w":"дворе.","s":12.095,"e":12.516}]},{"n":5,"text":"«Полно тут тебе валяться,","stanza":2,"s":13.663,"e":15.128,"words":[{"w":"«Полно","s":13.663,"e":14.09},{"w":"тут","s":14.09,"e":14.235},{"w":"тебе","s":14.235,"e":14.515},{"w":"валяться,","s":14.515,"e":15.128}]},{"n":6,"text":"Спрячь игрушки да вставай!","stanza":2,"s":15.47,"e":17.13,"words":[{"w":"Спрячь","s":15.47,"e":15.855},{"w":"игрушки","s":15.855,"e":16.405},{"w":"да","s":16.405,"e":16.595},{"w":"вставай!","s":16.595,"e":17.13}]},{"n":7,"text":"Подойди ко мне прощаться,","stanza":2,"s":17.661,"e":19.036,"words":[{"w":"Подойди","s":17.661,"e":18.045},{"w":"ко","s":18.045,"e":18.175},{"w":"мне","s":18.175,"e":18.35},{"w":"прощаться,","s":18.35,"e":19.036}]},{"n":8,"text":"Да и спать себе ступай».","stanza":2,"s":19.357,"e":20.617,"words":[{"w":"Да","s":19.357,"e":19.515},{"w":"и","s":19.515,"e":19.57},{"w":"спать","s":19.57,"e":19.895},{"w":"себе","s":19.895,"e":20.165},{"w":"ступай».","s":20.165,"e":20.617}]},{"n":9,"text":"Мальчик встал. А кот глазами","stanza":3,"s":21.867,"e":24.545,"words":[{"w":"Мальчик","s":21.867,"e":22.365},{"w":"встал.","s":22.365,"e":22.851},{"w":"А","s":23.41,"e":23.505},{"w":"кот","s":23.505,"e":23.835},{"w":"глазами","s":23.835,"e":24.545}]},{"n":10,"text":"Поводил и всё поёт;","stanza":3,"s":24.951,"e":26.726,"words":[{"w":"Поводил","s":24.951,"e":25.609},{"w":"и","s":25.734,"e":25.805},{"w":"всё","s":25.805,"e":26.125},{"w":"поёт;","s":26.125,"e":26.726}]},{"n":11,"text":"В окна снег валит клоками,","stanza":3,"s":27.384,"e":29.293,"words":[{"w":"В","s":27.384,"e":27.475},{"w":"окна","s":27.475,"e":27.825},{"w":"снег","s":27.825,"e":28.305},{"w":"валит","s":28.305,"e":28.645},{"w":"клоками,","s":28.645,"e":29.293}]},{"n":12,"text":"Буря свищет у ворот.","stanza":3,"s":29.72,"e":31.204,"words":[{"w":"Буря","s":29.72,"e":30.13},{"w":"свищет","s":30.13,"e":30.7},{"w":"у","s":30.7,"e":30.78},{"w":"ворот.","s":30.78,"e":31.204}]}],"probe":"","probePage":0};</script>
+    <script>
+// ---------- Аниме-чиби: заливка в два тона, цветной контур, искры, ноты, линии скорости ----------
+const W = 1920, H = 1080, TAU = Math.PI * 2;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, u) => a + (b - a) * u;
+const inv = (a, b, v) => clamp((v - a) / (b - a));
+const ease = (u) => { u = clamp(u); return u * u * (3 - 2 * u); };
+const easeOut = (u) => 1 - Math.pow(1 - clamp(u), 3);
+const easeIn = (u) => Math.pow(clamp(u), 3);
+const easeIO = (u) => { u = clamp(u); return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+const hash = (n) => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const pulse = (t, a, b) => clamp(Math.min((t - a) / 0.12, (b - t) / 0.12));   // 0…1, «окно» с мягкими краями
+// пружина Motion → u(0…1) с перелётом
+const SPRING = (() => {
+  try {
+    const gen = Motion.spring({ keyframes: [0, 1], stiffness: 210, damping: 12, mass: 1 });
+    const N = 120, arr = [];
+    for (let i = 0; i <= N; i++) arr.push(gen.next(i * 1000 / N).value);
+    return (u) => { u = clamp(u); const f = u * N, i = Math.floor(f); return i >= N ? arr[N] : lerp(arr[i], arr[i + 1], f - i); };
+  } catch (e) { return (u) => { u = clamp(u); return 1 - Math.cos(u * 9) * Math.exp(-u * 6); }; }
+})();
+const spr = (t, t0, dur = 0.7) => SPRING((t - t0) / dur);
+
+// цвет [r,g,b]
+const mix = (a, b, u) => [lerp(a[0], b[0], u), lerp(a[1], b[1], u), lerp(a[2], b[2], u)];
+const css = (c, a = 1) => a >= 1 ? `rgb(${c[0] | 0},${c[1] | 0},${c[2] | 0})` : `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${clamp(a).toFixed(3)})`;
+// аниме-тень: темнее и с уходом в сирень; свет: к тёплому белому
+const shd = (c, k = 1) => mix(c, [88, 60, 140], 0.32 * k).map((v, i) => v * (1 - 0.16 * k));
+const lit = (c, k = 1) => mix(c, [255, 250, 236], 0.45 * k);
+const ink = (c) => mix(c, [60, 30, 90], 0.62);   // цветной контур: тон заливки, затемнённый в сиреневый
+
+const C = {
+  wall: [236, 196, 206], wallD: [206, 160, 190], paper: [248, 222, 222], wood: [214, 146, 98], woodD: [170, 104, 76],
+  floor: [222, 160, 112], rug: [232, 104, 120], rug2: [255, 208, 120], rug3: [120, 160, 220],
+  stove: [246, 238, 232], tile: [110, 150, 220], warm: [255, 214, 140], lamp: [255, 170, 90],
+  sky: [42, 62, 128], skyD: [24, 30, 78], teal: [70, 168, 196], snow: [240, 250, 255], snowS: [170, 196, 236],
+  cloud: [196, 214, 246], cloudD: [130, 150, 210],
+  cat: [250, 178, 98], catW: [255, 246, 236], catS: [222, 128, 70], pink: [255, 150, 170],
+  skin: [255, 220, 196], hair: [120, 76, 56], shirt: [120, 200, 230], pants: [92, 110, 200], sock: [255, 255, 255],
+  red: [236, 70, 90], yellow: [255, 216, 80], green: [120, 200, 120], violet: [140, 90, 200], white: [255, 255, 255],
+  text: [70, 40, 110], hot: [236, 64, 132],
+};
+
+const reset = (g) => { g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = "source-over"; g.filter = "none"; };
+function rr(g, x, y, w, h, r) {
+  r = Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2);
+  g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r);
+  g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
+}
+function ell(g, x, y, rx, ry, rot = 0) { g.beginPath(); g.ellipse(x, y, Math.max(0.1, rx), Math.max(0.1, ry), rot, 0, TAU); }
+
+// Двухтоновая заливка проще и надёжнее: тень = форма ∩ (вся плоскость − сдвинутая форма)
+function cel2(g, path0, col, o = {}) {
+  const lw = o.lw ?? 4, sx = o.sx ?? -9, sy = o.sy ?? -11;
+  const path = (c) => { c.beginPath(); path0(c); };
+  path(g); g.fillStyle = css(o.shadeCol || shd(col)); g.fill();
+  g.save(); path(g); g.clip(); g.translate(sx, sy); path(g); g.fillStyle = css(col); g.fill(); g.restore();
+  if (!o.noLine) { path(g); g.lineWidth = lw; g.strokeStyle = css(o.line || ink(col)); g.lineJoin = "round"; g.lineCap = "round"; g.stroke(); }
+}
+// Конечность (рука, нога, хвост): толстая линия с контуром и тенью снизу
+function limb(g, pts, w, col, o = {}) {
+  g.lineCap = "round"; g.lineJoin = "round";
+  const path = () => { g.beginPath(); g.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) g.lineTo(pts[i][0], pts[i][1]); };
+  path(); g.strokeStyle = css(o.line || ink(col)); g.lineWidth = w + (o.lw ?? 4) * 2; g.stroke();
+  path(); g.strokeStyle = css(shd(col)); g.lineWidth = w; g.stroke();
+  g.save(); g.translate(-w * 0.12, -w * 0.16); path(); g.strokeStyle = css(col); g.lineWidth = w * 0.72; g.stroke(); g.restore();
+}
+// Двухзвенная IK: плечо s, кисть h, длины a, b; side = +1/-1 — куда смотрит локоть
+function ik(s, h, a, b, side) {
+  const dx = h[0] - s[0], dy = h[1] - s[1];
+  let d = Math.hypot(dx, dy); d = Math.min(d, a + b - 0.01);
+  const ang = Math.atan2(dy, dx);
+  const cosA = clamp((a * a + d * d - b * b) / (2 * a * d), -1, 1);
+  const A = Math.acos(cosA) * side;
+  return [s[0] + Math.cos(ang - A) * a, s[1] + Math.sin(ang - A) * a];
+}
+
+// ---------- Знаки аниме ----------
+// четырёхлучевая искра
+function sparkle(g, x, y, r, a = 1, col = C.white) {
+  if (a <= 0 || r <= 0) return;
+  g.save(); g.globalAlpha *= clamp(a); g.translate(x, y);
+  g.beginPath();
+  for (let i = 0; i < 4; i++) {
+    const an = i * Math.PI / 2;
+    g.lineTo(Math.cos(an) * r, Math.sin(an) * r);
+    g.lineTo(Math.cos(an + Math.PI / 4) * r * 0.22, Math.sin(an + Math.PI / 4) * r * 0.22);
+  }
+  g.closePath(); g.fillStyle = css(col); g.fill();
+  g.restore();
+}
+// нота ♪ (рисуем сами: в шрифте её может не быть)
+function note(g, x, y, s, rot, col, a = 1, dbl = false) {
+  if (a <= 0) return;
+  g.save(); g.globalAlpha *= clamp(a); g.translate(x, y); g.rotate(rot); g.scale(s, s);
+  g.lineWidth = 9; g.strokeStyle = css(ink(col)); g.fillStyle = css(col); g.lineJoin = "round";
+  const head = (hx) => { ell(g, hx, 0, 15, 11, -0.4); };
+  const shape = () => {
+    head(0); if (dbl) head(44);
+    g.moveTo(12, -4); g.rect(10, -62, 7, 58);
+    if (dbl) { g.rect(54, -66, 7, 58); g.moveTo(10, -62); g.lineTo(61, -66); g.lineTo(61, -52); g.lineTo(10, -48); g.closePath(); }
+    else { g.moveTo(17, -62); g.quadraticCurveTo(40, -48, 34, -24); g.quadraticCurveTo(34, -40, 17, -44); g.closePath(); }
+  };
+  g.beginPath(); shape(); g.stroke();
+  g.beginPath(); shape(); g.fill();
+  g.restore();
+}
+// буква сна Z
+function zee(g, x, y, s, a) {
+  if (a <= 0) return;
+  g.save(); g.globalAlpha *= clamp(a); g.translate(x, y); g.scale(s, s);
+  g.font = "800 60px 'M PLUS Rounded 1c'"; g.textAlign = "center"; g.textBaseline = "middle";
+  g.lineWidth = 10; g.strokeStyle = css(C.violet); g.lineJoin = "round"; g.strokeText("Z", 0, 0);
+  g.fillStyle = css(C.white); g.fillText("Z", 0, 0);
+  g.restore();
+}
+// восклицательный знак над головой
+function bang(g, x, y, s, a) {
+  if (a <= 0) return;
+  g.save(); g.globalAlpha *= clamp(a); g.translate(x, y); g.scale(s, s);
+  g.lineWidth = 8; g.strokeStyle = css(ink(C.red)); g.fillStyle = css(C.red); g.lineJoin = "round";
+  g.beginPath(); g.moveTo(-14, -80); g.lineTo(14, -80); g.lineTo(7, -18); g.lineTo(-7, -18); g.closePath(); g.stroke(); g.fill();
+  ell(g, 0, 0, 11, 11); g.stroke(); g.fill();
+  g.restore();
+}
+// линии скорости по краям кадра (экранные координаты), a — сила
+function speedLines(g, t, a, cx = W / 2, cy = H / 2, col = C.white) {
+  if (a <= 0) return;
+  reset(g);
+  g.save(); g.globalAlpha = clamp(a) * 0.85;
+  const fr = Math.floor(t * 30 / 2);
+  for (let i = 0; i < 90; i++) {
+    const an = (i / 90) * TAU + hash(i + fr * 13) * 0.05;
+    const r0 = 520 + hash(i * 3 + fr) * 360, r1 = 1500;
+    const wd = 3 + hash(i * 7 + fr) * 9;
+    const ca = Math.cos(an), sa = Math.sin(an);
+    g.beginPath();
+    g.moveTo(cx + ca * r0, cy + sa * r0);
+    g.lineTo(cx + ca * r1 - sa * wd, cy + sa * r1 + ca * wd);
+    g.lineTo(cx + ca * r1 + sa * wd, cy + sa * r1 - ca * wd);
+    g.closePath(); g.fillStyle = css(col); g.fill();
+  }
+  g.restore();
+}
+// горизонтальные штрихи рывка камеры (whip pan)
+function whipStreaks(g, t, a, dirx, diry) {
+  if (a <= 0) return;
+  reset(g); g.save(); g.globalAlpha = clamp(a);
+  const fr = Math.floor(t * 30);
+  const ang = Math.atan2(diry, dirx);
+  g.translate(W / 2, H / 2); g.rotate(ang);
+  for (let i = 0; i < 70; i++) {
+    const y = (hash(i * 5 + fr) - 0.5) * 1500, x = (hash(i * 11 + fr * 3) - 0.5) * 2600;
+    const len = 300 + hash(i * 17) * 900, th = 2 + hash(i * 23 + fr) * 10;
+    g.fillStyle = i % 3 ? "rgba(255,255,255,0.85)" : "rgba(255,200,230,0.8)";
+    g.fillRect(x - len / 2, y - th / 2, len, th);
+  }
+  g.restore();
+}
+// удар: звезда-вспышка с лучами
+function impact(g, x, y, r, a, col = C.white) {
+  if (a <= 0) return;
+  g.save(); g.globalAlpha *= clamp(a); g.translate(x, y);
+  g.beginPath();
+  for (let i = 0; i < 20; i++) { const an = i / 20 * TAU, rr2 = i % 2 ? r * 0.45 : r * (0.8 + hash(i) * 0.4); g.lineTo(Math.cos(an) * rr2, Math.sin(an) * rr2); }
+  g.closePath(); g.fillStyle = css(col); g.fill(); g.lineWidth = 5; g.strokeStyle = css(C.yellow); g.stroke();
+  g.restore();
+}
+// облачко-пыль для «поп»-смены позы
+function puff(g, x, y, r, u) {
+  if (u <= 0 || u >= 1) return;
+  g.save(); g.globalAlpha *= 1 - easeIn(u);
+  for (let i = 0; i < 9; i++) {
+    const an = i / 9 * TAU + 0.3, d = r * (0.3 + easeOut(u) * 0.9);
+    const rx = r * (0.42 - u * 0.2) * (0.8 + hash(i) * 0.4);
+    ell(g, x + Math.cos(an) * d, y + Math.sin(an) * d * 0.6, rx, rx * 0.85);
+    g.fillStyle = css(C.white); g.fill(); g.lineWidth = 4; g.strokeStyle = css(C.snowS); g.stroke();
+  }
+  ell(g, x, y, r * (0.7 - u * 0.4), r * (0.55 - u * 0.3)); g.fillStyle = css(C.white); g.fill();
+  g.restore();
+}
+
+// ---------- Кот-чиби: сидит на подушке анфас ----------
+// (x, y) — точка посадки (низ, середина), s — масштаб.
+// o: eyes 0 (прищур ^ ^) … 1 (открыты), look −1…1 (куда смотрят зрачки), sing 0…1 (поёт), ear 0…1 (дёрг уха),
+//    sway — наклон корпуса (рад), tailExt 0…1 (хвост вытянут по полу вправо), tailSweep 0…1 (метёт влево),
+//    blush, mouthO (рот «о» от удивления)
+function drawCat(g, x, y, s, t, o = {}) {
+  const eyes = o.eyes ?? 0, look = o.look ?? 0, sing = o.sing ?? 0, ear = o.ear ?? 0;
+  g.save(); g.translate(x, y); g.scale(s, s);
+  // тень на подушке/полу
+  ell(g, 0, 2, 120, 16); g.fillStyle = "rgba(90,50,120,0.22)"; g.fill();
+  g.rotate(o.sway ?? 0);
+  const lw = 5;
+  // --- хвост (за телом) ---
+  const ext = ease(o.tailExt ?? 0), sweep = ease(o.tailSweep ?? 0);
+  const tp = [];
+  for (let i = 0; i <= 16; i++) {
+    const u = i / 16;
+    // свёрнутый: вверх-вправо дугой; вытянутый: по полу вправо далеко; sweep — дуга уходит влево к коробу
+    const cx = 62 + Math.sin(u * 2.2) * 70 + Math.sin(t * 2.3 + u * 3) * 8 * u;
+    const cy = -24 - u * 120 + Math.sin(u * 3.1) * 10;
+    const L = 470;
+    const fx = 62 + u * L * (1 - sweep * 0.55), fy = -8 - Math.sin(u * Math.PI) * (16 + sweep * 60);
+    tp.push([lerp(cx, fx, ext), lerp(cy, fy, ext)]);
+  }
+  limb(g, tp, 30, C.cat, { lw });
+  // белый кончик хвоста
+  limb(g, tp.slice(13), 30, C.catW, { lw });
+  // --- задние лапы: бока-окорока и ступни (обе видны) ---
+  for (const sd of [-1, 1]) {
+    cel2(g, (c) => ell(c, sd * 56, -34, 40, 34), C.cat, { lw, sx: -sd * 6, sy: -8 });
+    cel2(g, (c) => ell(c, sd * 70, -8, 28, 13), C.catW, { lw, sx: -sd * 3, sy: -4 });
+    // пальцы на ступне
+    g.beginPath(); g.moveTo(sd * 70 - 8, -4); g.lineTo(sd * 70 - 8, 2); g.moveTo(sd * 70 + 8, -4); g.lineTo(sd * 70 + 8, 2);
+    g.strokeStyle = css(ink(C.catW)); g.lineWidth = 3; g.stroke();
+  }
+  // --- тело ---
+  const breathe = 1 + Math.sin(t * 2.6) * 0.015;
+  cel2(g, (c) => ell(c, 0, -78, 80 * breathe, 74), C.cat, { lw, sx: -10, sy: -10 });
+  // полоски на боках
+  g.lineCap = "round";
+  for (const sd of [-1, 1]) for (let k = 0; k < 2; k++) {
+    g.beginPath(); g.moveTo(sd * (66 - k * 4), -96 + k * 26); g.quadraticCurveTo(sd * (50 - k * 4), -90 + k * 26, sd * (44 - k * 3), -100 + k * 26);
+    g.strokeStyle = css(C.catS); g.lineWidth = 9; g.stroke();
+  }
+  // белый живот
+  cel2(g, (c) => ell(c, 0, -62, 44, 50), [255, 214, 172], { lw: 0, noLine: true, sx: -5, sy: -6 });
+  // --- передние лапы: прямые от груди до подушки, обе спереди ---
+  for (const sd of [-1, 1]) {
+    const knead = sing * Math.max(0, Math.sin(t * 7 + (sd > 0 ? Math.PI : 0))) * 5;
+    limb(g, [[sd * 21, -96], [sd * 21, -18 - knead]], 30, C.catW, { lw });
+    cel2(g, (c) => ell(c, sd * 22, -12 - knead, 20, 13), C.catW, { lw: 4, sx: -2, sy: -4 });
+    g.beginPath(); g.moveTo(sd * 22 - 6, -8 - knead); g.lineTo(sd * 22 - 6, -2 - knead); g.moveTo(sd * 22 + 6, -8 - knead); g.lineTo(sd * 22 + 6, -2 - knead);
+    g.strokeStyle = css(ink(C.catW)); g.lineWidth = 3; g.stroke();
+  }
+  // --- голова (большая) ---
+  g.save(); g.translate(0, -186); g.rotate(Math.sin(t * 2.1) * 0.04 * sing);
+  // уши (за головой)
+  for (const sd of [-1, 1]) {
+    const tw = sd > 0 ? Math.sin(clamp(ear) * Math.PI * 3) * 0.35 * (1 - clamp(ear) * 0.3) : 0;
+    g.save(); g.translate(sd * 66, -58); g.rotate(sd * 0.28 + tw);
+    cel2(g, (c) => { c.beginPath(); c.moveTo(-34, 22); c.quadraticCurveTo(-10, -50, 4, -62); c.quadraticCurveTo(26, -30, 34, 22); c.closePath(); }, C.cat, { lw, sx: -sd * 5, sy: -4 });
+    g.beginPath(); g.moveTo(-18, 14); g.quadraticCurveTo(-4, -30, 3, -40); g.quadraticCurveTo(16, -18, 20, 14); g.closePath();
+    g.fillStyle = css(C.pink); g.fill();
+    g.restore();
+  }
+  // череп
+  cel2(g, (c) => ell(c, 0, 0, 116, 94), C.cat, { lw, sx: -12, sy: -12 });
+  // мордочка белая
+  g.beginPath(); g.moveTo(-70, 40); g.quadraticCurveTo(-60, 0, -24, 8); g.quadraticCurveTo(0, -6, 24, 8); g.quadraticCurveTo(60, 0, 70, 40);
+  g.quadraticCurveTo(0, 104, -70, 40); g.closePath(); g.fillStyle = css(C.catW); g.fill();
+  // полоски на лбу
+  for (const dx of [-24, 0, 24]) {
+    g.beginPath(); g.moveTo(dx, -92); g.lineTo(dx * 1.1, -60 + Math.abs(dx) * 0.4);
+    g.strokeStyle = css(C.catS); g.lineWidth = 10; g.lineCap = "round"; g.stroke();
+  }
+  // румянец
+  for (const sd of [-1, 1]) { ell(g, sd * 70, 30, 22, 12); g.fillStyle = css(C.pink, 0.55 + 0.25 * (o.blush ?? 0)); g.fill(); }
+  // глаза
+  const eo = clamp(eyes);
+  for (const sd of [-1, 1]) {
+    const ex = sd * 44, ey = -2;
+    if (eo < 0.5) {
+      // прищур «^ ^» — дужки
+      g.beginPath(); g.moveTo(ex - 22, ey + 6); g.quadraticCurveTo(ex, ey - 18 + eo * 10, ex + 22, ey + 6);
+      g.strokeStyle = css(C.text); g.lineWidth = 8; g.lineCap = "round"; g.stroke();
+    } else {
+      const k = (eo - 0.5) * 2, ry = 30 * k + 2;
+      ell(g, ex, ey, 25, ry); g.fillStyle = css(C.white); g.fill(); g.lineWidth = 5; g.strokeStyle = css(C.text); g.stroke();
+      g.save(); ell(g, ex, ey, 25, ry); g.clip();
+      // радужка: зелёно-золотая, большой зрачок, блики
+      const px = ex + look * 9, py = ey + 2;
+      ell(g, px, py, 19, 26); g.fillStyle = css([90, 170, 90]); g.fill();
+      ell(g, px, py + 6, 19, 18); g.fillStyle = css([200, 210, 80]); g.fill();
+      ell(g, px, py, 10, 19); g.fillStyle = css([40, 30, 60]); g.fill();
+      ell(g, px - 7, py - 10, 7, 9); g.fillStyle = css(C.white); g.fill();
+      ell(g, px + 7, py + 10, 3.5, 3.5); g.fill();
+      if (o.reflect) o.reflect(g, px, py, sd);
+      g.restore();
+      // ресницы-уголки
+      g.beginPath(); g.moveTo(ex + sd * 22, ey - ry * 0.6); g.lineTo(ex + sd * 32, ey - ry * 0.9);
+      g.strokeStyle = css(C.text); g.lineWidth = 5; g.stroke();
+    }
+  }
+  // носик
+  g.beginPath(); g.moveTo(-8, 22); g.lineTo(8, 22); g.lineTo(0, 31); g.closePath(); g.fillStyle = css(C.pink); g.fill();
+  g.lineWidth = 3; g.strokeStyle = css(ink(C.pink)); g.stroke();
+  // рот: «ω», при пении приоткрыт и «дышит»
+  const open = sing * (0.45 + 0.55 * Math.abs(Math.sin(t * 4.2))) + (o.mouthO ?? 0);
+  if (open > 0.08) {
+    ell(g, 0, 44 + open * 4, 10 + open * 4, 5 + open * 10); g.fillStyle = css([170, 50, 80]); g.fill();
+    g.lineWidth = 4; g.strokeStyle = css(C.text); g.stroke();
+    ell(g, 0, 48 + open * 9, 6 + open * 2, 3 + open * 3); g.fillStyle = css(C.pink); g.fill();
+  }
+  g.beginPath(); g.moveTo(-18, 34); g.quadraticCurveTo(-9, 44, 0, 33); g.quadraticCurveTo(9, 44, 18, 34);
+  g.strokeStyle = css(C.text); g.lineWidth = 4.5; g.lineCap = "round"; g.stroke();
+  // усы
+  for (const sd of [-1, 1]) for (let k = -1; k <= 1; k++) {
+    g.beginPath(); g.moveTo(sd * 60, 30 + k * 10); g.lineTo(sd * (108 + Math.abs(k) * 4), 24 + k * 16 + Math.sin(t * 3 + k) * 2 * sing);
+    g.strokeStyle = css(ink(C.cat)); g.lineWidth = 3; g.stroke();
+  }
+  // блик на голове
+  ell(g, -50, -54, 26, 12, -0.4); g.fillStyle = "rgba(255,255,255,0.55)"; g.fill();
+  g.restore();
+  g.restore();
+}
+// точка конца хвоста в мировых координатах (для гэга с игрушками)
+function catTailTip(x, y, s, ext, sweep) {
+  const u = 1, L = 470;
+  return [x + (62 + u * L * (1 - ease(sweep) * 0.55)) * s * ease(ext), y - 8 * s];
+}
+// круглая подушка на полу под котом
+function drawCushion(g, x, y, s) {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  ell(g, 0, 10, 150, 26); g.fillStyle = "rgba(90,50,120,0.22)"; g.fill();
+  cel2(g, (c) => { c.beginPath(); c.ellipse(0, -6, 140, 34, 0, 0, Math.PI); c.lineTo(-140, -14); c.ellipse(0, -14, 140, 34, 0, Math.PI, 0); c.closePath(); }, C.violet, { lw: 5, sx: -6, sy: -8 });
+  ell(g, 0, -16, 124, 26); g.fillStyle = css(lit(C.violet, 0.35)); g.fill();
+  for (const sd of [-1, 1]) { ell(g, sd * 132, -8, 12, 12); g.fillStyle = css(C.yellow); g.fill(); g.lineWidth = 3; g.strokeStyle = css(ink(C.yellow)); g.stroke(); }
+  g.restore();
+}
+
+// ---------- Мальчик-чиби в пижаме ----------
+// Позы: "lie" — спит на боку лицом к нам (голова слева), "sit" — сидит на ковре анфас, ноги вперёд, "stand" — стоит анфас.
+// (x, y) — точка на полу под тазом, s — масштаб.
+// o: pose, hands [[lx,ly],[rx,ry]] — кисти (локальные), face: sleep|shock|rub|yawn|smile, bubble 0…1 (пузырь сна),
+//    pop 0…1 (лопнул), mouth 0…1 (зевок), tear 0…1
+const BOY = { ua: 50, fa: 48, handR: 16, lw: 5 };
+function elbowOut(s, h, a, b, sd) {
+  const e1 = ik(s, h, a, b, 1), e2 = ik(s, h, a, b, -1);
+  const sc = (e) => sd * (e[0] - s[0]) + 0.6 * (e[1] - s[1]);
+  return sc(e1) >= sc(e2) ? e1 : e2;
+}
+function boyArm(g, sh, hand, sd) {
+  const R = BOY.ua + BOY.fa - 2, dx = hand[0] - sh[0], dy = hand[1] - sh[1], d = Math.hypot(dx, dy);
+  if (d > R) hand = [sh[0] + dx / d * R, sh[1] + dy / d * R];   // кисть не дальше длины руки
+  const el = elbowOut(sh, hand, BOY.ua, BOY.fa, sd);
+  limb(g, [sh, el, hand], 26, C.shirt, { lw: BOY.lw });
+  // манжета и кисть
+  cel2(g, (c) => ell(c, hand[0], hand[1], BOY.handR, BOY.handR), C.skin, { lw: 4, sx: -3, sy: -4 });
+  return el;
+}
+function hairCap(g) {
+  // шапка волос с чёлкой зубцами и вихром-«антенной»
+  g.beginPath();
+  g.moveTo(-92, 6);
+  g.bezierCurveTo(-104, -70, -50, -104, 0, -102);
+  g.bezierCurveTo(56, -104, 104, -70, 92, 6);
+  g.lineTo(80, -10); g.lineTo(66, 8); g.lineTo(50, -24); g.lineTo(30, -6); g.lineTo(12, -34); g.lineTo(-8, -8);
+  g.lineTo(-28, -32); g.lineTo(-46, -4); g.lineTo(-62, -22); g.lineTo(-78, 4);
+  g.closePath();
+}
+// Голова: локальные координаты, центр (0,0); face — выражение
+function boyHead(g, t, o) {
+  const lw = BOY.lw;
+  // вихор
+  g.beginPath(); g.moveTo(4, -98); g.quadraticCurveTo(24, -150, 52, -140); g.quadraticCurveTo(30, -134, 18, -98); g.closePath();
+  g.fillStyle = css(C.hair); g.fill(); g.lineWidth = 4; g.strokeStyle = css(ink(C.hair)); g.stroke();
+  // уши
+  for (const sd of [-1, 1]) cel2(g, (c) => ell(c, sd * 84, 12, 14, 18), C.skin, { lw: 4, sx: -sd * 2, sy: -2 });
+  // лицо
+  cel2(g, (c) => ell(c, 0, 0, 86, 80), C.skin, { lw, sx: -8, sy: -8 });
+  // волосы
+  cel2(g, hairCap, C.hair, { lw, sx: -8, sy: -10 });
+  ell(g, -40, -70, 26, 9, -0.3); g.fillStyle = "rgba(255,240,220,0.5)"; g.fill();
+  // румянец
+  for (const sd of [-1, 1]) { ell(g, sd * 52, 34, 18, 9); g.fillStyle = css(C.pink, 0.6); g.fill(); }
+  const f = o.face || "smile";
+  g.lineCap = "round"; g.strokeStyle = css(C.text);
+  const eye = (sd) => {
+    const ex = sd * 36, ey = 12;
+    if (f === "sleep") { g.beginPath(); g.moveTo(ex - 16, ey); g.quadraticCurveTo(ex, ey + 14, ex + 16, ey); g.lineWidth = 6; g.stroke(); }
+    else if (f === "yawn" || (f === "rub" && sd < 0)) {
+      // зажмурился «> <»
+      g.beginPath(); g.moveTo(ex - sd * 14, ey - 12); g.lineTo(ex + sd * 12, ey); g.lineTo(ex - sd * 14, ey + 12); g.lineWidth = 6; g.stroke();
+    } else {
+      const big = f === "shock" ? 1.1 : 1;
+      ell(g, ex, ey, 17 * big, 24 * big); g.fillStyle = css(C.white); g.fill(); g.lineWidth = 4.5; g.stroke();
+      if (f === "shock") { ell(g, ex, ey + 2, 6, 7); g.fillStyle = css(C.text); g.fill(); }
+      else {
+        const lx = (o.lookX ?? 0) * 5;
+        ell(g, ex + lx, ey + 3, 13, 19); g.fillStyle = css([90, 60, 40]); g.fill();
+        ell(g, ex + lx, ey + 8, 12, 11); g.fillStyle = css([150, 100, 60]); g.fill();
+        ell(g, ex + lx - 5, ey - 6, 6, 7); g.fillStyle = css(C.white); g.fill();
+        ell(g, ex + lx + 5, ey + 12, 3, 3); g.fill();
+        if (f === "rub") { // полусонный: верхнее веко опущено
+          g.save(); ell(g, ex, ey, 17, 24); g.clip(); g.fillStyle = css(C.skin); g.fillRect(ex - 20, ey - 30, 40, 26); g.restore();
+          g.beginPath(); g.moveTo(ex - 17, ey - 4); g.lineTo(ex + 17, ey - 4); g.lineWidth = 5; g.stroke();
+        }
+      }
+    }
+  };
+  eye(-1); eye(1);
+  // рот
+  if (f === "yawn") {
+    const m = clamp(o.mouth ?? 1);
+    ell(g, 0, 50, 18 + m * 8, 8 + m * 26); g.fillStyle = css([170, 50, 80]); g.fill(); g.lineWidth = 4.5; g.strokeStyle = css(C.text); g.stroke();
+    ell(g, 0, 60 + m * 12, 12 + m * 4, 5 + m * 6); g.fillStyle = css(C.pink); g.fill();
+  } else if (f === "shock") {
+    ell(g, 0, 50, 11, 14); g.fillStyle = css([170, 50, 80]); g.fill(); g.lineWidth = 4.5; g.strokeStyle = css(C.text); g.stroke();
+  } else if (f === "sleep") {
+    g.beginPath(); g.moveTo(-8, 48); g.quadraticCurveTo(0, 54, 8, 48); g.lineWidth = 4.5; g.strokeStyle = css(C.text); g.stroke();
+  } else {
+    g.beginPath(); g.moveTo(-14, 44); g.quadraticCurveTo(0, 58, 14, 44); g.lineWidth = 4.5; g.strokeStyle = css(C.text); g.stroke();
+  }
+  // слезинка-искра у зевка
+  if ((o.tear ?? 0) > 0) { sparkle(g, 64, 4, 16 * o.tear, o.tear, [170, 220, 255]); ell(g, 56, 22, 6 * o.tear, 9 * o.tear); g.fillStyle = css([170, 220, 255]); g.fill(); }
+  // пузырь сна из носа
+  const b = o.bubble ?? 0;
+  if (b > 0.02 && !(o.pop > 0)) {
+    const r = 8 + b * 38;
+    ell(g, -18 - r * 0.85, 30 + r * 0.25, r, r); g.fillStyle = "rgba(200,235,255,0.55)"; g.fill();
+    g.lineWidth = 3.5; g.strokeStyle = "rgba(120,170,230,0.95)"; g.stroke();
+    ell(g, -18 - r * 1.15, 30 - r * 0.15, r * 0.25, r * 0.16, -0.6); g.fillStyle = "rgba(255,255,255,0.95)"; g.fill();
+  }
+  if (o.pop > 0 && o.pop < 1) {
+    const u = o.pop, r = 46 + u * 40;
+    g.save(); g.globalAlpha *= 1 - u;
+    for (let i = 0; i < 10; i++) {
+      const an = i / 10 * TAU;
+      g.beginPath(); g.moveTo(-50 + Math.cos(an) * r * 0.6, 40 + Math.sin(an) * r * 0.6); g.lineTo(-50 + Math.cos(an) * r, 40 + Math.sin(an) * r);
+      g.strokeStyle = "rgba(120,170,230,1)"; g.lineWidth = 5; g.stroke();
+    }
+    g.restore();
+  }
+}
+function drawBoy(g, x, y, s, t, o = {}) {
+  const lw = BOY.lw, pose = o.pose || "stand";
+  g.save(); g.translate(x, y); g.scale(s, s);
+  if (pose === "lie") {
+    ell(g, -10, 4, 210, 18); g.fillStyle = "rgba(90,50,120,0.22)"; g.fill();
+    const br = Math.sin(t * 2.2) * 2;   // дыхание
+    // нижняя нога: от бедра вправо, ступня на ковре
+    limb(g, [[40, -34], [104, -22], [150, -16]], 30, C.pants, { lw });
+    cel2(g, (c) => ell(c, 168, -16, 24, 15), C.sock, { lw: 4, sx: -3, sy: -4 });
+    // туловище (лежит горизонтально)
+    cel2(g, (c) => rr(c, -96, -100 - br, 156, 92 + br, 42), C.shirt, { lw, sx: -8, sy: -9 });
+    // звёздочки на пижаме
+    for (const [sx, sy] of [[-60, -70], [-10, -50], [30, -78]]) sparkle(g, sx, sy - br, 9, 1, C.yellow);
+    // верхняя нога: согнута, колено вперёд, ступня позади нижней
+    limb(g, [[44, -64], [112, -64], [146, -40]], 30, C.pants, { lw });
+    cel2(g, (c) => ell(c, 164, -38, 24, 15, 0.3), C.sock, { lw: 4, sx: -3, sy: -4 });
+    // голова лежит на ковре, макушкой влево
+    g.save(); g.translate(-160, -82); g.rotate(-1.05);
+    boyHead(g, t, { face: o.face || "sleep", bubble: o.bubble, pop: o.pop });
+    g.restore();
+    // ближняя рука: предплечье на ковре перед грудью, кисть видна на ковре
+    boyArmLying(g, [-66, -40], [-58, -12], [-4, -14]);
+    // дальняя рука: лежит сверху на боку, кисть на бедре
+    boyArmLying(g, [-50, -92 - br], [0, -112 - br], [48, -86 - br]);
+  } else if (pose === "sit") {
+    ell(g, 0, 4, 120, 16); g.fillStyle = "rgba(90,50,120,0.22)"; g.fill();
+    for (const sd of [-1, 1]) {
+      limb(g, [[sd * 24, -40], [sd * 52, -44], [sd * 66, -24]], 32, C.pants, { lw });
+      cel2(g, (c) => ell(c, sd * 72, -18, 20, 24, sd * 0.2), C.sock, { lw: 4, sx: -sd * 3, sy: -4 });
+    }
+    torsoFront(g, -150, -30);
+    g.save(); g.translate(0, -230 + (o.bob ?? 0)); g.rotate(o.tilt ?? 0); boyHead(g, t, o); g.restore();
+    const hd = o.hands || [[-34, -60], [34, -60]];
+    boyArm(g, [-50, -138], hd[0], -1); boyArm(g, [50, -138], hd[1], 1);
+  } else {
+    ell(g, 0, 4, 90, 14); g.fillStyle = "rgba(90,50,120,0.22)"; g.fill();
+    for (const sd of [-1, 1]) {
+      limb(g, [[sd * 24, -100], [sd * 26, -54], [sd * 27, -18]], 32, C.pants, { lw });
+      cel2(g, (c) => rr(c, sd * 27 - 22 + sd * 6, -22, 44, 22, 11), C.sock, { lw: 4, sx: -sd * 3, sy: -4 });
+    }
+    torsoFront(g, -216, -86);
+    g.save(); g.translate(0, -296 + (o.bob ?? 0)); g.rotate(o.tilt ?? 0); boyHead(g, t, o); g.restore();
+    const hd = o.hands || [[-70, -124], [70, -124]];
+    boyArm(g, [-50, -202], hd[0], -1); boyArm(g, [50, -202], hd[1], 1);
+  }
+  g.restore();
+}
+function boyArmLying(g, sh, el, hand) {
+  limb(g, [sh, el, hand], 26, C.shirt, { lw: BOY.lw });
+  cel2(g, (c) => ell(c, hand[0], hand[1], BOY.handR, BOY.handR), C.skin, { lw: 4, sx: -3, sy: -4 });
+}
+function torsoFront(g, top, bot) {
+  cel2(g, (c) => rr(c, -60, top, 120, bot - top, 44), C.shirt, { lw: BOY.lw, sx: -9, sy: -9 });
+  // воротник и пуговицы
+  g.beginPath(); g.moveTo(-30, top + 6); g.lineTo(0, top + 30); g.lineTo(30, top + 6);
+  g.strokeStyle = css(ink(C.shirt)); g.lineWidth = 4; g.stroke();
+  for (let k = 0; k < 3; k++) { ell(g, 0, top + 46 + k * 26, 5, 5); g.fillStyle = css(C.white); g.fill(); g.lineWidth = 2.5; g.stroke(); }
+  for (const [sx, sy] of [[-34, top + 54], [36, top + 84]]) sparkle(g, sx, sy, 9, 1, C.yellow);
+}
+
+// ---------- Мир: комната (мировые координаты ≈ 0…1920 × 0…1080, пол с y = 700) и двор в метели ----------
+const ROOM = {
+  floorY: 700, win: [620, 150, 1060, 520], door: [1560, 180, 1800, 700], cat: [430, 846], cushion: [430, 852],
+  boy: [1180, 884], boyS: 0.85, box: [626, 862], rug: [1060, 872, 470, 116], lamp: [1180, 96],
+};
+// снег: частицы в прямоугольнике, детерминированно; wind — снос по x (пикс/с)
+function drawSnow(g, t, n, x0, y0, w, h, wind, fall, size, seed, a = 1, col = C.snow) {
+  g.save(); g.globalAlpha *= a; g.fillStyle = css(col);
+  for (let i = 0; i < n; i++) {
+    const hx = hash(i * 1.7 + seed), hy = hash(i * 3.3 + seed), hs = hash(i * 5.1 + seed);
+    const sp = 0.6 + hs * 0.8;
+    let x = (hx * w + t * wind * sp + Math.sin(t * 1.6 + i) * 18) % w; if (x < 0) x += w;
+    let y = (hy * h + t * fall * sp) % h; if (y < 0) y += h;
+    const r = size * (0.5 + hs);
+    g.beginPath(); g.ellipse(x0 + x, y0 + y, r * 1.3, r, Math.atan2(fall, wind), 0, TAU); g.fill();
+  }
+  g.restore();
+}
+// вихревые штрихи ветра
+function windSwirls(g, t, x0, y0, w, h, n, a, seed = 0) {
+  if (a <= 0) return;
+  g.save(); g.globalAlpha *= a; g.lineCap = "round";
+  for (let i = 0; i < n; i++) {
+    const ph = (t * 0.7 + hash(i + seed)) % 1;
+    const x = x0 + ((hash(i * 7 + seed) * w + ph * w * 0.9) % w), y = y0 + hash(i * 13 + seed) * h;
+    const L = 120 + hash(i * 3) * 160, al = Math.sin(ph * Math.PI);
+    g.beginPath(); g.moveTo(x - L, y);
+    g.bezierCurveTo(x - L * 0.4, y - 30, x - L * 0.1, y + 40, x + 10, y);
+    g.arc(x + 10, y - 22, 22, Math.PI / 2, -Math.PI * 0.9, true);
+    g.strokeStyle = `rgba(230,245,255,${(0.75 * al).toFixed(3)})`; g.lineWidth = 6; g.stroke();
+  }
+  g.restore();
+}
+// Дух бури: круглая туча с лицом; o.blow 0…1 — свистит (щёки, губы «о», струя), o.juggle — снежки по кругу, o.grin
+function drawStorm(g, x, y, s, t, o = {}) {
+  g.save(); g.translate(x, y + Math.sin(t * 2.4) * 10); g.scale(s, s); g.rotate(Math.sin(t * 1.7) * 0.06);
+  const blow = clamp(o.blow ?? 0);
+  const puffs = [[0, 0, 120], [-110, 20, 80], [110, 18, 84], [-60, -70, 82], [62, -66, 86], [0, 60, 90], [-150, -20, 54], [154, -24, 56]];
+  const body = (c) => { c.beginPath(); for (const [px, py, r] of puffs) { c.moveTo(px + r, py); c.arc(px, py, r + Math.sin(t * 3 + px) * 3, 0, TAU); } };
+  // контур — обводка каждого круга под заливкой
+  g.lineWidth = 12; g.strokeStyle = css(ink(C.cloud)); body(g); g.stroke();
+  body(g); g.fillStyle = css(C.cloudD); g.fill();
+  g.save(); body(g); g.clip(); g.translate(-14, -18); body(g); g.fillStyle = css(C.cloud); g.fill(); g.restore();
+  // брови-вихры и глаза
+  const wink = o.wink ?? 0;
+  for (const sd of [-1, 1]) {
+    const ex = sd * 48, ey = -10;
+    if (blow > 0.3 || (sd > 0 && wink > 0.5)) { g.beginPath(); g.moveTo(ex - 18, ey); g.quadraticCurveTo(ex, ey - 16, ex + 18, ey); g.strokeStyle = css(C.text); g.lineWidth = 8; g.lineCap = "round"; g.stroke(); }
+    else {
+      ell(g, ex, ey, 16, 21); g.fillStyle = css(C.white); g.fill(); g.lineWidth = 5; g.strokeStyle = css(C.text); g.stroke();
+      ell(g, ex + 4 * (o.lookX ?? 0), ey + 3, 9, 13); g.fillStyle = css(C.text); g.fill();
+      ell(g, ex - 3, ey - 5, 4, 5); g.fillStyle = css(C.white); g.fill();
+    }
+    g.beginPath(); g.moveTo(ex - 22, ey - 36); g.lineTo(ex + 18, ey - 30 - sd * 8); g.strokeStyle = css(C.text); g.lineWidth = 7; g.stroke();
+  }
+  // щёки и рот
+  const ch = 1 + blow * 0.7;
+  for (const sd of [-1, 1]) { ell(g, sd * 74, 36, 26 * ch, 16 * ch); g.fillStyle = css(C.pink, 0.55); g.fill(); }
+  if (blow > 0.05) {
+    ell(g, 0, 44, 9 + blow * 5, 9 + blow * 7); g.fillStyle = css([90, 40, 90]); g.fill(); g.lineWidth = 6; g.strokeStyle = css(C.text); g.stroke();
+  } else {
+    // озорная улыбка с клычком
+    g.beginPath(); g.moveTo(-30, 34); g.quadraticCurveTo(0, 66, 30, 34); g.closePath(); g.fillStyle = css([90, 40, 90]); g.fill();
+    g.lineWidth = 5; g.strokeStyle = css(C.text); g.stroke();
+    g.beginPath(); g.moveTo(10, 38); g.lineTo(16, 50); g.lineTo(22, 37); g.fillStyle = css(C.white); g.fill();
+  }
+  g.restore();
+  // струя свиста: линии вперёд (dir), вихрь
+  if (blow > 0.05) {
+    const dir = o.dir ?? -1;
+    g.save(); g.translate(x + dir * 30 * s, y + 46 * s); g.scale(s, s);
+    for (let i = 0; i < 7; i++) {
+      const ph = (t * 2.2 + i / 7) % 1, yy = (i - 3) * 16 * (0.4 + ph);
+      g.beginPath(); g.moveTo(dir * (40 + ph * 300), yy); g.lineTo(dir * (120 + ph * 520), yy * 1.6);
+      g.strokeStyle = `rgba(235,250,255,${(blow * Math.sin(ph * Math.PI)).toFixed(3)})`; g.lineWidth = 8 - ph * 5; g.lineCap = "round"; g.stroke();
+    }
+    g.restore();
+  }
+  // снежки вокруг (жонглирует)
+  if ((o.juggle ?? 0) > 0) {
+    for (let k = 0; k < 3; k++) {
+      const an = t * 3.2 + k * TAU / 3;
+      const bx = x + Math.cos(an) * 230 * s, by = y - 40 * s + Math.sin(an) * 120 * s - Math.abs(Math.cos(an)) * 40 * s;
+      g.save(); g.globalAlpha *= o.juggle;
+      ell(g, bx, by, 24 * s, 24 * s); g.fillStyle = css(C.snow); g.fill(); g.lineWidth = 5 * s; g.strokeStyle = css(C.snowS); g.stroke();
+      g.restore();
+    }
+  }
+}
+// Небо за окном/во дворе
+function skyGrad(g, x0, y0, x1, y1) {
+  const gr = g.createLinearGradient(0, y0, 0, y1);
+  gr.addColorStop(0, css(C.skyD)); gr.addColorStop(0.6, css(C.sky)); gr.addColorStop(1, css(C.teal));
+  g.fillStyle = gr; g.fillRect(x0, y0, x1 - x0, y1 - y0);
+}
+function fir(g, x, y, h, bend, col = [40, 90, 110]) {
+  g.save(); g.translate(x, y);
+  for (let k = 0; k < 4; k++) {
+    const yy = -h * (0.15 + k * 0.22), ww = h * (0.42 - k * 0.08), b = bend * (0.4 + k * 0.3);
+    g.beginPath(); g.moveTo(-ww + b * 0.4, yy + h * 0.2); g.lineTo(b, yy - h * 0.22); g.lineTo(ww + b * 0.6, yy + h * 0.2); g.closePath();
+    g.fillStyle = css(col); g.fill(); g.lineWidth = 4; g.strokeStyle = css(ink(col)); g.stroke();
+    // снег на лапах
+    g.beginPath(); g.moveTo(-ww * 0.7 + b * 0.4, yy + h * 0.14); g.quadraticCurveTo(b, yy - h * 0.1, ww * 0.7 + b * 0.6, yy + h * 0.14);
+    g.lineTo(ww * 0.5 + b * 0.6, yy + h * 0.17); g.quadraticCurveTo(b, yy - h * 0.04, -ww * 0.5 + b * 0.4, yy + h * 0.17); g.closePath();
+    g.fillStyle = css(C.snow); g.fill();
+  }
+  g.restore();
+}
+
+// ---------- Комната ----------
+function drawRoom(g, t, st) {
+  const fy = ROOM.floorY;
+  // стена: обои с ромбиками
+  g.fillStyle = css(C.wall); g.fillRect(-800, -400, 3600, fy + 400);
+  g.save(); g.fillStyle = css(C.wallD, 0.55);
+  for (let yy = -360; yy < fy - 120; yy += 90) for (let xx = -760 + ((yy / 90) % 2 ? 45 : 0); xx < 2800; xx += 90) {
+    g.beginPath(); g.moveTo(xx, yy - 10); g.lineTo(xx + 8, yy); g.lineTo(xx, yy + 10); g.lineTo(xx - 8, yy); g.closePath(); g.fill();
+  }
+  g.restore();
+  // тёплый свет лампы на стене
+  const lg = g.createRadialGradient(ROOM.lamp[0], ROOM.lamp[1] + 140, 40, ROOM.lamp[0], ROOM.lamp[1] + 140, 900);
+  lg.addColorStop(0, "rgba(255,230,170,0.55)"); lg.addColorStop(1, "rgba(255,230,170,0)");
+  g.fillStyle = lg; g.fillRect(-800, -400, 3600, 1800);
+  // панель внизу стены
+  cel2(g, (c) => c.rect(-800, fy - 110, 3600, 110), C.wood, { lw: 5, sx: 0, sy: -10 });
+  // пол
+  g.fillStyle = css(C.floor); g.fillRect(-800, fy, 3600, 900);
+  g.strokeStyle = css(shd(C.floor)); g.lineWidth = 4;
+  for (let k = -12; k < 30; k++) { g.beginPath(); g.moveTo(960 + k * 110 * 0.55, fy); g.lineTo(960 + k * 110 * 1.9 - 900, fy + 700); g.stroke(); }
+  // полоса тёплого света из двери на полу
+  if (st.door > 0) {
+    const [dx0, , dx1] = ROOM.door, a = clamp(st.door);
+    g.save(); g.globalAlpha = 0.75 * a;
+    g.beginPath(); g.moveTo(dx0 + (dx1 - dx0) * (1 - a), fy); g.lineTo(dx1, fy); g.lineTo(dx1 - 260, fy + 520); g.lineTo(lerp(dx1 - 260, 760, a), fy + 520); g.closePath();
+    const gl = g.createLinearGradient(dx1, fy, 900, fy + 400); gl.addColorStop(0, "rgba(255,236,170,1)"); gl.addColorStop(1, "rgba(255,226,150,0.35)");
+    g.fillStyle = gl; g.fill(); g.restore();
+  }
+  // печка слева
+  const [sx0, sy0, sx1] = [-380, 40, 270];
+  cel2(g, (c) => rr(c, sx0, sy0, sx1 - sx0, fy - sy0 + 6, 24), C.stove, { lw: 6, sx: 10, sy: -10 });
+  for (let r = 0; r < 6; r++) for (let q = 0; q < 6; q++) {
+    const tx = sx0 + 40 + q * 100, ty = sy0 + 50 + r * 100;
+    if (tx > sx1 - 70) continue;
+    rr(g, tx, ty, 60, 60, 10); g.fillStyle = css(C.tile, 0.9); g.fill();
+    g.beginPath(); g.arc(tx + 30, ty + 30, 14, 0, TAU); g.fillStyle = css(C.white); g.fill();
+  }
+  // устье печки с огнём
+  rr(g, -180, 470, 220, 170, 80); g.fillStyle = css([90, 50, 70]); g.fill(); g.lineWidth = 6; g.strokeStyle = css(ink(C.stove)); g.stroke();
+  for (let k = 0; k < 3; k++) {
+    const fl = Math.sin(t * 9 + k * 2) * 10;
+    g.beginPath(); g.moveTo(-140 + k * 60, 636); g.quadraticCurveTo(-150 + k * 60, 560 + fl, -110 + k * 60, 520 + fl); g.quadraticCurveTo(-90 + k * 60, 590, -80 + k * 60, 636); g.closePath();
+    g.fillStyle = css(k === 1 ? C.yellow : C.lamp); g.fill();
+  }
+  // окно
+  drawWindow(g, t, st);
+  // дверь
+  drawDoor(g, t, st);
+  // лампа под потолком
+  const [lx, ly] = ROOM.lamp, sw = Math.sin(t * 1.3) * 0.03 + (st.lampSwing ?? 0) * Math.sin(t * 6) * 0.08;
+  g.save(); g.translate(lx, -300); g.rotate(sw);
+  g.beginPath(); g.moveTo(0, 0); g.lineTo(0, ly + 300); g.strokeStyle = css(C.text); g.lineWidth = 5; g.stroke();
+  const lgl = g.createRadialGradient(0, ly + 360, 10, 0, ly + 360, 200); lgl.addColorStop(0, "rgba(255,240,180,0.9)"); lgl.addColorStop(1, "rgba(255,240,180,0)");
+  g.fillStyle = lgl; g.fillRect(-220, ly + 160, 440, 400);
+  cel2(g, (c) => { c.beginPath(); c.moveTo(-40, ly + 300); c.lineTo(40, ly + 300); c.lineTo(110, ly + 380); c.lineTo(-110, ly + 380); c.closePath(); }, C.lamp, { lw: 5, sx: 8, sy: 0 });
+  ell(g, 0, ly + 384, 28, 12); g.fillStyle = css(C.yellow); g.fill();
+  g.restore();
+  // ковёр
+  const [rx, ry, rw, rh] = ROOM.rug;
+  ell(g, rx, ry, rw, rh); g.fillStyle = css(C.rug); g.fill(); g.lineWidth = 6; g.strokeStyle = css(ink(C.rug)); g.stroke();
+  ell(g, rx, ry, rw * 0.8, rh * 0.76); g.lineWidth = 14; g.strokeStyle = css(C.rug2); g.stroke();
+  ell(g, rx, ry, rw * 0.55, rh * 0.5); g.lineWidth = 10; g.strokeStyle = css(C.rug3); g.stroke();
+  ell(g, rx, ry, rw * 0.3, rh * 0.26); g.fillStyle = css(C.rug2); g.fill();
+}
+function drawWindow(g, t, st) {
+  const [x0, y0, x1, y1] = ROOM.win, rat = (st.rattle ?? 0) * Math.sin(t * 50) * 3;
+  g.save(); g.translate(rat, 0);
+  // вид наружу
+  g.save(); g.beginPath(); g.rect(x0, y0, x1 - x0, y1 - y0); g.clip();
+  skyGrad(g, x0, y0, x1, y1);
+  fir(g, x0 + 60, y1 + 30, 220, Math.sin(t * 2.2) * 20 - 16, [50, 100, 130]);
+  fir(g, x1 - 50, y1 + 40, 260, Math.sin(t * 2.0 + 1) * 24 - 18, [50, 100, 130]);
+  g.fillStyle = css(C.snow); g.fillRect(x0, y1 - 40, x1 - x0, 60);
+  windSwirls(g, t, x0, y0 + 20, x1 - x0, y1 - y0 - 60, 4, 0.8 * (st.storm ?? 1));
+  if ((st.stormInWin ?? 0) > 0) drawStorm(g, lerp(x1 + 220, x0 + 230, ease(st.stormInWin)), y0 + 160, 0.62, t, { juggle: st.juggle ?? 0, blow: st.blowWin ?? 0, dir: -1, lookX: -1 });
+  drawSnow(g, t, 60, x0, y0, x1 - x0, y1 - y0, -260 * (st.storm ?? 1), 170, 5, 3);
+  // снежные клоки, прилипшие к стеклу
+  for (const sp of st.splats || []) {
+    const u = t - sp.t0; if (u < 0) continue;
+    const k = SPRING(u / 0.35);
+    g.save(); g.translate(sp.x, sp.y); g.scale(k, k);
+    g.beginPath(); for (let i = 0; i < 12; i++) { const an = i / 12 * TAU, r = (i % 2 ? 26 : 40) * (0.8 + hash(i + sp.x) * 0.4); g.lineTo(Math.cos(an) * r, Math.sin(an) * r); }
+    g.closePath(); g.fillStyle = css(C.snow); g.fill(); g.lineWidth = 4; g.strokeStyle = css(C.snowS); g.stroke();
+    g.restore();
+    if (u < 0.3) impact(g, sp.x, sp.y, 70 * easeOut(u / 0.3), 1 - u / 0.3);
+  }
+  g.restore();
+  // блик на стекле
+  g.save(); g.globalAlpha = 0.18; g.fillStyle = "#fff";
+  g.beginPath(); g.moveTo(x0 + 40, y1); g.lineTo(x0 + 160, y0); g.lineTo(x0 + 230, y0); g.lineTo(x0 + 110, y1); g.fill(); g.restore();
+  // рама с переплётом
+  g.lineJoin = "round";
+  g.strokeStyle = css(C.white); g.lineWidth = 26; g.strokeRect(x0, y0, x1 - x0, y1 - y0);
+  g.beginPath(); g.moveTo((x0 + x1) / 2, y0); g.lineTo((x0 + x1) / 2, y1); g.moveTo(x0, y0 + (y1 - y0) * 0.42); g.lineTo(x1, y0 + (y1 - y0) * 0.42);
+  g.lineWidth = 16; g.stroke();
+  g.strokeStyle = css(ink(C.wall)); g.lineWidth = 4; g.strokeRect(x0 - 13, y0 - 13, x1 - x0 + 26, y1 - y0 + 26); g.strokeRect(x0 + 13, y0 + 13, x1 - x0 - 26, y1 - y0 - 26);
+  // подоконник
+  cel2(g, (c) => rr(c, x0 - 50, y1 + 8, x1 - x0 + 100, 30, 8), C.white, { lw: 5, sx: 0, sy: -8 });
+  g.restore();
+  // занавески: колышутся, на «свищет» взлетают
+  const fl = st.flap ?? 0;
+  for (const sd of [-1, 1]) {
+    const cx = sd < 0 ? x0 - 40 : x1 + 40;
+    const swing = Math.sin(t * 2 + sd) * 8 + fl * (28 + Math.sin(t * 11) * 22);
+    cel2(g, (c) => {
+      c.beginPath(); c.moveTo(cx - 70, y0 - 50); c.lineTo(cx + 70, y0 - 50);
+      c.quadraticCurveTo(cx + 60 + swing * 0.6 - sd * 40, (y0 + y1) / 2, cx + 40 - sd * 30 + swing * 2.2, y1 + 70 - fl * 50);
+      c.lineTo(cx - 50 - sd * 30 + swing * 2.6, y1 + 80 - fl * 60);
+      c.quadraticCurveTo(cx - 70 + swing * 0.4, (y0 + y1) / 2, cx - 70, y0 - 50); c.closePath();
+    }, C.pink, { lw: 5, sx: sd * 8, sy: 0 });
+  }
+  // карниз
+  cel2(g, (c) => rr(c, x0 - 140, y0 - 64, x1 - x0 + 280, 22, 10), C.woodD, { lw: 5, sx: 0, sy: -4 });
+}
+function drawDoor(g, t, st) {
+  const [x0, y0, x1, y1] = ROOM.door, a = ease(st.door ?? 0);
+  // наличник
+  cel2(g, (c) => rr(c, x0 - 26, y0 - 26, x1 - x0 + 52, y1 - y0 + 26, 8), C.white, { lw: 5, sx: 0, sy: -6 });
+  // проём: тёплый свет коридора
+  const gl = g.createLinearGradient(x0, y0, x1, y1); gl.addColorStop(0, "rgb(255,240,190)"); gl.addColorStop(1, "rgb(255,206,130)");
+  g.fillStyle = gl; g.fillRect(x0, y0, x1 - x0, y1 - y0);
+  // полотно: петли справа, открывается в комнату
+  const w = (x1 - x0) * (1 - a * 0.78);
+  cel2(g, (c) => { c.beginPath(); c.moveTo(x1 - w, y0 - a * 30); c.lineTo(x1, y0); c.lineTo(x1, y1); c.lineTo(x1 - w, y1 + a * 30); c.closePath(); }, C.wood, { lw: 5, sx: 10, sy: 0 });
+  if (a < 0.7) {
+    const k = 1 - a;
+    rr(g, x1 - w + 30 * k, y0 + 40, w - 60 * k, 180, 10); g.lineWidth = 4; g.strokeStyle = css(ink(C.wood)); g.stroke();
+    rr(g, x1 - w + 30 * k, y0 + 280, w - 60 * k, 180, 10); g.stroke();
+    ell(g, x1 - w + 24 * k + 6, (y0 + y1) / 2 + 20, 10 * k + 3, 10); g.fillStyle = css(C.yellow); g.fill(); g.stroke();
+  }
+}
+// короб для игрушек
+function drawBox(g, x, y, s, lid) {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  cel2(g, (c) => rr(c, -90, -110, 180, 110, 14), [120, 180, 120], { lw: 5, sx: 8, sy: 0 });
+  g.font = "800 46px 'M PLUS Rounded 1c'"; g.textAlign = "center"; g.fillStyle = css(C.white); g.fillText("★", 0, -38);
+  g.save(); g.translate(-90, -110); g.rotate(-lid * 1.2);
+  cel2(g, (c) => rr(c, 0, -22, 190, 24, 10), [100, 160, 110], { lw: 5, sx: 0, sy: -5 });
+  g.restore();
+  g.restore();
+}
+// игрушки: kind ball|block|horse
+function drawToy(g, kind, x, y, s, rot) {
+  g.save(); g.translate(x, y); g.rotate(rot); g.scale(s, s);
+  if (kind === "ball") {
+    ell(g, 0, -30, 30, 30); g.fillStyle = css(C.red); g.fill();
+    g.save(); ell(g, 0, -30, 30, 30); g.clip(); g.fillStyle = css(C.yellow); g.fillRect(-40, -38, 80, 16); g.restore();
+    ell(g, 0, -30, 30, 30); g.lineWidth = 5; g.strokeStyle = css(ink(C.red)); g.stroke();
+    ell(g, -10, -42, 8, 5, -0.5); g.fillStyle = "rgba(255,255,255,0.8)"; g.fill();
+  } else if (kind === "block") {
+    cel2(g, (c) => rr(c, -28, -56, 56, 56, 8), C.yellow, { lw: 5, sx: -6, sy: -6 });
+    g.font = "800 36px 'M PLUS Rounded 1c'"; g.textAlign = "center"; g.fillStyle = css(C.hot); g.fillText("А", 0, -16);
+  } else {
+    // лошадка на колёсиках
+    for (const sd of [-1, 1]) { ell(g, sd * 30, -10, 11, 11); g.fillStyle = css(C.text); g.fill(); }
+    cel2(g, (c) => rr(c, -48, -30, 96, 14, 6), C.woodD, { lw: 4, sx: 0, sy: -3 });
+    cel2(g, (c) => { c.beginPath(); c.moveTo(-38, -30); c.lineTo(-34, -60); c.lineTo(30, -60); c.lineTo(34, -30); c.closePath(); }, [255, 255, 255], { lw: 4, sx: 0, sy: -5 });
+    cel2(g, (c) => { c.beginPath(); c.moveTo(22, -56); c.lineTo(36, -100); c.lineTo(62, -96); c.lineTo(58, -80); c.lineTo(40, -76); c.lineTo(36, -56); c.closePath(); }, [255, 255, 255], { lw: 4, sx: 0, sy: -5 });
+    g.beginPath(); g.moveTo(34, -100); g.lineTo(18, -74); g.lineTo(26, -60); g.lineWidth = 9; g.strokeStyle = css(C.red); g.stroke();
+    ell(g, 46, -88, 3, 3); g.fillStyle = css(C.text); g.fill();
+  }
+  g.restore();
+}
+// тень мамы на полу в полосе света (силуэт вытянут к мальчику); arms 0 — руки в боки, 1 — раскрыты
+const SHC = document.createElement("canvas"); SHC.width = W; SHC.height = H;
+const SHG = SHC.getContext("2d");
+function drawMomShadow(g, t, a, arms) {
+  if (a <= 0) return;
+  const fy = ROOM.floorY, sg = SHG;
+  // силуэт рисуется непрозрачным в отдельный холст тем же преобразованием камеры, затем кладётся одним слоем
+  sg.setTransform(1, 0, 0, 1, 0, 0); sg.clearRect(0, 0, W, H);
+  sg.setTransform(g.getTransform());
+  // ширина — вдоль x, рост — от двери вниз-влево к мальчику
+  sg.transform(0.42, 0.5, 1.0, -0.46, 1690, fy + 4);
+  sg.fillStyle = "rgb(110,60,120)"; sg.strokeStyle = "rgb(110,60,120)"; sg.lineCap = "round"; sg.lineJoin = "round";
+  sg.beginPath(); sg.moveTo(-70, 0); sg.lineTo(70, 0); sg.lineTo(34, -210); sg.lineTo(-34, -210); sg.closePath(); sg.fill();
+  rr(sg, -36, -290, 72, 90, 30); sg.fill();
+  ell(sg, 0, -330, 44, 46); sg.fill(); ell(sg, 0, -384, 24, 22); sg.fill();
+  // руки: обе видны — в боки, на «Подойди» раскрываются
+  const A = ease(arms);
+  for (const sd of [-1, 1]) {
+    const sh = [sd * 34, -276];
+    const hand = [lerp(sd * 58, sd * 150, A), lerp(-212, -340, A)];
+    const el = [lerp(sd * 86, sd * 100, A), lerp(-246, -292, A)];
+    sg.beginPath(); sg.moveTo(sh[0], sh[1]); sg.lineTo(el[0], el[1]); sg.lineTo(hand[0], hand[1]); sg.lineWidth = 26; sg.stroke();
+    ell(sg, hand[0], hand[1], 18, 18); sg.fill();
+  }
+  g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 0.5 * a; g.drawImage(SHC, 0, 0); g.restore();
+}
+
+// ---------- Двор ----------
+const YARD = { ground: 820, house: [660, 520, 1260, 820], win: [870, 600, 1050, 740], gate: [1420, 820] };
+function drawYard(g, t, st) {
+  skyGrad(g, -800, -600, 2800, YARD.ground + 10);
+  // дальний лес
+  for (let k = 0; k < 14; k++) fir(g, -500 + k * 230, YARD.ground - 40, 200 + hash(k) * 120, Math.sin(t * 2 + k) * 16 - 20, [40, 70, 110]);
+  windSwirls(g, t, -400, 60, 2800, 600, 9, 0.7, 4);
+  // сугробы
+  g.beginPath(); g.moveTo(-800, YARD.ground); for (let x = -800; x <= 2800; x += 100) g.lineTo(x, YARD.ground - 16 - Math.sin(x * 0.01) * 14);
+  g.lineTo(2800, 1600); g.lineTo(-800, 1600); g.closePath(); g.fillStyle = css(C.snow); g.fill(); g.lineWidth = 5; g.strokeStyle = css(C.snowS); g.stroke();
+  // дом
+  const [hx0, hy0, hx1, hy1] = YARD.house;
+  cel2(g, (c) => c.rect(hx0, hy0, hx1 - hx0, hy1 - hy0), [196, 120, 90], { lw: 6, sx: 14, sy: 0 });
+  g.strokeStyle = css(shd([196, 120, 90])); g.lineWidth = 5;
+  for (let yy = hy0 + 30; yy < hy1; yy += 40) { g.beginPath(); g.moveTo(hx0, yy); g.lineTo(hx1, yy); g.stroke(); }
+  // крыша со снегом
+  cel2(g, (c) => { c.beginPath(); c.moveTo(hx0 - 80, hy0 + 10); c.lineTo((hx0 + hx1) / 2, hy0 - 230); c.lineTo(hx1 + 80, hy0 + 10); c.closePath(); }, [150, 80, 110], { lw: 6, sx: 12, sy: 0 });
+  g.beginPath(); g.moveTo(hx0 - 96, hy0 + 14); g.lineTo((hx0 + hx1) / 2, hy0 - 250); g.lineTo(hx1 + 96, hy0 + 14);
+  for (let k = 0; k <= 10; k++) { const x = hx1 + 96 - k * (hx1 - hx0 + 192) / 10; g.lineTo(x, hy0 + 14 + (k % 2 ? 26 : 8)); }
+  g.closePath(); g.fillStyle = css(C.snow); g.fill(); g.lineWidth = 5; g.strokeStyle = css(C.snowS); g.stroke();
+  // труба с дымом
+  cel2(g, (c) => c.rect(1110, hy0 - 200, 60, 140), [170, 90, 90], { lw: 5, sx: 8, sy: 0 });
+  for (let k = 0; k < 4; k++) { const u = (t * 0.6 + k / 4) % 1; ell(g, 1140 - u * 260, hy0 - 220 - u * 120, 20 + u * 30, 16 + u * 22); g.fillStyle = `rgba(230,236,250,${(0.8 * (1 - u)).toFixed(3)})`; g.fill(); }
+  // окно с тёплым светом и котом
+  const [wx0, wy0, wx1, wy1] = YARD.win;
+  const glow = g.createRadialGradient((wx0 + wx1) / 2, (wy0 + wy1) / 2, 20, (wx0 + wx1) / 2, (wy0 + wy1) / 2, 360);
+  glow.addColorStop(0, "rgba(255,220,140,0.55)"); glow.addColorStop(1, "rgba(255,220,140,0)");
+  g.fillStyle = glow; g.fillRect(wx0 - 400, wy0 - 400, wx1 - wx0 + 800, wy1 - wy0 + 800);
+  g.fillStyle = css(C.warm); g.fillRect(wx0, wy0, wx1 - wx0, wy1 - wy0);
+  // силуэт кота на подоконнике: уши, голова, спина
+  g.fillStyle = css([150, 80, 70]);
+  const cx = wx0 + 60, cy = wy1;
+  g.beginPath(); g.ellipse(cx, cy - 30, 40, 34, 0, 0, TAU); g.fill();
+  g.beginPath(); g.ellipse(cx, cy - 86, 40, 34, 0, 0, TAU); g.fill();
+  for (const sd of [-1, 1]) { g.beginPath(); g.moveTo(cx + sd * 34, cy - 100); g.lineTo(cx + sd * 30, cy - 136); g.lineTo(cx + sd * 10, cy - 116); g.closePath(); g.fill(); }
+  g.strokeStyle = css(C.white); g.lineWidth = 14;
+  g.strokeRect(wx0, wy0, wx1 - wx0, wy1 - wy0);
+  g.beginPath(); g.moveTo((wx0 + wx1) / 2, wy0); g.lineTo((wx0 + wx1) / 2, wy1); g.lineWidth = 10; g.stroke();
+  // ноты из окна
+  for (let k = 0; k < 3; k++) { const u = (t * 0.45 + k / 3) % 1; note(g, wx0 + 90 + u * 120 + Math.sin(u * 6) * 20, wy0 - u * 180, 0.7, Math.sin(u * 5) * 0.3, C.hot, (st.notes ?? 1) * Math.sin(u * Math.PI)); }
+  // забор и калитка
+  const fy = YARD.ground;
+  for (let x = 1300; x < 2400; x += 70) {
+    if (x > 1390 && x < 1580) continue;
+    cel2(g, (c) => { c.beginPath(); c.moveTo(x - 22, fy + 10); c.lineTo(x - 22, fy - 150); c.lineTo(x, fy - 176); c.lineTo(x + 22, fy - 150); c.lineTo(x + 22, fy + 10); c.closePath(); }, C.wood, { lw: 5, sx: 6, sy: 0 });
+  }
+  for (let x = -600; x < 560; x += 70) cel2(g, (c) => { c.beginPath(); c.moveTo(x - 22, fy + 10); c.lineTo(x - 22, fy - 150); c.lineTo(x, fy - 176); c.lineTo(x + 22, fy - 150); c.lineTo(x + 22, fy + 10); c.closePath(); }, C.wood, { lw: 5, sx: 6, sy: 0 });
+  cel2(g, (c) => c.rect(-620, fy - 120, 1180, 22), C.woodD, { lw: 4, sx: 0, sy: -4 });
+  cel2(g, (c) => c.rect(1280, fy - 120, 1120, 22), C.woodD, { lw: 4, sx: 0, sy: -4 });
+  // столбы калитки
+  for (const x of [1380, 1600]) cel2(g, (c) => rr(c, x - 20, fy - 230, 40, 240, 8), C.woodD, { lw: 5, sx: 6, sy: 0 });
+  // калитка мотается на петлях (у левого столба): ширина сжимается
+  const gs = Math.sin(t * 5.2) * 0.5 * (st.gate ?? 1) + 0.15;
+  const gw = 200 * Math.cos(gs);
+  cel2(g, (c) => { c.beginPath(); c.moveTo(1400, fy - 190); c.lineTo(1400 + gw, fy - 190 - Math.sin(gs) * 20); c.lineTo(1400 + gw, fy - Math.sin(gs) * 20); c.lineTo(1400, fy); c.closePath(); }, C.wood, { lw: 5, sx: 6, sy: 0 });
+  g.beginPath(); g.moveTo(1400, fy - 20); g.lineTo(1400 + gw, fy - 170 - Math.sin(gs) * 20); g.strokeStyle = css(ink(C.wood)); g.lineWidth = 6; g.stroke();
+  // ёлки рядом с домом
+  fir(g, 420, fy + 20, 330, Math.sin(t * 2.3) * 30 - 24, [50, 110, 120]);
+  fir(g, 1800, fy + 30, 380, Math.sin(t * 2.1 + 1) * 34 - 26, [50, 110, 120]);
+  // дух бури
+  if (st.storm) drawStorm(g, st.storm[0], st.storm[1], st.storm[2], t, st.stormO || {});
+  drawSnow(g, t, 260, -800, -600, 3600, 1800, -520, 300, 6, 11);
+}
+
+// ---------- Строки стиха: плашка внизу, слова загораются под голос; строфа 2 — облачко реплики мамы ----------
+const FONT = "'M PLUS Rounded 1c', sans-serif";
+const LINES = CFG.lines;
+const PANEL = { cx: 960, y0: 808, lh: 82, size: 60 };
+const COUPLETS = [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12]];
+// интервал показа пары строк: от начала первой до начала следующей пары (последняя — до конца ролика минус финал)
+function coupletSpan(k) {
+  const [a] = COUPLETS[k], s = LINES[a - 1].s - 0.12;
+  const e = k + 1 < COUPLETS.length ? LINES[COUPLETS[k + 1][0] - 1].s - 0.12 : CFG.ev.fin;
+  return [s, e];
+}
+function measure(g, txt) { return g.measureText(txt).width; }
+function drawPanel(g, x0, y0, w, h, speech, a, t) {
+  g.save(); g.globalAlpha = a;
+  const path = (c) => {
+    rr(c, x0, y0, w, h, 46);
+    if (speech) { c.moveTo(x0 + w - 190, y0 + 4); c.lineTo(x0 + w - 70, y0 - 74); c.lineTo(x0 + w - 110, y0 + 4); }
+  };
+  g.shadowColor = "rgba(80,40,120,0.35)"; g.shadowBlur = 0; g.shadowOffsetY = 8;
+  path(g); g.fillStyle = speech ? "rgba(255,247,226,0.94)" : "rgba(255,250,252,0.92)"; g.fill();
+  g.shadowColor = "transparent"; g.shadowOffsetY = 0;
+  path(g); g.lineJoin = "round"; g.lineWidth = 7; g.strokeStyle = css(speech ? C.lamp : C.violet); g.stroke();
+  // звёздочки по углам
+  sparkle(g, x0 + 30, y0 + 26, 16 + Math.sin(t * 4) * 3, 1, C.yellow);
+  sparkle(g, x0 + w - 32, y0 + h - 26, 14 + Math.sin(t * 4 + 2) * 3, 1, C.hot);
+  g.restore();
+}
+function drawVerse(g, t) {
+  reset(g);
+  let k = -1;
+  for (let i = 0; i < COUPLETS.length; i++) { const [s, e] = coupletSpan(i); if (t >= s && t < e) k = i; }
+  if (k < 0) return;
+  const [s, e] = coupletSpan(k);
+  const pair = COUPLETS[k], speech = k === 2 || k === 3;
+  g.font = `700 ${PANEL.size}px ${FONT}`;
+  const wmax = Math.max(...pair.map((n) => measure(g, LINES[n - 1].text)));
+  const pw = Math.round(wmax + 140), ph = PANEL.lh * 2 + 34;
+  // вход: пружина снизу; выход: уезжает вниз
+  const inU = spr(t, s, 0.6), outU = k + 1 < COUPLETS.length ? easeIn(inv(e - 0.22, e, t)) : 0;
+  const dy = Math.round((1 - inU) * 140 + outU * 220);
+  const a = clamp(inv(s, s + 0.12, t)) * (1 - outU);
+  const x0 = Math.round(PANEL.cx - pw / 2), y0 = PANEL.y0 + dy;
+  drawPanel(g, x0, y0, pw, ph, speech, a, t);
+  g.save(); g.globalAlpha = a; g.textBaseline = "alphabetic"; g.textAlign = "left";
+  pair.forEach((n, j) => {
+    const L = LINES[n - 1];
+    if (t < L.s - 0.1) return;
+    const la = clamp(inv(L.s - 0.1, L.s + 0.06, t));
+    const lw = measure(g, L.text) + (L.words.length - 1) * measure(g, " ") * 0.3;
+    let x = Math.round(PANEL.cx - lw / 2);
+    const by = y0 + 22 + PANEL.lh * (j + 1) - 14 + Math.round((1 - spr(t, L.s - 0.1, 0.45)) * 24);
+    const sp = measure(g, " ") * 1.3;
+    g.save(); g.globalAlpha *= la;
+    for (const w of L.words) {
+      const ww = measure(g, w.w);
+      const said = t >= w.s, cur = t >= w.s && t < w.e;
+      const bump = cur ? 1 + 0.08 * Math.sin(clamp((t - w.s) / Math.max(0.12, w.e - w.s)) * Math.PI) : 1;
+      g.save(); g.translate(x + ww / 2, by - 20); g.scale(bump, bump); g.translate(-ww / 2, 20);
+      g.lineJoin = "round"; g.lineWidth = 10; g.strokeStyle = "rgba(255,255,255,1)"; g.strokeText(w.w, 0, 0);
+      g.fillStyle = css(said ? C.hot : C.text); g.fillText(w.w, 0, 0);
+      g.restore();
+      x += ww + sp;
+    }
+    g.restore();
+  });
+  g.restore();
+}
+// Заголовок: две строки + автор; u — 0…1 пружина входа, a — прозрачность
+function drawTitle(g, t, cx, cy, sc, a, t0) {
+  if (a <= 0) return;
+  reset(g);
+  const lines = ["Кот поёт,", "глаза прищуря…"];
+  g.save(); g.globalAlpha = a;
+  lines.forEach((txt, i) => {
+    const k = spr(t, t0 + i * 0.12, 0.8), s = sc * k;
+    if (s <= 0.01) return;
+    g.save(); g.translate(Math.round(cx), Math.round(cy + i * 150 * sc)); if (Math.abs(s - 1) > 0.002) g.scale(s, s);
+    g.rotate((1 - k) * (i ? 0.08 : -0.08));
+    g.font = `800 ${140}px ${FONT}`; g.textAlign = "center"; g.textBaseline = "middle"; g.lineJoin = "round";
+    g.fillStyle = css(C.hot); g.strokeStyle = css(C.hot); g.lineWidth = 30;
+    g.save(); g.translate(8, 10); g.strokeText(txt, 0, 0); g.fillText(txt, 0, 0); g.restore();
+    g.lineWidth = 30; g.strokeStyle = css(C.white); g.strokeText(txt, 0, 0);
+    g.lineWidth = 12; g.strokeStyle = css(C.text); g.strokeText(txt, 0, 0);
+    const gr = g.createLinearGradient(0, -60, 0, 60); gr.addColorStop(0, "rgb(255,236,120)"); gr.addColorStop(1, "rgb(255,160,70)");
+    g.fillStyle = gr; g.fillText(txt, 0, 0);
+    g.restore();
+  });
+  // автор на плашке-пилюле
+  const k3 = spr(t, t0 + 0.3, 0.7);
+  if (k3 > 0.01) {
+    g.save(); g.translate(Math.round(cx), Math.round(cy + 260 * sc)); if (Math.abs(k3 * sc - 1) > 0.002) g.scale(k3 * sc, k3 * sc);
+    g.font = `800 52px ${FONT}`; g.textAlign = "center"; g.textBaseline = "middle";
+    const txt = "Афанасий Фет · 1842", w = measure(g, txt) + 80;
+    rr(g, -w / 2, -42, w, 84, 42); g.fillStyle = css(C.violet); g.fill(); g.lineWidth = 6; g.strokeStyle = css(C.white); g.stroke();
+    g.fillStyle = css(C.white); g.fillText(txt, 0, 2);
+    g.restore();
+  }
+  // искры вокруг
+  for (let i = 0; i < 7; i++) {
+    const ph = (t * 0.9 + i / 7) % 1;
+    sparkle(g, cx + Math.cos(i * 2.1) * 620 * sc, cy + 60 * sc + Math.sin(i * 1.7) * 200 * sc, 26 * Math.sin(ph * Math.PI) * sc, a, i % 2 ? C.yellow : C.white);
+  }
+  g.restore();
+}
+
+// ---------- Режиссура: камера, позы и события по времени слов ----------
+const EV = CFG.ev;
+const ANCHOR = [960, 420];   // точка экрана, куда камера ставит свою цель (низ кадра — под строки)
+// [время, мир, x, y, zoom, переход, длительность]
+const SHOTS = [
+  [0, "yard", 960, 330, 0.95, "cut", 0],
+  [1.0, "yard", 960, 450, 1.15, "move", 1.9],
+  [3.0, "yard", 960, 668, 3.6, "in", 0.38],
+  [3.38, "room", 430, 700, 1.75, "cut", 0],
+  [EV.L2 - 0.12, "room", 1130, 820, 1.6, "whip", 0.28],
+  [EV.L3 - 0.12, "room", 840, 335, 1.55, "whip", 0.28],
+  [EV.svish4 - 0.06, "yard", 930, 520, 2.3, "cut", 0],
+  [EV.svish4 + 0.2, "yard", 900, 520, 2.6, "move", 0.9],
+  [EV.E4 + 0.1, "room", 1000, 560, 0.8, "whip", 0.3],
+  [EV.L5 - 0.25, "room", 1300, 640, 0.95, "move", 0.8],
+  [EV.spryach - 0.1, "room", 700, 760, 1.25, "whip", 0.25],
+  [EV.vstavai - 0.14, "room", 1180, 780, 1.6, "whip", 0.2],
+  [EV.L7 - 0.1, "room", 1330, 640, 0.95, "move", 0.5],
+  [EV.L8 - 0.08, "room", 1180, 760, 1.9, "whip", 0.25],
+  [EV.L9 - 0.1, "room", 1100, 700, 1.15, "cut", 0],
+  [EV.kot2 - 0.1, "room", 430, 660, 3.0, "cut", 0],
+  [EV.poet2 - 0.05, "room", 430, 700, 1.75, "move", 0.5],
+  [EV.L11 - 0.12, "room", 700, 500, 0.95, "whip", 0.28],
+  [EV.L12 - 0.32, "room", 840, 335, 3.4, "in", 0.3],
+  [EV.L12 - 0.02, "yard", 1520, 620, 1.3, "cut", 0],
+  [EV.vorot, "yard", 1000, 420, 0.82, "move", 1.3],
+  [EV.E12 + 0.9, "room", 736, 560, 1.6, "whip", 0.3],
+];
+const FLASH = [3.38, EV.L12 - 0.02, EV.svish4 - 0.06];
+const PUNCH = [[EV.kot, 0.1], [EV.vstavai + 0.05, 0.12], [EV.svish4, 0.08], [EV.klok, 0.06], [EV.svish12, 0.06], [EV.vstal, 0.06]];
+function shotIndex(t) { let i = 0; while (i + 1 < SHOTS.length && t >= SHOTS[i + 1][0]) i++; return i; }
+function camAt(t) {
+  const i = shotIndex(t), s = SHOTS[i];
+  const to = [s[2], s[3], s[4]];
+  if (i === 0 || s[5] === "cut" || t >= s[0] + s[6]) return to;
+  const p = SHOTS[i - 1];
+  if (p[1] !== s[1]) return to;
+  const from = camAt(s[0] - 1e-4);
+  const u0 = (t - s[0]) / s[6];
+  const u = s[5] === "whip" ? easeIO(u0) : s[5] === "in" ? easeIn(u0) : easeIO(u0);
+  // зум в логарифме — равномерный наезд
+  return [lerp(from[0], to[0], u), lerp(from[1], to[1], u), Math.exp(lerp(Math.log(from[2]), Math.log(to[2]), u))];
+}
+// сила штрихов рывка и направление
+function whipAt(t) {
+  const i = shotIndex(t), s = SHOTS[i];
+  if (s[5] !== "whip" || t >= s[0] + s[6] || i === 0) return [0, 1, 0];
+  const p = camAt(s[0] - 1e-4), u = (t - s[0]) / s[6];
+  return [Math.sin(u * Math.PI), s[2] - p[0], s[3] - p[1]];
+}
+const bump = (u) => (u < 0 ? 0 : clamp(u / 0.06) * Math.exp(-u * 5));
+function punchAt(t) { let k = 1; for (const [tp, a] of PUNCH) k += a * bump(t - tp); return k; }
+function shakeAt(t) {
+  let a = 0;
+  for (const tp of [EV.vstavai + 0.05, EV.sneg + 0.03, EV.valit + 0.03, EV.klok + 0.03]) a += 14 * Math.exp(-Math.max(0, t - tp) * 9) * (t >= tp ? 1 : 0);
+  return [Math.sin(t * 61) * a, Math.cos(t * 53) * a];
+}
+
+// ---------- Позы кота ----------
+function catPose(t) {
+  const open = t >= EV.glazami - 0.3 && t < EV.poet2 - 0.05 ? SPRING((t - (EV.glazami - 0.3)) / 0.4) : t >= EV.poet2 - 0.05 ? 1 - easeOut((t - EV.poet2 + 0.05) / 0.18) : 0;
+  let look = 0.55;
+  if (t >= EV.povodil - 0.05) look = lerp(0.55, -0.9, easeIO(inv(EV.povodil - 0.05, EV.povodil + 0.35, t)));
+  if (t >= EV.povodil + 0.4) look = lerp(-0.9, 1, easeIO(inv(EV.povodil + 0.4, EV.povodil + 0.95, t)));
+  let ear = 0;
+  for (const tp of [EV.vstavai + 0.05, EV.sneg + 0.03, EV.valit + 0.03, EV.klok + 0.03]) if (t >= tp && t < tp + 0.5) ear = (t - tp) / 0.5;
+  const ext = ease(inv(EV.spryach + 0.05, EV.spryach + 0.33, t)) * (1 - ease(inv(EV.igrush + 0.55, EV.igrush + 0.95, t)));
+  const sweep = ease(inv(EV.igrush - 0.02, EV.igrush + 0.4, t));
+  return {
+    eyes: clamp(open, 0, 1.08), look, sing: open > 0.5 ? 0.55 : 1, ear, sway: Math.sin(t * 2.4) * 0.05,
+    tailExt: ext, tailSweep: sweep, blush: 0.5 + 0.5 * Math.sin(t * 1.3),
+  };
+}
+// отражение мальчика в зрачке кота: крошечный силуэт идёт к двери (вправо)
+function catReflect(t) {
+  if (t < EV.kot2 - 0.1 || t > EV.poet2) return null;
+  const u = inv(EV.kot2, EV.povodil + 0.95, t);
+  return (g, px, py, sd) => {
+    const rx = px + lerp(-8, 10, u), ry = py + 4;
+    g.save(); g.globalAlpha = 0.85; g.fillStyle = "rgba(255,240,200,0.95)";
+    ell(g, rx, ry - 7, 3.2, 3.2); g.fill(); rr(g, rx - 2.6, ry - 4, 5.2, 8, 2); g.fill();
+    g.restore();
+  };
+}
+
+// ---------- Позы мальчика ----------
+const POP1 = EV.vstavai + 0.05, POP2 = EV.vstal;
+function boyPose(t) {
+  if (t < POP1) {
+    const shake = t > EV.L5 ? Math.sin(t * 30) * 0.06 * inv(EV.L5, POP1, t) : 0;
+    return { pose: "lie", face: "sleep", bubble: clamp(0.55 + 0.45 * Math.sin(t * 2.4) + (t > EV.L5 ? 0.3 * inv(EV.L5, POP1, t) : 0) + shake, 0, 1.3) };
+  }
+  if (t < POP2) {
+    const u = t - POP1, hop = u < 0.3 ? -Math.sin(u / 0.3 * Math.PI) * 40 : 0;
+    if (t < EV.L7 - 0.1) return { pose: "sit", face: "shock", hands: [[-100, -212], [100, -212]], hop, pop: clamp(u / 0.35), bob: Math.sin(t * 20) * 2 * Math.exp(-u * 3) };
+    if (t < EV.spat - 0.1) {
+      const r = Math.sin(t * 13) * 7;
+      return { pose: "sit", face: "rub", hands: [[-38 + r, -214], [36, -58]], tilt: 0.06 };
+    }
+    if (t < EV.E8 + 0.35) {
+      const m = SPRING((t - EV.spat + 0.1) / 0.5), up = easeOut(inv(EV.spat - 0.1, EV.spat + 0.35, t));
+      return { pose: "sit", face: "yawn", mouth: m, tear: clamp((t - EV.spat - 0.2) / 0.3), tilt: -0.1 * up,
+        hands: [[lerp(-34, -92, up), lerp(-60, -300, up)], [lerp(34, 92, up), lerp(-60, -300, up)]] };
+    }
+    const d = easeOut(inv(EV.E8 + 0.35, EV.E8 + 0.75, t));
+    return { pose: "sit", face: "smile", hands: [[lerp(-92, -34, d), lerp(-300, -60, d)], [lerp(92, 34, d), lerp(-300, -60, d)]], tilt: 0.04 };
+  }
+  const u = t - POP2, hop = u < 0.32 ? -Math.sin(u / 0.32 * Math.PI) * 50 : 0;
+  const wave = t > POP2 + 0.35 ? Math.sin((t - POP2) * 12) * 22 : 0;
+  const wv = easeOut(inv(POP2 + 0.25, POP2 + 0.5, t));
+  return { pose: "stand", face: "smile", hop, lookX: -1,
+    hands: [[-72, -128], [lerp(72, 104 + wave, wv), lerp(-128, -300, wv)]] };
+}
+const BOY_GONE = EV.kot2 - 0.05;
+
+// ---------- Состояние комнаты ----------
+function roomState(t) {
+  const open = ease(inv(EV.L5 - 0.55, EV.L5 + 0.1, t)) * (1 - ease(inv(25.75, 26.0, t)));
+  const stormy = 1 + 0.6 * (pulse(t, EV.L3, EV.E4 + 0.5) + pulse(t, EV.L11, EV.E12));
+  return {
+    door: open, storm: stormy,
+    stormInWin: t < EV.E4 + 0.2 ? ease(inv(EV.L3 - 0.2, EV.L3 + 0.6, t)) : (t > EV.L11 - 0.6 && t < EV.L12 ? 1 : 0),
+    juggle: t < EV.L4 ? 1 : 0, blowWin: t > EV.L4 && t < EV.E4 + 0.3 ? 0.6 : 0,
+    rattle: pulse(t, EV.svish4, EV.E4 + 0.8) + (t > EV.sneg && t < EV.E11 ? 0.6 : 0),
+    flap: clamp(pulse(t, EV.svish4, EV.E4 + 1.4) * (1 - inv(EV.E4 + 0.5, EV.E4 + 1.4, t) * 0.8)),
+    lampSwing: pulse(t, EV.E4, EV.L5 + 0.5),
+    splats: [{ x: 700, y: 265, t0: EV.sneg + 0.03 }, { x: 975, y: 390, t0: EV.valit + 0.03 }, { x: 790, y: 455, t0: EV.klok + 0.03 }],
+  };
+}
+// игрушки: [вид, x, y, поворот, момент взлёта]
+const TOYS = [["horse", 770, 872, 0, 0], ["ball", 850, 892, 0, 1], ["block", 916, 906, 0.1, 2], ["block", 962, 884, -0.15, 3]];
+function drawToys(g, t) {
+  const [bx, by] = ROOM.box;
+  for (const [kind, x, y, r, k] of TOYS) {
+    const t0 = EV.igrush + 0.08 + k * 0.1, u = (t - t0) / 0.4;
+    if (u >= 1) continue;
+    if (u <= 0) { drawToy(g, kind, x, y + Math.sin(t * 2 + k) * 0, 0.9, r); continue; }
+    const px = lerp(x, bx, u), py = lerp(y, by - 60, u) - Math.sin(u * Math.PI) * 220;
+    drawToy(g, kind, px, py, 0.9, r + u * 6 * (k % 2 ? 1 : -1));
+  }
+  const lid = t > EV.spryach - 0.1 && t < EV.igrush + 1.0 ? SPRING((t - EV.spryach + 0.1) / 0.5) * (1 - ease(inv(EV.igrush + 0.7, EV.igrush + 1.0, t))) : 0;
+  drawBox(g, bx, by, 0.9, clamp(lid, 0, 1.1));
+  // искры над коробом после уборки
+  if (t > EV.igrush + 0.45 && t < EV.igrush + 1.2) for (let i = 0; i < 4; i++) sparkle(g, bx - 60 + i * 40, by - 140 - (t - EV.igrush) * 60 - i * 12, 18, 1 - inv(EV.igrush + 0.45, EV.igrush + 1.2, t), i % 2 ? C.yellow : C.white);
+}
+function catNotes(g, t, x, y, a) {
+  if (a <= 0) return;
+  for (let k = 0; k < 6; k++) {
+    const u = (t * 0.5 + k / 6) % 1, cols = [C.hot, C.violet, [255, 170, 60]];
+    note(g, x + 70 + u * 260 + Math.sin(u * 7 + k) * 26, y - 30 - u * 300, 0.75 + 0.25 * Math.sin(k), Math.sin(u * 5 + k) * 0.35, cols[k % 3], a * Math.sin(u * Math.PI), k % 3 === 1);
+  }
+}
+function boyZs(g, t, x, y, a) {
+  if (a <= 0) return;
+  for (let k = 0; k < 3; k++) { const u = (t * 0.45 + k / 3) % 1; zee(g, x + u * 90 + Math.sin(u * 6) * 14, y - u * 170, 0.6 + u * 0.6, a * Math.sin(u * Math.PI)); }
+}
+function drawRoomScene(g, t) {
+  const st = roomState(t);
+  drawRoom(g, t, st);
+  drawMomShadow(g, t, st.door * pulse(t, EV.L5 - 0.1, EV.E8 + 0.6), ease(inv(EV.podoidi, EV.proshch, t)));
+  drawToys(g, t);
+  // кот на подушке
+  const [cx, cy] = ROOM.cat, cp = catPose(t);
+  drawCushion(g, ROOM.cushion[0], ROOM.cushion[1], 1);
+  drawCat(g, cx, cy, 1, t, cp);
+  catNotes(g, t, cx, cy - 190, cp.sing > 0.8 ? 1 : 0.35);
+  // мальчик
+  if (t < BOY_GONE) {
+    const bp = boyPose(t), [bx, by] = ROOM.boy, s = ROOM.boyS;
+    drawBoy(g, bx, by + (bp.hop || 0), s, t, bp);
+    if (bp.pose === "lie") boyZs(g, t, bx - 60, by - 170, 1);
+    if (t >= POP1 && t < POP1 + 0.3) puff(g, bx, by - 90, 105, (t - POP1) / 0.3);
+    if (t >= POP2 && t < POP2 + 0.3) puff(g, bx, by - 40, 105, (t - POP2) / 0.3);
+    if (t >= POP1 && t < EV.L7 + 0.2) bang(g, bx + 110, by - 245, SPRING((t - POP1) / 0.4) * 1.2, 1 - inv(EV.L7 - 0.1, EV.L7 + 0.2, t));
+  }
+}
+function yardState(t) {
+  // дух бури: вступление — пролетает справа налево, жонглируя; строка 4 — крупно свистит; строка 12 — у калитки
+  if (t < 3.4) {
+    const u = inv(0.0, 2.9, t);
+    return { storm: [lerp(2000, 120, ease(u)), 560 + Math.sin(u * 5) * 50, 0.6], stormO: { juggle: 1, lookX: -1 }, notes: 1, gate: 0.6 };
+  }
+  if (t < EV.L12 - 0.1) return { storm: [960, 470, 1.3], stormO: { blow: easeOut(inv(EV.svish4 - 0.1, EV.svish4 + 0.15, t)), dir: -1 }, gate: 1 };
+  const up = ease(inv(EV.vorot + 0.2, EV.E12 + 0.8, t));
+  return { storm: [lerp(1730, 1500, up), lerp(540, 300, up), lerp(0.85, 0.7, up)], stormO: { blow: easeOut(inv(EV.svish12 - 0.15, EV.svish12 + 0.1, t)) * (1 - up * 0.7), dir: -1 }, gate: 1.6, notes: 1 };
+}
+function drawYardScene(g, t) { drawYard(g, t, yardState(t)); }
+
+// ---------- Склейка: мир под камерой → эффекты → строки → заголовок ----------
+const cv = document.getElementById("scene");
+const g = cv.getContext("2d", { alpha: false });
+const TOTAL = CFG.total;
+const T_TITLE_IN = 0.3, T_TITLE_OUT = 2.75;
+
+function vignette(g) {
+  reset(g);
+  const vg = g.createRadialGradient(W / 2, H / 2, 600, W / 2, H / 2, 1250);
+  vg.addColorStop(0, "rgba(60,30,90,0)"); vg.addColorStop(1, "rgba(60,30,90,0.32)");
+  g.fillStyle = vg; g.fillRect(0, 0, W, H);
+}
+function render(t) {
+  reset(g);
+  g.fillStyle = "#2a1e4a"; g.fillRect(0, 0, W, H);
+  const i = shotIndex(t), world = SHOTS[i][1];
+  const [cx, cy, z0] = camAt(t), z = z0 * punchAt(t), [shx, shy] = shakeAt(t);
+  const hx = Math.sin(t * 0.9) * 6, hy = Math.cos(t * 0.7) * 4;   // «ручная» камера
+  g.setTransform(z, 0, 0, z, ANCHOR[0] - cx * z + shx + hx, ANCHOR[1] - cy * z + shy + hy);
+  if (world === "room") drawRoomScene(g, t); else drawYardScene(g, t);
+  reset(g);
+  vignette(g);
+  // линии скорости: свист бури крупно, лопнувший пузырь
+  speedLines(g, t, pulse(t, EV.svish4 - 0.06, EV.E4 + 0.1) * 0.8);
+  speedLines(g, t, (t > EV.vstavai && t < EV.vstavai + 0.5 ? 1 - (t - EV.vstavai) / 0.5 : 0) * 0.7, W / 2, 380, [255, 236, 160]);
+  const [wa, wdx, wdy] = whipAt(t);
+  whipStreaks(g, t, wa, wdx, wdy);
+  for (const tf of FLASH) if (t >= tf - 0.05 && t < tf + 0.3) { reset(g); g.fillStyle = `rgba(255,250,236,${(t < tf ? (t - tf + 0.05) / 0.05 : 1 - (t - tf) / 0.3).toFixed(3)})`; g.fillRect(0, 0, W, H); }
+  drawVerse(g, t);
+  // заголовок во вступлении и в финале
+  if (t < T_TITLE_OUT + 0.4) {
+    const out = easeIn(inv(T_TITLE_OUT, T_TITLE_OUT + 0.35, t));
+    drawTitle(g, t, W / 2, 190 - out * 60, 0.86 * (1 - out * 0.6), 1 - out, T_TITLE_IN);
+  }
+  if (t >= EV.fin) drawTitle(g, t, 1290, 250, 0.8, 1, EV.fin);
+  reset(g);
+  if (t < 0.2) { g.fillStyle = `rgba(42,30,74,${(1 - t / 0.2).toFixed(3)})`; g.fillRect(0, 0, W, H); }
+  if (t > TOTAL - 0.6) { g.fillStyle = `rgba(42,30,74,${clamp((t - TOTAL + 0.6) / 0.5).toFixed(3)})`; g.fillRect(0, 0, W, H); }
+  reset(g);
+}
+
+// ---------- Проба: кот и мальчик во всех позах через весь ролик ----------
+function probeCast() {
+  reset(g); g.fillStyle = "#f4ecf4"; g.fillRect(0, 0, W, H);
+  const lab = (txt, x, y) => { reset(g); g.fillStyle = "#333"; g.font = "20px monospace"; g.textAlign = "center"; g.fillText(txt, x, y); };
+  const page = (CFG.probePage | 0);
+  if (page === 0) {
+    // кот: моменты через весь ролик (позы катятся функцией catPose)
+    const ts = [4, 9, EV.spryach + 0.2, EV.igrush + 0.1, EV.igrush + 0.3, EV.igrush + 0.6, EV.glazami + 0.3, EV.povodil + 0.2, EV.povodil + 0.7, EV.povodil + 1.0, EV.sneg + 0.15, 33];
+    ts.forEach((tt, k) => {
+      const x = 170 + (k % 6) * 300, y = k < 6 ? 470 : 990;
+      g.save(); g.translate(x, y); g.scale(0.62, 0.62); g.translate(-x, -y);
+      drawCushion(g, x, y + 6, 1); drawCat(g, x, y, 1, tt, catPose(tt)); g.restore();
+      lab(`cat t=${tt.toFixed(2)}`, x, y + 50);
+    });
+  } else {
+    const ts = [5, EV.L5 + 0.5, POP1 + 0.08, POP1 + 0.2, POP1 + 0.5, EV.L7 + 0.4, EV.L7 + 0.9, EV.spat + 0.1, EV.spat + 0.5, EV.E8 + 0.5, EV.E8 + 1.2, POP2 + 0.1, POP2 + 0.25, POP2 + 0.5, POP2 + 0.8, POP2 + 1.0];
+    ts.forEach((tt, k) => {
+      const x = 150 + (k % 8) * 232, y = k < 8 ? 480 : 1010;
+      const bp = boyPose(tt);
+      drawBoy(g, x, y + (bp.hop || 0), 0.62, tt, bp);
+      lab(`${bp.pose} t=${tt.toFixed(2)}`, x, y + 40);
+    });
+  }
+}
+
+const PQ = new URLSearchParams(location.search);
+const T_Q = PQ.has("t") ? +PQ.get("t") : 0;
+let LAST_T = T_Q;
+const seek = (t) => (CFG.probe ? probeCast() : render(t));
+window.addEventListener("hf-seek", (e) => { LAST_T = e.detail.time; seek(LAST_T); });
+seek(T_Q);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => seek(LAST_T));
+
+const tl = gsap.timeline({ paused: true });
+tl.set({}, {}, TOTAL);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+
+    </script>
+  </body>
+</html>
