@@ -1,0 +1,15 @@
+{
+  "video": "Кот поёт глаза прищуря - Фет - v1.mp4",
+  "thumb": "cover.png",
+  "title": "Кот поёт глаза прищуря - Фет",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 3"
+  ],
+  "platforms": [
+    "vk",
+    "rutube"
+  ],
+  "publish": true
+}
