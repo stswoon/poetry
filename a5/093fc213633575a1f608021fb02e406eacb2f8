@@ -1,0 +1,149 @@
+.claude/skills/stsPoetryUpload/SKILL.md
+  s_31f9557ae1f10f::t_35f57c906f4bf6 83,92-96
+  s_31f9557ae1f10f::t_ceac0003d70825 108
+  s_31f9557ae1f10f::t_f32c7d2191c256 78,81
+  s_31f9557ae1f10f::t_62223c97a85457 46-50
+  s_9c6f87d7134a9d::t_964cad9ab83a36 11-12,97
+utils/README.md
+  s_31f9557ae1f10f::t_96be817e9f404b 30-31,35,37,40-44
+utils/upload-helper/lib/probe.js
+  s_31f9557ae1f10f::t_2d17e349ed9727 12,17,26
+  s_31f9557ae1f10f::t_2bcc6b5178c1ad 203-234
+  s_31f9557ae1f10f::t_f4e91c48fa0877 1
+  s_31f9557ae1f10f::t_0cb472a638be66 2
+  s_31f9557ae1f10f::t_01ef097527e8c4 128-163
+  s_31f9557ae1f10f::t_eeef9b7fa0631c 3
+  s_31f9557ae1f10f::t_785218e17d2d76 70-82,98-115
+  s_31f9557ae1f10f::t_041d182d1156e4 19-25,27
+  s_31f9557ae1f10f::t_e18158ff925be7 14,18
+  s_afec205e7d8682::t_b0ac4e7432915f 28
+utils/upload-helper/config.json
+  s_31f9557ae1f10f::t_906ee34690bc36 17-19,21-25,32-33
+  s_31f9557ae1f10f::t_70af4891cb40a9 20
+utils/upload-helper/lib/config.js
+  s_31f9557ae1f10f::t_3dc14e3bc918ab 15-28
+channels/README.md
+  s_31f9557ae1f10f::t_4a189d1f3dcd7c 47-52
+  s_31f9557ae1f10f::t_985458b855e42c 31
+  s_31f9557ae1f10f::t_8e7ce451e31b66 61-67
+  s_31f9557ae1f10f::t_c5749bfb154994 7,28
+  s_31f9557ae1f10f::t_abbaf43a5603a8 27
+  s_31f9557ae1f10f::t_e9c6fb61d8d9a4 29-30,32-41
+utils/upload-helper/AGENTS.md
+  s_31f9557ae1f10f::t_eece6a17e49250 3,10,13
+  s_31f9557ae1f10f::t_f31c8b0728af52 36-45
+utils/upload-helper/lib/browser.js
+  s_31f9557ae1f10f::t_acd813c1fa33fe 5
+  s_31f9557ae1f10f::t_a5ad946f2fa157 52-63,67-68,79,85,94-98,100
+channels/avatar.html
+  s_31f9557ae1f10f::t_675fa2cfd10a4c 1-154
+utils/upload-helper/package.json
+  s_31f9557ae1f10f::t_7e2897331ea2b4 6,11-12
+utils/upload-helper/lib/selectors.js
+  s_31f9557ae1f10f::t_8bbd7c70069fad 6,153-238
+utils/upload-helper/lib/youtube-channel.js
+  s_31f9557ae1f10f::t_2eab347ac6f38c 244-252
+  s_31f9557ae1f10f::t_f3bd5145691219 105-112
+  s_31f9557ae1f10f::t_53e154e3eecebc 168
+  s_31f9557ae1f10f::t_7bd8ccb92d75b5 1-7,11,14-20,24-38,45,51-52,64,66,81,84,86,101,103,142-144,147-157,169-170,172-214,216-225,228,230-231,235-236,240-242,264,266-267,269-271
+  s_31f9557ae1f10f::t_9167a2130bab84 146
+  s_31f9557ae1f10f::t_54f24eb37ac41a 12
+  s_31f9557ae1f10f::t_9f13e67530694a 115-118,128-141
+  s_31f9557ae1f10f::t_98165af899c36c 158-167
+  s_31f9557ae1f10f::t_4be29fb0271237 8-10,13,21-23,39-44,46-50,53-63,65,67-80,82-83,85,87-100,102,104,113-114,119-127,145,171,215,226-227,229,232-234,237-239,243,253-263,265,268
+utils/upload-helper/README.md
+  s_31f9557ae1f10f::t_f2039c08cb0242 106-127
+  s_31f9557ae1f10f::t_ecee7aaea7854a 259-261
+  s_31f9557ae1f10f::t_f4cb5866003c44 198-201
+  s_31f9557ae1f10f::t_33142e34a26450 213-214
+  s_31f9557ae1f10f::t_c677e3929bec87 276-277
+  s_31f9557ae1f10f::t_1fd032adda0d19 85
+  s_31f9557ae1f10f::t_a867ee117a9188 3,7,11-13,76
+  s_31f9557ae1f10f::t_1e22f114bbc9a6 37,43,47-50,53-55
+  s_31f9557ae1f10f::t_4b4e37e4597b59 139-142
+  s_31f9557ae1f10f::t_d0040b97cbe684 146-161
+  s_31f9557ae1f10f::t_5a064d4d88d227 69,74-75
+  s_31f9557ae1f10f::t_7c0939965ab73b 294-295
+utils/upload-helper/run.js
+  s_31f9557ae1f10f::t_2e585d4dc1f84d 40-41
+  s_31f9557ae1f10f::t_9721e63ed394bb 231-233
+  s_31f9557ae1f10f::t_dd012b7e297254 138,148-153,156
+  s_31f9557ae1f10f::t_89aee6ba7c8bbc 141
+  s_31f9557ae1f10f::t_a0d1a478b344e7 171
+  s_31f9557ae1f10f::t_672b1fd1d49482 60-61
+  s_31f9557ae1f10f::t_a721bb7e470be6 432,434,437,439,448-450
+  s_31f9557ae1f10f::t_2b947201e86a0e 299
+  s_31f9557ae1f10f::t_c43a4838f106dc 42
+  s_31f9557ae1f10f::t_872ee6550e7026 135,290-298,300,302-324,326-350
+  s_31f9557ae1f10f::t_2c93246143f37e 140
+  s_31f9557ae1f10f::t_cec8b9e3359597 18,34-35,38-39
+  s_31f9557ae1f10f::t_9cbee48e001eee 405-408
+  s_31f9557ae1f10f::t_527ec553224600 452-453
+  s_31f9557ae1f10f::t_7de7793472004a 170
+  s_31f9557ae1f10f::t_55507ea4d990ce 301
+  s_31f9557ae1f10f::t_e2bbc11a2a0096 325
+  s_31f9557ae1f10f::t_f0569ee0696a15 159
+  s_31f9557ae1f10f::t_da30308495131e 73,77,82-87,93-104,115-134
+  s_6bc1819077020d::t_3debb578d5a75c 136
+channels/youtube-desc.txt
+  s_31f9557ae1f10f::t_4acfc514c7ee1b 1-7
+utils/upload-helper/lib/youtube.js
+  s_31f9557ae1f10f::t_596dfc5be8187f 27-35
+  s_31f9557ae1f10f::t_e56b69591bcc5e 36
+  s_31f9557ae1f10f::t_754a47860e06a9 79,95
+  s_31f9557ae1f10f::t_3be80f024d6a41 263,266
+  s_31f9557ae1f10f::t_6712aad8174aa4 1
+  s_31f9557ae1f10f::t_56025719b3e3de 58,63
+  s_31f9557ae1f10f::t_a5391146cf9bf5 198,201-204,206-212,215-234
+  s_31f9557ae1f10f::t_49a832edc5ca4f 434-435
+  s_31f9557ae1f10f::t_6581a926fd8a9d 10-12,41,45-48,51,55,61,70,72-75,103,116-117,126,135-137,140-141,146,148-149,157,167,170,176-177,185,191-192,199,235-236,267-294,297-299,304,308-312,314-325,331-332,336-338,340,344-352,362-363,365-370,373-387,392,402,405-411,414,416-428,436,445-455,461,468,472-473,476,478-479,495-506,517
+  s_31f9557ae1f10f::t_5ecad74b37250b 2-9,13-26,38-40,42-44,49-50,52-54,56-57,59-60,62,64-69,71,76-78,84-94,96-102,104-115,118-125,127-134,138-139,142-145,147,150-156,158-166,168-169,171-175,178-184,186-190,260-262,264-265,295-296,300-303,305-307,313,326-330,333-335,339,341-343,353-361,364,371-372,388-391,393-401,403-404,412-413,415,429-433,437-444,456-460,462-467,469-471,474-475,477,480-494,507-516,518-535
+  s_31f9557ae1f10f::t_fe1d1f4a7b16f4 37
+  s_31f9557ae1f10f::t_96b855209a4d39 80-83
+  s_31f9557ae1f10f::t_d20a548349d54d 193,197,238-251,255-259
+  s_31f9557ae1f10f::t_0fd039cb32cf44 252-254
+  s_31f9557ae1f10f::t_837bda4010b7a2 194-196,200,205,213-214,237
+channels/youtube.json
+  s_31f9557ae1f10f::t_f1f1bac1cc7673 1-2,4-7
+  s_31f9557ae1f10f::t_23cb540c3346f0 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "a5093fc213633575a1f608021fb02e406eacb2f8",
+  "prompts": {},
+  "sessions": {
+    "s_31f9557ae1f10f": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e02fa8822ffetnzogQBCpaLToc",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_6bc1819077020d": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e02a8d064ffekYw1UW5oJoAhiu",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_9c6f87d7134a9d": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e02c7f5a0ffdyauXflUlWGobYq",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    },
+    "s_afec205e7d8682": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "310fed3d-5e3a-4e5a-8929-d8003922ace5",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
