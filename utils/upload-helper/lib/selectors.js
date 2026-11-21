@@ -211,7 +211,8 @@ export const youtube = {
     { role: 'button', name: /Выберите плейлист|Выбрать плейлисты/i },
     { text: /^Выберите плейлист$/ },
   ],
-  playlistOptions: ['tp-yt-paper-item', 'ytcp-checkbox-lit', { role: 'option' }],
+  playlistDialog: 'tp-yt-paper-dialog[aria-label="Выберите плейлисты"]',
+  playlistGroup: 'ytcp-checkbox-group#playlists-list',
 
   checksDone: /Проверки завершены|Проблем не обнаружено|Проверка не выявила|Авторские права не нарушены/i,
   checksRunning: /Проверка:|Проверки выполняются|Проверка продолжается|Идёт проверка|Проверяем/i,

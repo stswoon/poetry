@@ -20,7 +20,8 @@
     "channelUrl": "https://www.youtube.com/@stsAiPoetry",
     "category": "Образование",
     "audience": "not_kids",
-    "alteredContent": false
+    "alteredContent": false,
+    "customThumbnail": false
   },
 
   "defaults": {

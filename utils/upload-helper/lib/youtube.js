@@ -24,12 +24,18 @@ export async function uploadYoutube({ page, job, run }) {
   }
   run.info(`Канал: ${channelId}`);
 
-  // Своя обложка доступна только подтверждённому по телефону каналу.
-  const verified = job.thumb ? await isChannelVerified(page) : true;
-  if (job.thumb && !verified) {
+  // По умолчанию YouTube ставит кадр из ролика: своя обложка требует
+  // подтверждённого номера телефона (config.youtube.customThumbnail).
+  const wantThumb = Boolean(job.thumb) && config.youtube.customThumbnail !== false;
+  if (job.thumb && !wantThumb) {
+    run.info('YouTube: своя обложка отключена — будет автоматическая из кадра ролика');
+  }
+
+  const verified = wantThumb ? await isChannelVerified(page) : true;
+  if (wantThumb && !verified) {
     run.warn(
       'YouTube: канал не подтверждён по телефону — своя обложка не загрузится. ' +
-        'Подтверди номер на https://www.youtube.com/verify и запусти загрузку снова',
+        'Подтверди номер на https://www.youtube.com/verify или оставь youtube.customThumbnail: false',
     );
   }
 
@@ -42,6 +48,15 @@ export async function uploadYoutube({ page, job, run }) {
     );
   }
   run.info(`Файл прикреплён через ${attached.via}`);
+
+  const limitText = await page.locator('body').innerText().catch(() => '');
+  if (/Загрузка недоступна|через 24 часа|пройдите проверку/i.test(limitText)) {
+    await run.shot(page, 'youtube-upload-limit');
+    throw new Error(
+      'YouTube: суточный лимит загрузок нового канала — «Загрузка недоступна… через 24 часа». ' +
+        'Подтверди номер на https://www.youtube.com/verify (снимет лимит) или подожди сутки',
+    );
+  }
 
   // Ссылка появляется в окне почти сразу — сохраним её до публикации.
   const knownUrl = await readVideoUrl(page, 15000);
@@ -76,7 +91,7 @@ export async function uploadYoutube({ page, job, run }) {
 
   await run.shot(page, 'youtube-details');
 
-  if (job.thumb && verified) {
+  if (wantThumb && verified) {
     const thumbSize = fs.statSync(job.thumb).size;
     if (thumbSize > 2 * 1024 * 1024) {
       run.warn('YouTube: обложка больше 2 МБ — YouTube её не примет, пересохрани в JPG/PNG до 2 МБ');
@@ -399,8 +414,9 @@ async function confirmCrop(page, run) {
 }
 
 /**
- * Плейлисты Studio: выпадающий список с чекбоксами.
- * Уже выбранный пункт не кликаем — повторный клик снял бы отметку.
+ * Плейлисты Studio: отдельный диалог «Выберите плейлисты» с чекбоксами
+ * (ytcp-checkbox-group#playlists-list). Отмечаем нужные и жмём «ОК».
+ * Уже отмеченный пункт не кликаем — повторный клик снял бы отметку.
  */
 async function selectPlaylist(page, name) {
   const trigger = await findFirst(page, s.playlistTrigger, { timeout: 8000 });
@@ -410,36 +426,39 @@ async function selectPlaylist(page, name) {
   await trigger.click({ timeout: 10000 }).catch(() => {});
   await page.waitForTimeout(900);
 
-  const exact = new RegExp(`^${escapeRegex(name)}$`, 'i');
-  const item = page.locator('tp-yt-paper-item').filter({ hasText: exact }).first();
-  const option = page.getByRole('option').filter({ hasText: exact }).first();
+  const dialog = page.locator(s.playlistDialog).first();
+  await dialog.waitFor({ state: 'visible', timeout: 8000 }).catch(() => {});
+  const group = dialog.locator(s.playlistGroup);
+  const label = group.locator('label').filter({ hasText: playlistMatcher(name) }).first();
 
-  let target = null;
-  if (await item.isVisible().catch(() => false)) target = item;
-  else if (await option.isVisible().catch(() => false)) target = option;
-
-  if (!target) {
+  if (!(await label.count().catch(() => 0))) {
     await page.keyboard.press('Escape').catch(() => {});
     return { ok: false, reason: 'missing' };
   }
 
-  if (!(await isOptionSelected(target))) {
-    await target.click({ timeout: 10000 }).catch(() => {});
-    await page.waitForTimeout(700);
+  const box = label.locator('xpath=ancestor::ytcp-checkbox-lit').first();
+  const readChecked = () =>
+    box
+      .locator('input')
+      .evaluate((el) => Boolean(el.checked))
+      .catch(() => false);
+
+  let selected = await readChecked();
+  if (!selected) {
+    await label.click({ timeout: 10000 }).catch(() => {});
+    await page.waitForTimeout(500);
+    selected = await readChecked();
   }
 
-  await page.keyboard.press('Escape').catch(() => {});
-  await page.waitForTimeout(400);
+  const ok = dialog.getByRole('button', { name: /^ОК$/i }).first();
+  if (await ok.isVisible().catch(() => false)) {
+    await ok.click({ timeout: 10000 }).catch(() => {});
+  } else {
+    await page.keyboard.press('Escape').catch(() => {});
+  }
+  await page.waitForTimeout(800);
 
-  const after = await findFirst(page, s.playlistTrigger, { timeout: 3000 });
-  const text = after ? await after.innerText().catch(() => '') : '';
-  return { ok: Boolean(text && text.includes(name)), reason: 'clicked' };
-}
-
-async function isOptionSelected(locator) {
-  if ((await locator.getAttribute('aria-selected').catch(() => null)) === 'true') return true;
-  if ((await locator.getAttribute('aria-checked').catch(() => null)) === 'true') return true;
-  return (await locator.locator('input[type=checkbox]:checked').count().catch(() => 0)) > 0;
+  return { ok: selected, reason: 'clicked' };
 }
 
 /** Жмёт «Далее», пока не появится блок «Доступ». */
@@ -528,6 +547,15 @@ function normalizeUrl(url) {
 function videoIdFrom(url) {
   if (!url) return null;
   return url.match(/(?:youtu\.be\/|v=)([\w-]{11})/)?.[1] ?? null;
+}
+
+/** «класс-3» и «класс 3» — одно и то же; «вне классов» ищется подстрокой (рядом бывает «private»). */
+function playlistMatcher(name) {
+  const normalized = String(name).trim().replace(/^класс[ -](\d+)$/i, 'класс $1');
+  if (/^класс \d+$/i.test(normalized)) {
+    return new RegExp(`^${escapeRegex(normalized)}$`, 'i');
+  }
+  return new RegExp(escapeRegex(normalized), 'i');
 }
 
 function escapeRegex(text) {

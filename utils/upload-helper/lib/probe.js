@@ -102,6 +102,18 @@ export async function probe({ page, platform, run, clicks = [], settle = 6000, u
           .slice(0, 40),
         contenteditables: [...document.querySelectorAll('[contenteditable="true"]')].map(info).slice(0, 40),
         radios: [...document.querySelectorAll('tp-yt-paper-radio-button, input[type=radio]')].map(info).slice(0, 80),
+        checkboxes: [
+          ...document.querySelectorAll('input[type=checkbox], tp-yt-paper-checkbox, ytcp-checkbox-lit'),
+        ]
+          .map(info)
+          .slice(0, 120),
+        listItems: [
+          ...document.querySelectorAll(
+            'tp-yt-paper-item, ytcp-option, [role=option], [role=menuitemcheckbox], [role=menuitemradio]',
+          ),
+        ]
+          .map(info)
+          .slice(0, 160),
         fileInputs: [...document.querySelectorAll('input[type=file]')].map(info).slice(0, 40),
         ytcpButtons: [...document.querySelectorAll('ytcp-button, ytcp-icon-button')].map(info).slice(0, 120),
         dropdowns: [
@@ -218,6 +230,8 @@ function renderMarkdown(platform, data) {
       ['Диалоги', detail.dialogs],
       ['contenteditable', detail.contenteditables],
       ['Радио', detail.radios],
+      ['Чекбоксы', detail.checkboxes],
+      ['Пункты списков', detail.listItems],
       ['Файловые input', detail.fileInputs],
       ['ytcp-кнопки', detail.ytcpButtons],
       ['Дропдауны', detail.dropdowns],
