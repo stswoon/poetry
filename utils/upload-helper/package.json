@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Загрузка роликов на VK Видео и RUTUBE через настоящий браузер (Playwright + Chrome)",
+  "description": "Загрузка роликов на VK Видео, RUTUBE и YouTube через настоящий браузер (Playwright + Chrome)",
   "main": "run.js",
   "scripts": {
     "login": "node run.js login",
     "probe": "node run.js probe",
-    "upload": "node run.js upload"
+    "upload": "node run.js upload",
+    "channel": "node run.js channel"
   },
   "engines": {
     "node": ">=20"

@@ -1,15 +1,16 @@
 # upload-helper — инструкция для агентов
 
-Инструмент кладёт ролик на VK Видео и RUTUBE через настоящий Chrome (Playwright).
+Инструмент кладёт ролик на VK Видео, RUTUBE и YouTube через настоящий Chrome (Playwright).
 Полное описание — [README.md](README.md). Здесь только то, что нужно агенту.
 
 ## Команды
 
 ```powershell
 cd D:\mycode\poetry\utils\upload-helper
-node run.js login                     # один раз, вручную: логин в оба кабинета
+node run.js login                     # один раз, вручную: логин в кабинеты
 node run.js probe --platform vk       # снимок страницы, если сломались селекторы
 node run.js upload --job <job.json>   # основная команда
+node run.js channel --job channels/youtube.json   # оформление канала YouTube
 ```
 
 ## Job
@@ -31,6 +32,16 @@ node run.js upload --job <job.json>   # основная команда
 - Если `thumb` не задан — берётся единственная картинка рядом с видео.
 - `descriptionFile` читается относительно папки job-файла.
 - Job и описание можно сохранять с BOM — читаются нормально.
+
+## YouTube
+
+- В `platforms` добавляй `youtube` только если стих свободен в США (см. `prava.md`, раздел 3);
+  по умолчанию платформы — `["vk", "rutube"]`.
+- Своя обложка к ролику не загрузится, пока канал не подтверждён по телефону
+  (https://www.youtube.com/verify). Скрипт предупреждает и публикует с автообложкой.
+- Плейлисты классов (`класс 1` … `класс 11`) создаются в студии один раз вручную.
+- Доступ уходит «Доступ по ссылке» (unlisted); ссылка `https://youtu.be/<id>`.
+- `node run.js channel --job channels/youtube.json --dry-run` — показать заполненную форму без публикации.
 
 ## Как понять результат
 

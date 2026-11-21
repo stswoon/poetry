@@ -1,0 +1,7 @@
+{
+  "name": "stsAI Стихи",
+  "handle": "stsAiPoetry",
+  "descriptionFile": "youtube-desc.txt",
+  "avatar": "avatar-youtube.png",
+  "banner": "cover-youtube.png"
+}

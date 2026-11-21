@@ -3,7 +3,7 @@
  * не требовали лезть в логику.
  *
  * Если что-то не находится: запусти `node run.js probe --platform vk`
- * (или rutube), посмотри logs/<run>/probe-*.md и поправь список ниже.
+ * (или rutube/youtube), посмотри logs/<run>/probe-*.md и поправь список ниже.
  *
  * Доступ проверяется после выбора: accessLabel — подпись поля, под которой
  * стоит текущее значение; accessCurrent — контрол, в имени которого уже видно
@@ -150,4 +150,89 @@ export const rutube = {
   videoUrl: /rutube\.ru\/video\//,
 };
 
-export const selectors = { vk, rutube };
+/**
+ * YouTube Studio (новый мастер загрузки, 2025–2026):
+ * Информация → Дополнения → Проверка → Доступ.
+ * Заголовок и описание — contenteditable с одинаковым id=textbox,
+ * поэтому различаем их по aria-label.
+ */
+export const youtube = {
+  uploadTriggers: [
+    { role: 'menuitem', name: /Добавить видео/i },
+    { role: 'button', name: /Добавить видео/i },
+    { text: /Добавить видео/i },
+  ],
+  createMenu: [{ role: 'button', name: /^Создать$/i }],
+
+  fileInputs: [
+    'ytcp-uploads-dialog input[type=file][accept*="video"]',
+    'ytcp-uploads-dialog input[type=file]',
+    'input[type=file][accept*="video"]',
+  ],
+
+  title: [
+    'ytcp-uploads-dialog div#textbox[aria-label^="Укажите название"]',
+    'ytcp-uploads-dialog #textbox[role="textbox"][aria-label*="название"]',
+  ],
+  description: [
+    'ytcp-uploads-dialog div#textbox[aria-label^="Расскажите"]',
+    'ytcp-uploads-dialog #textbox[role="textbox"][aria-label*="описание"]',
+  ],
+
+  showMore: ['#toggle-button', { role: 'button', name: /Развернуть|Показать дополнительные/i }],
+
+  audienceNotKids: [
+    'tp-yt-paper-radio-button[name="VIDEO_MADE_FOR_KIDS_NOT_MFK"]',
+    { role: 'radio', name: /Нет, это видео не для детей/i },
+  ],
+  audienceKids: [
+    'tp-yt-paper-radio-button[name="VIDEO_MADE_FOR_KIDS_MFK"]',
+    { role: 'radio', name: /Да, это видео для детей/i },
+  ],
+
+  alteredContentNo: ['tp-yt-paper-radio-button[name="VIDEO_HAS_ALTERED_CONTENT_NO"]'],
+  paidProductNo: ['tp-yt-paper-radio-button[name="VIDEO_PAID_PRODUCT_PLACEMENT_NO"]'],
+
+  // Категория — ytcp-select без id; узнаём её по названию одной из категорий.
+  categoryNames:
+    /^(Животные|Игры|Люди и блоги|Музыка|Наука и техника|Новости и политика|Образование|Общественная деятельность|Путешествия|Развлечения|Спорт|Транспорт|Фильмы и анимация|Хобби и стиль|Юмор)$/i,
+
+  next: ['#next-button', { role: 'button', name: /^Далее$/i }],
+  back: ['#back-button'],
+
+  thumbTriggers: [
+    { role: 'button', name: /Загрузить файл/i },
+    { text: /Загрузить файл/i },
+  ],
+  thumbInputs: ['#file-loader', 'ytcp-uploads-dialog input[type=file][accept*="image"]'],
+
+  playlistTrigger: [
+    'ytcp-dropdown-trigger[aria-label="Выбрать плейлисты"]',
+    { role: 'button', name: /Выберите плейлист|Выбрать плейлисты/i },
+    { text: /^Выберите плейлист$/ },
+  ],
+  playlistOptions: ['tp-yt-paper-item', 'ytcp-checkbox-lit', { role: 'option' }],
+
+  checksDone: /Проверки завершены|Проблем не обнаружено|Проверка не выявила|Авторские права не нарушены/i,
+  checksRunning: /Проверка:|Проверки выполняются|Проверка продолжается|Идёт проверка|Проверяем/i,
+
+  visibilityUnlisted: [
+    'tp-yt-paper-radio-button[name="UNLISTED"]',
+    { role: 'radio', name: /Доступ по ссылке|^По ссылке$/i },
+    { text: /Доступ по ссылке/i },
+  ],
+  visibilityPublic: ['tp-yt-paper-radio-button[name="PUBLIC"]'],
+  visibilityPrivate: ['tp-yt-paper-radio-button[name="PRIVATE"]'],
+
+  publish: [
+    '#done-button',
+    { role: 'button', name: /^Опубликовать$/i },
+    { role: 'button', name: /^Сохранить$/i },
+  ],
+  confirmPublish: [{ role: 'button', name: /^Опубликовать$/i }],
+
+  successText: /Видео опубликовано|Видео сохранено|Опубликовано|Все изменения сохранены/i,
+  videoUrl: /youtu\.be\/[\w-]{11}|youtube\.com\/watch\?v=[\w-]{11}/,
+};
+
+export const selectors = { vk, rutube, youtube };

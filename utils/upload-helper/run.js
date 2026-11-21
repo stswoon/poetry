@@ -15,7 +15,7 @@ import path from 'node:path';
 import readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 
-import { config, resolvePath, fromRoot } from './lib/config.js';
+import { config, resolvePath, fromRoot, platformTarget } from './lib/config.js';
 import { bool, list, number, option, parseArgs, UsageError } from '../lib/args.js';
 import { readJson, readText } from '../lib/files.js';
 import { Run, runDir } from '../lib/state.js';
@@ -31,10 +31,15 @@ import {
 import { probe } from './lib/probe.js';
 import { uploadVk } from './lib/vk.js';
 import { uploadRutube } from './lib/rutube.js';
+import { uploadYoutube } from './lib/youtube.js';
+import { setupYoutubeChannel } from './lib/youtube-channel.js';
 import { checkVideo, findThumb, normalizeText, validateMeta } from './lib/media.js';
 
-const PLATFORMS = ['vk', 'rutube'];
-const BOOLEAN_FLAGS = ['no-publish', 'keep-open', 'headless'];
+const PLATFORMS = ['vk', 'rutube', 'youtube'];
+const ALL_PLATFORMS = ['vk', 'rutube', 'youtube'];
+// YouTube — только по явному указанию: не все стихи свободны в США.
+const DEFAULT_UPLOAD_PLATFORMS = ['vk', 'rutube'];
+const BOOLEAN_FLAGS = ['no-publish', 'keep-open', 'headless', 'dry-run'];
 
 const args = parseArgs(process.argv.slice(2), { booleans: BOOLEAN_FLAGS });
 const command = args._[0] || 'help';
@@ -52,6 +57,8 @@ async function main() {
       return runProbe();
     case 'upload':
       return upload();
+    case 'channel':
+      return channel();
     case 'help':
     case '--help':
     case '-h':
@@ -63,25 +70,38 @@ async function main() {
 }
 
 async function login() {
-  const platforms = platformsFromArgs(['vk', 'rutube']);
+  const platforms = platformsFromArgs(ALL_PLATFORMS);
   const { context } = await openBrowser({ headless: false, slowMo: 150 });
 
   console.log('\nОткрываю кабинеты. Залогинься в каждом окне (капча/2FA — вручную).');
-  console.log('Когда оба кабинета будут открыты и авторизованы — нажми Enter здесь.\n');
+  console.log('Вход сохраняется в отдельный профиль .profile и переживёт перезапуск.\n');
 
   const pages = new Map();
   for (const platform of platforms) {
-    const target = platform === 'vk' ? config.vk.cabinet : config.rutube.studio;
     const tab = await context.newPage();
-    await tab.goto(target, { waitUntil: 'domcontentloaded', timeout: config.timeouts.navigation }).catch(() => {});
+    await tab
+      .goto(platformTarget(platform), {
+        waitUntil: 'domcontentloaded',
+        timeout: config.timeouts.navigation,
+      })
+      .catch(() => {});
     await tab.waitForTimeout(2500);
     pages.set(platform, tab);
     console.log(`  ${platform}: ${tab.url()}`);
   }
 
-  const rl = readline.createInterface({ input, output });
-  await rl.question('\nEnter — когда залогинился: ');
-  rl.close();
+  if (process.stdin.isTTY) {
+    const rl = readline.createInterface({ input, output });
+    await rl.question('\nEnter — когда залогинился: ');
+    rl.close();
+  } else {
+    console.log(
+      `\nТерминала нет: жду, пока все площадки станут залогинены (до ${Math.round(
+        config.timeouts.loginWait / 60000,
+      )} мин.)...`,
+    );
+    await waitForAllLogins(pages, platforms);
+  }
 
   for (const platform of platforms) {
     const status = await checkLogin(pages.get(platform), platform);
@@ -92,23 +112,51 @@ async function login() {
   console.log('\nПрофиль сохранён: логин переживёт перезапуск.');
 }
 
+/** Без терминала (фон) ждём автодетектом: пользователь логинится, скрипт закрывается сам. */
+async function waitForAllLogins(pages, platforms) {
+  const deadline = Date.now() + config.timeouts.loginWait;
+  let last = [];
+
+  while (Date.now() < deadline) {
+    const states = [];
+    for (const platform of platforms) {
+      states.push(await isLoggedIn(pages.get(platform), platform).catch(() => false));
+    }
+    const line = platforms.map((platform, i) => `${platform}: ${states[i] ? 'ок' : 'жду'}`).join(', ');
+    if (line !== last.join(', ')) {
+      console.log(`  ${line}`);
+      last = line.split(', ');
+    }
+    if (states.every(Boolean)) return true;
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+  }
+
+  return false;
+}
+
 async function runProbe() {
-  const platforms = platformsFromArgs(['vk', 'rutube']);
+  const platforms = platformsFromArgs(ALL_PLATFORMS);
   const settle = number(option(args, 'settle', 'Укажи паузу в мс: --settle 8000'), 6000);
+  const url = option(args, 'url', 'Укажи адрес: --url "https://..."');
+  const attach = option(args, 'attach', 'Укажи файл: --attach "<видео>"');
   const keepOpen = bool(args['keep-open'], false, '--keep-open');
   const run = new Run(runDir(fromRoot('logs'), 'probe'));
   const { context, page } = await openBrowser({ headless: false, slowMo: 100 });
 
   try {
     for (const platform of platforms) {
-      const target = platform === 'vk' ? config.vk.cabinet : config.rutube.studio;
-      await page.goto(target, { waitUntil: 'domcontentloaded', timeout: config.timeouts.navigation }).catch(() => {});
+      await page
+        .goto(platformTarget(platform), {
+          waitUntil: 'domcontentloaded',
+          timeout: config.timeouts.navigation,
+        })
+        .catch(() => {});
       await page.waitForTimeout(2500);
 
-      if (!(await isLoggedIn(page))) {
+      if (!(await isLoggedIn(page, platform))) {
         console.log(`\n[${platform}] Ты не залогинен. Войди в открывшемся окне: ${page.url()}`);
         console.log(`[${platform}] Жду до ${Math.round(config.timeouts.loginWait / 60000)} минут...`);
-        const ok = await waitForLogin(page);
+        const ok = await waitForLogin(page, { platform });
         if (!ok) throw new Error(`${platform}: не дождался логина — повтори node run.js probe --platform ${platform}`);
         console.log(`[${platform}] Логин есть, продолжаю.`);
       }
@@ -119,6 +167,8 @@ async function runProbe() {
         run,
         clicks: list(args.click),
         settle,
+        url,
+        attach,
       });
     }
     console.log(`\nГотово. Смотри ${path.join(run.dir, 'probe-*.md')}`);
@@ -178,7 +228,9 @@ async function upload() {
         const result =
           platform === 'vk'
             ? await uploadVk({ page, job, run })
-            : await uploadRutube({ page, job, run });
+            : platform === 'rutube'
+              ? await uploadRutube({ page, job, run })
+              : await uploadYoutube({ page, job, run });
 
         results.push({ platform, ...result });
         if (result.error) {
@@ -230,6 +282,67 @@ async function upload() {
       );
       await waitForUser(context, config.timeouts.manualPublish);
     }
+  } finally {
+    await context.close().catch(() => {});
+  }
+}
+
+/** Оформление канала: имя, описание, аватар и баннер (сейчас — только YouTube). */
+async function channel() {
+  const jobArg = option(args, 'job', 'Укажи файл настроек канала: --job channels/youtube.json');
+  if (!jobArg) throw new UsageError('Укажи файл настроек канала: --job channels/youtube.json');
+  const jobPath = path.resolve(jobArg);
+  if (!fs.existsSync(jobPath)) throw new UsageError(`Файл не найден: ${jobPath}`);
+
+  const job = readJson(jobPath);
+  const baseDir = path.dirname(jobPath);
+  const dryRun = bool(args['dry-run'], false, '--dry-run');
+  job.name = option(args, 'name', 'Укажи название: --name "stsAI Стихи"') ?? job.name;
+  job.handle = option(args, 'handle', 'Укажи handle: --handle stsAiPoetry') ?? job.handle;
+  job.descriptionFile =
+    option(args, 'description-file', 'Укажи файл описания: --description-file "<файл>"') ?? job.descriptionFile;
+  job.avatar = option(args, 'avatar', 'Укажи аватар: --avatar "<картинка>"') ?? job.avatar;
+  job.banner = option(args, 'banner', 'Укажи баннер: --banner "<картинка>"') ?? job.banner;
+  job.description = job.descriptionFile
+    ? readText(resolvePath(job.descriptionFile, baseDir))
+    : normalizeText(job.description);
+
+  const run = new Run(runDir(fromRoot('logs'), `channel-${job.name || 'youtube'}`), {
+    platform: 'youtube',
+    ready: false,
+  });
+
+  console.log(`\nКанал: ${job.name || '(без имени)'}`);
+  console.log(`Аватар: ${job.avatar || 'нет'}`);
+  console.log(`Баннер: ${job.banner || 'нет'}`);
+  console.log(`Логи: ${run.dir}`);
+
+  const { context, page } = await openBrowser({ headless: false });
+  try {
+    const status = await checkLogin(page, 'youtube');
+    if (!status.ok) throw new Error('YouTube: не залогинен — выполни: node run.js login --platform youtube');
+
+    const result = await setupYoutubeChannel({ page, job, baseDir, run, dryRun });
+    console.log(`\nСостояние: ${run.statePath}`);
+    console.log(
+      `RESULT_JSON: ${JSON.stringify({
+        ok: !result.error,
+        ...result,
+        stateFile: run.statePath,
+      })}`,
+    );
+    if (result.error) process.exitCode = 1;
+  } catch (error) {
+    run.fail(error);
+    await run.shot(page, 'youtube-channel-error');
+    console.log(
+      `RESULT_JSON: ${JSON.stringify({
+        ok: false,
+        error: String(error?.message || error),
+        stateFile: run.statePath,
+      })}`,
+    );
+    process.exitCode = 1;
   } finally {
     await context.close().catch(() => {});
   }
@@ -289,7 +402,10 @@ function loadJob() {
   job.category = job.category || config.defaults.category;
   job.playlists = list(job.playlists);
   job.publish = bool(job.publish, config.defaults.publish, 'job.publish');
-  job.platforms = parsePlatforms(list(args.platform).length ? args.platform : job.platforms, PLATFORMS);
+  job.platforms = parsePlatforms(
+    list(args.platform).length ? args.platform : job.platforms,
+    DEFAULT_UPLOAD_PLATFORMS,
+  );
 
   if (bool(args['no-publish'], false, '--no-publish')) job.publish = false;
 
@@ -313,13 +429,14 @@ function parsePlatforms(value, fallback) {
 
 function printHelp() {
   console.log(`
-upload-helper — VK Видео и RUTUBE через настоящий браузер
+upload-helper — VK Видео, RUTUBE и YouTube через настоящий браузер
 
-  node run.js login  [--platform vk|rutube]
+  node run.js login  [--platform vk|rutube|youtube]
       Открывает Chrome с постоянным профилем, ты логинишься руками.
       Логин сохраняется в .profile и переживает перезапуск.
+      Без терминала (фоновый запуск) скрипт сам ждёт авторизации до 10 минут.
 
-  node run.js probe  [--platform vk|rutube] [--click "Добавить"] [--click "Загрузить видео"] [--settle 8000]
+  node run.js probe  [--platform vk|rutube|youtube] [--click "Добавить"] [--click "Загрузить видео"] [--settle 8000]
       Снимает карту страницы загрузки (кнопки, поля, селекты) в logs/<run>/probe-*.md.
       --click можно повторять: кнопки нажимаются по очереди перед снимком.
 
@@ -328,8 +445,12 @@ upload-helper — VK Видео и RUTUBE через настоящий брау
                      --description-file "D:\\path\\desc.txt" --thumb "D:\\path\\cover.png" \\
                      --playlist "класс-7" --playlist "класс-11" [--platform vk] [--no-publish]
 
+  node run.js channel --job channels/youtube.json
+      Оформление канала YouTube: имя, handle, описание, аватар и баннер.
+
   Флаги upload:
-      --platform vk|rutube   можно повторять; по умолчанию обе
+      --platform vk|rutube|youtube   можно повторять; по умолчанию vk и rutube
+                                     (youtube — только явно: не все стихи свободны в США)
       --no-publish           остановиться перед кнопкой «Опубликовать» и держать формы
                              открытыми (каждая площадка — своя вкладка), пока ты не
                              опубликуешь и не закроешь окно (или Enter); до 60 мин.

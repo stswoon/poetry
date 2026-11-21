@@ -14,14 +14,23 @@
     "uploadUrl": "https://studio.rutube.ru/uploader/"
   },
 
+  "youtube": {
+    "studio": "https://studio.youtube.com/",
+    "uploadUrl": "https://studio.youtube.com/",
+    "channelUrl": "https://www.youtube.com/@stsAiPoetry",
+    "category": "Образование",
+    "audience": "not_kids",
+    "alteredContent": false
+  },
+
   "defaults": {
     "category": "Культура",
     "publish": true
   },
 
   "limits": {
-    "title": { "vk": 128, "rutube": 100 },
-    "description": { "vk": 5000, "rutube": 5000 },
+    "title": { "vk": 128, "rutube": 100, "youtube": 100 },
+    "description": { "vk": 5000, "rutube": 5000, "youtube": 5000 },
     "rutubeFileSizeBytes": 26843545600
   },
 

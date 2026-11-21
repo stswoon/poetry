@@ -1,6 +1,6 @@
-import { config } from './config.js';
-import { goto } from './browser.js';
-import { findFirst } from './ui.js';
+import { platformTarget } from './config.js';
+import { goto, youtubeChannelId } from './browser.js';
+import { attachFile, findFirst } from './ui.js';
 
 /**
  * Снимает «карту» страницы: кнопки, поля, селекты, тексты про доступ/плейлисты.
@@ -9,12 +9,22 @@ import { findFirst } from './ui.js';
  * click  — текст кнопки, которую надо нажать перед снимком (например, «Добавить»).
  * settle — сколько ждать отрисовки, мс.
  */
-export async function probe({ page, platform, run, clicks = [], settle = 6000 }) {
-  const target = platform === 'vk' ? config.vk.uploadUrl : config.rutube.uploadUrl;
-
+export async function probe({ page, platform, run, clicks = [], settle = 6000, url = null, attach = null }) {
   run.step(`${platform}: probe`);
-  await goto(page, target);
+  await goto(page, url || platformTarget(platform));
   await page.waitForTimeout(settle);
+
+  // У YouTube страница /videos/upload сама окно не открывает: нужен клик по «Добавить видео».
+  if (platform === 'youtube' && !url) {
+    const channelId = youtubeChannelId(page.url());
+    if (channelId) {
+      await goto(page, `https://studio.youtube.com/channel/${channelId}/videos/upload`);
+      await page.waitForTimeout(settle);
+    } else {
+      run.warn('YouTube: не нашёл ID канала в адресе студии');
+    }
+    if (attach) await openYoutubeUpload(page, run, attach, settle);
+  }
 
   for (const click of clicks) {
     const button = await findFirst(
@@ -57,6 +67,19 @@ export async function probe({ page, platform, run, clicks = [], settle = 6000 })
 
     const clean = (list) => list.filter((item) => item.text || item.placeholder || item.name || item.ariaLabel || item.type || item.accept);
 
+    const info = (el) => ({
+      tag: el.tagName.toLowerCase(),
+      id: el.id || undefined,
+      name: attr(el, 'name') || undefined,
+      role: attr(el, 'role') || undefined,
+      ariaLabel: attr(el, 'aria-label') || undefined,
+      ariaChecked: attr(el, 'aria-checked') || undefined,
+      checked: 'checked' in el ? Boolean(el.checked) : undefined,
+      accept: attr(el, 'accept') || undefined,
+      disabled: 'disabled' in el ? Boolean(el.disabled) : undefined,
+      text: text(el) || undefined,
+    });
+
     return {
       url: location.href,
       title: document.title,
@@ -72,6 +95,24 @@ export async function probe({ page, platform, run, clicks = [], settle = 6000 })
         .map(text)
         .filter((value) => /доступ|плейлист|обложк|категор|опубликов|загрузить|видимост|по ссылке/i.test(value))
         .slice(0, 120),
+      // Для YouTube Studio: Polymer-компоненты и shadow DOM не видны в обычном списке полей.
+      detail: {
+        dialogs: [...document.querySelectorAll('ytcp-uploads-dialog, ytcp-full-video-details, tp-yt-paper-dialog, [role=dialog]')]
+          .map(info)
+          .slice(0, 40),
+        contenteditables: [...document.querySelectorAll('[contenteditable="true"]')].map(info).slice(0, 40),
+        radios: [...document.querySelectorAll('tp-yt-paper-radio-button, input[type=radio]')].map(info).slice(0, 80),
+        fileInputs: [...document.querySelectorAll('input[type=file]')].map(info).slice(0, 40),
+        ytcpButtons: [...document.querySelectorAll('ytcp-button, ytcp-icon-button')].map(info).slice(0, 120),
+        dropdowns: [
+          ...document.querySelectorAll('ytcp-select, tp-yt-paper-dropdown-menu, ytcp-dropdown-trigger, [role=combobox], [aria-haspopup]'),
+        ]
+          .map(info)
+          .slice(0, 80),
+        ids: [...document.querySelectorAll('[id]')]
+          .map((el) => ({ tag: el.tagName.toLowerCase(), id: el.id, text: text(el) || undefined }))
+          .slice(0, 500),
+      },
     };
   });
 
@@ -82,6 +123,42 @@ export async function probe({ page, platform, run, clicks = [], settle = 6000 })
   run.info(`Снимок: ${jsonFile}`);
   run.info(`Читаемая версия: ${mdFile}`);
   return data;
+}
+
+/** Открывает окно загрузки YouTube и прикрепляет тестовый файл, чтобы снять форму. */
+async function openYoutubeUpload(page, run, file, settle) {
+  const create = page.getByRole('button', { name: /^Создать$/ }).first();
+  if (await create.isVisible().catch(() => false)) {
+    await create.click({ timeout: 10000 }).catch(() => {});
+    await page.waitForTimeout(1000);
+  }
+
+  const attached = await attachFile(page, {
+    inputs: [],
+    triggers: [
+      { role: 'menuitem', name: /Добавить видео/i },
+      { role: 'button', name: /Добавить видео/i },
+      { text: /Добавить видео/i },
+    ],
+    file,
+    timeout: 15000,
+    waitMs: 8000,
+  });
+
+  if (attached) {
+    run.info(`Тестовый файл прикреплён через ${attached.via}`);
+    await page.waitForTimeout(settle);
+    return;
+  }
+
+  const input = page.locator('ytcp-uploads-dialog input[type=file]').first();
+  if (await input.count().catch(() => 0)) {
+    await input.setInputFiles(file, { timeout: 60000 }).catch(() => {});
+    run.info('Тестовый файл прикреплён через input в окне');
+    await page.waitForTimeout(settle);
+  } else {
+    run.warn('YouTube: окно загрузки не открылось');
+  }
 }
 
 function renderMarkdown(platform, data) {
@@ -122,6 +199,38 @@ function renderMarkdown(platform, data) {
   lines.push('## Тексты про доступ/плейлисты/обложку');
   for (const value of data.keywordBlocks) lines.push(`- ${value}`);
   lines.push('');
+
+  const detail = data.detail;
+  if (detail) {
+    const row = (item) =>
+      `- <${item.tag}>` +
+      `${item.id ? ` id=${item.id}` : ''}` +
+      `${item.name ? ` name=${item.name}` : ''}` +
+      `${item.role ? ` role=${item.role}` : ''}` +
+      `${item.ariaLabel ? ` aria-label="${item.ariaLabel}"` : ''}` +
+      `${item.ariaChecked ? ` aria-checked=${item.ariaChecked}` : ''}` +
+      `${item.checked === true ? ' checked' : ''}` +
+      `${item.disabled ? ' disabled' : ''}` +
+      `${item.accept ? ` accept="${item.accept}"` : ''}` +
+      `${item.text ? ` text="${item.text.slice(0, 120)}"` : ''}`;
+
+    for (const [title, list] of [
+      ['Диалоги', detail.dialogs],
+      ['contenteditable', detail.contenteditables],
+      ['Радио', detail.radios],
+      ['Файловые input', detail.fileInputs],
+      ['ytcp-кнопки', detail.ytcpButtons],
+      ['Дропдауны', detail.dropdowns],
+    ]) {
+      lines.push(`## ${title}`);
+      for (const item of list) lines.push(row(item));
+      lines.push('');
+    }
+
+    lines.push('## id на странице');
+    for (const item of detail.ids) lines.push(`- <${item.tag}> #${item.id}${item.text ? ` — ${item.text.slice(0, 80)}` : ''}`);
+    lines.push('');
+  }
 
   return lines.join('\n');
 }

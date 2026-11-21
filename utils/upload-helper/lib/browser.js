@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 import { chromium } from 'playwright-core';
-import { config, fromRoot } from './config.js';
+import { config, fromRoot, platformTarget } from './config.js';
 
 /**
  * Настоящий Chrome с постоянным профилем: логин переживает перезапуск.
@@ -49,11 +49,23 @@ export async function openBrowser({ headless = config.headless, slowMo = config.
 
 /** Похоже ли на страницу входа. */
 export function urlLooksLikeLogin(url) {
-  return /id\.vk\.(com|ru)|\/login|\/auth|signin|account\/login|multipass/i.test(url);
+  return /id\.vk\.(com|ru)|\/login|\/auth|signin|account\/login|multipass|accounts\.google\.com/i.test(url);
+}
+
+/** ID канала из адреса студии: /channel/UC… */
+export function youtubeChannelId(url) {
+  return String(url).match(/\/channel\/(UC[\w-]+)/)?.[1] ?? null;
+}
+
+/** YouTube: залогинен, если студия открыла канал, а не страницу входа. */
+function isYouTubeLoggedIn(page) {
+  if (urlLooksLikeLogin(page.url())) return false;
+  return Boolean(youtubeChannelId(page.url()));
 }
 
 /** Проверка «залогинен» без перехода: по URL и кнопке «Войти». */
-export async function isLoggedIn(page) {
+export async function isLoggedIn(page, platform = null) {
+  if (platform === 'youtube') return isYouTubeLoggedIn(page);
   if (urlLooksLikeLogin(page.url())) return false;
   const loginButton = await page
     .getByRole('button', { name: /^Войти$|Войти в аккаунт/i })
@@ -64,13 +76,13 @@ export async function isLoggedIn(page) {
 }
 
 /** Ждёт, пока пользователь залогинится в открытом окне. */
-export async function waitForLogin(page, { timeoutMs = config.timeouts.loginWait, poll = 3000 } = {}) {
+export async function waitForLogin(page, { platform = null, timeoutMs = config.timeouts.loginWait, poll = 3000 } = {}) {
   const deadline = Date.now() + timeoutMs;
 
   await page.bringToFront().catch(() => {});
 
   while (Date.now() < deadline) {
-    if (await isLoggedIn(page)) return true;
+    if (await isLoggedIn(page, platform)) return true;
     await page.waitForTimeout(poll);
   }
 
@@ -79,12 +91,13 @@ export async function waitForLogin(page, { timeoutMs = config.timeouts.loginWait
 
 /** Проверяет, залогинен ли пользователь в кабинете площадки. */
 export async function checkLogin(page, platform) {
-  const target = platform === 'vk' ? config.vk.cabinet : config.rutube.studio;
+  await page.goto(platformTarget(platform), {
+    waitUntil: 'domcontentloaded',
+    timeout: config.timeouts.navigation,
+  });
+  await page.waitForTimeout(platform === 'youtube' ? 5000 : 3000);
 
-  await page.goto(target, { waitUntil: 'domcontentloaded', timeout: config.timeouts.navigation });
-  await page.waitForTimeout(3000);
-
-  return { ok: await isLoggedIn(page), url: page.url() };
+  return { ok: await isLoggedIn(page, platform), url: page.url() };
 }
 
 export async function goto(page, url, timeout = config.timeouts.navigation) {

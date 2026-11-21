@@ -4,6 +4,7 @@
 |---|---|---|
 | VK Видео | https://vkvideo.ru/@club242590990 | https://cabinet.vkvideo.ru/dashboard/@club242590990 |
 | Rutube | https://rutube.ru/channel/75569483 | Студия RUTUBE → «Настройки канала» |
+| YouTube | https://www.youtube.com/@stsAiPoetry | https://studio.youtube.com/channel/UCtQ-uKOqO89KAkJLM-JgTHw |
 
 ## Оформление (сделано 26–27.10.2026)
 
@@ -23,15 +24,32 @@
   - `cover-rutube.png`: Rutube, 2560×1004 (минимум 2204×864), название и перо ближе к центру.
   - `preview.png` / `preview.html`: как обложка обрезается на компьютере и телефоне.
   - Исходник один, `cover.html`, параметры в адресе: `?h=<высота>&off=<сдвиг полосы с названием>&s=<масштаб>`.
-- **Аватары** не сделаны, стоят стандартные. Rutube просит 800×800. Идея: круглый значок с тем же пером.
+- **Аватары** на VK и Rutube не сделаны, стоят стандартные. Rutube просит 800×800. На YouTube аватар уже стоит (`avatar-youtube.png`).
+
+### YouTube (сделано 21.11.2026)
+
+- **Название:** «stsAI Стихи», handle `@stsAiPoetry` (вариант `@stsai_stihi` YouTube не сохранил).
+- **Описание:** `channels/youtube-desc.txt`, 412 знаков (лимит YouTube 1000).
+- **Баннер:** `cover-youtube.png` — 2560×1440, 16:9, 4,1 МБ (лимит 6 МБ). Тот же `cover.html` с
+  `?h=1440&off=-260&s=0.55`: заголовок и перо попадают в безопасную полосу 1546×423.
+- **Аватар:** `avatar-youtube.png` — 800×800, круглое перо с золотой обводкой, исходник `avatar.html`.
+- **Верификация:** номер телефона пока не подтверждён. Без него YouTube не принимает **свои обложки
+  к роликам** и видео длиннее 15 минут: https://www.youtube.com/verify. Один номер — не более двух
+  аккаунтов в год.
+- **Плейлисты классов** не созданы: в студии «Контент → Плейлисты» их нужно завести один раз
+  (`класс 1` … `класс 11`), иначе загрузчик предупредит и опубликует без плейлиста.
+- Загрузчик: `utils/upload-helper`, сценарий `lib/youtube.js`, доступ «Доступ по ссылке» (unlisted).
 
 Пересборка обложек (Edge headless, пути абсолютные):
 
 ```bash
 E="/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
-"$E" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=2560,1280 --virtual-time-budget=8000 --screenshot="D:\mycode\poetry\channels\cover.png" "file:///D:/mycode/poetry/channels/cover.html"
-"$E" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=2560,1004 --virtual-time-budget=8000 --screenshot="D:\mycode\poetry\channels\cover-rutube.png" "file:///D:/mycode/poetry/channels/cover.html?h=1004&off=-446&s=0.9"
-"$E" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=1880,1000 --virtual-time-budget=3000 --screenshot="D:\mycode\poetry\channels\preview.png" "file:///D:/mycode/poetry/channels/preview.html"
+PROFILE="$TEMP/edge-shot-profile"   # без отдельного профиля Edge может не сделать снимок, если уже запущен
+"$E" --headless=new --disable-gpu --user-data-dir="$PROFILE" --hide-scrollbars --force-device-scale-factor=1 --window-size=2560,1280 --virtual-time-budget=8000 --screenshot="D:\mycode\poetry\channels\cover.png" "file:///D:/mycode/poetry/channels/cover.html"
+"$E" --headless=new --disable-gpu --user-data-dir="$PROFILE" --hide-scrollbars --force-device-scale-factor=1 --window-size=2560,1004 --virtual-time-budget=8000 --screenshot="D:\mycode\poetry\channels\cover-rutube.png" "file:///D:/mycode/poetry/channels/cover.html?h=1004&off=-446&s=0.9"
+"$E" --headless=new --disable-gpu --user-data-dir="$PROFILE" --hide-scrollbars --force-device-scale-factor=1 --window-size=2560,1440 --virtual-time-budget=9000 --screenshot="D:\mycode\poetry\channels\cover-youtube.png" "file:///D:/mycode/poetry/channels/cover.html?h=1440&off=-260&s=0.55"
+"$E" --headless=new --disable-gpu --user-data-dir="$PROFILE" --hide-scrollbars --force-device-scale-factor=1 --window-size=800,800 --virtual-time-budget=9000 --screenshot="D:\mycode\poetry\channels\avatar-youtube.png" "file:///D:/mycode/poetry/channels/avatar.html"
+"$E" --headless=new --disable-gpu --user-data-dir="$PROFILE" --hide-scrollbars --force-device-scale-factor=1 --window-size=1880,1000 --virtual-time-budget=3000 --screenshot="D:\mycode\poetry\channels\preview.png" "file:///D:/mycode/poetry/channels/preview.html"
 ```
 
 ## Работа с кабинетами через браузер (уроки 26–27.10.2026)
@@ -40,6 +58,13 @@ E="/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
 - Если окно Chrome свёрнуто или вкладка в фоне, страница кабинета «грузится» бесконечно и не читается. Окно нужно развернуть, вкладку открыть.
 - **Файлы через расширение прикрепить не удалось** ни в VK, ни в Rutube: инструменты не находят поле загрузки. Обложки загружал пользователь сам. Попытка передать файл через локальный сервер тоже не сработала. Если Chrome спросит, можно ли rutube.ru обращаться к устройствам в локальной сети, ответ «Блокировать».
 - Публичное меняем только после «да» пользователя: сначала показать тексты и картинки, потом сохранять.
+- **YouTube (21.11.2026).** Вход в Google через профиль `.profile` прошёл без блокировки «браузер небезопасен».
+  Студия — Polymer с теневым DOM: надёжнее всего id (`#publish-button`, `#done-button`, `#file-loader`).
+  Заголовок и описание канала — `contenteditable`; описание канала сохраняется только при посимвольном
+  вводе (`pressSequentially`), обычный `fill()` обновляет счётчик, но не модель. В мастере загрузки
+  четыре шага: «Информация → Дополнения → Проверка → Доступ»; обложка и плейлисты — на «Информации»,
+  «Доступ по ссылке» — на «Доступе», финальная кнопка называется «Сохранить». Своя обложка к ролику
+  требует подтверждения номера (`youtube.com/verify`); у нового канала её нет.
 
 ## Монетизация
 
