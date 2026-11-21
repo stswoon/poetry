@@ -1,0 +1,50 @@
+utils/upload-helper/README.md
+  s_31f9557ae1f10f::t_0c401a12ab06c8 262
+  s_31f9557ae1f10f::t_9ca8641f5fa5a0 279-280
+  s_31f9557ae1f10f::t_1f3b7dab97d3e9 153-156
+  s_31f9557ae1f10f::t_cc57d8c58cb3f3 261
+utils/upload-helper/lib/probe.js
+  s_31f9557ae1f10f::t_684995a164c01d 233-234
+  s_31f9557ae1f10f::t_f9b7451a26a476 105-116
+utils/upload-helper/AGENTS.md
+  s_31f9557ae1f10f::t_b3ddc9e2f7f6f8 40-41
+  s_31f9557ae1f10f::t_f6f8c8b7657b34 42-45
+utils/upload-helper/lib/youtube.js
+  s_31f9557ae1f10f::t_c908ca2ff65768 451,552-560
+  s_31f9557ae1f10f::t_37701cf75b9d41 432
+  s_31f9557ae1f10f::t_41fcb6cd6d45da 94
+  s_31f9557ae1f10f::t_bd03f5715425e1 52-60
+  s_31f9557ae1f10f::t_35c96fbe355663 38
+  s_31f9557ae1f10f::t_38c929e5d4809f 417-419,429-431,434,439,448-449,454-459
+  s_31f9557ae1f10f::t_e8226f2e1a6aa1 453
+  s_31f9557ae1f10f::t_5c8a49d56fa184 440-444,446-447,450,461
+  s_31f9557ae1f10f::t_5a4d458b0a345a 27-35
+utils/upload-helper/config.json
+  s_31f9557ae1f10f::t_8181cf13d114dc 23-24
+utils/upload-helper/lib/selectors.js
+  s_31f9557ae1f10f::t_15d03470f755af 214-215
+channels/README.md
+  s_31f9557ae1f10f::t_a9af75167e2767 39-44
+  s_31f9557ae1f10f::t_d36d791aeb6ca0 36-38
+.claude/skills/stsPoetryUpload/SKILL.md
+  s_31f9557ae1f10f::t_1037eb24f8fe23 110
+  s_31f9557ae1f10f::t_2a19d69d5bec92 93-94
+  s_31f9557ae1f10f::t_aa0d352ebe2254 109
+  s_31f9557ae1f10f::t_ee0b75a99296ec 95-97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "af41eeb8d212432552c8b4dcbef9cbea5b6e0d0e",
+  "prompts": {},
+  "sessions": {
+    "s_31f9557ae1f10f": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e02fa8822ffetnzogQBCpaLToc",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
