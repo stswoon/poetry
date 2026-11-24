@@ -1,0 +1,14 @@
+{
+  "video": "borodino_anime_v2.mp4",
+  "thumb": "cover.png",
+  "title": "Бородино - Лермонтов",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 5"
+  ],
+  "platforms": [
+    "youtube"
+  ],
+  "publish": true
+}

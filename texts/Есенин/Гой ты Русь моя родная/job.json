@@ -1,0 +1,15 @@
+{
+  "video": "goy-ty-rus_1080p60_v2.mp4",
+  "thumb": "cover.png",
+  "title": "Гой ты, Русь, моя родная… - Есенин",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 6",
+    "класс 11"
+  ],
+  "platforms": [
+    "youtube"
+  ],
+  "publish": true
+}

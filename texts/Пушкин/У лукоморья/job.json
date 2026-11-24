@@ -1,0 +1,15 @@
+{
+  "video": "lukomorye_eleven.mp4",
+  "thumb": "cover.png",
+  "title": "У лукоморья дуб зелёный - Пушкин",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 2",
+    "класс 5"
+  ],
+  "platforms": [
+    "youtube"
+  ],
+  "publish": true
+}

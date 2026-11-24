@@ -1,0 +1,15 @@
+{
+  "video": "Vorona_i_Lisica_8bit_16x9_v2.mp4",
+  "thumb": "cover.png",
+  "title": "Ворона и лисица - Крылов",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 3",
+    "класс 5"
+  ],
+  "platforms": [
+    "youtube"
+  ],
+  "publish": true
+}

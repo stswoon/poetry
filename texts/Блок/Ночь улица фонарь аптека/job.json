@@ -1,0 +1,14 @@
+{
+  "video": "blok_noch_ulica_fonar_apteka_stanislav.mp4",
+  "thumb": "cover.png",
+  "title": "Ночь, улица, фонарь, аптека… - Блок",
+  "descriptionFile": "desc.txt",
+  "category": "Культура",
+  "playlists": [
+    "класс 11"
+  ],
+  "platforms": [
+    "youtube"
+  ],
+  "publish": true
+}
