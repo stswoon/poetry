@@ -427,8 +427,14 @@ async function selectPlaylist(page, name) {
   await page.waitForTimeout(900);
 
   const dialog = page.locator(s.playlistDialog).first();
-  await dialog.waitFor({ state: 'visible', timeout: 8000 }).catch(() => {});
-  const group = dialog.locator(s.playlistGroup);
+  const opened = await dialog
+    .waitFor({ state: 'visible', timeout: 8000 })
+    .then(() => true)
+    .catch(() => false);
+  if (!opened) return { ok: false, reason: 'no-dialog' };
+
+  const group = dialog.locator(s.playlistGroup).first();
+  await group.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
   const label = group.locator('label').filter({ hasText: playlistMatcher(name) }).first();
 
   if (!(await label.count().catch(() => 0))) {
@@ -437,12 +443,18 @@ async function selectPlaylist(page, name) {
   }
 
   const box = label.locator('xpath=ancestor::ytcp-checkbox-lit').first();
-  const readChecked = () =>
-    box
-      .locator('input')
-      .evaluate((el) => Boolean(el.checked))
+  const boxInside = label.locator('ytcp-checkbox-lit').first();
+  const readChecked = async () => {
+    const target = (await box.count().catch(() => 0)) ? box : boxInside;
+    if (!(await target.count().catch(() => 0))) return false;
+    return target
+      .evaluate((el) =>
+        'checked' in el ? Boolean(el.checked) : el.getAttribute('aria-checked') === 'true',
+      )
       .catch(() => false);
+  };
 
+  const beforeText = (await trigger.innerText().catch(() => '')).trim();
   let selected = await readChecked();
   if (!selected) {
     await label.click({ timeout: 10000 }).catch(() => {});
@@ -450,15 +462,21 @@ async function selectPlaylist(page, name) {
     selected = await readChecked();
   }
 
-  const ok = dialog.getByRole('button', { name: /^ОК$/i }).first();
+  const ok = dialog.getByRole('button', { name: /^\s*ОК\s*$/i }).first();
   if (await ok.isVisible().catch(() => false)) {
     await ok.click({ timeout: 10000 }).catch(() => {});
   } else {
-    await page.keyboard.press('Escape').catch(() => {});
+    const okCustom = dialog.locator('ytcp-button').filter({ hasText: /^\s*ОК\s*$/ }).first();
+    if (await okCustom.isVisible().catch(() => false)) {
+      await okCustom.click({ timeout: 10000 }).catch(() => {});
+    } else {
+      await page.keyboard.press('Escape').catch(() => {});
+    }
   }
   await page.waitForTimeout(800);
 
-  return { ok: selected, reason: 'clicked' };
+  const afterText = (await trigger.innerText().catch(() => '')).trim();
+  return { ok: selected || (afterText !== '' && afterText !== beforeText), reason: 'clicked' };
 }
 
 /** Жмёт «Далее», пока не появится блок «Доступ». */
@@ -553,7 +571,8 @@ function videoIdFrom(url) {
 function playlistMatcher(name) {
   const normalized = String(name).trim().replace(/^класс[ -](\d+)$/i, 'класс $1');
   if (/^класс \d+$/i.test(normalized)) {
-    return new RegExp(`^${escapeRegex(normalized)}$`, 'i');
+    // В тексте label вокруг названия остаются переводы строк и пробелы.
+    return new RegExp(`^\\s*${escapeRegex(normalized)}\\s*$`, 'i');
   }
   return new RegExp(escapeRegex(normalized), 'i');
 }
