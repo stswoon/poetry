@@ -1,0 +1,21 @@
+utils/upload-helper/lib/youtube.js
+  s_7547d063cbb9a6::t_cdebd4e97a76d3 430-437,465,469-474
+  s_7547d063cbb9a6::t_04ea4fef7d81f2 574-575
+  s_7547d063cbb9a6::t_bd6fc8b7c778f2 446-453,455,457,478-479
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "8388995e3271d4c8659d6e18858bb5092d57a51a",
+  "prompts": {},
+  "sessions": {
+    "s_7547d063cbb9a6": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_df3d2e81bffexyVSwIU2dPFi2o",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "stswoon <xx@xx.xx>"
+    }
+  }
+}
