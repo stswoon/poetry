@@ -3,6 +3,18 @@ KID_COLORS.heroIn = { coat: [70, 112, 176], coatD: [48, 80, 130], hat: C.fur, ha
 const FLOOR = 880, TOP = 400;
 const STEPS = [[2470, 760], [2560, 640], [2630, 520]];   // [левый край, верх]; правый край у печи x=2700
 const STOVE_X = 2700;
+const PEG = [1010, 640], COAT_FLY = 0.55;
+// шубёнка: ворот в (x,y), висит вниз; spread — рукава в стороны (в полёте)
+function drawCoat(g, x, y, sc, rot, spread) {
+  g.save(); g.translate(x, y); g.rotate(rot); g.scale(sc, sc);
+  const sl = (k) => [lerp(52, 96, spread) * k, lerp(70, 34, spread)];
+  roughPoly(g, [[-30, 0], [30, 0], [54, 14], [sl(1)[0], sl(1)[1]], [sl(1)[0] - 14, sl(1)[1] + 6], [46, 34], [52, 112], [-52, 112], [-46, 34], [sl(-1)[0] + 14, sl(-1)[1] + 6], [sl(-1)[0], sl(-1)[1]], [-54, 14]], 320, 3);
+  paint(g, C.verm, 321, 1.5, 0.8);
+  brush(g, [[-30, 4], [30, 4]], 14, C.white, 322, 0.4);            // меховой воротник
+  brush(g, [[0, 10], [0, 108]], 7, C.vermD, 323, 0.4);               // запах
+  brush(g, [[-50, 108], [50, 108]], 9, C.white, 324, 0.4);           // опушка подола
+  g.restore();
+}
 
 function drawInterior(g, t, opt = {}) {
   const glowA = opt.glow ?? 1;
@@ -25,6 +37,11 @@ function drawInterior(g, t, opt = {}) {
   }
   // окно с метелью
   windowPane(g, t, 820, 330, 240, 230, opt.howl || 0);
+  // колышки для одежды; шубёнка висит после броска
+  brush(g, [[PEG[0] - 110, PEG[1] - 8], [PEG[0] + 110, PEG[1] - 8]], 22, [96, 60, 34], 863, 0.5);
+  for (const dx of [-75, 0, 75]) brush(g, [[PEG[0] + dx, PEG[1] - 8], [PEG[0] + dx + 8, PEG[1] + 10]], 14, [70, 44, 26], 864 + dx, 0.4);
+  const tl = t - (EV.L26 - 0.15 + COAT_FLY);
+  if (tl >= 0) drawCoat(g, PEG[0], PEG[1], 1.25, 0.5 * Math.exp(-3.2 * tl) * Math.sin(9 * tl), 0);
   // лавка вдоль стены
   roughPoly(g, [[1180, 752], [2360, 752], [2360, 782], [1180, 782]], 860, 2); paint(g, [130, 86, 50], 861, 0, 0.7);
   for (const x of [1220, 1700, 2320]) brush(g, [[x, 782], [x, FLOOR]], 18, [104, 68, 40], 862 + x, 0.4);
@@ -112,26 +129,28 @@ function kidIK(hip, lean, feet, hands, s, extra = {}) {
 }
 // ключи подъёма на печь: hip, ступни (ближняя, дальняя), кисти (ближняя, дальняя)
 const CLIMB = [
-  { hip: [2380, 752], f: [[2395, 866], [2365, 866]], h: [[2440, 690], [2420, 700]], lean: 0.05 },
-  { hip: [2455, 760], f: [[2515, 746], [2420, 866]], h: [[2575, 628], [2560, 630]], lean: 0.3 },
-  { hip: [2520, 640], f: [[2530, 746], [2505, 746]], h: [[2645, 508], [2630, 510]], lean: 0.3 },
-  { hip: [2590, 640], f: [[2600, 626], [2545, 746]], h: [[2655, 506], [2640, 508]], lean: 0.35 },
-  { hip: [2655, 520], f: [[2668, 506], [2610, 626]], h: [[2735, 390], [2718, 392]], lean: 0.45 },
+  { hip: [2395, 754], f: [[2405, 866], [2380, 866]], h: [[2440, 690], [2426, 708]], lean: 0.08 },
+  { hip: [2430, 758], f: [[2500, 746], [2380, 866]], h: [[2575, 628], [2561, 646]], lean: 0.22 },
+  { hip: [2545, 640], f: [[2500, 746], [2585, 626]], h: [[2645, 508], [2631, 526]], lean: 0.28 },
+  { hip: [2600, 522], f: [[2655, 506], [2585, 626]], h: [[2712, 392], [2698, 410]], lean: 0.34 },
+  { hip: [2660, 404], f: [[2655, 506], [2722, 386]], h: [[2770, 392], [2756, 410]], lean: 0.4 },
+  { hip: [2712, 306], f: [[2742, 386], [2722, 386]], h: [[2800, 392], [2786, 410]], lean: 0.45 },
 ];
 const SIT = { rot: 0, lean: -0.04, head: 0.05, legs: [{ a: 1.52, b: 0.06 }, { a: 1.47, b: 0.06 }], arms: [{ a: 0.75, b: 0.5 }, { a: 0.6, b: 0.6 }] };
 const SIT_HIP = [2760, 380];
 function climbPose(c, s) {
-  if (c >= 0.8) {
-    const u = ease(inv(0.8, 1, c));
-    const k = CLIMB[4], p0 = kidIK(k.hip, k.lean, k.f, k.h, s);
+  const N = CLIMB.length - 1, CE = 0.82;          // CE — доля на подъём, остальное — сесть
+  if (c >= CE) {
+    const u = ease(inv(CE, 1, c));
+    const k = CLIMB[N], p0 = kidIK(k.hip, k.lean, k.f, k.h, s);
     return { hip: [lerp(k.hip[0], SIT_HIP[0], u), lerp(k.hip[1], SIT_HIP[1], u)], pose: blendPose(p0, SIT, u) };
   }
-  const f = c / 0.8 * 4, i = Math.min(3, Math.floor(f)), u0 = f - i;
+  const f = c / CE * N, i = Math.min(N - 1, Math.floor(f)), u0 = f - i;
   const A = CLIMB[i], B = CLIMB[i + 1];
   // сначала переносится нога (остальные опоры стоят), потом руки, таз догоняет
-  const uf = easeIO(inv(0, 0.45, u0)), uh = easeIO(inv(0.25, 0.7, u0)), up = easeIO(inv(0.1, 1, u0));
+  const uf = easeIO(inv(0, 0.6, u0)), uh = easeIO(inv(0.2, 0.75, u0)), up = easeIO(inv(0.15, 1, u0));
   const L = (p, q, u) => [lerp(p[0], q[0], u), lerp(p[1], q[1], u)];
-  const lift = (p, q, u) => { const r = L(p, q, u); if (Math.hypot(q[0] - p[0], q[1] - p[1]) > 4) r[1] -= Math.sin(u * Math.PI) * 36; return r; };
+  const lift = (p, q, u) => { const r = L(p, q, u); if (Math.hypot(q[0] - p[0], q[1] - p[1]) > 4) r[1] -= Math.sin(u * Math.PI) * 30; return r; };
   const hip = L(A.hip, B.hip, up);
   const feet = [lift(A.f[0], B.f[0], uf), lift(A.f[1], B.f[1], uf)];
   const hands = [lift(A.h[0], B.h[0], uh), lift(A.h[1], B.h[1], uh)];
@@ -144,28 +163,32 @@ function scene7(g, t) {
   const a = EV.L25 - 0.12, cut = EV.L27 - 0.12;
   const s = 1.25;
   if (t < cut) {
-    const z = lerp(1.55, 1.75, ease(inv(a, cut, t)));
+    const tw = EV.L26 - 0.15;                       // бросок шубёнки
+    const whip = easeIO(inv(tw - 0.05, tw + 0.3, t));
+    const cam = camBlend([560, 690, 1.6], [860, 690, 1.42], whip);
     const [sx, sy] = shake(t, 1.5, 2, 23);
-    g.save(); camApply(g, 560, 690, z, sx, sy);
+    g.save(); camApply(g, cam[0], cam[1], cam[2], sx, sy);
     drawInterior(g, t, { door: 1 - ease(inv(a + 0.3, a + 1.0, t)) });
-    // мальчик анфас у двери: руки разводит — шубёнка слетает
-    const off = ease(inv(EV.shubenku - 0.1, EV.doloy, t));
-    const pose = { arms: [{ a: lerp(0.5, 1.9, off), b: lerp(0.4, 0.2, off) }, { a: lerp(0.5, 1.9, off), b: lerp(0.4, 0.2, off) }], mouth: "smile", eyes: "open", blink: (t % 2.3) < 0.1 ? 1 : 0 };
-    drawKidFront(g, 640, FLOOR - 140, 1.55, pose, t >= EV.shubenku + 0.15 ? "heroIn" : "hero", 300);
-    // ноги анфас: две ноги в валенках под рубахой/шубой
+    const thrown = t >= tw;
+    // до броска: берётся за ворот обеими руками; после — правая рука вытянута к колышку
+    const grab = ease(inv(a + 0.5, tw - 0.15, t));
+    const fol = ease(inv(tw + 0.35, tw + 1.1, t));
+    const arms = thrown
+      ? [{ a: 0.4, b: 0.3 }, { a: lerp(2.0, 0.45, fol), b: lerp(0.15, 0.3, fol) }]
+      : [{ a: lerp(0.35, 0.55, grab), b: lerp(0.3, 2.55, grab) }, { a: lerp(0.35, 0.55, grab), b: lerp(0.3, 2.55, grab) }];
+    const pose = { arms, mouth: thrown ? "open" : "smile", eyes: "open", blink: (t % 2.3) < 0.1 ? 1 : 0, head: thrown ? 0.1 * (1 - fol) : 0 };
+    drawKidFront(g, 640, FLOOR - 140, 1.55, pose, thrown ? "heroIn" : "hero", 300);
+    // ноги анфас: две ноги в валенках
     for (const sg of [-1, 1]) { brush(g, [[640 + sg * 22 * 1.55, FLOOR - 140 + 10], [640 + sg * 24 * 1.55, FLOOR - 20]], 28 * 1.55 * 0.7, C.felt, 310 + sg, 0.6); roughEll(g, 640 + sg * 26 * 1.55, FLOOR - 14, 26, 14, 312 + sg, 0.1); paint(g, C.feltD, 313 + sg, 0, 0.5); }
+    // шубёнка летит дугой на колышек
+    const fu = inv(tw, tw + COAT_FLY, t);
+    if (thrown && fu < 1) {
+      const e = easeOut(fu);
+      const x = lerp(640, PEG[0], e), y = lerp(FLOOR - 140 - 130, PEG[1], e) - Math.sin(fu * Math.PI) * 170;
+      drawCoat(g, x, y, 1.25, lerp(-5.2, 0, easeOut(fu)), 1 - fu * 0.6);
+    }
     g.restore();
     warmLight(g, W * 0.9, H * 0.3, 1300, 0.8, t);
-    // шубёнка летит в объектив
-    const fu = inv(EV.shubenku + 0.15, cut + 0.12, t);
-    if (fu > 0 && fu < 1) {
-      reset(g);
-      const sc = lerp(2.0, 14, easeIn(fu)), rx = lerp(1075, W / 2 + 100, fu), ry = lerp(600, H / 2, fu);
-      g.save(); g.translate(rx, ry); g.scale(sc, sc); g.rotate(fu * 1.2);
-      roughPoly(g, [[-40, -50], [40, -50], [70, -36], [96, 10], [70, 18], [48, -8], [50, 60], [-50, 60], [-48, -8], [-70, 18], [-96, 10], [-70, -36]], 320, 3);
-      paint(g, C.verm, 321, 0.7, 0.8);
-      g.restore();
-    }
     return;
   }
   // на печь: подъём по приступкам

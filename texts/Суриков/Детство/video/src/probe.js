@@ -18,7 +18,7 @@ const PROBE_PAGES = [
   // 1: подъём на печь по кадрам и сидя
   (g, lab) => {
     for (let i = 0; i < 8; i++) {
-      const cx = (i % 4) * 480, cy = Math.floor(i / 4) * 540, c = i / 7;
+      const cx = (i % 4) * 480, cy = Math.floor(i / 4) * 540, c = [0, 0.12, 0.25, 0.4, 0.55, 0.7, 0.82, 0.92][i];
       g.save(); g.beginPath(); g.rect(cx + 2, cy + 2, 476, 536); g.clip();
       g.translate(cx + 240, cy + 270); g.scale(0.62, 0.62); g.translate(-2600, -600);
       drawInterior(g, 0, {});

@@ -244,3 +244,13 @@ function drawKidFront(g, x, y, s, pose, colors, seed = 0) {
   g.restore();
   return hands;
 }
+
+// где окажется варежка ближней руки (без рисования) — для верёвки и предметов в руке
+function drawKidHandOnly(x, y, s, dir, pose) {
+  const lean = pose.lean || 0;
+  const sh = [Math.sin(lean) * KID.TL, -Math.cos(lean) * KID.TL];
+  const p = pose.arms[0], base = [sh[0] + 4, sh[1] + 8];
+  const a = p.a + lean, j = addv(base, a, KID.UA), a2 = a + p.b, e = addv(j, a2, KID.FA), m = addv(e, a2, KID.MIT * 0.8);
+  const r = pose.rot || 0, cr = Math.cos(r), sr = Math.sin(r);
+  return [x + dir * s * (m[0] * cr - m[1] * sr), y + s * (m[0] * sr + m[1] * cr)];
+}

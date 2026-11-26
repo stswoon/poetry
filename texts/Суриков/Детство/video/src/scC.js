@@ -87,11 +87,14 @@ function scene6(g, t) {
   const sledX = heroX - 300, sledY = 752 + Math.sin(t * 5) * 2;
   drawSled(g, sledX, sledY, 1.1, 0, 70, 1);
   // герой: идёт вправо, сутулится, руки прямые (не согнёшь), ближняя держит верёвку
-  const wp = walkPose(dist, s, 0.3, { lean: 0.2, head: 0.18, arms: [{ a: -0.32, b: 0.08 }, { a: 0.12, b: 0.1 }], mouth: "sad", eyes: "open" });
+  const wp = walkPose(dist, s, 0.3, { lean: 0.2, head: 0.18, arms: [{ a: -0.55, b: 0.1 }, { a: 0.12, b: 0.1 }], mouth: "sad", eyes: "open" });
   const hipY = 775 - wp.hipUp;
-  const hands = drawKid(g, heroX, hipY, s, 1, wp.pose, "hero", 100);
-  // верёвка от ближней варежки к носу санок (поверх — варежка держит)
-  brush(g, [[hands.nearHand[0], hands.nearHand[1]], [lerp(hands.nearHand[0], sledX + 100, 0.5), 765], [sledX + 100, sledY - 10]], 5, C.linenD, 67, 0.3);
+  // верёвка: ровная, чуть провисшая, от варежки за спиной к загибу полоза (рисуется до героя — варежка поверх)
+  const pre = drawKidHandOnly(heroX, hipY, s, 1, wp.pose);
+  const nose = [sledX + 95 * 1.1, sledY - 10 * 1.1];
+  g.strokeStyle = css(C.linenD); g.lineWidth = 5; g.lineCap = "round";
+  g.beginPath(); g.moveTo(pre[0], pre[1]); g.quadraticCurveTo((pre[0] + nose[0]) / 2, (pre[1] + nose[1]) / 2 + 16, nose[0], nose[1]); g.stroke();
+  drawKid(g, heroX, hipY, s, 1, wp.pose, "hero", 100);
   // пар изо рта
   const pu = (t * 0.8) % 1;
   g.save(); g.globalAlpha = (1 - pu) * 0.6; roughEll(g, heroX + 70 * s + pu * 60, hipY - 120 * s - pu * 30, 14 + pu * 30, 10 + pu * 20, 68, 0.2); paint(g, C.white, 69, 0, 0.3); g.restore();
