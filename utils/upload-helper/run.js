@@ -6,6 +6,7 @@
  *   node run.js login   [--platform vk|rutube]
  *   node run.js probe   [--platform vk|rutube]
  *   node run.js upload  --job job.json | --video ... --title ...
+ *   node run.js playlists --job job.json [--url ...]   (VK: добавить опубликованный ролик в плейлисты)
  *
  * Подробности — README.md рядом.
  */
@@ -18,7 +19,7 @@ import { stdin as input, stdout as output } from 'node:process';
 import { config, resolvePath, fromRoot, platformTarget } from './lib/config.js';
 import { bool, list, number, option, parseArgs, UsageError } from '../lib/args.js';
 import { readJson, readText } from '../lib/files.js';
-import { Run, runDir } from '../lib/state.js';
+import { Run, runDir, slug } from '../lib/state.js';
 import {
   checkLogin,
   holdForManualPublish,
@@ -29,7 +30,7 @@ import {
   waitForUser,
 } from './lib/browser.js';
 import { probe } from './lib/probe.js';
-import { uploadVk } from './lib/vk.js';
+import { addPlaylistsVk, uploadVk } from './lib/vk.js';
 import { uploadRutube } from './lib/rutube.js';
 import { uploadYoutube } from './lib/youtube.js';
 import { setupYoutubeChannel } from './lib/youtube-channel.js';
@@ -50,6 +51,10 @@ main().catch(async (error) => {
 });
 
 async function main() {
+  // Другой профиль Chrome — например, копия, когда основной занят другой загрузкой.
+  const profile = option(args, 'profile', 'Укажи папку профиля: --profile "<папка>"');
+  if (profile) config.profileDir = path.resolve(profile);
+
   switch (command) {
     case 'login':
       return login();
@@ -59,6 +64,8 @@ async function main() {
       return upload();
     case 'channel':
       return channel();
+    case 'playlists':
+      return playlists();
     case 'help':
     case '--help':
     case '-h':
@@ -349,6 +356,86 @@ async function channel() {
 }
 
 /**
+ * VK: добавляет уже опубликованный ролик в плейлисты — например, когда при загрузке
+ * плейлист не выбрался. Меняет только плейлисты: сам ролик, описание и доступ не трогает.
+ * Ссылку берёт из --url или из последней загрузки с тем же названием (logs/).
+ */
+async function playlists() {
+  const jobArg = option(args, 'job', 'Укажи путь к job-файлу: --job job.json');
+  const jobPath = jobArg ? path.resolve(jobArg) : null;
+  if (jobPath && !fs.existsSync(jobPath)) throw new UsageError(`Job-файл не найден: ${jobPath}`);
+  const job = jobPath ? readJson(jobPath) : {};
+
+  const title = normalizeText(option(args, 'title', 'Укажи название: --title "Название - Фамилия"') ?? job.title ?? '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const names = args.playlist !== undefined ? list(args.playlist) : list(job.playlists);
+  const platforms = parsePlatforms(args.platform, ['vk']);
+  if (platforms.some((platform) => platform !== 'vk')) {
+    throw new UsageError('playlists умеет только VK: на RUTUBE и YouTube плейлисты ставятся при загрузке');
+  }
+  if (names.length === 0) throw new UsageError('Нет плейлистов: укажи --playlist "класс 3" или playlists в job.json');
+
+  const url = option(args, 'url', 'Укажи ссылку: --url "https://vkvideo.ru/video-…"') ?? findUploadedUrl('vk', title);
+  if (!url) {
+    throw new UsageError(`Не нашёл в logs/ загрузку «${title || '?'}» на VK — укажи ссылку: --url "https://vkvideo.ru/video-…"`);
+  }
+
+  const headless = bool(args.headless, config.headless, '--headless');
+  const dryRun = bool(args['dry-run'], false, '--dry-run');
+  const run = new Run(runDir(fromRoot('logs'), `${title || 'vk'} playlists`), { platform: 'vk', url });
+  console.log(`\nРолик: ${title || '(название не задано — проверки названия не будет)'}`);
+  console.log(`Ссылка: ${url}`);
+  console.log(`Плейлисты: ${names.join(', ')}`);
+  console.log(`Логи: ${run.dir}`);
+
+  const { context, page } = await openBrowser({ headless });
+  try {
+    const status = await checkLogin(page, 'vk');
+    if (!status.ok) throw new Error('vk: не залогинен — выполни: node run.js login --platform vk');
+
+    const result = await addPlaylistsVk({ page, url, playlists: names, expectTitle: title || null, dryRun, run });
+    for (const name of result.missing) {
+      run.warn(`VK: ролик не попал в плейлист «${name}» — его нет в кабинете или VK не нашёл его в подсказках`);
+    }
+    run.set({ stage: result.ok ? 'done' : 'failed', result });
+    console.log(`\nСостояние: ${run.statePath}`);
+    console.log(`RESULT_JSON: ${JSON.stringify({ ...result, url, stateFile: run.statePath })}`);
+    if (!result.ok) process.exitCode = 1;
+  } catch (error) {
+    run.fail(error);
+    await run.shot(page, 'vk-playlists-error');
+    console.log(
+      `RESULT_JSON: ${JSON.stringify({ ok: false, error: String(error?.message || error), url, stateFile: run.statePath })}`,
+    );
+    process.exitCode = 1;
+  } finally {
+    await context.close().catch(() => {});
+  }
+}
+
+/** Ссылка из последней удачной загрузки с этим названием: logs/<время>-<название>/state.json. */
+function findUploadedUrl(platform, title) {
+  if (!title) return null;
+  const logs = fromRoot('logs');
+  if (!fs.existsSync(logs)) return null;
+  const runs = fs
+    .readdirSync(logs)
+    .filter((name) => name.endsWith(`-${slug(title)}`))
+    .sort()
+    .reverse();
+  for (const name of runs) {
+    const file = path.join(logs, name, 'state.json');
+    if (!fs.existsSync(file)) continue;
+    const state = readJson(file);
+    const failed = new Set((state.failures ?? []).map((item) => item.platform));
+    const hit = (state.results ?? []).find((item) => item.platform === platform && item.url && !failed.has(platform));
+    if (hit) return hit.url;
+  }
+  return null;
+}
+
+/**
  * Что делать после частичного сбоя. Площадки, где ролик уже загружен, повторять нельзя:
  * новый запуск зальёт туда второй ролик.
  */
@@ -445,6 +532,12 @@ upload-helper — VK Видео, RUTUBE и YouTube через настоящий
                      --description-file "D:\\path\\desc.txt" --thumb "D:\\path\\cover.png" \\
                      --playlist "класс-7" --playlist "класс-11" [--platform vk] [--no-publish]
 
+  node run.js playlists --job job.json [--url "https://vkvideo.ru/video-…"] [--playlist "класс 3"] [--dry-run]
+      VK: добавляет уже опубликованный ролик в плейлисты (если при загрузке они не выбрались).
+      Меняет только плейлисты. Ссылку берёт из --url или из последней загрузки в logs/,
+      плейлисты — из job.json или --playlist; название ролика сверяется с job.json.
+      --dry-run — только показать, в каких плейлистах ролик и чего не хватает.
+
   node run.js channel --job channels/youtube.json
       Оформление канала YouTube: имя, handle, описание, аватар и баннер.
 
@@ -456,6 +549,7 @@ upload-helper — VK Видео, RUTUBE и YouTube через настоящий
                              опубликуешь и не закроешь окно (или Enter); до 60 мин.
       --keep-open            не закрывать браузер при ошибке (для разбора)
       --headless             без окна (не рекомендуется)
+      --profile <папка>      другой профиль Chrome (например, копия, если основной занят)
 
   Доступ «по ссылке» проверяется перед публикацией. Если он не подтвердился,
   ролик остаётся неопубликованным, а запуск завершается с ok:false.

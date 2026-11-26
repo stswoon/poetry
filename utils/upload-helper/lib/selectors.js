@@ -68,6 +68,16 @@ export const vk = {
   ],
   accessLinkValue: /У кого есть ссылка|по ссылке/i,
 
+  // Страница ролика в кабинете: «Редактировать» открывает окно «Редактирование видео».
+  editButton: [
+    { role: 'link', name: /^Редактировать$/i },
+    { role: 'button', name: /^Редактировать$/i },
+    { text: /^Редактировать$/i },
+  ],
+  editDialog: /Редактирование видео/,
+  save: [{ role: 'button', name: /^Сохранить$/i }],
+  cancel: [{ role: 'button', name: /^Отмена$/i }],
+
   next: [
     { role: 'button', name: /^Далее$/i },
     { role: 'button', name: /Продолжить/i },

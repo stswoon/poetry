@@ -1,10 +1,21 @@
 import { config } from './config.js';
 import { selectors } from './selectors.js';
 import { attachFile, findFirst, fillFirst, waitEnabled } from './ui.js';
-import { advanceToPublish, readAccess, selectAccessLink, selectPlaylistsVk, waitForVideoUrl } from './flows.js';
+import {
+  advanceToPublish,
+  hasChip,
+  readAccess,
+  readChips,
+  selectAccessLink,
+  selectPlaylistsVk,
+  waitForVideoUrl,
+} from './flows.js';
 import { goto } from './browser.js';
 
 const s = selectors.vk;
+
+const PLAYLISTS_HINT =
+  'После публикации добавь ролик командой: node run.js playlists --job <job.json> (только плейлисты, сам ролик не меняется)';
 
 export async function uploadVk({ page, job, run }) {
   const t = config.timeouts;
@@ -23,7 +34,7 @@ export async function uploadVk({ page, job, run }) {
     .filter({ hasText: /Новое видео|Публикация видео/ })
     .last();
   await modal.waitFor({ state: 'visible', timeout: 20000 }).catch(() => {});
-  const scope = (await modal.isVisible().catch(() => false)) ? modal : null;
+  let scope = (await modal.isVisible().catch(() => false)) ? modal : null;
 
   await run.shot(page, 'vk-upload-dialog');
 
@@ -54,6 +65,12 @@ export async function uploadVk({ page, job, run }) {
     );
   }
   run.info(`Файл прикреплён через ${attached.via}`);
+
+  // Окно могло открыться только со второй попытки: без scope плейлисты и доступ пойдут мимо формы.
+  if (!scope && (await isShown(modal, 20000))) {
+    scope = modal;
+    run.info('Окно загрузки найдено после повтора');
+  }
 
   run.step('vk: заполняю форму');
   const titleField = await findFirst(page, s.title, { timeout: t.formAppear, scope });
@@ -89,14 +106,15 @@ export async function uploadVk({ page, job, run }) {
 
   if (job.playlists.length > 0) {
     run.step('vk: плейлисты');
+    if (!scope && (await isShown(modal, 5000))) scope = modal;
     if (!scope) {
-      run.warn('VK: окно загрузки не найдено — плейлисты не выбраны');
+      run.warn(`VK: окно загрузки не найдено — плейлисты не выбраны. ${PLAYLISTS_HINT}`);
     } else {
       const { missing, selected } = await selectPlaylistsVk(page, scope, job.playlists);
       for (const name of job.playlists) {
-        if (missing.includes(name)) run.warn(`VK: плейлист «${name}» не найден в подсказках — его нет или VK не успел ответить. Проверь в кабинете и добавь ролик вручную`);
+        if (missing.includes(name)) run.warn(`VK: плейлист «${name}» не найден в подсказках — его нет или VK не успел ответить. ${PLAYLISTS_HINT}`);
         else if (selected.includes(name)) run.info(`Плейлист «${name}» выбран`);
-        else run.warn(`VK: плейлист «${name}» не появился в поле — проверь вручную`);
+        else run.warn(`VK: плейлист «${name}» не появился в поле. ${PLAYLISTS_HINT}`);
       }
       await run.shot(page, 'vk-playlists');
     }
@@ -249,20 +267,161 @@ async function waitForUploadFinish(page, run, timeout) {
   return false;
 }
 
+/**
+ * «Добавить» → «Загрузить видео». Пока кабинет не ожил, клик по «Добавить» меню не открывает:
+ * так было с «Встречей зимы», поэтому жмём до трёх раз.
+ */
 async function openUploadDialog(page) {
-  const add = await findFirst(page, s.addButton, { timeout: 15000 });
-  if (!add) return false;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const add = await findFirst(page, s.addButton, { timeout: 15000 });
+    if (!add) return false;
 
-  await add.click({ timeout: 15000 }).catch(() => {});
-  await page.waitForTimeout(1000);
+    await add.click({ timeout: 15000 }).catch(() => {});
+    await page.waitForTimeout(1000);
 
-  const item = await findFirst(page, s.uploadMenuItem, { timeout: 6000 });
-  if (!item) {
+    const item = await findFirst(page, s.uploadMenuItem, { timeout: 6000 });
+    if (item) {
+      await item.click({ timeout: 15000 }).catch(() => {});
+      await page.waitForTimeout(2000);
+      return true;
+    }
+
     await page.keyboard.press('Escape').catch(() => {});
-    return false;
+    await page.waitForTimeout(1500);
+  }
+  return false;
+}
+
+async function isShown(locator, timeout) {
+  return locator
+    .waitFor({ state: 'visible', timeout })
+    .then(() => true)
+    .catch(() => false);
+}
+
+/**
+ * Добавляет уже опубликованный ролик в плейлисты: страница ролика в кабинете →
+ * «Редактировать» → поле «Плейлист» → «Сохранить». Больше ничего не меняет:
+ * название, описание, обложка и доступ остаются как есть.
+ * expectTitle — защита от чужого ролика: при несовпадении названия ничего не сохраняем.
+ * dryRun — только показать, в каких плейлистах ролик и чего не хватает.
+ */
+export async function addPlaylistsVk({ page, url, playlists, expectTitle, dryRun = false, run }) {
+  const id = parseVideoUrl(url);
+  if (!id) throw new Error(`VK: не понял, что за ролик, по ссылке ${url}`);
+  const club = config.vk.cabinet.match(/@club(\d+)/)?.[1];
+  if (club && id.owner !== club) {
+    throw new Error(`VK: ролик ${url} не из канала club${club} — плейлисты не трогаю`);
   }
 
-  await item.click({ timeout: 15000 }).catch(() => {});
-  await page.waitForTimeout(2000);
-  return true;
+  run.step('vk: открываю «Редактирование видео»');
+  let form = await openEditForm(page, id.video, run);
+  const title = await readTitle(form);
+  run.info(`Ролик: ${title || '(название не прочитал)'}`);
+  if (expectTitle && normalize(title) !== normalize(expectTitle)) {
+    await closeEditForm(page, form);
+    throw new Error(`VK: по ссылке открылся «${title}», а ждали «${expectTitle}» — ничего не меняю`);
+  }
+
+  const before = await readChips(chipsField(form));
+  run.info(`Сейчас в плейлистах: ${before.length ? before.join(', ') : 'нет'}`);
+  const todo = playlists.filter((name) => !hasChip(before, name));
+  if (todo.length === 0) {
+    run.info('Ролик уже во всех нужных плейлистах');
+    await closeEditForm(page, form);
+    return { ok: true, changed: false, playlists: before, missing: [] };
+  }
+  if (dryRun) {
+    run.info(`--dry-run: добавил бы ${todo.join(', ')} — ничего не меняю`);
+    await closeEditForm(page, form);
+    return { ok: true, changed: false, dryRun: true, playlists: before, missing: [], wouldAdd: todo };
+  }
+
+  run.step('vk: выбираю плейлисты');
+  const { missing } = await selectPlaylistsVk(page, form, todo);
+  await run.shot(page, 'vk-edit-playlists');
+  const picked = await readChips(chipsField(form));
+  if (!todo.some((name) => hasChip(picked, name))) {
+    await closeEditForm(page, form);
+    return { ok: false, changed: false, playlists: before, missing: todo };
+  }
+
+  run.step('vk: сохраняю');
+  const save = await findFirst(page, s.save, { timeout: 10000, scope: form });
+  if (!save || !(await waitEnabled(page, save, { timeout: 15000 }))) {
+    await run.shot(page, 'vk-edit-no-save');
+    throw new Error('VK: кнопка «Сохранить» не нашлась или неактивна — плейлисты не сохранены');
+  }
+  await save.click({ timeout: 15000 });
+  if (!(await isHidden(form, 20000))) {
+    await run.shot(page, 'vk-edit-not-saved');
+    throw new Error('VK: после «Сохранить» окно не закрылось — проверь ролик в кабинете');
+  }
+
+  // Проверяем по заново открытой форме: так видно, что VK действительно сохранил.
+  run.step('vk: проверяю');
+  form = await openEditForm(page, id.video, run);
+  const after = await readChips(chipsField(form));
+  await run.shot(page, 'vk-edit-check');
+  await closeEditForm(page, form);
+  run.info(`Теперь в плейлистах: ${after.length ? after.join(', ') : 'нет'}`);
+
+  const absent = playlists.filter((name) => !hasChip(after, name));
+  return { ok: absent.length === 0, changed: true, playlists: after, missing: absent };
+}
+
+async function openEditForm(page, videoId, run) {
+  const target = new URL(config.vk.cabinet);
+  target.searchParams.set('section', 'video_video_analytics');
+  target.searchParams.set('vid', videoId);
+  await goto(page, target.toString());
+
+  const edit = await findFirst(page, s.editButton, { timeout: 30000 });
+  if (!edit) {
+    await run.shot(page, 'vk-no-edit');
+    throw new Error('VK: на странице ролика нет «Редактировать» — поправь lib/selectors.js → vk.editButton');
+  }
+  await edit.click({ timeout: 15000 });
+
+  const form = page.locator('[role="dialog"]').filter({ hasText: s.editDialog }).last();
+  if (!(await isShown(form, 20000))) {
+    await run.shot(page, 'vk-no-edit-form');
+    throw new Error('VK: окно «Редактирование видео» не открылось');
+  }
+  // Поле плейлистов дорисовывается после заголовка окна.
+  await chipsField(form).waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
+  return form;
+}
+
+async function closeEditForm(page, form) {
+  const cancel = await findFirst(page, s.cancel, { timeout: 3000, scope: form });
+  if (cancel) await cancel.click({ timeout: 10000 }).catch(() => {});
+  else await page.keyboard.press('Escape').catch(() => {});
+  await isHidden(form, 10000);
+}
+
+function chipsField(form) {
+  return form.locator('[class*="ChipsInput"]').first();
+}
+
+async function readTitle(form) {
+  const field = await findFirst(form.page(), s.title, { timeout: 5000, scope: form });
+  return field ? (await field.inputValue().catch(() => '')).trim() : '';
+}
+
+async function isHidden(locator, timeout) {
+  return locator
+    .waitFor({ state: 'hidden', timeout })
+    .then(() => true)
+    .catch(() => false);
+}
+
+function normalize(text) {
+  return String(text).replace(/\s+/g, ' ').trim().toLowerCase();
+}
+
+/** https://vkvideo.ru/video-242590990_456239068?list=… → { owner: '242590990', video: '456239068' } */
+function parseVideoUrl(url) {
+  const match = String(url || '').match(/video-?(\d+)_(\d+)/);
+  return match ? { owner: match[1], video: match[2] } : null;
 }

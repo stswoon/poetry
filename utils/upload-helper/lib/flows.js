@@ -119,13 +119,17 @@ export async function advanceToPublish(page, s, { steps = 3, scope = null } = {}
   return findFirst(page, s.publish, { timeout: 5000, scope });
 }
 
-/** Чипы в поле плейлистов: «класс 1 ×» → «класс 1». placeholder отбрасывается. */
+/**
+ * Чипы в поле плейлистов: «класс 1 ×» → «класс 1». placeholder отбрасывается.
+ * VK дублирует подпись чипа скрытым текстом, поэтому повторы убираем.
+ */
 export async function readChips(field, placeholder = /выберите плейлист/i) {
   const text = await field.innerText().catch(() => '');
-  return text
+  const chips = text
     .split('\n')
     .map((line) => line.replace(/[×✕✖]/g, '').trim())
     .filter((line) => line && !placeholder.test(line));
+  return [...new Set(chips)];
 }
 
 /** Точное совпадение чипа: «класс 1» не засчитывается за «класс 11». */
