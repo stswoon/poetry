@@ -26,8 +26,7 @@ def norm(s):
 
 
 def poem_lines():
-    body = (POEM / "poem.md").read_text(encoding="utf-8").split("## Текст (для ролика")[1].split("\n## ")[0]
-    body = body.split("\n", 1)[1]
+    body = (POEM / "poem.md").read_text(encoding="utf-8").split("\n## Текст\n")[1].split("\n## ")[0]
     stanzas = [b.strip() for b in body.strip().split("\n\n") if b.strip()]
     out = []
     for si, b in enumerate(stanzas, 1):
