@@ -1,0 +1,1572 @@
+<!doctype html>
+<!-- Собрано build.py из template.tpl и src/*.js — правьте их, не этот файл. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #e9eef2; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #e9eef2; }
+      #scene { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #fontwarm { position: absolute; left: -9999px; top: 0; }
+      @font-face { font-family: "DTitle"; src: local("SignPainter-HouseScript"), local("SignPainter HouseScript"), local("SignPainter"); }
+      @font-face { font-family: "DLine"; src: local("BradleyHandITCTT-Bold"), local("Bradley Hand Bold"), local("Bradley Hand"); }
+      .f1 { font-family: "DTitle"; }
+      .f2 { font-family: "DLine"; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="82.120" data-width="1920" data-height="1080">
+      <canvas id="scene" width="1920" height="1080" data-layout-allow-overflow></canvas>
+      <div id="fontwarm" data-layout-allow-overflow><span class="f1">Детство Иван Суриков 1866 ПОВТОР</span><span class="f2">Вот моя деревня; Вот мой дом родной; Вот качусь я в санках По горе крутой; Вот свернулись санки И я на бок — хлоп! Кубарем качуся Под гору, в сугроб. И друзья-мальчишки, Стоя надо мной, Весело хохочут Над моей бедой. Всё лицо и руки Залепил мне снег… Мне в сугробе горе, А ребятам смех! Но меж тем уж село Солнышко давно; Поднялася вьюга, На небе темно. Весь ты перезябнешь, — Руки не согнёшь, — И домой тихонько, Нехотя бредёшь. Ветхую шубёнку Скинешь с плеч долой; Заберёшься на печь К бабушке седой, И сидишь, ни слова… Тихо всё кругом; Только слышишь: воет Вьюга за окном. В уголке согнувшись, Лапти дед плетёт; Матушка за прялкой Молча лён прядёт. Избу освещает Огонёк светца; Зимний вечер длится, Длится без конца…</span></div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="4.000" data-duration="71.120" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="82.120" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>const CFG = {"v0":4.0,"total":82.12,"ev":{"V0":4.0,"total":82.12,"L1":4.015,"L2":5.632,"L3":7.365,"L4":9.405,"L5":11.772,"L6":13.262,"L7":15.0,"L8":16.205,"L9":18.97,"L10":20.45,"L11":21.607,"L12":22.957,"L13":25.445,"L14":27.04,"L15":28.73,"L16":30.28,"L17":32.932,"L18":34.65,"L19":36.238,"L20":37.62,"L21":40.025,"L22":41.79,"L23":43.448,"L24":44.903,"L25":47.465,"L26":48.867,"L27":50.528,"L28":51.928,"L29":54.093,"L30":56.215,"L31":57.723,"L32":59.568,"L33":62.02,"L34":63.55,"L35":65.138,"L36":66.495,"L37":68.938,"L38":70.42,"L39":71.885,"L40":73.617,"E1":5.37,"E2":7.157,"E3":9.197,"E4":10.372,"E5":13.15,"E6":14.64,"E7":15.993,"E8":17.52,"E9":20.21,"E10":21.447,"E11":22.825,"E12":23.885,"E13":26.79,"E14":28.238,"E15":29.92,"E16":31.455,"E17":34.287,"E18":35.715,"E19":37.335,"E20":38.547,"E21":41.46,"E22":42.943,"E23":44.555,"E24":45.977,"E25":48.653,"E26":50.117,"E27":51.685,"E28":52.92,"E29":55.635,"E30":57.242,"E31":59.312,"E32":60.602,"E33":63.36,"E34":64.688,"E35":66.308,"E36":67.7,"E37":70.162,"E38":71.432,"E39":73.277,"E40":74.925,"derevnya":4.695,"dom":6.385,"kachus":7.785,"gory":9.49,"svernulis":12.185,"hlop":14.095,"kubarem":15.0,"sugrob":16.91,"druzya":19.08,"hohochut":22.13,"bedoy":23.44,"lico":25.73,"sneg":27.742,"gore":29.475,"smeh":30.908,"selo":33.705,"vyuga":36.8,"temno":38.072,"perezyab":40.488,"domoy":43.51,"bredesh":45.43,"shubenku":47.933,"doloy":49.68,"pech":51.278,"babushke":52.0,"sidish":54.168,"tiho":56.215,"voet":58.808,"oknom":60.18,"ded":63.99,"matushka":65.138,"len":66.85,"izbu":68.938,"ogonek":70.42,"vecher":72.36,"konca":74.462,"fin":76.325},"lines":[{"n":1,"text":"Вот моя деревня;","stanza":1,"s":4.015,"e":5.37,"words":[{"w":"Вот","s":4.015,"e":4.41},{"w":"моя","s":4.41,"e":4.695},{"w":"деревня;","s":4.695,"e":5.37}]},{"n":2,"text":"Вот мой дом родной;","stanza":1,"s":5.632,"e":7.157,"words":[{"w":"Вот","s":5.632,"e":6.065},{"w":"мой","s":6.065,"e":6.385},{"w":"дом","s":6.385,"e":6.62},{"w":"родной;","s":6.62,"e":7.157}]},{"n":3,"text":"Вот качусь я в санках","stanza":1,"s":7.365,"e":9.197,"words":[{"w":"Вот","s":7.365,"e":7.785},{"w":"качусь","s":7.785,"e":8.285},{"w":"я","s":8.285,"e":8.415},{"w":"в","s":8.415,"e":8.46},{"w":"санках","s":8.46,"e":9.197}]},{"n":4,"text":"По горе крутой;","stanza":1,"s":9.405,"e":10.372,"words":[{"w":"По","s":9.405,"e":9.49},{"w":"горе","s":9.49,"e":9.865},{"w":"крутой;","s":9.865,"e":10.372}]},{"n":5,"text":"Вот свернулись санки","stanza":2,"s":11.772,"e":13.15,"words":[{"w":"Вот","s":11.772,"e":12.185},{"w":"свернулись","s":12.185,"e":12.64},{"w":"санки","s":12.64,"e":13.15}]},{"n":6,"text":"И я на бок — хлоп!","stanza":2,"s":13.262,"e":14.64,"words":[{"w":"И","s":13.262,"e":13.3},{"w":"я","s":13.365,"e":13.44},{"w":"на","s":13.44,"e":13.9},{"w":"бок","s":13.9,"e":14.095},{"w":"—","s":13.9,"e":14.095},{"w":"хлоп!","s":14.095,"e":14.64}]},{"n":7,"text":"Кубарем качуся","stanza":2,"s":15.0,"e":15.993,"words":[{"w":"Кубарем","s":15.0,"e":15.44},{"w":"качуся","s":15.44,"e":15.993}]},{"n":8,"text":"Под гору, в сугроб.","stanza":2,"s":16.205,"e":17.52,"words":[{"w":"Под","s":16.205,"e":16.37},{"w":"гору,","s":16.37,"e":16.84},{"w":"в","s":16.865,"e":16.91},{"w":"сугроб.","s":16.91,"e":17.52}]},{"n":9,"text":"И друзья-мальчишки,","stanza":3,"s":18.97,"e":20.21,"words":[{"w":"И","s":18.97,"e":19.08},{"w":"друзья-мальчишки,","s":19.08,"e":20.21}]},{"n":10,"text":"Стоя надо мной,","stanza":3,"s":20.45,"e":21.447,"words":[{"w":"Стоя","s":20.45,"e":20.865},{"w":"надо","s":20.865,"e":21.08},{"w":"мной,","s":21.08,"e":21.447}]},{"n":11,"text":"Весело хохочут","stanza":3,"s":21.607,"e":22.825,"words":[{"w":"Весело","s":21.607,"e":22.13},{"w":"хохочут","s":22.13,"e":22.825}]},{"n":12,"text":"Над моей бедой.","stanza":3,"s":22.957,"e":23.885,"words":[{"w":"Над","s":22.957,"e":23.105},{"w":"моей","s":23.105,"e":23.44},{"w":"бедой.","s":23.44,"e":23.885}]},{"n":13,"text":"Всё лицо и руки","stanza":4,"s":25.445,"e":26.79,"words":[{"w":"Всё","s":25.445,"e":25.73},{"w":"лицо","s":25.73,"e":26.14},{"w":"и","s":26.14,"e":26.285},{"w":"руки","s":26.285,"e":26.79}]},{"n":14,"text":"Залепил мне снег…","stanza":4,"s":27.04,"e":28.238,"words":[{"w":"Залепил","s":27.04,"e":27.54},{"w":"мне","s":27.54,"e":27.742},{"w":"снег…","s":27.742,"e":28.238}]},{"n":15,"text":"Мне в сугробе горе,","stanza":4,"s":28.73,"e":29.92,"words":[{"w":"Мне","s":28.73,"e":28.983},{"w":"в","s":28.983,"e":29.02},{"w":"сугробе","s":29.02,"e":29.475},{"w":"горе,","s":29.475,"e":29.92}]},{"n":16,"text":"А ребятам смех!","stanza":4,"s":30.28,"e":31.455,"words":[{"w":"А","s":30.28,"e":30.387},{"w":"ребятам","s":30.387,"e":30.908},{"w":"смех!","s":30.908,"e":31.455}]},{"n":17,"text":"Но меж тем уж село","stanza":5,"s":32.932,"e":34.287,"words":[{"w":"Но","s":32.932,"e":33.08},{"w":"меж","s":33.08,"e":33.303},{"w":"тем","s":33.303,"e":33.545},{"w":"уж","s":33.545,"e":33.705},{"w":"село","s":33.705,"e":34.287}]},{"n":18,"text":"Солнышко давно;","stanza":5,"s":34.65,"e":35.715,"words":[{"w":"Солнышко","s":34.65,"e":35.26},{"w":"давно;","s":35.26,"e":35.715}]},{"n":19,"text":"Поднялася вьюга,","stanza":5,"s":36.238,"e":37.335,"words":[{"w":"Поднялася","s":36.238,"e":36.8},{"w":"вьюга,","s":36.8,"e":37.335}]},{"n":20,"text":"На небе темно.","stanza":5,"s":37.62,"e":38.547,"words":[{"w":"На","s":37.62,"e":37.75},{"w":"небе","s":37.75,"e":38.072},{"w":"темно.","s":38.072,"e":38.547}]},{"n":21,"text":"Весь ты перезябнешь, —","stanza":6,"s":40.025,"e":41.46,"words":[{"w":"Весь","s":40.025,"e":40.343},{"w":"ты","s":40.343,"e":40.488},{"w":"перезябнешь,","s":40.488,"e":41.46},{"w":"—","s":40.488,"e":41.46}]},{"n":22,"text":"Руки не согнёшь, —","stanza":6,"s":41.79,"e":42.943,"words":[{"w":"Руки","s":41.79,"e":42.18},{"w":"не","s":42.18,"e":42.303},{"w":"согнёшь,","s":42.303,"e":42.943},{"w":"—","s":42.303,"e":42.943}]},{"n":23,"text":"И домой тихонько,","stanza":6,"s":43.448,"e":44.555,"words":[{"w":"И","s":43.448,"e":43.51},{"w":"домой","s":43.51,"e":43.918},{"w":"тихонько,","s":43.918,"e":44.555}]},{"n":24,"text":"Нехотя бредёшь.","stanza":6,"s":44.903,"e":45.977,"words":[{"w":"Нехотя","s":44.903,"e":45.43},{"w":"бредёшь.","s":45.43,"e":45.977}]},{"n":25,"text":"Ветхую шубёнку","stanza":7,"s":47.465,"e":48.653,"words":[{"w":"Ветхую","s":47.465,"e":47.933},{"w":"шубёнку","s":47.933,"e":48.653}]},{"n":26,"text":"Скинешь с плеч долой;","stanza":7,"s":48.867,"e":50.117,"words":[{"w":"Скинешь","s":48.867,"e":49.315},{"w":"с","s":49.315,"e":49.392},{"w":"плеч","s":49.392,"e":49.68},{"w":"долой;","s":49.68,"e":50.117}]},{"n":27,"text":"Заберёшься на печь","stanza":7,"s":50.528,"e":51.685,"words":[{"w":"Заберёшься","s":50.528,"e":51.15},{"w":"на","s":51.15,"e":51.278},{"w":"печь","s":51.278,"e":51.685}]},{"n":28,"text":"К бабушке седой,","stanza":7,"s":51.928,"e":52.92,"words":[{"w":"К","s":51.928,"e":52.0},{"w":"бабушке","s":52.0,"e":52.492},{"w":"седой,","s":52.492,"e":52.92}]},{"n":29,"text":"И сидишь, ни слова…","stanza":8,"s":54.093,"e":55.635,"words":[{"w":"И","s":54.093,"e":54.168},{"w":"сидишь,","s":54.168,"e":54.748},{"w":"ни","s":54.968,"e":55.102},{"w":"слова…","s":55.102,"e":55.635}]},{"n":30,"text":"Тихо всё кругом;","stanza":8,"s":56.215,"e":57.242,"words":[{"w":"Тихо","s":56.215,"e":56.572},{"w":"всё","s":56.572,"e":56.742},{"w":"кругом;","s":56.742,"e":57.242}]},{"n":31,"text":"Только слышишь: воет","stanza":8,"s":57.723,"e":59.312,"words":[{"w":"Только","s":57.723,"e":57.988},{"w":"слышишь:","s":57.988,"e":58.538},{"w":"воет","s":58.808,"e":59.312}]},{"n":32,"text":"Вьюга за окном.","stanza":8,"s":59.568,"e":60.602,"words":[{"w":"Вьюга","s":59.568,"e":60.047},{"w":"за","s":60.047,"e":60.18},{"w":"окном.","s":60.18,"e":60.602}]},{"n":33,"text":"В уголке согнувшись,","stanza":9,"s":62.02,"e":63.36,"words":[{"w":"В","s":62.02,"e":62.07},{"w":"уголке","s":62.07,"e":62.538},{"w":"согнувшись,","s":62.538,"e":63.36}]},{"n":34,"text":"Лапти дед плетёт;","stanza":9,"s":63.55,"e":64.688,"words":[{"w":"Лапти","s":63.55,"e":63.99},{"w":"дед","s":63.99,"e":64.188},{"w":"плетёт;","s":64.188,"e":64.688}]},{"n":35,"text":"Матушка за прялкой","stanza":9,"s":65.138,"e":66.308,"words":[{"w":"Матушка","s":65.138,"e":65.628},{"w":"за","s":65.628,"e":65.742},{"w":"прялкой","s":65.742,"e":66.308}]},{"n":36,"text":"Молча лён прядёт.","stanza":9,"s":66.495,"e":67.7,"words":[{"w":"Молча","s":66.495,"e":66.85},{"w":"лён","s":66.85,"e":67.227},{"w":"прядёт.","s":67.227,"e":67.7}]},{"n":37,"text":"Избу освещает","stanza":10,"s":68.938,"e":70.162,"words":[{"w":"Избу","s":68.938,"e":69.3},{"w":"освещает","s":69.3,"e":70.162}]},{"n":38,"text":"Огонёк светца;","stanza":10,"s":70.42,"e":71.432,"words":[{"w":"Огонёк","s":70.42,"e":70.877},{"w":"светца;","s":70.877,"e":71.432}]},{"n":39,"text":"Зимний вечер длится,","stanza":10,"s":71.885,"e":73.277,"words":[{"w":"Зимний","s":71.885,"e":72.36},{"w":"вечер","s":72.36,"e":72.735},{"w":"длится,","s":72.735,"e":73.277}]},{"n":40,"text":"Длится без конца…","stanza":10,"s":73.617,"e":74.925,"words":[{"w":"Длится","s":73.617,"e":74.177},{"w":"без","s":74.25,"e":74.462},{"w":"конца…","s":74.462,"e":74.925}]}],"probe":"","probePage":0};</script>
+    <script>
+// ---------- Общие функции: время, пружины, цвет, случайность по зерну ----------
+const W = 1920, H = 1080, TAU = Math.PI * 2;
+const EV = CFG.ev;
+const TOTAL = CFG.total;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, u) => a + (b - a) * u;
+const inv = (a, b, v) => clamp((v - a) / (b - a));
+const ease = (u) => { u = clamp(u); return u * u * (3 - 2 * u); };
+const easeOut = (u) => 1 - Math.pow(1 - clamp(u), 3);
+const easeIn = (u) => Math.pow(clamp(u), 3);
+const easeIO = (u) => { u = clamp(u); return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+const hash = (n) => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const hash2 = (i, j) => { const s = Math.sin(i * 127.1 + j * 311.7 + 17.13) * 43758.5453; return s - Math.floor(s); };
+// пружина Motion → u(0…1) с перелётом; кадр детерминирован
+function makeSpring(stiffness, damping) {
+  try {
+    const gen = Motion.spring({ keyframes: [0, 1], stiffness, damping, mass: 1 });
+    const N = 160, arr = [];
+    for (let i = 0; i <= N; i++) arr.push(gen.next(i * 1400 / N).value);
+    return (u) => { u = clamp(u); const f = u * N, i = Math.floor(f); return i >= N ? arr[N] : lerp(arr[i], arr[i + 1], f - i); };
+  } catch (e) { return (u) => { u = clamp(u); return 1 - Math.cos(u * 9) * Math.exp(-u * 6); }; }
+}
+const SPRING = makeSpring(260, 14);      // бодрая, с перелётом
+const SOFT = makeSpring(140, 18);        // мягкая
+// k — растяжение по времени: 1 — естественная скорость пружины (~0.8 с), 0.5 — вдвое быстрее
+const spr = (t, t0, k = 1) => (t <= t0 ? 0 : SPRING((t - t0) / (1.4 * k)));
+const sprS = (t, t0, k = 1) => (t <= t0 ? 0 : SOFT((t - t0) / (1.4 * k)));
+// «вкл» с плавным входом и выходом
+const win = (t, a, b, fi = 0.3, fo = 0.3) => Math.min(ease(inv(a, a + fi, t)), 1 - ease(inv(b - fo, b, t)));
+// колебание
+const wob = (t, f, ph = 0) => Math.sin(t * f * TAU + ph);
+const EASEQ = (u) => { u = clamp(u); return u * u; };
+// Камера: тряска по зерну (детерминированно от времени)
+const shake = (t, amp, f = 9, seed = 0) => [
+  amp * (Math.sin(t * f * 1.7 + seed) * 0.6 + Math.sin(t * f * 3.1 + seed * 2.3) * 0.4),
+  amp * (Math.sin(t * f * 2.3 + seed * 1.3) * 0.6 + Math.sin(t * f * 4.3 + seed * 0.7) * 0.4),
+];
+const seg = (t, a, b) => t >= a && t < b;
+
+// ---------- Гуашь сухой кистью: палитра, фактуры, рваные края, мазки ----------
+const mix = (a, b, u) => [lerp(a[0], b[0], u), lerp(a[1], b[1], u), lerp(a[2], b[2], u)];
+const css = (c, a = 1) => a >= 1 ? `rgb(${clamp(c[0], 0, 255) | 0},${clamp(c[1], 0, 255) | 0},${clamp(c[2], 0, 255) | 0})`
+  : `rgba(${clamp(c[0], 0, 255) | 0},${clamp(c[1], 0, 255) | 0},${clamp(c[2], 0, 255) | 0},${clamp(a).toFixed(3)})`;
+const reset = (g) => { g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = "source-over"; g.filter = "none"; };
+
+// гуашь: белила, холодный снег, охра, умбра, киноварь, индиго
+const C = {
+  white: [250, 248, 240], snow: [232, 240, 246], snowS: [176, 200, 226], snowD: [128, 156, 196],
+  sky: [168, 206, 232], skyL: [222, 236, 244], skyW: [250, 226, 196],
+  ochre: [214, 156, 64], ochreL: [236, 196, 110], umber: [118, 76, 44], umberD: [72, 46, 30], umberL: [164, 116, 70],
+  verm: [214, 58, 38], vermD: [158, 36, 28], vermL: [240, 118, 84],
+  indigo: [44, 52, 104], indigoD: [26, 30, 64], violet: [96, 80, 140], pink: [236, 160, 150], rose: [226, 124, 120],
+  pine: [44, 84, 70], pineD: [26, 54, 46], pineL: [76, 120, 96], birch: [236, 232, 222], birchD: [40, 36, 34],
+  skin: [246, 196, 164], skinD: [222, 150, 120], cheek: [236, 120, 110],
+  felt: [120, 118, 124], feltD: [82, 80, 88], fur: [150, 100, 60], furL: [210, 176, 130],
+  blue: [52, 104, 170], blueL: [110, 160, 214], green: [56, 130, 86], greenL: [110, 172, 120], yel: [240, 196, 60],
+  linen: [226, 214, 186], linenD: [184, 168, 136], amber: [255, 196, 96], amberL: [255, 232, 160], fire: [255, 150, 40],
+  log: [150, 98, 58], logD: [104, 66, 38], stove: [236, 226, 208], stoveD: [196, 180, 160], ink: [30, 28, 40],
+};
+
+// ----- фактуры (рисуются один раз) -----
+function makeCanvas(w, h) { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; }
+// сухая кисть: продольные штрихи (бесшовная плитка 512×512, альфа-маска)
+// строка y получает свою «щетинку»: яркость меняется по y быстро, по x медленно и периодично
+function brushTex(light, seed) {
+  const N = 512, c = makeCanvas(N, N), x = c.getContext("2d");
+  const im = x.createImageData(N, N);
+  const row = new Float32Array(N), ph = new Float32Array(N), fr = new Float32Array(N);
+  for (let y = 0; y < N; y++) {
+    // щетинки группами: плавная огибающая + мелкий шум
+    row[y] = hash(y * 1.31 + seed) * 0.6 + hash(Math.floor(y / 3) * 7.7 + seed) * 0.4;
+    ph[y] = hash(y * 2.17 + seed * 3) * TAU; fr[y] = 1 + Math.floor(hash(y * 5.1 + seed) * 4);
+  }
+  for (let y = 0; y < N; y++) {
+    for (let xx = 0; xx < N; xx++) {
+      const along = 0.5 + 0.5 * Math.sin(xx / N * TAU * fr[y] + ph[y]);   // периодично по x
+      let v = row[y] * (0.35 + 0.65 * along);
+      v = light ? Math.max(0, v - 0.55) * 2.2 : Math.max(0, v - 0.5) * 2.0;
+      const i = (y * N + xx) * 4;
+      const col = light ? 255 : 24;
+      im.data[i] = col; im.data[i + 1] = col; im.data[i + 2] = light ? 255 : 36; im.data[i + 3] = Math.min(255, v * 150);
+    }
+  }
+  x.putImageData(im, 0, 0);
+  return c;
+}
+// зерно бумаги
+function paperTex() {
+  const c = makeCanvas(256, 256), x = c.getContext("2d");
+  const im = x.createImageData(256, 256);
+  for (let i = 0; i < 256 * 256; i++) {
+    const px = i % 256, py = (i / 256) | 0;
+    const n = hash2(px, py) * 0.6 + hash2(px >> 2, py >> 2) * 0.4;
+    const v = 128 + (n - 0.5) * 90;
+    im.data[i * 4] = v; im.data[i * 4 + 1] = v; im.data[i * 4 + 2] = v; im.data[i * 4 + 3] = 255;
+  }
+  x.putImageData(im, 0, 0);
+  return c;
+}
+const _ctx0 = document.getElementById("scene").getContext("2d", { alpha: false });
+const TEX_D = _ctx0.createPattern(brushTex(false, 1), "repeat");
+const TEX_L = _ctx0.createPattern(brushTex(true, 2), "repeat");
+const TEX_P = _ctx0.createPattern(paperTex(), "repeat");
+const MAT = (a, s, ox, oy) => { const c = Math.cos(a) * s, sn = Math.sin(a) * s; return new DOMMatrix([c, sn, -sn, c, ox, oy]); };
+
+// наложить фактуру сухой кисти на только что построенный путь (fill или stroke)
+function texture(g, seed = 0, ang = 0, amt = 1, stroke = false, sc = 1) {
+  const a0 = g.globalAlpha;
+  TEX_D.setTransform(MAT(ang + (hash(seed) - 0.5) * 0.3, sc, hash(seed + 1) * 512, hash(seed + 2) * 512));
+  TEX_L.setTransform(MAT(ang + (hash(seed + 3) - 0.5) * 0.3, sc, hash(seed + 4) * 512, hash(seed + 5) * 512));
+  g.globalAlpha = a0 * clamp(0.55 * amt);
+  if (stroke) { g.strokeStyle = TEX_D; g.stroke(); g.strokeStyle = TEX_L; g.stroke(); }
+  else { g.fillStyle = TEX_D; g.fill(); g.fillStyle = TEX_L; g.fill(); }
+  g.globalAlpha = a0;
+}
+
+// рваный контур: многоугольник с подразбиением и шумом по нормали
+function roughPoly(g, pts, seed = 0, rough = 3, closed = true) {
+  const n = pts.length, out = [];
+  const m = closed ? n : n - 1;
+  for (let i = 0; i < m; i++) {
+    const a = pts[i], b = pts[(i + 1) % n];
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    const k = Math.max(1, Math.min(14, Math.round(len / 18)));
+    const nx = -(b[1] - a[1]) / (len || 1), ny = (b[0] - a[0]) / (len || 1);
+    for (let j = 0; j < k; j++) {
+      const u = j / k, r = (hash(seed + i * 31.7 + j * 3.3) - 0.5) * 2 * rough;
+      out.push([lerp(a[0], b[0], u) + nx * r, lerp(a[1], b[1], u) + ny * r]);
+    }
+  }
+  if (!closed) out.push(pts[n - 1]);
+  g.beginPath();
+  out.forEach((p, i) => (i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])));
+  if (closed) g.closePath();
+}
+// эллипс с неровным краем мазка
+function roughEll(g, cx, cy, rx, ry, seed = 0, rough = 0.05, rot = 0, N = 28) {
+  g.beginPath();
+  for (let i = 0; i <= N; i++) {
+    const a = i / N * TAU, r = 1 + (hash(seed + (i % N) * 7.1) - 0.5) * 2 * rough;
+    const x = Math.cos(a) * rx * r, y = Math.sin(a) * ry * r;
+    const px = cx + x * Math.cos(rot) - y * Math.sin(rot), py = cy + x * Math.sin(rot) + y * Math.cos(rot);
+    i ? g.lineTo(px, py) : g.moveTo(px, py);
+  }
+  g.closePath();
+}
+// залить текущий путь гуашью
+function paint(g, col, seed = 0, ang = 0, amt = 1, a = 1, sc = 1) {
+  const a0 = g.globalAlpha;
+  g.globalAlpha = a0 * a; g.fillStyle = css(col); g.fill();
+  texture(g, seed, ang, amt, false, sc);
+  g.globalAlpha = a0;
+}
+// мазок кистью по ломаной: толщина w, круглые концы, фактура внутри
+function brush(g, pts, w, col, seed = 0, amt = 0.8, a = 1) {
+  if (pts.length < 2) return;
+  const a0 = g.globalAlpha;
+  g.beginPath();
+  pts.forEach((p, i) => (i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])));
+  g.lineCap = "round"; g.lineJoin = "round"; g.lineWidth = w;
+  g.globalAlpha = a0 * a; g.strokeStyle = css(col); g.stroke();
+  const ang = Math.atan2(pts[pts.length - 1][1] - pts[0][1], pts[pts.length - 1][0] - pts[0][0]);
+  texture(g, seed, ang, amt, true);
+  g.globalAlpha = a0;
+}
+// мазок с сужением к концам (ветки, лыко, пряди): набор коротких отрезков
+function taper(g, pts, w0, w1, col, seed = 0, a = 1) {
+  const a0 = g.globalAlpha; g.globalAlpha = a0 * a;
+  g.strokeStyle = css(col); g.lineCap = "round";
+  for (let i = 0; i < pts.length - 1; i++) {
+    g.lineWidth = lerp(w0, w1, i / Math.max(1, pts.length - 2));
+    g.beginPath(); g.moveTo(pts[i][0], pts[i][1]); g.lineTo(pts[i + 1][0], pts[i + 1][1]); g.stroke();
+  }
+  g.globalAlpha = a0;
+}
+// небо: вертикальный градиент + широкие горизонтальные мазки
+function skyFill(g, x, y, w, h, top, bot, seed = 0, amt = 0.6) {
+  const gr = g.createLinearGradient(0, y, 0, y + h);
+  gr.addColorStop(0, css(top)); gr.addColorStop(1, css(bot));
+  g.fillStyle = gr; g.fillRect(x, y, w, h);
+  g.beginPath(); g.rect(x, y, w, h);
+  texture(g, seed, 0, amt, false, 2.2);
+}
+// бумага поверх всего кадра (экран): зерно multiply + лёгкая виньетка кисти
+function paperOver(g, a = 0.16) {
+  reset(g);
+  g.globalCompositeOperation = "multiply"; g.globalAlpha = a;
+  g.fillStyle = TEX_P; g.fillRect(0, 0, W, H);
+  g.globalCompositeOperation = "source-over"; g.globalAlpha = 1;
+}
+// снежинки-хлопья гуашью (детерминированно); wind — снос по x, speed — скорость падения, dens — сколько
+function snowfall(g, t, n, wind, speed, size, a = 0.9, seed = 0, streak = 0) {
+  g.save();
+  for (let i = 0; i < n; i++) {
+    const h1 = hash(i * 1.7 + seed), h2 = hash(i * 3.9 + seed), h3 = hash(i * 5.3 + seed);
+    const z = 0.4 + h3 * 0.9;
+    let y = (h2 * H * 1.2 + t * speed * z * 120) % (H * 1.2) - 60;
+    let x = (h1 * W * 1.4 + t * wind * z * 120 + Math.sin(t * 1.3 + i) * 18) % (W * 1.4);
+    if (x < 0) x += W * 1.4;
+    x -= W * 0.2;
+    const r = size * z * (0.6 + h1 * 0.8);
+    g.globalAlpha = a * (0.5 + 0.5 * z);
+    g.fillStyle = css(C.white);
+    if (streak > 0) {
+      g.strokeStyle = css(C.white); g.lineWidth = r * 1.2; g.lineCap = "round";
+      g.beginPath(); g.moveTo(x, y); g.lineTo(x - wind * streak * z, y - speed * streak * z * 0.4); g.stroke();
+    } else {
+      g.beginPath(); g.arc(x, y, r, 0, TAU); g.fill();
+    }
+  }
+  g.restore();
+}
+
+// ---------- Скелет героев: FK/IK, позы. Вперёд = +x в локальных координатах, вниз = +y ----------
+// угол конечности: 0 — вниз, + — вперёд (по взгляду героя)
+const dirv = (a) => [Math.sin(a), Math.cos(a)];
+const addv = (p, a, L) => [p[0] + Math.sin(a) * L, p[1] + Math.cos(a) * L];
+// IK двухзвенной конечности. knee=true: колено вперёд (нога), иначе локоть назад-вниз (рука)
+function ik2(base, target, L1, L2, knee) {
+  const dx = target[0] - base[0], dy = target[1] - base[1];
+  const d = clamp(Math.hypot(dx, dy), Math.abs(L1 - L2) + 0.01, L1 + L2 - 0.01);
+  const ang = Math.atan2(dx, dy);
+  const a1 = Math.acos(clamp((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d), -1, 1));
+  const inner = Math.acos(clamp((L1 * L1 + L2 * L2 - d * d) / (2 * L1 * L2), -1, 1));
+  const bend = Math.PI - inner;
+  return knee ? { a: ang + a1, b: bend } : { a: ang - a1, b: bend };
+}
+// смешать две позы (числа и вложенные массивы/объекты)
+function blendPose(p, q, u) {
+  if (typeof p === "number") return lerp(p, q, u);
+  if (Array.isArray(p)) return p.map((v, i) => blendPose(v, q[i], u));
+  if (p && typeof p === "object") { const o = {}; for (const k in p) o[k] = k in q ? blendPose(p[k], q[k], u) : p[k]; for (const k in q) if (!(k in o)) o[k] = q[k]; return o; }
+  return u < 0.5 ? p : q;
+}
+// поза по ключам [[t, pose], …] с плавным переходом
+function poseAt(keys, t) {
+  if (t <= keys[0][0]) return keys[0][1];
+  for (let i = 0; i < keys.length - 1; i++) {
+    const [t0, p0] = keys[i], [t1, p1] = keys[i + 1];
+    if (t < t1) return blendPose(p0, p1, easeIO(inv(t0, t1, t)));
+  }
+  return keys[keys.length - 1][1];
+}
+
+// ---------- Ребёнок сбоку ----------
+// размеры при масштабе 1 (рост стоя ≈ 290 px)
+const KID = { TL: 92, NECK: 10, HR: 31, UA: 44, FA: 40, TH: 50, SH: 48, MIT: 12 };
+const KID_COLORS = {
+  hero: { coat: C.verm, coatD: C.vermD, hat: C.fur, hatL: C.furL, boot: C.felt, bootD: C.feltD, mit: C.ochreL, mitD: C.ochre, pants: C.indigo, trim: C.white, belt: C.ochre, scarf: C.blue },
+  f1: { coat: C.blue, coatD: [34, 70, 124], hat: [70, 70, 80], hatL: [130, 130, 140], boot: C.umberL, bootD: C.umber, mit: C.verm, mitD: C.vermD, pants: C.umberD, trim: C.linen, belt: C.verm, scarf: C.yel, knit: false },
+  f2: { coat: C.green, coatD: [32, 90, 60], hat: C.verm, hatL: C.vermL, boot: C.feltD, bootD: C.ink, mit: C.yel, mitD: C.ochre, pants: C.umber, trim: C.linen, belt: C.yel, scarf: C.white, knit: true },
+  f3: { coat: C.ochre, coatD: [160, 110, 40], hat: C.blue, hatL: C.blueL, boot: C.felt, bootD: C.feltD, mit: C.green, mitD: [32, 90, 60], pants: C.indigoD, trim: C.white, belt: C.blue, scarf: C.verm, knit: true },
+};
+// стандартные позы (углы); arms/legs: [ближняя, дальняя]
+const KP = {
+  stand: { rot: 0, lean: 0.03, head: 0, arms: [{ a: 0.15, b: 0.3 }, { a: -0.1, b: 0.3 }], legs: [{ a: 0.02, b: 0.04 }, { a: -0.02, b: 0.04 }] },
+  sled: { rot: 0, lean: 0.12, head: -0.05, arms: [{ a: 0.9, b: 0.6 }, { a: 1.25, b: 0.25 }], legs: [{ a: 1.45, b: 0.35 }, { a: 1.12, b: 0.75 }] },
+  wave: { rot: 0, lean: 0.06, head: 0.08, arms: [{ a: 2.05, b: 0.75 }, { a: 0.85, b: 0.6 }], legs: [{ a: 1.45, b: 0.35 }, { a: 1.12, b: 0.75 }] },
+  tuck: { rot: 0, lean: 0.5, head: 0.3, arms: [{ a: 1.9, b: 1.2 }, { a: 2.6, b: 0.9 }], legs: [{ a: 1.9, b: 1.9 }, { a: 1.6, b: 1.6 }] },
+  flail: { rot: 0, lean: 0.1, head: -0.2, arms: [{ a: 2.6, b: 0.4 }, { a: -2.2, b: 0.5 }], legs: [{ a: 0.9, b: 0.4 }, { a: -0.5, b: 0.6 }] },
+};
+
+function head(g, s, c, pose, front, seed) {
+  // голова — круг; лицо смотрит вперёд (+x)
+  const R = KID.HR;
+  roughEll(g, 0, 0, R, R * 1.02, seed + 1, 0.02); paint(g, C.skin, seed + 2, 0.3, 0.35);
+  // румянец и снег
+  g.save(); g.globalAlpha = 0.55; roughEll(g, R * 0.42, R * 0.32, R * 0.26, R * 0.2, seed + 3, 0.1); g.fillStyle = css(C.cheek); g.fill(); g.restore();
+  // глаз, рот, нос (профиль 3/4)
+  const ex = R * 0.42, ey = -R * 0.1;
+  g.fillStyle = css(C.ink); g.strokeStyle = css(C.ink); g.lineCap = "round";
+  const eyes = pose.eyes || "open";
+  if (eyes === "closed" || eyes === "happy" || (pose.blink || 0) > 0.5) {
+    g.lineWidth = 3.4; g.beginPath();
+    if (eyes === "happy") g.arc(ex, ey + 3, 6, Math.PI * 1.1, Math.PI * 1.9); else { g.moveTo(ex - 6, ey + 1); g.lineTo(ex + 5, ey + 1); }
+    g.stroke();
+  } else { g.beginPath(); g.ellipse(ex, ey, 4.2, 5.4, 0, 0, TAU); g.fill(); g.fillStyle = "#fff"; g.beginPath(); g.arc(ex + 1.4, ey - 1.8, 1.4, 0, TAU); g.fill(); }
+  // бровь
+  g.lineWidth = 3; g.beginPath();
+  const sad = pose.mouth === "sad";
+  g.moveTo(ex - 8, ey - 11 + (sad ? -3 : 0)); g.lineTo(ex + 6, ey - 12 + (sad ? 3 : 0)); g.stroke();
+  // нос
+  roughEll(g, R * 0.96, R * 0.08, 6, 5.5, seed + 9, 0.05); g.fillStyle = css(C.skinD); g.fill();
+  // рот
+  const m = pose.mouth || "smile", mx = R * 0.55, my = R * 0.5;
+  g.lineWidth = 3.2; g.beginPath();
+  if (m === "smile") { g.arc(mx, my - 6, 9, 0.35 * Math.PI, 0.85 * Math.PI); g.stroke(); }
+  else if (m === "sad") { g.arc(mx, my + 6, 8, 1.2 * Math.PI, 1.8 * Math.PI); g.stroke(); }
+  else if (m === "o") { g.ellipse(mx + 2, my, 5, 6.5, 0, 0, TAU); g.fillStyle = css(C.vermD); g.fill(); }
+  else { // open / laugh
+    const op = m === "laugh" ? 0.6 + 0.4 * Math.abs(Math.sin((pose.tl || 0) * 18)) : 1;
+    g.moveTo(mx - 11, my - 4); g.quadraticCurveTo(mx, my + 14 * op, mx + 11, my - 5); g.closePath();
+    g.fillStyle = css(C.vermD); g.fill();
+  }
+  // шапка-ушанка или вязаная шапка
+  if (c.knit) {
+    roughPoly(g, [[-R * 1.02, -R * 0.15], [-R * 0.9, -R * 0.8], [-R * 0.2, -R * 1.18], [R * 0.6, -R * 0.95], [R * 1.0, -R * 0.3], [R * 0.95, -R * 0.12]], seed + 11, 2);
+    paint(g, c.hat, seed + 12, 0, 0.9);
+    brush(g, [[-R * 1.02, -R * 0.2], [R * 0.98, -R * 0.2]], 11, c.hatL, seed + 13, 0.7);
+    roughEll(g, -R * 0.45, -R * 1.2, 10, 10, seed + 14, 0.2); paint(g, c.hatL, seed + 15, 0, 0.7);
+  } else {
+    roughPoly(g, [[-R * 1.12, R * 0.55], [-R * 1.15, -R * 0.4], [-R * 0.7, -R * 1.12], [R * 0.3, -R * 1.2], [R * 0.95, -R * 0.75], [R * 1.05, -R * 0.35],
+      [R * 0.2, -R * 0.42], [-R * 0.3, -R * 0.2], [-R * 0.35, R * 0.6]], seed + 11, 2.4);
+    paint(g, c.hat, seed + 12, 0.4, 1);
+    brush(g, [[-R * 0.35, -R * 0.42], [R * 1.05, -R * 0.52]], 15, c.hatL, seed + 13, 0.8);
+  }
+  // снег на лице: лоб, щека, подбородок — глаз и рот остаются видны
+  if (pose.snowy > 0) {
+    g.save(); g.globalAlpha = clamp(pose.snowy);
+    const SP = [[-0.2, -0.45, 9, 6], [0.15, -0.5, 8, 5], [0.85, 0.15, 7, 6], [0.2, 0.75, 9, 6], [-0.5, 0.35, 8, 7], [0.95, -0.2, 5, 4]];
+    SP.forEach(([u, v, rx, ry], i) => { roughEll(g, u * R, v * R, rx, ry, seed + i * 5, 0.25); paint(g, C.white, seed + i, 0, 0.4); });
+    g.restore();
+  }
+}
+
+// нарисовать ребёнка сбоку. (x,y) — таз на экране, s — масштаб, dir — куда смотрит (1 вправо, -1 влево)
+function drawKid(g, x, y, s, dir, pose, colors, seed = 0) {
+  const c = KID_COLORS[colors] || colors;
+  g.save(); g.translate(x, y); g.scale(s * dir, s); g.rotate(pose.rot || 0);
+  const lean = pose.lean || 0;
+  const sh = [Math.sin(lean) * KID.TL, -Math.cos(lean) * KID.TL];
+  const hipN = [3, 0], hipF = [-3, 0];
+  const limb = (base, L, i, isLeg) => {
+    const p = isLeg ? pose.legs[i] : pose.arms[i];
+    const a = isLeg ? p.a : p.a + lean;
+    const j = addv(base, a, isLeg ? KID.TH : KID.UA);
+    const a2 = isLeg ? a - p.b : a + p.b;
+    const e = addv(j, a2, isLeg ? KID.SH : KID.FA);
+    return { j, e, a2 };
+  };
+  const drawLeg = (i, dark) => {
+    const L = limb(i ? hipF : hipN, 0, i, true);
+    const base = i ? hipF : hipN;
+    const k = dark ? 0.82 : 1;
+    brush(g, [base, L.j], 26, mix(c.pants, [0, 0, 0], 1 - k), seed + 20 + i, 0.6);
+    brush(g, [L.j, L.e], 25, mix(c.boot, [0, 0, 0], 1 - k), seed + 22 + i, 0.8);
+    // ступня-валенок вперёд, перпендикулярно голени
+    const fa = L.a2 - Math.PI / 2 + 0.05;
+    const toe = [L.e[0] - Math.sin(fa) * 0 + Math.sin(L.a2 + Math.PI / 2) * 24, L.e[1] + Math.cos(L.a2 + Math.PI / 2) * 24];
+    brush(g, [[L.e[0] - Math.sin(L.a2 + Math.PI / 2) * 4, L.e[1] - Math.cos(L.a2 + Math.PI / 2) * 4], toe], 22, mix(c.bootD, [0, 0, 0], 1 - k), seed + 24 + i, 0.7);
+    // подол шубки поверх бедра
+    const flap = [lerp(base[0], L.j[0], 0.62), lerp(base[1], L.j[1], 0.62)];
+    brush(g, [[base[0], base[1] - 8], flap], 40, mix(c.coat, [0, 0, 0], 1 - k * 0.98), seed + 26 + i, 0.7);
+    brush(g, [[lerp(base[0], flap[0], 0.85), lerp(base[1], flap[1], 0.85)], flap], 14, mix(c.trim, [0, 0, 0], 1 - k), seed + 28 + i, 0.5);
+    return L;
+  };
+  const drawArm = (i, dark) => {
+    const L = limb([sh[0] + (i ? -4 : 4), sh[1] + 8], 0, i, false);
+    const base = [sh[0] + (i ? -4 : 4), sh[1] + 8];
+    const k = dark ? 0.8 : 1;
+    const col = mix(c.coat, [0, 0, 0], 1 - k);
+    brush(g, [base, L.j], 24, col, seed + 30 + i, 0.7);
+    brush(g, [L.j, L.e], 21, col, seed + 32 + i, 0.7);
+    // меховой обшлаг и варежка
+    const cu = addv(L.e, L.a2, -5);
+    brush(g, [cu, L.e], 22, mix(c.trim, [0, 0, 0], 1 - k), seed + 34 + i, 0.4);
+    const m = addv(L.e, L.a2, KID.MIT * 0.8);
+    roughEll(g, m[0], m[1], KID.MIT * 1.05, KID.MIT * 1.25, seed + 36 + i, 0.08, -L.a2);
+    paint(g, mix(c.mit, [0, 0, 0], 1 - k), seed + 37 + i, 0, 0.6);
+    if (pose.snowy > 0) { g.save(); g.globalAlpha = clamp(pose.snowy); roughEll(g, m[0], m[1], KID.MIT * 1.1, KID.MIT * 0.9, seed + 38 + i, 0.3); paint(g, C.white, seed, 0, 0.3); g.restore(); }
+    return { L, hand: m };
+  };
+  // дальняя рука, дальняя нога, туловище, ближняя нога, голова, ближняя рука
+  const farArm = drawArm(1, true);
+  drawLeg(1, true);
+  // туловище-шубка
+  g.save(); g.rotate(lean);
+  const TL = KID.TL;
+  roughPoly(g, [[-24, -TL + 4], [18, -TL + 2], [28, -TL * 0.45], [30, 6], [-30, 8], [-30, -TL * 0.45]], seed + 40, 2.6);
+  paint(g, c.coat, seed + 41, 1.4, 0.9);
+  brush(g, [[-30, -16], [30, -16]], 12, c.belt, seed + 42, 0.6);
+  brush(g, [[22, -TL + 8], [28, 4]], 10, c.trim, seed + 43, 0.5);
+  // шарф/воротник
+  brush(g, [[-20, -TL + 4], [20, -TL + 2]], 18, c.scarf, seed + 44, 0.6);
+  g.restore();
+  drawLeg(0, false);
+  // голова
+  g.save(); g.translate(sh[0] + Math.sin(lean) * (KID.NECK + KID.HR), sh[1] - Math.cos(lean) * (KID.NECK + KID.HR) + 6);
+  g.rotate(lean * 0.6 + (pose.head || 0));
+  head(g, s, c, pose, false, seed + 50);
+  g.restore();
+  const nearArm = drawArm(0, false);
+  g.restore();
+  const r = pose.rot || 0, cr = Math.cos(r), sr = Math.sin(r);
+  const tw = (p) => [x + dir * s * (p[0] * cr - p[1] * sr), y + s * (p[0] * sr + p[1] * cr)];
+  return { farHand: tw(farArm.hand), nearHand: tw(nearArm.hand) };
+}
+
+// ---------- Ребёнок анфас (крупно; друзья над сугробом) ----------
+// pose: arms [{a,b}] — левая/правая (на экране), a: 0 вниз, + наружу; b: сгиб локтя внутрь-вверх
+function drawKidFront(g, x, y, s, pose, colors, seed = 0) {
+  const c = KID_COLORS[colors] || colors;
+  g.save(); g.translate(x, y); g.scale(s, s); g.rotate(pose.rot || 0);
+  const TL = KID.TL;
+  // руки за туловищем не прячем: рисуем после шубки
+  roughPoly(g, [[-34, -TL + 6], [34, -TL + 6], [44, 10], [-44, 10]], seed + 1, 3);
+  paint(g, c.coat, seed + 2, 1.5, 0.9);
+  brush(g, [[0, -TL + 14], [0, 8]], 12, c.trim, seed + 3, 0.5);
+  brush(g, [[-42, -14], [42, -14]], 12, c.belt, seed + 4, 0.6);
+  brush(g, [[-28, -TL + 6], [28, -TL + 6]], 20, c.scarf, seed + 5, 0.6);
+  const hands = [];
+  for (let i = 0; i < 2; i++) {
+    const sg = i ? 1 : -1, p = pose.arms[i];
+    const base = [sg * 34, -TL + 14];
+    const a = p.a;              // от вертикали наружу
+    const j = [base[0] + sg * Math.sin(a) * KID.UA, base[1] + Math.cos(a) * KID.UA];
+    const a2 = a - p.b;         // локоть сгибается внутрь
+    const e = [j[0] + sg * Math.sin(a2) * KID.FA, j[1] + Math.cos(a2) * KID.FA];
+    brush(g, [base, j], 24, c.coat, seed + 10 + i, 0.7);
+    brush(g, [j, e], 21, c.coat, seed + 12 + i, 0.7);
+    brush(g, [[lerp(j[0], e[0], 0.85), lerp(j[1], e[1], 0.85)], e], 22, c.trim, seed + 14 + i, 0.4);
+    const m = [e[0] + sg * Math.sin(a2) * 9, e[1] + Math.cos(a2) * 9];
+    roughEll(g, m[0], m[1], 13, 15, seed + 16 + i, 0.08); paint(g, c.mit, seed + 17 + i, 0, 0.6);
+    if (pose.snowy > 0) { g.save(); g.globalAlpha = clamp(pose.snowy); roughEll(g, m[0], m[1] - 2, 14, 11, seed + 18 + i, 0.3); paint(g, C.white, seed, 0, 0.3); g.restore(); }
+    hands.push(m);
+  }
+  // голова анфас
+  g.save(); g.translate(0, -TL - KID.NECK - KID.HR + 6); g.rotate(pose.head || 0);
+  const R = KID.HR;
+  roughEll(g, 0, 0, R * 1.05, R, seed + 20, 0.02); paint(g, C.skin, seed + 21, 0.2, 0.35);
+  g.save(); g.globalAlpha = 0.5;
+  roughEll(g, -R * 0.55, R * 0.3, R * 0.22, R * 0.16, seed + 22, 0.1); g.fillStyle = css(C.cheek); g.fill();
+  roughEll(g, R * 0.55, R * 0.3, R * 0.22, R * 0.16, seed + 23, 0.1); g.fill(); g.restore();
+  const eyes = pose.eyes || "open";
+  g.fillStyle = css(C.ink); g.strokeStyle = css(C.ink); g.lineCap = "round"; g.lineWidth = 3.4;
+  for (const sx of [-1, 1]) {
+    const ex = sx * R * 0.38, ey = -R * 0.08;
+    if (eyes === "happy" || eyes === "closed" || (pose.blink || 0) > 0.5) { g.beginPath(); if (eyes === "happy") g.arc(ex, ey + 4, 6, Math.PI * 1.1, Math.PI * 1.9); else { g.moveTo(ex - 6, ey + 1); g.lineTo(ex + 6, ey + 1); } g.stroke(); }
+    else { g.beginPath(); g.ellipse(ex, ey, 4.4, 5.6, 0, 0, TAU); g.fill(); g.fillStyle = "#fff"; g.beginPath(); g.arc(ex + 1.4, ey - 2, 1.5, 0, TAU); g.fill(); g.fillStyle = css(C.ink); }
+    const sad = pose.mouth === "sad";
+    g.beginPath(); g.moveTo(ex + sx * 8, ey - 12); g.lineTo(ex - sx * 7, ey - 12 - (sad ? 6 : 0)); g.stroke();
+  }
+  roughEll(g, 0, R * 0.14, 5.5, 5, seed + 24, 0.05); g.fillStyle = css(C.skinD); g.fill();
+  const m = pose.mouth || "smile", my = R * 0.5;
+  g.lineWidth = 3.2; g.beginPath();
+  if (m === "smile") { g.arc(0, my - 7, 10, 0.25 * Math.PI, 0.75 * Math.PI); g.stroke(); }
+  else if (m === "sad") { g.arc(0, my + 7, 9, 1.2 * Math.PI, 1.8 * Math.PI); g.stroke(); }
+  else { const op = m === "laugh" ? 0.6 + 0.4 * Math.abs(Math.sin((pose.tl || 0) * 18)) : 1; g.moveTo(-13, my - 4); g.quadraticCurveTo(0, my + 16 * op, 13, my - 4); g.closePath(); g.fillStyle = css(C.vermD); g.fill(); }
+  if (c.knit) {
+    roughPoly(g, [[-R * 1.08, -R * 0.15], [-R * 0.95, -R * 0.85], [0, -R * 1.25], [R * 0.95, -R * 0.85], [R * 1.08, -R * 0.15]], seed + 30, 2);
+    paint(g, c.hat, seed + 31, 0, 0.9);
+    brush(g, [[-R * 1.08, -R * 0.2], [R * 1.08, -R * 0.2]], 11, c.hatL, seed + 32, 0.7);
+    roughEll(g, 0, -R * 1.3, 11, 11, seed + 33, 0.2); paint(g, c.hatL, seed + 34, 0, 0.7);
+  } else {
+    roughPoly(g, [[-R * 1.2, R * 0.65], [-R * 1.22, -R * 0.45], [-R * 0.8, -R * 1.15], [R * 0.8, -R * 1.15], [R * 1.22, -R * 0.45], [R * 1.2, R * 0.65],
+      [R * 0.9, R * 0.6], [R * 0.95, -R * 0.35], [-R * 0.95, -R * 0.35], [-R * 0.9, R * 0.6]], seed + 30, 2.4);
+    paint(g, c.hat, seed + 31, 0.4, 1);
+    brush(g, [[-R * 1.15, -R * 0.45], [R * 1.15, -R * 0.45]], 16, c.hatL, seed + 32, 0.8);
+  }
+  if (pose.snowy > 0) {
+    g.save(); g.globalAlpha = clamp(pose.snowy);
+    const SP = [[-0.55, -0.42, 9, 6], [0.1, -0.5, 10, 5], [0.6, -0.45, 7, 5], [-0.8, 0.25, 7, 8], [0.82, 0.3, 8, 8], [-0.35, 0.82, 9, 6], [0.3, 0.85, 8, 6], [0, 0.95, 6, 4]];
+    SP.forEach(([u, v, rx, ry], i) => { roughEll(g, u * R, v * R, rx, ry, seed + i * 5, 0.25); paint(g, C.white, seed + i, 0, 0.4); });
+    g.restore();
+  }
+  g.restore();
+  g.restore();
+  return hands;
+}
+
+// ---------- Взрослые (сидя, сбоку), санки, кот, избы, деревья ----------
+const AD = { TL: 118, HR: 36, UA: 54, FA: 50, TH: 60 };
+const ADULT = {
+  baba: { top: [92, 104, 140], topD: [70, 80, 112], skirt: C.umber, sleeve: [92, 104, 140], scarf: C.indigo, dots: C.white, hair: [236, 234, 228], feet: C.feltD },
+  ded: { top: C.linen, topD: C.linenD, skirt: null, pants: [96, 108, 130], sleeve: C.linen, belt: C.verm, hair: [210, 206, 200], beard: [222, 218, 210], feet: C.ochreL },
+  mama: { top: C.linen, topD: C.linenD, skirt: [176, 52, 40], sleeve: C.linen, scarf: C.ochre, dots: C.verm, hair: [110, 70, 40], feet: C.ochreL, apron: [236, 228, 206] },
+};
+// сидящий взрослый: (x,y) — сиденье под тазом, seatH — высота сиденья до пола (px при s=1)
+// pose: { lean, head, hands: [[x,y] ближняя, [x,y] дальняя] в координатах от плеча, mouth, eyes, seatH }
+function drawAdult(g, x, y, s, dir, kind, pose, seed = 0) {
+  const c = ADULT[kind];
+  g.save(); g.translate(x, y); g.scale(s * dir, s);
+  const lean = pose.lean || 0, TL = AD.TL, seatH = pose.seatH || 110;
+  const sh = [Math.sin(lean) * TL, -Math.cos(lean) * TL];
+  const knee = [AD.TH, -6];
+  const foot = [AD.TH + 8, seatH - 8];
+  const arm = (i) => {
+    const base = [sh[0] + (i ? -6 : 6), sh[1] + 14];
+    const tgt = [sh[0] + pose.hands[i][0], sh[1] + pose.hands[i][1]];
+    const r = ik2(base, tgt, AD.UA, AD.FA, false);
+    const el = addv(base, r.a, AD.UA), hd = addv(el, r.a + r.b, AD.FA);
+    const col = i ? mix(c.sleeve, [0, 0, 0], 0.18) : c.sleeve;
+    brush(g, [base, el], 26, col, seed + 10 + i, 0.6);
+    brush(g, [el, hd], 22, col, seed + 12 + i, 0.6);
+    roughEll(g, hd[0], hd[1], 10, 11, seed + 14 + i, 0.06); paint(g, i ? C.skinD : C.skin, seed + 15 + i, 0, 0.3);
+    return hd;
+  };
+  const far = arm(1);
+  // ноги / юбка
+  if (c.skirt) {
+    roughPoly(g, [[-34, -26], [14, -30], [knee[0] + 14, knee[1] - 16], [knee[0] + 22, knee[1] + 8], [foot[0] + 14, foot[1] - 4], [foot[0] - 34, foot[1] - 2], [knee[0] - 26, 16], [-30, 16]], seed + 20, 2.5);
+    paint(g, c.skirt, seed + 21, 1.4, 0.8);
+    if (c.apron) { roughPoly(g, [[8, -26], [knee[0] + 10, knee[1] - 14], [knee[0] + 18, knee[1] + 8], [foot[0] + 8, foot[1] - 10], [foot[0] - 18, foot[1] - 10], [knee[0] - 6, 10]], seed + 22, 2); paint(g, c.apron, seed + 23, 1.5, 0.5); }
+    roughEll(g, foot[0] - 14, foot[1] + 1, 19, 9, seed + 26, 0.08); paint(g, mix(c.feet, [0, 0, 0], 0.25), seed + 27, 0, 0.5);
+    roughEll(g, foot[0] + 10, foot[1] + 3, 20, 9, seed + 24, 0.08); paint(g, c.feet, seed + 25, 0, 0.5);
+  } else {
+    for (let i = 1; i >= 0; i--) {
+      const dk = i ? 0.8 : 1, k = [knee[0] - i * 8, knee[1] - i * 2], f = [foot[0] - i * 12, foot[1]];
+      brush(g, [[0, -4], k], 30, mix(c.pants, [0, 0, 0], 1 - dk), seed + 26 + i, 0.6);
+      brush(g, [k, [f[0] - 4, f[1] - 14]], 26, mix(C.white, [0, 0, 0], 1 - dk * 0.92), seed + 28 + i, 0.6); // онучи
+      roughEll(g, f[0] + 6, f[1] - 2, 20, 10, seed + 30 + i, 0.1); paint(g, mix(c.feet, [0, 0, 0], 1 - dk), seed + 31 + i, 0.4, 0.9); // лапоть
+    }
+  }
+  // туловище
+  g.save(); g.rotate(lean);
+  roughPoly(g, [[-30, -TL + 6], [22, -TL + 4], [32, -TL * 0.4], [30, 8], [-34, 10], [-36, -TL * 0.45]], seed + 40, 2.5);
+  paint(g, c.top, seed + 41, 1.4, 0.8);
+  if (c.belt) brush(g, [[-34, -14], [30, -14]], 10, c.belt, seed + 42, 0.6);
+  g.restore();
+  // голова
+  g.save(); g.translate(sh[0] + Math.sin(lean) * (AD.HR + 6), sh[1] - Math.cos(lean) * (AD.HR + 6)); g.rotate(lean * 0.5 + (pose.head || 0));
+  const R = AD.HR;
+  if (kind === "baba" || kind === "mama") {
+    // платок
+    roughPoly(g, [[-R * 1.2, R * 0.9], [-R * 1.25, -R * 0.4], [-R * 0.6, -R * 1.18], [R * 0.5, -R * 1.15], [R * 1.08, -R * 0.55], [R * 0.7, -R * 0.4], [-R * 0.3, R * 0.2], [-R * 0.2, R * 1.1]], seed + 50, 2.4);
+    paint(g, c.scarf, seed + 51, 0.6, 0.8);
+    g.fillStyle = css(c.dots); for (let i = 0; i < 9; i++) { g.beginPath(); g.arc(-R * 0.9 + hash(i + seed) * R * 1.5, -R * 0.9 + hash(i * 3 + seed) * R * 1.6, 3, 0, TAU); g.fill(); }
+  }
+  roughEll(g, R * 0.12, R * 0.05, R * 0.92, R * 0.98, seed + 52, 0.02); paint(g, C.skin, seed + 53, 0.3, 0.3);
+  if (kind === "baba") { brush(g, [[-R * 0.5, -R * 0.62], [R * 0.6, -R * 0.75]], 12, c.hair, seed + 54, 0.4); }
+  if (kind === "mama") { brush(g, [[-R * 0.45, -R * 0.62], [R * 0.6, -R * 0.72]], 11, c.hair, seed + 54, 0.4); }
+  if (kind === "ded") {
+    roughEll(g, -R * 0.15, -R * 0.55, R * 0.95, R * 0.55, seed + 55, 0.1); paint(g, c.hair, seed + 56, 0, 0.5);
+    roughPoly(g, [[R * 0.1, R * 0.2], [R * 0.95, R * 0.25], [R * 0.8, R * 1.2], [R * 0.3, R * 1.55], [-R * 0.1, R * 0.9]], seed + 57, 3); paint(g, c.beard, seed + 58, 1.5, 0.5);
+  }
+  g.save(); g.globalAlpha = 0.45; roughEll(g, R * 0.5, R * 0.3, R * 0.22, R * 0.15, seed + 59, 0.1); g.fillStyle = css(C.cheek); g.fill(); g.restore();
+  g.strokeStyle = css(C.ink); g.fillStyle = css(C.ink); g.lineCap = "round"; g.lineWidth = 3.2;
+  const ex = R * 0.5, ey = -R * 0.12;
+  if ((pose.eyes || "open") !== "open" || (pose.blink || 0) > 0.5) { g.beginPath(); g.moveTo(ex - 6, ey + 1); g.quadraticCurveTo(ex, ey + 5, ex + 6, ey + 1); g.stroke(); }
+  else { g.beginPath(); g.ellipse(ex, ey, 3.6, 4.6, 0, 0, TAU); g.fill(); }
+  roughEll(g, R * 1.0, R * 0.1, 6.5, 6, seed + 60, 0.05); g.fillStyle = css(C.skinD); g.fill();
+  if (kind !== "ded") { g.lineWidth = 3; g.beginPath(); g.arc(R * 0.6, R * 0.38, 8, 0.3 * Math.PI, 0.8 * Math.PI); g.stroke(); }
+  g.restore();
+  const near = arm(0);
+  g.restore();
+  // координаты кистей в экранных единицах родителя
+  const tr = (p) => [x + p[0] * s * dir, y + p[1] * s];
+  return { near: tr(near), far: tr(far) };
+}
+
+// ---------- Санки: деревянные планки, загнутые полозья. (x,y) — середина сиденья ----------
+function drawSled(g, x, y, s, rot = 0, seed = 0, dir = 1) {
+  g.save(); g.translate(x, y); g.scale(s * dir, s); g.rotate(rot);
+  // полозья (дальний темнее)
+  for (let i = 1; i >= 0; i--) {
+    const dy = i ? -6 : 0, col = i ? C.umberD : C.umber;
+    brush(g, [[-86, 24 + dy], [60, 24 + dy], [86, 14 + dy], [96, -4 + dy], [86, -14 + dy]], 7, col, seed + i, 0.4);
+    brush(g, [[-60, 22 + dy], [-60, 4 + dy]], 6, col, seed + 3 + i, 0.4);
+    brush(g, [[50, 22 + dy], [50, 4 + dy]], 6, col, seed + 5 + i, 0.4);
+  }
+  roughPoly(g, [[-80, -4], [76, -4], [76, 6], [-80, 6]], seed + 7, 1.5); paint(g, C.ochre, seed + 8, 0, 0.8);
+  g.strokeStyle = css(C.umber); g.lineWidth = 2; for (let k = -60; k < 70; k += 26) { g.beginPath(); g.moveTo(k, -4); g.lineTo(k, 6); g.stroke(); }
+  g.restore();
+}
+
+// ---------- Кот, свернувшийся клубком (лапы поджаты) ----------
+function drawCat(g, x, y, s, t, seed = 0) {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  const br = 1 + 0.03 * Math.sin(t * 2.2);
+  roughEll(g, 0, -22 * br, 62, 30 * br, seed, 0.05); paint(g, [196, 120, 60], seed + 1, 0, 0.7);
+  brush(g, [[-50, -8], [-10, 4], [40, -2]], 16, [196, 120, 60], seed + 2, 0.6); // хвост вокруг
+  roughEll(g, 44, -30, 24, 20, seed + 3, 0.05); paint(g, [210, 136, 72], seed + 4, 0, 0.6);
+  roughPoly(g, [[30, -44], [36, -64], [46, -46]], seed + 5, 1); paint(g, [196, 120, 60], seed + 6, 0, 0.4);
+  roughPoly(g, [[50, -46], [62, -62], [62, -40]], seed + 7, 1); paint(g, [196, 120, 60], seed + 8, 0, 0.4);
+  g.strokeStyle = css(C.ink); g.lineWidth = 2.4; g.lineCap = "round";
+  g.beginPath(); g.arc(46, -30, 5, 0.1 * Math.PI, 0.9 * Math.PI); g.stroke();
+  g.beginPath(); g.arc(58, -30, 4, 0.1 * Math.PI, 0.9 * Math.PI); g.stroke();
+  for (const k of [-24, 0, 24]) brush(g, [[k - 8, -46], [k + 4, -38]], 5, [150, 84, 40], seed + k, 0.3);
+  g.restore();
+}
+
+// ---------- Изба снаружи: брёвна, крыша со снегом, окно с наличником, дым ----------
+function drawIzba(g, x, y, s, t, opt = {}, seed = 0) {
+  const lit = opt.lit || 0, w = 300, hW = 170;
+  g.save(); g.translate(x, y); g.scale(s, s);
+  // сруб
+  roughPoly(g, [[-w / 2, 0], [w / 2, 0], [w / 2, -hW], [-w / 2, -hW]], seed, 2); paint(g, opt.dusk ? mix(C.log, C.indigo, opt.dusk) : C.log, seed + 1, 0, 0.9);
+  for (let k = 1; k < 7; k++) brush(g, [[-w / 2 - 6, -k * hW / 7], [w / 2 + 6, -k * hW / 7]], 5, opt.dusk ? mix(C.logD, C.indigoD, opt.dusk) : C.logD, seed + k, 0.4);
+  // окно
+  const wx = 0, wy = -hW * 0.55;
+  roughPoly(g, [[wx - 44, wy - 46], [wx + 44, wy - 46], [wx + 44, wy + 40], [wx - 44, wy + 40]], seed + 10, 1.5); paint(g, C.white, seed + 11, 0, 0.4);
+  roughPoly(g, [[wx - 34, wy - 36], [wx + 34, wy - 36], [wx + 34, wy + 30], [wx - 34, wy + 30]], seed + 12, 1);
+  paint(g, mix(opt.dusk ? C.indigoD : C.indigo, C.amber, lit), seed + 13, 0, 0.5);
+  if (lit > 0) { g.save(); g.globalAlpha = lit * 0.5; g.globalCompositeOperation = "lighter"; const gr = g.createRadialGradient(wx, wy, 10, wx, wy, 180); gr.addColorStop(0, "rgba(255,190,90,0.9)"); gr.addColorStop(1, "rgba(255,190,90,0)"); g.fillStyle = gr; g.fillRect(wx - 200, wy - 200, 400, 400); g.restore(); }
+  g.strokeStyle = css(C.white); g.lineWidth = 5; g.beginPath(); g.moveTo(wx, wy - 36); g.lineTo(wx, wy + 30); g.moveTo(wx - 34, wy - 4); g.lineTo(wx + 34, wy - 4); g.stroke();
+  roughPoly(g, [[wx - 54, wy - 46], [wx, wy - 78], [wx + 54, wy - 46]], seed + 14, 1.5); paint(g, C.white, seed + 15, 0, 0.4);
+  // крыша со снегом
+  roughPoly(g, [[-w / 2 - 34, -hW + 6], [0, -hW - 130], [w / 2 + 34, -hW + 6]], seed + 20, 3); paint(g, opt.dusk ? mix(C.umberD, C.indigoD, opt.dusk) : C.umberD, seed + 21, 0.7, 0.8);
+  roughPoly(g, [[-w / 2 - 40, -hW + 2], [-w / 2 - 20, -hW - 14], [0, -hW - 138], [w / 2 + 20, -hW - 14], [w / 2 + 40, -hW + 2], [w / 2, -hW - 6], [0, -hW - 116], [-w / 2, -hW - 6]], seed + 22, 4);
+  paint(g, opt.dusk ? mix(C.snow, C.snowD, opt.dusk) : C.snow, seed + 23, 0, 0.5);
+  // труба и дым
+  roughPoly(g, [[60, -hW - 70], [86, -hW - 70], [86, -hW - 120], [60, -hW - 120]], seed + 24, 1.5); paint(g, C.stoveD, seed + 25, 0, 0.6);
+  if (opt.smoke !== 0) {
+    for (let i = 0; i < 7; i++) {
+      const u = ((t * 0.35 + i / 7) % 1), r = 14 + u * 40;
+      g.save(); g.globalAlpha = (1 - u) * 0.55;
+      roughEll(g, 73 + Math.sin(u * 5 + i) * 18 + u * (opt.wind || 30) * 3, -hW - 130 - u * 220, r, r * 0.8, seed + 30 + i, 0.15);
+      paint(g, opt.dusk ? mix(C.white, C.violet, opt.dusk) : C.white, seed + i, 0, 0.3); g.restore();
+    }
+  }
+  // сугроб у стены
+  roughPoly(g, [[-w / 2 - 50, 4], [-w / 2 + 20, -26], [w / 2 - 30, -20], [w / 2 + 60, 4]], seed + 40, 4); paint(g, opt.dusk ? mix(C.snow, C.snowD, opt.dusk * 0.8) : C.snow, seed + 41, 0, 0.5);
+  g.restore();
+}
+function drawPine(g, x, y, s, seed = 0, dusk = 0) {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  brush(g, [[0, 0], [0, -40]], 14, mix(C.umberD, C.indigoD, dusk), seed, 0.3);
+  const green = mix(C.pine, C.indigoD, dusk * 0.7), snow = mix(C.white, C.snowD, dusk);
+  for (let k = 0; k < 4; k++) {
+    const y0 = -30 - k * 60, wdt = 110 - k * 24;
+    roughPoly(g, [[-wdt, y0], [0, y0 - 100], [wdt, y0]], seed + k * 7, 4); paint(g, green, seed + k, -0.3, 0.8);
+    roughPoly(g, [[-wdt * 0.7, y0 - 24], [0, y0 - 98], [wdt * 0.55, y0 - 30], [0, y0 - 64]], seed + k * 9, 3); paint(g, snow, seed + k + 3, 0, 0.4);
+  }
+  g.restore();
+}
+function drawBirch(g, x, y, s, seed = 0, dusk = 0) {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  const bark = mix(C.birch, C.snowD, dusk);
+  brush(g, [[0, 0], [4, -200], [-2, -420]], 22, bark, seed, 0.4);
+  g.fillStyle = css(C.birchD);
+  for (let k = 0; k < 9; k++) { const yy = -30 - k * 44 - hash(k + seed) * 20; g.fillRect(-10 + hash(k * 3 + seed) * 8, yy, 8 + hash(k * 5 + seed) * 10, 4); }
+  for (let k = 0; k < 6; k++) {
+    const yy = -200 - k * 40, sg = k % 2 ? 1 : -1;
+    taper(g, [[0, yy], [sg * 40, yy - 30], [sg * 90, yy - 40 + hash(k) * 30]], 6, 1.5, mix(C.umberD, C.indigoD, dusk), seed + k);
+  }
+  g.restore();
+}
+
+// ---------- Сцены 0–1: вершина горы (титр) и спуск от первого лица до «хлоп!» ----------
+// холмы и лес вдали (полоса у горизонта), x0 — параллакс
+function farHills(g, hz, x0, dusk = 0, seed = 0) {
+  roughPoly(g, [[-200, hz + 30], [-200, hz - 40], [300 + x0 * 0.2, hz - 90], [800 + x0 * 0.2, hz - 50], [1300 + x0 * 0.2, hz - 110], [2100, hz - 40], [2100, hz + 30]], seed, 6);
+  paint(g, mix([150, 170, 200], C.violet, dusk), seed + 1, 0, 0.6);
+  // кромка леса
+  g.save();
+  for (let i = 0; i < 70; i++) {
+    const x = -100 + i * 32 + x0 * 0.35, hgt = 26 + hash(i + seed) * 30;
+    roughPoly(g, [[x - 16, hz + 6], [x, hz - hgt], [x + 16, hz + 6]], seed + i, 2);
+    paint(g, mix([90, 120, 130], C.indigoD, dusk), seed + i, 0, 0.4);
+  }
+  g.restore();
+}
+
+// ---- Сцена 0: вершина горы сбоку, мальчик на санках машет в камеру; титр ----
+function scene0(g, t) {
+  const t0 = 0, tEnd = EV.L1;
+  const push = easeIn(inv(tEnd - 0.7, tEnd, t));             // санки трогаются
+  const cx = lerp(0, 60, inv(0, tEnd, t)) + push * 200;       // проводка камеры
+  const z = lerp(1.0, 1.1, ease(inv(0, tEnd, t)));
+  const [sx, sy] = shake(t, 2.5, 3);
+  skyFill(g, 0, 0, W, H, C.skyL, C.skyW, 11, 0.5);
+  // солнце
+  roughEll(g, 1500, 230, 70, 70, 5, 0.04); paint(g, [255, 236, 190], 6, 0, 0.3);
+  g.save();
+  g.translate(W / 2 + sx, H / 2 + sy); g.scale(z, z); g.translate(-W / 2 - cx, -H / 2);
+  farHills(g, 640, -cx, 0, 20);
+  // деревня внизу (далеко справа)
+  for (let i = 0; i < 6; i++) drawIzba(g, 1250 + i * 130, 690 + (i % 2) * 14, 0.22, t, { smoke: 1, wind: 20 }, 300 + i * 13);
+  // склон горы: вершина слева, склон уходит вправо вниз
+  roughPoly(g, [[-300, 830], [900, 826], [1180, 860], [1600, 1000], [2300, 1200], [-300, 1200]], 40, 5);
+  paint(g, C.snow, 41, 0.1, 0.6);
+  brush(g, [[900, 836], [1180, 868], [1600, 1004], [2300, 1200]], 18, C.snowS, 42, 0.5, 0.7); // тень кромки
+  // берёзы на вершине
+  drawBirch(g, 60, 860, 1.5, 50); drawPine(g, -60, 880, 1.5, 60);
+  // мальчик на санках у кромки, лицом вправо (вниз по склону)
+  const sledX = 780 + push * 300, sledY = 790 + push * 60;
+  const rot = push * 0.18;
+  g.save(); g.translate(sledX, sledY); g.rotate(rot);
+  drawSled(g, 0, 0, 1.7, 0, 70, 1);
+  const pw = poseAt([[0, KP.sled], [0.4, KP.wave], [tEnd - 1.4, KP.wave], [tEnd - 0.9, KP.sled]], t);
+  const wav = Math.sin(t * 9) * 0.35 * win(t, 0.4, tEnd - 1.0, 0.3, 0.3);
+  const p = { ...pw, arms: [{ a: pw.arms[0].a + wav * 0.6, b: pw.arms[0].b - wav * 0.5 }, pw.arms[1]], head: pw.head + 0.1 * win(t, 0.4, tEnd - 1.0), mouth: "open", eyes: "open", blink: (t % 2.6) < 0.12 ? 1 : 0 };
+  drawKid(g, -20, -48, 1.7, 1, p, "hero", 100);
+  g.restore();
+  g.restore();
+  // титр
+  titleBlock(g, t, 150, 290, 1, 0.3);
+  // снег слегка падает
+  snowfall(g, t, 60, 0.4, 0.6, 3.5, 0.7, 7);
+}
+
+// ---- Сцена 1: спуск от первого лица ----
+// пройденный путь (м) — интеграл скорости
+function sledV(t) {
+  const a = EV.L1, b = EV.kachus, c = EV.L5;
+  if (t < b) return lerp(0.8, 2.2, inv(a, b, t));
+  if (t < c) return lerp(2.2, 13, easeOut(inv(b, b + 1.6, t)));
+  return 13;
+}
+function sledDist(t) {
+  // численно: шаг 1/60
+  let d = 0; const a = EV.L1 - 0.2;
+  for (let x = a; x < t; x += 1 / 60) d += sledV(x) / 60;
+  return d;
+}
+const TREES = [];
+for (let i = 0; i < 60; i++) TREES.push({ z: 6 + i * 4.2, x: (i % 2 ? 1 : -1) * (4.5 + hash(i * 3.3) * 6), kind: hash(i * 1.9) < 0.45 ? "birch" : "pine", s: 0.8 + hash(i) * 0.5 });
+function scene1(g, t) {
+  const d = sledDist(t);
+  const tH = EV.hlop;
+  // крен и занос после «свернулись»
+  const swerve = ease(inv(EV.svernulis, tH, t));
+  const crash = inv(tH - 0.05, tH + 0.25, t);
+  let roll = Math.sin(t * 3.1) * 0.02 + swerve * 0.35 * Math.sin((t - EV.svernulis) * 6) + swerve * 0.25 + easeIn(crash) * 1.5;
+  if (t > tH + 0.25) roll = 1.75 + (t - tH - 0.25) * 4.5;  // кувырок камеры
+  const v = sledV(t);
+  const [sx, sy] = shake(t, 1.5 + v * 0.9, 11);
+  const hz = 430 - 40 * ease(inv(EV.L1, EV.kachus, t)) + swerve * 60;
+  const camX = swerve * 2.5 * Math.sin((t - EV.svernulis) * 4);
+  const f = 820, Hc = 1.3;
+  reset(g);
+  g.fillStyle = css(C.snow); g.fillRect(0, 0, W, H);
+  g.save();
+  g.translate(W / 2 + sx, H / 2 + sy); g.rotate(roll); g.scale(1.25, 1.25); g.translate(-W / 2, -H / 2);
+  skyFill(g, -400, -600, W + 800, hz + 600, C.sky, C.skyW, 13, 0.5);
+  roughEll(g, 1450 - camX * 30, hz - 180, 60, 60, 5, 0.04); paint(g, [255, 236, 190], 6, 0, 0.3);
+  farHills(g, hz, -camX * 40, 0, 20);
+  // долина с деревней ниже горизонта, приближается
+  const vz = 1 + d * 0.012;
+  roughPoly(g, [[-400, hz + 4], [W + 400, hz + 4], [W + 400, hz + 200], [-400, hz + 200]], 30, 3); paint(g, mix(C.snow, C.snowS, 0.4), 31, 0, 0.5);
+  const homeI = 3;
+  for (let i = 0; i < 7; i++) {
+    const hx = W / 2 + (i - 3) * 150 * vz - camX * 60, hy = hz + 70 + (i % 2) * 14;
+    drawIzba(g, hx, hy, 0.2 * vz, t, { smoke: 1, wind: 15, lit: 0 }, 300 + i * 13);
+    if (i === homeI) {
+      // «дом родной»: кисть обводит дом красным кольцом
+      const u = ease(inv(EV.dom - 0.1, EV.dom + 0.6, t)), fade = 1 - inv(EV.L4, EV.L4 + 0.6, t);
+      if (u > 0 && fade > 0) {
+        g.save(); g.globalAlpha = fade;
+        const pts = []; for (let k = 0; k <= 40 * u; k++) { const a = -2.2 + k / 40 * 6.6; pts.push([hx + Math.cos(a) * 72 * vz, hy - 38 * vz + Math.sin(a) * 58 * vz]); }
+        if (pts.length > 1) brush(g, pts, 9, C.verm, 77, 0.6);
+        g.restore();
+      }
+    }
+  }
+  // склон: от камеры до кромки горы
+  roughPoly(g, [[-400, H + 600], [-400, hz + 120], [W + 400, hz + 120], [W + 400, H + 600]], 34, 4);
+  paint(g, C.snow, 35, 0, 0.5, 1, 1.6);
+  // колея: две борозды к точке схода
+  const vpx = W / 2 - camX * 30;
+  for (const sg of [-2, -1, 1, 2]) brush(g, [[vpx + sg * 6, hz + 124], [vpx + sg * 120, hz + 300], [vpx + sg * 300 + Math.sin(sg) * 60, H + 200]], 10, C.snowS, 36 + sg, 0.4, 0.55);
+  // бугорки склона: короткие мазки-тени вразброс, бегут на камеру
+  for (let k = 0; k < 22; k++) {
+    const zz = ((k * 2.3 + hash(k) * 3 - d) % 50 + 50) % 50 + 1.6;
+    const lx = (hash(k * 4.1) - 0.5) * 16;
+    const y = hz + 120 + Hc * f / zz * 0.55, x = vpx + lx * f / zz;
+    if (y > H + 200) continue;
+    g.save(); g.globalAlpha = clamp(1.3 - zz / 40) * 0.55;
+    roughEll(g, x, y, 260 / zz + 4, 60 / zz + 2, 40 + k, 0.2); paint(g, C.snowS, 40 + k, 0, 0.4);
+    g.restore();
+  }
+  // деревья по сторонам: от дальних к ближним
+  const vis = TREES.map((tr) => ({ ...tr, zz: tr.z - d })).filter((tr) => tr.zz > 0.6 && tr.zz < 60).sort((a, b) => b.zz - a.zz);
+  for (const tr of vis) {
+    const sc = f / tr.zz * 0.006 * tr.s;
+    const x = vpx + (tr.x - camX) * f / tr.zz, y = hz + 120 + Hc * f / tr.zz * 0.55;
+    g.save(); g.globalAlpha = clamp((60 - tr.zz) / 12);
+    if (tr.kind === "birch") drawBirch(g, x, y, sc * 1.1, 500 + tr.z); else drawPine(g, x, y, sc * 1.2, 600 + tr.z);
+    g.restore();
+  }
+  g.restore();
+  // скоростные линии по краям кадра
+  const vs = clamp((v - 4) / 9);
+  if (vs > 0) {
+    g.save();
+    for (let i = 0; i < 26; i++) {
+      const a = hash(i * 1.3) * TAU, ph = (t * 3.2 + hash(i * 2.7)) % 1;
+      const r0 = 520 + ph * 700, r1 = r0 + 160 + vs * 260;
+      g.globalAlpha = vs * 0.55 * (1 - ph);
+      brush(g, [[W / 2 + Math.cos(a) * r0 * 1.5, hz + 140 + Math.sin(a) * r0 * 0.7], [W / 2 + Math.cos(a) * r1 * 1.5, hz + 140 + Math.sin(a) * r1 * 0.7]], 6 + vs * 6, C.white, 200 + i, 0.3);
+    }
+    g.restore();
+  }
+  // передний план: загнутые полозья по краям, верёвка, обе варежки (в экранных координатах)
+  const [fx, fy] = shake(t, 3 + v * 1.4, 14, 3);
+  g.save(); g.translate(fx, fy + 10); g.translate(W / 2, H); g.rotate(roll * 0.35); g.translate(-W / 2, -H);
+  const mitY = 935 + Math.sin(t * 7) * 8;
+  for (const sg of [-1, 1]) {
+    const bx = W / 2 + sg * 820;
+    // полоз: снизу из угла вверх и загиб к центру
+    brush(g, [[bx + sg * 40, H + 60], [bx, 820], [bx - sg * 20, 700], [bx - sg * 80, 640], [bx - sg * 130, 660], [bx - sg * 120, 710]], 34, C.umber, 80 + sg, 0.7);
+    brush(g, [[bx + sg * 30, H + 60], [bx - sg * 6, 820], [bx - sg * 24, 712]], 12, C.umberL, 81 + sg, 0.5, 0.8);
+    // край сиденья в углу
+    roughPoly(g, [[bx - sg * 60, H + 40], [bx - sg * 40, 1010], [bx + sg * 120, 1000], [bx + sg * 140, H + 40]], 82 + sg, 3); paint(g, C.ochre, 83 + sg, 0, 0.8);
+    // верёвка от загиба полоза к варежке
+    const mx = W / 2 + sg * 640;
+    brush(g, [[bx - sg * 120, 700], [bx - sg * 110, 820], [mx + sg * 20, mitY - 10]], 7, C.linenD, 95 + sg, 0.3);
+    // рукав и варежка
+    brush(g, [[W / 2 + sg * 520, H + 80], [mx, mitY + 40]], 78, C.verm, 96 + sg, 0.7);
+    brush(g, [[mx + sg * 4, mitY + 52], [mx - sg * 6, mitY + 30]], 80, C.white, 97 + sg, 0.4);
+    roughEll(g, mx + sg * 6, mitY, 50, 42, 98 + sg, 0.08, sg * 0.3); paint(g, C.ochreL, 99 + sg, 0, 0.6);
+    brush(g, [[mx - sg * 30, mitY - 20], [mx - sg * 44, mitY + 4]], 20, C.ochreL, 100 + sg, 0.5); // большой палец
+  }
+  g.restore();
+  // «хлоп!»: снег в объектив
+  const sp = inv(tH - 0.02, tH + 0.2, t);
+  if (sp > 0) {
+    lensSnow(g, t, ease(sp) * (1 - 0.4 * inv(tH + 0.8, EV.L7, t)), 120);
+  }
+}
+// снег, налипший на объектив: пятна по краям и белая вспышка
+function lensSnow(g, t, amt, seed) {
+  reset(g);
+  g.save(); g.globalAlpha = clamp(amt * 0.9);
+  for (let i = 0; i < 26; i++) {
+    const a = hash(i + seed) * TAU, r = 380 + hash(i * 2 + seed) * 520;
+    const x = W / 2 + Math.cos(a) * r * 1.4, y = H / 2 + Math.sin(a) * r * 0.8;
+    roughEll(g, x, y, 90 + hash(i * 3 + seed) * 180, 70 + hash(i * 4 + seed) * 140, seed + i, 0.18, a);
+    paint(g, C.white, seed + i, a, 0.5);
+  }
+  g.restore();
+  const flash = 1 - inv(0, 0.5, amt > 0 ? (t - EV.hlop) : 0);
+  if (t >= EV.hlop && flash > 0) { g.fillStyle = css(C.white, flash * 0.85); g.fillRect(0, 0, W, H); }
+}
+
+// ---------- Сцены 2–4: повтор кувырка, вид из сугроба, лицо в снегу и смех ----------
+// склон в повторе: y = slopeY(x)
+const slopeY = (x) => 300 + x * 0.42;
+// знак «ПОВТОР ×0.5» с мигающей точкой
+function replayBadge(g, t) {
+  reset(g);
+  const x = 1440, y = 70;
+  roughPoly(g, [[x - 10, y - 4], [x + 420, y - 10], [x + 426, y + 66], [x - 6, y + 70]], 700, 3); paint(g, C.verm, 701, 0, 0.6, 0.95);
+  if (Math.floor(t * 2.5) % 2 === 0) { roughEll(g, x + 34, y + 30, 13, 13, 702, 0.1); g.fillStyle = css(C.white); g.fill(); }
+  g.font = '44px "DLine"'; g.fillStyle = css(C.white); g.textBaseline = "middle"; g.textAlign = "left";
+  g.fillText("ПОВТОР ×0.5", x + 62, y + 32);
+}
+// ---- Сцена 2: повтор сбоку — кувырок, санки отдельно, бух в сугроб ----
+function scene2(g, t) {
+  const a = EV.L7 - 0.15, b = EV.sugrob, e = EV.L9;
+  const u = inv(a, b + 0.1, t);                  // путь кувырком до сугроба
+  const bx = lerp(200, 2350, u);                 // мировая x мальчика
+  const land = inv(b - 0.05, b + 0.25, t);       // въезд в сугроб
+  const fx = lerp(bx, 2420, ease(inv(b - 0.5, b + 0.3, t)));
+  const camX = fx - 900, camY = slopeY(Math.min(fx, 2300)) - 690;
+  const Z = 1.35;
+  const [sx, sy] = shake(t, 3 + 10 * win(t, b, b + 0.5, 0.02, 0.4), 10, 5);
+  skyFill(g, 0, 0, W, H, C.skyL, C.skyW, 21, 0.5);
+  g.save(); g.translate(-camX * 0.15 + sx * 0.3, -camY * 0.1 + 40);
+  farHills(g, 520, -camX * 0.3, 0, 22);
+  g.restore();
+  g.save(); g.translate(W / 2, H / 2); g.scale(Z, Z); g.translate(-W / 2, -H / 2); g.translate(-camX + sx, -camY + sy);
+  // склон
+  roughPoly(g, [[-400, slopeY(-400)], [2300, slopeY(2300)], [3400, slopeY(2300) + 40], [3400, 2600], [-400, 2600]], 23, 5);
+  paint(g, C.snow, 24, 0.4, 0.6, 1, 1.6);
+  for (let k = 0; k < 9; k++) { const x = k * 300 + 60; brush(g, [[x, slopeY(x) + 20], [x + 140, slopeY(x + 140) + 26]], 9, C.snowS, 25 + k, 0.4, 0.6); }
+  // деревья на склоне (позади)
+  for (let k = 0; k < 6; k++) { const x = 100 + k * 420; if (k % 2) drawBirch(g, x, slopeY(x) - 10, 0.9, 30 + k); else drawPine(g, x, slopeY(x) - 6, 0.9, 40 + k); }
+  // сугроб внизу: задняя часть
+  const dx = 2420, dy = slopeY(2300) + 30;
+  roughPoly(g, [[dx - 260, dy + 40], [dx - 170, dy - 90], [dx - 20, dy - 150], [dx + 160, dy - 100], [dx + 280, dy + 40]], 26, 6); paint(g, C.snow, 27, 0, 0.5);
+  // санки летят отдельно, вращаясь
+  const su = inv(EV.L7 - 0.1, b + 0.6, t);
+  const sxw = lerp(260, 2150, su), syw = slopeY(sxw) - 60 - Math.sin(su * Math.PI) * 220;
+  drawSled(g, sxw, syw, 1.15, su * 7.5, 71, 1);
+  // мальчик: кувырок колесом по склону
+  if (t < b) {
+    const by = slopeY(bx) - 95 - Math.abs(Math.sin(u * Math.PI * 4)) * 70;
+    const rot = u * Math.PI * 2 * 3.0;
+    const ph = Math.sin(u * Math.PI * 8);
+    const pose = blendPose(KP.tuck, KP.flail, clamp(0.5 + 0.5 * ph));
+    // пыль снега на касаниях
+    for (let k = 0; k < 4; k++) {
+      const uk = (k + 0.5) / 4.2, pk = inv(a + (b - a) * uk, a + (b - a) * uk + 0.6, t);
+      if (pk > 0 && pk < 1) { const xk = lerp(200, 2350, uk); g.save(); g.globalAlpha = 1 - pk; roughEll(g, xk, slopeY(xk) - 20 - pk * 40, 60 + pk * 90, 30 + pk * 40, 60 + k, 0.2); paint(g, C.white, 60 + k, 0, 0.3); g.restore(); }
+    }
+    drawKid(g, bx, by, 1.3, 1, { ...pose, rot, mouth: "o", eyes: "wide" }, "hero", 100);
+  }
+  if (t >= b) {
+    // торчат валенки: вниз головой в сугробе, ноги дрыгаются (обе видны)
+    const k1 = Math.sin((t - b) * 11), k2 = Math.sin((t - b) * 11 + 2.2);
+    const sink = easeOut(land);
+    const pose = { rot: Math.PI * 0.92, lean: 0, head: 0, arms: [{ a: 0.4, b: 0.3 }, { a: -0.3, b: 0.3 }],
+      legs: [{ a: 0.25 + 0.35 * k1, b: 0.5 + 0.4 * Math.max(0, k1) }, { a: -0.2 + 0.35 * k2, b: 0.5 + 0.4 * Math.max(0, k2) }], mouth: "o" };
+    drawKid(g, dx - 10, dy - 112 + lerp(-30, 0, sink), 1.3, 1, pose, "hero", 100);
+    // передняя часть сугроба закрывает туловище
+    roughPoly(g, [[dx - 340, dy + 60], [dx - 220, dy - 70], [dx - 70, dy - 132], [dx + 80, dy - 128], [dx + 230, dy - 60], [dx + 340, dy + 60]], 28, 6); paint(g, C.snow, 29, 0, 0.5);
+    brush(g, [[dx - 200, dy - 50], [dx - 60, dy - 104], [dx + 70, dy - 100]], 12, C.snowS, 30, 0.4, 0.6);
+    // взрыв снега
+    const pu = inv(b, b + 0.8, t);
+    if (pu < 1) { g.save(); for (let k = 0; k < 14; k++) { const an = -Math.PI * (0.1 + 0.8 * hash(k * 3)), r = pu * (160 + hash(k) * 220); g.globalAlpha = 1 - pu; roughEll(g, dx + Math.cos(an) * r, dy - 120 + Math.sin(an) * r + pu * pu * 140, 30 + hash(k * 5) * 30, 24, 80 + k, 0.25); paint(g, C.white, 80 + k, 0, 0.3); } g.restore(); }
+  }
+  g.restore();
+  replayBadge(g, t);
+}
+
+// ---- Сцена 3: снизу из сугроба — друзья нависают и хохочут ----
+function friendHead(g, t, cx, cy, ang, sc, colors, pose, seed) {
+  g.save(); g.translate(cx, cy); g.rotate(ang);
+  drawKidFront(g, 0, 0, sc, pose, colors, seed);
+  g.restore();
+}
+function scene3(g, t) {
+  const a = EV.L9 - 0.12, hh = EV.hohochut;
+  const [sx, sy] = shake(t, 4, 2.4, 9);
+  reset(g);
+  skyFill(g, 0, 0, W, H, [150, 196, 230], C.skyL, 31, 0.5);
+  // облако и ветка берёзы над головами
+  roughEll(g, 1300 + sx, 260, 260, 70, 32, 0.12); paint(g, C.white, 33, 0, 0.4, 0.8);
+  taper(g, [[W + 40, 80], [1500, 160], [1260, 150]], 12, 2, C.umberD, 34);
+  // друзья: голова к центру кадра, туловище уходит к краю
+  const laugh = win(t, hh - 0.2, EV.L13, 0.2, 0.2);
+  const F = [
+    { c: "f1", hx: 600, hy: 600, t0: a + 0.05, arms: [{ a: 0.5, b: 1.9 }, { a: 0.5, b: 1.9 }] },
+    { c: "f2", hx: 980, hy: 330, t0: a + 0.25, arms: [{ a: 0.35, b: 0.15 }, { a: 0.5, b: 1.8 }] },
+    { c: "f3", hx: 1340, hy: 620, t0: a + 0.45, arms: [{ a: 0.6, b: 1.7 }, { a: 0.3, b: 0.2 }] },
+  ];
+  // края сугроба вокруг объектива («рыбий глаз»): ребята стоят над кромкой, поэтому рисуются поверх
+  g.save();
+  g.beginPath(); g.rect(-50, -50, W + 100, H + 100);
+  for (let i = 0; i <= 40; i++) { const an = i / 40 * TAU, r = 1 + (hash(i * 3.3) - 0.5) * 0.12; const x = W / 2 + Math.cos(an) * 820 * r, y = H / 2 + Math.sin(an) * 470 * r; i ? g.lineTo(x, y) : g.moveTo(x, y); }
+  g.closePath();
+  g.fillStyle = css(C.snow); g.fill("evenodd");
+  texture(g, 35, 0, 0.6);
+  g.restore();
+  const HO = KID.TL + KID.NECK + KID.HR - 6, SC = 3.0;
+  for (let i = 0; i < 3; i++) {
+    const f = F[i], k = spr(t, f.t0, 0.6);
+    const bob = Math.sin(t * 9 + i * 2) * 14 * laugh;
+    let dx = f.hx - W / 2, dy = f.hy - H / 2; const dl = Math.hypot(dx, dy); dx /= dl; dy /= dl;
+    const ang = Math.atan2(-dx, dy);
+    const out = lerp(700, 0, k);                       // вылезают из-за края
+    const hx = f.hx + dx * (out + bob), hy = f.hy + dy * (out + bob);
+    friendHead(g, t, hx + dx * HO * SC + sx, hy + dy * HO * SC + sy, ang, SC, f.c, { arms: f.arms, mouth: laugh > 0.3 ? "laugh" : "smile", eyes: laugh > 0.3 ? "happy" : "open", tl: t + i, head: Math.sin(t * 7 + i) * 0.08 * laugh }, 200 + i * 40);
+  }
+  // снег сыплется с плеч ребят
+  snowfall(g, t, 40, 0.1, 1.4, 5, 0.8, 37);
+}
+
+// ---- Сцена 4: лицо в снегу крупно → «А ребятам смех!» общий план ----
+function scene4(g, t) {
+  const a = EV.L13 - 0.12, wide = EV.L16 - 0.15;
+  if (t < wide) {
+    const z = lerp(1.0, 1.12, ease(inv(a, wide, t)));
+    const [sx, sy] = shake(t, 3, 2, 11);
+    skyFill(g, 0, 0, W, H, [160, 200, 232], C.snow, 41, 0.5);
+    // фон: склон и ребята размыто вдали
+    roughPoly(g, [[-100, 700], [W + 100, 620], [W + 100, H + 100], [-100, H + 100]], 42, 6); paint(g, C.snow, 43, 0, 0.5);
+    const sad = t >= EV.gore - 0.1;
+    const blink = (t > EV.gore + 0.2 && t < EV.gore + 0.38) || (t > a + 1.2 && t < a + 1.35) ? 1 : 0;
+    // руки у лица, варежки в снегу; плечи срезаны кадром — обе руки видны
+    const pose = { arms: [{ a: 0.85, b: 3.45 }, { a: 0.85, b: 3.45 }], snowy: 1, mouth: sad ? "sad" : "o", eyes: "open", blink, head: sad ? -0.06 : 0.04 * Math.sin(t * 3) };
+    g.save(); g.translate(W / 2 + sx, H / 2 + sy); g.scale(z, z); g.translate(-W / 2, -H / 2);
+    drawKidFront(g, W / 2, 1010 + (sad ? 24 : 0), 4.0, pose, "hero", 300);
+    g.restore();
+    // налипший на объектив снег по краям
+    lensSnow(g, t, 0.32, 130);
+    return;
+  }
+  // общий план: мальчик по пояс в сугробе, ребята валятся со смеху
+  const u = inv(wide, EV.L17, t);
+  const [sx, sy] = shake(t, 3, 2.5, 13);
+  skyFill(g, 0, 0, W, H, C.skyL, C.skyW, 44, 0.5);
+  farHills(g, 520, 0, 0, 45);
+  roughPoly(g, [[-100, 640], [W + 100, 600], [W + 100, H + 100], [-100, H + 100]], 46, 6); paint(g, C.snow, 47, 0, 0.5);
+  g.save(); g.translate(sx, sy);
+  g.translate(W / 2, H); g.scale(1.3, 1.3); g.translate(-W / 2, -H - 60);
+  // f1: согнулся, держится за живот (слева)
+  const b1 = Math.sin(t * 10) * 0.08;
+  drawKid(g, 520, 830, 1.25, 1, { rot: 0, lean: 0.5 + b1, head: 0.25, arms: [{ a: -0.23, b: 1.52 }, { a: 0.3, b: 0.2 }], legs: [{ a: 0.12, b: 0.25 }, { a: -0.12, b: 0.2 }], mouth: "laugh", eyes: "happy", tl: t }, "f1", 400);
+  // f3: показывает пальцем (позади справа)
+  drawKid(g, 1250, 740, 0.95, -1, { rot: 0, lean: 0.12 + b1, head: 0.05, arms: [{ a: 1.55, b: 0.1 }, { a: -0.23, b: 1.52 }], legs: [{ a: 0.05, b: 0.05 }, { a: -0.08, b: 0.05 }], mouth: "laugh", eyes: "happy", tl: t + 2 }, "f3", 480);
+  // f2: лежит на спине, голова вправо, дрыгает ногами
+  const k1 = Math.sin(t * 9), k2 = Math.sin(t * 9 + 2);
+  drawKid(g, 1380, 852, 1.15, -1, { rot: -Math.PI / 2, lean: 0, head: -0.1, arms: [{ a: -0.23, b: 1.52 }, { a: 1.7 + 0.3 * k1, b: 0.4 }], legs: [{ a: 1.35 + 0.3 * k1, b: 0.6 + 0.4 * Math.max(0, k1) }, { a: 1.15 + 0.3 * k2, b: 0.7 + 0.4 * Math.max(0, k2) }], mouth: "laugh", eyes: "happy", tl: t + 1 }, "f2", 440);
+  // герой по пояс в сугробе (анфас), сначала грустный, к концу строки улыбается
+  const smile = t > EV.smeh + 0.25;
+  const wv = Math.sin(t * 4) * 0.12;
+  drawKidFront(g, 900, 900, 1.5, { arms: [{ a: 1.15 + wv, b: 1.5 }, { a: 1.15 - wv, b: 1.5 }], snowy: 0.8, mouth: smile ? "smile" : "sad", eyes: "open", blink: 0, head: Math.sin(t * 2.6) * 0.06 }, "hero", 300);
+  roughPoly(g, [[620, 1100], [660, 900], [780, 850], [1020, 846], [1160, 900], [1200, 1100]], 49, 6); paint(g, C.snow, 50, 0, 0.5);
+  brush(g, [[680, 900], [800, 860], [1000, 858], [1140, 900]], 10, C.snowS, 51, 0.4, 0.6);
+  g.restore();
+}
+
+// ---------- Сцены 5–6: закат и вьюга (таймлапс), дорога домой ----------
+// ходьба: фаза от пройденного пути, опорная нога идёт назад без проскальзывания
+const KLEG = KID.TH + KID.SH;
+function walkPose(dist, s, A = 0.36, base = {}) {
+  const S = 4 * KLEG * Math.sin(A) * s;         // длина шага (полный цикл) при масштабе s
+  const ph = dist / S * TAU;
+  const leg = (p) => ({ a: A * Math.cos(p), b: 0.08 + 0.85 * Math.max(0, -Math.sin(p)) });
+  const L0 = leg(ph), L1 = leg(ph + Math.PI);
+  // высота таза по опорной ноге (у которой колено прямее)
+  const st = L0.b < L1.b ? L0 : L1;
+  const hipUp = (KLEG * Math.cos(st.a) + 11) * s;
+  return { pose: { rot: 0, lean: 0.06, head: 0, ...base, legs: [L0, L1], arms: base.arms || [{ a: -0.35 * Math.cos(ph), b: 0.3 }, { a: 0.35 * Math.cos(ph), b: 0.3 }] }, hipUp, ph };
+}
+
+// ---- Сцена 5: солнце садится, поднимается вьюга, темнеет ----
+function scene5(g, t) {
+  const a = EV.L17 - 0.12, e = EV.L21;
+  const u = inv(a, e - 0.2, t);
+  const dusk = ease(inv(EV.selo - 0.5, EV.temno + 0.3, t));
+  const storm = ease(inv(EV.vyuga - 0.4, EV.vyuga + 1.0, t));
+  const top = dusk < 0.5 ? mix(C.sky, [214, 150, 170], dusk * 2) : mix([214, 150, 170], C.indigoD, (dusk - 0.5) * 2);
+  const bot = dusk < 0.5 ? mix(C.skyW, [255, 170, 110], dusk * 2) : mix([255, 170, 110], C.violet, (dusk - 0.5) * 2);
+  const cy = lerp(0, -70, ease(u));                // камера медленно поднимается
+  const [sx, sy] = shake(t, 2 + storm * 7, 4, 17);
+  skyFill(g, 0, 0, W, H, top, bot, 51, 0.5);
+  // солнце садится за лес
+  const sunY = lerp(360, 760, ease(inv(a, EV.selo + 0.8, t)));
+  if (sunY < 760) { roughEll(g, 1340, sunY, 80, 80, 52, 0.04); paint(g, mix([255, 220, 150], [255, 120, 70], dusk), 53, 0, 0.3); }
+  g.save(); g.translate(sx, sy - cy);
+  farHills(g, 640, 0, dusk, 54);
+  // деревня в долине: окна загораются к темноте
+  for (let i = 0; i < 7; i++) drawIzba(g, 420 + i * 190, 720 + (i % 2) * 16, 0.32, t, { smoke: 1, wind: 20 + storm * 120, dusk: dusk * 0.9, lit: ease(inv(EV.temno - 0.6, EV.temno + 0.4, t)) * (0.6 + 0.4 * hash(i)) }, 300 + i * 13);
+  // гора на переднем плане с длинными тенями
+  roughPoly(g, [[-200, 820], [700, 790], [1300, 820], [2200, 780], [2200, 1300], [-200, 1300]], 55, 6);
+  paint(g, mix(C.snow, C.snowD, dusk * 0.8), 56, 0, 0.5);
+  for (let k = 0; k < 5; k++) brush(g, [[200 + k * 380, 850 + k % 2 * 20], [200 + k * 380 + lerp(80, 420, dusk), 880]], 26, mix(C.snowS, C.indigo, dusk), 57 + k, 0.4, 0.6);
+  // ребята расходятся по домам (влево, маленькие)
+  for (let k = 0; k < 2; k++) {
+    const dist = Math.max(0, t - a - 0.3 - k * 0.4) * 110;
+    const s = 0.42;
+    const wp = walkPose(dist, s, 0.36, { arms: [{ a: 0.2, b: 0.3 }, { a: -0.2, b: 0.3 }], mouth: "smile" });
+    const x = 1500 - k * 120 - dist;
+    if (x > -100) drawKid(g, x, 825 - wp.hipUp, s, -1, wp.pose, k ? "f2" : "f3", 600 + k * 30);
+  }
+  g.restore();
+  // вьюга: хлопья косо и полосы позёмки
+  snowfall(g, t, Math.round(30 + storm * 190), -3 - storm * 9, 1 + storm * 1.5, 3 + storm * 2, 0.75, 58, storm > 0.2 ? 6 : 0);
+  if (storm > 0) {
+    g.save();
+    for (let k = 0; k < 8; k++) {
+      const y = 780 + k * 40, ph = ((t * (0.9 + hash(k)) + hash(k * 3)) % 1);
+      g.globalAlpha = storm * 0.45 * Math.sin(ph * Math.PI);
+      brush(g, [[W + 200 - ph * (W + 900), y], [W + 200 - ph * (W + 900) + 700, y - 30]], 40, C.white, 59 + k, 0.4);
+    }
+    g.restore();
+  }
+}
+
+// ---- Сцена 6: мальчик бредёт домой сквозь вьюгу, тащит санки ----
+function scene6(g, t) {
+  const a = EV.L21 - 0.12, e = EV.L25;
+  const s = 1.45;
+  const dist = Math.max(0, t - a) * 95;            // нехотя: медленно
+  const heroX = 600 + dist;                         // мировая x
+  const camX = heroX - 760;
+  const dusk = 1;
+  const [sx, sy] = shake(t, 4, 3, 19);
+  skyFill(g, 0, 0, W, H, C.indigoD, C.violet, 61, 0.5);
+  // дальний план: деревня, окно дома приближается
+  g.save(); g.translate(-camX * 0.25 + sx * 0.3, 0);
+  for (let i = 0; i < 6; i++) drawIzba(g, 300 + i * 420, 560, 0.4, t, { smoke: 1, wind: 160, dusk: 0.9, lit: 0.6 }, 320 + i * 11);
+  g.restore();
+  // сугробы среднего плана
+  g.save(); g.translate(-camX * 0.6 + sx * 0.5, 0);
+  for (let k = 0; k < 8; k++) { const x = k * 520; roughPoly(g, [[x - 300, 700], [x - 80, 630 - hash(k) * 30], [x + 160, 640], [x + 340, 700]], 62 + k, 5); paint(g, mix(C.snowD, C.indigo, 0.35), 63 + k, 0, 0.5); }
+  g.restore();
+  // дом героя справа: тёплое окно ближе с каждым шагом
+  g.save(); g.translate(-camX + sx, sy);
+  drawIzba(g, 2650, 770, 1.2, t, { smoke: 1, wind: 200, dusk: 0.85, lit: 1 }, 333);
+  // дорога
+  roughPoly(g, [[-400, 690], [4000, 680], [4000, 1300], [-400, 1300]], 64, 5); paint(g, mix(C.snowS, C.indigo, 0.3), 65, 0, 0.5, 1, 1.6);
+  // кочки и позёмка на дороге — неподвижны в мире, бегут назад вместе с землёй
+  for (let k = Math.floor((camX - 300) / 150); k < (camX + W + 300) / 150; k++) { const x = k * 150 + hash(k) * 60; brush(g, [[x, 720 + hash(k * 3) * 200], [x + 40 + hash(k * 5) * 60, 722 + hash(k * 3) * 200]], 8 + hash(k * 7) * 10, mix(C.snowD, C.indigo, 0.45), 640 + k, 0.4, 0.8); }
+  // следы позади героя
+  for (let k = 0; k < 40; k++) { const fx = Math.floor(heroX / 55) * 55 - k * 55; if (fx < heroX - 40) { roughEll(g, fx, 772 + (k % 2) * 14, 16, 6, 66 + k, 0.2); g.fillStyle = css(C.indigo, 0.35); g.fill(); } }
+  // санки на верёвке позади
+  const sledX = heroX - 300, sledY = 752 + Math.sin(t * 5) * 2;
+  drawSled(g, sledX, sledY, 1.1, 0, 70, 1);
+  // герой: идёт вправо, сутулится, руки прямые (не согнёшь), ближняя держит верёвку
+  const wp = walkPose(dist, s, 0.3, { lean: 0.2, head: 0.18, arms: [{ a: -0.32, b: 0.08 }, { a: 0.12, b: 0.1 }], mouth: "sad", eyes: "open" });
+  const hipY = 775 - wp.hipUp;
+  const hands = drawKid(g, heroX, hipY, s, 1, wp.pose, "hero", 100);
+  // верёвка от ближней варежки к носу санок (поверх — варежка держит)
+  brush(g, [[hands.nearHand[0], hands.nearHand[1]], [lerp(hands.nearHand[0], sledX + 100, 0.5), 765], [sledX + 100, sledY - 10]], 5, C.linenD, 67, 0.3);
+  // пар изо рта
+  const pu = (t * 0.8) % 1;
+  g.save(); g.globalAlpha = (1 - pu) * 0.6; roughEll(g, heroX + 70 * s + pu * 60, hipY - 120 * s - pu * 30, 14 + pu * 30, 10 + pu * 20, 68, 0.2); paint(g, C.white, 69, 0, 0.3); g.restore();
+  g.restore();
+  // метель поверх
+  snowfall(g, t, 230, -10, 2.4, 4.5, 0.8, 71, 6);
+}
+
+// ---------- Сцены 7–10 и финал: изба изнутри (один «съёмочный павильон»), изба снаружи ночью ----------
+KID_COLORS.heroIn = { coat: [70, 112, 176], coatD: [48, 80, 130], hat: C.fur, hatL: C.furL, boot: C.felt, bootD: C.feltD, mit: C.skin, mitD: C.skinD, pants: C.indigo, trim: [70, 112, 176], belt: C.verm, scarf: [70, 112, 176], hair: [150, 100, 54] };
+const FLOOR = 880, TOP = 400;
+const STEPS = [[2470, 760], [2560, 640], [2630, 520]];   // [левый край, верх]; правый край у печи x=2700
+const STOVE_X = 2700;
+
+function drawInterior(g, t, opt = {}) {
+  const glowA = opt.glow ?? 1;
+  // стена из брёвен
+  roughPoly(g, [[-300, -400], [4000, -400], [4000, FLOOR + 10], [-300, FLOOR + 10]], 800, 2); paint(g, [150, 100, 60], 801, 0, 0.7, 1, 1.6);
+  for (let k = 0; k < 16; k++) { const y = FLOOR - k * 62; brush(g, [[-300, y], [4000, y + (hash(k) - 0.5) * 8]], 12, [110, 70, 40], 802 + k, 0.5); brush(g, [[-300, y - 26], [4000, y - 26]], 8, [178, 124, 74], 820 + k, 0.4, 0.6); }
+  // пол
+  roughPoly(g, [[-300, FLOOR], [4000, FLOOR], [4000, 1500], [-300, 1500]], 840, 2); paint(g, [176, 124, 72], 841, 0, 0.6);
+  for (let k = 0; k < 6; k++) brush(g, [[-300, FLOOR + 30 + k * 70], [4000, FLOOR + 30 + k * 70]], 4, [120, 80, 46], 842 + k, 0.3);
+  // дверь (слева), открыта в начале сцены 7
+  const open = opt.door || 0;
+  roughPoly(g, [[110, 330], [420, 330], [420, FLOOR], [110, FLOOR]], 850, 2); paint(g, mix([60, 40, 26], C.indigoD, open), 851, 0, 0.6);
+  if (open > 0.02) {
+    g.save(); g.beginPath(); g.rect(110, 330, 310, FLOOR - 330); g.clip();
+    snowfall(g, t, 50, 6, 2, 4, 0.8 * open, 852, 5);
+    g.restore();
+    roughPoly(g, [[420, 330], [420 + 120 * open, 300], [420 + 120 * open, FLOOR + 30], [420, FLOOR]], 853, 2); paint(g, [126, 84, 50], 854, 1.57, 0.7);
+  } else {
+    for (let k = 0; k < 4; k++) brush(g, [[130 + k * 76, 340], [130 + k * 76, FLOOR - 10]], 6, [90, 60, 36], 855 + k, 0.4);
+  }
+  // окно с метелью
+  windowPane(g, t, 820, 330, 240, 230, opt.howl || 0);
+  // лавка вдоль стены
+  roughPoly(g, [[1180, 752], [2360, 752], [2360, 782], [1180, 782]], 860, 2); paint(g, [130, 86, 50], 861, 0, 0.7);
+  for (const x of [1220, 1700, 2320]) brush(g, [[x, 782], [x, FLOOR]], 18, [104, 68, 40], 862 + x, 0.4);
+  // прялка: донце на лавке, стойка, лопасть с куделью
+  const px = 2200;
+  brush(g, [[px - 70, 748], [px + 40, 748]], 16, [170, 110, 60], 870, 0.5);
+  brush(g, [[px, 748], [px, 470]], 16, [170, 110, 60], 871, 0.5);
+  roughPoly(g, [[px - 40, 470], [px + 40, 470], [px + 46, 330], [px - 46, 330]], 872, 2); paint(g, [190, 126, 66], 873, 0, 0.6);
+  brush(g, [[px - 30, 360], [px + 30, 360]], 6, C.verm, 874, 0.4); brush(g, [[px - 30, 400], [px + 30, 400]], 6, C.green, 875, 0.4);
+  roughEll(g, px, 330, 52, 44, 876, 0.18); paint(g, [228, 220, 196], 877, 0, 0.6);  // кудель
+  // светец: подставка, стержень, зажим с лучиной; корытце с водой
+  const lx = 2470;
+  roughPoly(g, [[lx - 60, FLOOR], [lx + 60, FLOOR], [lx + 40, FLOOR - 26], [lx - 40, FLOOR - 26]], 880, 2); paint(g, [96, 62, 36], 881, 0, 0.6);
+  roughEll(g, lx + 40, FLOOR - 12, 50, 16, 882, 0.08); paint(g, [70, 90, 110], 883, 0, 0.4);
+  brush(g, [[lx, FLOOR - 26], [lx, 560]], 8, [50, 46, 52], 884, 0.3);
+  brush(g, [[lx - 10, 560], [lx + 14, 548]], 10, [50, 46, 52], 885, 0.3);
+  brush(g, [[lx - 30, 572], [lx + 44, 536]], 6, [214, 180, 120], 886, 0.3);       // лучина
+  // печь
+  roughPoly(g, [[STOVE_X, TOP], [3900, TOP], [3900, FLOOR], [STOVE_X, FLOOR]], 890, 3); paint(g, C.stove, 891, 1.57, 0.6);
+  brush(g, [[STOVE_X - 10, TOP], [3900, TOP]], 24, C.stoveD, 892, 0.5);
+  // чело: тёмный свод с углями
+  const cx0 = 2780;
+  roughPoly(g, [[cx0, FLOOR - 160], [cx0, FLOOR - 280], [cx0 + 110, FLOOR - 340], [cx0 + 220, FLOOR - 280], [cx0 + 220, FLOOR - 160]], 893, 3); paint(g, [44, 30, 30], 894, 0, 0.4);
+  const ember = 0.6 + 0.4 * Math.sin(t * 5.3) * Math.sin(t * 2.1);
+  roughEll(g, cx0 + 110, FLOOR - 180, 80, 20, 895, 0.2); paint(g, mix([200, 60, 20], [255, 170, 60], ember), 896, 0, 0.3);
+  // приступки
+  for (const [x0, y0] of STEPS) { roughPoly(g, [[x0, y0], [STOVE_X + 4, y0], [STOVE_X + 4, FLOOR], [x0, FLOOR]], 897 + x0, 2); paint(g, [198, 180, 156], 898 + x0, 1.57, 0.6); brush(g, [[x0, y0], [STOVE_X, y0]], 8, [150, 132, 110], 899 + x0, 0.4); }
+  // занавеска-лоскутное одеяло на печи и кот
+  roughPoly(g, [[3150, TOP - 4], [3600, TOP - 4], [3600, TOP - 40], [3150, TOP - 36]], 900, 3); paint(g, C.verm, 901, 0, 0.6);
+  drawCat(g, 3400, TOP - 30, 1.0, t, 910);
+}
+function windowPane(g, t, x, y, w, h, howl) {
+  roughPoly(g, [[x - 26, y - 26], [x + w + 26, y - 26], [x + w + 26, y + h + 26], [x - 26, y + h + 26]], 930, 2); paint(g, [200, 160, 110], 931, 0, 0.6);
+  g.save(); g.beginPath(); g.rect(x, y, w, h); g.clip();
+  const [tx, ty] = shake(t, howl * 3, 13, 5);
+  g.translate(tx, ty);
+  skyFill(g, x - 10, y - 10, w + 20, h + 20, C.indigoD, C.indigo, 932, 0.4);
+  g.save(); g.translate(x, y); g.scale(w / W, h / H);
+  snowfall(g, t, 120 + Math.round(howl * 160), -14 - howl * 10, 3, 9, 0.9, 933, 5);
+  g.restore();
+  // морозные узоры по углам
+  g.globalAlpha = 0.55;
+  for (let k = 0; k < 7; k++) { const cx = x + (k % 2 ? w : 0), cy = y + (k < 4 ? h : 0); roughEll(g, cx, cy, 40 + hash(k) * 40, 30 + hash(k * 3) * 30, 934 + k, 0.3); paint(g, C.white, 934 + k, 0.7, 0.6); }
+  g.restore();
+  // переплёт
+  brush(g, [[x + w / 2, y], [x + w / 2, y + h]], 10, [176, 130, 84], 940, 0.4);
+  brush(g, [[x, y + h / 2], [x + w, y + h / 2]], 10, [176, 130, 84], 941, 0.4);
+}
+// тёплый свет лучины и виньетка
+function warmLight(g, cxS, cyS, r, a, t) {
+  reset(g);
+  const fl = 0.85 + 0.15 * Math.sin(t * 11) * Math.sin(t * 7.3);
+  g.globalCompositeOperation = "lighter"; g.globalAlpha = a * fl * 0.35;
+  const gr = g.createRadialGradient(cxS, cyS, 10, cxS, cyS, r);
+  gr.addColorStop(0, "rgba(255,190,100,1)"); gr.addColorStop(1, "rgba(255,190,100,0)");
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.globalCompositeOperation = "multiply"; g.globalAlpha = 0.55;
+  const vg = g.createRadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, H * 1.0);
+  vg.addColorStop(0, "rgba(255,255,255,1)"); vg.addColorStop(1, "rgba(60,40,60,1)");
+  g.fillStyle = vg; g.fillRect(0, 0, W, H);
+  reset(g);
+}
+// пламя лучины в мировых координатах
+function flame(g, x, y, s, t) {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  for (let k = 0; k < 3; k++) {
+    const fl = Math.sin(t * (9 + k * 3) + k) * 0.12;
+    const hgt = [70, 52, 30][k], wdt = [20, 14, 8][k];
+    g.beginPath(); g.moveTo(-wdt, 0); g.quadraticCurveTo(-wdt * 1.1, -hgt * 0.5, fl * 60, -hgt); g.quadraticCurveTo(wdt * 1.1, -hgt * 0.5, wdt, 0); g.quadraticCurveTo(0, 12, -wdt, 0);
+    g.fillStyle = css([[255, 140, 40], [255, 200, 90], [255, 246, 210]][k]); g.fill();
+  }
+  g.restore();
+}
+// камера павильона: центр (wx,wy) и масштаб z
+function camApply(g, wx, wy, z, sx = 0, sy = 0) { g.translate(W / 2 + sx, H / 2 + sy); g.scale(z, z); g.translate(-wx, -wy); }
+const camBlend = (A, B, u) => [lerp(A[0], B[0], u), lerp(A[1], B[1], u), Math.exp(lerp(Math.log(A[2]), Math.log(B[2]), u))];
+
+// ---- поза ребёнка через IK: hip, ступни, кисти в мировых координатах (лицом вправо, масштаб s) ----
+function kidIK(hip, lean, feet, hands, s, extra = {}) {
+  const loc = (p) => [(p[0] - hip[0]) / s, (p[1] - hip[1]) / s];
+  const legs = feet.map((f, i) => { const r = ik2([i ? -3 : 3, 0], [loc(f)[0] - 14 * Math.cos(0), loc(f)[1]], KID.TH, KID.SH, true); return { a: r.a, b: r.b }; });
+  const sh = [Math.sin(lean) * KID.TL, -Math.cos(lean) * KID.TL];
+  const arms = hands.map((hd, i) => { const base = [sh[0] + (i ? -4 : 4), sh[1] + 8]; const r = ik2(base, loc(hd), KID.UA, KID.FA + KID.MIT * 0.8, false); return { a: r.a - lean, b: r.b }; });
+  return { rot: 0, lean, head: 0, legs, arms, ...extra };
+}
+// ключи подъёма на печь: hip, ступни (ближняя, дальняя), кисти (ближняя, дальняя)
+const CLIMB = [
+  { hip: [2380, 752], f: [[2395, 866], [2365, 866]], h: [[2440, 690], [2420, 700]], lean: 0.05 },
+  { hip: [2455, 760], f: [[2515, 746], [2420, 866]], h: [[2575, 628], [2560, 630]], lean: 0.3 },
+  { hip: [2520, 640], f: [[2530, 746], [2505, 746]], h: [[2645, 508], [2630, 510]], lean: 0.3 },
+  { hip: [2590, 640], f: [[2600, 626], [2545, 746]], h: [[2655, 506], [2640, 508]], lean: 0.35 },
+  { hip: [2655, 520], f: [[2668, 506], [2610, 626]], h: [[2735, 390], [2718, 392]], lean: 0.45 },
+];
+const SIT = { rot: 0, lean: -0.04, head: 0.05, legs: [{ a: 1.52, b: 0.06 }, { a: 1.47, b: 0.06 }], arms: [{ a: 0.75, b: 0.5 }, { a: 0.6, b: 0.6 }] };
+const SIT_HIP = [2760, 380];
+function climbPose(c, s) {
+  if (c >= 0.8) {
+    const u = ease(inv(0.8, 1, c));
+    const k = CLIMB[4], p0 = kidIK(k.hip, k.lean, k.f, k.h, s);
+    return { hip: [lerp(k.hip[0], SIT_HIP[0], u), lerp(k.hip[1], SIT_HIP[1], u)], pose: blendPose(p0, SIT, u) };
+  }
+  const f = c / 0.8 * 4, i = Math.min(3, Math.floor(f)), u0 = f - i;
+  const A = CLIMB[i], B = CLIMB[i + 1];
+  // сначала переносится нога (остальные опоры стоят), потом руки, таз догоняет
+  const uf = easeIO(inv(0, 0.45, u0)), uh = easeIO(inv(0.25, 0.7, u0)), up = easeIO(inv(0.1, 1, u0));
+  const L = (p, q, u) => [lerp(p[0], q[0], u), lerp(p[1], q[1], u)];
+  const lift = (p, q, u) => { const r = L(p, q, u); if (Math.hypot(q[0] - p[0], q[1] - p[1]) > 4) r[1] -= Math.sin(u * Math.PI) * 36; return r; };
+  const hip = L(A.hip, B.hip, up);
+  const feet = [lift(A.f[0], B.f[0], uf), lift(A.f[1], B.f[1], uf)];
+  const hands = [lift(A.h[0], B.h[0], uh), lift(A.h[1], B.h[1], uh)];
+  const u = up;
+  return { hip, pose: kidIK(hip, lerp(A.lean, B.lean, u), feet, hands, s) };
+}
+
+// ---- Сцена 7: шубёнку долой — и на печь к бабушке ----
+function scene7(g, t) {
+  const a = EV.L25 - 0.12, cut = EV.L27 - 0.12;
+  const s = 1.25;
+  if (t < cut) {
+    const z = lerp(1.55, 1.75, ease(inv(a, cut, t)));
+    const [sx, sy] = shake(t, 1.5, 2, 23);
+    g.save(); camApply(g, 560, 690, z, sx, sy);
+    drawInterior(g, t, { door: 1 - ease(inv(a + 0.3, a + 1.0, t)) });
+    // мальчик анфас у двери: руки разводит — шубёнка слетает
+    const off = ease(inv(EV.shubenku - 0.1, EV.doloy, t));
+    const pose = { arms: [{ a: lerp(0.5, 1.9, off), b: lerp(0.4, 0.2, off) }, { a: lerp(0.5, 1.9, off), b: lerp(0.4, 0.2, off) }], mouth: "smile", eyes: "open", blink: (t % 2.3) < 0.1 ? 1 : 0 };
+    drawKidFront(g, 640, FLOOR - 140, 1.55, pose, t >= EV.shubenku + 0.15 ? "heroIn" : "hero", 300);
+    // ноги анфас: две ноги в валенках под рубахой/шубой
+    for (const sg of [-1, 1]) { brush(g, [[640 + sg * 22 * 1.55, FLOOR - 140 + 10], [640 + sg * 24 * 1.55, FLOOR - 20]], 28 * 1.55 * 0.7, C.felt, 310 + sg, 0.6); roughEll(g, 640 + sg * 26 * 1.55, FLOOR - 14, 26, 14, 312 + sg, 0.1); paint(g, C.feltD, 313 + sg, 0, 0.5); }
+    g.restore();
+    warmLight(g, W * 0.9, H * 0.3, 1300, 0.8, t);
+    // шубёнка летит в объектив
+    const fu = inv(EV.shubenku + 0.15, cut + 0.12, t);
+    if (fu > 0 && fu < 1) {
+      reset(g);
+      const sc = lerp(2.0, 14, easeIn(fu)), rx = lerp(1075, W / 2 + 100, fu), ry = lerp(600, H / 2, fu);
+      g.save(); g.translate(rx, ry); g.scale(sc, sc); g.rotate(fu * 1.2);
+      roughPoly(g, [[-40, -50], [40, -50], [70, -36], [96, 10], [70, 18], [48, -8], [50, 60], [-50, 60], [-48, -8], [-70, 18], [-96, 10], [-70, -36]], 320, 3);
+      paint(g, C.verm, 321, 0.7, 0.8);
+      g.restore();
+    }
+    return;
+  }
+  // на печь: подъём по приступкам
+  const c = inv(cut + 0.05, EV.babushke + 0.15, t);
+  const cp = climbPose(c, s);
+  const cam = camBlend([2560, 620, 1.05], [2820, 470, 1.25], ease(inv(cut, EV.L29, t)));
+  const [sx, sy] = shake(t, 1.2, 2, 27);
+  g.save(); camApply(g, cam[0], cam[1], cam[2], sx, sy);
+  drawInterior(g, t, {});
+  // бабушка на печи, лицом к мальчику; протягивает руки
+  const reach = ease(inv(EV.babushke - 0.4, EV.babushke + 0.4, t));
+  drawAdult(g, 3020, TOP - 26, 1.05, -1, "baba", { lean: 0.05 + reach * 0.15, head: 0.08, seatH: 34, hands: [[lerp(30, 120, reach), lerp(110, 40, reach)], [lerp(10, 100, reach), lerp(100, 30, reach)]], eyes: "open", blink: (t % 3.1) < 0.12 ? 1 : 0 }, 700);
+  drawKid(g, cp.hip[0], cp.hip[1], s, 1, { ...cp.pose, mouth: "smile", eyes: "open" }, "heroIn", 100);
+  g.restore();
+  warmLight(g, W * 0.15, H * 0.4, 1300, 0.9, t);
+}
+
+// ---- Сцена 8: тихо на печи → метель воет за окном ----
+function scene8(g, t) {
+  const a = EV.L29 - 0.12, w = EV.L31 - 0.15;
+  const s = 1.25;
+  if (t < w) {
+    const z = lerp(1.45, 1.65, ease(inv(a, w, t)));
+    g.save(); camApply(g, 2880, 360, z);
+    drawInterior(g, t, {});
+    drawAdult(g, 3020, TOP - 26, 1.05, -1, "baba", { lean: 0.12, head: 0.12, seatH: 34, hands: [[118, 36], [60, 100]], eyes: "closed" }, 700);
+    const bl = (t % 2.9) < 0.14 ? 1 : 0;
+    drawKid(g, SIT_HIP[0], SIT_HIP[1], s, 1, { ...SIT, head: 0.05 + 0.04 * Math.sin(t * 1.3), mouth: "smile", eyes: "open", blink: bl }, "heroIn", 100);
+    g.restore();
+    warmLight(g, W * 0.1, H * 0.6, 1100, 0.9, t);
+    return;
+  }
+  // окно крупно: воет метель, стекло дрожит
+  const howl = ease(inv(w, EV.voet + 0.3, t));
+  const z = lerp(2.6, 2.9, ease(inv(w, EV.L33, t)));
+  const [sx, sy] = shake(t, howl * 5, 9, 29);
+  g.save(); camApply(g, 940, 470, z, sx, sy);
+  drawInterior(g, t, { howl });
+  g.restore();
+  // вихри ветра за стеклом (поверх кадра, в пределах окна)
+  warmLight(g, W * 0.5, H * 1.1, 900, 0.5, t);
+}
+
+// ---- Сцена 9: дед плетёт лапоть, матушка прядёт лён ----
+function scene9(g, t) {
+  const a = EV.L33 - 0.12, p = EV.matushka - 0.25;
+  const u = ease(inv(p - 0.35, p + 0.35, t));
+  const cam = camBlend([1540, 660, 2.3], [2140, 600, 2.1], u);
+  g.save(); camApply(g, cam[0], cam[1], cam[2]);
+  drawInterior(g, t, {});
+  // дед: сидит на лавке, лапоть на колене; ближняя рука с кочедыком ходит вверх-вниз
+  const k = Math.sin(t * 6.5);
+  const dh = drawAdult(g, 1470, 752, 1.0, 1, "ded", { lean: 0.32, head: 0.3, seatH: 128, hands: [[62 + k * 10, 70 - Math.max(0, k) * 30], [70, 96]], eyes: "open", blink: (t % 3.3) < 0.12 ? 1 : 0 }, 720);
+  // лапоть на колене и лыко
+  roughEll(g, 1470 + 70, 738, 36, 16, 730, 0.12); paint(g, C.ochreL, 731, 0.4, 0.8);
+  g.strokeStyle = css(C.ochre); g.lineWidth = 2; for (let i = -2; i <= 2; i++) { g.beginPath(); g.moveTo(1470 + 50 + i * 10, 726); g.lineTo(1470 + 64 + i * 10, 752); g.stroke(); }
+  taper(g, [[dh.near[0], dh.near[1]], [1470 + 80, 730], [1470 + 140, 790], [1470 + 120, 860]], 7, 3, C.ochreL, 732);
+  // матушка у прялки: дальняя рука тянет кудель, ближняя крутит веретено
+  const sp = t * 14;
+  const mh = drawAdult(g, 2080, 752, 1.0, 1, "mama", { lean: 0.08, head: -0.08, seatH: 128, hands: [[64, 120], [100, -40]], eyes: "open", blink: (t % 2.7) < 0.12 ? 1 : 0 }, 740);
+  // нить от кудели к веретену
+  const spx = mh.near[0] + 6, spy = mh.near[1] + 40;
+  g.strokeStyle = css(C.white, 0.9); g.lineWidth = 2; g.beginPath(); g.moveTo(2200 - 30, 350); g.lineTo(mh.far[0], mh.far[1]); g.lineTo(spx, spy - 50); g.stroke();
+  // веретено (вращается: полоски бегут)
+  brush(g, [[spx, spy - 60], [spx, spy + 40]], 8, [196, 150, 96], 742, 0.3);
+  roughEll(g, spx, spy + 2, 18, 30, 743, 0.05); paint(g, [228, 220, 196], 744, 0, 0.4);
+  g.strokeStyle = css(C.umber); g.lineWidth = 2;
+  for (let i = 0; i < 3; i++) { const ph = (sp + i * 2.1) % TAU, xx = spx + Math.cos(ph) * 16; if (Math.sin(ph) > 0) { g.beginPath(); g.moveTo(xx, spy - 22); g.lineTo(xx, spy + 26); g.stroke(); } }
+  g.restore();
+  warmLight(g, W * 0.95, H * 0.45, 1100, 0.9, t);
+}
+
+// ---- Сцена 10: огонёк светца → вся изба → изба снаружи, название ----
+function scene10(g, t) {
+  const a = EV.L37 - 0.12, out = EV.L40 - 0.2, fin = EV.fin;
+  if (t < out) {
+    const pull = ease(inv(EV.L39 - 0.3, out, t));
+    const cam = camBlend([2475, 560, 3.0], [2050, 560, 0.58], pull);
+    g.save(); camApply(g, cam[0], cam[1], cam[2]);
+    drawInterior(g, t, {});
+    drawAdult(g, 1470, 752, 1.0, 1, "ded", { lean: 0.32, head: 0.3, seatH: 128, hands: [[62 + Math.sin(t * 6.5) * 10, 70], [70, 96]], eyes: "open" }, 720);
+    roughEll(g, 1470 + 70, 738, 36, 16, 730, 0.12); paint(g, C.ochreL, 731, 0.4, 0.8);
+    const mh = drawAdult(g, 2080, 752, 1.0, 1, "mama", { lean: 0.08, head: -0.08, seatH: 128, hands: [[64, 120], [100, -40]], eyes: "open" }, 740);
+    g.strokeStyle = css(C.white, 0.9); g.lineWidth = 2; g.beginPath(); g.moveTo(2170, 350); g.lineTo(mh.far[0], mh.far[1]); g.lineTo(mh.near[0] + 6, mh.near[1] - 10); g.stroke();
+    brush(g, [[mh.near[0] + 6, mh.near[1] - 20], [mh.near[0] + 6, mh.near[1] + 80]], 8, [196, 150, 96], 742, 0.3);
+    drawAdult(g, 3020, TOP - 26, 1.05, -1, "baba", { lean: 0.12, head: 0.12, seatH: 34, hands: [[118, 36], [60, 100]], eyes: "closed" }, 700);
+    drawKid(g, SIT_HIP[0], SIT_HIP[1], 1.25, 1, { ...SIT, mouth: "smile", eyes: "closed" }, "heroIn", 100);
+    flame(g, 2490, 540, 1, t);
+    // угольки падают в корытце
+    for (let k = 0; k < 3; k++) { const ph = (t * 0.7 + k / 3) % 1; g.fillStyle = css([255, 150, 40], 1 - ph); g.beginPath(); g.arc(2500 + k * 6, 560 + ph * 300, 3, 0, TAU); g.fill(); }
+    g.restore();
+    const fx = W / 2 + (2490 - cam[0]) * cam[2], fy = H / 2 + (520 - cam[1]) * cam[2];
+    warmLight(g, fx, fy, 500 + 900 * cam[2], 1.2, t);
+    return;
+  }
+  // снаружи: изба ночью в стихающей метели
+  const calm = ease(inv(out, fin + 1, t));
+  const z = lerp(1.5, 1.0, ease(inv(out, fin, t)));
+  skyFill(g, 0, 0, W, H, C.indigoD, [70, 64, 120], 990, 0.4);
+  // звёзды проступают
+  g.fillStyle = css(C.white, calm * 0.8);
+  for (let k = 0; k < 40; k++) { g.beginPath(); g.arc(hash(k * 3.1) * W, hash(k * 5.7) * 420, 1.5 + hash(k) * 2, 0, TAU); g.fill(); }
+  g.save(); camApply(g, W / 2, 640, z);
+  for (let i = 0; i < 4; i++) drawIzba(g, 200 + i * 520 - (i > 1 ? -300 : 0), 760, 0.42, t, { smoke: 1, wind: 40, dusk: 0.95, lit: 0.5 }, 960 + i * 7);
+  roughPoly(g, [[-400, 820], [W + 400, 800], [W + 400, 1400], [-400, 1400]], 991, 6); paint(g, mix(C.snowD, C.indigo, 0.25), 992, 0, 0.5);
+  drawIzba(g, 1060, 930, 1.35, t, { smoke: 1, wind: 40, dusk: 0.8, lit: 1 }, 333);
+  drawSled(g, 1400, 920, 1.0, 0.1, 70, -1);
+  g.restore();
+  snowfall(g, t, Math.round(lerp(160, 40, calm)), lerp(-8, -1, calm), lerp(2, 0.8, calm), 4, 0.8, 993, calm < 0.6 ? 4 : 0);
+  // название крупно (кадр для обложки)
+  titleBlock(g, t, W / 2, 330, 1.25, fin, true);
+}
+
+// ---------- Строки стиха: по две, на мазке белил в нижней трети; кисть открывает слова ----------
+const LINES = CFG.lines;
+const PAIRS = [];
+for (let i = 0; i < LINES.length; i += 2) PAIRS.push([LINES[i], LINES[i + 1]]);
+const FS = 58, LH = 74;
+function drawVerse(g, t) {
+  let pi = -1;
+  for (let i = 0; i < PAIRS.length; i++) if (t >= PAIRS[i][0].s - 0.15) pi = i;
+  if (pi < 0) return;
+  const P = PAIRS[pi], next = PAIRS[pi + 1];
+  const endT = next ? next[0].s - 0.15 : EV.fin - 0.3;
+  const outU = inv(endT - 0.18, endT, t);
+  if (outU >= 1) return;
+  reset(g);
+  g.font = `${FS}px "DLine"`;
+  const tw = Math.max(...P.map((l) => g.measureText(l.text).width));
+  const bw = Math.round(tw + 120), bh = LH * 2 + 40;
+  const bx = Math.round(W / 2 - bw / 2), by = Math.round(H - 34 - bh);
+  // мазок-подложка: проводится кистью слева направо
+  const kIn = easeOut(inv(P[0].s - 0.2, P[0].s + 0.15, t));
+  const sw = bw * kIn;
+  g.save();
+  g.globalAlpha = 1 - easeIn(outU);
+  g.beginPath(); g.rect(bx - 30, by - 30, sw + 60, bh + 60); g.clip();
+  roughPoly(g, [[bx - 10, by + 8], [bx + bw * 0.5, by - 4], [bx + bw + 14, by + 6], [bx + bw + 6, by + bh - 4], [bx + bw * 0.5, by + bh + 6], [bx - 14, by + bh - 6]], 900 + pi, 7);
+  paint(g, C.white, 901 + pi, 0, 0.55, 0.97, 1.4);
+  g.restore();
+  g.save();
+  g.globalAlpha = 1 - easeIn(outU);
+  g.fillStyle = css(C.indigoD); g.textAlign = "left"; g.textBaseline = "middle";
+  P.forEach((l, i) => {
+    if (t < l.s - 0.15) return;
+    const x = bx + 60, y = Math.round(by + 20 + LH * (i + 0.5) + 2);
+    // кисть открывает строку слева направо за ~0,35 с
+    const u = easeOut(inv(l.s - 0.15, l.s + 0.25, t));
+    g.save();
+    if (u < 0.999) { g.beginPath(); g.rect(x - 10, y - LH / 2, (tw + 40) * u, LH); g.clip(); }
+    g.fillText(l.text, x, y);
+    g.restore();
+  });
+  g.restore();
+}
+// заголовок: «Детство» кистевым шрифтом + автор; (x,y) — левый край строки названия
+function titleBlock(g, t, x, y, scale, t0, center = false) {
+  reset(g);
+  const u = easeOut(inv(t0, t0 + 0.9, t));
+  if (u <= 0) return;
+  const fs = Math.round(230 * scale);
+  g.font = `${fs}px "DTitle"`;
+  const tw = g.measureText("Детство").width;
+  const x0 = Math.round(center ? x - tw / 2 : x), y0 = Math.round(y);
+  g.save();
+  g.beginPath(); g.rect(x0 - 40, y0 - fs, (tw + 80) * u, fs * 1.6); g.clip();
+  g.textBaseline = "alphabetic"; g.textAlign = "left";
+  g.fillStyle = css(C.indigoD, 0.55); g.fillText("Детство", x0 + 6, y0 + 7);
+  g.fillStyle = css(C.white); g.fillText("Детство", x0, y0);
+  g.restore();
+  const v = easeOut(inv(t0 + 0.6, t0 + 1.3, t));
+  if (v > 0) {
+    const afs = Math.round(54 * scale);
+    g.font = `${afs}px "DLine"`;
+    const s = "Иван Суриков · 1866";
+    const aw = g.measureText(s).width;
+    const ax = Math.round(center ? x - aw / 2 : x0 + 20), ay = Math.round(y0 + afs * 1.5);
+    g.save(); g.globalAlpha = v;
+    g.beginPath(); g.rect(ax - 30, ay - afs, (aw + 60) * v, afs * 1.6); g.clip();
+    roughPoly(g, [[ax - 24, ay - afs * 0.75], [ax + aw + 26, ay - afs * 0.85], [ax + aw + 20, ay + afs * 0.45], [ax - 20, ay + afs * 0.5]], 950, 4);
+    paint(g, C.verm, 951, 0, 0.5, 0.92);
+    g.fillStyle = css(C.white); g.textBaseline = "middle"; g.fillText(s, ax, Math.round(ay - afs * 0.15));
+    g.restore();
+  }
+}
+
+// ---------- Пробы героев: все позы подряд крупно (PROBE=cast PROBE_PAGE=N) ----------
+const PROBE_PAGES = [
+  // 0: герой сбоку — санки, машет, кувырок по кадрам, в сугробе, ходьба
+  (g, lab) => {
+    const cells = [];
+    cells.push(["sled", KP.sled]);
+    for (const k of [0, 0.5, 1]) cells.push([`wave ${k}`, { ...KP.wave, arms: [{ a: KP.wave.arms[0].a + Math.sin(k * 3) * 0.35 * 0.6, b: KP.wave.arms[0].b - Math.sin(k * 3) * 0.35 * 0.5 }, KP.wave.arms[1]], mouth: "open" }]);
+    for (let i = 0; i < 8; i++) { const u = i / 8; const ph = Math.sin(u * Math.PI * 8); cells.push([`tumble ${u.toFixed(2)}`, { ...blendPose(KP.tuck, KP.flail, clamp(0.5 + 0.5 * ph)), rot: u * Math.PI * 2 * 3, mouth: "o" }]); }
+    for (let i = 0; i < 3; i++) { const k1 = Math.sin(i * 1.1 * 11), k2 = Math.sin(i * 1.1 * 11 + 2.2); cells.push([`drift ${i}`, { rot: Math.PI * 0.92, lean: 0, head: 0, arms: [{ a: 0.4, b: 0.3 }, { a: -0.3, b: 0.3 }], legs: [{ a: 0.25 + 0.35 * k1, b: 0.5 + 0.4 * Math.max(0, k1) }, { a: -0.2 + 0.35 * k2, b: 0.5 + 0.4 * Math.max(0, k2) }] }]); }
+    for (let i = 0; i < 6; i++) { const wp = walkPose(i * 40, 1, 0.3, { lean: 0.2, head: 0.18, arms: [{ a: -0.32, b: 0.08 }, { a: 0.12, b: 0.1 }], mouth: "sad" }); cells.push([`walk ${i}`, wp.pose, wp.hipUp]); }
+    cells.forEach(([n, p, hu], i) => {
+      const cx = 140 + (i % 8) * 235, cy = 260 + Math.floor(i / 8) * 270;
+      g.strokeStyle = "#999"; g.beginPath(); g.moveTo(cx - 110, cy + 0); g.lineTo(cx + 110, cy); g.stroke();
+      drawKid(g, cx, hu ? cy - hu * 0.7 : cy - 70, 0.7, 1, p, i % 2 ? "hero" : "heroIn", 100);
+      lab(n, cx, cy + 22);
+    });
+  },
+  // 1: подъём на печь по кадрам и сидя
+  (g, lab) => {
+    for (let i = 0; i < 8; i++) {
+      const cx = (i % 4) * 480, cy = Math.floor(i / 4) * 540, c = i / 7;
+      g.save(); g.beginPath(); g.rect(cx + 2, cy + 2, 476, 536); g.clip();
+      g.translate(cx + 240, cy + 270); g.scale(0.62, 0.62); g.translate(-2600, -600);
+      drawInterior(g, 0, {});
+      const cp = climbPose(c, 1.25);
+      drawKid(g, cp.hip[0], cp.hip[1], 1.25, 1, { ...cp.pose, mouth: "smile" }, "heroIn", 100);
+      g.restore();
+      lab(`climb c=${c.toFixed(2)}`, cx + 240, cy + 520);
+    }
+  },
+  // 2: друзья в общем плане, f2 лёжа, взрослые
+  (g, lab) => {
+    for (let i = 0; i < 3; i++) {
+      const t = i * 0.13, b1 = Math.sin(t * 10) * 0.08, k1 = Math.sin(t * 9), k2 = Math.sin(t * 9 + 2);
+      const x0 = 120 + i * 600;
+      drawKid(g, x0 + 80, 300, 0.9, 1, { rot: 0, lean: 0.5 + b1, head: 0.25, arms: [{ a: -0.23, b: 1.52 }, { a: 0.3, b: 0.2 }], legs: [{ a: 0.12, b: 0.25 }, { a: -0.12, b: 0.2 }], mouth: "laugh", eyes: "happy", tl: t }, "f1", 400);
+      drawKid(g, x0 + 300, 300, 0.9, -1, { rot: 0, lean: 0.12 + b1, head: 0.05, arms: [{ a: 1.55, b: 0.1 }, { a: -0.23, b: 1.52 }], legs: [{ a: 0.05, b: 0.05 }, { a: -0.08, b: 0.05 }], mouth: "laugh", eyes: "happy" }, "f3", 480);
+      drawKid(g, x0 + 380, 470, 0.9, -1, { rot: -Math.PI / 2, lean: 0, head: -0.1, arms: [{ a: -0.23, b: 1.52 }, { a: 1.7 + 0.3 * k1, b: 0.4 }], legs: [{ a: 1.35 + 0.3 * k1, b: 0.6 + 0.4 * Math.max(0, k1) }, { a: 1.15 + 0.3 * k2, b: 0.7 + 0.4 * Math.max(0, k2) }], mouth: "laugh", eyes: "happy" }, "f2", 440);
+      lab(`friends t=${t.toFixed(2)}`, x0 + 220, 520);
+    }
+    const r = 0.5;
+    drawAdult(g, 300, 850, 1.0, -1, "baba", { lean: 0.05 + r * 0.15, head: 0.08, seatH: 34, hands: [[lerp(30, 120, r), lerp(110, 40, r)], [lerp(10, 100, r), lerp(100, 30, r)]] }, 700); lab("baba reach", 300, 900);
+    drawAdult(g, 620, 850, 1.0, -1, "baba", { lean: 0.12, head: 0.12, seatH: 34, hands: [[118, 36], [60, 100]], eyes: "closed" }, 700); lab("baba hug", 620, 900);
+    for (let i = 0; i < 2; i++) drawAdult(g, 900 + i * 300, 850, 1.0, 1, "ded", { lean: 0.32, head: 0.3, seatH: 128, hands: [[62 + (i ? 10 : -10), 70 - (i ? 30 : 0)], [70, 96]] }, 720);
+    lab("ded", 1050, 1000);
+    drawAdult(g, 1600, 850, 1.0, 1, "mama", { lean: 0.08, head: -0.08, seatH: 128, hands: [[64, 120], [100, -40]] }, 740); lab("mama", 1600, 1000);
+  },
+];
+
+// ---------- Кадр: сцена по времени → снежная шторка на стыках → строки → бумага ----------
+const cv = document.getElementById("scene");
+const g = cv.getContext("2d", { alpha: false });
+// границы сцен (начало каждой); сцена i идёт до начала i+1
+const CUTS = () => [
+  [0, scene0], [EV.L1 - 0.05, scene1], [EV.L7 - 0.15, scene2], [EV.L9 - 0.12, scene3], [EV.L13 - 0.12, scene4],
+  [EV.L17 - 0.12, scene5], [EV.L21 - 0.12, scene6], [EV.L25 - 0.12, scene7], [EV.L29 - 0.12, scene8],
+  [EV.L33 - 0.12, scene9], [EV.L37 - 0.12, scene10],
+];
+let _CUTS = null;
+function sceneAt(t) {
+  _CUTS = _CUTS || CUTS();
+  let k = 0;
+  for (let i = 0; i < _CUTS.length; i++) if (t >= _CUTS[i][0]) k = i;
+  return k;
+}
+// шторка из снежных мазков через стык (без затемнения): мазки пролетают слева направо
+function snowWipe(g, t, tc, dur = 0.45, seed = 0) {
+  const u = inv(tc - dur / 2, tc + dur / 2, t);
+  if (u <= 0 || u >= 1) return;
+  reset(g);
+  for (let i = 0; i < 14; i++) {
+    const y = (i + 0.5) * H / 14 + (hash(i + seed) - 0.5) * 40;
+    const lag = hash(i * 3 + seed) * 0.3;
+    const p = clamp((u - lag) / 0.7);
+    const x1 = lerp(-900, W + 900, p), x0 = x1 - 900 - hash(i * 5 + seed) * 500;
+    brush(g, [[x0, y], [x1, y + (hash(i * 7) - 0.5) * 30]], 120 + hash(i * 2 + seed) * 70, C.white, seed + i, 0.5);
+  }
+}
+function render(t) {
+  reset(g);
+  const k = sceneAt(t);
+  _CUTS[k][1](g, t);
+  reset(g);
+  for (let i = 1; i < _CUTS.length; i++) if (i !== 2 && i !== 1) snowWipe(g, t, _CUTS[i][0], 0.42, 1000 + i * 17);
+  reset(g);
+  drawVerse(g, t);
+  paperOver(g, 0.15);
+}
+
+// ---------- пробы героев ----------
+function probeCast() {
+  reset(g); g.fillStyle = css(C.snow); g.fillRect(0, 0, W, H);
+  const page = CFG.probePage | 0;
+  const lab = (s, x, y) => { g.fillStyle = "#333"; g.font = "18px monospace"; g.textAlign = "center"; g.fillText(s, x, y); };
+  if (typeof PROBE_PAGES !== "undefined" && PROBE_PAGES[page]) return PROBE_PAGES[page](g, lab);
+}
+
+const PQ = new URLSearchParams(location.search);
+const T_Q = PQ.has("t") ? +PQ.get("t") : 0;
+let LAST_T = T_Q;
+const seek = (t) => (CFG.probe ? probeCast() : render(t));
+window.addEventListener("hf-seek", (e) => { LAST_T = e.detail.time; seek(LAST_T); });
+seek(T_Q);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => seek(LAST_T));
+
+const tl = gsap.timeline({ paused: true });
+tl.set({}, {}, TOTAL);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+
+    </script>
+  </body>
+</html>
