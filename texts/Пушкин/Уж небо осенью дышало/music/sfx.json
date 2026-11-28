@@ -1,0 +1,160 @@
+{
+ "intro": 3.0,
+ "outro": 5.5,
+ "total": 31.94,
+ "bpm": 118.42,
+ "fin": 26.973,
+ "final_chord_t": 26.853,
+ "bars": {
+  "forest": 3,
+  "geese": 7,
+  "november": 10,
+  "bar_s": 2.027
+ },
+ "voice_mean_dbfs": -26.5,
+ "music_line_db": [
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0
+ ],
+ "music_intro_db": -8.0,
+ "music_fin_db": -8.0,
+ "peak_dbfs": -18.2,
+ "sfx": [
+  {
+   "name": "rustle",
+   "what": "гусь просыпается: шорох перьев",
+   "event": 2.2,
+   "start": 2.143,
+   "end": 2.693,
+   "db_to_voice": -17.0
+  },
+  {
+   "name": "splash",
+   "what": "шлепок лапы по воде 1/5",
+   "event": 3.24,
+   "start": 3.223,
+   "end": 3.443,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "splash",
+   "what": "шлепок лапы по воде 2/5",
+   "event": 3.61,
+   "start": 3.593,
+   "end": 3.813,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "splash",
+   "what": "шлепок лапы по воде 3/5",
+   "event": 3.98,
+   "start": 3.963,
+   "end": 4.183,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "splash",
+   "what": "шлепок лапы по воде 4/5",
+   "event": 4.35,
+   "start": 4.333,
+   "end": 4.553,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "splash",
+   "what": "шлепок лапы по воде 5/5",
+   "event": 4.72,
+   "start": 4.703,
+   "end": 4.923,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "gust",
+   "what": "порыв ветра: небо дышит",
+   "event": 4.22,
+   "start": 3.756,
+   "end": 5.556,
+   "db_to_voice": -21.0
+  },
+  {
+   "name": "wings",
+   "what": "взлёт гуся: взмахи крыльев",
+   "event": 4.82,
+   "start": 4.788,
+   "end": 5.408,
+   "db_to_voice": -19.0
+  },
+  {
+   "name": "sunwhoosh",
+   "what": "солнце гаснет: мягкий вжух",
+   "event": 6.78,
+   "start": 6.552,
+   "end": 7.452,
+   "db_to_voice": -23.0
+  },
+  {
+   "name": "wind",
+   "what": "ветер над полем: день короче",
+   "event": 7.856,
+   "start": 7.341,
+   "end": 8.941,
+   "db_to_voice": -22.0
+  },
+  {
+   "name": "leaves",
+   "what": "листья срываются вихрем",
+   "event": 13.84,
+   "start": 13.379,
+   "end": 14.879,
+   "db_to_voice": -22.0
+  },
+  {
+   "name": "fog",
+   "what": "туман ложится на поля",
+   "event": 16.17,
+   "start": 15.638,
+   "end": 17.238,
+   "db_to_voice": -27.0
+  },
+  {
+   "name": "geese",
+   "what": "клин гогочет: га-га",
+   "event": 16.954,
+   "start": 16.929,
+   "end": 18.209,
+   "db_to_voice": -21.0
+  },
+  {
+   "name": "geese",
+   "what": "гуси оборачиваются: га-га (караван)",
+   "event": 18.25,
+   "start": 18.227,
+   "end": 19.427,
+   "db_to_voice": -21.0
+  },
+  {
+   "name": "gate",
+   "what": "ворота хлопают",
+   "event": 24.7,
+   "start": 24.683,
+   "end": 25.383,
+   "db_to_voice": -21.0
+  },
+  {
+   "name": "drift",
+   "what": "свист позёмки у ворот",
+   "event": 24.6,
+   "start": 24.6,
+   "end": 26.82,
+   "db_to_voice": -25.0
+  }
+ ]
+}

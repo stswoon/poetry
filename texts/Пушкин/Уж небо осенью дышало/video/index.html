@@ -1,0 +1,1419 @@
+<!doctype html>
+<!-- Собрано build.py из template.tpl и src/*.js — правьте их, не этот файл. -->
+<html lang="ru" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="lib/gsap.min.js"></script>
+    <script src="lib/motion.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #efe4cc; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #efe4cc; }
+      #scene { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #fontwarm { position: absolute; left: -9999px; top: 0; }
+      @font-face { font-family: "GTitle"; src: local("Palatino-BoldItalic"), local("Palatino Bold Italic"); }
+      @font-face { font-family: "GLine"; src: local("Palatino-Roman"), local("Palatino"); }
+      @font-face { font-family: "GSub"; src: local("Palatino-Italic"), local("Palatino Italic"); }
+      .f1 { font-family: "GTitle"; }
+      .f2 { font-family: "GLine"; }
+      .f3 { font-family: "GSub"; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="31.940" data-width="1920" data-height="1080">
+      <canvas id="scene" width="1920" height="1080" data-layout-allow-overflow></canvas>
+      <div id="fontwarm" data-layout-allow-overflow><span class="f1">Уж небо осенью дышало… А. С. Пушкин</span><span class="f2">Уж небо осенью дышало, Уж реже солнышко блистало, Короче становился день, Лесов таинственная сень С печальным шумом обнажалась, Ложился на поля туман, Гусей крикливых караван Тянулся к югу: приближалась Довольно скучная пора; Стоял ноябрь уж у двора.</span><span class="f3">А. С. Пушкин · из романа «Евгений Онегин» · юг</span></div>
+      <audio id="voice" class="clip" src="assets/voice.mp3" data-start="3.000" data-duration="23.440" data-track-index="10" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="31.940" data-track-index="11" data-volume="1"></audio>
+    </div>
+    <script>const CFG = {"v0":3.0,"total":31.94,"ev":{"V0":3.0,"total":31.94,"L1":3.04,"L2":5.46,"L3":7.856,"L4":10.025,"L5":12.372,"L6":14.904,"L7":16.954,"L8":19.041,"L9":21.898,"L10":24.182,"E1":4.944,"E2":7.358,"E3":9.328,"E4":11.973,"E5":14.351,"E6":16.427,"E7":18.661,"E8":21.274,"E9":23.638,"E10":26.173,"dyshalo":4.22,"blistalo":6.78,"koroche":7.856,"den":9.31,"sen":11.46,"pechal":12.47,"obnazh":13.84,"tuman":16.17,"gusey":16.954,"karavan":18.25,"yugu":19.78,"pora":23.44,"noyabr":24.6,"dvora":25.82,"fin":26.973},"lines":[{"n":1,"text":"Уж небо осенью дышало,","s":3.04,"e":4.944,"words":[{"w":"Уж","s":3.04,"e":3.2},{"w":"небо","s":3.2,"e":3.61},{"w":"осенью","s":3.61,"e":4.21},{"w":"дышало,","s":4.22,"e":4.944}]},{"n":2,"text":"Уж реже солнышко блистало,","s":5.46,"e":7.358,"words":[{"w":"Уж","s":5.46,"e":5.46},{"w":"реже","s":5.46,"e":5.81},{"w":"солнышко","s":5.81,"e":6.78},{"w":"блистало,","s":6.78,"e":7.358}]},{"n":3,"text":"Короче становился день,","s":7.856,"e":9.328,"words":[{"w":"Короче","s":7.856,"e":8.38},{"w":"становился","s":8.38,"e":9.31},{"w":"день,","s":9.31,"e":9.328}]},{"n":4,"text":"Лесов таинственная сень","s":10.025,"e":11.973,"words":[{"w":"Лесов","s":10.025,"e":10.5},{"w":"таинственная","s":10.5,"e":11.45},{"w":"сень","s":11.46,"e":11.973}]},{"n":5,"text":"С печальным шумом обнажалась,","s":12.372,"e":14.351,"words":[{"w":"С","s":12.372,"e":12.44},{"w":"печальным","s":12.47,"e":13.34},{"w":"шумом","s":13.34,"e":13.84},{"w":"обнажалась,","s":13.84,"e":14.351}]},{"n":6,"text":"Ложился на поля туман,","s":14.904,"e":16.427,"words":[{"w":"Ложился","s":14.904,"e":15.55},{"w":"на","s":15.66,"e":15.77},{"w":"поля","s":15.77,"e":16.17},{"w":"туман,","s":16.17,"e":16.427}]},{"n":7,"text":"Гусей крикливых караван","s":16.954,"e":18.661,"words":[{"w":"Гусей","s":16.954,"e":17.39},{"w":"крикливых","s":17.39,"e":18.25},{"w":"караван","s":18.25,"e":18.661}]},{"n":8,"text":"Тянулся к югу: приближалась","s":19.041,"e":21.274,"words":[{"w":"Тянулся","s":19.041,"e":19.67},{"w":"к","s":19.67,"e":19.78},{"w":"югу:","s":19.78,"e":20.28},{"w":"приближалась","s":20.28,"e":21.274}]},{"n":9,"text":"Довольно скучная пора;","s":21.898,"e":23.638,"words":[{"w":"Довольно","s":21.898,"e":22.71},{"w":"скучная","s":22.71,"e":23.44},{"w":"пора;","s":23.44,"e":23.638}]},{"n":10,"text":"Стоял ноябрь уж у двора.","s":24.182,"e":26.173,"words":[{"w":"Стоял","s":24.182,"e":24.6},{"w":"ноябрь","s":24.6,"e":25.2},{"w":"уж","s":25.24,"e":25.6},{"w":"у","s":25.66,"e":25.81},{"w":"двора.","s":25.82,"e":26.173}]}],"probe":"","probePage":0};</script>
+    <script>
+// ---------- Общие функции: время, пружины, цвет, случайность по зерну ----------
+const W = 1920, H = 1080, TAU = Math.PI * 2;
+const EV = CFG.ev;
+const TOTAL = CFG.total;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, u) => a + (b - a) * u;
+const inv = (a, b, v) => clamp((v - a) / (b - a));
+const ease = (u) => { u = clamp(u); return u * u * (3 - 2 * u); };
+const easeOut = (u) => 1 - Math.pow(1 - clamp(u), 3);
+const easeIn = (u) => Math.pow(clamp(u), 3);
+const easeIO = (u) => { u = clamp(u); return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+const hash = (n) => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const hash2 = (i, j) => { const s = Math.sin(i * 127.1 + j * 311.7 + 17.13) * 43758.5453; return s - Math.floor(s); };
+// генератор по зерну (для заранее запечённых акварельных кусков)
+function rng(seed) { let s = (seed * 9301 + 49297) % 233280 || 1; return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; }
+// пружина Motion → u(0…1) с перелётом; кадр детерминирован
+function makeSpring(stiffness, damping) {
+  try {
+    const gen = Motion.spring({ keyframes: [0, 1], stiffness, damping, mass: 1 });
+    const N = 160, arr = [];
+    for (let i = 0; i <= N; i++) arr.push(gen.next(i * 1400 / N).value);
+    return (u) => { u = clamp(u); const f = u * N, i = Math.floor(f); return i >= N ? arr[N] : lerp(arr[i], arr[i + 1], f - i); };
+  } catch (e) { return (u) => { u = clamp(u); return 1 - Math.cos(u * 9) * Math.exp(-u * 6); }; }
+}
+const SPRING = makeSpring(260, 14);
+const SOFT = makeSpring(140, 18);
+const spr = (t, t0, k = 1) => (t <= t0 ? 0 : SPRING((t - t0) / (1.4 * k)));
+const sprS = (t, t0, k = 1) => (t <= t0 ? 0 : SOFT((t - t0) / (1.4 * k)));
+const win = (t, a, b, fi = 0.3, fo = 0.3) => Math.min(ease(inv(a, a + fi, t)), 1 - ease(inv(b - fo, b, t)));
+const wob = (t, f, ph = 0) => Math.sin(t * f * TAU + ph);
+function reset(g) { g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = "source-over"; g.filter = "none"; g.shadowBlur = 0; g.shadowColor = "transparent"; }
+function mk(w, h) { const c = document.createElement("canvas"); c.width = Math.ceil(w); c.height = Math.ceil(h); return c; }
+// палитра: баллончики
+// палитра: акварель и тушь на тёплой бумаге
+const P = {
+  paper: "#f1e6cd", paperD: "#e2d1ad", ink: "#2a2018", inkS: "rgba(42,32,24,",
+  sky: "#9fb3c4", skyD: "#6d8297", skyL: "#cdd7dc", cloud: "#8a96a3", cloudD: "#5d6875",
+  ochre: "#d89a3a", ochreL: "#ecc26a", rust: "#b8502a", crimson: "#9c2f2a", umber: "#7a4f2c", umberD: "#4e3320",
+  olive: "#8b8a45", field: "#c9a85a", fieldD: "#9d7f3e", water: "#7f9bab", waterD: "#506d7e",
+  sun: "#f2b544", sunO: "#e0762e", fog: "#f4efe4", snow: "#eef2f4", frost: "#9cb6c8",
+  goose: "#8c8a80", gooseD: "#5b5850", gooseL: "#d9d4c4", beak: "#e8822c", eye: "#1a1410",
+};
+
+// ---------- Акварель и тушь (v2): послойная заливка с деформацией края, грануляция, сухая кисть ----------
+// Всё тяжёлое запекается при загрузке; в кадре только drawImage и простые пути.
+function gauss(r) { let u = 0; while (u === 0) u = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * r()); }
+function vnoise(x, seed) { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return lerp(hash(i + seed * 13.1), hash(i + 1 + seed * 13.1), u); }
+// рекурсивная деформация многоугольника: середина каждого ребра сдвигается по Гауссу пропорционально длине ребра
+function deform(pts, depth, vari, r) {
+  let p = pts.map((q) => [q[0], q[1], q[2] ?? vari * (0.6 + 0.8 * r())]);
+  for (let d = 0; d < depth; d++) {
+    const o = [];
+    for (let i = 0; i < p.length; i++) {
+      const a = p[i], b = p[(i + 1) % p.length], len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      const v = (a[2] + b[2]) / 2;
+      o.push(a, [(a[0] + b[0]) / 2 + gauss(r) * len * v * 0.35, (a[1] + b[1]) / 2 + gauss(r) * len * v * 0.35, v * (0.75 + 0.5 * r())]);
+    }
+    p = o;
+  }
+  return p;
+}
+function poly(c, pts) { c.beginPath(); c.moveTo(pts[0][0], pts[0][1]); for (let k = 1; k < pts.length; k++) c.lineTo(pts[k][0], pts[k][1]); c.closePath(); }
+function bbox(pts, m = 0) { let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; for (const [x, y] of pts) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); } return [x0 - m, y0 - m, x1 + m, y1 + m]; }
+// зерно бумаги для грануляции (повторяемая плитка)
+let GRAIN = null;
+function bakeGrain() {
+  const n = 256, c = mk(n, n), x = c.getContext("2d"), id = x.createImageData(n, n), d = id.data, r = rng(77);
+  for (let i = 0; i < n * n; i++) { const v = r(); const a = v > 0.72 ? (v - 0.72) / 0.28 : 0; d[i * 4] = d[i * 4 + 1] = d[i * 4 + 2] = 0; d[i * 4 + 3] = Math.round(255 * Math.pow(a, 1.6)); }
+  x.putImageData(id, 0, 0);
+  // крупнее: кластеры зерна
+  const c2 = mk(n * 2, n * 2), x2 = c2.getContext("2d"); x2.imageSmoothingEnabled = true; x2.drawImage(c, 0, 0, n * 2, n * 2); x2.globalAlpha = 0.6; x2.drawImage(c, 0, 0);
+  return c2;
+}
+// акварельная заливка: layers полупрозрачных слоёв одной деформированной формы
+function watercolor(c, pts, color, seed, o = {}) {
+  GRAIN = GRAIN || bakeGrain();
+  const r = rng(seed * 31 + 7);
+  const vari = o.vari ?? 0.55, layers = o.layers ?? 30, a = o.alpha ?? 0.05;
+  const base = deform(pts, o.depth ?? 2, vari, r);
+  const [x0, y0, x1, y1] = bbox(base, 80);
+  const w = Math.ceil(x1 - x0), h = Math.ceil(y1 - y0);
+  if (w < 2 || h < 2) return;
+  const t = mk(w, h), tx = t.getContext("2d");
+  tx.translate(-x0, -y0); tx.fillStyle = color;
+  for (let L = 0; L < layers; L++) {
+    const lp = deform(base, 3, vari * 0.5, r);
+    tx.globalAlpha = a; poly(tx, lp); tx.fill();
+  }
+  // тёмная кайма у высохшего края (пигмент собирается к краю)
+  if (o.edge !== 0) { tx.globalAlpha = (o.edge ?? 0.18); tx.strokeStyle = color; tx.lineWidth = 2.2; tx.filter = "blur(0.8px)"; poly(tx, deform(base, 2, vari * 0.3, r)); tx.stroke(); tx.filter = "none"; }
+  // грануляция: выбиваем пигмент зерном бумаги
+  if (o.gran !== 0) { tx.setTransform(1, 0, 0, 1, 0, 0); tx.globalCompositeOperation = "destination-out"; tx.globalAlpha = o.gran ?? 0.35; tx.fillStyle = tx.createPattern(GRAIN, "repeat"); tx.translate(-(x0 % 512), -(y0 % 512)); tx.fillRect(x0 % 512, y0 % 512, w, h); }
+  c.drawImage(t, x0, y0);
+}
+// пятно-капля как набор точек (база для watercolor)
+function blob(cx, cy, rx, ry, n = 10, rot = 0) { const p = []; for (let k = 0; k < n; k++) { const a = rot + (k / n) * TAU; p.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]); } return p; }
+function rect(x0, y0, x1, y1) { return [[x0, y0], [x1, y0], [x1, y1], [x0, y1]]; }
+// «по мокрому»: вертикальная растяжка неба несколькими цветами с мягкими затёками
+function wetSky(c, w, h, stops, seed) {
+  const gr = c.createLinearGradient(0, 0, 0, h); stops.forEach(([u, col]) => gr.addColorStop(u, col)); c.fillStyle = gr; c.fillRect(0, 0, w, h);
+  const r = rng(seed);
+  for (let k = 0; k < 9; k++) { const [u, col] = stops[Math.floor(r() * stops.length)]; const y = u * h + (r() - 0.5) * h * 0.15; watercolor(c, blob(r() * w, y, w * (0.25 + r() * 0.3), h * 0.06, 8), col, seed + k, { alpha: 0.03, layers: 22, vari: 0.7, gran: 0.15, edge: 0.08 }); }
+}
+// мазок тушью сухой кистью: штампы вдоль пути, ширина с нажимом, разрывы к концу; лёгкое растекание по бумаге
+function resample(pts, step) {
+  const out = [pts[0]]; let acc = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const [ax, ay] = pts[i - 1], [bx, by] = pts[i], d = Math.hypot(bx - ax, by - ay); let s = step - acc;
+    while (s <= d) { const u = s / d; out.push([ax + (bx - ax) * u, ay + (by - ay) * u]); s += step; }
+    acc = d - (s - step);
+  }
+  return out;
+}
+function inkBrush(c, pts, w, color = P.ink, seed = 1, o = {}) {
+  if (pts.length < 2) return;
+  const q = resample(pts, Math.max(0.8, w * 0.22)), n = q.length, r = rng(seed);
+  c.save(); c.fillStyle = color;
+  if (o.bleed !== false) { c.globalAlpha = 0.12; c.strokeStyle = color; c.lineWidth = w * 1.9; c.lineCap = "round"; c.lineJoin = "round"; c.filter = "blur(1.5px)"; c.beginPath(); q.forEach((p, k) => (k ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1]))); c.stroke(); c.filter = "none"; }
+  const dry = o.dry ?? 0.25, head = o.head ?? 0.15, tail = o.tail ?? 0.35;
+  for (let k = 0; k < n; k++) {
+    const u = k / Math.max(1, n - 1);
+    const press = Math.min(1, u / head, (1 - u) / tail) ;
+    const ww = w * (0.18 + 0.82 * Math.pow(clamp(press), 0.7)) * (0.85 + 0.3 * vnoise(k * 0.15, seed));
+    // сухая кисть: к хвосту мазок рвётся
+    if (u > 1 - tail && vnoise(k * 0.9, seed + 5) < dry * (u - (1 - tail)) / tail * 2) continue;
+    c.globalAlpha = o.alpha ?? 0.92;
+    c.beginPath(); c.ellipse(q[k][0], q[k][1], ww / 2, ww / 2 * 0.8, 0, 0, TAU); c.fill();
+  }
+  c.restore();
+}
+// быстрый мазок для анимации (в кадре): переменная толщина отрезками
+function inkStroke(c, pts, w, color = P.ink, o = {}) {
+  const n = pts.length; if (n < 2) return;
+  c.save(); c.strokeStyle = color; c.lineCap = "round"; c.lineJoin = "round";
+  for (let k = 0; k < n - 1; k++) {
+    const u = (k + 0.5) / (n - 1);
+    const taper = o.flat ? 1 : Math.pow(Math.sin(Math.PI * clamp(u)), 0.5);
+    c.lineWidth = Math.max(0.6, w * (0.3 + 0.7 * taper) * (1 + 0.18 * (hash2(k, o.seed ?? 1) - 0.5)));
+    c.beginPath(); c.moveTo(pts[k][0], pts[k][1]); c.lineTo(pts[k + 1][0], pts[k + 1][1]); c.stroke();
+  }
+  c.restore();
+}
+function bez(p0, p1, p2, p3, n = 16) {
+  const out = [];
+  for (let k = 0; k <= n; k++) { const u = k / n, v = 1 - u; out.push([v * v * v * p0[0] + 3 * v * v * u * p1[0] + 3 * v * u * u * p2[0] + u * u * u * p3[0], v * v * v * p0[1] + 3 * v * v * u * p1[1] + 3 * v * u * u * p2[1] + u * u * u * p3[1]]); }
+  return out;
+}
+function splatter(c, x, y, rad, n, color, seed, a = 0.8) {
+  const q = rng(seed); c.save(); c.fillStyle = color;
+  for (let k = 0; k < n; k++) { const ang = q() * TAU, d = Math.pow(q(), 0.6) * rad, s = 0.8 + q() * 4.5 * (1 - d / rad); c.globalAlpha = a * (0.4 + 0.6 * q()); c.beginPath(); c.arc(x + Math.cos(ang) * d, y + Math.sin(ang) * d, s, 0, TAU); c.fill(); }
+  c.restore();
+}
+// бумага: холодное прессование — светотень зерна, волокна (кладётся «умножением» на весь кадр)
+let PAPER = null;
+function bakePaper() {
+  const c = mk(W, H), x = c.getContext("2d"), r = rng(11);
+  x.fillStyle = "#ffffff"; x.fillRect(0, 0, W, H);
+  x.filter = "blur(50px)";
+  for (let k = 0; k < 70; k++) { x.globalAlpha = 0.07; x.fillStyle = r() < 0.5 ? "#d8c49c" : "#fffaf0"; x.beginPath(); x.arc(r() * W, r() * H, 90 + r() * 260, 0, TAU); x.fill(); }
+  x.filter = "none"; x.globalAlpha = 1;
+  // зерно: мягкая крупная фактура (сглаженный шум) + мелкий шум
+  const nw = 480, nh = 270, nc = mk(nw, nh), nx = nc.getContext("2d"), nid = nx.createImageData(nw, nh);
+  for (let i = 0; i < nw * nh; i++) { const v = 200 + r() * 55; nid.data[i * 4] = nid.data[i * 4 + 1] = v; nid.data[i * 4 + 2] = v - 6; nid.data[i * 4 + 3] = 255; }
+  nx.putImageData(nid, 0, 0);
+  x.globalCompositeOperation = "multiply"; x.globalAlpha = 0.35; x.imageSmoothingEnabled = true; x.drawImage(nc, 0, 0, W, H);
+  x.globalCompositeOperation = "source-over"; x.globalAlpha = 1;
+  const id = x.getImageData(0, 0, W, H), d = id.data;
+  for (let i = 0; i < d.length; i += 4) { const s2 = (r() - 0.5) * 9; d[i] += s2; d[i + 1] += s2; d[i + 2] += s2; }
+  x.putImageData(id, 0, 0);
+  x.strokeStyle = "rgba(150,120,80,0.10)"; x.lineWidth = 1;
+  for (let k = 0; k < 600; k++) { const px = r() * W, py = r() * H, a = r() * TAU, l = 6 + r() * 22; x.beginPath(); x.moveTo(px, py); x.quadraticCurveTo(px + Math.cos(a + 1) * l * 0.5, py + Math.sin(a + 1) * l * 0.5, px + Math.cos(a) * l, py + Math.sin(a) * l); x.stroke(); }
+  return c;
+}
+function bake(w, h, fn) { const c = mk(w, h); fn(c.getContext("2d"), w, h); return c; }
+// пигментная пятнистость для героев (накладывается на гуся source-atop)
+let MOTTLE = null;
+function bakeMottle() {
+  return bake(1024, 1024, (c) => {
+    const r = rng(303);
+    c.filter = "blur(10px)";
+    for (let k = 0; k < 260; k++) { c.globalAlpha = 0.18; c.fillStyle = r() < 0.55 ? "#3a3026" : "#ffffff"; c.beginPath(); c.ellipse(r() * 1024, r() * 1024, 10 + r() * 50, 8 + r() * 30, r() * 3, 0, TAU); c.fill(); }
+    c.filter = "none";
+    c.globalAlpha = 0.5; c.fillStyle = c.createPattern(GRAIN || (GRAIN = bakeGrain()), "repeat"); c.fillRect(0, 0, 1024, 1024);
+  });
+}
+
+// ---------- Гусь со спины (камера летит за ним): тушь + акварель, рисуется в своём холсте и тонируется пятнами пигмента ----------
+// st: x, y (центр туловища на экране), s (масштаб), roll (крен, рад), mode ('sleep'|'swim'|'run'|'fly'),
+//     flap (фаза взмаха 0…1), run (фаза бега), look (−1…1 поворот головы: + вправо), honk (0…1 клюв открыт),
+//     pitch (−1 пике … +1 набор высоты), ruff (0…1 перья дыбом), nu (0…1 шея поднята)
+const GBUF = { c: null, x: null, N: 1100 };
+const GCOL = { back: "#8f8b7f", backD: "#6b675d", light: "#d8d2c2", neck: "#6c665c", head: "#625d54", prim: "#3d3a34", sec: "#5d5a52", white: "#f4f1ea", beak: "#e8822c", foot: "#e57a2a" };
+function wingAngles(flap) {
+  const a = Math.sin(flap * TAU), b = Math.sin((flap - 0.1) * TAU);
+  // плечо: −0.5 (вниз) … +0.85 (вверх); кисть отстаёт и гнётся
+  return [lerp(-0.5, 0.85, (a + 1) / 2), lerp(-0.85, 1.05, (b + 1) / 2)];
+}
+// одно крыло: side = +1 правое (на экране справа), −1 левое
+function drawWingRear(g, side, flap, ink) {
+  const [t1, t2] = wingAngles(flap);
+  const S = [side * 58, -16];
+  const d1 = [side * Math.cos(t1), -Math.sin(t1)], d2 = [side * Math.cos(t2), -Math.sin(t2)];
+  const E = [S[0] + d1[0] * 112, S[1] + d1[1] * 112];
+  const T = [E[0] + d2[0] * 150, E[1] + d2[1] * 150];
+  // нормаль «к зрителю» (вниз по экрану у горизонтального крыла)
+  const fix = (n) => (n[1] < 0 ? [-n[0], -n[1]] : n);
+  const N1 = fix([-d1[1], d1[0]]), N2 = fix([-d2[1], d2[0]]);
+  const R = [side * 18, 20];                      // корень заднего края у спины
+  const E2 = [E[0] + N1[0] * 62, E[1] + N1[1] * 62];
+  const M = [lerp(E[0], T[0], 0.55), lerp(E[1], T[1], 0.55)];
+  const M2 = [M[0] + N2[0] * 46, M[1] + N2[1] * 46];
+  const RE = [lerp(E2[0], R[0], 0.5) + N1[0] * 14, lerp(E2[1], R[1], 0.5) + N1[1] * 14];
+  const shape = (c) => {
+    c.beginPath(); c.moveTo(R[0], R[1]); c.lineTo(S[0], S[1]);
+    c.quadraticCurveTo(lerp(S[0], E[0], 0.5) - N1[0] * 10, lerp(S[1], E[1], 0.5) - N1[1] * 10, E[0], E[1]);
+    c.quadraticCurveTo(M[0] - N2[0] * 6, M[1] - N2[1] * 6, T[0], T[1]);
+    c.quadraticCurveTo(T[0] + N2[0] * 20 - d2[0] * 10, T[1] + N2[1] * 20 - d2[1] * 10, M2[0], M2[1]);
+    c.quadraticCurveTo(E2[0] + N2[0] * 4, E2[1] + N2[1] * 4, E2[0], E2[1]);
+    c.quadraticCurveTo(RE[0], RE[1], R[0], R[1]);
+    c.closePath();
+  };
+  g.save();
+  shape(g); g.fillStyle = GCOL.back; g.fill();
+  g.save(); shape(g); g.clip();
+  // кроющие светлее у переднего края, второстепенные — тёмная полоса по заднему краю, маховые (кисть) тёмные
+  g.strokeStyle = "rgba(255,255,255,0.30)"; g.lineWidth = 26; g.lineCap = "round"; g.beginPath(); g.moveTo(S[0], S[1] + 8); g.lineTo(E[0] + N1[0] * 12, E[1] + N1[1] * 12); g.stroke();
+  g.strokeStyle = GCOL.sec; g.lineWidth = 30; g.globalAlpha = 0.8; g.beginPath(); g.moveTo(R[0] + N1[0] * 10, R[1] + N1[1] * 10); g.lineTo(E2[0] - N1[0] * 6, E2[1] - N1[1] * 6); g.stroke();
+  g.globalAlpha = 1; g.fillStyle = GCOL.prim;
+  g.beginPath(); g.moveTo(E[0] + d2[0] * 40 - N2[0] * 30, E[1] + d2[1] * 40 - N2[1] * 30); g.lineTo(T[0] + d2[0] * 30, T[1] + d2[1] * 30); g.lineTo(M2[0] + N2[0] * 40, M2[1] + N2[1] * 40); g.lineTo(E2[0] + d2[0] * 30 + N2[0] * 20, E2[1] + d2[1] * 30 + N2[1] * 20); g.closePath(); g.fill();
+  g.strokeStyle = "rgba(60,52,42,0.45)"; g.lineWidth = 2.2;
+  const an = Math.atan2(N1[1], N1[0]);
+  for (let k = 1; k < 5; k++) { const u = k / 5, px = lerp(S[0], E[0], u) + N1[0] * 14, py = lerp(S[1], E[1], u) + N1[1] * 14; g.beginPath(); g.arc(px, py, 11, an - 1.2, an + 1.2); g.stroke(); }
+  g.restore();
+  // тушь: передний край густо, задний тоньше, «пальцы» маховых штрихами
+  inkStroke(g, [S, [lerp(S[0], E[0], 0.5) - N1[0] * 5, lerp(S[1], E[1], 0.5) - N1[1] * 5], E, M, T], 5.2, ink, { seed: 3 + side });
+  inkStroke(g, bez(T, [T[0] + N2[0] * 20, T[1] + N2[1] * 20], M2, E2, 10).concat([RE, R]), 2.4, ink, { seed: 5 + side, flat: true });
+  for (let k = 0; k < 4; k++) { const u = 0.12 + k * 0.13, bx = lerp(T[0], E[0], u), by = lerp(T[1], E[1], u), dd = lerp(18, 40, u); inkStroke(g, [[bx, by], [bx + N2[0] * dd, by + N2[1] * dd]], 1.6, ink, { seed: 8 + k }); }
+  g.restore();
+}
+// голова слегка в профиль: look задаёт поворот и сторону клюва
+function drawHeadRear(g, hx, hy, look, honk, eyeClosed, ink, sc = 1) {
+  const side = look >= 0 ? 1 : -1, turn = clamp(Math.abs(look), 0.2, 1);
+  g.save(); g.translate(hx, hy); g.scale(sc, sc);
+  const bl = 20 + 26 * turn, by = 0;
+  g.fillStyle = GCOL.beak;
+  g.beginPath(); g.moveTo(side * 12, by - 8); g.lineTo(side * (12 + bl), by - 2); g.lineTo(side * (12 + bl), by + 1); g.lineTo(side * 12, by + 3); g.closePath(); g.fill();
+  g.save(); g.translate(side * 12, by + 3); g.rotate(side * honk * 0.5);
+  g.beginPath(); g.moveTo(0, 0); g.lineTo(side * (bl - 3), -1); g.lineTo(side * (bl - 8), 6); g.lineTo(0, 7); g.closePath(); g.fill();
+  inkStroke(g, [[0, 7], [side * (bl - 8), 6]], 1.4, ink, { flat: true });
+  g.restore();
+  inkStroke(g, [[side * 12, by - 8], [side * (12 + bl), by - 2], [side * (12 + bl), by + 1]], 2, ink, { seed: 2 });
+  g.fillStyle = GCOL.head; g.beginPath(); g.ellipse(side * 4 * turn, 0, 21 + 4 * turn, 19, 0, 0, TAU); g.fill();
+  inkStroke(g, [[-21, 6], [-18, -12], [0, -20], [18, -12], [22, 5]], 3, ink, { seed: 4 });
+  if (!eyeClosed) { g.fillStyle = GCOL.white; g.beginPath(); g.ellipse(side * 13, by - 3, 2.5, 5, 0, 0, TAU); g.fill(); }
+  if (turn > 0.25) {
+    if (eyeClosed) inkStroke(g, [[side * 1, -6], [side * 6, -3], [side * 11, -6]], 1.8, ink, { flat: true });
+    else { g.fillStyle = "#17110c"; g.beginPath(); g.arc(side * 6, -6, 4.2, 0, TAU); g.fill(); g.fillStyle = "#fff"; g.beginPath(); g.arc(side * 7.3, -7.3, 1.4, 0, TAU); g.fill(); }
+  }
+  g.restore();
+}
+function headPos(st) {
+  const nu = st.nu ?? 1, pitch = st.pitch ?? 0, look = st.look ?? 0.3;
+  return [look * 26, lerp(-70, -150, nu) - pitch * 38];
+}
+function drawGooseRear(g, st) {
+  MOTTLE = MOTTLE || bakeMottle();
+  if (!GBUF.c) { GBUF.c = mk(GBUF.N, GBUF.N); GBUF.x = GBUF.c.getContext("2d"); }
+  const s = st.s ?? 1, N = GBUF.N, half = N / 2;
+  const box = Math.min(N, Math.ceil(980 * s) + 40), b0 = Math.floor(half - box / 2);
+  const x = GBUF.x;
+  x.setTransform(1, 0, 0, 1, 0, 0); x.globalAlpha = 1; x.globalCompositeOperation = "source-over";
+  x.clearRect(b0 - 3, b0 - 3, box + 6, box + 6);   // с запасом: при крене края копии берут соседние пиксели
+  x.save(); x.beginPath(); x.rect(b0, b0, box, box); x.clip();
+  x.translate(half, half); x.rotate(st.roll ?? 0); x.scale(s, s);
+  const ink = st.ink ?? P.ink;
+  const mode = st.mode ?? "fly", pitch = st.pitch ?? 0, ruff = st.ruff ?? 0;
+  const folded = mode === "sleep" || mode === "swim";
+  // ---- крылья (оба всегда видны: левое и правое по сторонам)
+  if (!folded) { const fl = st.flap ?? 0, sp = st.spread ?? 1; x.save(); x.globalAlpha = clamp(sp * 2.5); x.scale(lerp(0.45, 1, sp), lerp(0.55, 1, sp)); drawWingRear(x, -1, lerp(0.5, fl, sp), ink); drawWingRear(x, 1, lerp(0.5, fl, sp), ink); x.restore(); }
+  // ---- шея и голова (уходят вдаль, туловище ближе к нам и рисуется поверх основания шеи)
+  const look = st.look ?? 0.3;
+  if (mode !== "sleep") {
+    const [hx, hy] = headPos(st);
+    const np = bez([0, -30], [0, -70], [hx * 0.6, hy + 34], [hx, hy + 10], 12);
+    const L = [], Rr = [];
+    np.forEach((p, k) => { const u = k / (np.length - 1), w = lerp(27, 15, u); const q = np[Math.min(k + 1, np.length - 1)], o = np[Math.max(k - 1, 0)]; let dx = q[0] - o[0], dy = q[1] - o[1]; const l = Math.hypot(dx, dy) || 1; dx /= l; dy /= l; L.push([p[0] - dy * w, p[1] + dx * w]); Rr.push([p[0] + dy * w, p[1] - dx * w]); });
+    const neckPath = (c) => { c.beginPath(); L.forEach((p, k) => (k ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1]))); for (let k = Rr.length - 1; k >= 0; k--) c.lineTo(Rr[k][0], Rr[k][1]); c.closePath(); };
+    x.save(); neckPath(x); x.fillStyle = GCOL.neck; x.fill(); x.clip();
+    x.strokeStyle = "rgba(255,255,255,0.16)"; x.lineWidth = 9; x.beginPath(); np.forEach((p, k) => (k ? x.lineTo(p[0] - 9, p[1]) : x.moveTo(p[0] - 9, p[1]))); x.stroke();
+    x.strokeStyle = "rgba(40,34,28,0.4)"; x.lineWidth = 1.6;
+    for (let k = 2; k < np.length - 1; k += 2) { const p = np[k]; x.beginPath(); x.moveTo(p[0] - 22, p[1] - 3); x.quadraticCurveTo(p[0], p[1] + 5, p[0] + 22, p[1] - 3); x.stroke(); }
+    x.restore();
+    inkStroke(x, L, 3.6, ink, { seed: 51 }); inkStroke(x, Rr, 3.6, ink, { seed: 52 });
+    drawHeadRear(x, hx, hy, look, st.honk ?? 0, false, ink, 1.3);
+  }
+  // ---- туловище (спина): чешуйчатые ряды перьев со светлыми каймами
+  const spr0 = mode === "run" ? (st.spread ?? 1) : folded ? 0 : 1;
+  const rx = lerp(98, 88, spr0), ry = lerp(64, 60, spr0) - pitch * 6;
+  const bodyPath = (c) => { c.beginPath(); c.moveTo(-rx, -4); c.bezierCurveTo(-rx, -ry * 0.95, rx, -ry * 0.95, rx, -4); c.bezierCurveTo(rx, ry * 0.7, rx * 0.42, ry + 8, 0, ry + 8); c.bezierCurveTo(-rx * 0.42, ry + 8, -rx, ry * 0.7, -rx, -4); c.closePath(); };
+  x.save();
+  bodyPath(x); x.fillStyle = GCOL.back; x.fill();
+  x.clip();
+  x.fillStyle = GCOL.light; x.beginPath(); x.ellipse(0, 6 + ry * 0.95, rx * 0.9, ry * 0.5, 0, 0, TAU); x.fill();
+  for (let row = 0; row < 4; row++) for (let k = -3; k <= 3; k++) {
+    const px = k * 26 + (row % 2) * 13, py = -38 + row * 22;
+    if (Math.abs(px) > rx * 0.85 - row * 6) continue;
+    x.strokeStyle = "rgba(240,234,220,0.75)"; x.lineWidth = 2.6; x.beginPath(); x.arc(px, py, 12, 0.25, Math.PI - 0.25); x.stroke();
+    x.strokeStyle = "rgba(50,44,36,0.4)"; x.lineWidth = 1.6; x.beginPath(); x.arc(px, py + 3, 12, 0.35, Math.PI - 0.35); x.stroke();
+  }
+  x.restore();
+  if (ruff > 0.01) { for (let k = -2; k <= 2; k++) { const px = k * 34 + ruff * k * 14, py = -58 - ruff * (30 + 26 * hash(k + 9)), a = k * 0.35 + ruff * k * 0.4; x.save(); x.translate(px, py); x.rotate(a); x.globalAlpha = clamp(ruff * 1.6); x.fillStyle = GCOL.light; x.beginPath(); x.ellipse(0, 0, 6, 15, 0, 0, TAU); x.fill(); x.strokeStyle = ink; x.lineWidth = 1.4; x.stroke(); x.beginPath(); x.moveTo(0, 15); x.lineTo(0, -12); x.stroke(); x.restore(); } }
+  inkStroke(x, bez([-rx, -4], [-rx, -ry * 0.95], [rx, -ry * 0.95], [rx, -4], 18), 5, ink, { seed: 31 });
+  inkStroke(x, bez([rx, -4], [rx, ry * 0.7], [rx * 0.42, ry + 8], [0, ry + 8], 10), 3.2, ink, { seed: 32 });
+  inkStroke(x, bez([0, ry + 8], [-rx * 0.42, ry + 8], [-rx, ry * 0.7], [-rx, -4], 10), 3.2, ink, { seed: 34 });
+  // ---- хвост: тёмный веер и белое подхвостье (ближе всего к зрителю)
+  x.fillStyle = GCOL.white; x.beginPath(); x.ellipse(0, ry - 6, 30, 9, 0, 0, TAU); x.fill();
+  const tl = (c) => { c.beginPath(); c.moveTo(-26, ry - 2); c.quadraticCurveTo(-30, ry + 24, 0, ry + 30); c.quadraticCurveTo(30, ry + 24, 26, ry - 2); c.closePath(); };
+  tl(x); x.fillStyle = "#77736a"; x.fill();
+  x.strokeStyle = GCOL.white; x.lineWidth = 4; x.beginPath(); x.moveTo(-22, ry + 18); x.quadraticCurveTo(0, ry + 32, 22, ry + 18); x.stroke();
+  inkStroke(x, bez([-26, ry - 2], [-30, ry + 24], [30, ry + 24], [26, ry - 2], 10), 2.6, ink, { seed: 33 });
+  // ---- голова спящего: лежит на спине, клюв спрятан в перья
+  if (mode === "sleep") drawHeadRear(x, 30, -36, -0.9, 0, true, ink, 1.35);
+  // ---- сложенные крылья по бокам (на воде)
+  if (folded || spr0 < 1) {
+    x.save(); x.globalAlpha = folded ? 1 : 1 - spr0;
+    for (const sd of [-1, 1]) {
+      const fw = [[sd * 30, -46], [sd * 92, -20], [sd * 104, 26], [sd * 70, 60], [sd * 44, 40]];
+      x.fillStyle = GCOL.backD; poly(x, fw); x.fill();
+      x.fillStyle = GCOL.prim; poly(x, [[sd * 70, 60], [sd * 104, 26], [sd * 96, 54], [sd * 58, 74]]); x.fill();
+      inkStroke(x, [[sd * 30, -46], [sd * 92, -20], [sd * 104, 26], [sd * 70, 60]], 3.2, ink, { seed: 40 + sd });
+    }
+    x.restore();
+  }
+  drawFeetRear(x, st, ry, ink);
+  x.restore();
+  // пятна пигмента поверх гуся (только по закрашенному)
+  x.setTransform(1, 0, 0, 1, 0, 0); x.globalCompositeOperation = "source-atop"; x.globalAlpha = 0.5;
+  const ox = (hash(st.seed ?? 1) * 100) | 0;
+  x.drawImage(MOTTLE, ox, ox, Math.min(box, 1024 - ox), Math.min(box, 1024 - ox), b0, b0, box, box);
+  x.globalCompositeOperation = "source-over"; x.globalAlpha = 1;
+  g.drawImage(GBUF.c, b0, b0, box, box, Math.round(st.x - box / 2), Math.round(st.y - box / 2), box, box);
+}
+// лапы со спины. Полёт: поджаты под хвостом, обе ступни подошвами к нам. Бег: шлёпают по очереди. Вода: гребут под водой.
+function drawFeetRear(x, st, ry, ink) {
+  const mode = st.mode ?? "fly";
+  const foot = (fx, fy, sc, a) => {
+    x.save(); x.translate(fx, fy); x.rotate(a); x.scale(sc, sc);
+    x.fillStyle = GCOL.foot; x.beginPath(); x.moveTo(0, -4); x.lineTo(-15, 16); x.quadraticCurveTo(0, 12, 15, 16); x.closePath(); x.fill();
+    x.strokeStyle = ink; x.lineWidth = 1.8; x.stroke();
+    x.lineWidth = 1.2; x.beginPath(); x.moveTo(0, -2); x.lineTo(-9, 14); x.moveTo(0, -2); x.lineTo(0, 13); x.moveTo(0, -2); x.lineTo(9, 14); x.stroke();
+    x.restore();
+  };
+  const leg = (a, b, w) => { x.lineCap = "round"; x.strokeStyle = ink; x.lineWidth = w + 3; x.beginPath(); x.moveTo(...a); x.lineTo(...b); x.stroke(); x.strokeStyle = GCOL.foot; x.lineWidth = w; x.stroke(); };
+  if (mode === "fly") {
+    for (const sd of [-1, 1]) { const fx = sd * 38, fy = ry + 22; leg([sd * 28, ry - 2], [fx, fy - 3], 5); foot(fx, fy, 0.95, sd * 0.2); }
+  } else if (mode === "run") {
+    for (const sd of [-1, 1]) {
+      const ph = ((st.run ?? 0) + (sd > 0 ? 0.5 : 0)) * TAU, sp = st.spread ?? 1, lift = Math.max(0, Math.sin(ph)) * 34 * sp;
+      const fy = ry + lerp(26, 62, sp) - lift, fx = sd * (34 + Math.cos(ph) * 6);
+      x.save(); x.globalAlpha = lerp(0.45, 1, sp); leg([sd * 30, ry - 10], [fx, fy - 6], 6.5);
+      foot(fx, fy - 4, lerp(1.1, 1.25, sp), sd * 0.25); x.restore();
+    }
+  } else {
+    x.save(); x.globalAlpha = 0.45;
+    for (const sd of [-1, 1]) { const ph = ((st.run ?? 0) + (sd > 0 ? 0.5 : 0)) * TAU; foot(sd * (40 + Math.sin(ph) * 8), ry + 36, 1.1, sd * 0.3); }
+    x.restore();
+  }
+}
+
+// ---------- Запечённые акварельные куски (v2) ----------
+let SPR = null;
+const TEXW = 1024;
+// повторяемая плитка земли: рисуем элементы с переносом через края, потом тройная ширина для выборки
+function tileTex(fn, base) {
+  const t = bake(TEXW, TEXW, (c) => {
+    c.fillStyle = base; c.fillRect(0, 0, TEXW, TEXW);
+    const wrap = (draw) => { for (const dx of [-TEXW, 0, TEXW]) for (const dy of [-TEXW, 0, TEXW]) { c.save(); c.translate(dx, dy); draw(c); c.restore(); } };
+    fn(c, wrap);
+  });
+  return bake(TEXW * 3, TEXW, (c) => { for (let k = 0; k < 3; k++) c.drawImage(t, k * TEXW, 0); });
+}
+function skyCanvas(w, h, hz, stops, seed, clouds) {
+  return bake(w, h, (c) => {
+    wetSky(c, w, hz, stops, seed);
+    c.fillStyle = stops[stops.length - 1][1]; c.fillRect(0, hz - 2, w, h - hz + 2);
+    const r = rng(seed + 50);
+    for (const [n, y0, y1, cols, sz] of clouds) for (let k = 0; k < n; k++) {
+      const cx = r() * w, cy = lerp(y0, y1, r()), rx = sz * (0.6 + r() * 0.8);
+      watercolor(c, blob(cx, cy, rx, rx * 0.22, 9), cols[k % cols.length], seed + k * 7 + n, { alpha: 0.06, layers: 14, vari: 0.8, gran: 0.25, edge: 0.15 });
+    }
+  });
+}
+function bakeTree(seed, kind) {
+  // kind: 0 берёза (белый ствол, золото), 1 осина (оранжево-красная), 2 клён (багрянец)
+  const w = 700, h = 1700, r = rng(seed);
+  const trunkCol = kind === 0 ? "#efe9dc" : kind === 1 ? "#8d8f80" : "#5a4330";
+  const bx = w / 2;
+  const branches = [];
+  const bare = bake(w, h, (c) => {
+    const lean = (r() - 0.5) * 30;
+    const trunk = [[bx - 24, h], [bx + 24, h], [bx + 12 + lean, 560], [bx - 8 + lean, 560]];
+    watercolor(c, trunk, trunkCol, seed, { alpha: 0.12, layers: 12, vari: 0.15, gran: 0.3 });
+    inkBrush(c, [[bx - 24, h], [bx - 16 + lean * 0.5, 1000], [bx - 8 + lean, 560]], 6, P.ink, seed, { tail: 0.4, dry: 0.5 });
+    inkBrush(c, [[bx + 24, h], [bx + 18 + lean * 0.5, 1020], [bx + 12 + lean, 590]], 3.5, P.ink, seed + 1, { tail: 0.5, dry: 0.6 });
+    if (kind === 0) for (let k = 0; k < 16; k++) { const y = 600 + r() * (h - 640); inkBrush(c, [[bx - 20 + lean * (1 - y / h), y], [bx + 2 + r() * 14 + lean * (1 - y / h), y + 3]], 5 + r() * 4, P.ink, seed + k + 9, { bleed: false }); }
+    // ветви: развилки тушью вверх
+    const grow = (x0, y0, a, len, wd, d) => {
+      if (d > 3 || len < 30) return;
+      const x1 = x0 + Math.cos(a) * len, y1 = y0 + Math.sin(a) * len;
+      inkBrush(c, bez([x0, y0], [lerp(x0, x1, 0.3) + (r() - 0.5) * 20, lerp(y0, y1, 0.3)], [lerp(x0, x1, 0.7), lerp(y0, y1, 0.7) + (r() - 0.5) * 20], [x1, y1], 8), wd, P.ink, seed + d * 13 + (x1 | 0), { tail: 0.5, dry: 0.3, bleed: d < 2 });
+      branches.push([x1, y1]);
+      const n = 2 + (r() < 0.5 ? 1 : 0);
+      for (let k = 0; k < n; k++) grow(x1, y1, a + (r() - 0.5) * 1.3, len * (0.6 + r() * 0.2), wd * 0.62, d + 1);
+    };
+    for (let k = 0; k < 6; k++) { const y = 560 + k * 80 + r() * 40, side = k % 2 ? 1 : -1; grow(bx + lean * (1 - y / h) + side * 6, y, -Math.PI / 2 + side * (0.5 + r() * 0.5), 150 + r() * 70, 7, 0); }
+    grow(bx + lean, 570, -Math.PI / 2 + (r() - 0.5) * 0.3, 190, 9, 0);
+  });
+  const cols = kind === 0 ? ["#e8b93c", "#d99a2b", "#f0d070", "#c9a232"] : kind === 1 ? ["#e07a2c", "#c4482a", "#eba24a", "#b8562a"] : ["#b8302a", "#d2602a", "#8f2620", "#e08a3a"];
+  const crown = bake(w, h, (c) => {
+    // общая масса кроны, затем пятна у концов ветвей
+    watercolor(c, blob(bx, 470, 250, 300, 12), cols[0], seed + 99, { alpha: 0.05, layers: 16, vari: 0.6, gran: 0.35 });
+    for (let k = 0; k < 16; k++) { const [x, y] = branches[Math.floor(r() * branches.length)] || [bx, 400]; const rr = 80 + r() * 70; watercolor(c, blob(x, y, rr, rr * 0.75, 9, r() * 3), cols[k % cols.length], seed + 100 + k, { alpha: 0.07, layers: 14, vari: 0.7, gran: 0.35 }); }
+    for (let k = 0; k < 5; k++) splatter(c, bx + (r() - 0.5) * 360, 300 + r() * 360, 170, 40, cols[k % 4], seed + 200 + k, 0.7);
+    // мазки-листья тушью поверх
+    for (let k = 0; k < 40; k++) { const [x, y] = branches[Math.floor(r() * branches.length)] || [bx, 300]; const px = x + (r() - 0.5) * 120, py = y + (r() - 0.5) * 90; c.save(); c.globalAlpha = 0.6; c.fillStyle = cols[k % 4]; c.translate(px, py); c.rotate(r() * 6); c.beginPath(); c.ellipse(0, 0, 9, 5, 0, 0, TAU); c.fill(); c.restore(); }
+  });
+  return { bare, crown };
+}
+function bakeBareTree(seed) {
+  return bake(560, 1200, (c) => {
+    const r = rng(seed), bx = 280;
+    inkBrush(c, [[bx - 6, 1200], [bx + 4, 800], [bx - 4, 420]], 22, P.ink, seed, { tail: 0.3, head: 0.02 });
+    const grow = (x0, y0, a, len, wd, d) => {
+      if (d > 4 || len < 22) return;
+      const x1 = x0 + Math.cos(a) * len, y1 = y0 + Math.sin(a) * len;
+      inkBrush(c, bez([x0, y0], [lerp(x0, x1, 0.35) + (r() - 0.5) * 24, lerp(y0, y1, 0.35)], [lerp(x0, x1, 0.7), lerp(y0, y1, 0.7)], [x1, y1], 8), wd, P.ink, seed + d * 17 + (x1 | 0), { tail: 0.6, dry: 0.4, bleed: false });
+      for (let k = 0; k < 2 + (r() < 0.4 ? 1 : 0); k++) grow(x1, y1, a + (r() - 0.5) * 1.2, len * 0.68, wd * 0.6, d + 1);
+    };
+    for (let k = 0; k < 4; k++) grow(bx, 600 - k * 50, -Math.PI / 2 + (k % 2 ? 1 : -1) * (0.4 + r() * 0.5), 190, 11, 0);
+    grow(bx - 4, 420, -Math.PI / 2, 180, 12, 0);
+  });
+}
+function bakeHaystack(seed) {
+  return bake(560, 480, (c) => {
+    const r = rng(seed);
+    const dome = []; for (let k = 0; k <= 16; k++) { const a = Math.PI + (k / 16) * Math.PI; dome.push([280 + Math.cos(a) * 230, 440 + Math.sin(a) * 360 * (k > 3 && k < 13 ? 1 : 0.92)]); }
+    watercolor(c, dome, "#d9a647", seed, { alpha: 0.1, layers: 18, vari: 0.12, gran: 0.4 });
+    watercolor(c, [[90, 440], [470, 440], [440, 300], [120, 300]], "#a8742a", seed + 1, { alpha: 0.06, layers: 12, vari: 0.3, gran: 0.4, edge: 0 });
+    // солома сухой кистью
+    for (let k = 0; k < 70; k++) { const a = Math.PI * (1.05 + r() * 0.9), rr = 0.35 + r() * 0.6; const x = 280 + Math.cos(a) * 230 * rr, y = 440 + Math.sin(a) * 360 * rr; inkBrush(c, [[x, y], [x + (r() - 0.5) * 16, y + 40 + r() * 50]], 2.2, k % 3 ? "#8a5a1e" : "#5a3a14", seed + k, { bleed: false, alpha: 0.65, dry: 0.6 }); }
+    inkBrush(c, dome.slice(0, 9), 6, P.ink, seed + 5, { tail: 0.2 }); inkBrush(c, dome.slice(8), 4, P.ink, seed + 6, { head: 0.1, tail: 0.5 });
+    inkBrush(c, [[280, 90], [282, 30]], 7, P.ink, seed + 7, { head: 0.05 }); // жердь
+  });
+}
+function bakeReeds(seed) {
+  return bake(420, 620, (c) => {
+    const r = rng(seed);
+    for (let k = 0; k < 16; k++) {
+      const x = 60 + r() * 300, hh = 300 + r() * 300, bend = (r() - 0.4) * 80;
+      const pts = bez([x, 620], [x + 4, 620 - hh * 0.4], [x + bend * 0.5, 620 - hh * 0.75], [x + bend, 620 - hh], 10);
+      inkBrush(c, pts, 4 + r() * 3, k % 3 ? "#6b5428" : P.ink, seed + k, { tail: 0.6, dry: 0.3, bleed: false });
+      if (k % 3 === 0) { const [hx, hy] = pts[8]; watercolor(c, blob(hx, hy, 10, 34, 8), "#5a3518", seed + 50 + k, { alpha: 0.2, layers: 6, vari: 0.15, gran: 0.2, edge: 0.3 }); }
+      if (k % 2) watercolor(c, [[x, 620], [x + bend * 0.4 + 40, 620 - hh * 0.5], [x + 10, 620 - hh * 0.3]], "#8b8a45", seed + 80 + k, { alpha: 0.08, layers: 8, vari: 0.3, gran: 0.3 });
+    }
+  });
+}
+function bakeCloud(seed, light, dark, w = 1000, h = 460) {
+  return bake(w, h, (c) => {
+    const r = rng(seed);
+    for (let k = 0; k < 7; k++) { const rx = w * (0.13 + r() * 0.1); watercolor(c, blob(w * (0.25 + r() * 0.5), h * (0.4 + r() * 0.2), rx, rx * 0.62, 10), light, seed + k, { alpha: 0.08, layers: 14, vari: 0.6, gran: 0.25, edge: 0.12 }); }
+    watercolor(c, blob(w * 0.5, h * 0.7, w * 0.36, h * 0.12, 10), dark, seed + 40, { alpha: 0.06, layers: 12, vari: 0.6, gran: 0.3 });
+  });
+}
+function bakeLeaf(seed, col, kind) {
+  return bake(120, 90, (c) => {
+    c.translate(60, 45);
+    const p = kind ? [[-44, 0], [-20, -26], [0, -34], [20, -22], [44, 0], [20, 20], [0, 30], [-20, 22]] : [[-46, 0], [-12, -24], [30, -16], [48, 0], [30, 16], [-12, 24]];
+    watercolor(c, p, col, seed, { alpha: 0.16, layers: 8, vari: 0.12, gran: 0.25, edge: 0.4 });
+    inkBrush(c, [[-50, 0], [44, 0]], 2.2, P.ink, seed, { bleed: false });
+    for (let k = -1; k <= 1; k += 2) inkBrush(c, [[-6, 0], [14, k * 16]], 1.4, P.ink, seed + k, { bleed: false });
+  });
+}
+function bakeNovember() {
+  // Ноябрь: высокий старик в длинном сером кафтане, шапка, седая борода инеем, обеими руками держит посох перед собой
+  return bake(420, 860, (c) => {
+    const ink = "#24303a";
+    // кафтан до пят
+    const coat = [[150, 230], [270, 230], [320, 760], [100, 760]];
+    const solid = (pts, col) => { c.fillStyle = col; poly(c, pts); c.fill(); };
+    solid(coat, "#8a97a3"); solid([[150, 260], [120, 420], [180, 470], [205, 430], [180, 300]], "#7e8b97"); solid([[270, 260], [300, 420], [245, 470], [220, 430], [245, 300]], "#7e8b97");
+    solid([[160, 200], [260, 200], [250, 260], [216, 360], [204, 360], [170, 260]], "#eef2f4"); solid([[160, 135], [260, 135], [250, 70], [210, 52], [170, 70]], "#5d6a76");
+    c.fillStyle = "#e6d2ba"; c.beginPath(); c.ellipse(210, 175, 48, 54, 0, 0, TAU); c.fill();
+    for (const [x, d] of [[160, -1], [255, 1]]) solid([[x - 28, 760], [x + 24, 760], [x + 24 + d * 14, 812], [x - 30 + d * 8, 812]], "#4a433c");
+    watercolor(c, coat, "#7d8c99", 900, { alpha: 0.13, layers: 16, vari: 0.12, gran: 0.4 });
+    watercolor(c, [[205, 240], [225, 240], [230, 760], [200, 760]], "#5d6b78", 901, { alpha: 0.12, layers: 8, vari: 0.1, gran: 0.3, edge: 0 });
+    inkBrush(c, [[150, 232], [120, 500], [100, 760]], 5, ink, 902, { tail: 0.2 }); inkBrush(c, [[270, 232], [300, 500], [320, 760]], 5, ink, 903, { tail: 0.2 });
+    inkBrush(c, [[100, 760], [210, 772], [320, 760]], 4, ink, 904, {});
+    // сапоги — две ступни из-под полы
+    for (const [x, d] of [[160, -1], [255, 1]]) { watercolor(c, [[x - 28, 760], [x + 24, 760], [x + 24 + d * 14, 812], [x - 30 + d * 8, 812]], "#3c3630", 905 + x, { alpha: 0.25, layers: 8, vari: 0.1, gran: 0.2 }); inkBrush(c, [[x - 30, 812], [x + 26 + d * 14, 812]], 5, ink, 906 + x, { head: 0.05, tail: 0.1 }); }
+    // рукава к посоху: обе руки перед грудью
+    watercolor(c, [[150, 260], [120, 420], [180, 470], [205, 430], [180, 300]], "#6d7c89", 907, { alpha: 0.14, layers: 10, vari: 0.12, gran: 0.3 });
+    watercolor(c, [[270, 260], [300, 420], [245, 470], [220, 430], [245, 300]], "#6d7c89", 908, { alpha: 0.14, layers: 10, vari: 0.12, gran: 0.3 });
+    inkBrush(c, [[150, 262], [120, 420], [180, 470]], 3.5, ink, 909, {}); inkBrush(c, [[270, 262], [300, 420], [245, 470]], 3.5, ink, 910, {});
+    // посох
+    inkBrush(c, [[212, 120], [214, 470], [216, 812]], 10, "#4a3824", 911, { head: 0.02, tail: 0.05 });
+    // кисти рук на посохе (две)
+    for (const [x, y] of [[196, 450], [232, 466]]) { watercolor(c, blob(x, y, 20, 16, 8), "#d9c2a8", 912 + x, { alpha: 0.3, layers: 8, vari: 0.1, gran: 0.2, edge: 0.4 }); inkBrush(c, [[x - 18, y - 4], [x, y - 14], [x + 18, y - 2]], 2.6, ink, 913 + x, {}); }
+    // голова: лицо, брови-иней, глаза, нос
+    watercolor(c, blob(210, 175, 50, 56, 10), "#e2cdb4", 914, { alpha: 0.2, layers: 10, vari: 0.08, gran: 0.2 });
+    inkBrush(c, [[176, 160], [192, 152], [204, 158]], 5, "#f4f8fa", 915, { bleed: false }); inkBrush(c, [[244, 160], [228, 152], [216, 158]], 5, "#f4f8fa", 916, { bleed: false });
+    inkBrush(c, [[176, 158], [192, 150], [204, 156]], 2.4, ink, 917, { bleed: false }); inkBrush(c, [[244, 158], [228, 150], [216, 156]], 2.4, ink, 918, { bleed: false });
+    c.fillStyle = ink; c.beginPath(); c.arc(193, 172, 4.5, 0, TAU); c.arc(227, 172, 4.5, 0, TAU); c.fill();
+    inkBrush(c, [[210, 172], [214, 196], [206, 200]], 2.4, ink, 919, { bleed: false });
+    // борода инеем: белая с голубым, длинная, клином вниз
+    watercolor(c, [[160, 200], [260, 200], [250, 260], [216, 360], [204, 360], [170, 260]], "#f2f6f8", 920, { alpha: 0.35, layers: 12, vari: 0.15, gran: 0.15, edge: 0.5 });
+    watercolor(c, [[175, 210], [245, 210], [232, 280], [210, 350], [190, 280]], "#b9cfdc", 921, { alpha: 0.08, layers: 8, vari: 0.2, gran: 0.2, edge: 0 });
+    for (let k = 0; k < 7; k++) inkBrush(c, [[176 + k * 11, 214], [190 + k * 5, 300 + (k % 3) * 14]], 1.3, "#7f98a8", 922 + k, { bleed: false });
+    inkBrush(c, [[160, 200], [180, 270], [210, 362], [240, 270], [260, 200]], 2.4, ink, 930, {});
+    // шапка с меховой оторочкой
+    watercolor(c, [[160, 135], [260, 135], [250, 70], [210, 52], [170, 70]], "#55626e", 931, { alpha: 0.2, layers: 10, vari: 0.1, gran: 0.3 });
+    watercolor(c, blob(210, 138, 58, 14, 10), "#e9edef", 932, { alpha: 0.3, layers: 8, vari: 0.15, gran: 0.2, edge: 0.4 });
+    inkBrush(c, [[158, 140], [170, 68], [210, 50], [250, 68], [262, 140]], 3, ink, 933, {});
+    // иней на плечах
+    splatter(c, 160, 240, 40, 30, "#f6f9fb", 934, 0.9); splatter(c, 262, 240, 40, 30, "#f6f9fb", 935, 0.9);
+  });
+}
+function bakeDoor(seed) {
+  return bake(210, 380, (c) => {
+    const r = rng(seed);
+    c.fillStyle = "#6f4c2e"; c.fillRect(4, 6, 202, 368);
+    for (let k = 0; k < 5; k++) { watercolor(c, rect(4 + k * 41, 6, 44 + k * 41, 374), k % 2 ? "#8a6240" : "#7a5434", seed + k, { alpha: 0.16, layers: 8, vari: 0.04, gran: 0.4, edge: 0.3 }); inkBrush(c, [[4 + k * 41, 6], [6 + k * 41, 374]], 2, P.ink, seed + 10 + k, { bleed: false, dry: 0.5 }); }
+    for (const y of [60, 310]) { watercolor(c, rect(0, y - 14, 210, y + 14), "#5e4128", seed + y, { alpha: 0.2, layers: 6, vari: 0.04, gran: 0.3 }); inkBrush(c, [[0, y - 14], [210, y - 14]], 2.5, P.ink, seed + y + 1, { bleed: false }); }
+    inkBrush(c, [[10, 300], [200, 70]], 9, "#5e4128", seed + 99, { bleed: false });
+    inkBrush(c, [[4, 4], [206, 4], [206, 376], [4, 376], [4, 4]], 3.2, P.ink, seed + 98, { head: 0.02, tail: 0.02 });
+    for (let k = 0; k < 20; k++) splatter(c, r() * 210, r() * 380, 4, 2, "#3a2614", seed + 200 + k, 0.5);
+  });
+}
+function bakeVillage() {
+  return bake(W + 200, H + 120, (c, w, h) => {
+    const hz = 650;
+    wetSky(c, w, hz, [[0, "#6f7b88"], [0.55, "#98a3ad"], [1, "#c9c3b2"]], 600);
+    const r = rng(601);
+    for (let k = 0; k < 7; k++) watercolor(c, blob(r() * w, 120 + r() * 300, 260 + r() * 200, 60, 9), k % 2 ? "#6a7582" : "#57626e", 610 + k, { alpha: 0.06, layers: 14, vari: 0.8, gran: 0.25 });
+    // дальний лес и холм
+    watercolor(c, [[0, 640], [300, 590], [700, 610], [1100, 570], [1500, 600], [w, 585], [w, 700], [0, 700]], "#5d5446", 620, { alpha: 0.08, layers: 16, vari: 0.25, gran: 0.4 });
+    // поле перед деревней (тёмная охра) и дорога к воротам
+    c.fillStyle = "#a39066"; c.fillRect(0, 680, w, h - 680);
+    watercolor(c, [[0, 690], [w, 680], [w, h], [0, h]], "#8b7a55", 621, { alpha: 0.05, layers: 14, vari: 0.3, gran: 0.4 });
+    watercolor(c, [[1010, 935], [1110, 935], [1400, h], [720, h]], "#b8a582", 622, { alpha: 0.08, layers: 12, vari: 0.15, gran: 0.4 });
+    // избы: брёвна, крыша, окно светится
+    const hut = (x, y, s, seed) => {
+      watercolor(c, [[x - 140 * s, y], [x + 140 * s, y], [x + 140 * s, y - 160 * s], [x - 140 * s, y - 160 * s]], "#8a5a32", seed, { alpha: 0.12, layers: 14, vari: 0.05, gran: 0.4 });
+      for (let k = 0; k < 7; k++) { inkBrush(c, [[x - 145 * s, y - 23 * s * k], [x + 145 * s, y - 23 * s * k + 2]], 2.6, P.ink, seed + k, { bleed: false, dry: 0.5 }); c.fillStyle = "#6a4022"; for (const d of [-1, 1]) { c.beginPath(); c.arc(x + d * 145 * s, y - 23 * s * k - 11 * s, 10 * s, 0, TAU); c.fill(); } }
+      const roof = [[x - 175 * s, y - 150 * s], [x, y - 290 * s], [x + 175 * s, y - 150 * s]];
+      watercolor(c, roof, "#5e4a34", seed + 1, { alpha: 0.13, layers: 14, vari: 0.06, gran: 0.4 });
+      inkBrush(c, roof, 5, P.ink, seed + 2, { head: 0.05, tail: 0.1 });
+      for (let k = 0; k < 10; k++) inkBrush(c, [[x - 150 * s + k * 30 * s, y - 155 * s + Math.abs(k - 5) * 0], [lerp(x - 150 * s + k * 30 * s, x, 0.55), lerp(y - 155 * s, y - 280 * s, 0.55)]], 1.2, "#3a2a1a", seed + 30 + k, { bleed: false, alpha: 0.5 });
+      watercolor(c, rect(x - 42 * s, y - 115 * s, x + 42 * s, y - 55 * s), "#f2c45a", seed + 3, { alpha: 0.2, layers: 10, vari: 0.03, gran: 0.2, edge: 0.4 });
+      inkBrush(c, [[x - 46 * s, y - 118 * s], [x + 46 * s, y - 118 * s], [x + 46 * s, y - 52 * s], [x - 46 * s, y - 52 * s], [x - 46 * s, y - 118 * s]], 3.4, P.ink, seed + 4, { head: 0.02, tail: 0.02 });
+      inkBrush(c, [[x, y - 118 * s], [x, y - 52 * s]], 2.4, P.ink, seed + 5, { bleed: false });
+      // труба
+      watercolor(c, rect(x + 70 * s, y - 250 * s, x + 100 * s, y - 200 * s), "#7a4a30", seed + 6, { alpha: 0.2, layers: 6, vari: 0.04, gran: 0.3 });
+      inkBrush(c, [[x + 70 * s, y - 200 * s], [x + 70 * s, y - 252 * s], [x + 100 * s, y - 252 * s], [x + 100 * s, y - 222 * s]], 2.6, P.ink, seed + 7, {});
+    };
+    hut(330, 720, 0.95, 640); hut(1690, 728, 1.05, 650);
+    for (const [x, y, sc, sd] of [[110, 820, 0.62, 660], [1890, 830, 0.6, 661], [610, 700, 0.36, 662], [1420, 700, 0.34, 663]]) { const t = bakeBareTree(sd); c.drawImage(t, x - 280 * sc, y - 1200 * sc, 560 * sc, 1200 * sc); }
+    // забор с проёмом под ворота
+    for (let x = -10; x < w; x += 36) {
+      if (x > 800 && x < 1190) continue;
+      const hh = 130 + 14 * hash(x);
+      watercolor(c, [[x, 920], [x + 28, 920], [x + 28, 920 - hh], [x + 14, 906 - hh], [x, 920 - hh]], x % 72 ? "#7a5a3a" : "#6a4c30", 700 + x, { alpha: 0.2, layers: 6, vari: 0.04, gran: 0.4, edge: 0.3 });
+      inkBrush(c, [[x, 920], [x, 920 - hh], [x + 14, 906 - hh], [x + 28, 920 - hh]], 2.2, P.ink, 701 + x, { bleed: false, dry: 0.4 });
+    }
+    inkBrush(c, [[-10, 860], [800, 862]], 4, P.ink, 710, {}); inkBrush(c, [[1190, 862], [w, 860]], 4, P.ink, 711, {});
+    // столбы ворот и навес
+    for (const px of [800, 1190]) { watercolor(c, rect(px - 24, 560, px + 24, 950), "#5e4128", 720 + px, { alpha: 0.2, layers: 10, vari: 0.03, gran: 0.4 }); inkBrush(c, [[px - 24, 952], [px - 24, 560]], 4, P.ink, 721 + px, {}); inkBrush(c, [[px + 24, 952], [px + 24, 560]], 3, P.ink, 722 + px, {}); }
+    const roof = [[760, 560], [995, 505], [1230, 560], [1230, 585], [760, 585]];
+    watercolor(c, roof, "#5e4a34", 730, { alpha: 0.18, layers: 12, vari: 0.05, gran: 0.4 });
+    inkBrush(c, [[750, 562], [995, 503], [1240, 562]], 6, P.ink, 731, {});
+  });
+}
+function bakeFinal() {
+  return bake(W, H, (c, w, h) => {
+    const hz = 820;
+    wetSky(c, w, hz, [[0, "#3f5168"], [0.45, "#9a8a78"], [0.8, "#e09a5e"], [1, "#f2c27a"]], 800);
+    const r = rng(801);
+    for (let k = 0; k < 8; k++) watercolor(c, blob(r() * w, 140 + r() * 420, 280 + r() * 220, 34 + r() * 20, 9), k % 2 ? "#6f7480" : "#c98a6a", 810 + k, { alpha: 0.06, layers: 14, vari: 0.8, gran: 0.25 });
+    watercolor(c, blob(1560, 800, 150, 150, 14), "#f6c25a", 820, { alpha: 0.1, layers: 16, vari: 0.04, gran: 0.2, edge: 0.3 });
+    watercolor(c, blob(1560, 800, 230, 230, 14), "#f0a050", 821, { alpha: 0.03, layers: 12, vari: 0.08, gran: 0.1, edge: 0 });
+    // озеро с отражением заката и тёмный берег
+    c.fillStyle = "#c98a6a"; c.fillRect(0, hz, w, h - hz);
+    watercolor(c, [[0, hz], [w, hz], [w, h], [0, h]], "#6a7480", 822, { alpha: 0.05, layers: 14, vari: 0.3, gran: 0.4 });
+    watercolor(c, [[1400, hz + 5], [1720, hz + 5], [1660, h], [1460, h]], "#f2b860", 823, { alpha: 0.06, layers: 12, vari: 0.4, gran: 0.3, edge: 0 });
+    for (let k = 0; k < 30; k++) { const y = hz + 20 + r() * (h - hz - 20), x = r() * w; inkBrush(c, [[x, y], [x + 60 + r() * 140, y + 1]], 2, "rgba(255,230,190,0.8)", 830 + k, { bleed: false }); }
+    watercolor(c, [[0, hz + 2], [300, hz - 26], [620, hz - 14], [860, hz + 2]], "#5d5a52", 824, { alpha: 0.1, layers: 14, vari: 0.12, gran: 0.4 });
+    watercolor(c, [[w, hz + 2], [w - 260, hz - 20], [w - 520, hz + 2]], "#5d5a52", 825, { alpha: 0.1, layers: 14, vari: 0.12, gran: 0.4 });
+    for (const [x, sd, sc] of [[60, 840, 0.8], [1860, 841, 0.7]]) { const rd = bakeReeds(sd); c.drawImage(rd, x - 210 * sc, h - 620 * sc + 20, 420 * sc, 620 * sc); }
+  });
+}
+function bakeMask() {
+  // маска перехода: пятно, растекающееся по мокрой бумаге (почти непрозрачно внутри, рваный мягкий край) + тёмная кайма
+  const N = 1200;
+  const r = rng(990), base = deform(blob(N / 2, N / 2, 420, 400, 12), 3, 0.5, r);
+  const mask = bake(N, N, (c) => { c.fillStyle = "#000"; for (let L = 0; L < 14; L++) { c.globalAlpha = 0.28; poly(c, deform(base, 2, 0.25, r)); c.fill(); } });
+  const rim = bake(N, N, (c) => { c.strokeStyle = "#6b4a2a"; c.lineJoin = "round"; for (let L = 0; L < 5; L++) { c.globalAlpha = 0.22; c.lineWidth = 6 + L * 3; c.filter = `blur(${1 + L}px)`; poly(c, deform(base, 2, 0.15, r)); c.stroke(); } c.filter = "none"; });
+  return { mask, rim };
+}
+function bakeSprites() {
+  PAPER = PAPER || bakePaper(); GRAIN = GRAIN || bakeGrain();
+  const s = {};
+  // небо
+  s.skyPond = skyCanvas(2600, 2300, 1700, [[0, "#5d7896"], [0.45, "#93a9bb"], [0.82, "#c9cfc9"], [1, "#e8d6a6"]], 1, [[6, 1100, 1550, ["#8a93a0", "#7a8492"], 340], [5, 300, 900, ["#b4bfc8", "#a3afba"], 300]]);
+  s.skySun = skyCanvas(2600, 1500, 1100, [[0, "#6f7f9c"], [0.5, "#d39a80"], [0.85, "#f0bf74"], [1, "#f6d79a"]], 2, [[7, 500, 1000, ["#c98a86", "#a7809a"], 300]]);
+  s.skyDusk = skyCanvas(2600, 1500, 1100, [[0, "#3b4a5e"], [0.5, "#8a8578"], [0.85, "#d4955e"], [1, "#e9ad6a"]], 3, [[6, 450, 1000, ["#5f6a76", "#8a7a6a"], 320]]);
+  s.skyForest = skyCanvas(2600, 1500, 1100, [[0, "#c98a3e"], [0.6, "#e9b961"], [1, "#f6dc9a"]], 4, [[10, 600, 1080, ["#e0a04a", "#f2cf7c"], 260]]);
+  // дальние полосы у горизонта
+  s.farPond = bake(3200, 260, (c, w, h) => {
+    const r = rng(20);
+    watercolor(c, [[0, 160], [500, 110], [1000, 140], [1600, 95], [2200, 135], [2700, 105], [w, 140], [w, h], [0, h]], "#6f7a5c", 21, { alpha: 0.08, layers: 14, vari: 0.25, gran: 0.4 });
+    for (let k = 0; k < 60; k++) { const x = r() * w, rr = 24 + r() * 30; watercolor(c, blob(x, 150 - r() * 30, rr, rr * 1.2, 8), ["#d49a3a", "#b8562a", "#8b8a45", "#e0b050"][k % 4], 22 + k, { alpha: 0.1, layers: 8, vari: 0.3, gran: 0.3 }); }
+    c.fillStyle = "#b89458"; c.fillRect(0, 205, w, 30); watercolor(c, [[0, 200], [w, 200], [w, 240], [0, 240]], "#9a7a40", 23, { alpha: 0.08, layers: 10, vari: 0.2, gran: 0.4 });
+    const gr = c.createLinearGradient(0, 228, 0, h); gr.addColorStop(0, "rgba(143,166,176,0)"); gr.addColorStop(1, "rgba(143,166,176,1)"); c.fillStyle = gr; c.fillRect(0, 228, w, h - 228);
+  });
+  s.farField = bake(3200, 240, (c, w, h) => {
+    const r = rng(30);
+    watercolor(c, [[0, 140], [600, 110], [1200, 135], [1900, 100], [2600, 130], [w, 115], [w, h], [0, h]], "#7d6a7a", 31, { alpha: 0.07, layers: 14, vari: 0.25, gran: 0.4 });
+    for (let k = 0; k < 70; k++) { const x = r() * w, rr = 18 + r() * 26; watercolor(c, blob(x, 165 - r() * 25, rr, rr * 1.3, 8), ["#7a5a3a", "#9a6a3a", "#6a6a40"][k % 3], 32 + k, { alpha: 0.1, layers: 7, vari: 0.3, gran: 0.3 }); }
+    const gr = c.createLinearGradient(0, 180, 0, h); gr.addColorStop(0, "rgba(201,164,90,0)"); gr.addColorStop(1, "rgba(201,164,90,1)"); c.fillStyle = gr; c.fillRect(0, 180, w, h - 180);
+  });
+  s.farDusk = bake(3200, 240, (c, w, h) => {
+    watercolor(c, [[0, 150], [700, 120], [1400, 145], [2100, 110], [w, 140], [w, h], [0, h]], "#4a5052", 40, { alpha: 0.09, layers: 14, vari: 0.25, gran: 0.4 });
+    const gr = c.createLinearGradient(0, 170, 0, h); gr.addColorStop(0, "rgba(98,94,92,0)"); gr.addColorStop(1, "rgba(98,94,92,1)"); c.fillStyle = gr; c.fillRect(0, 170, w, h - 170);
+  });
+  s.farForest = bake(3200, 300, (c, w, h) => {
+    const r = rng(45);
+    for (let k = 0; k < 50; k++) { const x = r() * w; watercolor(c, rect(x, 40 + r() * 60, x + 14 + r() * 10, h), k % 2 ? "#c99a5a" : "#b07a40", 46 + k, { alpha: 0.08, layers: 6, vari: 0.1, gran: 0.3, edge: 0 }); }
+    const gr = c.createLinearGradient(0, 200, 0, h); gr.addColorStop(0, "rgba(168,98,46,0)"); gr.addColorStop(1, "rgba(168,98,46,1)"); c.fillStyle = gr; c.fillRect(0, 200, w, h - 200);
+  });
+  s.farAir = bake(3200, 520, (c, w, h) => {
+    // земля далеко внизу под небольшим углом: лоскуты полей сжаты в полосы, чем ближе — тем крупнее
+    const r = rng(50);
+    const gr0 = c.createLinearGradient(0, 0, 0, h); gr0.addColorStop(0, "#b8907a"); gr0.addColorStop(1, "#7f7056"); c.fillStyle = gr0; c.fillRect(0, 0, w, h);
+    for (let k = 0; k < 80; k++) { const y = Math.pow(r(), 0.7) * h, sc = 0.3 + y / h, x = r() * w; watercolor(c, blob(x, y, (140 + r() * 220) * sc, (6 + r() * 10) * sc * 2, 8), ["#b8944e", "#8a8448", "#a86a3a", "#6e6a4a", "#c9a85a"][k % 5], 51 + k, { alpha: 0.07, layers: 8, vari: 0.4, gran: 0.4, edge: 0.1 }); }
+    for (let k = 0; k < 30; k++) { const y = 40 + Math.pow(r(), 0.8) * (h - 40), x = r() * w, sc = 0.3 + y / h; watercolor(c, blob(x, y, 40 * sc, 10 * sc, 8), "#7a7448", 140 + k, { alpha: 0.06, layers: 6, vari: 0.3, gran: 0.3 }); }
+    inkBrush(c, bez([0, 220], [900, 180], [1800, 330], [w, 230], 40), 9, "#9fb2be", 52, { bleed: true, alpha: 0.7 });
+    const gr = c.createLinearGradient(0, 0, 0, 220); gr.addColorStop(0, "rgba(222,160,122,1)"); gr.addColorStop(1, "rgba(222,160,122,0)"); c.fillStyle = gr; c.fillRect(0, 0, w, 220);
+  });
+  // земля
+  s.texWater = tileTex((c, wrap) => {
+    const r = rng(60);
+    for (let k = 0; k < 18; k++) { const x = r() * TEXW, y = r() * TEXW, col = ["#7d97a3", "#a9bcc2", "#8aa0a8"][k % 3]; wrap((cc) => watercolor(cc, blob(x, y, 160 + r() * 120, 60 + r() * 40, 8), col, 61 + k, { alpha: 0.05, layers: 10, vari: 0.6, gran: 0.3 })); }
+    for (let k = 0; k < 90; k++) { const x = r() * TEXW, y = r() * TEXW, l = 40 + r() * 120, col = k % 3 ? "rgba(255,255,255,0.75)" : "#5f7a88"; wrap((cc) => inkBrush(cc, [[x, y], [x + l * 0.5, y - 4], [x + l, y]], 3 + r() * 3, col, 70 + k, { bleed: false, dry: 0.4 })); }
+  }, "#8fa6b0");
+  s.texField = tileTex((c, wrap) => {
+    const r = rng(80);
+    for (let k = 0; k < 16; k++) { const x = r() * TEXW, y = r() * TEXW, col = ["#b8904a", "#d9b25e", "#a88a40", "#c79a4a"][k % 4]; wrap((cc) => watercolor(cc, blob(x, y, 200 + r() * 160, 120 + r() * 100, 8), col, 81 + k, { alpha: 0.05, layers: 10, vari: 0.6, gran: 0.4 })); }
+    for (let k = 0; k < 26; k++) { const x = k * (TEXW / 26) + r() * 8; wrap((cc) => inkBrush(cc, [[x, -20], [x + 6, TEXW / 2], [x - 4, TEXW + 20]], 3 + r() * 2, "rgba(110,76,34,0.75)", 90 + k, { bleed: false, dry: 0.7, head: 0.01, tail: 0.01 })); }
+    for (let k = 0; k < 260; k++) { const x = r() * TEXW, y = r() * TEXW; wrap((cc) => inkBrush(cc, [[x, y], [x + (r() - 0.5) * 6, y - 10 - r() * 14]], 1.6, k % 2 ? "#7a5422" : "#e8c070", 200 + k, { bleed: false })); }
+  }, "#c9a45a");
+  s.texForest = tileTex((c, wrap) => {
+    const r = rng(100);
+    for (let k = 0; k < 14; k++) { const x = r() * TEXW, y = r() * TEXW, col = ["#a8622e", "#8a4a24", "#c47a34", "#7a6a3a"][k % 4]; wrap((cc) => watercolor(cc, blob(x, y, 180 + r() * 140, 120 + r() * 80, 8), col, 101 + k, { alpha: 0.05, layers: 10, vari: 0.6, gran: 0.4 })); }
+    for (let k = 0; k < 220; k++) { const x = r() * TEXW, y = r() * TEXW, col = ["#e0a040", "#c4482a", "#e8c060", "#8f2620"][k % 4], a = r() * 6; wrap((cc) => { cc.save(); cc.globalAlpha = 0.75; cc.fillStyle = col; cc.translate(x, y); cc.rotate(a); cc.beginPath(); cc.ellipse(0, 0, 10, 5, 0, 0, TAU); cc.fill(); cc.restore(); }); }
+  }, "#9a5a2c");
+  s.texDusk = tileTex((c, wrap) => {
+    const r = rng(120);
+    for (let k = 0; k < 14; k++) { const x = r() * TEXW, y = r() * TEXW, col = ["#6a6650", "#5a5560", "#7a6a50"][k % 3]; wrap((cc) => watercolor(cc, blob(x, y, 200 + r() * 140, 120 + r() * 90, 8), col, 121 + k, { alpha: 0.05, layers: 10, vari: 0.6, gran: 0.4 })); }
+    for (let k = 0; k < 26; k++) { const x = k * (TEXW / 26) + r() * 8; wrap((cc) => inkBrush(cc, [[x, -20], [x + 6, TEXW / 2], [x - 4, TEXW + 20]], 2, "rgba(40,36,44,0.28)", 130 + k, { bleed: false, dry: 0.7, head: 0.01, tail: 0.01 })); }
+  }, "#625e5c");
+  // предметы
+  s.trees = [bakeTree(300, 0), bakeTree(310, 1), bakeTree(320, 2), bakeTree(330, 0), bakeTree(340, 1)];
+  s.bare = [bakeBareTree(350), bakeBareTree(360)];
+  s.stack = [bakeHaystack(400), bakeHaystack(410)];
+  s.reeds = [bakeReeds(420), bakeReeds(430)];
+  s.clouds = [bakeCloud(440, "#c3c9cf", "#8a95a2"), bakeCloud(450, "#aab3bd", "#6e7a88"), bakeCloud(460, "#e4e2dc", "#a9b0b8")];
+  s.dark = [bakeCloud(470, "#6b7684", "#4b5664"), bakeCloud(480, "#5f6a78", "#424c58")];
+  s.cloudsDusk = [bakeCloud(490, "#9aa4ae", "#5f6a76"), bakeCloud(500, "#d3a98a", "#8a6f5a")];
+  s.faceCloud = bakeCloud(510, "#9aa4b0", "#6e7988", 1300, 620);
+  s.sun = bake(420, 420, (c) => { watercolor(c, blob(210, 210, 120, 120, 14), "#f5c04a", 520, { alpha: 0.12, layers: 16, vari: 0.04, gran: 0.2, edge: 0.35 }); watercolor(c, blob(210, 210, 175, 175, 14), "#f2a050", 521, { alpha: 0.025, layers: 12, vari: 0.08, gran: 0.1, edge: 0 }); });
+  s.fog = [0, 1].map((k) => bake(2600, 520, (c, w, h) => { const r = rng(530 + k); for (let j = 0; j < 9; j++) watercolor(c, blob(400 + j * 225 + r() * 40, 260, 190 + r() * 80, 70, 10), "#f3efe6", 531 + j + k * 20, { alpha: 0.07, layers: 14, vari: 0.6, gran: 0.15, edge: 0.05 }); }));
+  s.palm = [0, 1].map((k) => bake(360, 560, (c) => {
+    const r = rng(540 + k), col = "#5a3a2a";
+    inkBrush(c, bez([180, 560], [190 + k * 10, 420], [160, 260], [196 + k * 20, 150], 14), 22, col, 541 + k, { bleed: false, head: 0.02 });
+    for (let j = 0; j < 7; j++) { const a = -Math.PI / 2 + (j - 3) * 0.55, l = 120 + r() * 40; const ex = 196 + k * 20 + Math.cos(a) * l * 1.3, ey = 150 + Math.sin(a) * l * 0.6 + 40; inkBrush(c, bez([196 + k * 20, 150], [196 + k * 20 + Math.cos(a) * l * 0.5, 150 + Math.sin(a) * l * 0.5 - 10], [ex - Math.cos(a) * 20, ey - 30], [ex, ey + 20], 12), 18, col, 550 + j + k * 10, { bleed: false, tail: 0.7 }); }
+  }));
+  const LC = ["#e0a040", "#c4482a", "#e8c060", "#8f2620", "#d2702a", "#b8a03a"];
+  s.leaves = LC.map((col, k) => bakeLeaf(560 + k, col, k % 2));
+  s.november = bakeNovember();
+  s.doorL = bakeDoor(600); s.doorR = bakeDoor(610);
+  s.village = bakeVillage();
+  s.final = bakeFinal();
+  s.titleWash = bake(1800, 420, (c) => { watercolor(c, blob(900, 210, 780, 140, 12), "#ecc26a", 620, { alpha: 0.05, layers: 16, vari: 0.5, gran: 0.3 }); watercolor(c, blob(1100, 230, 480, 90, 10), "#b8502a", 621, { alpha: 0.03, layers: 12, vari: 0.6, gran: 0.3 }); });
+  const m = bakeMask(); s.mask = m.mask; s.rim = m.rim;
+  return s;
+}
+
+// ---------- Мир за гусём: перспектива, земля «по строкам», предметы-картинки, частицы ----------
+// Мир: x вправо, y вверх (метры), z вперёд. Камера: {x, y, z, hy (горизонт на экране), roll}
+const F = 900;            // фокус, px
+const TPM = 20;           // пикселей текстуры земли на метр
+const ZMAX = 32;          // дальше земля не рисуется — её закрывает дальняя полоса
+const ZFAR = 75;          // дальше предметы не видны
+function proj(cam, x, y, z) { const dz = z - cam.z; if (dz <= 0.3) return null; const k = F / dz; return [W / 2 + (x - cam.x) * k, cam.hy + (cam.y - y) * k, k, dz]; }
+// небо: полотно с линией горизонта hz совмещается с горизонтом камеры
+function drawSky(g, sky, hz, cam, par = 0.15) {
+  const ox = -(sky.width - W) / 2 - cam.x * 6 * par;
+  g.drawImage(sky, ox, cam.hy - hz);
+  // на случай крена: дотянуть небо вверх
+  if (cam.hy - hz > -400) { g.drawImage(sky, 0, 0, sky.width, 4, ox, cam.hy - hz - 1200, sky.width, 1201); }
+}
+function drawFar(g, strip, cam, bottom, par = 1) {
+  const sx = (((cam.x * 8 * par) % 1600) + 1600) % 1600;
+  g.drawImage(strip, sx, 0, Math.min(strip.width - sx, W + 800), strip.height, -400, cam.hy + bottom - strip.height, Math.min(strip.width - sx, W + 800), strip.height);
+}
+// земля построчно (mode-7): каждая строка экрана — полоска текстуры на своей дальности
+function drawGround(g, tex, cam, rowStart = 1) {
+  const TH = tex.height, TW = TEXW;
+  const y0 = Math.ceil(cam.hy + Math.max(rowStart, cam.y * F / ZMAX));
+  for (let sy = y0; sy < H + 360; sy += 2) {
+    const dz = cam.y * F / (sy - cam.hy);
+    const half = (W / 2 + 420) * dz / F;
+    const srcW = 2 * half * TPM;
+    if (srcW > 2 * TW - 2) continue;
+    const srcY = (((cam.z + dz) * TPM) % TH + TH) % TH;
+    const sx0 = (((cam.x - half) * TPM) % TW + TW) % TW;
+    g.drawImage(tex, sx0, TH - 1 - srcY, srcW, 1, -420, sy, W + 840, 2.6);
+  }
+}
+// предметы-картинки: it = {spr, x, y, z, h (высота в метрах), ax (0…1 точка привязки по ширине), alpha, flip, rot}
+function drawBill(g, cam, it) {
+  const p = proj(cam, it.x, it.y ?? 0, it.z); if (!p) return false;
+  const [sx, sy, k, dz] = p; if (dz > ZFAR) return false;
+  const hp = it.h * k, wp = hp * it.spr.width / it.spr.height;
+  if (sx + wp < -500 || sx - wp > W + 500 || hp < 1.5) return false;
+  const fade = (1 - inv(ZFAR * 0.7, ZFAR, dz)) * (it.alpha ?? 1) * (it.near ? inv(it.near * 0.85, it.near, dz) : 1);
+  if (fade <= 0.01) return false;
+  g.save(); g.globalAlpha = fade; g.translate(sx, sy);
+  if (it.rot) g.rotate(it.rot);
+  if (it.flip) g.scale(-1, 1);
+  g.drawImage(it.spr, -wp * (it.ax ?? 0.5), -hp * (it.ay ?? 1), wp, hp);
+  g.restore();
+  return true;
+}
+// дымка у горизонта: цвет неба ложится на дальнее
+function haze(g, cam, col, a = 0.5, hgt = 160) {
+  const gr = g.createLinearGradient(0, cam.hy - hgt * 0.4, 0, cam.hy + hgt);
+  gr.addColorStop(0, `rgba(${col},0)`); gr.addColorStop(0.4, `rgba(${col},${a})`); gr.addColorStop(1, `rgba(${col},0)`);
+  g.fillStyle = gr; g.fillRect(-400, cam.hy - hgt * 0.4, W + 800, hgt * 1.4);
+}
+// камера с креном: всё, что рисует fn, крутится вокруг центра кадра
+function withRoll(g, cam, fn) { g.save(); g.translate(W / 2, H / 2); g.rotate(cam.roll ?? 0); g.translate(-W / 2, -H / 2); fn(); g.restore(); }
+// повторяющиеся предметы вдоль пути: индексы по шагу, позиции из хэша — без накопления
+function scatter(cam, step, z0, seed, fn) {
+  const out = [];
+  const i0 = Math.floor(Math.max(z0, cam.z) / step), i1 = Math.floor((cam.z + ZFAR) / step);
+  for (let i = i0; i <= i1; i++) { const it = fn(i, i * step + hash(i * 7.3 + seed) * step * 0.6, (k) => hash(i * 13.7 + seed + k * 3.1)); if (it) (Array.isArray(it) ? out.push(...it) : out.push(it)); }
+  return out;
+}
+function drawBills(g, cam, items) { items.sort((a, b) => b.z - a.z); for (const it of items) drawBill(g, cam, it); }
+// лист в мире: летит, кувыркается; рисуется картинкой-акварелью
+function drawLeaf3(g, cam, x, y, z, rot, k, size = 0.18) {
+  const p = proj(cam, x, y, z); if (!p) return;
+  const [sx, sy, kk, dz] = p; if (dz > 40) return;
+  const s = size * kk / 60; if (s < 0.05) return;
+  const sp = SPR.leaves[k % SPR.leaves.length];
+  g.save(); g.translate(sx, sy); g.rotate(rot); g.scale(s, s * (0.35 + 0.65 * Math.abs(Math.cos(rot * 1.7)))); g.globalAlpha = clamp(inv(0.4, 1.2, dz)); g.drawImage(sp, -60, -45); g.restore();
+}
+// гусь в мире (клин): экранный масштаб из дальности; s=1 — герой на 2,25 м
+const HERO_DZ = 2.25;
+function gooseAt(g, cam, x, y, z, st) {
+  const p = proj(cam, x, y, z); if (!p) return null;
+  const [sx, sy, k, dz] = p; const s = HERO_DZ / dz;
+  if (s < 0.012) return null;
+  drawGooseRear(g, { ...st, x: sx, y: sy, s });
+  return [sx, sy, s];
+}
+
+// ---------- Сцены v2: камера летит за гусём ----------
+const T0 = {
+  wake: 2.15, run: EV.L1 + 0.15, lift: EV.dyshalo + 0.45,
+  s1: EV.L2 - 0.15, s2: EV.L3 - 0.2, s3: EV.L4 - 0.15, s4: EV.L6 - 0.3, s5: EV.L7 - 0.35, s6: EV.L9 - 0.3, s7: EV.fin,
+};
+const BLOOM = 0.55;   // длительность перехода «растекающееся пятно»
+let NOHERO = false;  // на переходе героя рисует main.js один раз, плавно между сценами
+// путь по времени: интеграл скорости, таблица с шагом 1/240 с (кадр детерминирован)
+function integ(a, b, v) { const dt = 1 / 240, n = Math.ceil((b - a) / dt) + 2, z = new Float64Array(n); for (let i = 1; i < n; i++) z[i] = z[i - 1] + v(a + (i - 0.5) * dt) * dt; return (t) => { const f = clamp((t - a) / dt, 0, n - 1), i = Math.floor(f); return i >= n - 1 ? z[n - 1] : lerp(z[i], z[i + 1], f - i); }; }
+const zPond = integ(0, T0.s2 + 1, (t) => (t < T0.run ? 0 : t < T0.lift ? 9 * easeIn(inv(T0.run, T0.lift, t)) : lerp(9, 16, inv(T0.lift, T0.lift + 1, t))));
+const zField = integ(T0.s2 - 1, T0.s3 + 1, () => 19);
+const zForest = integ(T0.s3 - 1, T0.s4 + 1, (t) => lerp(8, 21, ease(inv(EV.pechal - 0.3, EV.pechal + 0.4, t))));
+const zFog = integ(T0.s4 - 1, T0.s5 + 1, () => 16);
+const flapAt = (t, f, ph = 0) => t * f + ph;
+const SKYHZ = { pond: 1700, sun: 1100, dusk: 1100, forest: 1100 };
+
+// ================= 0–1. Пруд → набор высоты к солнцу (одна непрерывная съёмка) =================
+function camPond(t) {
+  const up = easeIO(inv(T0.lift, T0.s2, t));
+  const pitchUp = easeIO(inv(T0.lift - 0.1, EV.blistalo - 0.3, t)), dive = easeIO(inv(EV.blistalo + 0.35, T0.s2 + 0.4, t));
+  return {
+    x: Math.sin(t * 0.7) * 0.15, y: 1.15 + up * 11 + Math.sin(t * 1.3) * 0.03, z: zPond(t),
+    hy: 540 + pitchUp * 430 - dive * 820 + (t < T0.run ? Math.sin(t * 1.6) * 3 : 0),
+    roll: Math.sin(t * 0.9) * 0.02 + 0.08 * Math.sin(Math.PI * inv(T0.lift, EV.L2 + 0.8, t)) + dive * 0.22,
+  };
+}
+function heroPond(t) {
+  const woke = t > T0.wake;
+  if (t < T0.run - 0.1) {
+    const st = { x: 960, y: 700 + Math.sin(t * 1.8) * 3, s: 1.1, mode: woke ? "swim" : "sleep", nu: woke ? easeOut(inv(T0.wake, T0.wake + 0.3, t)) : 0, run: t * 0.25 };
+    // оглядывается: влево, вправо, гогочет «проспал!»
+    st.look = woke ? lerp(-0.85, 0.85, ease(inv(T0.wake + 0.15, T0.wake + 0.6, t))) * (1 - ease(inv(T0.wake + 0.7, T0.run, t))) + 0.3 * ease(inv(T0.wake + 0.7, T0.run, t)) : 0;
+    st.honk = woke ? Math.max(0, Math.sin((t - T0.wake - 0.45) * 18)) * win(t, T0.wake + 0.45, T0.wake + 0.85, 0.02, 0.05) : 0;
+    st.ruff = win(t, T0.wake, T0.wake + 0.5, 0.05, 0.3);
+    return st;
+  }
+  const up = easeIO(inv(T0.lift, T0.lift + 0.8, t)), spread = ease(inv(T0.run - 0.1, T0.run + 0.45, t));
+  const dive = easeIO(inv(EV.blistalo + 0.35, T0.s2 + 0.4, t)), climb = win(t, T0.lift, EV.blistalo + 0.4, 0.4, 0.3);
+  return {
+    spread, x: 960 + Math.sin(t * 1.1) * 14, y: lerp(lerp(700, 660, spread), 600, up) + Math.sin(t * 5.6) * 6 * spread, s: lerp(1.1, 1.08, spread),
+    mode: t < T0.lift ? "run" : "fly", nu: lerp(0.85, 1, up), run: (t - T0.run) * 4.2 * spread, flap: flapAt(t, t < T0.lift ? 3.4 : 2.9),
+    look: 0.3 + Math.sin(t * 1.7) * 0.15, pitch: climb * 0.8 - dive * 1, roll: -0.1 * Math.sin(Math.PI * inv(T0.lift, EV.L2 + 0.8, t)) + Math.sin(t * 1.3) * 0.03 - dive * 0.15,
+    ruff: win(t, EV.L1 + 0.15, EV.dyshalo + 0.9, 0.12, 0.4),
+  };
+}
+function drawCloudFace(g, t, cam) {
+  const vis = win(t, EV.L1 - 0.12, EV.L2 - 0.05, 0.3, 0.45); if (vis <= 0) return null;
+  const inh = ease(inv(EV.L1 - 0.12, EV.L1 + 0.05, t)) * (1 - ease(inv(EV.L1 + 0.05, EV.L1 + 0.3, t)));
+  const blow = win(t, EV.L1 + 0.02, EV.dyshalo + 0.9, 0.15, 0.4) * (0.75 + 0.25 * win(t, EV.dyshalo - 0.2, EV.dyshalo + 0.6, 0.1, 0.3));
+  const cx = 960, cy = cam.hy - 330, sc = 0.8 * (1 + inh * 0.1);
+  g.save(); g.globalAlpha = vis; g.translate(cx, cy + (1 - vis) * -60); g.scale(sc * (1 + blow * 0.06), sc * (1 - blow * 0.04));
+  const c = SPR.faceCloud; g.drawImage(c, -c.width / 2, -c.height / 2);
+  // лицо: зажмуренные глаза-дуги, щёки дуются на вдохе, губы трубочкой и «О» на выдохе
+  inkStroke(g, bez([-150, -40], [-125, -70], [-85, -70], [-60, -40], 10), 9, P.ink, { seed: 1 });
+  inkStroke(g, bez([60, -40], [85, -70], [125, -70], [150, -40], 10), 9, P.ink, { seed: 2 });
+  g.save(); g.globalAlpha *= 0.5; g.fillStyle = "#d9826a"; for (const d of [-175, 175]) { g.beginPath(); g.ellipse(d, 30, 60 + inh * 26, 40 + inh * 14, 0, 0, TAU); g.fill(); } g.restore();
+  const mo = 18 + inh * 4 + blow * 24;
+  g.fillStyle = "#b9524a"; g.beginPath(); g.ellipse(0, 70, mo, mo * 1.15, 0, 0, TAU); g.fill();
+  g.fillStyle = "#3a1a14"; g.beginPath(); g.ellipse(0, 72, mo * 0.55, mo * 0.7, 0, 0, TAU); g.fill();
+  inkStroke(g, Array.from({ length: 17 }, (_, k) => [Math.cos(k / 16 * TAU) * mo, 70 + Math.sin(k / 16 * TAU) * mo * 1.15]), 4, P.ink, { flat: true });
+  g.restore();
+  return { mx: cx, my: cy + 70 * sc, blow };
+}
+function drawBreath(g, t, face) {
+  // струи холодного дыхания: из губ облака веером к зрителю, растут и уносятся за края кадра
+  if (!face || face.blow <= 0) return;
+  g.save(); g.lineCap = "round";
+  for (let k = 0; k < 16; k++) {
+    const p = ((t - EV.L1) * 1.3 + hash(k) * 0.9) % 1; if (p < 0) continue;
+    const a = (k / 15 - 0.5) * 2.6, d0 = 40 + p * 1300, d1 = d0 + 120 + p * 380;
+    const dirx = Math.sin(a), diry = Math.cos(a) * 0.55 + 0.25;
+    const px0 = face.mx + dirx * d0, py0 = face.my + diry * d0, px1 = face.mx + dirx * d1, py1 = face.my + diry * d1;
+    g.globalAlpha = face.blow * (1 - p * 0.8) * 0.9; g.strokeStyle = k % 3 ? "rgba(246,250,252,1)" : "#b9cfdc"; g.lineWidth = 8 + p * 46;
+    g.beginPath(); g.moveTo(px0, py0); g.quadraticCurveTo((px0 + px1) / 2 + diry * 30, (py0 + py1) / 2 - 20, px1, py1); g.stroke();
+  }
+  g.restore();
+}
+function scPond(g, t) {
+  const cam = camPond(t);
+  let face = null;
+  withRoll(g, cam, () => {
+    drawSky(g, SPR.skyPond, SKYHZ.pond, cam);
+    // солнце: открывается при наборе высоты; на «блистало» мигает и тонет в тучах
+    const sx = 1300, sy = cam.hy - 720;
+    const cover = easeIO(inv(EV.blistalo - 0.45, EV.blistalo + 0.35, t));
+    const flick = 1 - 0.35 * Math.max(0, Math.sin(t * 23)) * win(t, EV.L2, EV.blistalo, 0.1, 0.1);
+    if (sy > -250) { g.save(); g.globalAlpha = flick; g.drawImage(SPR.sun, sx - 210, sy - 210); g.restore(); }
+    if (cover > 0) {
+      g.drawImage(SPR.dark[0], lerp(-900, sx - 620, cover), sy - 250, 900, 405);
+      g.drawImage(SPR.dark[1], lerp(W + 200, sx - 300, cover), sy - 150, 900, 405);
+      g.save(); g.globalAlpha = 0.3 * cover; g.fillStyle = "#4b5563"; g.fillRect(-400, -400, W + 800, H + 800); g.restore();
+    }
+    face = drawCloudFace(g, t, cam);
+    // клин уходит вдаль — гусь проспал
+    const fu = inv(0, T0.run + 0.4, t);
+    if (fu < 1) for (let k = 0; k < 7; k++) { const o = vOff(k); gooseAt(g, cam, o[0] * 1.2 + 4, 14 + o[1], cam.z + 90 + fu * 120 + o[2], { mode: "fly", flap: flapAt(t, 3, k * 0.21), look: 0.3, seed: k }); }
+    // дальний берег, вода, камыш
+    drawFar(g, SPR.farPond, cam, 120);
+    g.fillStyle = "#8fa6b0"; const gs = cam.hy + 110, ge = cam.hy + cam.y * F / ZMAX + 2; if (ge > gs) g.fillRect(-420, gs, W + 840, ge - gs);
+    drawGround(g, SPR.texWater, cam);
+    haze(g, cam, "232,222,196", 0.35, 120);
+    // рябь бежит к зрителю на «дышало»
+    const gu = win(t, EV.L1 + 0.1, EV.dyshalo + 1.4, 0.2, 0.5);
+    if (gu > 0) { g.save(); g.strokeStyle = "rgba(255,255,255,0.8)"; g.lineCap = "round"; for (let k = 0; k < 34; k++) { const p = ((t - EV.L1) * 0.9 + hash(k * 3)) % 1, y = cam.hy + 120 + p * p * 760, x = W / 2 + (hash(k) - 0.5) * (300 + p * 2600); g.globalAlpha = gu * (0.3 + 0.6 * p); g.lineWidth = 2 + p * 6; g.beginPath(); g.moveTo(x - 30 - p * 90, y); g.quadraticCurveTo(x, y - 6 - p * 8, x + 30 + p * 90, y); g.stroke(); } g.restore(); }
+    const bend = win(t, EV.L1 + 0.1, EV.dyshalo + 1.2, 0.25, 0.5) * 0.18;
+    drawBills(g, cam, scatter(cam, 2.6, 1.5, 11, (i, z, h) => [
+      { spr: SPR.reeds[i % 2], x: -(2.6 + h(1) * 4), y: -0.1, z, h: 2.1 + h(2), flip: h(3) < 0.5, rot: -bend, near: 1.2 },
+      { spr: SPR.reeds[(i + 1) % 2], x: 2.6 + h(4) * 4, y: -0.1, z: z + 1.2, h: 2.1 + h(5), flip: h(6) < 0.5, rot: -bend, near: 1.2 },
+    ]));
+    drawBreath(g, t, face);
+  });
+  // герой (в экране; крен свой)
+  const st = heroPond(t);
+  if (!NOHERO) drawGooseRear(g, st);
+  if (st.mode === "sleep" || st.mode === "swim") waterline(g, st, t);
+  else if (st.mode === "run" && st.spread < 1) { g.save(); g.globalAlpha = 1 - st.spread; waterline(g, st, t); g.restore(); }
+  if (st.mode === "run" && st.spread > 0.5) splashes(g, st, t);
+  // спит: «Z z z» тушью поднимается над головой
+  const zz = win(t, 0.3, T0.wake - 0.05, 0.3, 0.15);
+  if (zz > 0) { g.save(); g.font = '46px "GTitle"'; g.fillStyle = P.ink; for (let k = 0; k < 3; k++) { const p = ((t * 0.55 + k / 3) % 1); g.globalAlpha = zz * Math.sin(Math.PI * p); g.save(); g.translate(st.x + 70 + p * 60 + k * 6, st.y - 70 - p * 150); g.scale(0.6 + p * 0.6, 0.6 + p * 0.6); g.fillText("Z", 0, 0); g.restore(); } g.restore(); }
+  // «!» тушью над головой при пробуждении
+  const ex = win(t, T0.wake + 0.1, T0.wake + 0.9, 0.05, 0.2);
+  if (ex > 0) { const sp = spr(t, T0.wake + 0.1); g.save(); g.globalAlpha = ex; g.translate(st.x + 120, st.y - 230); g.scale(sp, sp); inkStroke(g, [[0, -70], [3, -36], [5, -14]], 16, P.crimson, {}); g.fillStyle = P.crimson; g.beginPath(); g.arc(6, 8, 9, 0, TAU); g.fill(); g.restore(); }
+  windStreaks(g, t, 900 * inv(T0.run, T0.lift + 0.5, t) * (1 - inv(T0.s1, T0.s2, t) * 0.3), 0.2);
+  drawTitleIntro(g, t);
+}
+function waterline(g, st, t) {
+  // нижняя часть гуся под водой: полупрозрачная вода поверх, светлое кольцо ряби
+  const s = st.s, wy = st.y + 34 * s;
+  g.save(); g.beginPath(); g.rect(st.x - 200 * s, wy, 400 * s, 160 * s); g.clip();
+  const gr = g.createLinearGradient(0, wy, 0, wy + 110 * s); gr.addColorStop(0, "rgba(143,166,176,0.55)"); gr.addColorStop(1, "rgba(143,166,176,0.95)");
+  g.fillStyle = gr; g.fillRect(st.x - 200 * s, wy, 400 * s, 160 * s); g.restore();
+  g.save(); g.strokeStyle = "rgba(255,255,255,0.85)"; g.lineWidth = 3;
+  for (let k = 0; k < 3; k++) { const p = ((t * 0.5 + k / 3) % 1); g.globalAlpha = 0.8 * (1 - p); g.beginPath(); g.ellipse(st.x, wy + 2, (115 + p * 120) * s, (12 + p * 12) * s, 0, 0, TAU); g.stroke(); }
+  g.restore();
+}
+function splashes(g, st, t) {
+  for (const sd of [-1, 1]) {
+    const ph = ((st.run + (sd > 0 ? 0.5 : 0)) % 1 + 1) % 1; // 0.5…1 — лапа внизу
+    if (ph < 0.5) continue;
+    const u = (ph - 0.5) / 0.5, fx = st.x + sd * 38 * st.s, fy = st.y + 122 * st.s;
+    g.save(); g.globalAlpha = 1 - u;
+    splatter(g, fx, fy - 20 * u, 30 + u * 70, 20, "#ffffff", Math.floor(st.run * 2) * 7 + (sd > 0 ? 3 : 0), 0.95);
+    g.strokeStyle = "rgba(255,255,255,0.9)"; g.lineWidth = 3; g.beginPath(); g.ellipse(fx, fy + 6, 30 + u * 80, 7 + u * 10, 0, 0, TAU); g.stroke(); g.restore();
+  }
+}
+function windStreaks(g, t, speed, a) {
+  if (speed <= 1) return;
+  g.save(); g.strokeStyle = `rgba(250,248,240,${a})`; g.lineCap = "round";
+  for (let k = 0; k < 22; k++) {
+    const p = ((t * speed / 900 + hash(k * 5)) % 1), ang = hash(k) * TAU, r0 = 120 + p * p * 1100;
+    const x = W / 2 + Math.cos(ang) * r0 * 1.4, y = 520 + Math.sin(ang) * r0 * 0.8;
+    g.globalAlpha = p; g.lineWidth = 1 + p * 3;
+    g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(ang) * (40 + p * 160), y + Math.sin(ang) * (24 + p * 90)); g.stroke();
+  }
+  g.restore();
+}
+
+// ================= 2. Поле на закате: солнце садится, тени длиннее, впереди встаёт лес =================
+function camField(t) {
+  const out = 1 - easeOut(inv(T0.s2, T0.s2 + 0.8, t));
+  return { x: Math.sin((t - T0.s2) * 1.1) * 0.8, y: 2.5 + Math.sin(t * 1.7) * 0.15 + out * 4, z: zField(t), hy: 420 - out * 280, roll: Math.sin((t - T0.s2) * 1.1 + 1.2) * 0.07 };
+}
+function heroField(t) {
+  const out = 1 - easeOut(inv(T0.s2, T0.s2 + 0.8, t));
+  return { x: 960 + Math.cos((t - T0.s2) * 1.1) * 40, y: 640 + Math.sin(t * 5.4) * 6, s: 1.05, mode: "fly", flap: flapAt(t, 3), look: 0.3 + Math.sin(t * 1.3) * 0.15, pitch: -out, roll: -Math.sin((t - T0.s2) * 1.1 + 1.2) * 0.12 };
+}
+function scField(g, t) {
+  const cam = camField(t);
+  const sunU = easeIn(inv(EV.koroche - 0.1, EV.den + 0.45, t));
+  withRoll(g, cam, () => {
+    drawSky(g, SPR.skySun, SKYHZ.sun, cam);
+    if (sunU > 0) { g.save(); g.globalAlpha = sunU * 0.85; drawSky(g, SPR.skyDusk, SKYHZ.dusk, cam); g.restore(); }
+    // солнце катится за горизонт
+    const sx = 1150 - sunU * 60, sy = cam.hy - lerp(300, -60, sunU);
+    g.save(); g.beginPath(); g.rect(-400, -600, W + 800, cam.hy + 600 + 4); g.clip(); g.drawImage(SPR.sun, sx - 210, sy - 210); g.restore();
+    drawFar(g, SPR.farField, cam, 70);
+    drawGround(g, SPR.texField, cam);
+    // закатный тон и сумрак на земле
+    g.save(); g.globalAlpha = 0.18 + 0.3 * sunU; g.fillStyle = sunU > 0.5 ? "#3a3560" : "#b4603a"; g.fillRect(-420, cam.hy, W + 840, H + 400); g.restore();
+    haze(g, cam, "240,190,120", 0.45 * (1 - sunU) + 0.15, 140);
+    // тени стогов к зрителю (солнце впереди): длиннее с закатом
+    const items = scatter(cam, 8, 0, 21, (i, z, h) => { const sd = i % 2 ? 1 : -1; return { spr: SPR.stack[i % 2], x: sd * (4.5 + h(1) * 6), y: 0, z, h: 3.2 + h(2) * 0.6, flip: h(3) < 0.5 }; });
+    const L = 2 + sunU * 16;
+    g.save(); g.fillStyle = "rgba(60,40,70,0.32)";
+    for (const it of items) { const a = proj(cam, it.x - 1.4, 0, it.z), b = proj(cam, it.x + 1.4, 0, it.z), c = proj(cam, it.x + 1.1 - L * 0.15, 0, Math.max(cam.z + 0.6, it.z - L)), d = proj(cam, it.x - 1.1 - L * 0.15, 0, Math.max(cam.z + 0.6, it.z - L)); if (!a || !b || !c || !d || a[3] > ZMAX) continue; g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.lineTo(c[0], c[1]); g.lineTo(d[0], d[1]); g.closePath(); g.fill(); }
+    g.restore();
+    // стена леса впереди
+    const zEdge = zField(T0.s3) + 4;
+    for (let k = 0; k < 18; k++) { const sd = k % 2 ? 1 : -1, x = sd * (1.2 + (k >> 1) * 1.6) + (hash(k) - 0.5), z = zEdge + hash(k + 3) * 6; items.push({ spr: SPR.trees[k % 5].bare, x, y: 0, z: z + 0.01, h: 13, near: 1.6 }, { spr: SPR.trees[k % 5].crown, x, y: 0, z, h: 13, near: 1.6 }); }
+    drawBills(g, cam, items);
+  });
+  if (!NOHERO) drawGooseRear(g, heroField(t));
+  windStreaks(g, t, 1100, 0.18);
+}
+
+// ================= 3. Лес: таинственная сень → печальный шум → листья срываются =================
+function pathX(t) { const r = ease(inv(EV.pechal - 0.2, EV.pechal + 0.5, t)); return Math.sin((t - EV.pechal) * 2.3) * 2.4 * r; }
+function camForest(t) {
+  const r = ease(inv(EV.pechal - 0.2, EV.pechal + 0.5, t)), dx = Math.cos((t - EV.pechal) * 2.3) * r;
+  const out = easeIn(inv(T0.s4 - 0.6, T0.s4 + BLOOM, t));
+  return { x: pathX(t), y: 2.6 + Math.sin(t * 1.4) * 0.12 + out * 1.5, z: zForest(t), hy: 470 + out * 120, roll: -dx * 0.22 + Math.sin(t * 0.8) * 0.02 };
+}
+function heroForest(t) {
+  const r = ease(inv(EV.pechal - 0.2, EV.pechal + 0.5, t)), dx = Math.cos((t - EV.pechal) * 2.3) * r;
+  const myst = win(t, EV.L4, EV.pechal + 0.2, 0.4, 0.3);
+  return { x: 960 + dx * 60, y: 640 + Math.sin(t * 5.6) * 6, s: 1.05, mode: "fly", flap: flapAt(t, lerp(2.2, 3.4, r)), look: 0.3 + myst * Math.sin((t - EV.L4) * 2.2) * 0.7, pitch: 0, roll: dx * 0.35, seed: 3 };
+}
+function forestTrees(cam) {
+  const items = [];
+  // по сторонам ряды деревьев
+  items.push(...scatter(cam, 2.4, zForest(T0.s3) - 2, 31, (i, z, h) => { const sd = i % 2 ? 1 : -1; return { x: sd * (3.2 + h(1) * 9), z, k: i % 5, h: 12 + h(2) * 3, flip: h(3) < 0.5, ph: h(4) * 6 }; }));
+  // деревья на пути после «печальным»: гусь проходит их змейкой
+  const zP = zForest(EV.pechal);
+  items.push(...scatter(cam, 5, zP + 4, 37, (i, z, h) => { let tt = EV.pechal; for (let k = 0; k < 40 && zForest(tt) < z; k++) tt += 0.1; const px = pathX(tt); return { x: px - Math.sign(px || 1) * (2.6 + h(1)), z, k: (i + 2) % 5, h: 12 + h(2) * 3, flip: h(3) < 0.5, ph: h(4) * 6 }; }));
+  return items;
+}
+function scForest(g, t) {
+  const cam = camForest(t);
+  const shake = win(t, EV.pechal - 0.1, EV.obnazh + 1.2, 0.3, 0.4);
+  const bare = (z) => 0.55 * easeIO(inv(EV.pechal + 0.2, EV.obnazh - 0.2, t)) + 0.45 * easeIO(inv(EV.obnazh - 0.1 + (z - cam.z) * 0.008, EV.obnazh + 0.45 + (z - cam.z) * 0.008, t));
+  withRoll(g, cam, () => {
+    drawSky(g, SPR.skyForest, SKYHZ.forest, cam);
+    drawFar(g, SPR.farForest, cam, 60);
+    drawGround(g, SPR.texForest, cam);
+    haze(g, cam, "246,220,154", 0.6, 220);
+    const trees = forestTrees(cam).sort((a, b) => b.z - a.z);
+    for (const tr of trees) {
+      const T = SPR.trees[tr.k], rot = shake * Math.sin(t * 13 + tr.ph) * 0.025;
+      const base = { x: tr.x, y: 0, z: tr.z, h: tr.h, flip: tr.flip, rot, near: 1.6 };
+      drawBill(g, cam, { ...base, spr: T.bare });
+      drawBill(g, cam, { ...base, spr: T.crown, alpha: 1 - 0.88 * bare(tr.z) });
+    }
+    // лучи сквозь сень
+    const myst = win(t, EV.L4 - 0.2, EV.pechal + 0.3, 0.5, 0.4);
+    g.save(); g.globalAlpha = 0.16 + 0.12 * myst; g.fillStyle = "#fff3c8";
+    for (let k = 0; k < 5; k++) { const x = 200 + k * 380 + Math.sin(t * 0.4 + k) * 40; g.beginPath(); g.moveTo(x, -300); g.lineTo(x + 90, -300); g.lineTo(x + 360, H + 300); g.lineTo(x + 180, H + 300); g.closePath(); g.fill(); }
+    g.restore();
+    drawLeavesForest(g, cam, t, false);
+  });
+  const myst = win(t, EV.L4 - 0.2, EV.pechal + 0.3, 0.5, 0.4);
+  g.save(); g.globalAlpha = 0.3 * myst; g.fillStyle = "#2c3a3a"; g.fillRect(0, 0, W, H); g.globalAlpha = 0.7 * myst; const vg = g.createRadialGradient(960, 560, 240, 960, 560, 1100); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "#1e140a"); g.fillStyle = vg; g.fillRect(0, 0, W, H); g.restore();
+  if (!NOHERO) drawGooseRear(g, heroForest(t));
+  withRoll(g, cam, () => drawLeavesForest(g, cam, t, true));
+  windStreaks(g, t, 400 + 900 * ease(inv(EV.pechal - 0.3, EV.pechal + 0.4, t)), 0.16);
+}
+function drawLeavesForest(g, cam, t, near) {
+  // листопад: редкий, потом вихрь на «обнажалась» — листья летят на зрителя
+  const n = 60 + Math.floor(120 * ease(inv(EV.pechal, EV.obnazh - 0.3, t))) + Math.floor(220 * ease(inv(EV.obnazh - 0.15, EV.obnazh + 0.25, t)));
+  for (let k = 0; k < n; k++) {
+    const burst = k >= 180, mid = k >= 60 && !burst;
+    const t0 = burst ? EV.obnazh - 0.1 + hash(k * 3) * 0.6 : mid ? EV.pechal + hash(k * 3) * 1.4 : T0.s3 - 1 + hash(k) * 6;
+    if (t < t0) continue;
+    const u = t - t0, z0 = burst || mid ? zForest(t0) + 2.5 + hash(k * 5) * (burst ? 14 : 22) : zForest(T0.s3) + hash(k * 5) * 90;
+    const x0 = (hash(k * 7) - 0.5) * (burst ? 9 : 16), y0 = burst ? 2 + hash(k * 11) * 5 : 6 + hash(k * 11) * 5;
+    const x = x0 + Math.sin(u * 2 + k) * 0.8 + (burst ? (hash(k * 13) - 0.5) * 6 * u : 0), y = y0 - u * (burst ? 2.2 : 1.1) + Math.sin(u * 3 + k) * 0.3, z = z0 - (burst ? 7 * u : 0);
+    if (y < -0.2) continue;
+    const dz = z - cam.z;
+    if (near !== dz < HERO_DZ + 0.6) continue;
+    drawLeaf3(g, cam, x, y, z, u * (2 + 3 * hash(k)) + k, k, burst ? 0.42 : 0.3);
+  }
+}
+
+// ================= 4. Туман ложится на поля =================
+function camFog(t) { return { x: Math.sin((t - T0.s4) * 0.9) * 0.6, y: lerp(2.6, 1.5, ease(inv(EV.tuman - 0.8, EV.tuman + 0.5, t))) + Math.sin(t * 1.6) * 0.08, z: zFog(t), hy: 450, roll: Math.sin((t - T0.s4) * 0.9 + 1) * 0.05 }; }
+function heroFog(t) {
+  return { x: 960 + Math.cos((t - T0.s4) * 0.9) * 30, y: 640 + Math.sin(t * 5.2) * 6, s: 1.05, mode: "fly", flap: flapAt(t, 2.8), look: 0.3, pitch: 0, roll: -Math.sin((t - T0.s4) * 0.9 + 1) * 0.08 };
+}
+function scFog(g, t) {
+  const cam = camFog(t);
+  const lay = easeOut(inv(EV.tuman - 1.0, EV.tuman + 0.4, t));
+  withRoll(g, cam, () => {
+    drawSky(g, SPR.skyDusk, SKYHZ.dusk, cam);
+    drawFar(g, SPR.farDusk, cam, 60);
+    drawGround(g, SPR.texDusk, cam);
+    g.save(); g.globalAlpha = 0.25; g.fillStyle = "#2e3048"; g.fillRect(-420, cam.hy, W + 840, H + 400); g.restore();
+    const items = scatter(cam, 13, 0, 41, (i, z, h) => ({ spr: SPR.bare[i % 2], x: (i % 2 ? 1 : -1) * (7 + h(1) * 9), y: 0, z, h: 9 + h(2) * 3, flip: h(3) < 0.5 }));
+    // пласты тумана: висят выше, на «ложился» опускаются на землю и расползаются
+    items.push(...scatter(cam, 5, 0, 43, (i, z, h) => ({ spr: SPR.fog[i % 2], x: (h(1) - 0.5) * 16, y: lerp(6 + h(2) * 4, -0.2, lay), z, h: lerp(1.6, 2.4, lay), alpha: 0.55 + 0.35 * lay, ay: 0.5 })));
+    drawBills(g, cam, items);
+    haze(g, cam, "230,226,220", 0.3 + 0.4 * lay, 200);
+  });
+  // низовой туман у края кадра растёт
+  const gr = g.createLinearGradient(0, 700, 0, H); gr.addColorStop(0, "rgba(243,239,230,0)"); gr.addColorStop(1, `rgba(243,239,230,${0.7 * lay})`); g.fillStyle = gr; g.fillRect(0, 700, W, H - 700);
+  const st = heroFog(t);
+  // вихри от кончиков крыльев режут туман
+  if (lay > 0.4 && !NOHERO) { const [t1, t2] = wingAngles(st.flap); for (const sd of [-1, 1]) { const tx = st.x + sd * (58 + 112 * Math.cos(t1) + 150 * Math.cos(t2)) * st.s, ty = st.y + (-16 - 112 * Math.sin(t1) - 150 * Math.sin(t2)) * st.s; g.save(); g.lineCap = "round"; const gr2 = g.createLinearGradient(tx, ty, tx + sd * 260, H); gr2.addColorStop(0, `rgba(246,243,236,${0.85 * (lay - 0.4) / 0.6})`); gr2.addColorStop(1, "rgba(246,243,236,0)"); g.strokeStyle = gr2; for (let k = 0; k < 3; k++) { g.lineWidth = 9 - k * 2; g.beginPath(); g.moveTo(tx, ty); g.bezierCurveTo(tx + sd * 40, ty + 140, tx + sd * (140 + k * 30), ty + 300, tx + sd * (260 + k * 40), H + 40); g.stroke(); } g.restore(); } }
+  if (!NOHERO) drawGooseRear(g, st);
+}
+
+// ================= 5. Клин: крикливый караван, догоняем, «к югу» =================
+function vOff(k) { if (k === 0) return [0, 0, 0]; const sd = k % 2 ? 1 : -1, n = Math.ceil(k / 2); return [sd * n * 2.0, -n * 0.12, -n * 2.4]; }
+const HERO_SLOT = 7; // хвост правого крыла клина (n = 4)
+function flockShot(t) {
+  // герой догоняет клин сзади-снизу; на «караван» камера отъезжает и поднимается — клин виден целиком, «Λ»
+  const j = easeIO(inv(T0.s5, EV.yugu + 0.2, t));
+  const slot = vOff(HERO_SLOT);
+  const hero = [lerp(3, slot[0], j), lerp(-0.5, slot[1], j), lerp(-17, slot[2], j)];
+  const pull = easeIO(inv(EV.karavan - 0.2, EV.karavan + 1.4, t));
+  const back = lerp(HERO_DZ, 12.5, pull), upc = lerp(1.1, 3.4, pull);
+  const cam = { x: lerp(hero[0], 2.2, pull), y: hero[1] + upc, z: hero[2] - back, hy: lerp(250, 340, pull), roll: Math.sin(t * 0.7) * 0.03 + 0.05 * ease(inv(EV.yugu - 0.2, EV.yugu + 0.6, t)) };
+  return { cam, hero, j, pull };
+}
+function scFlock(g, t) {
+  const { cam, hero, pull } = flockShot(t);
+  withRoll(g, cam, () => {
+    drawSky(g, SPR.skyDusk, SKYHZ.dusk, cam, 0.05);
+    // юг: тёплое зарево и пальмы на горизонте на «к югу»
+    const so = ease(inv(EV.yugu - 0.1, EV.yugu + 0.8, t));
+    if (so > 0) {
+      g.save(); g.globalAlpha = so; const gr = g.createRadialGradient(960, cam.hy, 20, 960, cam.hy, 700); gr.addColorStop(0, "rgba(255,206,110,0.95)"); gr.addColorStop(1, "rgba(255,180,90,0)"); g.fillStyle = gr; g.fillRect(-400, cam.hy - 700, W + 800, 900); g.restore();
+    }
+    // земля далеко внизу
+    const fa = SPR.farAir; g.drawImage(fa, (t * 30) % 1600, 0, W + 840, fa.height, -420, cam.hy - 20, W + 840, H - cam.hy + 420);
+    haze(g, cam, "226,160,120", 0.6, 160);
+    // облака мимо (свой бег вперёд)
+    const run = (t - T0.s5) * 14, camC = { ...cam, z: cam.z + run };
+    drawBills(g, camC, scatter(camC, 14, -1e9, 51, (i, z, h) => ({ spr: SPR.cloudsDusk[Math.abs(i) % 2], x: (Math.abs(i) % 2 ? 1 : -1) * (6 + h(1) * 14), y: cam.y + 1 + h(2) * 6, z, h: 3 + h(3) * 2, ay: 0.5 })));
+    if (so > 0) for (let k = 0; k < 5; k++) { const x = 560 + k * 200 + (k % 2) * 40, hh = (190 + 70 * hash(k)) * so; g.save(); g.globalAlpha = so; g.drawImage(SPR.palm[k % 2], x - hh * 0.32, cam.hy - hh + 10, hh * 0.64, hh); g.restore(); }
+    // клин: гуси оглядываются и гогочут
+    const order = [...Array(7).keys()].sort((a, b) => vOff(b)[2] - vOff(a)[2]);
+    let talk = null;
+    for (const k of order) {
+      const o = vOff(k), hk = (ph) => Math.max(0, Math.sin((t - ph) * 16)) * win(t, ph, ph + 0.55, 0.02, 0.05);
+      const turn = win(t, EV.gusey - 0.1 + k * 0.05, EV.gusey + 0.9, 0.15, 0.25) + win(t, EV.karavan - 0.05 + k * 0.05, EV.karavan + 0.9, 0.15, 0.25);
+      const look = lerp(0.3, k % 2 ? 1 : -1, clamp(turn));
+      const pos = gooseAt(g, cam, o[0], o[1] + Math.sin(t * 2 + k) * 0.06, o[2], { mode: "fly", flap: flapAt(t, 2.8, k * 0.17), look, honk: Math.max(hk(EV.gusey + k * 0.08), hk(EV.karavan + 0.1 + k * 0.06)), roll: Math.sin(t * 1.4 + k) * 0.05, seed: k });
+      if (k === 3 && pos) talk = pos;
+    }
+    // «га-га!» тушью у клюва ближнего гуся
+    for (const ph of [EV.gusey, EV.karavan + 0.1]) {
+      const a = win(t, ph, ph + 1.0, 0.05, 0.3); if (a <= 0 || !talk) continue;
+      const [hx, hy, s] = talk; const sp = spr(t, ph);
+      g.save(); g.globalAlpha = a; g.translate(hx + 120 * s + 90, hy - 160 * s - 30); g.scale(sp, sp); g.rotate(-0.08);
+      g.font = '58px "GTitle"'; g.fillStyle = P.ink; g.textAlign = "center"; g.fillText("га-га!", 0, 0); g.restore();
+    }
+    // герой — в мире клина (после отъезда камеры он в хвосте правого крыла)
+    const st = { mode: "fly", flap: flapAt(t, 3.2 - 0.4 * pull), look: 0.3, roll: 0.05 * Math.sin(t * 1.5), pitch: 0, seed: 9, honk: Math.max(0, Math.sin((t - EV.karavan - 0.5) * 16)) * win(t, EV.karavan + 0.5, EV.karavan + 0.95, 0.02, 0.05) };
+    if (!NOHERO) gooseAt(g, cam, hero[0], hero[1], hero[2], st);
+  });
+  windStreaks(g, t, 700 * (1 - pull), 0.14);
+}
+function heroFlock(t) { const { cam, hero, pull } = flockShot(t); const p = proj(cam, hero[0], hero[1], hero[2]); return { mode: "fly", flap: flapAt(t, 3.2 - 0.4 * pull), look: 0.3, roll: 0.05 * Math.sin(t * 1.5), pitch: 0, seed: 9, x: p ? p[0] : 960, y: p ? p[1] : 600, s: p ? HERO_DZ / p[3] : 1 }; }
+
+// ================= 6. Деревня: скучная пора, ноябрь у ворот =================
+function drawNovember(g, x, y, sc, t) {
+  // появляется из снежного вихря у ворот: сначала спираль, потом фигура проявляется снизу вверх
+  const s = SPR.november, w = s.width * sc, h = s.height * sc;
+  const sw = win(t, EV.noyabr - 0.8, EV.noyabr + 0.9, 0.2, 0.6);
+  if (sw > 0) { g.save(); g.lineCap = "round"; for (let k = 0; k < 10; k++) { const yy = y - k * h * 0.1, r = 40 + k * 16 * sc * 1.6, a0 = t * 8 + k * 0.7; g.globalAlpha = sw * 0.85; g.strokeStyle = k % 2 ? "#f4f8fa" : "#b9cfdc"; g.lineWidth = 6; g.beginPath(); g.ellipse(x, yy, r, r * 0.22, 0, a0, a0 + 3.6); g.stroke(); } g.restore(); }
+  const a = easeOut(inv(EV.noyabr - 0.6, EV.noyabr + 0.35, t)); if (a <= 0) return;
+  g.save(); g.globalAlpha = a; g.beginPath(); g.rect(x - w, y - h * a - 10, w * 2, h * a + 20); g.clip();
+  g.drawImage(s, x - w / 2, y - h, w, h);
+  g.restore();
+  // морозное дыхание на «двора»
+  const br = win(t, EV.dvora - 0.1, EV.dvora + 1.3, 0.2, 0.5);
+  if (br > 0) { g.save(); for (let k = 0; k < 5; k++) { const p = ((t - EV.dvora) * 0.8 + k / 5) % 1; g.globalAlpha = br * (1 - p) * 0.6; g.fillStyle = "#f2f6f8"; g.beginPath(); g.arc(x - 20 * sc - p * 160 * sc, y - h * 0.77 + p * 20 * sc, (14 + p * 40) * sc, 0, TAU); g.fill(); } g.restore(); }
+}
+function scVillage(g, t) {
+  const push = easeIO(inv(EV.dvora - 0.5, EV.dvora + 0.9, t));
+  const z = 1.02 + 0.05 * inv(T0.s6, T0.s7, t) + push * 0.16;
+  const fx = lerp(960, 1220, push), fy = lerp(560, 1180, push);
+  g.save(); g.translate(fx, fy); g.scale(z, z); g.translate(-fx, -fy);
+  g.drawImage(SPR.village, -100, -60);
+  g.save(); g.translate(-100, -60);
+  const wind = 0.4 + 0.6 * ease(inv(EV.pora - 0.5, EV.pora + 0.5, t));
+  // дым из труб клонит ветром
+  for (const [x, y] of [[409, 471], [1777, 467]]) for (let k = 0; k < 7; k++) { const p = ((t * 0.6 + k / 7) % 1); g.save(); g.globalAlpha = 0.4 * (1 - p); g.fillStyle = "#e7e4dc"; g.beginPath(); g.ellipse(x - p * 320 * wind, y - p * 170, 18 + p * 46, 14 + p * 30, -0.4, 0, TAU); g.fill(); g.restore(); }
+  // клин тает в небе
+  for (let k = 0; k < 8; k++) { const o = vOff(k), u = inv(T0.s6, EV.pora + 1.2, t); if (u >= 1) continue; drawGooseRear(g, { x: 1260 + u * 500 + o[0] * 14, y: 230 - u * 150 - o[2] * 5, s: 0.07 * (1 - u * 0.5), mode: "fly", flap: flapAt(t, 3, k * 0.2), look: 0.3, seed: k }); }
+  // створки ворот: болтаются на ветру, на «ноябрь» захлопываются с отскоком
+  const shut = spr(t, EV.noyabr + 0.02, 0.55);
+  const open = (1 - clamp(shut, 0, 1.12)) * (0.75 + 0.12 * Math.sin(t * 2.6));
+  for (const [hx, d, sp2] of [[824, 1, SPR.doorL], [1166, -1, SPR.doorR]]) {
+    const wv = 171 * Math.max(0.2, Math.cos(open * 1.25));
+    g.save(); g.translate(hx, 572); g.scale(d * wv / 210, 1); g.drawImage(sp2, 0, 0, 210, 360); g.restore();
+  }
+  g.restore();
+  // листья несёт по земле
+  const lf = ease(inv(EV.pora - 0.4, EV.pora + 0.4, t)) * (1 - ease(inv(EV.noyabr, EV.noyabr + 0.8, t)) * 0.6);
+  for (let k = 0; k < 18; k++) { const p = ((t * 0.35 + hash(k)) % 1); const x = W + 100 - p * (W + 300), y = 880 + hash(k * 3) * 180 - Math.abs(Math.sin(p * 9 + k)) * 60; g.save(); g.globalAlpha = lf; g.translate(x, y); g.rotate(p * 12 + k); g.scale(0.45, 0.3); g.drawImage(SPR.leaves[k % 6], -60, -45); g.restore(); }
+  drawNovember(g, 1225, 905, 0.56, t);
+  g.restore();
+  const dull = easeIO(inv(EV.pora - 0.6, EV.pora + 0.6, t));
+  g.save(); g.globalAlpha = 0.28 * dull; g.fillStyle = "#56657a"; g.fillRect(0, 0, W, H); g.restore();
+  snowflakes(g, t, Math.floor(180 * easeOut(inv(EV.noyabr - 0.4, EV.dvora, t))), EV.noyabr - 0.4, 1.3);
+}
+function snowflakes(g, t, n, t0, wind = 1) {
+  g.save(); g.fillStyle = "#f6f8fa";
+  for (let k = 0; k < n; k++) {
+    const born = t0 + hash(k) * 1.5; if (t < born) continue;
+    const u = t - born, x = ((hash(k * 3) * (W + 400) - u * 220 * wind) % (W + 400) + W + 400) % (W + 400) - 200, y = ((hash(k * 7) * 300 - 200) + u * (90 + 80 * hash(k * 5))) % (H + 100);
+    g.globalAlpha = 0.9; g.beginPath(); g.arc(x + Math.sin(u * 3 + k) * 12, y, 2 + 3.5 * hash(k * 13), 0, TAU); g.fill();
+  }
+  g.restore();
+}
+
+// ================= 7. Финал: клин уходит к закату, название крупно =================
+function scFinal(g, t) {
+  const u = inv(T0.s7, TOTAL, t);
+  g.save(); const z = 1.05 - 0.05 * easeOut(u); g.translate(960, 600); g.scale(z, z); g.translate(-960, -600); g.drawImage(SPR.final, 0, 0); g.restore();
+  for (let k = 0; k < 8; k++) { const o = vOff(k); drawGooseRear(g, { x: lerp(1250, 1880, u) + o[0] * lerp(12, 6, u), y: lerp(170, 110, u) - o[2] * lerp(4, 2, u), s: lerp(0.085, 0.04, u), mode: "fly", flap: flapAt(t, 2.6, k * 0.2), look: 0.3, seed: k }); }
+  drawTitleFinal(g, t);
+}
+
+// ================= сцены и переходы =================
+const SC = [
+  { a: 0, b: T0.s2, draw: scPond, hero: heroPond },
+  { a: T0.s2, b: T0.s3, draw: scField, o: [960, 560], hero: heroField },
+  { a: T0.s3, b: T0.s4, draw: scForest, o: [960, 470], hero: heroForest },
+  { a: T0.s4, b: T0.s5, draw: scFog, o: [960, 450], hero: heroFog },
+  { a: T0.s5, b: T0.s6, draw: scFlock, o: [960, 300], hero: heroFlock },
+  { a: T0.s6, b: T0.s7, draw: scVillage, o: [1100, 700] },
+  { a: T0.s7, b: TOTAL + 1, draw: scFinal, o: [960, 540] },
+];
+function heroState(t) {
+  if (t < T0.s2) return heroPond(t);
+  if (t < T0.s3) return heroField(t);
+  if (t < T0.s4) return heroForest(t);
+  if (t < T0.s5) return heroFog(t);
+  return heroFlock(t);
+}
+
+// ---------- Строки стиха: полоса бумаги с рваным краем в нижней трети, тушь пишет слева направо ----------
+const LN = CFG.lines;
+const KEYW = new Set(["дышало", "блистало", "день", "сень", "обнажалась", "туман", "караван", "югу", "пора", "двора"]);
+const nrm = (s) => s.toLowerCase().replace(/ё/g, "е").replace(/[^а-я]/g, "");
+function lineWindow(i) {
+  const l = LN[i], a = l.s - 0.12;
+  const b = i < LN.length - 1 ? LN[i + 1].s - 0.38 : EV.fin - 0.1;
+  return [a, b];
+}
+function tornStrip(c, pw, ph, seed) {
+  c.beginPath(); c.moveTo(-pw / 2, -ph / 2);
+  const n = 22;
+  for (let k = 0; k <= n; k++) c.lineTo(-pw / 2 + k * pw / n, -ph / 2 + (hash2(k, seed) - 0.5) * 9);
+  for (let k = 0; k <= 4; k++) c.lineTo(pw / 2 + (hash2(k, seed + 1) - 0.5) * 12, -ph / 2 + k * ph / 4);
+  for (let k = n; k >= 0; k--) c.lineTo(-pw / 2 + k * pw / n, ph / 2 + (hash2(k, seed + 2) - 0.5) * 9);
+  for (let k = 4; k >= 0; k--) c.lineTo(-pw / 2 + (hash2(k, seed + 3) - 0.5) * 12, -ph / 2 + k * ph / 4);
+  c.closePath();
+}
+function drawVerse(g, t) {
+  for (let i = 0; i < LN.length; i++) {
+    const [a, b] = lineWindow(i);
+    if (t < a || t > b + 0.24) continue;
+    const l = LN[i];
+    reset(g);
+    const fs = 62;
+    g.font = `${fs}px "GLine"`;
+    const parts = l.words.map((w) => ({ ...w, wd: g.measureText(w.w).width }));
+    const sp = g.measureText(" ").width;
+    const tw = parts.reduce((s, p) => s + p.wd, 0) + sp * (parts.length - 1);
+    const cx = 960, cy = 962;
+    const inA = spr(t, a, 0.35), out = easeIn(inv(b, b + 0.24, t));
+    const pw = tw + 120, ph = 104;
+    const dx = -out * 1300; // уходит влево с ветром
+    g.save();
+    g.translate(Math.round(cx + dx), cy); g.globalAlpha = 1 - out * 0.6;
+    g.scale(lerp(0.8, 1, clamp(inA, 0, 1.2)), lerp(0.8, 1, clamp(inA, 0, 1.2)));
+    g.save(); g.globalAlpha *= 0.35; g.fillStyle = "#2a2018"; g.filter = "blur(8px)"; g.translate(6, 10); tornStrip(g, pw, ph, 300 + i); g.fill(); g.restore();
+    g.fillStyle = "#f8f0dc"; tornStrip(g, pw, ph, 300 + i); g.fill();
+    // акварельная подкладка под строкой
+    g.save(); tornStrip(g, pw, ph, 300 + i); g.clip(); g.globalAlpha = 0.22; g.fillStyle = i % 2 ? P.ochreL : "#c9d3d6"; g.beginPath(); g.ellipse(0, 10, pw * 0.48, ph * 0.42, 0, 0, TAU); g.fill(); g.restore();
+    g.restore();
+    // текст ровно и в целых координатах (резкий край букв); проявляется кистью слева направо
+    const vis = easeOut(inv(a + 0.02, a + 0.38, t));
+    g.save(); g.globalAlpha = 1 - out;
+    const tx = Math.round(cx + dx - tw / 2), ty = Math.round(cy + fs * 0.33);
+    g.beginPath(); g.rect(tx - 12, ty - fs - 20, (tw + 24) * vis, fs * 1.7); g.clip();
+    g.textBaseline = "alphabetic";
+    let x = tx;
+    for (const p of parts) {
+      const key = KEYW.has(nrm(p.w)) && t >= p.s - 0.05;
+      g.fillStyle = key ? P.crimson : P.ink; g.fillText(p.w, Math.round(x), ty);
+      x += p.wd + sp;
+    }
+    g.restore();
+    if (vis > 0 && vis < 1) splatter(g, tx + tw * vis, ty - fs * 0.35, 30, 10, P.ink, Math.floor(t * 30), 0.6);
+  }
+}
+// ---------- Названия: кисть пишет тушью по акварельной подкладке ----------
+function brushText(g, text, x, y, fs, prog, col, font = "GTitle") {
+  g.font = `${fs}px "${font}"`; const tw = g.measureText(text).width;
+  const tx = Math.round(x - tw / 2), ty = Math.round(y);
+  g.save(); g.beginPath(); g.rect(tx - 20, ty - fs * 1.1, (tw + 40) * prog, fs * 1.5); g.clip();
+  g.fillStyle = col; g.fillText(text, tx, ty); g.restore();
+  if (prog > 0.02 && prog < 0.99) { const ex = tx + tw * prog; splatter(g, ex, ty - fs * 0.35, fs * 0.5, 12, col, Math.floor(prog * 60), 0.7); }
+  return tw;
+}
+function drawTitleIntro(g, t) {
+  // название пишется в небе над прудом и сдувается ветром перед первой строкой
+  const blow = easeIn(inv(T0.wake + 0.3, EV.L1 - 0.12, t));
+  if (blow >= 1) return;
+  reset(g);
+  g.save(); g.globalAlpha = 1 - blow; g.translate(-blow * 1100, -blow * 80);
+  const wa = easeOut(inv(0.05, 0.6, t));
+  g.save(); g.globalAlpha *= wa; g.drawImage(SPR.titleWash, 960 - 800 * 0.85, 250 - 175 * 0.85, 1800 * 0.85, 420 * 0.85); g.restore();
+  brushText(g, "Уж небо осенью дышало…", 960, 260, 112, easeIO(inv(0.15, 1.5, t)), P.ink);
+  brushText(g, "А. С. Пушкин · из романа «Евгений Онегин»", 960, 350, 44, easeOut(inv(1.2, 1.8, t)), P.umberD, "GSub");
+  g.restore();
+}
+function drawTitleFinal(g, t) {
+  reset(g);
+  const a = T0.s7 + 0.25;
+  g.save(); g.globalAlpha = easeOut(inv(a - 0.1, a + 0.5, t)); g.drawImage(SPR.titleWash, 960 - 900, 380 - 210, 1800, 420); g.restore();
+  brushText(g, "Уж небо", 960, 360, 170, easeIO(inv(a, a + 0.7, t)), P.ink);
+  brushText(g, "осенью дышало…", 960, 530, 170, easeIO(inv(a + 0.55, a + 1.4, t)), P.ink);
+  brushText(g, "А. С. Пушкин", 960, 640, 62, easeOut(inv(a + 1.3, a + 1.8, t)), P.crimson, "GSub");
+  brushText(g, "из романа «Евгений Онегин»", 960, 710, 42, easeOut(inv(a + 1.6, a + 2.1, t)), P.umberD, "GSub");
+}
+
+// ---------- Пробы (PROBE=cast PROBE_PAGE=N): герои во всех позах крупно ----------
+function probeCast() {
+  reset(g); g.fillStyle = "#ece2cc"; g.fillRect(0, 0, W, H);
+  const lab = (s, x, y) => { g.fillStyle = "#222"; g.font = "17px monospace"; g.textAlign = "center"; g.fillText(s, x, y); g.textAlign = "left"; };
+  const page = CFG.probePage | 0;
+  if (page === 0) {
+    // фазы взмаха, бег, вода, сон, гогот, крен
+    const cells = [];
+    for (let i = 0; i < 8; i++) cells.push([{ mode: "fly", flap: i / 8, look: 0.3 }, `взмах ${(i / 8).toFixed(2)}`]);
+    for (let i = 0; i < 4; i++) cells.push([{ mode: "run", flap: i / 4, run: i / 4, look: 0.4, nu: 0.85 }, `бег ${(i / 4).toFixed(2)}`]);
+    cells.push([{ mode: "sleep" }, "сон"], [{ mode: "swim", look: -0.8, nu: 1, run: 0.3 }, "вода, смотрит влево"], [{ mode: "swim", look: 0.9, nu: 1, honk: 1 }, "вода, гогочет"], [{ mode: "fly", flap: 0.25, roll: 0.35, look: 0.5 }, "крен вправо"], [{ mode: "fly", flap: 0.7, roll: -0.35, look: -0.5 }, "крен влево"], [{ mode: "fly", flap: 0.3, pitch: 1, look: 0.3 }, "набор"], [{ mode: "fly", flap: 0.6, pitch: -1, look: 0.3, ruff: 1 }, "пике, перья"], [{ mode: "fly", flap: 0.1, look: 1, honk: 1 }, "гогочет в полёте"]);
+    cells.forEach(([st, name], i) => {
+      const cx = 160 + (i % 6) * 320, cy = 160 + Math.floor(i / 6) * 265;
+      drawGooseRear(g, { ...st, x: cx, y: cy, s: 0.42 });
+      lab(name, cx, cy + 120);
+    });
+  } else if (page === 1) {
+    // герой по ролику: 24 момента подряд
+    const t0 = 0.5, t1 = T0.s6 - 0.1, n = 24;
+    for (let i = 0; i < n; i++) {
+      const t = lerp(t0, t1, i / (n - 1)), st = heroState(t);
+      const cx = 160 + (i % 6) * 320, cy = 150 + Math.floor(i / 6) * 265;
+      drawGooseRear(g, { ...st, x: cx, y: cy, s: 0.4 });
+      lab(`t=${t.toFixed(2)} ${st.mode} f=${((st.flap ?? 0) % 1).toFixed(2)}`, cx, cy + 118);
+    }
+  } else if (page === 2) {
+    // спрайты: проверка акварели
+    SPR = SPR || bakeSprites();
+    const list = [];
+    const add = (k, v) => { if (!v) return; if (v.width) list.push([k, v]); else if (Array.isArray(v)) v.forEach((q, i) => add(k + i, q)); else if (typeof v === "object") for (const [kk, q] of Object.entries(v)) add(k + "." + kk, q); };
+    for (const [k, v] of Object.entries(SPR)) if (!/^(sky|tex|village|final|mask|rim|fog)/.test(k)) add(k, v);
+    let x = 20, y = 20, rowH = 0;
+    for (const [k, c] of list) {
+      const sc = Math.min(1, 230 / c.height, 330 / c.width);
+      const w = c.width * sc, h = c.height * sc;
+      if (x + w > W - 20) { x = 20; y += rowH + 30; rowH = 0; }
+      g.drawImage(c, x, y, w, h); lab(k, x + w / 2, y + h + 18); x += w + 24; rowH = Math.max(rowH, h);
+    }
+  } else if (page === 3) {
+    // ноябрь у ворот: появление по кадрам
+    SPR = SPR || bakeSprites();
+    for (let i = 0; i < 6; i++) { const t = EV.noyabr - 0.8 + i * 0.35; const cx = 170 + i * 315; drawNovember(g, cx, 900, 0.62, t); lab(`t=${t.toFixed(2)}`, cx, 1000); }
+  }
+  g.globalCompositeOperation = "multiply"; PAPER = PAPER || bakePaper(); g.drawImage(PAPER, 0, 0); g.globalCompositeOperation = "source-over";
+}
+
+// ---------- Кадр: сцена (на переходе — вторая сквозь растекающееся пятно) → бумага «умножением» → строки ----------
+const cv = document.getElementById("scene");
+const g = cv.getContext("2d", { alpha: false });
+let BUF2 = null;
+function render(t) {
+  SPR = SPR || bakeSprites();
+  reset(g);
+  g.fillStyle = P.paper; g.fillRect(0, 0, W, H);
+  let cur = SC.length - 1;
+  for (let i = 0; i < SC.length; i++) if (t < SC[i].b) { cur = i; break; }
+  const s = SC[cur], prev = SC[cur - 1];
+  const bp = prev ? inv(s.a, s.a + BLOOM, t) : 1;
+  if (bp < 1) {
+    // уходящая сцена дорисовывается своим временем, новая проступает пятном из точки o
+    const both = !!(prev.hero && s.hero);
+    NOHERO = both; reset(g); prev.draw(g, t);
+    BUF2 = BUF2 || mk(W, H); const b = BUF2.getContext("2d");
+    reset(b); b.fillStyle = P.paper; b.fillRect(0, 0, W, H); s.draw(b, t); reset(b);
+    NOHERO = false;
+    const sc = lerp(0.08, 3.4, easeIn(bp) * 0.6 + bp * 0.4), M = SPR.mask, [ox, oy] = s.o;
+    b.globalCompositeOperation = "destination-in"; b.drawImage(M, ox - M.width * sc / 2, oy - M.height * sc / 2, M.width * sc, M.height * sc); b.globalCompositeOperation = "source-over";
+    reset(g); g.drawImage(BUF2, 0, 0);
+    g.globalAlpha = 1 - bp * 0.6; g.drawImage(SPR.rim, ox - M.width * sc / 2, oy - M.height * sc / 2, M.width * sc, M.height * sc); g.globalAlpha = 1;
+    if (both) {
+      // один герой поверх перехода: плавно от позы уходящей сцены к позе новой
+      const hp = prev.hero(t), hn = s.hero(t), u = easeIO(bp), st = { ...hn };
+      for (const k of ["x", "y", "s", "roll", "pitch", "look"]) st[k] = lerp(hp[k] ?? hn[k] ?? 0, hn[k] ?? 0, u);
+      reset(g); drawGooseRear(g, st);
+    }
+  } else { reset(g); s.draw(g, t); }
+  reset(g);
+  g.globalCompositeOperation = "multiply"; g.drawImage(PAPER, 0, 0); g.globalCompositeOperation = "source-over";
+  const vg = g.createRadialGradient(W / 2, H / 2, H * 0.5, W / 2, H / 2, H * 1.05);
+  vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(60,36,14,0.26)");
+  g.fillStyle = vg; g.fillRect(0, 0, W, H);
+  if (t < T0.s7) drawVerse(g, t);
+}
+const PQ = new URLSearchParams(location.search);
+const T_Q = PQ.has("t") ? +PQ.get("t") : 0;
+let LAST_T = T_Q;
+const seek = (t) => (CFG.probe ? probeCast() : render(t));
+window.addEventListener("hf-seek", (e) => { LAST_T = e.detail.time; seek(LAST_T); });
+let READY = false;
+function boot() { READY = true; seek(LAST_T); }
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
+
+const tl = gsap.timeline({ paused: true });
+tl.to({ v: 0 }, { v: 1, duration: TOTAL, ease: "none", onUpdate() { const t = tl.time(); if (READY && Math.abs(t - LAST_T) > 1e-6) { LAST_T = t; seek(t); } } }, 0);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+
+    </script>
+  </body>
+</html>
