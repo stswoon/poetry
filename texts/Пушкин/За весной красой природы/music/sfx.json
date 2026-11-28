@@ -1,0 +1,191 @@
+{
+ "intro": 3.6,
+ "outro": 6.0,
+ "total": 28.84,
+ "bpm": 96.77,
+ "fin": 23.553,
+ "bars": {
+  "first": -2,
+  "dark": 2,
+  "rise": 5,
+  "finale": 8,
+  "end_hit": 9,
+  "end_hit_t": 26.04
+ },
+ "voice_mean_dbfs": -21.8,
+ "music_line_db": [
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0,
+  -19.0
+ ],
+ "music_intro_db": -8.0,
+ "music_fin_db": -7.0,
+ "peak_dbfs": -12.3,
+ "sfx": [
+  {
+   "name": "rattle",
+   "what": "стук-тряска на заставке",
+   "event": 0.05,
+   "start": 0.033,
+   "end": 0.138,
+   "db_to_voice": -14.0
+  },
+  {
+   "name": "rattle",
+   "what": "стук-тряска на заставке",
+   "event": 0.2,
+   "start": 0.183,
+   "end": 0.288,
+   "db_to_voice": -14.0
+  },
+  {
+   "name": "rattle",
+   "what": "стук-тряска на заставке",
+   "event": 0.35,
+   "start": 0.334,
+   "end": 0.439,
+   "db_to_voice": -14.0
+  },
+  {
+   "name": "rattle",
+   "what": "баллончик перед строкой 1",
+   "event": 3.42,
+   "start": 3.403,
+   "end": 3.508,
+   "db_to_voice": -14.0
+  },
+  {
+   "name": "rattle",
+   "what": "баллончик перед строкой 2",
+   "event": 6.37,
+   "start": 6.357,
+   "end": 6.462,
+   "db_to_voice": -14.0
+  },
+  {
+   "name": "rattle",
+   "what": "баллончики перед строкой 7 (закат)",
+   "event": 18.326,
+   "start": 18.309,
+   "end": 18.414,
+   "db_to_voice": -14.0
+  },
+  {
+   "name": "rattle",
+   "what": "баллончики: море",
+   "event": 19.49,
+   "start": 19.473,
+   "end": 19.578,
+   "db_to_voice": -14.0
+  },
+  {
+   "name": "rattle",
+   "what": "баллончик к финальному названию",
+   "event": 23.253,
+   "start": 23.236,
+   "end": 23.341,
+   "db_to_voice": -14.0
+  },
+  {
+   "name": "spray",
+   "what": "пшик: буквы названия",
+   "event": 0.6,
+   "start": 0.603,
+   "end": 1.203,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "spray",
+   "what": "пшик: веточка",
+   "event": 3.54,
+   "start": 3.543,
+   "end": 4.343,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "spray",
+   "what": "пшик: солнце",
+   "event": 6.49,
+   "start": 6.493,
+   "end": 7.393,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "spray",
+   "what": "пшик: закат (два баллончика)",
+   "event": 18.726,
+   "start": 18.729,
+   "end": 19.629,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "spray",
+   "what": "пшик: солнце над морем",
+   "event": 19.476,
+   "start": 19.479,
+   "end": 19.929,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "spray",
+   "what": "пшик: море (два баллончика)",
+   "event": 19.64,
+   "start": 19.643,
+   "end": 20.593,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "spray",
+   "what": "пшик: гребни волн",
+   "event": 20.49,
+   "start": 20.493,
+   "end": 20.943,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "spray",
+   "what": "пшик: остров и пальма",
+   "event": 20.536,
+   "start": 20.539,
+   "end": 21.089,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "spray",
+   "what": "пшик: название",
+   "event": 23.373,
+   "start": 23.376,
+   "end": 24.576,
+   "db_to_voice": -20.0
+  },
+  {
+   "name": "gray",
+   "what": "широкий серый баллон: туман",
+   "event": 8.77,
+   "start": 8.773,
+   "end": 10.273,
+   "db_to_voice": -21.5
+  },
+  {
+   "name": "wind",
+   "what": "порыв ветра: туча дует",
+   "event": 11.37,
+   "start": 10.912,
+   "end": 12.712,
+   "db_to_voice": -21.0
+  },
+  {
+   "name": "wings",
+   "what": "взлёт птички: три взмаха",
+   "event": 17.05,
+   "start": 17.028,
+   "end": 17.448,
+   "db_to_voice": -17.0
+  }
+ ]
+}
