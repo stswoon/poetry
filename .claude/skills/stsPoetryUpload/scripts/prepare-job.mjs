@@ -4,6 +4,8 @@
  * Запуск: node prepare-job.mjs "<Поэт>/<Стих>"
  * Последняя строка вывода — PREPARE_JSON: {...}; код выхода 1, если в папке чего-то не хватает.
  * Если в rights.md нет вывода ✅, job.json и desc.txt не пишутся, а в отчёте rightsOk: false: ролик идёт только на Диск.
+ * YouTube — обязательная площадка: он попадает в platforms, когда в rights.md строка «США … | ✅» (usOk: true).
+ * Нет строки или она не ✅ — usOk: false и usReason: YouTube решает агент по разделу 3 prava.md.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,7 +29,11 @@ const title = `${poem} - ${poet}`;
 const description = buildDescription();
 
 if (!fs.existsSync(path.join(dir, 'cover.png'))) errors.push('Нет обложки cover.png');
-const rightsOk = /^##\s*Вывод[\s\S]*?✅/m.test(readIfExists('rights.md'));
+const rightsText = readIfExists('rights.md');
+const rightsOk = /^##\s*Вывод[\s\S]*?✅/m.test(rightsText);
+const usRow = rightsText.split('\n').find((line) => /^\|\s*США/.test(line));
+const usOk = Boolean(usRow && /^\|[^|]*\|\s*✅/.test(usRow));
+const usReason = usOk ? null : usRow ? `в rights.md: ${usRow.trim()}` : 'в rights.md нет строки «США (YouTube)»';
 if (rightsOk && description.length > DESCRIPTION_LIMIT) {
   errors.push(`Описание ${description.length} символов, лимит ${DESCRIPTION_LIMIT}`);
 }
@@ -57,7 +63,7 @@ fs.writeFileSync(
       descriptionFile: 'desc.txt',
       category: 'Культура',
       playlists,
-      platforms: ['vk', 'rutube'],
+      platforms: usOk ? ['vk', 'rutube', 'youtube'] : ['vk', 'rutube'],
       publish: true,
     },
     null,
@@ -74,6 +80,8 @@ report({
   poemText: path.join(dir, 'poem.md'),
   title,
   playlists,
+  usOk,
+  usReason,
   installed: fs.existsSync(path.join(helper, 'node_modules', 'playwright-core')),
   profile: fs.existsSync(path.join(helper, '.profile')),
   previousRuns: findPreviousRuns(helper),

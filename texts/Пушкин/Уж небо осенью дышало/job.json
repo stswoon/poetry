@@ -10,7 +10,8 @@
   ],
   "platforms": [
     "vk",
-    "rutube"
+    "rutube",
+    "youtube"
   ],
   "publish": true
 }
